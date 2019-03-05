@@ -1,0 +1,23 @@
+[
+    "ac-button",
+    "ac-notification",
+    "ac-orgcenter-form",
+    "ac-upload",
+    "ac-input-locale",
+    "yyuap-bpm",
+    "ac-thermometer",
+    "ac-toast",
+    "ac-drawer",
+    "ac-attachment",
+    "ac-editor",
+    "ac-mobile-locale",
+    "ac-complex-search-panel",
+    "ac-barcode",
+    "ac-qrcode",
+    "ref-tree",
+    "ref-multiple-selection",
+    "ref-table",
+    "ref-tree-table",
+    "ref-tree-transfer",
+    "ref-multiple-table"
+]

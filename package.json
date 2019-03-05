@@ -1,0 +1,41 @@
+{
+  "name": "ucf-node",
+  "version": "1.0.0",
+  "description": "Based with Koa 2.x",
+  "main": "index.js",
+  "scripts": {
+    "md": "node app/getMd.js",
+    "dev": "node --inspect app/app.js",
+    "start": "node app/app.js"
+  },
+  "keywords": [],
+  "author": "yonyou iuap fed",
+  "license": "ISC",
+  "dependencies": {
+    "download": "^7.1.0",
+    "fs-extra": "^7.0.1",
+    "ip": "^1.1.5",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "^4.2.0",
+    "koa-nunjucks-2": "^3.0.2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "log4js": "^3.0.6",
+    "marked": "^0.6.1",
+    "nunjucks": "^3.1.6"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iuap-design/ucf-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iuap-design/ucf-node/issues"
+  },
+  "homepage": "https://github.com/iuap-design/ucf-node#readme"
+}
