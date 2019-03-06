@@ -1,0 +1,44 @@
+<div>
+    <ul class="menu-components">
+        <% for (key in sidebar){ %>
+            <li class="menu-group">
+                <% if(group==key.split('&')[1]){ %>
+                    <div class="menu-item-title open" name="<%= key %>"> <%= key.split('&')[0] %>
+                <% } else { %>
+                    <div class="menu-item-title" name="<%= key %>"> <%= key.split('&')[0] %>
+                <% } %>    
+                
+                <% for (item in sidebar[key]){ %>
+                    <% if (sidebar[key][item].component == active) { %>
+                        <div class="menu-item active">
+                            <% if(item.component!=''){%>
+                                <a href="/<%= sidebar[key][item].component %>?group=<%= key.split('&')[1] %>"><%= item %></a>
+                            <% } %>  
+                        </div>
+                    <% } else { %>
+                        <div class="menu-item">
+                            <% if(item.component!=''){%>
+                                <a href="/<%= sidebar[key][item].component  %>?group=<%= key.split('&')[1] %>"><%= item %></a>
+                            <% } %>  
+                        </div>
+                    <% } %>    
+                <% } %>  
+            </div>  
+            </li>
+        <% } %> 
+    </ul>
+</div>
+<script>
+    let nodeList = document.querySelectorAll('.menu-item-title');
+    nodeList.forEach(item=>{
+        item.onclick=()=>{
+            let name = item.getAttribute('name');
+            let cls = item.getAttribute('class');
+            if(cls.indexOf('open')!=-1){//打开状态
+                item.setAttribute('class','menu-item-title');
+            } else {//关闭状态
+                item.setAttribute('class','menu-item-title open');
+            }
+        }
+    })
+</script>

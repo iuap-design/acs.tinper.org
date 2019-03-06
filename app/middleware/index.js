@@ -3,7 +3,6 @@ const ip = require("ip")
 const bodyParser = require('koa-bodyparser')
 const nunjucks = require('koa-nunjucks-2')
 const staticFiles = require('koa-static')
-
 const send = require('./send')
 const log = require('./logger')
 const httpError = require('./http-error')
@@ -20,7 +19,11 @@ module.exports = (app) => {
     serverIp: ip.address()
   }));
 
-  app.use(staticFiles(path.resolve(__dirname, "../public")))
+
+
+  const css = staticFiles(path.join(__dirname,'../../static'));
+
+  app.use(css);
 
   app.use(nunjucks({
     ext: 'html',

@@ -56,7 +56,6 @@ module.exports = (options) => {
 
     await next()
     const responseTime = Date.now() - start;
-    debugger;
     logger.info(access(ctx, {
       responseTime: `响应时间为${responseTime/1000}s`
     }, commonInfo))

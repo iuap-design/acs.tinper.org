@@ -1,10 +1,21 @@
 const Koa = require('koa')
 const app = new Koa()
-
+const render = require('koa-ejs');
+const path = require('path');
+const marked = require("marked");
+const fs = require('fs-extra');
 const router = require('./router')
 const middleware = require('./middleware')
 
-// const port = process.env.port || 3000
+
+render(app, {
+    root: path.join(__dirname, 'views'),
+    layout: 'index',
+    viewExt: 'html',
+    cache: false,
+    debug: false,
+});
+  
 
 router(app)
 middleware(app)
