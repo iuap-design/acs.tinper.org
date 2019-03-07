@@ -6,7 +6,11 @@
     height: 65px;
     line-height: 65px;
     border-bottom: 1px solid #dfdfdf;
-    padding-left: 15px;
+    margin-left: 0;
+}
+.nav .nav-left{
+    position: relative;
+    bottom: 6px;
 }
 
 .nav .nav-left .nav-logo {
@@ -31,11 +35,13 @@
 
 .nav .nav-left .nav-split {
     color: #ccc;
-    margin: 0 20px
+    margin: 0 16px
 }
 
 .nav .nav-left .nav-search {
-    color: #959aa5
+    color: #959aa5;
+    position: relative;
+    top: -5px;
 }
 
 .nav .nav-left .nav-search #componentSearch {
@@ -49,7 +55,8 @@
 .nav .nav-left .nav-search .u-form-control-affix-wrapper .u-form-control {
     width: auto;
     border: none;
-    padding-left: 30px
+    padding-left: 30px;
+    font-weight: 500;
 }
 
 .nav .nav-left .nav-search .u-form-control-affix-wrapper .u-form-control-suffix {
@@ -100,6 +107,29 @@
     background: #fff !important;
     font-weight: 0 !important
 }
+.nav .nav-right .lang-select{
+    position: relative;
+    left: 6px;
+}
+.nav .nav-right .nav-lang-select{
+    border: none;
+    background: #fff;
+    min-width: 85px;
+    font-size: 14px;
+    color: #444;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    height: 64px;
+}
+.nav .nav-right .uf-arrow-down{
+    position: absolute;
+    right: 15px;
+    line-height: 1;
+    top: 27px;
+    font-size: 10.5px;
+}
+
 
 .nav .nav-left .nav-search  .uf-search:before {
     position: absolute;

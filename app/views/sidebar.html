@@ -5,7 +5,7 @@
                 <% if(title.children){ var child = title.children; %>
                     <div class="menu-item menu-item-components open" >
                         <span class="menu-item-components-text">
-                                <%= key %>
+                            <%= key %>
                         </span>
                         <% for (heard in child) { var acs = child[heard]; %>
                             <div class="menu-item-heard">
@@ -25,9 +25,15 @@
                         <% } %>
                     </div>
                 <% } else { %>
-                 <div class="menu-item">
-                    <a href="/<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
-                 </div>
+                    <% if(sidebar[key].component==active){ %>
+                        <div class="menu-item active">
+                            <a href="/<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
+                        </div>
+                    <% } else { %>
+                        <div class="menu-item">
+                            <a href="/<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
+                        </div>
+                    <% } %>
                  <% } %> 
             </li>
         <% } %> 

@@ -14,6 +14,9 @@
     text-decoration: none;
     padding-left: 10px;
 }
+.sidebar .menu-components .menu-group .menu-item.active a{
+    color: #e14c46;
+}
 
 .sidebar .menu-components .menu-item-components{
     position: relative;
