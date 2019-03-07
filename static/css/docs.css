@@ -134,7 +134,7 @@ body {
     font-family: Monaco, Andale Mono, Courier New, monospace;
 }
 .docs code {
-    background-color: #fee9cc;
+    background-color: #FAFAFA;
     color: rgba(0, 0, 0, 0.75);
     padding: 1px 3px;
     font-size: 12px;
@@ -152,10 +152,15 @@ body {
     word-wrap: break-word;
 }
 .docs pre code {
-    background-color: #fff;
-    color:#737373;
-    font-size: 11px;
-    padding: 0;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #abb2bf;
+    background: #282c34;
+    font-family: Menlo,Monaco,Consolas,Courier,monospace;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    -webkit-font-smoothing: auto;
 }
 .docs sup {
     font-size: 0.83em;

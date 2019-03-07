@@ -1,66 +1,145 @@
-## 快速上手
+## 快速开始
 
-tinper-bee组件库 致力于提供给程序员愉悦快速的开发体验
+tinper-acs组件库 致力于提供给程序员愉悦快速的开发体验
 
 在开始之前，推荐学习 <a href="http://facebook.github.io/react">React</a> 和 <a href="http://www.nodeclass.com/api/ECMAScript6.html">ES2016</a> 
 
-项目脚手架可以使用uba工具来初始化项目 [详情点击](https://github.com/iuap-design/tinper-uba/blob/master/README.md)
+项目脚手架可以使用 `ac-tools` 工具来初始化项目 [详情点击](https://github.com/tinper-acs/ac-tools)
 
 
 
-### 一、安装tinper-bee
+## ac-tools
 
-#### 使用npm安装
 
-推荐使用npm安装。不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
-可以通过 npm 直接安装到项目中，使用 import 或 require 进行引用。
+### 介绍
+
+是一款编写应用组件的开发工具 [应用组件](https://github.com/tinper-acs) 执行远程代码访问、基本组件开发构建、demo示例的生成等自动化工具。
+
+
+### 安装
+
+```bash
+$ ynpm install ac-tools -g 或者 (npm install ac-tools -g )
+
+$ mkdir app && cd app
+
+$ ac-tools init
+```
+ 
+> 稍等片刻安装结束后，输入下面命令来确定是否安装成功：
+
+```bash
+$ ac-tools
+
+  Usage :
+
+  1. ac-tools init           Generate best application component project
+  2. ac-tools h              Help
+  3. ac-tools v              Version
+  4. ac-tools sample         Producing example Engineering
+  5. ac-tools md             README.md documents are translated into HTML to be published on git IO
 
 ```
-npm install --save tinper-bee
+OK,到此成功。
+
+
+### 使用
+
+1. 如何使用前端集成工具`ac-tools`来快速创建一个应用组件：
+
+```bash
+$ cd app
+
+$ ac-tools init
 ```
 
-#### 使用CDN
+[初始化生成的模版文件对应的文档链接](https://github.com/tinper-acs/app-component-templ)
 
-- css样式
+2. Start development server.
+```bash
+$ npm run dev
+```
+3. After writing a good example.
+```bash
+$ ac-tools sample
+```
+4. Build io demo page. 
+```bash
+$ npm run deploy
+```
+5. After writing README.md documents.And push to io page
+```bash
+$ ac-tools md
+```
+
+### api
+
+
+项目根目录，使用以下命令完成对应功能。
+
+>命令5会有一分钟的延时，请耐心等待。
+
+| # | Scripts 脚本命令 | Description 功能描述 |
+| --- | --- | --- |
+| 1 | ac-tools h | api 查询 |
+| 2 | ac-tools v | 版本查询 |
+| 3 | ac-tools init | 下载模板项目|
+| 4 | ac-tools sample | 编写demo时，需要生成示例代码 |
+| 5 | ac-tools md | README.md文档转化成html发布到git io上 |
+| 6 | ac-tools cdn | 将需要上传cdn的文件上传到cdn |
+
+### 其他
+
+#### ynpm[推荐使用]
+
+公司内网通过使用`ynpm`,实现快速下载包，减少下载等待时间。详情请 [点击](https://github.com/iuap-design/ynpm-tool)
+
+```bash
+
+$ ynpm install ac-tools -g               # 安装 ac-tools 速度飞快在内网下
+```
+
+#### cnpm
+
+你可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm:
+```bash
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+$ cnpm install ac-tools -g
+```
+
+#### ac-tools cdn
+
+> 例如 在文件根目录下创建`oss.config.json`
+
+对应的关键字含义
+
+| key | 对应含义 | 是否必填 |
+| --- | --- | --- |
+| accessKeyId | oss账号id | 是 |
+| accessKeySecret | oss账号secret | 是 |
+| bucket | oss初始化放置目录 | 是|
+| region | cdn的地区 | 是 |
+| pushDirName | 上传文件的目录(相对路径) | 否，默认选择dist文件夹 |
+| osspath | 上传文件生成url中path路径 | 否，默认为空 |
+| exclude | 上传文件的目录中不用上传的文件名称 | 否，默认为空 |
+
 
 ```
-<link href="//design.yonyoucloud.com/static/tinper-bee/[版本号]/assets/tinper-bee.css">
-
-```
-
-- js
-
-```
-<script src="//design.yonyoucloud.com/static/tinper-bee/[版本号]/build/tinper-bee.js"></script>
-
-```
-
-[更多CDN服务](http://tinper.org/dist/cdn/index.html)
-
-
-
-
-### 二、在项目中使用tinper-bee组件库
-
-例如：
-
-```
-import React,{ Component } from 'react';
-import { Button,Panel } from 'tinper-bee';
-import './index.less';
-
-export default class Example extends Component{
-  constructor(props) {
-   super(props);
- }
-  render(){
-    return (
-    <Panel>
-      hello world
-      <Button>click me</Button>
-    </Panel>)
-  }
+{
+  "ossconfig": {
+    "accessKeyId": "XXXXXXX",
+    "accessKeySecret": "XXXXX",
+    "bucket": "XXXXX",
+    "region": "XXXXX"
+  },
+  "pushDirName":"dist",
+  "osspath":"yonyou-fed",
+  "exclude":["index.html",'html/index.html']
 }
-
 ```
+
+运行ac-tools cdn 生成cdn路径为：`http://iuap-tenat-market.oss-cn-beijing.aliyuncs.com/yonyou-fed`
+
+
 
