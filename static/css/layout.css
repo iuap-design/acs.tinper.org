@@ -21,6 +21,7 @@
     padding-left: 40px;
 }
 
-.footer {
-    background: #808080
+.footer-out {
+    max-width: calc(100% - 300px);
+    margin-left: 290px;
 }

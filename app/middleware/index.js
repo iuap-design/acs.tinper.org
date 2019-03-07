@@ -11,13 +11,13 @@ const rules = require('./rules')
 
 module.exports = (app) => {
 
-  app.use(log({
-    env: app.env,
-    projectName: 'ucf-node',
-    appLogLevel: 'debug',
-    dir: 'logs',
-    serverIp: ip.address()
-  }));
+  // app.use(log({
+  //   env: app.env,
+  //   projectName: 'ucf-node',
+  //   appLogLevel: 'debug',
+  //   dir: 'logs',
+  //   serverIp: ip.address()
+  // }));
 
 
 

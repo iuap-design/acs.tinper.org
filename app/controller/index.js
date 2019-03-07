@@ -11,7 +11,6 @@ const axios = require('axios');
 // 官网react版本
 module.exports = {
   index: async (ctx, next) => {
-    let group = ctx.url.split('group=')[1];
     let component = ctx.params.component;
     let filePath = path.join(__dirname, `../../docs/${component}.md`);
     if(!component)filePath=path.join(__dirname, `../../docs/summarize.md`)
@@ -41,8 +40,7 @@ module.exports = {
       sidebar: sidebar,
       docs: data,
       jsList:jsList,
-      active:component,
-      group:group
+      active:component
     });
   }
 }

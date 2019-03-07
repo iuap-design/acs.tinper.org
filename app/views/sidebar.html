@@ -1,43 +1,50 @@
 <div>
     <ul class="menu-components">
-        <% for (key in sidebar){ %>
+        <% for (key in sidebar){ var title = sidebar[key]; %>
             <li class="menu-group">
-                <% if(group==key.split('&')[1]){ %>
-                    <div class="menu-item-title open" name="<%= key %>"> <%= key.split('&')[0] %>
+                <% if(title.children){ var child = title.children; %>
+                    <div class="menu-item menu-item-components open" >
+                        <span class="menu-item-components-text">
+                                <%= key %>
+                        </span>
+                        <% for (heard in child) { var acs = child[heard]; %>
+                            <div class="menu-item-heard">
+                                <%= heard %>
+                                <% for (com in acs) { %>
+                                    <% if(acs[com].component == active) {%>
+                                        <div class="menu-item-com active">
+                                            <a href="/<%= acs[com].component %>" title="<%= com %>"><%= com %></a>
+                                        </div>
+                                    <%} else {%>
+                                        <div class="menu-item-com">
+                                            <a href="/<%= acs[com].component %>" title="<%= com %>"><%= com %></a>
+                                        </div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        <% } %>
+                    </div>
                 <% } else { %>
-                    <div class="menu-item-title" name="<%= key %>"> <%= key.split('&')[0] %>
-                <% } %>    
-                
-                <% for (item in sidebar[key]){ %>
-                    <% if (sidebar[key][item].component == active) { %>
-                        <div class="menu-item active">
-                            <% if(item.component!=''){%>
-                                <a href="/<%= sidebar[key][item].component %>?group=<%= key.split('&')[1] %>"><%= item %></a>
-                            <% } %>  
-                        </div>
-                    <% } else { %>
-                        <div class="menu-item">
-                            <% if(item.component!=''){%>
-                                <a href="/<%= sidebar[key][item].component  %>?group=<%= key.split('&')[1] %>"><%= item %></a>
-                            <% } %>  
-                        </div>
-                    <% } %>    
-                <% } %>  
-            </div>  
+                 <div class="menu-item">
+                    <a href="/<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
+                 </div>
+                 <% } %> 
             </li>
         <% } %> 
     </ul>
 </div>
+
+
 <script>
-    let nodeList = document.querySelectorAll('.menu-item-title');
+    let nodeList = document.querySelectorAll('.menu-item-components-text');
     nodeList.forEach(item=>{
-        item.onclick=()=>{
-            let name = item.getAttribute('name');
-            let cls = item.getAttribute('class');
+        item.onclick=(e)=>{
+            let outDiv = document.querySelector('.menu-item-components')
+            let cls = outDiv.getAttribute('class');
             if(cls.indexOf('open')!=-1){//打开状态
-                item.setAttribute('class','menu-item-title');
+                outDiv.setAttribute('class','menu-item menu-item-components');
             } else {//关闭状态
-                item.setAttribute('class','menu-item-title open');
+                outDiv.setAttribute('class','menu-item menu-item-components open');
             }
         }
     })
