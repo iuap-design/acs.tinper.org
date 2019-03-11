@@ -1,3 +1,4 @@
+
 .footer {
     min-height: 500px;
     background: #424242;
@@ -26,7 +27,7 @@
 }
 
 .footer .footer-top-item a:hover {
-    background: #bd423e
+    color: #e14c46
 }
 
 .footer .footer-top-item img {
@@ -36,7 +37,7 @@
 
 .footer .footer-middle .footer-line {
     height: 1px;
-    background: #959aa5;
+    background: #666;
     margin-left: -11%;
     margin-right: -11%;
 }
@@ -58,4 +59,9 @@
 .footer .footer-base .footer-base-font p {
     margin-top: 8px;
     margin-bottom: 7px
+}
+
+/* 适配 */
+.footer p{
+    color: #fff;
 }
