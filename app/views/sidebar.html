@@ -13,11 +13,11 @@
                                 <% for (com in acs) { %>
                                     <% if(acs[com].component == active) {%>
                                         <div class="menu-item-com active">
-                                            <a href="/<%= acs[com].component %>" title="<%= com %>"><%= com %></a>
+                                            <a href="./<%= acs[com].component %>" title="<%= com %>"><%= com %></a>
                                         </div>
                                     <%} else {%>
                                         <div class="menu-item-com">
-                                            <a href="/<%= acs[com].component %>" title="<%= com %>"><%= com %></a>
+                                            <a href="./<%= acs[com].component %>" title="<%= com %>"><%= com %></a>
                                         </div>
                                     <% } %>
                                 <% } %>
@@ -27,11 +27,11 @@
                 <% } else { %>
                     <% if(sidebar[key].component==active){ %>
                         <div class="menu-item active">
-                            <a href="/<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
+                            <a href="./<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
                         </div>
                     <% } else { %>
                         <div class="menu-item">
-                            <a href="/<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
+                            <a href="./<%= sidebar[key].component %>" title="<%= key %>"><%= key %></a>
                         </div>
                     <% } %>
                  <% } %> 

@@ -8,18 +8,9 @@
     border-bottom: 1px solid #dfdfdf;
     margin-left: 0;
 }
-.nav .nav-left{
-    position: relative;
-    bottom: 6px;
-}
 
 .nav .nav-left .nav-logo {
     display: inline-block
-}
-
-.nav .nav-left .nav-logo img {
-    display: inline-block;
-    height: 80px
 }
 
 .nav .nav-left .nav-logo i {
