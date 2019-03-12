@@ -10,7 +10,7 @@ const axios = require('axios');
 ///##.*代码演示/ 匹配规则改变，
 // 官网react版本
 module.exports = {
-  index: async (ctx, next) => {
+  index: async (ctx, next) => {debugger
     let component = ctx.params.component;
     let filePath = path.join(__dirname, `../../docs/${component}.md`);
     if(!component)filePath=path.join(__dirname, `../../docs/summarize.md`)
