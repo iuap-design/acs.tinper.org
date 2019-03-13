@@ -107,6 +107,14 @@
             }
         }
     },
+    "表格": {
+        "children":{
+            "电子表格 AcSpreadsheet": {
+                "version": "1.0.0",
+                "component": "ac-spreadsheet"
+            }
+        }
+    },
     "图形化": {
         "children":{
             "温度计/液位计 AcThermometer": {
