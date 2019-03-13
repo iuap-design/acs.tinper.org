@@ -14,8 +14,9 @@ import AcInputLocale from '@yonyou/ac-input-locale';
 
 import '@yonyou/ac-input-locale/dist/index.css';
 ```
+## 代码演示
 
-##效果  [进入示例](https://tinper-acs.github.io/ac-input-locale/)
+## 效果  [进入示例](https://tinper-acs.github.io/ac-input-locale/)
 
 ## API
 

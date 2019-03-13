@@ -21,9 +21,7 @@ import '@yonyou/ac-button/dist/index.css';
 
 ```
 
-## 效果
-
-![](media/15355446781426/15355454605269.jpg)
+## 代码演示
 
 ## API
 

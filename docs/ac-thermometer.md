@@ -125,6 +125,8 @@ class Demo extends Component {
 export default Demo;
 
 ```
+## 代码演示
+
 ### 4. API
 
 参数 | 类型 | 说明 | 默认值

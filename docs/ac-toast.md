@@ -38,6 +38,8 @@ Toast.info({
 ![loading](/preview/toast-loading.png)
 ![错误消息](/preview/toast-error.png)
 
+## 代码演示
+
 ### 5. 参数
 
 Parameter | Type |Default| Description

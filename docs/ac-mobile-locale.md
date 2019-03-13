@@ -4,6 +4,8 @@
 
 手机号多语控件
 
+## 代码演示
+
 ## 效果  [进入示例](https://tinper-acs.github.io/ac-mobile-locale/)
 
 
