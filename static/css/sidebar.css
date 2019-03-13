@@ -73,8 +73,8 @@
     color: #E14C46
 }
 ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 0;
+    height: 0;
 }
 
 /* 滚动槽 */
