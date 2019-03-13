@@ -45,27 +45,30 @@
 .sidebar .menu-components .menu-item-components.open .menu-item-components-text:before{
     content: "\e636";
 }
-.sidebar .menu-components .menu-item-components .menu-item-heard{
+.sidebar .menu-components .menu-item-components .menu-item-com{
     display: none;
     color: #959AA5;
 }
-.sidebar .menu-components .menu-item-components.open .menu-item-heard{
+.sidebar .menu-components .menu-item-components.open .menu-item-com{
     display: block;
 }
-.sidebar .menu-components .menu-item-com,.sidebar .menu-components .menu-item-heard{
+.sidebar .menu-components .menu-item-com,.sidebar .menu-components .menu-item-com{
     font-size: 13px;
 }
-.sidebar .menu-components .menu-item-heard{
+.sidebar .menu-components .menu-item-com{
     user-select: none;
     padding-left: 10px;
 }
-.sidebar .menu-components .menu-item-heard .menu-item-com{
+.sidebar .menu-components .menu-item-com{
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.sidebar .menu-components .menu-item-heard .menu-item-com.active{
+.sidebar .menu-components .menu-item-com.active{
     background: #FDF6F6;
-    border-right: 1px solid #E14C46;
+    border-right: 2px solid #E14C46;
+}
+.sidebar .menu-components .menu-item-com.active a{
+    color: #E14C46
 }

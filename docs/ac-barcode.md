@@ -11,10 +11,6 @@
 
 ## 代码演示
 
-```js
-
-```
-
 ### 1. 简介
 
 React条形码组件，使用业界知名 [jsbarcode](https://github.com/lindell/JsBarcode) 进行封装，简单、友好的使用体验，支持大小设置、颜色设置、边框设置、多种格式支持如svg、canvas、img等

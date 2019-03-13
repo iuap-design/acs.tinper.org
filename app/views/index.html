@@ -18,6 +18,7 @@
 <script src="//design.yonyoucloud.com/static/react/16.6.0/umd/react.development.js"></script>
 <script src="//design.yonyoucloud.com/static/react/16.6.0/umd/react-dom.development.js"></script>
 <script src="//design.yonyoucloud.com/static/prop-types/15.6.0/prop-types.min.js"></script>
+
 <body>
     <div class="navbar">
         <div id='navbar'></div>
@@ -38,4 +39,7 @@
 <script type="text/javascript" src="//design.yonyoucloud.com/static/docSearch/docsearch.min.js"></script>
 <script src="./js/Navbar.js"></script>
 <script src="./js/Footer.js"></script>
+<% jsList.forEach(function(item){ %>
+    <script src="<%= item %>" > </script>
+<% }); %>
 </html>
