@@ -28,14 +28,6 @@
                 "抽屉组件 AcDrawer": {
                     "version": "0.0.2",
                     "component": "ac-drawer"
-                },
-                "条形码组件 AcBarcode": {
-                    "version": "0.0.1",
-                    "component": "ac-barcode"
-                },
-                "二维码组件 AcQrcode": {
-                    "version": "0.0.1",
-                    "component": "ac-qrcode"
                 }
         } 
     },
@@ -79,7 +71,7 @@
             }
         }
     },
-    "长流程": {
+    "单据": {
         "children":{
             "查询组件": {
                 "version": "0.2.9",
@@ -89,10 +81,6 @@
                 "version": "0.0.1",
                 "component": "ac-complex-search-panel"
             },
-            "Bpm流程组件yyuap-bpm": {
-                "version": "0.2.9",
-                "component": "yyuap-bpm"
-            },
             "上传列表组件AcAttachment": {
                 "version": "0.2.3",
                 "component": "ac-attachment"
@@ -100,6 +88,14 @@
             "附件管理 AcUpload": {
                 "version": "0.0.20",
                 "component": "ac-upload"
+            }
+        }
+    },
+    "流程审批":{
+        "children":{
+            "Bpm流程组件yyuap-bpm": {
+                "version": "0.2.9",
+                "component": "yyuap-bpm"
             }
         }
     },
@@ -116,6 +112,14 @@
             "温度计/液位计 AcThermometer": {
                 "version": "0.0.1",
                 "component": "ac-thermometer"
+            },
+            "条形码组件 AcBarcode": {
+                "version": "0.0.1",
+                "component": "ac-barcode"
+            },
+            "二维码组件 AcQrcode": {
+                "version": "0.0.1",
+                "component": "ac-qrcode"
             }
         }
     }
