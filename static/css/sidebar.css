@@ -72,3 +72,24 @@
 .sidebar .menu-components .menu-item-com.active a{
     color: #E14C46
 }
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* 滚动槽 */
+
+::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+
+::-webkit-scrollbar-thumb {
+    background: #DFDFDF;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 0, 0, 0.4);
+}
