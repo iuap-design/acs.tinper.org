@@ -2,16 +2,21 @@
     min-height: 500px;
     background: #424242;
     color: #ffffff;
-    padding-top: 50px;
 }
 
 .footer .footer-top {
     min-height: 400px;
+    padding: 50px;
 }
 
 .footer .footer-top-item {
-    min-height: 450px;
+    height: 400px;
     line-height: 30px;
+    padding: 0;
+}
+
+.footer .footer-middle{
+    padding: 0;
 }
 
 .footer .footer-top-item p {
