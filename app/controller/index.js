@@ -10,10 +10,9 @@ const axios = require('axios');
 ///##.*代码演示/ 匹配规则改变，
 // 官网react版本
 module.exports = {
-  index: async (ctx, next) => {debugger
-    let component = ctx.params.component;
+  index: async (ctx, next) => {
+    let component = ctx.params.component||'summarize';
     let filePath = path.join(__dirname, `../../docs/${component}.md`);
-    if(!component)filePath=path.join(__dirname, `../../docs/summarize.md`)
     let data = await fs.readFileSync(filePath, 'utf-8');
     let jsList = [];
     if (/##.*代码演示/.test(data)) {//优化此部分代码

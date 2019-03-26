@@ -119,15 +119,12 @@ body {
 }
 .docs blockquote {
     padding: 0;
-    font-family:georgia,serif;
-    font-style: italic;
 }
 .docs blockquote p {
     font-size: 14px;
     font-weight: 300;
     line-height: 18px;
     margin-bottom: 0;
-    font-style: italic;
 }
 .docs code, pre {
     font-family: PingFang-SC-Medium, Monaco, Andale Mono, Courier New, monospace;

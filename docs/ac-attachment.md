@@ -1,38 +1,28 @@
-## ac-attachment
+# 按钮 AcButton
 
-[![npm version](https://img.shields.io/npm/v/ac-attachment.svg)](https://www.npmjs.com/package/ac-attachment)
-[![NPM downloads](http://img.shields.io/npm/dt/ac-attachment.svg?style=flat)](https://npmjs.org/package/ac-attachment)
+## 何时使用
 
-### 1. 简介
+代替原生按钮
 
-附件上传组件(基于应用平台)
+## 如何使用
 
-### 2. 安装
-
-```bash
+```
 npm install ac-attachment -S
-```
 
-### 3. 使用
-```javascript
 import AcAttachment from 'ac-attachment';
+
 import 'ac-attachment/dist/ac-attachment.css';
+
 ```
-
-```javascript
-<AcAttachment recordId='' groupname='' />
-```
-更多用法可以参考[demo](./demo/demolist)文件夹中的示例
-
-> 注：组件基于应用平台的附件接口，接口需要登录，否则无法进行附件相关的任何操作
-
-### 4. 预览
 
 ## 代码演示
 
-### 5. 参数
 
-Parameter | Type | Default | Required | Description
+## API 
+
+### 参数
+
+名称 | 类型 | 默认值 | 是否必填 | 描述
 --------- | ---- | ------|----------- | -----------------
 recordId | `string` | | 是 | 单据相关的唯一标示，一般包含单据ID，如果有多个附件的时候由业务自己制定规则 
 groupname | `string` |  | 是 | 分组名
@@ -55,10 +45,9 @@ className | `string` |  | 否 | 附件容器的自定义class
 checkDuplicate | `boolean` | `true` | 否 | 文件上传是否检测文件名重复 
 locale | `string` | `zh` | 否 | 组件语言类型，默认是简体中文，目前支持英文(en或en_US)，简体中文(zh_CN)，繁体中文(zh_TW)
 
+### 事件
 
-### 6. 事件
-
-Name | Parameter | Description
+名称 | 类型 | 描述
 --------- | ---- | -----------------
 onFileTypeOver | `file`，当前上传的文件对象 | 文件类型超出限制回调
 onFileSizeOver | `file`，当前上传的文件对象 | 文件大小超出限制回调
@@ -66,41 +55,23 @@ onFileNumOver | `file`，当前上传的文件对象 | 文件数量超出限制�
 onDelete | `attach` | 参数attach为附件组件实例，调用attach.fDelete()，可以调起接口删除附件
 
 
-### 7. 自定义按钮
+## 注意事项
 
-允许传入自定义按钮，自定义按钮嵌套在附件组件内，以属性data-btn作为标识，不必添加事件，组件根据标识执行对应事件。
-按钮可以传入0至3个，未传递的使用内置的默认按钮，无标识的按钮无效。
-
-```javascript
-//传入定义按钮
-<AcAttachment recordId='' groupname=''>
-    <Button data-btn="upload" className="ml5" colors="primary" size='sm'>上传</Button>
-    <Button data-btn="download" className="ml5" colors="primary" size='sm'>下载</Button>
-    <Button data-btn="delete" className="ml5" colors="primary" size='sm'>删除</Button>
-</AcAttachment>
-```
-
-Attribute |  Value |  Description
---------- |  ------ | -------------------
-data-btn  |  `upload` | 表示上传按钮
-data-btn  |  `download` | 表示下载按钮
-data-btn  |  `delete`   | 表示删除按钮
-
-### 8. 文件列表刷新
+## 文件列表刷新
 
 组件在recordId发生变化，会自动刷新文件列表，也可以手动刷新文件列表，用法如下：
 
 ```javascript
-<AcAttachment ref={(attach) => {this.attach = attach}} recordId='' groupname='' />
+<AcAttachment ref={(c) => {this.attach = c.attach}} recordId='' groupname='' />
 
 //手动刷新文件列表
 this.attach.fLoadFileList();
 ```
 
-### 9. 自定义弹框删除文件
+### 自定义弹框删除文件
 
 ```javascript
-<AcAttachment ref={(attach) => {this.attach = attach}} recordId='' groupname='' />
+<AcAttachment ref={(c) => {this.attach = c.attach}} recordId='' groupname='' />
 
 //手动删除文件
 this.attach.fDelete();
@@ -116,3 +87,5 @@ this.attach.fDelete();
     }}
 />
 ```
+
+## 更新日志

@@ -1,13 +1,10 @@
-## app-mobile-locale
+# 手机国际化 AcMobileLocale
 
----
+## 何时使用
 
-手机号多语控件
+手机号国际化
 
-## 代码演示
-
-## 效果  [进入示例](https://tinper-acs.github.io/ac-mobile-locale/)
-
+## 如何使用
 
 ```
 $ ynpm install @yonyou/ac-mobile-locale --save-dev
@@ -19,9 +16,13 @@ import AcMobileLocale from '@yonyou/ac-mobile-locale';
 样式引入
 
 import '@yonyou/ac-mobile-locale/dist/index.css';
+
 ```
 
-## API
+## 代码演示
+
+
+## API 
 
 |参数|说明|类型|返回值|是否必填|
 |:--|:---:|:--:|---:|---:|
@@ -35,13 +36,9 @@ import '@yonyou/ac-mobile-locale/dist/index.css';
 |inputId|输入框的key 默认是mobile| string | -- | 否 |
 |form|传入form需要表单校验，否则不需要校验| string | -- | 否 |
 
-#### 开发调试
+## 注意事项
 
-```sh
-$ cd @yonyou/ac-mobile-locale
+当前按钮集成Button所有的属性
 
-$ ynpm install
+## 更新日志
 
-$ npm run dev
-
-```

@@ -6,9 +6,15 @@ const fs = require('fs-extra');
 let components = require('../../static/components.json');
 
 components.forEach(item => {
-    fs.pathExists(`./docs/${item}.md`, (err, flag) => {
-        if (!flag) {
-            download(`https://raw.githubusercontent.com/tinper-acs/${item}/master/README.md`).then(data => {
+    // fs.pathExists(`./docs/${item}.md`, (err, flag) => {
+    //     if (!flag) {
+            
+    //     } else {
+    //         console.log(`😀${item} 已存在，跳过 `);
+    //     }
+    // })
+
+    download(`https://raw.githubusercontent.com/tinper-acs/${item}/master/README.md`).then(data => {
                 fs.writeFile(`./docs/${item}.md`, data).then(() => {
                     console.log(`😀 ${item} 文件写入成功!`);
                 }).catch(err => {
@@ -19,8 +25,4 @@ components.forEach(item => {
                 console.log(`❌ ⏬${item} 文件请求失败!`);
                 console.log(err);
             })
-        } else {
-            console.log(`😀${item} 已存在，跳过 `);
-        }
-    })
 });

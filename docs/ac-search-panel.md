@@ -36,7 +36,6 @@ import "./node_modules/ac-search-panel/src/SearchPanel.scss"
 import "./node_modules/ac-search-panel/build/SearchPanel.css"
 ```
 
-## 代码演示
 
 ## API
 

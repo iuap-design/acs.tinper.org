@@ -1,3 +1,6 @@
+<% if (active.indexOf('ac-') > -1 || active.indexOf('ref-') > -1) { %>
+    <link href="https://tinper-acs.github.io/<%= active %>/styles.css" type="text/css" rel="stylesheet" />
+<% } %>
 <div>
     <%- docs %>
 </div>

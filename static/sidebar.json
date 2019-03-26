@@ -17,17 +17,9 @@
                     "version": "0.0.2",
                     "component": "ac-notification"
                 },
-                "内部转移应用 AcOrgcenterForm": {
-                    "version": "0.0.1",
-                    "component": "ac-orgcenter-form"
-                },
                 "消息组件 AcToast": {
                     "version": "0.0.9",
                     "component": "ac-toast"
-                },
-                "抽屉组件 AcDrawer": {
-                    "version": "0.0.2",
-                    "component": "ac-drawer"
                 }
         } 
     },
@@ -41,21 +33,9 @@
                 "version": "0.0.1",
                 "component": "ref-multiple-table"
             },
-            "穿梭参照 RefTreeTransfer": {
-                "version": "0.0.1",
-                "component": "ref-tree-transfer"
-            },
             "树表参照 RefTreeTable": {
                 "version": "0.0.1",
                 "component": "ref-tree-table"
-            },
-            "下拉参照 RefCombobox": {
-                "version": "0.0.1",
-                "component": "ref-combobox"
-            },
-            "行内搜索表格参照 RefMultipleTableWalsin": {
-                "version": "0.0.1",
-                "component": "ref-multiple-table-walsin"
             }
         }
     },
@@ -73,10 +53,6 @@
     },
     "单据": {
         "children":{
-            "查询组件": {
-                "version": "0.2.9",
-                "component": "ac-search-panel"
-            },
             "条件搜索组件 AcComplexSearchPanel": {
                 "version": "0.0.1",
                 "component": "ac-complex-search-panel"

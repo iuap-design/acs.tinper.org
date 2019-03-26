@@ -1,49 +1,29 @@
-# ac-barcode
-
-条形码组件
-
-![image](https://user-images.githubusercontent.com/3817644/53559495-293c0800-3b85-11e9-9094-f6455cbe9ec5.png)
-
-[![npm version](https://img.shields.io/npm/v/ac-barcode.svg)](https://www.npmjs.com/package/ac-barcode)
-[![NPM downloads](http://img.shields.io/npm/dt/ac-barcode.svg?style=flat)](https://npmjs.org/package/ac-barcode)
-
-在线演示：https://tinper-acs.github.io/ac-barcode/
-
-## 代码演示
-
-### 1. 简介
+# 条形码组件 AcBarcode
 
 React条形码组件，使用业界知名 [jsbarcode](https://github.com/lindell/JsBarcode) 进行封装，简单、友好的使用体验，支持大小设置、颜色设置、边框设置、多种格式支持如svg、canvas、img等
 
-### 2. 安装
+## 何时使用
 
-1. 通过`npm`安装
-    ```bash
-    npm install ac-barcode --save
-    ```
-2. 国内镜像通过`cnpm`安装
-    ```bash
-    cnpm install ac-barcode --save
-    ```
-3. 用友内网通过`ynpm`安装
-    ```bash
-    ynpm install ac-barcode --save
-    ```
+条形码
+
+## 如何使用
+
+```
+npm install ac-barcode --save
 
 
-### 3. 使用
-
-```js
 import AcBarcode from "ac-barcode";
 
 render(){
     return (<AcBarcode value="9787123" />)
 }
+
 ```
 
 ## 代码演示
 
-### 4. API
+
+## API 
 
 | 参数 | 默认值 | 类型 |
 |--------|---------------|------|
@@ -67,9 +47,9 @@ render(){
 | [`marginLeft`](https://github.com/lindell/JsBarcode/wiki/Options#margins) | `undefined` | `Number` |
 | [`marginRight`](https://github.com/lindell/JsBarcode/wiki/Options#margins) | `undefined` | `Number` |
 
+## 注意事项
 
-### 5. 支持标准
-
+支持标准
 * [CODE128](https://github.com/lindell/JsBarcode/wiki/CODE128)
   * CODE128 (automatic mode switching)
   * CODE128 A/B/C (force mode)
@@ -92,9 +72,5 @@ render(){
 * [Pharmacode](https://github.com/lindell/JsBarcode/wiki/pharmacode)
 * [Codabar](https://github.com/lindell/JsBarcode/wiki/codabar)
 
+## 更新日志
 
-### 6. CHANGLOG
-
-* [1.0.0-完善文档发布正式版](https://github.com/tinper-acs/ac-barcode/releases/tag/1.0.0)
-* [0.0.2-修改脚手架工程](https://github.com/tinper-acs/ac-barcode/releases/tag/0.0.2)
-* [0.0.1-初次版本实现、增加示例](https://github.com/tinper-acs/ac-barcode/releases/tag/0.0.1)

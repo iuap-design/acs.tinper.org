@@ -1,10 +1,10 @@
-## ac-complex-search-panel 条件搜索组件
+# 复杂查询面板 AcComplexSearchPanel
 
->  查询面板React组件 [进入示例](https://tinper-acs.github.io/ac-complex-search-panel/)
+## 何时使用
 
+查询面板
 
-## 代码演示
-
+## 如何使用
 
 ```
 $ ynpm install ac-complex-search-panel --save-dev
@@ -19,15 +19,17 @@ import 'ac-complex-search-panel/dist/ac-complex-search-panel.css';
 
 ```
 
-##效果  [进入示例](https://tinper-acs.github.io/ac-complex-search-panel/)
- 
+## 代码演示
 
-## API
+
+## API 
 
 |参数|说明|类型|默认值|
 |:--|:---:|:--:|---:|
 | form | `bee-form`组件内的form，必须传入 | object | - |
 | searchOpen | 是否默认展开更多查询条件 | string | false |
+| open | 设置展开显示 | string | - |
+| openHandle | 展开收起回调 | function | () => {} |
 | search | 查询的回调 | function | () => {} |
 | reset | 重置的回调,默认首先调用'this.props.form.resetFields()'清空所有值,无法清空的需要在回调中手动清空 | function | () => {} |
 | resetName | 重置的文字 | string | 重置 |
@@ -44,13 +46,8 @@ import 'ac-complex-search-panel/dist/ac-complex-search-panel.css';
 | searchBtnPosition | 查询按钮位置 | `left`/`right` | left |
 | searchHead | 查询面板标题 | string | 查询面板 |
 
-       
+## 注意事项
 
-#### 开发调试
+暂无
 
-```sh
-$ cd ac-complex-search-panel
-$ npm install
-$ npm run dev
-```
-
+## 更新日志

@@ -3,7 +3,6 @@
 > 华新丽华专项combobox参照
 
 ## 代码演示
-
 ```sh
 $ npm install ref-combobox@walsin --save
 ```
