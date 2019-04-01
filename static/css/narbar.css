@@ -110,7 +110,10 @@
 }
 
 .mob-nav {
-    width: 100%;
+    position:fixed;
+    z-index:999;
+    background:white;
+    width:100%;
     height: 65px;
     line-height: 65px;
     border-bottom: 1px solid #DFDFDF;
@@ -125,25 +128,52 @@
     margin: 0 auto;
 }
 
-.mob-nav .nav-content {
+.mob-nav span{
     float: right;
-    right: 3px;
+    right: 31px;
     position: fixed;
     z-index: 999;
-}
-
-.mob-nav .nav-content .uf-navmenu {
-    margin-left: 2px;
-}
-
-.mob-nav .nav-content .u-button {
-    background: transparent;
 }
 
 .mob-nav a {
     color: #424242;
 }
 
+.mob-nav ul{
+    position:fixed;
+    display:none;
+    width:240px;
+    top:60px;
+    right:24px;
+    border:1px solid #C0C0C0;
+    font-size:0;
+}
+
+.mob-nav ul li{
+    background:#FFFFFF;
+    font-size:14px;
+    margin-bottom:-1px;
+    height:42px;
+    line-height:42px;
+}
+.mob-nav ul li a:hover{
+    background-color:rgba(240,240,240,1);
+    color:#E14C46;
+}
+.mob-nav .lang{
+   color:#ccc;
+}
+.mob-nav .basecomp{
+    background-color:rgba(240,240,240,1);
+ }
+ .mob-nav .basecomp a{
+    color:#E14C46;
+ }
+
+/* 基础组件详情页移动端导航栏 */
+.mob-nav  .uf-navmenu{
+    margin-left:90px;
+}
 .u-dropdown {
     width: 240px;
 }
@@ -228,13 +258,13 @@ input::-webkit-input-placeholder {
     font-size: 14px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
     .nav {
         display: none;
     }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
     .mob-nav {
         display: none;
     }

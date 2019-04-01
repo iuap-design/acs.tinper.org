@@ -61,20 +61,18 @@
 
 @media screen and (max-width: 800px) {
     .footer {
-        padding-left: 6%;
-        padding-right: 6%;
         display: inline-block;
         text-align: center;
+    }
+    .footer .footer-top{
+        padding:50px 37px 40px 37px;
     }
     .footer .footer-middle .footer-line {
         height: 1px;
         background: #666666;
-        margin-left: -20%;
-        margin-right: -18%;
-        width: 138%;
     }
     .footer .footer-top-item {
-        min-height: 110px;
+        height:auto;
         margin-bottom: 40px;
     }
     .footer .footer-top-item p {
@@ -83,6 +81,10 @@
     .footer .footer-base {
         margin-bottom: 60px;
         margin-top: 30px;
+    }
+    .footer .footer-base .footer-base-font{
+        padding-left:25px;
+        padding-right:25px;
     }
     .footer .footer-base .footer-base-font p {
         line-height: 20px;

@@ -229,3 +229,9 @@ select::-ms-expand {
 .docs a.pencil{
     color: #8D99AE;
 }
+
+@media (max-width:768px) {
+    .docs .doc-content{
+        margin-right:0;
+    }
+}

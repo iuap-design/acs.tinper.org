@@ -64,7 +64,21 @@
     </div>
 </div>
 
+<!-- 移动端导航栏 -->
+<div class="mob-nav">
+    <img src="//iuap-design-cdn.oss-cn-beijing.aliyuncs.com/static/tinper-bee/logo/iuapdesign.svg">
+    <span class="uf uf-navmenu" onclick="displayOrHide()"> 
+        <ul id="itemList0">
+            <li><a href="/" >首页</a></li>
+            <li class="lang">设计语言</li>
+            <li class="basecomp" ><a href="/tinper-bee">基础组件</a></li>
+            <li><a href="/tinper-acs" >应用组件</a></li>
+            <li style="border-bottom:1px solid #C0C0C0;" ><a target="_blank" href="/case/preview">典型案例</a></li>
+        </ul>
+    </span>
+</div>
 
+<!-- PC端导航栏 -->
 <script>
     var select = document.querySelector('#selectLang');
     var selectList = document.querySelector('#selectList');
@@ -95,4 +109,21 @@
             showHide(true)
         };
     })
+</script>
+
+<!-- 移动端导航栏 -->
+<script>
+    var hide=true;
+    function displayOrHide(){
+        var itemList=document.getElementById("itemList0");
+        if(hide){
+            //显示
+            itemList.style.display="block";
+            hide=false;
+        }else{
+            //隐藏
+            itemList.style.display="none";
+            hide=true;
+        }
+    }
 </script>
