@@ -201,6 +201,7 @@ body {
     position: absolute;
     left: 32px;
     bottom: 0px;
+    top:-0.8px;
 }
 .docs .doc-content .title-right .title-tag .uf:before{
     position: absolute;

@@ -121,13 +121,7 @@ module.exports = {
 
 
       }
-    } else {
-      filePath = path.join(__dirname, `../../docs/${component}.md`);
-      rightMenus = docsMenus[component].menus;
-      data = await fs.readFileSync(filePath, 'utf-8');
-    }
-
-    let str =
+      let str =
       data.match(/#? \w+/g) && data.match(/#? \w+/g).length ?
       data.match(/#? \w+/g)[0] :
       "";
@@ -141,6 +135,13 @@ module.exports = {
       "<a class='title-tag' href='https://github.com/tinper-acs/" + component + "/issues/new' target='_blank'><i class='uf uf-qm-c'></i><span>issue</span></a>" +
       "</div>"
     );
+    } else {
+      filePath = path.join(__dirname, `../../docs/${component}.md`);
+      rightMenus = docsMenus[component].menus;
+      data = await fs.readFileSync(filePath, 'utf-8');
+    }
+
+   
 
     data = marked(data);
 
