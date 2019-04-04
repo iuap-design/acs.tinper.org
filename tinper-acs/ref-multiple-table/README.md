@@ -27,15 +27,13 @@ import 'ref-multiple-table/dist/index.css';
 
 ## 分类
 
-
-### RefMultipleTableBaseUI
+RefMultipleTableBaseUI
       表格参照的纯ui，需要正确的参数传入。
 
-
-### RefMultipleTableWithInput
+RefMultipleTableWithInput
     带文本框的参照弹出窗。
 
-### SearchPanelItem
+SearchPanelItem
     表格参照搜索面板处的搜索条件。（带有复杂搜索的表格参照需要使用此组件）
 
 
@@ -103,5 +101,6 @@ name | `String` | --- | getFieldProps(name, option)的name字段，设置表单�
 text| `String`| ---|搜索框的标题| 否
 
 
- 
+## 注意事项
+
 ## 更新日志
