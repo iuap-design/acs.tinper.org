@@ -1,0 +1,107 @@
+.t-con {
+    color: white;
+    z-index: 9999;
+    width: 100%;
+    line-height: 1;
+}
+.t-con {
+    position: fixed;
+    top: 80%;
+}
+.t-hide {
+    display: none;
+}
+.t-content {
+    display: inline-block;
+    max-width: 720px;
+    background-color: rgba(48, 45, 55, 0.7);
+    border-radius: 10px;
+    padding: 20px 30px;
+}
+.t-text {}
+.t-text-icon{
+    margin-top: 10px;
+}
+.t-con.t-left {
+    text-align: left;
+}
+.t-con.t-right {
+    text-align: right;
+}
+.t-con.t-center {
+    text-align: center;
+}
+.t-con.t-top {
+    top: 0;
+    bottom: auto;
+}
+.t-con.t-bottom {
+    top: auto;
+    bottom: 0;
+}
+.t-con.t-middle {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.t-con.t-center-middle {
+    top: 45%;
+    transform: translate(0, -50%);
+    text-align: center;
+}
+.t-content.t-success{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.t-content.t-warning{
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.t-content.t-error{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.icon {
+    font-size: 30px !important;
+    display: inline-block;
+}
+.icon-loading{
+    animation: loadingrotate 1.2s linear infinite;
+    -webkit-animation: loadingrotate 1.2s linear infinite;
+}
+@keyframes loadingrotate{
+    0% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        opacity: .3;
+    }
+    50% {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        opacity: .3;
+    }
+}
+@-webkit-keyframes loadingrotate{
+    0% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        opacity: .3;
+    }
+    50% {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(359deg);
+        -webkit-transform: rotate(359deg);
+        opacity: .3;
+    }
+}

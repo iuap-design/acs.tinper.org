@@ -1,0 +1,258 @@
+@charset "UTF-8";
+.temp-main {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000; }
+
+.btn {
+  width: 80px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin: 0 8px;
+  font-family: Helvetica;
+  font-size: 14px;
+  line-height: 32px; }
+
+.btn > i {
+  margin-right: 8px; }
+
+/** 品牌红 **/
+button.brand_btn {
+  background: #e14c46;
+  color: white; }
+
+button.brand_btn:hover {
+  background: #d23d37; }
+
+button.brand_btn:active {
+  background: #b2332e;
+  color: white; }
+
+button.brand_btn:disabled {
+  background: rgba(9, 44, 66, 0.04);
+  color: #A5ADBA; }
+
+/** 默认**/
+button.default_btn {
+  color: #474d54;
+  background: rgba(9, 44, 66, 0.04); }
+
+button.default_btn:hover {
+  background: rgba(9, 44, 66, 0.08);
+  color: #474d54; }
+
+button.default_btn:active {
+  background: rgba(225, 76, 70, 0.1);
+  color: #e14c46; }
+
+button.default_btn:disabled {
+  background: rgba(9, 44, 66, 0.04);
+  color: #a5adba; }
+
+/** 默认带边框 **/
+button.default_line_btn {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.8); }
+
+button.default_line_btn:active {
+  background: #fcedec;
+  color: #e14c46; }
+
+button.default_line_btn:hover {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  color: white; }
+
+button.default_line_btn:disabled {
+  color: #a5adba;
+  background: #f5f6f8; }
+
+/**
+.default_line_btn:visited{
+ background:rgba(245,246,248,1);
+ color:rgba(165,173,186,1);
+ opacity:70;
+ cursor: not-allowed;
+}
+**/
+/**  默认无背景色 **/
+button.default_alpha_btn {
+  font-family: PingFangSC-Regular;
+  color: #474d54;
+  background: transparent; }
+
+button.default_alpha_btn:active {
+  background: rgba(225, 76, 70, 0.1);
+  color: #e14c46; }
+
+button.default_alpha_btn:hover {
+  color: #474d54;
+  background: rgba(9, 44, 66, 0.08); }
+
+button.default_alpha_btn:disabled {
+  background: rgba(9, 44, 66, 0);
+  color: #a5adba;
+  cursor: not-allowed; }
+
+/*默认白色背景带边框*/
+button.default_white_btn {
+  font-family: MicrosoftYaHei;
+  color: #474d54;
+  background: white;
+  border: 1px solid rgba(78, 89, 104, 0.25); }
+
+button.default_white_btn:hover {
+  background: rgba(9, 44, 66, 0.04); }
+
+button.default_white_btn:active {
+  background: rgba(225, 76, 70, 0.1);
+  border-color: rgba(225, 76, 70, 0.05);
+  color: #e14c46; }
+
+button.default_white_btn:disabled {
+  background: rgba(9, 44, 66, 0.04);
+  color: #a5adba;
+  cursor: not-allowed; }
+
+/** 选用样式一 **/
+button.check_selected_btn {
+  width: 22px;
+  height: 22px;
+  color: #767f8b;
+  /* border: 1px solid rgba(117,127,140,1); */
+  background: transparent;
+  margin: 0px;
+  margin-left: 2px; }
+
+button.check_selected_btn:active {
+  color: #00cb7c; }
+
+button.check_selected_btn:hover {
+  color: #2d3f5d;
+  background: none; }
+
+/**  选用样式二 **/
+button.check_close_btn {
+  width: 22px;
+  height: 22px;
+  color: #767f8b;
+  background: transparent;
+  margin: 0px;
+  margin-left: 2px; }
+
+button.check_close_btn:active {
+  color: #2d3f5d; }
+
+button.check_close_btn:hover {
+  color: #444651;
+  background: none; }
+
+/**  危险 **/
+button.danger_btn {
+  font-size: 14px;
+  font-family: AppleSystemUIFont;
+  color: white;
+  background: #4c4c4c; }
+
+button.danger_btn:hover {
+  background: #5f5f5f;
+  color: white; }
+
+button.danger_btn:active {
+  background: #444651;
+  color: white; }
+
+button.disabled_danger_btn {
+  background: rgba(9, 44, 66, 0);
+  color: #a5adba; }
+
+/**  警告 **/
+button.warning_btn {
+  font-family: PingFangSC-Regular;
+  color: #474d54;
+  background: #ffab00; }
+
+button.warning_btn:hover {
+  background: #f6c544;
+  font-family: PingFangSC-Medium;
+  color: #474d54; }
+
+button.warning_btn:active {
+  background: #ff991f;
+  font-family: PingFangSC-Medium;
+  color: #474d54; }
+
+button.warning_btn:disabled {
+  background: rgba(9, 44, 66, 0.04);
+  color: #a5adba; }
+
+/**  组织 **/
+button.org_btn {
+  color: white;
+  width: 86px;
+  height: 32px;
+  border-radius: 3px;
+  margin-right: 5px;
+  background: #df3528; }
+
+button.org_btn:hover {
+  background: #df3528;
+  opacity: 0.8; }
+
+button.org_btn:active {
+  background: #df5b26;
+  font-family: PingFangSC-Medium;
+  color: #474d54; }
+
+button.org_btn:disabled {
+  background: rgba(9, 44, 66, 0.04);
+  color: #a5adba; }
+
+/**  组织-o **/
+button.org_o {
+  color: white;
+  width: 86px;
+  height: 32px;
+  border-radius: 3px;
+  margin-right: 5px;
+  background: white;
+  border: 1px solid #df3528;
+  color: #df3528; }
+
+button.org_o:hover {
+  background: white;
+  opacity: 0.8; }
+
+button.org_o:active {
+  background: white;
+  font-family: PingFangSC-Medium;
+  color: #474d54; }
+
+button.org_o:disabled {
+  background: rgba(9, 44, 66, 0.04);
+  color: #a5adba; }
+
+/*搜索*/
+button.search_icon_btn {
+  height: 38px;
+  border: 1px solid RGBA(78, 89, 104, 0.19);
+  background: #fff; }
+
+.demoPadding {
+  background: #eceff1;
+  padding: 10px; }
+  .demoPadding button {
+    margin: auto 5px; }
+  .demoPadding .divider {
+    margin: 6px 0;
+    height: 1px;
+    overflow: hidden;
+    background-color: #e0e0e0; }
+
+/*# sourceMappingURL=demo.css.map */

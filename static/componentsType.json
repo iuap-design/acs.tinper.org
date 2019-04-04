@@ -1,0 +1,23 @@
+{
+    "standard":[
+        "ac-button",
+        "ac-notification",
+        "ac-barcode",
+        "ac-qrcodes",
+        "ac-input-locale",
+        "ac-mobile-locale",
+        "ac-complex-search-panel",
+        "ac-spreadsheet",
+        "ac-thermometer"
+    ],
+    "others":[
+        "ac-toast",
+        "yyuap-bpm",
+        "ac-attachment",
+        "ac-upload",
+        "ac-editor",
+        "ref-tree",
+        "ref-multiple-table",
+        "ref-tree-table"
+    ]
+}

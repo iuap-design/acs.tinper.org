@@ -1,0 +1,141 @@
+/* FormGroup */
+/*  Navlayout  */
+.login-account-locale {
+  height: 38px;
+  border-radius: 3px;
+  width: 340px;
+  font-size: 13px;
+  box-sizing: border-box; }
+  .login-account-locale .mobile-box {
+    display: -ms-flexbox;
+    display: flex;
+    border: 1px solid #e0e0e0;
+    height: 38px;
+    border-radius: 3px; }
+    .login-account-locale .mobile-box .location {
+      position: relative;
+      width: 119px;
+      height: 36px;
+      line-height: 36px;
+      float: left;
+      border-right: 1px solid #e0e0e0;
+      text-align: left;
+      padding-left: 10px; }
+      .login-account-locale .mobile-box .location .locaton-list {
+        position: absolute;
+        top: 36px;
+        left: -1px;
+        max-height: 170px;
+        overflow-y: auto;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 3px;
+        width: auto;
+        min-width: 120px;
+        z-index: 100;
+        white-space: nowrap; }
+        .login-account-locale .mobile-box .location .locaton-list li {
+          height: 28px;
+          line-height: 28px;
+          cursor: pointer;
+          color: #474D54;
+          text-align: left;
+          padding-left: 10px;
+          padding-right: 10px;
+          font-size: 12px; }
+          .login-account-locale .mobile-box .location .locaton-list li:hover {
+            background: rgba(9, 30, 66, 0.04); }
+      .login-account-locale .mobile-box .location .bottom {
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        right: 8px;
+        top: 14px;
+        font-weight: bold; }
+        .login-account-locale .mobile-box .location .bottom .bottom-arrow1 {
+          top: 1px;
+          border-top: 6px solid #555555;
+          width: 0;
+          height: 0;
+          display: block;
+          position: absolute;
+          left: 0;
+          border-bottom: 6px transparent dashed;
+          border-left: 6px transparent dashed;
+          border-right: 6px transparent dashed;
+          overflow: hidden; }
+        .login-account-locale .mobile-box .location .bottom .bottom-arrow2 {
+          top: 1px;
+          border-top: 6px solid #555555;
+          width: 0;
+          height: 0;
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-bottom: 6px transparent dashed;
+          border-left: 6px transparent dashed;
+          border-right: 6px transparent dashed;
+          overflow: hidden;
+          border-top: 6px solid #fff; }
+    .login-account-locale .mobile-box .mobile {
+      display: -ms-flexbox;
+      display: flex;
+      width: calc(100% - 119px); }
+      .login-account-locale .mobile-box .mobile .country-code {
+        display: inline-block;
+        min-width: 50px;
+        height: 36px;
+        line-height: 36px;
+        overflow: hidden;
+        padding: 0 5px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 13px;
+        border-right: 1px solid #e0e0e0; }
+        .login-account-locale .mobile-box .mobile .country-code .country-code-input {
+          width: 50px;
+          color: #757575;
+          text-align: center;
+          font-size: 13px; }
+      .login-account-locale .mobile-box .mobile .position-relative {
+        position: relative;
+        width: 100%;
+        padding-left: 5px; }
+      .login-account-locale .mobile-box .mobile .login-input, .login-account-locale .mobile-box .mobile .u-form-control {
+        border: none;
+        outline: none;
+        line-height: 36px;
+        height: 36px;
+        padding: 0; }
+      .login-account-locale .mobile-box .mobile .login-input {
+        padding-left: 5px; }
+      .login-account-locale .mobile-box .mobile .error {
+        font-size: 12px;
+        color: red;
+        position: absolute;
+        top: 42px;
+        width: 240px;
+        left: 0px; }
+  .login-account-locale .mobile-box.disabled {
+    background: #eee;
+    border-color: #e0e0e0;
+    color: #BDBDBD;
+    cursor: not-allowed; }
+    .login-account-locale .mobile-box.disabled .bottom-arrow2 {
+      border-top: 6px solid #eee !important; }
+    .login-account-locale .mobile-box.disabled .mobile .country-code .country-code-input {
+      background: #eee;
+      border-color: #e0e0e0;
+      color: #BDBDBD; }
+
+.demoPadding button {
+  margin: auto 5px; }
+
+.demoPadding .divider {
+  margin: 6px 0;
+  height: 1px;
+  overflow: hidden;
+  background-color: #e0e0e0; }
+
+/*# sourceMappingURL=demo.css.map */

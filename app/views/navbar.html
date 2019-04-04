@@ -22,7 +22,7 @@
             </li>
             <li class="language">设计语言</li>
             <li>
-                <a href="/tinper-bee">基础组件</a>
+                <a  href="/tinper-bee">基础组件</a>
             </li>
             <li>
                 <a class="first-show" href="/tinper-acs">应用组件</a>
@@ -33,7 +33,8 @@
             <li class="lang-select">
                 <div class="u-select u-select-focused u-select-enabled" id="selectLang">
                     <div class="u-select-selection 
-    u-select-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0">
+        u-select-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false"
+                        tabindex="0">
                         <div class="u-select-selection-rendered" name="input">
                             <div class="u-select-selection-selected-value" title="简体中文" style="display: block; opacity: 1;">简体中文</div>
                         </div>
@@ -48,11 +49,11 @@
                                 <div style="overflow: auto;">
                                     <ul class="u-select-dropdown-menu u-select-dropdown-menu-vertical  u-menu-light u-select-dropdown-menu-root" role="menu"
                                         aria-activedescendant="">
-                                        <li unselectable="unselectable" title="简体中文" class="u-select-dropdown-menu-item-selected u-select-dropdown-menu-item" role="menuitem"
+                                        <li unselectable="unselectable" title="简体中文" class="u-select-dropdown-menu-item-selected u-select-dropdown-menu-item select-list" role="menuitem"
                                             aria-selected="true" style="user-select: none;">简体中文</li>
-                                        <li unselectable="unselectable" title="繁体中文" class="u-select-dropdown-menu-item-disabled u-select-dropdown-menu-item" role="menuitem"
+                                        <li unselectable="unselectable" title="繁体中文" class="u-select-dropdown-menu-item-disabled u-select-dropdown-menu-item select-list" role="menuitem"
                                             aria-selected="false" aria-disabled="true" style="user-select: none;">繁体中文</li>
-                                        <li unselectable="unselectable" title="英文" class="u-select-dropdown-menu-item-disabled u-select-dropdown-menu-item" role="menuitem"
+                                        <li unselectable="unselectable" title="英文" class="u-select-dropdown-menu-item-disabled u-select-dropdown-menu-item select-list" role="menuitem"
                                             aria-selected="false" aria-disabled="true" style="user-select: none;">英文</li>
                                     </ul>
                                 </div>
@@ -64,55 +65,58 @@
     </div>
 </div>
 
-<!-- 移动端导航栏 -->
 <div class="mob-nav">
     <img src="//iuap-design-cdn.oss-cn-beijing.aliyuncs.com/static/tinper-bee/logo/iuapdesign.svg">
     <span class="uf uf-navmenu" onclick="displayOrHide()"> 
         <ul id="itemList0">
             <li><a href="/" >首页</a></li>
             <li class="lang">设计语言</li>
-            <li  ><a href="/tinper-bee">基础组件</a></li>
-            <li class="basecomp"><a href="/tinper-acs" >应用组件</a></li>
+            <li class="basecomp" ><a href="/tinper-bee">基础组件</a></li>
+            <li><a href="/tinper-acs" >应用组件</a></li>
             <li style="border-bottom:1px solid #C0C0C0;" ><a target="_blank" href="/case/preview">典型案例</a></li>
         </ul>
     </span>
 </div>
 
-<!-- PC端导航栏 -->
 <script>
+    
     var select = document.querySelector('#selectLang');
     var selectList = document.querySelector('#selectList');
     var selectOptions = selectList.querySelectorAll('.u-select-dropdown-menu-item');
 
-    function showHide(hide) {
+    function langShowHide(hide) {
         var select = document.querySelector('#selectLang');
         var selectList = document.querySelector('#selectList');
-        var cls = selectList.getAttribute('class');
-        if (hide) {
-            selectList.setAttribute('class', 'select-list');
-            select.setAttribute('class', 'u-select u-select-focused u-select-enabled');
-        } else {
-            if (cls.indexOf('open') != -1) { //打开状态
+        try {
+            var cls = selectList.getAttribute('class');
+            if (hide) {
                 selectList.setAttribute('class', 'select-list');
                 select.setAttribute('class', 'u-select u-select-focused u-select-enabled');
-            } else { //关闭状态
-                selectList.setAttribute('class', 'select-list open');
-                select.setAttribute('class', 'u-select u-select-open u-select-focused u-select-enabled');
+            } else {
+                if (cls.indexOf('open') != -1) { //打开状态
+                    selectList.setAttribute('class', 'select-list');
+                    select.setAttribute('class', 'u-select u-select-focused u-select-enabled');
+                } else { //关闭状态
+                    selectList.setAttribute('class', 'select-list open');
+                    select.setAttribute('class', 'u-select u-select-open u-select-focused u-select-enabled');
+                }
             }
+        } catch (error) {
+            
         }
+        
     }
     select.onclick = (e) => {
-        showHide()
+        langShowHide()
     };
     selectOptions.forEach(item => {
         item.onclick = () => {
-            showHide(true)
+            langShowHide(true)
         };
     })
-</script>
 
-<!-- 移动端导航栏 -->
-<script>
+
+    //移动端适配
     var hide=true;
     function displayOrHide(){
         var itemList=document.getElementById("itemList0");

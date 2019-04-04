@@ -1,14 +1,74 @@
-
-body{
-    margin: 0px;
-}
 .navbar {
     background: #808080;
     height: 65px;
 }
+
 .content {
     width: 100%;
 }
+
+.sidebar {
+    width: 250px;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 40px;
+    position: fixed;
+    overflow: auto;
+    height: calc(100% - 65px);
+    top: 65px;
+    padding-top: 30px;
+    padding-bottom: 65px;
+    border-right: 1px solid #dfdfdf;
+    background: #fff;
+}
+
+.docs {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 300px);
+    padding-left: 40px;
+    margin-left: 250px;
+}
+.footer-out {
+    background: #424242;
+    margin-left: 249px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 2;
+}
+.u-row{
+    margin: 0!important;
+}
+.u-row .u-col-md-12{
+    padding: 0!important;
+}
+
+body::-webkit-scrollbar {
+    width: 0!important;
+    height: 0!important;
+}
+
+/* 滚动槽 */
+
+body::-webkit-scrollbar-track {
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+
+body::-webkit-scrollbar-thumb {
+    background: #DFDFDF;
+    border-radius: 10px;
+}
+/* 失去焦点颜色 */
+body::-webkit-scrollbar-thumb:window-inactive {
+    background: #DFDFDF;
+}
+
+
+
+
 
 #closebtn{
     display:none;
@@ -47,47 +107,12 @@ body{
     border-radius:18%;
     box-shadow:0px 0px 5px #BDBDBD;
     background:white;
+    display:block;
     text-align:center;
+    margin:0 auto;
     z-index:2015;
     line-height:37px;
 }
-
-.sidebar {
-    width: 250px;
-    display: inline-block;
-    vertical-align: top;
-    padding-left: 40px;
-    position: fixed;
-    overflow: auto;
-    height: calc(100% - 65px);
-    top: 65px;
-    padding-top: 30px;
-    padding-bottom: 65px;
-    border-right: 1px solid #dfdfdf;
-    background: #fff;
-}
-
-.docs {
-    display: inline-block;
-    vertical-align: top;
-    width: calc(100% - 300px);
-    padding-left: 40px;
-    margin-left: 250px;
-}
-.footer-out {
-    background:#424242;
-    margin-left: 249px;
-    margin-top: 60px;
-    position: relative;
-    z-index: 2;
-}
-.u-row{
-    margin: 0!important;
-}
-.u-row .u-col-md-12{
-    padding: 0!important;
-}
-
 
 @media (max-width: 768px) {
     .docs .right-menus{
@@ -127,11 +152,11 @@ body{
     }
 }
 
-@media(min-width:769px){
-  #openbtn{
-      display:none;
-  }
-}
+ @media(min-width:769px){
+    #openbtn{
+        display:none;
+    }
+  } 
 
 .mob-nav {
     position:fixed;
@@ -188,7 +213,7 @@ body{
     color:#E14C46;
  }
 
-/* 应用组件详情页移动端导航栏 */
+/* 基础组件详情页移动端导航栏 */
 .mob-nav  .uf-navmenu{
     margin-left:90px;
 }
