@@ -8,7 +8,8 @@
         "ac-mobile-locale",
         "ac-complex-search-panel",
         "ac-spreadsheet",
-        "ac-thermometer"
+        "ac-thermometer",
+        "ac-complex-grid"
     ],
     "others":[
         "ac-toast",

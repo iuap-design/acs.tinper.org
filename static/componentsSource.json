@@ -23,6 +23,9 @@
     "ac-spreadsheet": {
         "name": "电子表格"
     },
+    "ac-complex-grid": {
+        "name": "复杂表格"
+    },
     "ac-thermometer": {
         "name": "温度计、液位计组件"
     },

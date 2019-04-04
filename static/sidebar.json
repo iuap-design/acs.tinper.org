@@ -97,6 +97,10 @@
             "电子表格 AcSpreadsheet": {
                 "version": "1.0.0",
                 "component": "ac-spreadsheet"
+            },
+            "复杂表格 AcComplexGrid": {
+                "version": "1.0.0",
+                "component": "ac-complex-grid"
             }
         }
     },
