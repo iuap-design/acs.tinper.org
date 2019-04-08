@@ -1,6 +1,21 @@
-<% if (active.indexOf('ac-') > -1 || active.indexOf('ref-') > -1) { %>
-    <link href="https://tinper-acs.github.io/<%= active %>/styles.css" type="text/css" rel="stylesheet" />
+<% if(isComponent&&isStander){ %>
+    <link href="./<%= active %>/dist/demo.css" type="text/css" rel="stylesheet" />
+<% } else if (isComponent&&isGhpages) { %>
+    <link rel="stylesheet" href="./<%= active %>/ghpages/styles.css">
 <% } %>
-<div>
+<div class="doc-content">
     <%- docs %>
+    <div class="changelog">
+        <% include changelog.html %>
+    </div>
 </div>
+
+<div class="right-menus">
+    <% include rightMenus.html %>
+</div>
+
+
+
+<% if(isComponent&&isStander){ %>
+    <script src="./<%= active %>/dist/demo.js"></script>
+<% } %>

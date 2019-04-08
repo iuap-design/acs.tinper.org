@@ -4,7 +4,9 @@
   "description": "Based with Koa 2.x",
   "main": "index.js",
   "scripts": {
-    "md": "node app/utils/getMd.js",
+    "init": "node app/utils/getComponent.js",
+    "getMenu": "node app/utils/getRightMenu.js",
+    "getRelease": "node app/utils/getRelease.js",
     "dev": "node --inspect app/app.js",
     "start": "node app/app.js"
   },
@@ -14,7 +16,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "download": "^7.1.0",
+    "download-git-repo": "^1.1.0",
     "fs-extra": "^7.0.1",
+    "ghreleases": "^3.0.2",
     "ip": "^1.1.5",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
@@ -25,6 +29,7 @@
     "koa-static": "^5.0.0",
     "log4js": "^3.0.6",
     "marked": "^0.6.1",
+    "moment": "^2.24.0",
     "nunjucks": "^3.1.6"
   },
   "directories": {

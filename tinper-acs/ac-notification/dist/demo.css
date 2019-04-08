@@ -1,0 +1,105 @@
+/* FormGroup */
+/*  Navlayout  */
+.temp-main {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000; }
+
+.notification_mess {
+  width: auto; }
+
+.notification_mess .u-notification-notice {
+  width: 528px;
+  height: auto; }
+
+.notification_cont {
+  margin-top: 3px;
+  font-size: 14px;
+  margin-left: 31px;
+  white-space: normal;
+  color: RGBA(71, 77, 84, 1); }
+
+._close {
+  position: absolute;
+  right: -14px;
+  top: -7px; }
+
+._title {
+  font-size: 16px;
+  height: 30px;
+  line-height: 30px;
+  position: relative; }
+
+._title i {
+  vertical-align: -16%;
+  margin-right: 9px; }
+
+.title_cont {
+  font-size: 16px;
+  font-weight: bold; }
+
+.notification_mess .u-notification-notice {
+  border-radius: 0px 0px 3px 3px; }
+
+/*** warning ***/
+.warning_cont .u-notification-notice {
+  background: rgba(255, 171, 0, 0.05);
+  box-shadow: 0px 10px 12px 0px rgba(74, 81, 93, 0.25);
+  border: 1px solid RGBA(255, 171, 0, 0.5);
+  border-top: 3px solid RGBA(255, 171, 0, 0.5); }
+
+.warning_cont ._title {
+  color: #ff8b00; }
+
+.warning_cont ._title i {
+  color: #ff8b00; }
+
+/*** success ***/
+.success_cont .u-notification-notice {
+  background: rgba(0, 179, 158, 0.05);
+  box-shadow: 0px 10px 12px 0px rgba(74, 81, 93, 0.25);
+  border: 1px solid RGBA(0, 179, 158, 0.5);
+  border-top: 3px solid RGBA(65, 204, 179, 1); }
+
+.success_cont ._title {
+  color: RGBA(0, 179, 158, 1); }
+
+.success_cont ._title i {
+  color: RGBA(0, 179, 158, 1); }
+
+/*** info ***/
+.info_cont .u-notification-notice {
+  background: rgba(16, 142, 233, 0.05);
+  box-shadow: 0px 10px 12px 0px rgba(74, 81, 93, 0.25);
+  border: 1px solid RGBA(16, 142, 233, 0.5);
+  border-top: 3px solid RGBA(16, 142, 233, 1); }
+
+.info_cont ._title {
+  color: RGBA(16, 142, 233, 1); }
+
+.info_cont ._title i {
+  color: RGBA(16, 142, 233, 1); }
+
+/*** error ***/
+.error_cont .u-notification-notice {
+  background: white;
+  box-shadow: 0px 10px 12px 0px rgba(74, 81, 93, 0.25);
+  border: 1px solid RGBA(76, 76, 76, 0.5);
+  border-top: 3px solid RGBA(76, 76, 76, 1); }
+
+.error_cont ._title {
+  color: RGBA(71, 77, 84, 1); }
+
+.error_cont ._title i {
+  color: RGBA(71, 77, 84, 1); }
+
+.demoPadding button {
+  margin: auto 5px; }
+
+.demoPadding .divider {
+  margin: 6px 0;
+  height: 1px;
+  overflow: hidden;
+  background-color: #e0e0e0; }
+
+/*# sourceMappingURL=demo.css.map */

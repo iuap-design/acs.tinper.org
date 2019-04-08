@@ -1,0 +1,60 @@
+{
+    "ac-button": {
+        "name": "按钮"
+    },
+    "ac-notification": {
+        "name": "提示"
+    },
+    "ac-barcode": {
+        "name": "条形码组件"
+    },
+    "ac-qrcodes": {
+        "name": "二维码组件"
+    },
+    "ac-input-locale": {
+        "name": "多语输入"
+    },
+    "ac-mobile-locale": {
+        "name": "手机国际化"
+    },
+    "ac-complex-search-panel": {
+        "name": "复杂查询面板"
+    },
+    "ac-spreadsheet": {
+        "name": "电子表格"
+    },
+    "ac-complex-grid": {
+        "name": "复杂表格"
+    },
+    "ac-thermometer": {
+        "name": "温度计、液位计组件"
+    },
+
+
+
+
+    "ac-toast": {
+        "name": "消息"
+    },
+    "yyuap-bpm": {
+        "name": "Bpm流程组件"
+    },
+    "ac-attachment": {
+        "name": "上传列表组件"
+    },
+    "ac-upload": {
+        "name": "附件管理"
+    },
+    "ac-editor": {
+        "name": "富文本编辑"
+    },
+    "ref-tree": {
+        "name": "树参照"
+    },
+    "ref-multiple-table": {
+        "name": "表参照"
+    },
+    "ref-tree-table": {
+        "name": "树表参照"
+    }
+}

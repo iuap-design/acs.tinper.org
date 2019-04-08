@@ -21,9 +21,11 @@ module.exports = (app) => {
 
 
 
-  const css = staticFiles(path.join(__dirname,'../../static'));
+  const static = staticFiles(path.join(__dirname,'../../static'));
+  const tinperAcs = staticFiles(path.join(__dirname,'../../tinper-acs'));
 
-  app.use(css);
+  app.use(static);
+  app.use(tinperAcs);
 
   app.use(nunjucks({
     ext: 'html',
