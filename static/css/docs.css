@@ -371,4 +371,18 @@ select::-ms-expand {
     .docs .doc-content{
         margin-right:0;
     }
+    /* 解决移动端overflow失效的问题 */
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    html, body {
+        height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    body {
+        position: relative;
+    }
 }
