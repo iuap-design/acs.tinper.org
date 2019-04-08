@@ -1,6 +1,6 @@
 /**
  *
- * @title toast
+ * @title toast loading示例
  * @description toast loading示例
  *
  */

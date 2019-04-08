@@ -1,7 +1,7 @@
 /**
  *
- * @title toast
- * @description toast 不同颜色示例
+ * @title toast不同颜色示例
+ * @description toast不同颜色示例
  *
  */
 

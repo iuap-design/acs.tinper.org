@@ -1,6 +1,6 @@
 /**
  *
- * @title 西瓜UI Button
+ * @title 基础示例2
  * @description 西瓜UI 其他Button样式组件
  *
  */

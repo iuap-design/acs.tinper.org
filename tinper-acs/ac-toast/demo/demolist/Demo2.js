@@ -1,6 +1,6 @@
 /**
  *
- * @title toast
+ * @title toast图标示例
  * @description toast图标示例
  *
  */

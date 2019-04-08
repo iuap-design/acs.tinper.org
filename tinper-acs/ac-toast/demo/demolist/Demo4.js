@@ -1,6 +1,6 @@
 /**
  *
- * @title toast
+ * @title toast关闭回调
  * @description toast关闭回调
  *
  */
