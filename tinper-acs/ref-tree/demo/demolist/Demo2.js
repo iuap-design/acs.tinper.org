@@ -11,7 +11,7 @@ import { Button, Form } from 'tinper-bee';
 const option = {
     title: '树',
     searchable: true,
-    multiple: false,
+    multiple: true,
     checkStrictly: true,
     disabled: false,
     nodeDisplay: (record) => {
@@ -43,6 +43,7 @@ class Demo2 extends Component {
                 <RefTreeWithInput
                     {...option}
                     getRefTreeData={this.getRefTreeData}
+                    theme={'ref-red'}
                     {...getFieldProps('code1', {
                         initialValue: JSON.stringify({
                             code: "org1",

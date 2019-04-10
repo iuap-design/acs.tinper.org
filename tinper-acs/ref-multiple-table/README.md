@@ -69,6 +69,8 @@ onSave | `function(value)` | -- | 参照确定的回调| 否
 onCancel | `function(value)` | -- | 参照取消的回调| 否
 value| ``string``|空|默认值，初始化input框值|否
 matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，选中节点从matchData中获取| 否
+theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
+searchPanelLocale | `Object` | {'title': '条件筛选EN','resetName': '重置En','searchName': '查询EN','down':'打开EN','up':'关闭EN',} | 复杂搜索标题，按钮的文字等信息 | 否
 
 
 ### RefMultipleTableWithInput
@@ -90,6 +92,7 @@ disabled|`bool`| false |禁用整个参照 | 否
 onChange|`function(values, record)`|--|value改变、快捷录入和保存时数据回调|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
+
 
 ### SearchPanelItem  
 > 注意:以下参数为 `<SearchPanelItem/>`需要使用的，为了保证功能的正常使用请传入。

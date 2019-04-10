@@ -60,6 +60,8 @@ onSave | `function(value)` | -- | 参照确定的回调| 否
 onCancel | `function(value)` | -- | 参照取消的回调| 否
 value| ``string``|空|默认值，当matchData为空时，可以初始化选中的节点。例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
 matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，在选中节点从matchData中获取| 否
+theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
+onLoadData|  `function(treeNode)` | --| 懒加载传个树的回调方法| 否
 
 ### RefTreeWithInput
 

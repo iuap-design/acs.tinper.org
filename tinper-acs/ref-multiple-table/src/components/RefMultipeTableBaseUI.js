@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import Loading from 'rc-loading';
+// import Loading from 'rc-loading';
 import shallowequal from 'shallowequal';
 import RefCoreError from 'ref-core/lib/refs/RefCoreError';
 import RefCoreButton from 'ref-core/lib/refs/RefCoreButton';
@@ -11,13 +11,23 @@ import 'ref-core/lib/refs/refcorebutton.css';
 import 'ref-core/lib/refs/refcoretab.css';
 import 'ref-core/lib/refs/refcoresearch.css';
 import {paginationLocale} from 'ref-core/lib/utils/locale.js'
-import { Modal, Pagination,Table,Checkbox} from 'tinper-bee';
-import multiSelect from 'tinper-bee/lib/multiSelect.js';
+// import { Modal, Pagination,Table,Checkbox} from 'tinper-bee';
+// import multiSelect from 'tinper-bee/lib/multiSelect.js';
+import Checkbox from 'bee-checkbox';
+// import 'bee-checkbox/build/Checkbox.css'
+import Modal from 'bee-modal';
+// import 'bee-modal/build/Modal.css'
+import Pagination from 'bee-pagination';
+import 'bee-pagination/build/Pagination.css';
+import Table from 'bee-table';
+// import 'bee-table/build/Table.css';
+import multiSelect from "bee-table/build/lib/multiSelect.js";
+// import 'bee-select/build/Select.css';
+import Loading from 'bee-loading';
+// import 'bee-loading/build/Loading.css'
 import RefSearchPanel from './RefSearchPanel';
 import './RefMultipleTableBaseUI.less'
 import { refValParse } from '../utils'
-
-
 class RefMultipleTableBase extends Component {
 	columnsData = []//表头数据
 	tableData = []//表格数据
@@ -43,28 +53,38 @@ class RefMultipleTableBase extends Component {
 		return !shallowequal(nextState, this.state) || !dataEqual || nextProps.showModal !== this.props.showModal;
 	}
 	componentWillReceiveProps(nextProps) {
-		let { strictMode,valueField = "refpk"  } = nextProps;
+		let { strictMode,valueField = "refpk" ,matchData=[],value } = nextProps;
 		//严格模式下每次打开必须重置数据
 		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
 			if( strictMode || !this.columnsData.length || this.currPageIndex !== 1 ) {
 				//开启严格模式 或 表头信息没有获取到，即初始化失败是必须重置
 				this.initComponent();
 			}
-			//内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
-			this.checkedArray = Object.assign(this.checkedArray,  nextProps.checkedArray || []);
-			//内部缓存已选择值，缓存成 Map 便于检索
-			this.checkedMap = {};
-			this.checkedArray.forEach(item=>{
-        this.checkedMap[item[valueField]] = item;
-      });
-      this.setState({selectedDataLength:this.checkedArray.length,tableIsSelecting: true})
-		}
+            // 	//内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
+            // 	this.checkedArray = Object.assign(this.checkedArray,  nextProps.checkedArray || []);
+            // 	//内部缓存已选择值，缓存成 Map 便于检索
+            // 	this.checkedMap = {};
+            // 	this.checkedArray.forEach(item=>{
+            //     this.checkedMap[item[valueField]] = item;
+            //   });
+            //   this.setState({selectedDataLength:this.checkedArray.length,tableIsSelecting: true})
+            // }
+            //这里改用matchData，由于第一次运行到这里选中可能从value中取值
+            this.checkedArray = Object.assign([],nextProps.matchData || []);
+            this.checkedMap = {};
+            this.checkedArray.forEach(item=>{
+            this.checkedMap[item[valueField]] = item;
+            });
+            //内部缓存已选择值，缓存成 Map 便于检索
+            this.setState({selectedDataLength:this.checkedArray.length,tableIsSelecting: true})
+           
+       }
 		
   }
   initComponent = () => {
 		let { value, matchData=[], valueField = "refpk" } = this.props;
 		let valueMap = refValParse(value);
-		if (this.checkedArray.length == 0 && valueMap.refpk) {
+		if (this.checkedArray.length == 0 && valueMap[valueField]) {
 			if (matchData.length>0) {
 				this.checkedMap = {};
 				this.checkedArray = matchData.map(item=>{
@@ -252,7 +272,7 @@ class RefMultipleTableBase extends Component {
     let { className, miniSearch = true, title = '', backdrop, size = 'lg',
       showModal, lang = 'zh_CN', valueField, emptyBut = false, buttons, fliterFormInputs = [],
       showLoading,tableData, pageCount, currPageIndex, 
-      columnsData, totalElements } = this.props;
+      columnsData, totalElements,theme='ref-red',searchPanelLocale} = this.props;
     let {checkedArray,checkedMap} = this;
     let {selectedDataLength,tableIsSelecting} = this.state;
     let _tableData = tableData.map(item => {
@@ -268,12 +288,12 @@ class RefMultipleTableBase extends Component {
     return (
       <Modal
         show={showModal}
-        className={`${className} ref-core ref-multiple-table ref-core-modal`}
+        className={` ${theme} ${className} ref-core ref-multiple-table ref-core-modal`}
         backdrop={backdrop}
         size={size}
         onHide={this.handleBtnCancel}
       >
-        <Loading spinning={showLoading} type={'fence'} displayType={"block"} >
+        <Loading container={this} show={showLoading} />
           <Modal.Header closeButton={true}>
             <Modal.Title > {title}</Modal.Title>
           </Modal.Header >
@@ -283,7 +303,8 @@ class RefMultipleTableBase extends Component {
               fliterFormInputs.length !== 0 && !miniSearch ?
                 <RefSearchPanel
                   show={tableIsSelecting}
-                  onSearch={this.props.searchFilterInfo}
+									onSearch={this.props.searchFilterInfo}
+									searchPanelLocale={searchPanelLocale}
                 >
                   {
                     fliterFormInputs.map(item => item)
@@ -302,7 +323,8 @@ class RefMultipleTableBase extends Component {
               {/*简单查询 */}
               <RefCoreSearch
                 className={`${miniSearch && tableIsSelecting ? '' : 'ref-multiple-table-tab-search-hide'}`}
-                onSearch={_this.props.miniSearchFunc}
+								onSearch={_this.props.miniSearchFunc}
+								onChange={_this.props.miniSearchFunc}
                 language={lang}
               />
             </RefCoreTab>
@@ -350,7 +372,6 @@ class RefMultipleTableBase extends Component {
               onClickBtn={_this.onClickBtn}
             />
           </Modal.Footer>
-        </Loading>
       </Modal>
     );
   }

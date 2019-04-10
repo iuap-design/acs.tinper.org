@@ -9,7 +9,8 @@ import  'ref-core/lib/refs/refcoreerror.css';
 import  'ref-core/lib/refs/refcoretree.css';
 import  'ref-core/lib/refs/refcoresearch.css';
 import  'ref-core/lib/refs/refcorebutton.css';
-import { Loading,Modal } from 'tinper-bee'
+import Loading from 'bee-loading';
+import Modal from 'bee-modal';
 import './index.less';
 const noop = () => {
 };
@@ -36,6 +37,7 @@ const propTypes = {
   multiple: PropTypes.bool, //  默认单选
   checkedArray: PropTypes.array,
   treeData: PropTypes.array,//接收树的数据
+  onLoadData:PropTypes.func,
 };
 const defaultProps = {
   title: '弹窗标题',
@@ -52,6 +54,8 @@ const defaultProps = {
   lang: 'zh_CN',
   nodeDisplay:'{refname}',
   treeData:[],
+  onLoadData:()=>{},
+  getRefTreeData:()=>{}
 }
 class RefTreeBaseUI extends Component {
   constructor(props) {
@@ -72,10 +76,10 @@ class RefTreeBaseUI extends Component {
 	// 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
 	// }
   componentWillReceiveProps(nextProps) {
-		let { strictMode,checkedArray,valueField } = nextProps;
+		let { strictMode,value,valueField,matchData=[] } = nextProps;
 		//严格模式下每次打开必须重置数据
 		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-			if( strictMode || !this.treeData.length ) {
+			if( strictMode || !this.treeData.length) {
 				//开启严格模式 
 				// this.setState({
 				// 	showLoading: true
@@ -84,14 +88,25 @@ class RefTreeBaseUI extends Component {
         // });
         this.initComponent();
 			}
-			//20190124因為不再走constructor，导致checkedKeys和selectedArray不一致
-			if(checkedArray.length>0){
-				this.setState({
-					selectedArray: checkedArray || [], //  记录保存的选择项
-					checkedKeys: checkedArray.map(item=>{
-						return item[valueField];
-					}),
-				})
+      //20190124因為不再走constructor，导致checkedKeys和selectedArray不一致,20190409baseui不会再走initcomponent但是选中需要添加
+      let valueMap = refValParse(value)
+      if(matchData.length>0 || this.state.checkedKeys.length===0 && valueMap[valueField]){
+        if(matchData.length>0){
+          this.setState({
+            selectedArray: matchData || [], //  记录保存的选择项
+            checkedKeys: matchData.map(item=>{
+              return item[valueField];
+            }),
+          })
+        }else{
+          this.setState({
+            checkedArray: [valueMap],
+            selectedArray: [valueMap],
+            showLoading: false,
+            checkedKeys: valueMap.refpk.split(',')
+          });
+        }
+				
 			}
 		}
   }
@@ -269,6 +284,7 @@ class RefTreeBaseUI extends Component {
       emptyBut,
       multiple,
       treeData,
+      theme= 'ref-red',
     } = this.props;
     this.treeData = treeData;
     const { checkedKeys } = this.state;
@@ -277,11 +293,11 @@ class RefTreeBaseUI extends Component {
       <Modal
         show={showModal}
         size="sm"
-        className={`${className} ref-core  ref-core-modal ref-tree`}
+        className={`${theme} ${className} ref-core  ref-core-modal ref-tree`}
         backdrop={backdrop}
         onHide={() => this.onClickBtn('cancel')}
       >
-        <Loading show={showLoading} showBackDrop={true} loadingType="line" displayType={"block"} />
+        <Loading  container={this}  show={showLoading} showBackDrop={true} loadingType="line" displayType={"block"} />
           <Modal.Header closeButton>
             <Modal.Title > {title} </Modal.Title>
           </Modal.Header >
@@ -310,7 +326,7 @@ class RefTreeBaseUI extends Component {
                   selectedKeys={checkedKeys}
                   checkStrictly={checkStrictly}
                   showLine={showLine}
-                  loadData={lazyModal ? this.onLoadData.bind(this) : null}
+                  loadData={lazyModal ? this.props.onLoadData: null}
                 /> :
                 <RefCoreError show={!Boolean(this.treeData.length)} language={lang} />
             }

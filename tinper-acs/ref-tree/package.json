@@ -1,6 +1,6 @@
 {
   "name": "ref-tree",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -90,6 +90,8 @@
     "prop-types": "^15.6.0"
   },
   "dependencies": {
-    "ref-core": "^0.3.2-beta"
+    "bee-loading": "^1.0.9",
+    "bee-modal": "^2.0.4",
+    "ref-core": "^0.3.4-beta.1"
   }
 }

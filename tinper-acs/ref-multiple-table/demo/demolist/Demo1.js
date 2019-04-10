@@ -94,6 +94,7 @@ class Demo1 extends Component {
             searchFilterInfo: searchFilterInfo,
             onSave: this.onSave,
             onCancel: this.onCancel,
+            miniSearch:true
         });
         return (
             <div className="demoPadding">

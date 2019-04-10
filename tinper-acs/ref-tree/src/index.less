@@ -1,24 +1,36 @@
 
 .ref-tree{
-  & .ref-core-search{
-    width: 100%;
+  //主题-红色
+  &.ref-red{
+      .ref-core-button-empty{
+          color:#f53c32!important;
+      }
   }
-	& .ref-core-tree{
-		margin-top: 5px;
-    text-align: left;
-    .u-tree-node-content-wrapper{
-      &:hover{
-        .ref-core-tree-node-selected{
-          opacity: 0;
-        }
-      }
-      &.u-tree-node-selected:hover{
-        .ref-core-tree-node-selected{
-          opacity: 1;
-        }
-      }
-      
+  // 主题-蓝色
+  &.ref-blue{
+    .ref-core-button-empty{
+        color:#1e88e5!important;
     }
-	}
+}
+& .ref-core-search{
+  width: 100%;
+}
+& .ref-core-tree{
+  margin-top: 5px;
+  text-align: left;
+  .u-tree-node-content-wrapper{
+    &:hover{
+      .ref-core-tree-node-selected{
+        opacity: 0;
+      }
+    }
+    &.u-tree-node-selected:hover{
+      .ref-core-tree-node-selected{
+        opacity: 1;
+      }
+    }
+    
+  }
+}
 }
 @import './walsin.less';
