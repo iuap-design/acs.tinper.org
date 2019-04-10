@@ -4,7 +4,9 @@ const path = require('path');
 const render = require('koa-ejs');
 const sidebar = require('../../static/sidebar.json');
 const components = require('../../static/components.json');
-let componentType = require('../../static/componentsType.json')
+let componentType = require('../../static/componentsType.json');
+
+
 const renderer = new marked.Renderer();
 
 
@@ -149,6 +151,8 @@ module.exports = {
       .replace(/\<table/gi, '<div class="table-container">\n<table')
       .replace(/<\/table>/gi, "</table>\n</div>\n");
 
+    
+
     await ctx.render('index', {
       sidebar: sidebar,
       docs: data,
@@ -157,7 +161,8 @@ module.exports = {
       isStander: isStander,
       isGhpages: isGhpages,
       rightMenus: rightMenus,
-      changeLog: changeLog
+      changeLog: changeLog,
+      latestVersion:sidebar['概述']['version']
     });
   }
 }

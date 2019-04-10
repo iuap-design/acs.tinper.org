@@ -5,10 +5,11 @@ const marked = require("marked");
 let componentsSource = require('../../static/componentsSource.json');
 let components = require('../../static/components.json');
 let sidebar = require('../../static/sidebar.json');
+const latestVersion = require('latest-version');
 
 
 const auth = {
-    token: '953a44ae3b8fcad7330f7375bdfd68a81583a67c',
+    token: '',
     user: 'liushaozhen'
 }
 
@@ -45,10 +46,27 @@ function getRelease(component) {
                 })
         }
     })
-
-    
 }
 
 Object.keys(componentsSource).forEach(item=>{
     getRelease(item);
 })
+
+
+
+let getLatestVersion = async () => {
+    let tinperBeeVersion = await latestVersion('tinper-bee');
+
+    sidebar['概述'].version = 'v'+tinperBeeVersion;
+        
+    fs.writeJson('./static/sidebar.json', sidebar)
+        .then(() => {
+            console.log(`😀tinper-bee版本写入成功`);
+        })
+        .catch(err => {
+            console.log(`❌tinper-bee版本写入失败`);
+            console.error(err)
+        })
+};
+
+getLatestVersion()

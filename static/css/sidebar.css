@@ -12,6 +12,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-left: 40px;
 }
 .sidebar .menu-components .menu-group .menu-item.active{
     background: #FDF6F6;
@@ -21,6 +22,11 @@
     color: #424242;
     text-decoration: none;
     padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inherit;
+    width: 180px;
 }
 .sidebar .menu-components .menu-group .menu-item a:hover{
     color: #e14c46;
@@ -38,6 +44,7 @@
 .sidebar .menu-components .menu-item-components .menu-item-components-text{
     width: 100%;
     display: block;
+    padding-left: 10px;
 }
 .sidebar .menu-components .menu-item-components .menu-item-components-text:before{
     position: absolute;
@@ -56,6 +63,10 @@
 }
 .sidebar .menu-components .menu-item-components.open .menu-item-com{
     display: block;
+    margin-left: -40px;
+    width: 250px;
+    padding-left: 60px;
+    height: 40px;
 }
 .sidebar .menu-components .menu-item-com,.sidebar .menu-components .menu-item-com{
     font-size: 13px;
