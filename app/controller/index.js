@@ -105,7 +105,7 @@ module.exports = {
           let scripts = '';
           requestJSList.forEach((item) => {
             if (item.indexOf(component) != -1) {
-              scripts += item.replace(component, component + '/ghpages');
+              scripts += item.replace('/'+component, './'+component + '/ghpages');
             }
           })
           let demo = '<div id="root"></div>' + scripts;
