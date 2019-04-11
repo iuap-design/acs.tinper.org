@@ -111,17 +111,6 @@ class RefSearchPanel extends Component {
             </Row>
           </Form>
         </AdvancedContainer>
-        <Form>
-          <Row>
-            {
-              React.Children.map(this.props.children, (item) => {
-                return React.cloneElement(item, {
-                  form
-                });
-              })
-            }
-          </Row>
-        </Form>
       </SearchPanel>
     )
   }

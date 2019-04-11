@@ -29,6 +29,9 @@
     "ac-thermometer": {
         "name": "温度计、液位计组件"
     },
+    "ac-city-select": {
+        "name": "城市选择"
+    },
 
 
 

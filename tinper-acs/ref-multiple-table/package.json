@@ -1,6 +1,6 @@
 {
   "name": "ref-multiple-table",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -95,7 +95,7 @@
     "bee-loading": "^1.0.9",
     "bee-modal": "^2.0.4",
     "bee-pagination": "^2.0.6",
-    "bee-search-panel": "^2.0.12",
+    "bee-search-panel": "2.0.12",
     "bee-table": "^2.0.11",
     "ref-core": "^0.3.2-beta",
     "ref-multiple-table": "1.0.15-beta"

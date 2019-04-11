@@ -9,7 +9,8 @@
         "ac-complex-search-panel",
         "ac-spreadsheet",
         "ac-thermometer",
-        "ac-complex-grid"
+        "ac-complex-grid",
+        "ac-city-select"
     ],
     "others":[
         "ac-toast",
