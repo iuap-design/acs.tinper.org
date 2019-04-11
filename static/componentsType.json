@@ -7,12 +7,12 @@
         "ac-input-locale",
         "ac-mobile-locale",
         "ac-complex-search-panel",
-        "ac-spreadsheet",
         "ac-thermometer",
         "ac-complex-grid",
         "ac-city-select"
     ],
     "others":[
+        "ac-spreadsheet",
         "ac-toast",
         "yyuap-bpm",
         "ac-attachment",
