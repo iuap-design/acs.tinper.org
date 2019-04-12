@@ -8,10 +8,6 @@
 ## 如何使用
 
 ```
-import { CitySelect } from 'tinper-bee';
-
-or
-
 import CitySelect from 'ac-city-select';
 import ac-city-select/build/CitySelect.css;
 
