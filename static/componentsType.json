@@ -22,7 +22,6 @@
         "ref-multiple-table",
         "ref-tree-table",
         "ac-multi-tabs",
-        "ac-navbar",
-        "ac-editor-sany"
+        "ac-navbar"
     ]
 }

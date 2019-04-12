@@ -41,9 +41,6 @@
     "ac-navbar":{
       "name":"导航栏组件"  
     },
-    "ac-editor-sany":{
-      "name":"富文本编辑器sany版本"  
-    },
     "ac-toast": {
         "name": "消息"
     },

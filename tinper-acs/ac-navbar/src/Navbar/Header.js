@@ -381,7 +381,7 @@ class AcNavbar extends Component {
         // console.log(UserMenuObj);
 
         return (
-          <nav className={[!showHeader?"header header-hide":"header header-show", sideShowPosition==='left'?"header-show-left":'',leftExpanded?"header-show-left-expand":''].join(" ")} style={{backgroundImage: `url(${require("../assets/images/bg_topbar.jpg")})`}}>
+          <nav className={[!showHeader?"header header-hide":"header header-show", sideShowPosition==='left'?"header-show-left":'',leftExpanded?"header-show-left-expand":''].join(" ")} style={{backgroundImage: `url(//design.yonyoucloud.com/static/tinper-acs/ac-navbar/bg_topbar.jpg)`}}>
             <HeaderLeft placeholder={"应用查询"}/>
             <HeaderCenter/>
             <HeaderRight 

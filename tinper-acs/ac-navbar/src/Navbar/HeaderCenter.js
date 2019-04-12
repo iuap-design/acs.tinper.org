@@ -10,7 +10,7 @@ class HeaderCenter extends Component {
         return (
             <div className="header-center">
               <a href="javascript:;">
-                <div className={"portal-logo " + 'zh_CN'} style={{backgroundImage: `url(${require("../assets/images/logo.svg")})`}}></div>
+                <div className={"portal-logo " + 'zh_CN'} style={{backgroundImage: `url(//design.yonyoucloud.com/static/tinper-acs/ac-navbar/logo.svg)`}}></div>
                 {/* <img src={a } className="portal-logo" /> */}
               </a>
             </div>

@@ -29,8 +29,8 @@ class HeaderLeft extends Component {
             <div className="header-left">
               <div className={[sideBarShow?"header-svg header-svg-red":"header-svg",sideShowPosition?"header-svg-show":""].join(" ")} onClick={self.svgClick.bind(this)}>
                 {sideBarShow?
-                <img src={require(`../assets/images/icon_menu_white.svg`)}  />
-                :<img src={require(`../assets/images/icon_menu.svg`)}  />
+                <img src='//design.yonyoucloud.com/static/tinper-acs/ac-navbar/icon_menu_white.svg'  />
+                :<img src='//design.yonyoucloud.com/static/tinper-acs/ac-navbar/icon_menu.svg'  />
                 }
                 { /*<svg className="icon" style={sideBarShow?obj1:obj}>
                <use xlinkHref={sideBarShow?'#icon-logo1':'#icon-logo'}></use>
