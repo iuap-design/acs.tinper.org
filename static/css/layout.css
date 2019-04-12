@@ -40,13 +40,13 @@
     z-index: 2;
 }
 
-.u-row {
+/* .u-row {
     margin: 0 !important;
 }
 
 .u-row .u-col-md-12 {
     padding: 0 !important;
-}
+} */
 
 body::-webkit-scrollbar {
     width: 0 !important;
