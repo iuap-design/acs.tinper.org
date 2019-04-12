@@ -57,7 +57,7 @@ Object.keys(componentsSource).forEach(item=>{
 let getLatestVersion = async () => {
     let tinperBeeVersion = await latestVersion('tinper-bee');
 
-    sidebar['概述'].version = 'V'+tinperBeeVersion;
+    sidebar['概述'].version = tinperBeeVersion;
         
     fs.writeJson('./static/sidebar.json', sidebar)
         .then(() => {
