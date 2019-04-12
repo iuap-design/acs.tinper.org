@@ -35,7 +35,12 @@
 
 
 
-
+    "ac-multi-tabs":{
+      "name":"多页签组件"  
+    },
+    "ac-navbar":{
+      "name":"导航栏组件"  
+    },
     "ac-toast": {
         "name": "消息"
     },

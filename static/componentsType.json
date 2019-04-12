@@ -20,6 +20,8 @@
         "ac-editor",
         "ref-tree",
         "ref-multiple-table",
-        "ref-tree-table"
+        "ref-tree-table",
+        "ac-multi-tabs",
+        "ac-navbar"
     ]
 }
