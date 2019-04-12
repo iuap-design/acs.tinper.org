@@ -1,4 +1,4 @@
-# 城市选择 CitySelect
+# 城市选择 AcCitySelect
 
 地区级联
 
@@ -8,7 +8,7 @@
 ## 如何使用
 
 ```
-import CitySelect from 'ac-city-select';
+import AcCitySelect from 'ac-city-select';
 import ac-city-select/build/CitySelect.css;
 
 ```
