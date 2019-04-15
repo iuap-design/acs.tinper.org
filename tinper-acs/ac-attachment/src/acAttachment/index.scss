@@ -11,13 +11,13 @@
     border: none !important;
     i{
         padding: 0;
-        line-height: 26px;
+        line-height: 26px !important;
         overflow: hidden;
         float: left;
-        font-size: 14px;
+        font-size: 14px !important;
     }
     i:before{
-        margin-right: 8px;
+        margin-right: 8px !important;
     }
 }
 .upload-btn:first-child{margin-left:0;}

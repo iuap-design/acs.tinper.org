@@ -12,7 +12,7 @@ const baseConfig = require('./webpack.base')
 
 const pkg = require('../package.json')
 const name = pkg.name
-let publicPath = '/'
+let publicPath = './ac-attachment/'
 // 取package.json中 name 进行处理
 // github.io 路径需要绝对路径或者正确的相对路径，用户可以自定义publicPath，视情况而定
 if (name.startsWith('@yonyou')) {

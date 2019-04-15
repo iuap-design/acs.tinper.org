@@ -256,7 +256,7 @@ class AcAttachment extends Component{
                     return a.filename.localeCompare(b.filename);
                 }
             },
-            { title: <FormattedMessage id="intl.col.fileType" />, dataIndex: 'filetype', key: 'filetype', width: 100, render(text, record, index) {
+            { title: <FormattedMessage id="intl.col.fileType" />, dataIndex: 'filetype', key: 'filetype', width: 150, render(text, record, index) {
                 let ext = record.filetype;
                 let filetypeCls = 'upload-filetype-' + ext;
                 let hasIcon = self.fileTypeIcons.indexOf(ext) > -1;
@@ -268,7 +268,7 @@ class AcAttachment extends Component{
                 );
               }
             },
-            { title: <FormattedMessage id="intl.col.fileSize" />, dataIndex: 'filesize', key: 'filesize', width: 100, 
+            { title: <FormattedMessage id="intl.col.fileSize" />, dataIndex: 'filesize', key: 'filesize', width: 150, 
                 sorter: function(a,b){
                     const reg = /^([\d.]+)([\w()]+)$/;
                     const matchA = a.filesize.match(reg),
@@ -288,7 +288,7 @@ class AcAttachment extends Component{
                     return 1;
                 }
             },
-            { title: <FormattedMessage id="intl.col.uploaderName" />, dataIndex: 'uploaderName', key: 'uploaderName', width: 100, 
+            { title: <FormattedMessage id="intl.col.uploaderName" />, dataIndex: 'uploaderName', key: 'uploaderName', width: 150, 
                 sorter:function(a,b){
                     return a.uploaderName.localeCompare(b.uploaderName);
                 }
