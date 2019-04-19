@@ -1,7 +1,7 @@
 /**
  *
- * @title RefTreeTransferBaseUI
- * @description 使用RefTreeTransferBaseUI，带有input框
+ * @title 基本示例2
+ * @description 使用RefTreeTransferWithInput，带有input框
  *
  */
 import React, { Component } from 'react';

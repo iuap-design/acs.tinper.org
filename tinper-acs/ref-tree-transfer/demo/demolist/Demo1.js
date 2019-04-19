@@ -1,14 +1,14 @@
 /**
  *
- * @title RefTreeTransferBaseUI
+ * @title 基本示例1
  * @description 使用RefTreeTransferBaseUI，无input框
  *
  */
 import React, { Component } from 'react';
-import RefTreeTransferBaseUI,{RefTreeTransferWithInput} from '../../src/index';
+import RefTreeTransferBaseUI from '../../src/index';
 import '../../src/index.less';
 import {Button} from 'tinper-bee';
-class Demo2 extends Component {
+class Demo1 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -120,4 +120,4 @@ class Demo2 extends Component {
 	}
 }
 
-export default Demo2;
+export default Demo1;
