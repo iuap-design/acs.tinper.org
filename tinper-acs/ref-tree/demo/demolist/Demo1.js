@@ -6,7 +6,8 @@
  */
 
 import React, { Component } from 'react';
-import RefTreeBaseUI from '../../src/RefTreeBaseUI';
+import RefTreeBaseUI from '../../src/index';
+import  '../../src/index.less';
 import { Button } from 'tinper-bee';
 const option = {
     title: '树',

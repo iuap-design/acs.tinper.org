@@ -1,0 +1,105 @@
+@import 'theme-red.css';
+.ref-tree-table-base-pagination-hide {
+  display: none !important;
+}
+.ref-tree-table-base .ref-core-error {
+  padding: 0px;
+}
+.ref-tree-table-base .u-table-tbody {
+  background-color: #FFF;
+}
+.ref-tree-table-base-row-selected {
+  background: #e3f2fd;
+}
+.ref-tree-table-base-pagination {
+  text-align: center;
+}
+.ref-tree-table-base-tab {
+  margin-bottom: 10px;
+}
+.ref-tree-table-base-tab-search-hide {
+  display: none !important;
+}
+.ref-tree-table-base-tab .u-input-group {
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+}
+.ref-tree-table-base .u-pagination {
+  display: inline-block;
+}
+.ref-tree-table-base .u-pagination:after {
+  content: ' ';
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+@media (max-width: 1024px) {
+  .ref-tree-table-base .u-pagination .u-pagination-list {
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  .ref-tree-table-base .u-pagination .u-pagination-total {
+    margin: 0px;
+  }
+}
+.ref-tree-table-base .u-select-focused .u-select-selection,
+.ref-tree-table-base .u-select-selection:focus,
+.ref-tree-table-base .u-select-selection:active {
+  border-color: #004898;
+}
+.ref-tree-table.ref-red .selectedItemSum {
+  color: #f53c32;
+}
+.ref-tree-table.ref-blue .selectedItemSum {
+  color: #1e88e5;
+}
+.ref-tree-table.ref-core .u-modal-dialog .u-modal-body {
+  text-align: left ;
+  padding: 0;
+}
+.ref-tree-table-layout-col {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  padding-top: 10px;
+}
+.ref-tree-table-layout-col-title {
+  height: 30px;
+  line-height: 30px;
+  font-weight: 600;
+  color: #515151;
+}
+.ref-tree-table-layout-col:first-child {
+  width: 260px;
+  padding: 10px 20px 0 18px;
+  border-right: 1px solid #c8c8c8;
+}
+.ref-tree-table-layout-col:first-child .ref-core-search {
+  width: 100%;
+}
+.ref-tree-table-layout-col:last-child {
+  width: calc(100% - 260px);
+}
+.ref-tree-table-layout-col:last-child .ref-core-table {
+  height: calc(100% - 30px);
+}
+.ref-tree-table-tab {
+  margin-bottom: 10px;
+}
+.ref-tree-table-tab-search-hide {
+  display: none !important;
+}
+.ref-tree-table-tab .u-input-group {
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+}
+.ref-tree-table .ref-core-tree {
+  overflow: auto;
+  height: 413px;
+  border-radius: 5px;
+}
+.ref-tree-table-base .ref-core-tree {
+  text-align: left;
+}

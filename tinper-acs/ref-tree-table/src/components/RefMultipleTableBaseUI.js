@@ -1,28 +1,31 @@
 
 import React, { Component } from 'react';
-import Loading from 'rc-loading';
 import PropTypes from 'prop-types';
-import RefCoreError from 'ref-core/lib/refs/refcoreerror';
-import RefCoreTab from 'ref-core/lib/refs/refcoretab';
-import RefCoreSearch from 'ref-core/lib/refs/refcoresearch';
-import 'ref-core/lib/refs/refcoreerror.css';
-import 'ref-core/lib/refs/refcoretab.css';
-import 'ref-core/lib/refs/refcoresearch.css';
+import RefCoreError from 'ref-core/lib/refs/RefCoreError';
+import RefCoreTab from 'ref-core/lib/refs/RefCoreTab';
+import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
 import {paginationLocale} from 'ref-core/lib/utils/locale.js'
-import {Pagination,Table,Checkbox} from 'tinper-bee';
-import multiSelect from 'tinper-bee/lib/multiSelect.js';
-import './RefMultipleTableBase.less'
+import Loading from 'bee-loading';
+import Pagination from 'bee-pagination';
+import Checkbox from 'bee-checkbox';
+import Table from 'bee-table';
+import multiSelect from "bee-table/build/lib/multiSelect.js";
+// import './RefMultipleTableBase.less'
 import { refValParse } from '../utils';
 // const MultiSelectTable = multiSelect(Table, Checkbox);
 const noop = () => {
 };
 const propTypes = {
 	loadTableData: PropTypes.func,//分页下拉或者跳转的回调
-	onTableSearch: PropTypes.func
+	onTableSearch: PropTypes.func,
+	columnsData: PropTypes.array,
+	tableData: PropTypes.array,
 };
 const defaultProps = {
 	loadTableData: noop,
 	onTableSearch:noop,
+	columnsData: [],
+	tableData: [],
 }
 class RefMultipleTableBaseUI extends Component {
 	columnsData = []//表头数据
@@ -43,13 +46,10 @@ class RefMultipleTableBaseUI extends Component {
 		this.TableView = props.multiple ? multiSelect(Table, Checkbox) : Table;
 	}
 	componentDidMount(){
-		this.initComponent(this.props);
+		if(this.props.showModal)this.initComponent(this.props);
 	}
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.showModal && nextProps.condition !== this.props.condition){
-			this.initComponent(nextProps);
-		}
-		
+		this.initComponent(nextProps);
 	}
 	initComponent = (props) => {
         //内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
@@ -87,8 +87,6 @@ class RefMultipleTableBaseUI extends Component {
 		let { onChange } = this.props;
 		onChange(checkedArray)
 	}
-
-
 	/**
 	 * 跳转到制定页数的操作
 	 * @param {number} index 跳转页数
@@ -293,7 +291,7 @@ class RefMultipleTableBaseUI extends Component {
 		});
 		return (
 			<div className={`${className} ref-core ref-tree-table-base`}>
-				<Loading spinning={showLoading} type={'fence'} displayType={"block"} >
+				{/* <Loading container={document.getElementsByClassName('u-modal-content')[0]} show={showLoading} type={'fence'} displayType={"block"} /> */}
 					<RefCoreTab
 						className="ref-tree-table-base-tab"
 						selectedData={_this.checkedArray}
@@ -342,7 +340,6 @@ class RefMultipleTableBaseUI extends Component {
 							locale={paginationLocale(lang)}
 						/>
 					</div>
-				</Loading>
 			</div>
 		);
 	}

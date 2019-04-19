@@ -64,5 +64,8 @@
     },
     "ref-tree-table": {
         "name": "树表参照"
+    },
+    "ref-tree-transfer": {
+        "name": "树穿梭参照"
     }
 }

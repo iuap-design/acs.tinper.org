@@ -12,7 +12,7 @@ const baseConfig = require('./webpack.base')
 module.exports = webpackMerge(baseConfig, {
   mode:'production',
   entry: {
-      app: path.join(__dirname, '../src/index.js')
+      app: path.join(__dirname, '../src/index.js'),
   },
   externals:['react','react-dom','prop-types','tinper-bee','ref-core'],
   output: {
@@ -36,11 +36,6 @@ module.exports = webpackMerge(baseConfig, {
           MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
-            // options: {
-            //   modules: true,
-            //   sourceMap: true,
-            //   importLoader: 2
-            // }
           },
           "sass-loader"
         ]
@@ -51,11 +46,6 @@ module.exports = webpackMerge(baseConfig, {
           MiniCssExtractPlugin.loader,
           {
             loader: "css-loader",
-            // options: {
-            //   modules: true,
-            //   sourceMap: true,
-            //   importLoader: 2
-            // }
           },
           "less-loader"
         ]
@@ -63,9 +53,6 @@ module.exports = webpackMerge(baseConfig, {
     ]
   },
   optimization: {
-    // runtimeChunk: {
-    //   name: 'manifest'
-    // },
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
@@ -73,30 +60,7 @@ module.exports = webpackMerge(baseConfig, {
         sourceMap: true
       }),
       new OptimizeCSSAssetsPlugin({})  // use OptimizeCSSAssetsPlugin
-    ], // [new UglifyJsPlugin({...})]
-    // splitChunks:{
-    //   // chunks: 'async',
-    //   // minSize: 30000,
-    //   // minChunks: 1,
-    //   // maxAsyncRequests: 5,
-    //   // maxInitialRequests: 3,
-    //   // name: false,
-    //   cacheGroups: {
-    //     // vendor: {
-    //     //   name: 'vendor',
-    //     //   chunks: 'initial',
-    //     //   priority: -10,
-    //     //   reuseExistingChunk: false,
-    //     //   test: /node_modules\/(.*)\.js/
-    //     // },
-    //     styles: {
-    //       name: 'styles',
-    //       test: /\.(sa|sc|c)ss$/,
-    //       chunks: 'all',
-    //       enforce: true
-    //     }
-    //   }
-    // }
+    ], 
   },
   plugins: [
       new webpack.DefinePlugin({
@@ -104,10 +68,6 @@ module.exports = webpackMerge(baseConfig, {
             'NODE_ENV':  JSON.stringify('production')
           }
       }),
-      // new HtmlWebPackPlugin({
-      //   template: "./src/index.html",
-      //   filename: "./index.html"
-      // }),
       new MiniCssExtractPlugin({
         filename: 'index.css',
       })

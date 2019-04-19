@@ -1,0 +1,20 @@
+@import 'theme-red.css';
+.ref-tree.ref-red .ref-core-button-empty {
+  color: #f53c32 !important;
+}
+.ref-tree.ref-blue .ref-core-button-empty {
+  color: #1e88e5 !important;
+}
+.ref-tree .ref-core-search {
+  width: 100%;
+}
+.ref-tree .ref-core-tree {
+  margin-top: 5px;
+  text-align: left;
+}
+.ref-tree .ref-core-tree .u-tree-node-content-wrapper:hover .ref-core-tree-node-selected {
+  opacity: 0;
+}
+.ref-tree .ref-core-tree .u-tree-node-content-wrapper.u-tree-node-selected:hover .ref-core-tree-node-selected {
+  opacity: 1;
+}

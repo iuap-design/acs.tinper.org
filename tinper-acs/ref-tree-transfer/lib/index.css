@@ -1,0 +1,392 @@
+@import 'theme-red.css';
+.ref-red .uTreeSearchableFilter,
+.ref-blue .uTreeSearchableFilter {
+  color: #f50;
+  transition: all 0.3s ease;
+}
+.ref-red .leftTreeWrap,
+.ref-blue .leftTreeWrap {
+  width: 220px;
+  box-sizing: border-box;
+  background: #F7F9FB 100%;
+}
+.ref-red .leftTreeWrap .ref-core-search,
+.ref-blue .leftTreeWrap .ref-core-search {
+  width: 100%;
+}
+.ref-red .leftTreeSearchStyle:global(.u-form-control),
+.ref-blue .leftTreeSearchStyle:global(.u-form-control) {
+  width: 218px;
+  height: 32px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: 1px solid #a8b7c7;
+  box-sizing: border-box;
+  margin-left: 17px;
+  margin-top: 4px;
+}
+.ref-red .leftTreeStyle,
+.ref-blue .leftTreeStyle {
+  /* margin-top: 8px; */
+  /* margin-left: 15px; */
+  width: 220px;
+  /* max-height:470px; */
+  max-height: 320px;
+  overflow: auto;
+}
+.ref-red .leftTreeStyle :global(.u-tree),
+.ref-blue .leftTreeStyle :global(.u-tree) {
+  line-height: 17px;
+  color: #424242;
+  font-size: 13px;
+  padding-left: 0;
+}
+.ref-red,
+.ref-blue {
+  /* 可穿梭 */
+  /* 无穿梭 */
+}
+.ref-red .transferDivWrap,
+.ref-blue .transferDivWrap {
+  margin-top: 0px;
+  width: 100%;
+  position: relative;
+  min-width: 620px;
+}
+.ref-red .transferWrap,
+.ref-blue .transferWrap {
+  position: relative;
+  margin-left: 10px;
+  width: 560px;
+  height: 370px;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+.ref-red .transferWrap .u-transfer-list,
+.ref-blue .transferWrap .u-transfer-list {
+  box-sizing: border-box;
+  width: 250px;
+  height: 370px;
+}
+.ref-red .transferWrap .u-transfer-list-header,
+.ref-blue .transferWrap .u-transfer-list-header {
+  width: 248px;
+  box-sizing: border-box;
+}
+.ref-red .transferWrap .u-transfer-list-content,
+.ref-blue .transferWrap .u-transfer-list-content {
+  margin-top: 8px;
+  height: 290px;
+}
+.ref-red .transferWrap .u-transfer-list-content div,
+.ref-blue .transferWrap .u-transfer-list-content div {
+  overflow: hidden;
+}
+.ref-red .transferWrap .u-transfer-operation,
+.ref-blue .transferWrap .u-transfer-operation {
+  width: 60px;
+  height: 370px;
+  box-sizing: border-box;
+  margin: 0;
+  padding-top: 150px;
+}
+.ref-red .transferWrap .u-transfer-operation .u-button-sm,
+.ref-blue .transferWrap .u-transfer-operation .u-button-sm {
+  margin-left: 10px;
+  margin-bottom: 15px;
+  width: 40px;
+  min-width: 40px;
+  height: 26px;
+  border-radius: 3px;
+  border: none;
+  /* background-color: rgba(216, 216, 216, 0.17);
+        color:#1E7BE2;    */
+}
+.ref-red .transferWrap .u-transfer-operation .u-button-sm[disabled],
+.ref-blue .transferWrap .u-transfer-operation .u-button-sm[disabled] {
+  background-color: rgba(216, 216, 216, 0.17);
+  color: #86939E;
+}
+.ref-red .transferWrap .u-button .uf.uf-arrow-left,
+.ref-blue .transferWrap .u-button .uf.uf-arrow-left {
+  font-size: 18px;
+}
+.ref-red .transferWrap .u-button .uf.uf-arrow-right,
+.ref-blue .transferWrap .u-button .uf.uf-arrow-right {
+  font-size: 18px;
+}
+.ref-red .allTransferRightBtnStyle,
+.ref-blue .allTransferRightBtnStyle {
+  width: 40px;
+  height: 26px;
+  position: absolute;
+  left: 260px;
+  top: 232px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgba(216, 216, 216, 0.17);
+  color: #86939E;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .allTransferLeftBtnStyle,
+.ref-blue .allTransferLeftBtnStyle {
+  width: 40px;
+  height: 26px;
+  position: absolute;
+  left: 260px;
+  top: 109px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgba(216, 216, 216, 0.17);
+  color: #86939E;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .allTransferTopUpBtnStyle,
+.ref-blue .allTransferTopUpBtnStyle,
+.ref-red .allTransferTopBtnStyle,
+.ref-blue .allTransferTopBtnStyle,
+.ref-red .allTransferBottomBtnStyle,
+.ref-blue .allTransferBottomBtnStyle,
+.ref-red .allTransferBottomDownBtnStyle,
+.ref-blue .allTransferBottomDownBtnStyle {
+  top: 0;
+}
+.ref-red .allTransferTopBtnStyle,
+.ref-blue .allTransferTopBtnStyle {
+  width: 40px;
+  height: 26px;
+  position: absolute;
+  right: 10px;
+  /* top:300px; */
+  margin-top: 184px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgba(216, 216, 216, 0.17);
+  color: #86939E;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .allTransferBottomBtnStyle,
+.ref-blue .allTransferBottomBtnStyle {
+  width: 40px;
+  height: 26px;
+  position: absolute;
+  right: 10px;
+  /* top:338px; */
+  margin-top: 220px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgba(216, 216, 216, 0.17);
+  color: #86939E;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .allTransferTopUpBtnStyle,
+.ref-blue .allTransferTopUpBtnStyle,
+.ref-red .allTransferBottomDownBtnStyle,
+.ref-blue .allTransferBottomDownBtnStyle {
+  width: 40px;
+  height: 26px;
+  position: absolute;
+  right: 10px;
+  /* top:258px; */
+  margin-top: 148px;
+  border-radius: 3px;
+  border: none;
+  background-color: rgba(216, 216, 216, 0.17);
+  color: #86939E;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .allTransferBottomDownBtnStyle,
+.ref-blue .allTransferBottomDownBtnStyle {
+  /* top:380px; */
+  margin-top: 256px;
+}
+.ref-red .topInfo,
+.ref-blue .topInfo {
+  width: 624px;
+  color: #474D54;
+  height: 48px;
+  line-height: 30px;
+  color: #424242;
+  font-size: 14px;
+  padding-top: 15px;
+  box-sizing: border-box;
+}
+.ref-red .topLeftInfo,
+.ref-blue .topLeftInfo {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  padding-left: 20px;
+  width: 50%;
+  box-sizing: border-box;
+}
+.ref-red .topRightInfo,
+.ref-blue .topRightInfo {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  padding-left: 36px;
+  width: 50%;
+  box-sizing: border-box;
+}
+.ref-red .buttomInfoWrap,
+.ref-blue .buttomInfoWrap {
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+  line-height: 20px;
+  color: #424242;
+  font-size: 13px;
+  font-family: STHeitiSC-Light;
+}
+.ref-red .leftInfoStyle,
+.ref-blue .leftInfoStyle {
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 50%;
+  height: 60px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.ref-red .rightInfoStyle,
+.ref-blue .rightInfoStyle {
+  white-space: nowrap;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-left: 18px;
+  width: 50%;
+  height: 60px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.ref-red .saveBtnStyle,
+.ref-blue .saveBtnStyle {
+  margin-top: 38px;
+  margin-left: 10px;
+  width: 86px;
+  height: 32px;
+  border: none;
+  background-color: #2196f3;
+  color: #FFFFFF;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .delBtnStyle,
+.ref-blue .delBtnStyle {
+  margin-left: 410px;
+  width: 86px;
+  height: 32px;
+  border: none;
+  background-color: #eceff1;
+  color: #424242;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}
+.ref-red .modalTitleStyle,
+.ref-blue .modalTitleStyle {
+  display: inline-block;
+  height: 60px;
+  width: 400px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-top: 20px;
+  line-height: 20px;
+  font-size: 16px;
+  color: #424242 100%;
+}
+.ref-red .rightSearchStyle,
+.ref-blue .rightSearchStyle {
+  position: absolute;
+  right: 13%;
+  width: 30%;
+  top: 0;
+}
+.ref-red .closeBtnStyle,
+.ref-blue .closeBtnStyle {
+  cursor: pointer;
+  color: #54698D;
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+  display: inline-block;
+  float: right;
+  vertical-align: top;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+.ref-red .ref-tree-transfer.u-modal .u-modal-dialog .u-modal-body,
+.ref-blue .ref-tree-transfer.u-modal .u-modal-dialog .u-modal-body {
+  padding-top: 0;
+  text-align: left;
+}
+.ref-red .ref-tree-transfer-tree,
+.ref-blue .ref-tree-transfer-tree {
+  display: inline-block;
+  vertical-align: top;
+  width: 220px;
+  max-height: 525px;
+  box-sizing: border-box;
+  text-align: left;
+}
+.ref-red .ref-tree-transfer-tree-title,
+.ref-blue .ref-tree-transfer-tree-title {
+  padding-left: 20px;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 35px;
+  font-size: 14px;
+  overflow: hidden;
+  height: 35px;
+  background-color: #eceff1;
+  margin-top: 15px;
+}
+.ref-red .ref-tree-transfer-tree .ref-core-search,
+.ref-blue .ref-tree-transfer-tree .ref-core-search {
+  margin-top: 15px;
+}
+.ref-red .ref-tree-transfer-right,
+.ref-blue .ref-tree-transfer-right {
+  margin-left: 15px;
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 235px);
+  max-height: 525px;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: auto;
+}
+.ref-red .ref-tree-transfer-right-search,
+.ref-blue .ref-tree-transfer-right-search {
+  position: absolute;
+  right: 13%;
+  width: 30%;
+  top: 0;
+}
+.ref-red .ref-tree-transfer-right-title,
+.ref-blue .ref-tree-transfer-right-title {
+  white-space: nowrap;
+  width: 100%;
+  height: 35px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  line-height: 35px;
+  font-size: 14px;
+  overflow: hidden;
+  background-color: #eceff1;
+  position: relative;
+  margin-top: 15px;
+}

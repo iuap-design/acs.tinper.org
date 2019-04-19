@@ -1,32 +1,18 @@
 
 import React, { Component } from 'react';
-// import Loading from 'rc-loading';
 import shallowequal from 'shallowequal';
 import RefCoreError from 'ref-core/lib/refs/RefCoreError';
 import RefCoreButton from 'ref-core/lib/refs/RefCoreButton';
 import RefCoreTab from 'ref-core/lib/refs/RefCoreTab';
 import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
-import 'ref-core/lib/refs/refcoreerror.css';
-import 'ref-core/lib/refs/refcorebutton.css';
-import 'ref-core/lib/refs/refcoretab.css';
-import 'ref-core/lib/refs/refcoresearch.css';
 import {paginationLocale} from 'ref-core/lib/utils/locale.js'
-// import { Modal, Pagination,Table,Checkbox} from 'tinper-bee';
-// import multiSelect from 'tinper-bee/lib/multiSelect.js';
 import Checkbox from 'bee-checkbox';
-// import 'bee-checkbox/build/Checkbox.css'
 import Modal from 'bee-modal';
-// import 'bee-modal/build/Modal.css'
 import Pagination from 'bee-pagination';
-import 'bee-pagination/build/Pagination.css';
 import Table from 'bee-table';
-// import 'bee-table/build/Table.css';
 import multiSelect from "bee-table/build/lib/multiSelect.js";
-// import 'bee-select/build/Select.css';
 import Loading from 'bee-loading';
-// import 'bee-loading/build/Loading.css'
 import RefSearchPanel from './RefSearchPanel';
-import './RefMultipleTableBaseUI.less'
 import { refValParse } from '../utils'
 class RefMultipleTableBase extends Component {
 	columnsData = []//表头数据
@@ -292,12 +278,13 @@ class RefMultipleTableBase extends Component {
         backdrop={backdrop}
         size={size}
         onHide={this.handleBtnCancel}
+        autoFocus={false}
       >
-        <Loading container={this} show={showLoading} />
           <Modal.Header closeButton={true}>
             <Modal.Title > {title}</Modal.Title>
           </Modal.Header >
-          <Modal.Body>
+          <Modal.Body ref={(ref)=>this.modalRef = ref}>
+             <Loading container={this.modalRef} show={showLoading} />
             {
               //按字段查询
               fliterFormInputs.length !== 0 && !miniSearch ?

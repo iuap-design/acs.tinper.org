@@ -1,12 +1,10 @@
 import RefTreeTableBaseUI from './components/RefTreeTableBaseUI';
-import RefWithInput from 'ref-core/lib/refs/refcorewithinput.js';
-import 'ref-core/lib/refs/refcorewithinput.css';
+import RefWithInput from 'ref-core/lib/refs/RefCoreWithInput';
 import createModal from 'ref-core/lib/utils/createApi.js';
-import RefCoreGlobal from 'ref-core/lib/refs/refcoreglobal';
+import RefCoreGlobal from 'ref-core/lib/refs/RefCoreGlobal';
 import React from 'react';
-import './index.less';
 import 'ref-core/css/refcore.css';
-
+// import './index.less'; //webpack打包放开
 
 function RefTreeTable(props){
     return (

@@ -499,7 +499,7 @@ class AcAttachment extends Component{
 	render(){
 		const columns = this.fGetTableColumns();
         let {fileList,selectedFiles,tableList,btnUpload,btnDownload,btnDelete} = this.state;
-        let {fileType,className,multiple,intl} = this.props;
+        let {fileType,className,multiple,intl,locale} = this.props;
         let fileMaxSize = this.fileMaxSize;
         let uploadUrl = this.uploadUrl;
 		let uploadData = this.fGetUploadData();
@@ -507,6 +507,7 @@ class AcAttachment extends Component{
 		return (
                 <div className={className} onClick={this.fConClick}>
                     <AcUpload
+                        locale={locale}
                         title={intl.formatMessage({id:'intl.upload.title'})}
                         action={uploadUrl}
                         data={uploadData}

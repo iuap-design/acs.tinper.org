@@ -5,9 +5,9 @@
  *
  */
 import React, { Component } from 'react';
-
 import { FormControl,Button, Form } from 'tinper-bee';
-import { SearchPanelItem,RefMultipleTableWithInput } from '../../src/index.js';
+import { SearchPanelItem,RefMultipleTableWithInput }  from '../../src/index';
+import  '../../src/index.less';
 let props = {
     placeholder: "placehholder",
     title: '复杂表格参照',

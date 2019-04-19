@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import Form from "bee-form";
-// import "bee-form/build/Form.css";
 import Label from 'bee-label';
-// import 'bee-label/build/Label.css'
 import { Col, Row } from 'bee-layout';
-// import 'bee-layout/build/Layout.css';
 import SearchPanel from 'bee-search-panel';
-// import 'bee-search-panel/build/SearchPanel.css';
-// import { Form, Label,Col,Row} from 'tinper-bee';
 const { FormItem } = Form;
 const AdvancedContainer = SearchPanel.AdvancedContainer;
-import './RefSearchPanel.less';
 /**
  * 部分不能通过this.props.form.resetFields()清空的组件，需要传reset方法，在reset方法中自行清空
  */

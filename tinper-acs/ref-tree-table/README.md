@@ -29,6 +29,7 @@ import 'ref-tree-table/dist/index.css"
 
 
 RefTreeTableBaseUI (默认)
+
     树表的通用ui
     
 
@@ -78,15 +79,15 @@ onTreeSearch`function(searchVal)` |()=>{} |左树上的搜索| 否
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 multiple |`bool`| false |右表是否单选， true 单选，false 多选。左树总是单选 | 否
-checkedArray| `array`|[]|已选择数据。注意，当使用RefTreeTableWithInput 或者 搭配refcorewithinput使用时，checkedArray这个参数不起效且初始值默认[] | 否
+matchData| `array`|[]|表中展示的选中数据| 否
 value| ``string``|空|默认值，初始化input框值|否
 matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，选中节点从matchData中获取| 否
 condition| `Object` | -- | 右表查询条件，带上左树信息。根据condition值不同来刷新页面| 否
 columnsData | `Array` | [] | 右表列数据。具体参照tinper-bee的table组件 | 否
 tableData|Array | [] | 右表表体数据。具体参照tinper-bee的table组件 | 否
 page | `Object` | {pageCount:0,currPageIndex:0,totalElements:0}| 分页数据信息。 | 否
-loadTableData | `function(param)`|()=>{}| 分页下拉或者跳转的回调，返回参数 | 否
-onTableSearch| `function(valye)`|()=>{}| 表格搜索的回调|否
+loadTableData | `function(param)`|()=>{}| 分页下拉或者跳转的回调，返回参数。参数包含{refClientPageInfo.currPageIndex:分页当前页码,refClientPageInfo.pageSize:每页展示的数据量,content:搜索条件} | 否
+onTableSearch| `function(value)`|()=>{}| 表格搜索的回调，参数是搜索条件|否
 
 
 ### RefTreeTableWithInput
@@ -99,7 +100,9 @@ wrapClassName|`string`|空 | 文本框的class样，默认为空。 | 否
 placeholder|`string`| 空 |文本框的 placeholder | 否
 style| `object`| {width:200}| 文本框的style，默认宽度200px | 否 
 filterUrl| `string`|空|快捷录入接口。|否
-displayField |<code>string 或 function</code>|'{refname}' |记录中显示的键。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
+filterUrlFunc| `function(value)` | ()=>{} | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc | 否
+filertData| `Array`| [] | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会使用filterData| 否
+displayField |<code>string 或 function</code>|'{refname}' |记录中显示的内容的格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
 valueField |``string``|'refcode' |待提交的 value 的键。 | 否
 value| ``string``|空|默认值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。初始化input框值，搭配上面的matchData初始化表格选中数据|否
 disabled|`bool`| false |禁用整个参照 | 否

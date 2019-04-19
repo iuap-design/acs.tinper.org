@@ -6,6 +6,8 @@
  */
 import React, { Component } from 'react';
 import RefMultipleTableBaseUI from '../../src/index';
+import  '../../src/index.less';
+
 import { Button, Form } from 'tinper-bee';
 const props = {
     placeholder: "自定义placeholder",
@@ -68,7 +70,10 @@ class Demo1 extends Component {
     onSave = (item) => {
         // console.log('save',item);
         this.checkedArray = item;
-        this.setState({ showModal: false })
+        this.setState({ 
+            showModal: false,
+            matchData:item,
+        })
     }
     onCancel = (item) => {
         this.setState({ showModal: false })
@@ -100,6 +105,7 @@ class Demo1 extends Component {
             <div className="demoPadding">
                 <RefMultipleTableBaseUI
                     {...childrenProps}
+                    matchData={this.state.matchData}
                 />
                 <Button
                     colors="primary"

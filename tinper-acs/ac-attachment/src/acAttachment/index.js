@@ -47,7 +47,7 @@ class AcAttachmentIntl extends Component{
 
 		return (
             <IntlProvider locale={locale} messages={messages[localeSrc]}>
-                <AcAttachment {...this.props} ref={(ref) => this.attach = ref && ref._wrappedInstance} />
+                <AcAttachment {...this.props} locale={localeSrc} ref={(ref) => this.attach = ref && ref._wrappedInstance} />
             </IntlProvider>
 		)
 	}
