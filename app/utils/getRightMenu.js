@@ -20,7 +20,7 @@ let getDemoTitle = (component)=>{
     let twoTitle = {
         "何时使用":{},
         "如何使用":{},
-        "代码演示":{
+        "能力特性":{
             children:[]
         },
         "API":{
@@ -41,7 +41,7 @@ let getDemoTitle = (component)=>{
                 demosTitle.push(title.trim());
              }
          });
-         twoTitle["代码演示"].children = demosTitle;
+         twoTitle["能力特性"].children = demosTitle;
          getApiTitle(component,twoTitle);
     }).catch((err)=>{
         fs.appendFile('./static/error.txt', `${component} 没有demoList，只有md文档 \n`);

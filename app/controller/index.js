@@ -108,7 +108,7 @@ module.exports = {
               scripts += item.replace('/'+component, './'+component + '/ghpages');
             }
           })
-          let demo = '<div id="root"></div>' + scripts;
+          let demo = '<h2 id="能力特性" class="">能力特性</h2><div id="root"></div>' + scripts;
           data = data.replace(/##.*代码演示/, demo);
         } else {
 
@@ -118,7 +118,7 @@ module.exports = {
         isStander = true;
         filePath = path.join(__dirname, `../../tinper-acs/${component}/docs/api.md`);
         data = await fs.readFileSync(filePath, 'utf-8');
-        let demo1 = '<div id="tinperBeeDemo"></div>';
+        let demo1 = '<h2 id="能力特性" class="">能力特性</h2><div id="tinperBeeDemo"></div>';
         data = data.replace(/##.*代码演示/, demo1);
 
 
