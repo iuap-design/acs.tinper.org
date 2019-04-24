@@ -15,9 +15,13 @@ $ npm install ref-tree-table@2.0.0  --save
 
 引入
 
-import RefTreeTableBaseUI from 'ref-tree-table';
+import RefTreeTableBaseUI from 'ref-tree-table/lib/index.js';
+或者
+import { RefTreeTableWithInput } from 'ref-tree-table/lib/index.js'
 
-import 'ref-tree-table/dist/index.css"
+
+样式
+import 'ref-tree-table/lib/index.css';
 
 
 ```
@@ -49,6 +53,7 @@ RefTreeTableBaseUI接收的参数部分用于左树，部分用于右表
 title |``string``|空 |打开上传的模态框显示的标题文字 | 否
 className |`string`|空 | 参照class样式，作用于弹出层和 RefTreeTableWithInput 输入框的样式以及左树右表外层类名，默认为空。 | 否
 backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显示 | 否
+value| ``string``|空|默认值，初始化input框值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
 lang|`string`| `zh_CN` |多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN] | 否
 buttons |`object`| `okText`: "确认", //确认按钮<br/>`cancelText`: "取消", //取消按钮<br/>`clearText`: "清空已选" //清空已选按钮|弹出层工具栏三个按钮的文字，若 
 onSave |`function( record:object )`|-- |保存回调函数，返回已选择的记录详细数据。 | 否
@@ -79,10 +84,8 @@ onTreeSearch`function(searchVal)` |()=>{} |左树上的搜索| 否
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 multiple |`bool`| false |右表是否单选， true 单选，false 多选。左树总是单选 | 否
-matchData| `array`|[]|表中展示的选中数据| 否
-value| ``string``|空|默认值，初始化input框值|否
 matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，选中节点从matchData中获取| 否
-condition| `Object` | -- | 右表查询条件，带上左树信息。根据condition值不同来刷新页面| 否
+~~condition~~| `Object` | -- | ~~右表查询条件，带上左树信息。根据condition值不同来刷新页面~~| 否
 columnsData | `Array` | [] | 右表列数据。具体参照tinper-bee的table组件 | 否
 tableData|Array | [] | 右表表体数据。具体参照tinper-bee的table组件 | 否
 page | `Object` | {pageCount:0,currPageIndex:0,totalElements:0}| 分页数据信息。 | 否
@@ -92,7 +95,7 @@ onTableSearch| `function(value)`|()=>{}| 表格搜索的回调，参数是搜索
 
 ### RefTreeTableWithInput
 
-除了使用上述<RefTreeTableBaseUI/>的参数（showModal不可使用）还可以使用 以下参数。下面的参数是 < RefTreeTableWithInput/>独有。
+除了使用上述<RefTreeTableBaseUI/>的参数（showModal不可使用）还可以使用以下参数。
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
@@ -111,5 +114,8 @@ canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按�
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
 
 ## 注意事项
+
+
+暂无
 
 ## 更新日志

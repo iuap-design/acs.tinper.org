@@ -3,7 +3,7 @@ import RefMultipleTableBaseUI from './components/RefMultipeTableBaseUI';
 import RefSearchPanel,{SearchPanelItem} from './components/RefSearchPanel';
 import RefWithInput from 'ref-core/lib/refs/RefCoreWithInput';
 import { createRefModal, createRefInput } from 'ref-core/lib/utils/createApi.js';
-import RefCoreGlobal from 'ref-core/lib/refs/refcoreglobal';
+import RefCoreGlobal from 'ref-core/lib/refs/RefCoreGlobal';
 import 'ref-core/css/refcore.css';
 // import './index.less' //webpack打包需要放开
 function RefMultipleTable(props){

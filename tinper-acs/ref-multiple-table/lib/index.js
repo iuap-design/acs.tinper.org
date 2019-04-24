@@ -35,9 +35,9 @@ var _RefCoreWithInput2 = _interopRequireDefault(_RefCoreWithInput);
 
 var _createApi = require('ref-core/lib/utils/createApi.js');
 
-var _refcoreglobal = require('ref-core/lib/refs/refcoreglobal');
+var _RefCoreGlobal = require('ref-core/lib/refs/RefCoreGlobal');
 
-var _refcoreglobal2 = _interopRequireDefault(_refcoreglobal);
+var _RefCoreGlobal2 = _interopRequireDefault(_RefCoreGlobal);
 
 require('ref-core/css/refcore.css');
 
@@ -52,7 +52,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import './index.less' //webpack打包需要放开
 function RefMultipleTable(props) {
     return _react2["default"].createElement(
-        _refcoreglobal2["default"],
+        _RefCoreGlobal2["default"],
         props,
         _react2["default"].createElement(_RefMultipeTableBaseUI2["default"], null)
     );

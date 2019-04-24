@@ -56,6 +56,9 @@
     "ac-editor": {
         "name": "富文本编辑"
     },
+    "ac-search-panel": {
+        "name": "查询面板"
+    },
     "ref-tree": {
         "name": "树参照"
     },
@@ -67,5 +70,8 @@
     },
     "ref-tree-transfer": {
         "name": "树穿梭参照"
+    },
+    "ref-combobox": {
+        "name": "下拉参照"
     }
 }

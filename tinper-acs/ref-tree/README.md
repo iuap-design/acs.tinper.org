@@ -8,16 +8,18 @@
 
 ## 如何使用
 
-```
+```sh
 $ ynpm install ref-tree@2.0.0-beta.0 --save
 
 引入
 
-import RefTreeBaseUI from 'ref-tree';
+import RefTreeBaseUI from 'ref-tree/lib/index';
+或者
+import { RefTreeWithInput } from 'ref-tree/lib/index';
 
 样式
 
-import 'ref-tree/dist/index.css';
+import 'ref-tree/lib/index.css';
 
 ```
 

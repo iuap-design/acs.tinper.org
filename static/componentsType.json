@@ -12,6 +12,7 @@
         "ac-city-select"
     ],
     "others":[
+        "ac-search-panel",
         "ac-spreadsheet",
         "ac-toast",
         "yyuap-bpm",
@@ -23,6 +24,7 @@
         "ref-tree-table",
         "ac-multi-tabs",
         "ac-navbar",
-        "ref-tree-transfer"
+        "ref-tree-transfer",
+        "ref-combobox"
     ]
 }

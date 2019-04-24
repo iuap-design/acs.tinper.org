@@ -1,4 +1,4 @@
-# 表格参照通用ui RefMultipleTable 
+# 表格参照RefMultipleTable 
 
 
 ## 何时使用
@@ -8,16 +8,19 @@
 
 ## 如何使用
 
-```
+``` sh
 $ ynpm install ref-multiple-table@2.0.0-beta.0 --save
 
 引入
 
-import RefTreeBaseUI,{SearchPanelItem}from 'ref-multiple-table';
+import RefMultipleTableBaseUI,{ SearchPanelItem }  from 'ref-multiple-table/lib/index.js'
+
+或者
+import { RefMultipleTableWithInput } from 'ref-multiple-table/lib/index.js'
 
 样式
 
-import 'ref-multiple-table/dist/index.css';
+import 'ref-multiple-table/lib/index.css';
 
 ```
 
