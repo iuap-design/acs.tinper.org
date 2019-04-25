@@ -93,6 +93,10 @@
     closebtn=document.getElementById('closebtn'),//关闭按钮
     sidebarDOM=document.getElementsByClassName('sidebar')[0],//侧边栏
     mask=document.getElementsByClassName('mask')[0];//遮罩层
+
+    var handle = function(event){
+            event.preventDefault();// 阻止元素发生默认行为
+    }
     
     //汉堡按钮显示逻辑
     openbtn.addEventListener('click', function () {
@@ -100,11 +104,15 @@
         closebtn.style.display='block';
         openbtn.style.display='none';
         sidebarDOM.style.left=0;
-        let docs=document.getElementsByClassName('docs')[0];
-        // document.body.style.position = 'fixed';
+        mask.style.position="fixed";
+        mask.style.zIndex=2000;
+        sidebarDOM.style.position="fixed";
+        sidebarDOM.style.zIndex=2019;
         //以下document的两句代码控制当左侧抽屉遮罩层出现时，遮罩层下面的页面不可以滚动，当点击关闭按钮后，页面才可以滚动。
+        // document.body.style.position = 'fixed';
         document.body.style.overflow = 'hidden';
-        window.sessionStorage.setItem('openBtn',true)
+        window.sessionStorage.setItem('openBtn',true);
+        mask.addEventListener('touchmove',handle,false);//添加监听事件--页面不可滚动
     });
 
     //点击侧边栏的选项时，使侧边栏不消失的控制点击侧边栏时，使侧边栏不消失的控制
@@ -115,10 +123,15 @@
         closebtn.style.display='block';
         openbtn.style.display='none';
         sidebarDOM.style.left=0;
-        let docs=document.getElementsByClassName('docs')[0];
+        sidebarDOM.style.position="fixed";
+        sidebarDOM.style.zIndex=2019;//新增
+        //解决在ios或者safari浏览器上mask浮层的z-index无效；
+        mask.style.position="fixed";
+        mask.style.zIndex=2000;//新增
         // document.body.style.position = 'fixed';
         document.body.style.overflow = 'hidden';
-        window.sessionStorage.setItem('openBtn',true)
+        window.sessionStorage.setItem('openBtn',true);
+        mask.addEventListener('touchmove',handle,false);//添加监听事件--页面不可滚动
     }
 
     // 关闭按钮显示逻辑
@@ -130,7 +143,8 @@
         openbtn.style.display='block';
         //以下document的两句代码控制当左侧抽屉遮罩层消失时，页面才可以滚动。
         // document.body.style.position = 'relative';
-        document.body.style.overflow = 'auto';  
+        document.body.style.overflow = 'auto';
+        mask.removeEventListener('touchmove',handle,false);
     }, false);
 </script>
 
