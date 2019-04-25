@@ -7,7 +7,7 @@
     "init": "node app/utils/getComponent.js",
     "getMenu": "node app/utils/getRightMenu.js",
     "getRelease": "node app/utils/getRelease.js",
-    "writeFile":"node app/utils/getComponent.js && node app/utils/getRightMenu.js && node app/utils/getRelease.js",
+    "writeFile": "node app/utils/getComponent.js && node app/utils/getRightMenu.js && node app/utils/getRelease.js",
     "dev": "node --inspect app/app.js",
     "start": "node app/app.js"
   },
