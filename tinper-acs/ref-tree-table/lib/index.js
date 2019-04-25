@@ -33,7 +33,7 @@ require('ref-core/css/refcore.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-//import './index.less'; //webpack打包放开
+// import './index.less'; //webpack打包放开
 
 function RefTreeTable(props) {
     return _react2["default"].createElement(

@@ -218,8 +218,8 @@ var RefTreeTableBaseUI = function (_Component) {
 				show: showModal, className: theme + '  ' + className + ' ref-core ref-core-modal ref-tree-table',
 				backdrop: backdrop,
 				size: 'xlg',
-				onHide: this.handleBtnCancel
-
+				onHide: this.handleBtnCancel,
+				autoFocus: false
 			},
 			_react2["default"].createElement(
 				_tinperBee.Modal.Header,

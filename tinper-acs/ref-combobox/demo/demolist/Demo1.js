@@ -1,7 +1,7 @@
 /**
  *
- * @title 应用组件名称
- * @description 应用组件描述
+ * @title 下拉参照
+ * @description ref-combobox下拉参照
  *
  */
 
@@ -95,9 +95,9 @@ class Demo1 extends Component {
             loading:false,
           });
     }
-    onClickItem=(value)=>{
-        console.log('clickItem',value)
-        this.changeData(value)
+    onClickItem=(record)=>{
+        console.log('clickItem',record)
+        this.changeData(record["refcode"])
     }
     onChangeFormControl  = (value) =>{
         console.log('搜索',value)
@@ -119,7 +119,7 @@ class Demo1 extends Component {
                 <RefComboBoxBaseUI
                     displayField={(record)=>{return `${record.refname}-haha`}}
                     valueField={'refcode'}
-                    lang={'zh_TW'}
+                    lang={'zh_CN'}
                     {...getFieldProps('combobox', {
                         initialValue:'{"refpk":"level1","refname":"初级"}',  //M0000000000002
                         rules: [{

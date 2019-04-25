@@ -1,6 +1,6 @@
 
 //特定的样式
-@import './theme-red.less';
+@import './theme-red.css';
 @import './components/RefMultipleTableBaseUI.less';
 @import './components/RefSearchPanel.less';
 .ref-multiple-table{
@@ -8,8 +8,12 @@
         padding: 10px 0;
         text-align: center;
     }
+   
     & .u-search-header{
         padding-top:0;
+    }
+    &.ref-core .u-table{
+        padding:0 16px;
     }
     & .u-table-tbody{
         & tr td span{

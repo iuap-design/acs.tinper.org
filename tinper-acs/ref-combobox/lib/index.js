@@ -285,7 +285,7 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
               } },
             _react2["default"].createElement(
               'span',
-              { className: !inputVal ? '' : "uf uf-close-c-o" },
+              { className: !inputVal ? '' : "uf uf-close-c" },
               ' '
             )
           )

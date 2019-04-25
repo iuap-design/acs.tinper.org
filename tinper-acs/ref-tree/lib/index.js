@@ -35,7 +35,7 @@ require('./theme-red.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-// import './index.less';
+// import './index.less'; //webpack打包放开
 var RefTree = function RefTree(props) {
     return _react2["default"].createElement(
         _RefCoreGlobal2["default"],

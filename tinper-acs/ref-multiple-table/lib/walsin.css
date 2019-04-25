@@ -1,0 +1,350 @@
+.ref-multiple-table-pagination-hide {
+  display: none !important;
+}
+.ref-multiple-table .ref-core-error {
+  padding: 0px;
+}
+.ref-multiple-table .u-table-tbody {
+  background-color: #FFF;
+}
+.ref-multiple-table-row-selected {
+  background: #e3f2fd;
+}
+.ref-multiple-table-radio {
+  box-sizing: border-box;
+  background-color: #FFF;
+  display: inline-block;
+  border-radius: 9px;
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #7A869A;
+}
+.ref-multiple-table-radio:after {
+  box-sizing: border-box;
+  content: '';
+  background-color: #FFF;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  vertical-align: bottom;
+}
+.ref-multiple-table-radio-on {
+  background-color: #108ee9;
+  border-color: #108ee9;
+}
+.ref-multiple-table-tab {
+  height: 40px;
+}
+.ref-multiple-table-tab-search-hide {
+  display: none !important;
+}
+.ref-multiple-table-tab .u-input-group {
+  width: auto !important;
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+}
+.ref-multiple-table .u-pagination {
+  display: inline-block;
+}
+.ref-multiple-table .u-pagination:after {
+  content: ' ';
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+.ref-multiple-table .u-pagination .u-pagination-total,
+.ref-multiple-table .u-pagination .page_jump_value {
+  height: 32px ;
+  line-height: 32px ;
+}
+.ref-multiple-table .u-pagination .page_jump > span {
+  line-height: 32px;
+}
+.ref-multiple-table .u-pagination .page_jump_btn {
+  height: 32px;
+  line-height: 32px;
+}
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-child(1) a,
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-child(2) a,
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-last-child(1) a,
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-last-child(2) a {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-child(1) a span,
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-child(2) a span,
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-last-child(1) a span,
+.ref-multiple-table .u-pagination .u-pagination-list li:nth-last-child(2) a span {
+  font-size: 24px;
+  display: block;
+  margin-top: -2px;
+}
+.ref-multiple-table .u-pagination .u-pagination-list li a {
+  padding: 0px 11px;
+  line-height: 32px;
+  height: 32px;
+  box-sizing: border-box;
+}
+.ref-multiple-table .u-pagination .data_per_select > span {
+  line-height: 32px;
+}
+.ref-multiple-table .u-pagination .data_per_select .u-select {
+  width: 60px;
+  height: 32px;
+}
+.ref-multiple-table .u-pagination .data_per_select .u-select .u-select-selection {
+  height: 32px;
+}
+.ref-multiple-table .u-pagination .data_per_select .u-select .u-select-selection .u-select-selection-rendered {
+  line-height: 32px;
+}
+@media (max-width: 1024px) {
+  .ref-multiple-table .u-pagination .u-pagination-list {
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  .ref-multiple-table .u-pagination .u-pagination-list li a {
+    padding: 0px 6px;
+  }
+  .ref-multiple-table .u-pagination .u-pagination-total {
+    margin: 0px;
+  }
+  .ref-multiple-table .u-pagination .data_per_select {
+    min-width: 45px;
+  }
+  .ref-multiple-table .u-pagination .data_per_select .u-select {
+    width: 48px !important;
+  }
+  .ref-multiple-table .u-pagination .page_jump {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .ref-multiple-table .u-pagination .page_jump_value {
+    width: 30px;
+  }
+  .ref-multiple-table .u-pagination .page_jump_btn {
+    min-width: 10px;
+    height: 32px;
+  }
+}
+.ref-multiple-table .u-select-focused .u-select-selection,
+.ref-multiple-table .u-select-selection:focus,
+.ref-multiple-table .u-select-selection:active {
+  border-color: #004898;
+}
+.ref-multiple-table .u-table th,
+.ref-multiple-table .u-table td {
+  padding: 10px 8px;
+}
+.ref-multiple-table .u-table-fixed-left {
+  box-shadow: none;
+}
+.ref-multiple-table .u-table-fixed-left .u-table-thead th {
+  padding: 9px 8px;
+}
+.ref-multiple-table .u-table th {
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ref-multiple-table .u-table tr.filterable th {
+  padding: 0px 2px;
+  height: 39px;
+}
+.ref-multiple-table .u-table-row.u-table-row-level-0 td {
+  height: 32px !important;
+  padding: 0 8px;
+}
+.ref-multiple-table .u-table-filter-column-filter-icon {
+  right: 15px;
+}
+.ref-walsin-modal.ref-core .u-table {
+  padding: 0;
+}
+.ref-walsin-modal .u-modal-body .selectedItemSum {
+  color: #004898;
+}
+.ref-walsin-modal .u-checkbox.is-checked .u-checkbox-label:before {
+  box-shadow: inset 0 0 0 10px #004898;
+  border-color: #004898;
+}
+.ref-walsin-modal .u-checkbox.u-checkbox-indeterminate .u-checkbox-label:before {
+  box-shadow: inset 0 0 0 10px #004898;
+  border-color: #004898;
+}
+.ref-walsin-modal .u-modal-body {
+  min-height: 419px;
+}
+.ref-walsin-modal .ref-core-button .u-button {
+  background-color: #004898;
+  color: #fff;
+  height: 30px;
+  line-height: 1;
+  font-size: 14px;
+}
+.ref-walsin-modal .ref-core-button .u-button.u-button-primary {
+  border: 1px #004898 solid;
+}
+.ref-walsin-modal .ref-core-button .u-button:first-child {
+  margin-right: 10px;
+}
+.ref-walsin-modal .ref-core-button .u-button:hover {
+  background-color: #0052CC;
+}
+.ref-walsin-modal .ref-core-button-hide {
+  display: none;
+}
+.ref-walsin-modal .u-modal-footer {
+  text-align: left;
+}
+.ref-walsin-modal-pagination-hide {
+  display: none !important;
+}
+.ref-walsin-modal .ref-core-error {
+  padding: 0px;
+}
+.ref-walsin-modal .u-table-tbody {
+  background-color: #FFF;
+}
+.ref-walsin-modal-row-selected {
+  background: #e3f2fd;
+}
+.ref-walsin-modal .u-pagination {
+  margin-left: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  margin: 0 5px 5px 16px !important;
+}
+.ref-walsin-modal .u-pagination .u-select-open .u-select-selection {
+  border-color: #004898;
+}
+.ref-walsin-modal .u-pagination .u-pagination-total,
+.ref-walsin-modal .u-pagination .page_jump_value {
+  height: 32px ;
+  line-height: 32px ;
+}
+.ref-walsin-modal .u-pagination .page_jump > span {
+  line-height: 32px;
+}
+.ref-walsin-modal .u-pagination .page_jump_btn {
+  border-color: #004898;
+  height: 32px ;
+  line-height: 32px;
+  background: #004898;
+  color: #fff;
+  padding: 0px 8px;
+  margin-top: 0px;
+}
+.ref-walsin-modal .u-pagination .page_jump_btn:focus,
+.ref-walsin-modal .u-pagination .page_jump_btn:hover,
+.ref-walsin-modal .u-pagination .page_jump_btn:active {
+  background: #0052cc;
+  color: #fff;
+}
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-child(1) a,
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-child(2) a,
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-last-child(1) a,
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-last-child(2) a {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-child(1) a span,
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-child(2) a span,
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-last-child(1) a span,
+.ref-walsin-modal .u-pagination .u-pagination-list li:nth-last-child(2) a span {
+  font-size: 24px;
+  display: block;
+  margin-top: -2px;
+}
+.ref-walsin-modal .u-pagination .u-pagination-list li a {
+  padding: 0px 11px;
+  line-height: 32px;
+  height: 32px;
+  box-sizing: border-box;
+}
+.ref-walsin-modal .u-pagination .data_per_select > span {
+  line-height: 32px;
+}
+.ref-walsin-modal .u-pagination .data_per_select .u-select {
+  width: 60px;
+  height: 32px;
+}
+.ref-walsin-modal .u-pagination .data_per_select .u-select .u-select-selection {
+  height: 32px;
+}
+.ref-walsin-modal .u-pagination .data_per_select .u-select .u-select-selection .u-select-selection-rendered {
+  line-height: 32px;
+}
+.ref-walsin-modal .u-pagination-list > .active > a,
+.ref-walsin-modal .u-pagination-list > .active > span,
+.ref-walsin-modal .u-pagination-list > .active > a:hover,
+.ref-walsin-modal .u-pagination-list > .active > span:hover,
+.ref-walsin-modal .u-pagination-list > .active > a:focus,
+.ref-walsin-modal .u-pagination-list > .active > span:focus {
+  background: #004898;
+  border-color: #004898;
+}
+@media (max-width: 1024px) {
+  .ref-walsin-modal .u-pagination .u-pagination-list {
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  .ref-walsin-modal .u-pagination .u-pagination-list li a {
+    padding: 0px 6px;
+  }
+  .ref-walsin-modal .u-pagination .u-pagination-total {
+    margin: 0px;
+  }
+  .ref-walsin-modal .u-pagination .data_per_select {
+    min-width: 45px;
+  }
+  .ref-walsin-modal .u-pagination .data_per_select .u-select {
+    width: 48px !important;
+  }
+  .ref-walsin-modal .u-pagination .page_jump {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .ref-walsin-modal .u-pagination .page_jump_value {
+    width: 30px;
+  }
+  .ref-walsin-modal .u-pagination .page_jump_btn {
+    min-width: 10px;
+  }
+}
+.ref-walsin-modal .u-select-focused .u-select-selection,
+.ref-walsin-modal .u-select-selection:focus,
+.ref-walsin-modal .u-select-selection:active {
+  border-color: #004898;
+}
+.ref-walsin-modal .u-table th,
+.ref-walsin-modal .u-table td {
+  padding: 10px 8px;
+}
+.ref-walsin-modal .u-table th {
+  word-break: keep-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ref-walsin-modal .u-table tr.filterable th {
+  padding: 0px 2px;
+  height: 39px;
+}
+.ref-walsin-modal .u-table-row.u-table-row-level-0 td {
+  height: 32px !important;
+  padding: 0 8px;
+}
+.ref-walsin-modal .u-table-filter-column-filter-icon {
+  right: 15px;
+}

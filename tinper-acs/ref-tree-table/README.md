@@ -11,13 +11,13 @@
 
 ```sh
 
-$ npm install ref-tree-table@2.0.0  --save
+$ npm install ref-tree-table  --save
 
 引入
 
-import RefTreeTableBaseUI from 'ref-tree-table/lib/index.js';
+import RefTreeTableBaseUI from 'ref-tree-table';
 或者
-import { RefTreeTableWithInput } from 'ref-tree-table/lib/index.js'
+import { RefTreeTableWithInput } from 'ref-tree-table'
 
 
 样式

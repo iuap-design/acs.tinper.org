@@ -68,7 +68,7 @@ class Demo1 extends Component {
                         multiple={true}
                         displayField='{refname}'
                         valueField='refpk'
-                        lang='zh_TW'
+                        lang='zh_CN'
                         showLoding={false}
                         treeData={treeData} 
                         showLoading={false} 

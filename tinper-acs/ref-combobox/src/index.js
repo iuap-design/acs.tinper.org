@@ -328,7 +328,7 @@ class RefComboBoxBaseUI extends Component {
             {!!inputVal && <InputGroup.Button className="clearAll" shape="border" style={{
               cursor: 'pointer'
             }} onClick={e=>this.clearAll(e)}>
-              <span className={!inputVal ? '' : "uf uf-close-c-o"} > </span>
+              <span className={!inputVal ? '' : "uf uf-close-c"} > </span>
             </InputGroup.Button>
             }
           </InputGroup>

@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.SearchPanelItem = exports.RefSearchPanel = exports.createRefMultipleTableModal = exports.createRefMultipleTable = exports.RefMultipleTable = exports.RefMultipleTableWithInput = undefined;
+exports.SearchPanelItem = exports.RefSearchPanel = exports.createRefMultipleTableModal = exports.createRefMultipleTable = exports.RefMultipleTable = exports.RefMultipleTableWalsinBaseUI = exports.RefMultipleTableWithInput = undefined;
 
 var _assign = require('babel-runtime/core-js/object/assign');
 
@@ -24,6 +24,10 @@ var _react2 = _interopRequireDefault(_react);
 var _RefMultipeTableBaseUI = require('./components/RefMultipeTableBaseUI');
 
 var _RefMultipeTableBaseUI2 = _interopRequireDefault(_RefMultipeTableBaseUI);
+
+var _RefMultipleTableWalsinBaseUI = require('./components/RefMultipleTableWalsinBaseUI');
+
+var _RefMultipleTableWalsinBaseUI2 = _interopRequireDefault(_RefMultipleTableWalsinBaseUI);
 
 var _RefSearchPanel = require('./components/RefSearchPanel');
 
@@ -51,6 +55,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // import './index.less' //webpack打包需要放开
 function RefMultipleTable(props) {
+    if (props.className === 'ref-walsin-modal') {
+        return _react2["default"].createElement(
+            _RefCoreGlobal2["default"],
+            props,
+            _react2["default"].createElement(_RefMultipleTableWalsinBaseUI2["default"], null)
+        );
+    }
     return _react2["default"].createElement(
         _RefCoreGlobal2["default"],
         props,
@@ -87,7 +98,7 @@ var RefMultipleTableWithInput = function (_Component) {
         return _react2["default"].createElement(
             _RefCoreWithInput2["default"],
             this.props,
-            _react2["default"].createElement(RefMultipleTable, null)
+            _react2["default"].createElement(_RefMultipleTableWalsinBaseUI2["default"], null)
         );
     };
 
@@ -96,6 +107,7 @@ var RefMultipleTableWithInput = function (_Component) {
 
 exports["default"] = _RefMultipeTableBaseUI2["default"];
 exports.RefMultipleTableWithInput = RefMultipleTableWithInput;
+exports.RefMultipleTableWalsinBaseUI = _RefMultipleTableWalsinBaseUI2["default"];
 exports.RefMultipleTable = RefMultipleTable;
 exports.createRefMultipleTable = createRefMultipleTable;
 exports.createRefMultipleTableModal = createRefMultipleTableModal;

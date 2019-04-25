@@ -40,7 +40,7 @@ const config = webpackMerge(baseConfig, {
     //主机域名
     host: '0.0.0.0',
     compress: true,
-    port: '3000',
+    port: '3001',
     //服务于webpack生成的静态文件，用dist
     // contentBase: path.join(__dirname, '../dist'),
     //热更新
@@ -88,7 +88,7 @@ const config = webpackMerge(baseConfig, {
       }
     }),
     new OpenBrowserPlugin({
-      url: `http://127.0.0.1:3000`
+      url: `http://127.0.0.1:3001`
     }),
     new webpack.HotModuleReplacementPlugin()
   ]

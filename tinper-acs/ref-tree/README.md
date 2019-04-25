@@ -9,13 +9,13 @@
 ## 如何使用
 
 ```sh
-$ ynpm install ref-tree@2.0.0-beta.0 --save
+$ ynpm install ref-tree --save
 
 引入
 
-import RefTreeBaseUI from 'ref-tree/lib/index';
+import RefTreeBaseUI from 'ref-tree';
 或者
-import { RefTreeWithInput } from 'ref-tree/lib/index';
+import { RefTreeWithInput } from 'ref-tree';
 
 样式
 

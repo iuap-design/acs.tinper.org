@@ -71,7 +71,7 @@ class Demo2 extends Component {
                         filterUrl='/pap_basedoc/common-ref/filterRefJSON'
                         displayField='{refname}'
                         valueField='refpk'
-                        lang='zh_TW'
+                        lang='zh_CN'
                         treeData={treeData}
                         onTreeChange={this.onTreeChange} 
                         onTreeSearch={this.onTreeSearch}

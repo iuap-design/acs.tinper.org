@@ -1,0 +1,195 @@
+
+.ref-multiple-table{
+    &-pagination-hide{
+        display: none !important;
+    }
+    & .ref-core-error{
+        padding: 0px;
+    }
+    & .u-table-tbody {
+        //表体背景色
+        background-color: #FFF;
+    }
+
+    &-row-selected{
+        background: rgb(227,242,253);
+    }
+    &-radio{
+        box-sizing: border-box;
+        background-color: #FFF;
+        display: inline-block;
+        border-radius: 9px;
+        height: 18px;
+        width: 18px;
+        vertical-align: middle;
+        text-align: center;
+        user-select: none;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid #7A869A;
+        &:after{
+            box-sizing: border-box;
+            content: '';
+            display: inline-block;
+            background-color: #FFF;
+            display: inline-block;
+            height: 8px;
+            width: 8px;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            vertical-align: bottom;
+        }
+        &-on{
+            background-color: #108ee9;
+            border-color:#108ee9;
+        }
+    }
+    &-tab{
+        height: 40px;
+        &-search-hide{
+            display: none !important;
+        }
+        & .u-input-group{
+            width: auto !important;
+            display: inline-block;
+            vertical-align: middle;
+            float: left;
+        }
+        
+    }
+    
+    .u-pagination {
+        display: inline-block;
+
+        &:after{
+            content: ' ';
+            display: block;
+            overflow: hidden;
+            clear: both;
+        }
+        .u-pagination-total,.page_jump_value {  
+            height: 32px ;
+            line-height: 32px ;
+        }
+        .page_jump>span{
+            line-height: 32px;
+            
+        }
+        .page_jump_btn{
+            height: 32px;
+            line-height: 32px;
+        }
+        
+        .u-pagination-list {
+            li:nth-child(1),
+            li:nth-child(2),
+            li:nth-last-child(1),
+            li:nth-last-child(2) {
+                a {
+                    
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                    span {
+                        font-size: 24px;
+                        display: block;
+                        margin-top: -2px;
+                    }
+                }
+            }
+            li{
+                a{
+                    padding: 0px 11px;
+                    line-height: 32px;
+                    height: 32px;
+                    box-sizing: border-box;
+                }
+            }
+        }
+        .data_per_select >span{
+            line-height: 32px;
+        }
+        .data_per_select .u-select {
+            width: 60px;
+            height: 32px;
+            .u-select-selection {
+                height: 32px;
+                .u-select-selection-rendered {
+                    line-height: 32px;
+                }
+            }
+        }
+    }
+
+    
+
+        //分页媒体查询
+        @media (max-width: 1024px){
+        .u-pagination{
+            .u-pagination-list{
+                flex-shrink: 0;
+                margin-right: 2px;
+                li a{
+                    padding: 0px 6px;
+                }
+            }
+            .u-pagination-total {
+                margin:0px;
+            }
+            .data_per_select {
+                min-width: 45px;
+                .u-select{
+                    width: 48px !important;
+                }
+                
+            }
+            .page_jump{
+                margin-left: 0px;
+                margin-right: 0px;
+                
+
+            }
+            .page_jump_value{
+                width: 30px;
+            }
+            .page_jump_btn{
+                min-width:10px;
+                height: 32px;
+            }
+        }
+    }
+    .u-select-focused .u-select-selection,
+    .u-select-selection:focus,
+    .u-select-selection:active {
+        border-color: #004898;
+    }
+    .u-table th,
+    .u-table td {
+        padding: 10px 8px;
+    }
+    .u-table-fixed-left {
+        box-shadow: none;
+        & .u-table-thead{
+            //修复增加selectMulti后表头错位问题
+            & th{
+                padding: 9px 8px;
+            }
+        }
+    }
+    .u-table th{
+        word-break: keep-all;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .u-table tr.filterable th {
+        padding: 0px 2px;
+        height: 39px;
+    }
+    .u-table-row.u-table-row-level-0 td {
+        height: 32px !important;
+        padding: 0 8px;
+    }
+    .u-table-filter-column-filter-icon {
+        right: 15px;
+    }
+}

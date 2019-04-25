@@ -12,9 +12,9 @@ $ ynpm install ref-tree-transfer --save
 
 引入
 
-import RefTreeTransferBaseUI from 'ref-tree-transfer/lib/index';
+import RefTreeTransferBaseUI from 'ref-tree-transfer';
 或者
-import { RefTreeTransferWithInput } from 'ref-tree-transfer/lib/index';
+import { RefTreeTransferWithInput } from 'ref-tree-transfer';
 
 样式
 

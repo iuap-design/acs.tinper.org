@@ -85,7 +85,7 @@ class Demo2 extends Component {
 			refModelUrl:{},
 			displayField:'{refname}-{refcode}',
 			valueField:'refcode',
-			lang:'zh_TW',
+			lang:'zh_CN',
 			theme : 'ref-red',
 			searchPlaceholder:'搜索自定义',
 			notFoundContent:'暂无数据自定义',

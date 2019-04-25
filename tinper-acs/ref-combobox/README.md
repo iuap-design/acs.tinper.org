@@ -11,7 +11,7 @@ $ ynpm install ref-combobox --save
 
 引入
 
-import RefComboBoxBaseUI, {ComboStore,ComboItem} from 'ref-combobox/lib/index';
+import RefComboBoxBaseUI, {ComboStore,ComboItem} from 'ref-combobox';
 
 样式
 
@@ -27,11 +27,11 @@ import 'ref-combobox/lib/index.css';
 
 RefComboBoxBaseUI
     
-    带有输入框，下拉选择参照。默认
+    带有输入框，下拉选择参照。默认，需要配合使用下面两个
 
 ComboStore
     
-    可走缓存数据的下拉
+    可走缓存数据的下拉。
 
 ComboItem
     
@@ -52,9 +52,9 @@ onClickItemInner | `function(record)`| -- | 下拉选中，返回缓存的数据
 sliderWidth|`number`或者`String`| 'auto'| 下拉菜单的宽度|否
 comboboxStoreData| `array` | [] | 下拉参照要展示dom集合，搭配<ComboItem>使用 | 否
 storeData| `array` | [] | 下拉参照数据集合，不传入storeData会导致onClickItemInner不能返回对应的完整数据 | 否
-onChangeFormControl| `function(value)` | 输入框输入值回调，value是输入内容 | 否
-onFocusFormControl| `function(popupVisible)` | 输入框focus回调，会将下拉参照的前一刻打开状态返回| 否
-onSelect| `function(currentIndex)` | 翻页回调，返回当前页面| 否
+onChangeFormControl| `function(value)` | - | 输入框输入值回调，value是输入内容 | 否
+onFocusFormControl| `function(popupVisible)` | -|  输入框focus回调，会将下拉参照的前一刻打开状态返回| 否
+onSelect| `function(currentIndex)` | - | 翻页回调，返回当前页面| 否
 pageCount | `number` | 1 | 总页数 | 否
 currPageIndex| `number` | 0 | 当前页码 | 否
 loading | `boolean` | false | 是否展示加载 | 否
@@ -77,7 +77,7 @@ lang| `String`| 'zh_CN'| 分页多语 | 否
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 active| `bool`| false | 该条数据是否是选中 | 否
-text| `String`| ''| 数据展示的形式 | 否
+text| `String`| ''| 该条展示数据 | 否
 value | `String`| ''| data-value,自定义属性 | 否
 
 

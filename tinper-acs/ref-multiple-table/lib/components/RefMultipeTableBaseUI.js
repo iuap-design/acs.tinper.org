@@ -473,7 +473,7 @@ var RefMultipleTableBase = function (_Component) {
         ),
         columnsData && columnsData.length ? _react2["default"].createElement(_this.TableView, {
           bordered: true,
-          scroll: { x: false, y: true },
+          // scroll: { x: false, y: true },
           columns: columnsData,
           rowClassName: _this.renderRowClassName,
           data: tableIsSelecting ? _tableData : checkedArray,

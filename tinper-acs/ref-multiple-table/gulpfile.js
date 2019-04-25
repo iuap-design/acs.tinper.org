@@ -67,7 +67,7 @@ gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
 
-gulp.task("lib2", ["clean_lib2","pack_lib2", "less_component"], function() {});
+gulp.task("lib2", ["clean_lib2","pack_lib2", "less_component",'css_component'], function() {});
 
 gulp.task('default',['lib2']);
 // gulp.task('default',['theme_src']);

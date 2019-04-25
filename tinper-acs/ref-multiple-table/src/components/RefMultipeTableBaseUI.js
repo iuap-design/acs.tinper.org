@@ -318,7 +318,7 @@ class RefMultipleTableBase extends Component {
             {
               columnsData && columnsData.length ? React.createElement(_this.TableView, {
                 bordered: true,
-                scroll: { x: false, y: true },
+                // scroll: { x: false, y: true },
                 columns: columnsData,
                 rowClassName: _this.renderRowClassName,
                 data: tableIsSelecting ? _tableData : checkedArray,

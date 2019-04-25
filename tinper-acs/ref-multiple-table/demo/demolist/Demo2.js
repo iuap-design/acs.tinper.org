@@ -6,6 +6,7 @@
  */
 import React, { Component } from 'react';
 import { FormControl,Button, Form } from 'tinper-bee';
+import Radio from 'bee-radio';
 import { SearchPanelItem,RefMultipleTableWithInput }  from '../../src/index';
 import  '../../src/index.less';
 let props = {
@@ -35,7 +36,7 @@ class Demo3 extends Component {
             strFieldCode: ["code", "name", "email", "mobile"],
             strFieldName: ["人员编码", "人员名称", "人员邮箱", "人员电话"]
         }
-        let { multiple } = props;
+        let { multiple , valueField} = props;
         let keyList = data.strFieldCode || [];
         let titleList = data.strFieldName || [];
         props["fliterFormInputs"] = [];
@@ -62,7 +63,15 @@ class Demo3 extends Component {
                 key: "a",
                 width: 45,
                 render(text, record, index) {
-                    return <div className={`ref-multiple-table-radio ${record._checked ? 'ref-multiple-table-radio-on' : ''}`} />
+                    return(
+						<Radio.RadioGroup
+							name={record[valueField]}
+							selectedValue={record._checked?record[valueField]:null}
+						>
+							<Radio value={record[valueField]}></Radio>
+						</Radio.RadioGroup>   
+					)
+                    // return <div className={`ref-multiple-table-radio ${record._checked ? 'ref-multiple-table-radio-on' : ''}`} />
                 }
             })
 
