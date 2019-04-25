@@ -16,6 +16,7 @@ $ ynpm install ref-multiple-table --save
 import RefMultipleTableBaseUI,{ SearchPanelItem }  from 'ref-multiple-table'
 
 或者
+
 import { RefMultipleTableWithInput } from 'ref-multiple-table'
 
 样式
@@ -44,9 +45,7 @@ SearchPanelItem
 
     表格参照搜索面板处的搜索条件。（带有复杂搜索的表格参照需要使用此组件）
 
-RefMultipleTableWalsinBaseUI
 
-     行内搜索表格参照的纯ui，需要正确的参数传入。
 ## API
 
 ### RefMultipleTableBaseUI
@@ -72,8 +71,8 @@ showLoading | `bool` | false | 是否展示loading，多用于请求中| 否
 pageCount |`number`| — |总页数 | 否
 currPageIndex| `number`| — |当前页数 | 否
 totalElements | `number`| — |一共多少条 | 否
-dataNumSelect | `function()`| — |选择每页多少条的回调函数 | 否
-handlePagination| `functitabon()`| — |切换页的方法 | 否
+dataNumSelect | `function(index,pagesize)`| — |选择每页多少条的回调函数 | 否
+handlePagination| `function(currenIndex)`| — |切换页的方法 | 否
 showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 否
 onSave | `function(value)` | -- | 参照确定的回调| 否
 onCancel | `function(value)` | -- | 参照取消的回调| 否
@@ -82,46 +81,12 @@ matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当
 theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
 searchPanelLocale | `Object` | {'title': '条件筛选EN','resetName': '重置En','searchName': '查询EN','down':'打开EN','up':'关闭EN',} | 复杂搜索标题，按钮的文字等信息 | 否
 
-### RefMultipleTableWalsinBaseUI
-
-以下参数为 `<RefMultipleTableWalsinBaseUI/>`需要使用的，为了保证功能的正常使用请传入。
-
-参数 | 类型 |默认值| 说明 | 必选
----|---|--- | --- | ---
-className |`string`|空 | 参照class样式，作用于弹出层的样式，默认为空。 | 否
-title |``string``|空 |打开上传的模态框显示的标题文字 | 否
-backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显示 | 否
-lang|`string`| `zh_CN` |多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN] | 否
-buttons|`object`| - |{buttons:{cancelText:'取消',clearText:'清空已选',okText:'确认'}} 按钮文字展示| 否
-emptyBut| `bool` | false| 清空按钮是否展示 |否
-miniSearch| `Boolean`|true|默认是简单搜索|否
-size|`String`|'lg'|modal的size|否
-valueField |``string``|'refcode' |待提交的 value 的键。 | 否
-showLoading | `bool` | false | 是否展示loading，多用于请求中| 否
-<span style="color:red;">*</span>tableData | `Array` | — | 表体数据 | 否
-<span style="color:red;">*</span>columsData | `Array`| — | 表头数据 | 否
-pageCount |`number`| — |总页数 | 否
-currPageIndex| `number`| — |当前页数 | 否
-totalElements | `number`| — |一共多少条 | 否
-dataNumSelect | `function()`| — |选择每页多少条的回调函数 | 否
-handlePagination| `functitabon()`| — |切换页的方法 | 否
-showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 否
-onSave | `function(value)` | -- | 参照确定的回调| 否
-onCancel | `function(value)` | -- | 参照取消的回调| 否
-value| ``string``|空|默认值，初始化input框值|否
-matchData | `Array` | [] | 选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，选中节点从matchData中获取| 否
-theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
-onFilterChange| `function(field,value,condition)`| ()=>{} | 行内搜索回调函数 | 否
-fliterColumn | `Array` | [] | 过滤条件，为空则没有行内搜索 | 否
-
-
 ### RefMultipleTableWithInput
 
 除了使用上述<RefMultipleTableBaseUI/>的参数（showModal不可使用）还可以使用以下参数。
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
-className |`string`|空 | 参照class样式，作用于弹出层的样式，默认为空。className若是ref-walsin-modal，那么弹出的参照是行内过滤表格参照，否则是默认表格参照 | 否 
 wrapClassName|`string`|空 | 文本框的class样，默认为空。 | 否
 placeholder|`string`| 空 |文本框的 placeholder | 否
 style| `object`| {width:200}| 文本框的style，默认宽度200px | 否 

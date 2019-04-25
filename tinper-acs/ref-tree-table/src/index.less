@@ -1,6 +1,10 @@
 @import './components/RefMultipleTableBase.less';
 @import './theme-red.css';
 .ref-tree-table{
+    .u-input-group-btn{
+        line-height: 32px;
+        color: #757575;
+     }
     //主题-红色
     &.ref-red{
         .selectedItemSum{
@@ -16,6 +20,16 @@
     &.ref-core .u-modal-dialog .u-modal-body {
         text-align: left ;
         padding: 0;
+        position: relative;
+        &:after{
+            content: '';
+            height: 100%;
+            width: 1px;
+            background: #c8c8c8;
+            position: absolute;
+            top:0;
+            left: 256px;
+        }
     }
     &-layout{
         // height: 500px;
@@ -23,7 +37,10 @@
             display: inline-block;
             vertical-align: top;
             height: 100%;
-            padding-top:10px;
+            padding:10px 16px 0 16px;
+            .ref-tabs-panel {
+                padding: 0;
+            }
             &-title{
                 height: 30px;
                 line-height: 30px;
@@ -32,9 +49,7 @@
             }
             &:first-child{
                 width: 260px;
-                // margin-right: 10px;
                 padding: 10px 20px 0 18px;
-                border-right: 1px solid #c8c8c8;
                 .ref-core-search{
                     width: 100%;
                 }

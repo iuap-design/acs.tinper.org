@@ -102,7 +102,6 @@
     "prop-types": "^15.6.0"
   },
   "dependencies": {
-    "cross-env": "^5.2.0",
     "bee-checkbox": "^2.0.5",
     "bee-icon": "^1.0.10",
     "bee-loading": "^1.0.9",
@@ -110,6 +109,7 @@
     "bee-pagination": "^2.0.5",
     "bee-table": "^2.0.10",
     "bee-tree": "^2.0.7",
-    "ref-core": "0.3.4-beta.3"
+    "cross-env": "^5.2.0",
+    "ref-core": "^0.3.4-beta.4"
   }
 }

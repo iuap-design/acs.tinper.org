@@ -3,6 +3,16 @@
 @import './transfer.less';
 @import './theme-red.css';
 .ref-red,.ref-blue{
+//  自定义样式
+ .u-input-group-btn{
+	line-height: 32px;
+	color: #757575;
+ }
+ &.ref-tree-transfer{
+	.u-checkbox{
+		margin-right: 0;
+	}
+ }
 .modalTitleStyle{
 	display:inline-block;
 	height:60px;
@@ -32,15 +42,12 @@
 	margin-right:20px;
 	margin-top:20px;
   }
-  
+  &.ref-tree-transfer .u-modal-content .u-modal-body{
+		padding-top: 0;
+		text-align: left;
+}
   .ref-tree-transfer{
-	  // & .u-modal-dialog.u-modal-lg{
-	  // 	width: 1000px;
-	  // }
-	  &.u-modal .u-modal-dialog .u-modal-body{
-		  padding-top: 0;
-		  text-align: left;
-	  }
+	
 	  &-tree{
 		  display:inline-block;
 		  vertical-align: top;
