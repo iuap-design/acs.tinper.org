@@ -5,13 +5,6 @@
  *
  */
 
-/**
- *
- * @title 应用组件名称
- * @description 应用组件描述
- *
- */
-
 import React, { Component } from 'react';
 
 import Form from "bee-form";

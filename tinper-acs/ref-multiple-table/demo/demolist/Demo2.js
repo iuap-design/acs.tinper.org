@@ -1,6 +1,6 @@
 /**
  *
- * @title RefMultipleTableWithInput
+ * @title 基础示例2
  * @description 使用RefMultipleTableWithInput，表格参照带有input
  *
  */

@@ -1,6 +1,6 @@
 /**
  *
- * @title RefMultipleTableBaseUI
+ * @title 基础示例1
  * @description 表格参照，使用RefMultipleTableBaseUI,不带有input
  *
  */

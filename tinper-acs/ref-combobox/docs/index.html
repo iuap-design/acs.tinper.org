@@ -35,7 +35,7 @@
 
 引入
 
-import RefComboBoxBaseUI, {ComboStore,ComboItem} from <span class="hljs-string">'ref-combobox/lib/index'</span>;
+import RefComboBoxBaseUI, {ComboStore,ComboItem} from <span class="hljs-string">'ref-combobox'</span>;
 
 样式
 
@@ -43,8 +43,8 @@ import <span class="hljs-string">'ref-combobox/lib/index.css'</span>;
 </code></pre><h2 id="代码演示">代码演示</h2>
 <h2 id="分类">分类</h2>
 <p>RefComboBoxBaseUI</p>
-<pre class="hljs"><code>带有输入框，下拉选择参照。默认</code></pre><p>ComboStore</p>
-<pre class="hljs"><code>可走缓存数据的下拉</code></pre><p>ComboItem</p>
+<pre class="hljs"><code>带有输入框，下拉选择参照。默认，需要配合使用下面两个</code></pre><p>ComboStore</p>
+<pre class="hljs"><code>可走缓存数据的下拉。</code></pre><p>ComboItem</p>
 <pre class="hljs"><code>下拉的单条数据</code></pre><h2 id="api">API</h2>
 <h3 id="refcomboboxbaseui">RefComboBoxBaseUI</h3>
 <table>
@@ -124,18 +124,21 @@ import <span class="hljs-string">'ref-combobox/lib/index.css'</span>;
 <tr>
 <td>onChangeFormControl</td>
 <td><code>function(value)</code></td>
+<td>-</td>
 <td>输入框输入值回调，value是输入内容</td>
 <td>否</td>
 </tr>
 <tr>
 <td>onFocusFormControl</td>
 <td><code>function(popupVisible)</code></td>
+<td>-</td>
 <td>输入框focus回调，会将下拉参照的前一刻打开状态返回</td>
 <td>否</td>
 </tr>
 <tr>
 <td>onSelect</td>
 <td><code>function(currentIndex)</code></td>
+<td>-</td>
 <td>翻页回调，返回当前页面</td>
 <td>否</td>
 </tr>
@@ -228,7 +231,7 @@ import <span class="hljs-string">'ref-combobox/lib/index.css'</span>;
 <td>text</td>
 <td><code>String</code></td>
 <td>&#39;&#39;</td>
-<td>数据展示的形式</td>
+<td>该条展示数据</td>
 <td>否</td>
 </tr>
 <tr>

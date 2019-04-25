@@ -1,6 +1,6 @@
 /**
  *
- * @title 行内搜索表格参照
+ * @title 行内搜索表格参照示例2
  * @description 使用RefMultipleTableWithInput，表格参照带有input
  *
  */
