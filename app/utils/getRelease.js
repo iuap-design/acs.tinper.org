@@ -9,7 +9,7 @@ const latestVersion = require('latest-version');
 
 
 const auth = {
-    token: 'a7ff6088c5c994e8b255f3746fa0f4d4e3cdf206',
+    token: '',
     user: 'liushaozhen'
 }
 
@@ -18,7 +18,9 @@ const auth = {
  * @param {*} component 
  */
 function getRelease(component) {
-    gh.list(auth, 'tinper-acs', component, (err, list) => {
+    let org = 'tinper-acs';
+    if(component.indexOf('bee')==0)org='tinper-bee';
+    gh.list(auth, org, component, (err, list) => {
         if (err) {
             console.log(`❌❌ 读取release失败！${component} `)
             console.log(err);
