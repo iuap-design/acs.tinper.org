@@ -12,7 +12,8 @@ const en = {
     'intl.col.fileType': 'fileType',
     'intl.col.fileSize': 'fileSize',
     'intl.col.uploaderName': 'uploaderName',
-    'intl.col.uploadTime': 'uploadTime'
+    'intl.col.uploadTime': 'uploadTime',
+    'intl.table.nodata': 'No data'
 }
 
 export default en;

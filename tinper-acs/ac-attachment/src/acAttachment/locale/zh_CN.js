@@ -12,7 +12,8 @@ const zh_CN = {
     'intl.col.fileType': '文件类型',
     'intl.col.fileSize': '文件大小',
     'intl.col.uploaderName': '上传人',
-    'intl.col.uploadTime': '上传时间'
+    'intl.col.uploadTime': '上传时间',
+    'intl.table.nodata': '暂无数据'
 }
 
 export default zh_CN;

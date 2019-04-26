@@ -12,7 +12,8 @@ const zh_TW = {
     'intl.col.fileType': '文件類型',
     'intl.col.fileSize': '文件大小',
     'intl.col.uploaderName': '上傳人',
-    'intl.col.uploadTime': '上傳時間'
+    'intl.col.uploadTime': '上傳時間',
+    'intl.table.nodata': '暫無數據'
 }
 
 export default zh_TW;
