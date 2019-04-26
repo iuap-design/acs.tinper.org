@@ -1,14 +1,15 @@
 # 复杂表格 Grid
 
 ## 何时使用
+
 当需要复杂表格展示数据的时候
 
 ## 如何使用
 
 ```
 
-import Grid from 'bee-complex-grid';
-import 'bee-complex-grid/build/Grid.css';
+import Grid from 'ac-complex-grid';
+import 'ac-complex-grid/build/Grid.css';
 
 ```
 
