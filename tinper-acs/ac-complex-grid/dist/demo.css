@@ -5480,23 +5480,30 @@ ul {
 .u-grid th .drop-menu .uf {
   font-size: 12px;
   visibility: hidden;
+  color: #505F79;
+  font-weight: bold;
   cursor: pointer; }
 
 .u-grid th .drop-menu {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: inline-block;
-  vertical-align: middle;
-  overflow: hidden; }
+  display: inline-block; }
   .u-grid th .drop-menu i.uf {
     padding-left: 4px; }
+  .u-grid th .drop-menu .drop-menu-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    max-width: calc( 100% - 21px); }
 
 .u-grid th .cansort.drop-menu {
-  width: calc(100% - 32px) !important; }
+  max-width: calc(100% - 32px) !important; }
+
+.u-grid th:last-child .cansort.drop-menu {
+  width: calc(100% - 64px) !important; }
 
 .u-grid th .bee-table-column-sorter {
-  margin-left: 0px;
-  margin-top: 4px; }
+  margin-left: 0px; }
   .u-grid th .bee-table-column-sorter i {
     padding: 0px; }
 
@@ -5508,6 +5515,9 @@ ul {
 
 .u-grid th ::last-child {
   overflow: hidden; }
+
+.u-grid .u-table-fixed-left th:last-child .cansort.drop-menu {
+  width: calc(100% - 32px) !important; }
 
 .u-grid .u-checkbox {
   margin: 0px; }
@@ -5538,5 +5548,35 @@ ul {
 
 .u-dropdown.grid-menu {
   z-index: 1800; }
+
+.u-table-thead th .bee-table-column-sorter {
+  margin-top: 0px; }
+
+.grid-toolbar {
+  padding: 7px 12px 7px 4px; }
+  .grid-toolbar .u-button {
+    margin-left: 8px; }
+  .grid-toolbar .dropdown-btn {
+    display: inline-block; }
+  .grid-toolbar .toolbar-btn-icon.u-button {
+    width: 26px;
+    min-width: 0px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0px; }
+    .grid-toolbar .toolbar-btn-icon.u-button .uf {
+      padding: 0px; }
+  .grid-toolbar .u-button:not(.u-button-icon) i.uf {
+    vertical-align: middle;
+    font-size: 14px; }
+
+.u-dropdown-menu {
+  padding-top: 3px;
+  padding-bottom: 8px; }
+  .u-dropdown-menu > .u-dropdown-menu-item {
+    line-height: 26px;
+    height: 26px;
+    padding-left: 12px;
+    min-width: 76px; }
 
 /*# sourceMappingURL=demo.css.map */

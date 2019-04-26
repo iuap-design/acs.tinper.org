@@ -1,10 +1,10 @@
 /**
- * @title 高级表格的基础应用grid
+ * @title 高级表格的基础应用(基本示例2)
  * @description 全选、分页、过滤功能、交换
  *
  */
 import React, { Component } from "react";
-import Grid from "../../src";
+import  Grid from "../../src";
 
 function fmoney(s, n) {
   n = n > 0 && n <= 20 ? n : 2;
@@ -36,6 +36,7 @@ const column = [
     key: "money",
     width: 160,
     textAlign:'right',
+    sumCol: true,
     render(text, record, index) {
        let money = fmoney(text,2);
        return (<span>{money}</span>)
@@ -82,28 +83,6 @@ const column = [
     dataIndex: "closeState_name",
     key: "closeState_name",
     width: 150
-  },
-  {
-    title: "操作",
-    dataIndex: "d",
-    key: "d",
-    width: 100,
-    fixed: "right",
-    render(text, record, index) {
-      return (
-        <div className="operation-btn">
-          <a
-            href="#"
-            tooltip={text}
-            onClick={() => {
-              alert("这是第" + index + "列，内容为:" + text);
-            }}
-          >
-            一些操作
-          </a>
-        </div>
-      );
-    }
   }
 ];
 const dataList = [
@@ -210,6 +189,7 @@ class Demo1 extends Component {
         data={dataList}
         getSelectedDataFunc={this.getSelectedDataFunc}
         paginationObj={paginationObj}
+        canSum={true}
       />
     );
   }

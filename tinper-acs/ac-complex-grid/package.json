@@ -38,7 +38,7 @@
  },
  "dependencies": {
   "babel-runtime": "^6.23.0",
-  "bee-complex-grid": "latest",
+  "bee-complex-grid": "^2.0.9",
   "classnames": "^2.2.5",
   "tinper-bee-core": "latest"
  },

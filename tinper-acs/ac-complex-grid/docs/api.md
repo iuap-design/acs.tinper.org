@@ -16,7 +16,6 @@ import 'ac-complex-grid/build/Grid.css';
 ## 代码演示
 
 ## API
-
 table相关API参考[这里](https://design.yonyoucloud.com/tinper-bee/bee-table),下面是Grid扩充的API
 
 |参数|说明|类型|默认值|
@@ -33,6 +32,8 @@ import 'ac-complex-grid/build/Grid.css';
 |exportData|要导出的数据源|array	|-|
 |afterRowFilter|行过滤菜单显示隐藏时的回调函数，第一个参数会返回当前行过滤展开关闭状态|Function	|-|
 |noReplaceColumns|重置column内容|boolean	|false|
+|canSum |是否开启合计功能|boolean	|false|
+
 
 
 ### Column(新增)
@@ -53,6 +54,11 @@ import 'ac-complex-grid/build/Grid.css';
   
 ```
 
+### GridToolbar操作栏
+|参数|说明|类型|默认值|
+|:--|:---|:--|:---| 
+|toolBtns|按钮组,数组元素中单个按钮属性可以参考[button](http://bee.tinper.org/tinper-bee/bee-button)当按钮属性中含有children属性，会自动解析成dropdown按钮。|array	|[]|
+|btnSize|按钮的尺寸,默认是小尺寸行高为26px（sm、lg、xg）|string	|'sm'|
 
 ## 注意事项
 
