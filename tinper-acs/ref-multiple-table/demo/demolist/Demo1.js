@@ -58,7 +58,8 @@ class Demo1 extends Component {
      * @param {number} index 跳转页数
      */
     handlePagination = (index) => {
-        console.log(index)
+        this.currPageIndex = index;
+        this.setState({ number:Math.random()})
     }
 	/**
 	 * 选择每页数据个数

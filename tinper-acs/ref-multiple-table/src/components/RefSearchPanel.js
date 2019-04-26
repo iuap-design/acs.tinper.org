@@ -37,7 +37,7 @@ const SearchPanelItem = (props) => {
   let { getFieldProps } = form;
   return (
     <Col md={5} xs={12} sm={12}>
-      <FormItem>
+      <div className="formItemCustomed">
         <Label>{others.text}:</Label>
         <div className="ref-search-panel-search-item">
           {
@@ -48,7 +48,7 @@ const SearchPanelItem = (props) => {
             })
           }
         </div>
-      </FormItem>
+      </div>
     </Col>
   )
 }

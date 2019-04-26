@@ -108,6 +108,6 @@
   "dependencies": {
     "bee-loading": "^1.0.9",
     "bee-modal": "^2.0.4",
-    "ref-core": "^0.3.4-beta.3"
+    "ref-core": "^0.3.4-beta.4"
   }
 }
