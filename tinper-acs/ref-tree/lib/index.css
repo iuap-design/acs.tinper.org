@@ -5,6 +5,10 @@
 .ref-tree.ref-blue .ref-core-button-empty {
   color: #1e88e5 !important;
 }
+.ref-tree .u-input-group-btn {
+  line-height: 32px;
+  color: #757575;
+}
 .ref-tree .ref-core-search {
   width: 100%;
 }

@@ -51,16 +51,15 @@
   margin-top: 0px;
   width: 100%;
   position: relative;
-  min-width: 620px;
+  min-width: 700px;
 }
 .ref-red .transferWrap,
 .ref-blue .transferWrap {
   position: relative;
   margin-left: 10px;
-  width: 560px;
+  width: calc(100% - 40px);
   height: 370px;
   box-sizing: border-box;
-  background-color: #fff;
   margin: 0;
   padding: 0;
   overflow-x: auto;
@@ -68,22 +67,8 @@
 .ref-red .transferWrap .u-transfer-list,
 .ref-blue .transferWrap .u-transfer-list {
   box-sizing: border-box;
-  width: 250px;
+  width: 298px;
   height: 370px;
-}
-.ref-red .transferWrap .u-transfer-list-header,
-.ref-blue .transferWrap .u-transfer-list-header {
-  width: 248px;
-  box-sizing: border-box;
-}
-.ref-red .transferWrap .u-transfer-list-content,
-.ref-blue .transferWrap .u-transfer-list-content {
-  margin-top: 8px;
-  height: 290px;
-}
-.ref-red .transferWrap .u-transfer-list-content div,
-.ref-blue .transferWrap .u-transfer-list-content div {
-  overflow: hidden;
 }
 .ref-red .transferWrap .u-transfer-operation,
 .ref-blue .transferWrap .u-transfer-operation {
@@ -100,15 +85,13 @@
   width: 40px;
   min-width: 40px;
   height: 26px;
+  line-height: 26px;
   border-radius: 3px;
   border: none;
-  /* background-color: rgba(216, 216, 216, 0.17);
-        color:#1E7BE2;    */
 }
 .ref-red .transferWrap .u-transfer-operation .u-button-sm[disabled],
 .ref-blue .transferWrap .u-transfer-operation .u-button-sm[disabled] {
   background-color: rgba(216, 216, 216, 0.17);
-  color: #86939E;
 }
 .ref-red .transferWrap .u-button .uf.uf-arrow-left,
 .ref-blue .transferWrap .u-button .uf.uf-arrow-left {
@@ -123,7 +106,7 @@
   width: 40px;
   height: 26px;
   position: absolute;
-  left: 260px;
+  left: 308px;
   top: 232px;
   border-radius: 3px;
   border: none;
@@ -137,7 +120,7 @@
   width: 40px;
   height: 26px;
   position: absolute;
-  left: 260px;
+  left: 308px;
   top: 109px;
   border-radius: 3px;
   border: none;
@@ -161,7 +144,7 @@
   width: 40px;
   height: 26px;
   position: absolute;
-  right: 10px;
+  right: 0;
   /* top:300px; */
   margin-top: 184px;
   border-radius: 3px;
@@ -176,7 +159,7 @@
   width: 40px;
   height: 26px;
   position: absolute;
-  right: 10px;
+  right: 0;
   /* top:338px; */
   margin-top: 220px;
   border-radius: 3px;
@@ -193,7 +176,7 @@
   width: 40px;
   height: 26px;
   position: absolute;
-  right: 10px;
+  right: 0;
   /* top:258px; */
   margin-top: 148px;
   border-radius: 3px;
@@ -293,6 +276,15 @@
   cursor: pointer;
   outline: none;
 }
+.ref-red .u-input-group-btn,
+.ref-blue .u-input-group-btn {
+  line-height: 32px;
+  color: #757575;
+}
+.ref-red.ref-tree-transfer .u-checkbox,
+.ref-blue.ref-tree-transfer .u-checkbox {
+  margin-right: 0;
+}
 .ref-red .modalTitleStyle,
 .ref-blue .modalTitleStyle {
   display: inline-block;
@@ -327,8 +319,8 @@
   margin-right: 20px;
   margin-top: 20px;
 }
-.ref-red .ref-tree-transfer.u-modal .u-modal-dialog .u-modal-body,
-.ref-blue .ref-tree-transfer.u-modal .u-modal-dialog .u-modal-body {
+.ref-red.ref-tree-transfer .u-modal-content .u-modal-body,
+.ref-blue.ref-tree-transfer .u-modal-content .u-modal-body {
   padding-top: 0;
   text-align: left;
 }

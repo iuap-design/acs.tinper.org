@@ -7,8 +7,10 @@ fs.remove('tinper-acs')
     .then(() => {
         fs.mkdir('tinper-acs');
         Object.keys(componentsSource).forEach((item,index)=>{
+            let org = 'tinper-acs';
+            if(item.indexOf('bee')==0)org='tinper-bee';
             console.log(`download ${item} tinper-acs/${item}`)
-            download(`tinper-acs/${item}`,`tinper-acs/${item}`,
+            download(`${org}/${item}`,`tinper-acs/${item}`,
             function (error) {
                 if (error) {
                     console.log(`❌ download ${item} 失败,还剩  ${length}  个` + error);

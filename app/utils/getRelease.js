@@ -18,7 +18,9 @@ const auth = {
  * @param {*} component 
  */
 function getRelease(component) {
-    gh.list(auth, 'tinper-acs', component, (err, list) => {
+    let org = 'tinper-acs';
+    if(component.indexOf('bee')==0)org='tinper-bee';
+    gh.list(auth, org, component, (err, list) => {
         if (err) {
             console.log(`❌❌ 读取release失败！${component} `)
             console.log(err);

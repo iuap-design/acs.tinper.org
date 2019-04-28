@@ -94,6 +94,7 @@ class Demo1 extends Component {
     }
     onChangeFormControl  = (value) =>{
         console.log('搜索',value)
+        this.changeData(value)
     }
     onFocusFormControl = (visible) =>{
         console.log('下拉当前是否展示',visible)
