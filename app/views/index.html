@@ -59,6 +59,9 @@
 </body>
 <script type="text/javascript" src="//design.yonyoucloud.com/static/docSearch/docsearch.min.js"></script>
 <script>
+     //解决:hover伪类在移动端二次点击的问题
+     document.body.addEventListener('touchstart', function(){ });
+     
     // hljs.initHighlightingOnLoad();
     document.querySelectorAll('.drawer-body code').forEach((block) => {
         hljs.highlightBlock(block);
