@@ -24,6 +24,8 @@
     white-space: nowrap;
     display: inherit;
     width: 180px;
+    outline: none;
+    -moz-outline-style: none;
 }
 .sidebar .menu-components .menu-group .menu-item a:hover{
     color: #e14c46;
