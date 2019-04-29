@@ -144,11 +144,12 @@ body::-webkit-scrollbar-thumb:window-inactive {
         margin-left: 0;
     }
     .content .sidebar {
+        position:fixed;
         left: 0;
         top: 0;
         height: 100%;
         left: -250px;
-        z-index: 2000;
+        z-index: 2019;
     }
     .content {
         width: 100%;
@@ -173,7 +174,10 @@ body::-webkit-scrollbar-thumb:window-inactive {
         display: none;
     }
 }
-
+.navbar .mob-nav{
+    position:fixed;
+    z-index:999;
+}
 .mob-nav {
     position: fixed;
     z-index: 999;
@@ -230,6 +234,5 @@ body::-webkit-scrollbar-thumb:window-inactive {
     float: right;
     right: 3px;
     position: fixed;
-    z-index: 999;
     margin-right: 17px;
 }
