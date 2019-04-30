@@ -131,9 +131,6 @@ body::-webkit-scrollbar-thumb:window-inactive {
 }
 
 @media (max-width: 768px) {
-    html,body{
-        overflow-x:hidden;
-    }
     .docs .right-menus {
         display: none;
     }
