@@ -54,7 +54,8 @@
 
     //左侧滚动条定位
     let sidebar = document.querySelector('#sidebar');
-    sidebar.onscroll=function(){
+    sidebar.onscroll=function(e){
+        e.stopPropagation();
         sessionStorage.setItem('scrollTop',sidebar.scrollTop);
     }
     let sessionScrollTop = sessionStorage.getItem('scrollTop');
