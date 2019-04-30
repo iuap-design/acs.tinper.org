@@ -209,6 +209,12 @@ body {
     left: 14px;
     bottom: -1px;
 }
+.docs .doc-content .title-right .title-tag.title-version{
+    width: 60px;
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+}
 /* 版本下拉 */
 .docs .doc-content .title-right #tagSelect{
     width: 80px;
@@ -371,19 +377,5 @@ select::-ms-expand {
 @media (max-width: 768px) {
     .docs .doc-content{
         margin-right:0;
-    }
-    /* 解决移动端overflow失效的问题 */
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    html, body {
-        height: 100%;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    body {
-        position: relative;
     }
 }
