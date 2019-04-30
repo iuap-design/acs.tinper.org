@@ -209,6 +209,12 @@ body {
     left: 14px;
     bottom: -1px;
 }
+.docs .doc-content .title-right .title-tag.title-version{
+    width: 60px;
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+}
 /* 版本下拉 */
 .docs .doc-content .title-right #tagSelect{
     width: 80px;
