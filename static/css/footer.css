@@ -64,6 +64,11 @@
         display: inline-block;
         text-align: center;
     }
+    .footer .u-row{
+        margin-left:0;
+        margin-right:0;
+    }
+
     .footer .footer-middle .footer-line {
         height: 1px;
         background: #666666;
