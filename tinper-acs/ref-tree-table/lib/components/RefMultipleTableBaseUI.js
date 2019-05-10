@@ -136,8 +136,14 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 	//表头数据
 
 
+	RefMultipleTableBaseUI.prototype.componentDidMount = function componentDidMount() {
+		if (this.props.showModal) this.initComponent(this.props);
+	};
+
 	RefMultipleTableBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-		this.initComponent(nextProps);
+		if (nextProps.showModal) {
+			this.initComponent(nextProps);
+		}
 	};
 	/**
   * 跳转到制定页数的操作

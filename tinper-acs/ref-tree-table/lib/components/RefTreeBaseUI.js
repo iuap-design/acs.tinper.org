@@ -255,7 +255,7 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
       },
       _react2["default"].createElement(_RefCoreSearch2["default"], {
         show: searchable,
-        onSearch: this.onSearchClick,
+        onSearch: this.onSearchChange,
         onChange: this.onSearchChange,
         language: lang
       }),
@@ -284,10 +284,6 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
   return RefTreeBaseUI;
 }(_react.Component), _initialiseProps = function _initialiseProps() {
   var _this4 = this;
-
-  this.onSearchClick = function (value) {
-    _this4.props.onTreeSearch(value);
-  };
 
   this.onSearchChange = function (value) {
     _this4.props.onTreeSearch(value);

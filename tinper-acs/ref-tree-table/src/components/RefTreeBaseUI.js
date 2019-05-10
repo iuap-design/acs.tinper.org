@@ -70,10 +70,6 @@ class RefTreeBaseUI extends Component {
     }
 	}
 
-  onSearchClick = (value) => {
-    this.props.onTreeSearch(value);
-  };
-
   onSearchChange = (value) => {
     this.props.onTreeSearch(value);
   };
@@ -197,7 +193,7 @@ class RefTreeBaseUI extends Component {
        	{/* <Loading show={showLoading} type={'fence'} displayType={"block"} ></Loading> */}
         <RefCoreSearch
             show={searchable}
-            onSearch={this.onSearchClick}
+            onSearch={this.onSearchChange}
             onChange={this.onSearchChange}
             language={lang}
           />

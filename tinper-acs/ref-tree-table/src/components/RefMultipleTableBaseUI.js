@@ -59,9 +59,13 @@ class RefMultipleTableBaseUI extends Component {
 		}
 
 	}
-	
+	componentDidMount(){
+		if(this.props.showModal)this.initComponent(this.props);
+	}
 	componentWillReceiveProps(nextProps) {
-		this.initComponent(nextProps);
+		if(nextProps.showModal){
+			this.initComponent(nextProps);
+		}
 	}
 	initComponent = (props) => {
         //内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
