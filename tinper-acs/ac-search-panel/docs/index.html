@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>使用方法</title>
+    <title>查询面板 SearchPanel</title>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
@@ -14,92 +14,30 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span3"><ul class="nav nav-list">
-    <li class="sidebar-header-2"><a href="#使用方法">使用方法</a></li>
-    <li class="sidebar-header-4"><a href="#样式引入">样式引入</a></li>
+    <li class="sidebar-header-1"><a href="#查询面板-searchpanel">查询面板 SearchPanel</a></li>
+    <li class="sidebar-header-2"><a href="#何时使用">何时使用</a></li>
+    <li class="sidebar-header-2"><a href="#如何使用">如何使用</a></li>
+    <li class="sidebar-header-2"><a href="#代码演示">代码演示</a></li>
     <li class="sidebar-header-2"><a href="#api">API</a></li>
-    <li class="sidebar-header-4"><a href="#开发调试">开发调试</a></li>
+    <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
+    <li class="sidebar-header-2"><a href="#更新日志">更新日志</a></li>
 </ul>
       </div>
-      <div class="span9 main"><p><a href="https://www.npmjs.com/package/ac-search-panel"><img src="https://img.shields.io/npm/v/ac-search-panel.svg" alt="npm version"></a>
-<a href="https://travis-ci.org/tinper-bee/ac-search-panel"><img src="https://img.shields.io/travis/tinper-bee/ac-search-panel/master.svg" alt="Build Status"></a>
-<a href="https://coveralls.io/github/tinper-bee/ac-search-panel?branch=master"><img src="https://coveralls.io/repos/github/tinper-bee/ac-search-panel/badge.svg?branch=master" alt="Coverage Status"></a>
-<a href="https://david-dm.org/tinper-bee/ac-search-panel#info=devDependencies"><img src="https://img.shields.io/david/dev/tinper-bee/ac-search-panel.svg" alt="devDependency Status"></a>
-<a href="https://npmjs.org/package/ac-search-panel"><img src="http://img.shields.io/npm/dm/ac-search-panel.svg?style=flat" alt="NPM downloads"></a>
-<a href="http://isitmaintained.com/project/tinper-bee/ac-search-panel" title="Average time to resolve an issue"><img src="http://isitmaintained.com/badge/resolution/tinper-bee/ac-search-panel.svg" alt="Average time to resolve an issue"></a>
-<a href="http://isitmaintained.com/project/tinper-bee/ac-search-panel" title="Percentage of issues still open"><img src="http://isitmaintained.com/badge/open/tinper-bee/ac-search-panel.svg" alt="Percentage of issues still open"></a></p>
-<p>react ac-search-panel component for tinper-acs</p>
-<p>折叠查询条件</p>
-<h2 id="使用方法">使用方法</h2>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-type">SearchPanel</span> from <span class="hljs-symbol">'ac</span>-search-panel';
+      <div class="span9 main"><h1 id="查询面板-searchpanel">查询面板 SearchPanel</h1>
+<p>基于 <code>bee-search-panel</code> 进一步封装，主要将表单元素样式封装进组件内部</p>
+<h2 id="何时使用">何时使用</h2>
+<p>查询面板</p>
+<h2 id="如何使用">如何使用</h2>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> Toast <span class="hljs-keyword">from</span> <span class="hljs-string">'ac-search-panel'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'ac-search-panel/dist/index.css'</span>;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SearchPanelDemo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-    render() {
-        <span class="hljs-keyword">return</span> (
-            &lt;<span class="hljs-type">SearchPanel</span>/&gt;
-        )
-    }
-}</code></pre><h4 id="样式引入">样式引入</h4>
-<ul class="list">
-<li>可以使用link引入build目录下SearchPanel.css<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"./node_modules/ac-search-panel/build/SearchPanel.css"</span>&gt;</span></code></pre></li>
-<li>可以在js中import样式<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-string">"./node_modules/ac-search-panel/src/SearchPanel.scss"</span>
-<span class="hljs-comment">//或是</span>
-<span class="hljs-keyword">import</span> <span class="hljs-string">"./node_modules/ac-search-panel/build/SearchPanel.css"</span></code></pre></li>
-</ul>
+</code></pre><h2 id="代码演示">代码演示</h2>
 <h2 id="api">API</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:center">说明</th>
-<th style="text-align:center">类型</th>
-<th style="text-align:right">默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">searchOpen</td>
-<td style="text-align:center">是否默认展开</td>
-<td style="text-align:center">boolean</td>
-<td style="text-align:right">false</td>
-</tr>
-<tr>
-<td style="text-align:left">showIcon</td>
-<td style="text-align:center">是否显示展开关闭图标</td>
-<td style="text-align:center">boolean</td>
-<td style="text-align:right">true</td>
-</tr>
-<tr>
-<td style="text-align:left">searchHead</td>
-<td style="text-align:center">标题</td>
-<td style="text-align:center">string</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td style="text-align:left">searchContent</td>
-<td style="text-align:center">表单内容</td>
-<td style="text-align:center">ReactNode/string</td>
-<td style="text-align:right">-</td>
-</tr>
-<tr>
-<td style="text-align:left">searchClick</td>
-<td style="text-align:center">查询按钮回调</td>
-<td style="text-align:center">function</td>
-<td style="text-align:right">()=&gt;{}</td>
-</tr>
-<tr>
-<td style="text-align:left">clearClick</td>
-<td style="text-align:center">清空按钮回调</td>
-<td style="text-align:center">function</td>
-<td style="text-align:right">()=&gt;{}</td>
-</tr>
-</tbody>
-</table>
-<h4 id="开发调试">开发调试</h4>
-<pre class="hljs"><code>$ npm install -g bee-tools
-$ git <span class="hljs-built_in">clone</span> https://github.com/tinper-bee/ac-search-panel
-$ <span class="hljs-built_in">cd</span> ac-search-panel
-$ npm install
-$ npm run dev</code></pre>      </div>
+<p>参考<a href="https://design.yonyoucloud.com/tinper-bee/bee-search-panel">bee-searhc-panel</a></p>
+<h2 id="注意事项">注意事项</h2>
+<p>暂无</p>
+<h2 id="更新日志">更新日志</h2>
+      </div>
     </div>
   </div>
 

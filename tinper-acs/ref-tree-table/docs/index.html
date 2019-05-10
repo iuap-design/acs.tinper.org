@@ -31,19 +31,22 @@
 <p>单选多选的树表参照</p>
 <h2 id="如何使用">如何使用</h2>
 <pre class="hljs"><code>
-$ npm install ref-tree-table@2.0.0  --save
+$ npm install ref-tree-table  --save
 
 引入
 
 import RefTreeTableBaseUI from <span class="hljs-string">'ref-tree-table'</span>;
+或者
+import { RefTreeTableWithInput } from <span class="hljs-string">'ref-tree-table'</span>
 
-import <span class="hljs-string">'ref-tree-table/dist/index.css"
 
-</span></code></pre><h2 id="代码演示">代码演示</h2>
+样式
+import <span class="hljs-string">'ref-tree-table/lib/index.css'</span>;
+
+</code></pre><h2 id="代码演示">代码演示</h2>
 <h2 id="分类">分类</h2>
-<p>RefTreeTableBaseUI (默认)
-    树表的通用ui</p>
-<p>RefTreeTableWithInput</p>
+<p>RefTreeTableBaseUI (默认)</p>
+<pre class="hljs"><code>树表的通用ui</code></pre><p>RefTreeTableWithInput</p>
 <pre class="hljs"><code>带文本框的参照弹出窗。</code></pre><h2 id="api">API</h2>
 <h3 id="reftreetablebaseui">RefTreeTableBaseUI</h3>
 <p>RefTreeTableBaseUI接收的参数部分用于左树，部分用于右表</p>
@@ -77,6 +80,13 @@ import <span class="hljs-string">'ref-tree-table/dist/index.css"
 <td><code>bool</code></td>
 <td>true</td>
 <td>弹出层是否有模态层，true 显示，false 不显示</td>
+<td>否</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>string</code></td>
+<td>空</td>
+<td>默认值，初始化input框值，例如 <code>&#39;{&quot;refname&quot;:&quot;初级-T1&quot;,&quot;refpk&quot;:&quot;level1&quot;}&#39;</code>。</td>
 <td>否</td>
 </tr>
 <tr>
@@ -246,20 +256,6 @@ import <span class="hljs-string">'ref-tree-table/dist/index.css"
 <td>否</td>
 </tr>
 <tr>
-<td>checkedArray</td>
-<td><code>array</code></td>
-<td>[]</td>
-<td>已选择数据。注意，当使用RefTreeTableWithInput 或者 搭配refcorewithinput使用时，checkedArray这个参数不起效且初始值默认[]</td>
-<td>否</td>
-</tr>
-<tr>
-<td>value</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>默认值，初始化input框值</td>
-<td>否</td>
-</tr>
-<tr>
 <td>matchData</td>
 <td><code>Array</code></td>
 <td>[]</td>
@@ -267,10 +263,10 @@ import <span class="hljs-string">'ref-tree-table/dist/index.css"
 <td>否</td>
 </tr>
 <tr>
-<td>condition</td>
+<td><del>condition</del></td>
 <td><code>Object</code></td>
 <td>--</td>
-<td>右表查询条件，带上左树信息。根据condition值不同来刷新页面</td>
+<td><del>右表查询条件，带上左树信息。根据condition值不同来刷新页面</del></td>
 <td>否</td>
 </tr>
 <tr>
@@ -298,20 +294,20 @@ import <span class="hljs-string">'ref-tree-table/dist/index.css"
 <td>loadTableData</td>
 <td><code>function(param)</code></td>
 <td>()=&gt;{}</td>
-<td>分页下拉或者跳转的回调，返回参数</td>
+<td>分页下拉或者跳转的回调，返回参数。参数包含{refClientPageInfo.currPageIndex:分页当前页码,refClientPageInfo.pageSize:每页展示的数据量,content:搜索条件}</td>
 <td>否</td>
 </tr>
 <tr>
 <td>onTableSearch</td>
-<td><code>function(valye)</code></td>
+<td><code>function(value)</code></td>
 <td>()=&gt;{}</td>
-<td>表格搜索的回调</td>
+<td>表格搜索的回调，参数是搜索条件</td>
 <td>否</td>
 </tr>
 </tbody>
 </table>
 <h3 id="reftreetablewithinput">RefTreeTableWithInput</h3>
-<p>除了使用上述<RefTreeTableBaseUI/>的参数（showModal不可使用）还可以使用 以下参数。下面的参数是 &lt; RefTreeTableWithInput/&gt;独有。</p>
+<p>除了使用上述<RefTreeTableBaseUI/>的参数（showModal不可使用）还可以使用以下参数。</p>
 <table>
 <thead>
 <tr>
@@ -352,10 +348,24 @@ import <span class="hljs-string">'ref-tree-table/dist/index.css"
 <td>否</td>
 </tr>
 <tr>
+<td>filterUrlFunc</td>
+<td><code>function(value)</code></td>
+<td>()=&gt;{}</td>
+<td>必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc</td>
+<td>否</td>
+</tr>
+<tr>
+<td>filertData</td>
+<td><code>Array</code></td>
+<td>[]</td>
+<td>必须配合filterUrl使用，当filterUrl为空或者不传入，才会使用filterData</td>
+<td>否</td>
+</tr>
+<tr>
 <td>displayField</td>
 <td><code>string 或 function</code></td>
 <td>&#39;{refname}&#39;</td>
-<td>记录中显示的键。<br/>当为字符串时则会根据<code>{}</code>包裹的增则匹配替换。<br/>如：<code>{refname}</code><br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}，是input展示value</td>
+<td>记录中显示的内容的格式。<br/>当为字符串时则会根据<code>{}</code>包裹的增则匹配替换。<br/>如：<code>{refname}</code><br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}，是input展示value</td>
 <td>否</td>
 </tr>
 <tr>
@@ -403,6 +413,7 @@ import <span class="hljs-string">'ref-tree-table/dist/index.css"
 </tbody>
 </table>
 <h2 id="注意事项">注意事项</h2>
+<p>暂无</p>
 <h2 id="更新日志">更新日志</h2>
       </div>
     </div>

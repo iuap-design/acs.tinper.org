@@ -12,7 +12,7 @@ const baseConfig = require('./webpack.base')
 module.exports = webpackMerge(baseConfig, {
   mode:'production',
   entry: {
-      app: path.join(__dirname, '../src/index.js'),
+    app: path.join(__dirname, '../src/index.js'),
   },
   externals:['react','react-dom','prop-types','tinper-bee','ref-core'],
   output: {

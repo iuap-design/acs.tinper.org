@@ -4,7 +4,6 @@ import RefWithInput from 'ref-core/lib/refs/RefCoreWithInput';
 import {createRefModal, createRefInput} from 'ref-core/lib/utils/createApi.js';
 import RefCoreGlobal from 'ref-core/lib/refs/RefCoreGlobal';
 import 'ref-core/css/refcore.css';
-import './theme-red.css';
 // import './index.less'; //webpack打包放开
 const RefTree = (props) =>{
     return (

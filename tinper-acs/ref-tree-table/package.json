@@ -1,6 +1,6 @@
 {
   "name": "ref-tree-table",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -19,10 +19,10 @@
   "bugs": {
     "url": "https://github.com/tinper-acs/ref-tree-t/issues"
   },
-  "homepage": "https://github.com/tinper-acs/ref-tree-t#readme",
+  "homepage": "https://github.com/tinper-acs/ref-tree-table/readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tinper-acs/ref-tree-t.git"
+    "url": "git+https://github.com/tinper-acs/ref-tree-table.git"
   },
   "author": "",
   "license": "MIT",
@@ -48,6 +48,7 @@
     "bee-drawer": "0.0.2",
     "bee-layout": "latest",
     "bee-panel": "latest",
+    "colors": "^1.3.3",
     "css-loader": "^1.0.0",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -59,6 +60,16 @@
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^3.1.0",
     "file-loader": "^2.0.0",
+    "gulp": "~3.9.0",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "~6.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-conventional-changelog": "^1.1.6",
+    "gulp-es3ify": "0.0.0",
+    "gulp-eslint": "~2.0.0",
+    "gulp-just-replace": "~1.0.2",
+    "gulp-less": "^4.0.1",
+    "gulp-sass": "^4.0.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.8.1",
@@ -83,18 +94,7 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.4",
-    "webpack-node-externals": "^1.7.2",
-    "gulp": "~3.9.0",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-babel": "~6.1.1",
-    "gulp-concat": "~2.6.0",
-    "gulp-conventional-changelog": "^1.1.6",
-    "gulp-es3ify": "0.0.0",
-    "gulp-eslint": "~2.0.0",
-    "gulp-just-replace": "~1.0.2",
-    "gulp-less": "^4.0.1",
-    "gulp-sass": "^4.0.2",
-    "colors": "^1.3.3"
+    "webpack-node-externals": "^1.7.2"
   },
   "peerDependencies": {
     "react": "^15.3.0 || ^16.0.0",
@@ -110,6 +110,6 @@
     "bee-table": "^2.0.10",
     "bee-tree": "^2.0.7",
     "cross-env": "^5.2.0",
-    "ref-core": "^0.3.4-beta.4"
+    "ref-core": "^0.2.3"
   }
 }

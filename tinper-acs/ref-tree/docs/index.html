@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>ref-tree 参照树形</title>
+    <title>参照树形 RefTree</title>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
@@ -14,41 +14,39 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span3"><ul class="nav nav-list">
-    <li class="sidebar-header-1"><a href="#ref-tree-参照树形">ref-tree 参照树形</a></li>
+    <li class="sidebar-header-1"><a href="#参照树形-reftree">参照树形 RefTree</a></li>
     <li class="sidebar-header-2"><a href="#何时使用">何时使用</a></li>
     <li class="sidebar-header-2"><a href="#如何使用">如何使用</a></li>
     <li class="sidebar-header-2"><a href="#代码演示">代码演示</a></li>
+    <li class="sidebar-header-2"><a href="#分类">分类</a></li>
     <li class="sidebar-header-2"><a href="#api">API</a></li>
     <li class="sidebar-header-3"><a href="#reftreebaseui">RefTreeBaseUI</a></li>
-    <li class="sidebar-header-3"><a href="#refwithinput-api">RefWithInput  API</a></li>
-    <li class="sidebar-header-4"><a href="#refwithinput接收的参数">RefWithInput接收的参数</a></li>
-    <li class="sidebar-header-4"><a href="#refwithinput提供的参数">RefWithInput提供的参数</a></li>
-    <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
-    <li class="sidebar-header-3"><a href="#reftreebaseui-1">RefTreeBaseUI</a></li>
-    <li class="sidebar-header-3"><a href="#reftree">RefTree</a></li>
     <li class="sidebar-header-3"><a href="#reftreewithinput">RefTreeWithInput</a></li>
-    <li class="sidebar-header-3"><a href="#createreftree">createRefTree</a></li>
-    <li class="sidebar-header-3"><a href="#createreftreewithinput">createRefTreeWithInput</a></li>
+    <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
+    <li class="sidebar-header-3"><a href="#参数解析">参数解析</a></li>
     <li class="sidebar-header-2"><a href="#更新日志">更新日志</a></li>
 </ul>
       </div>
-      <div class="span9 main"><h1 id="ref-tree-参照树形">ref-tree 参照树形</h1>
+      <div class="span9 main"><h1 id="参照树形-reftree">参照树形 RefTree</h1>
 <h2 id="何时使用">何时使用</h2>
-<blockquote>
-<p>单选多选树形参照通用ui</p>
-</blockquote>
+<p>单选多选树形参照</p>
 <h2 id="如何使用">如何使用</h2>
-<pre class="hljs"><code>$ ynpm <span class="hljs-keyword">install</span> <span class="hljs-keyword">ref</span>-tree@<span class="hljs-number">2.0</span><span class="hljs-number">.0</span>-beta<span class="hljs-number">.0</span> <span class="hljs-comment">--save</span>
+<pre class="hljs"><code>$ ynpm install ref-tree --save
 
 引入
 
-<span class="hljs-keyword">import</span> RefTreeBaseUI <span class="hljs-keyword">from</span> <span class="hljs-string">'ref-tree'</span>;
+import RefTreeBaseUI from <span class="hljs-string">'ref-tree'</span>;
+或者
+import { RefTreeWithInput } from <span class="hljs-string">'ref-tree'</span>;
 
 样式
 
-import 'ref-tree/dist/index.css';
+import <span class="hljs-string">'ref-tree/lib/index.css'</span>;
 </code></pre><h2 id="代码演示">代码演示</h2>
-<h2 id="api">API</h2>
+<h2 id="分类">分类</h2>
+<p>RefTreeBaseUI（默认）</p>
+<pre class="hljs"><code>树参照通用ui</code></pre><p>RefTreeWithInput</p>
+<pre class="hljs"><code> 带文本框的树参照弹出窗。</code></pre><h2 id="api">API</h2>
 <h3 id="reftreebaseui">RefTreeBaseUI</h3>
 <table>
 <thead>
@@ -62,16 +60,9 @@ import 'ref-tree/dist/index.css';
 </thead>
 <tbody>
 <tr>
-<td>className</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>参照class样式，作用于弹出层的样式，默认为空。</td>
-<td>否</td>
-</tr>
-<tr>
 <td>title</td>
 <td><code>string</code></td>
-<td>空</td>
+<td>&#39;弹窗标题&#39;</td>
 <td>打开上传的模态框显示的标题文字</td>
 <td>否</td>
 </tr>
@@ -79,7 +70,7 @@ import 'ref-tree/dist/index.css';
 <td>className</td>
 <td><code>string</code></td>
 <td>空</td>
-<td>参照class样式，作用sh于弹出层的样式，默认为空。&#39;ref-walsin-modal&#39;参照使用另外一种风格</td>
+<td>参照class名，作用于弹出层，默认为空。使用&#39;ref-walsin-modal&#39;参照使用另外一种风格</td>
 <td>否</td>
 </tr>
 <tr>
@@ -99,15 +90,15 @@ import 'ref-tree/dist/index.css';
 <tr>
 <td>lang</td>
 <td><code>string</code></td>
-<td><code>zh_TW</code></td>
-<td>多语配置，详情查看参数详解</td>
+<td><code>zh_CN</code></td>
+<td>多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN]</td>
 <td>否</td>
 </tr>
 <tr>
 <td>buttons</td>
 <td><code>object</code></td>
 <td>-</td>
-<td>{buttons:{cancelText:&#39;&#39;,confirmText:&#39;&#39;,okText:&#39;&#39;}} 按钮文字展示</td>
+<td>{buttons:{cancelText:&#39;取消&#39;,clearText:&#39;清空已选&#39;,okText:&#39;确认&#39;}} 按钮文字展示</td>
 <td>否</td>
 </tr>
 <tr>
@@ -118,22 +109,9 @@ import 'ref-tree/dist/index.css';
 <td>否</td>
 </tr>
 <tr>
-<td>valueField</td>
-<td><code>string</code></td>
-<td>&#39;refcode&#39;</td>
-<td>待提交的 value 的键。</td>
-<td>否</td>
-</tr>
-<tr>
-<td>nodeDisplay</td>
-<td><code>string 或 function</code></td>
-<td><code>{refname}</code></td>
-<td>节点渲染时可匹配的内容，这里为了提供根据数据渲染节点图标使用</td>
-<td>否</td>
-</tr>
-<tr>
 <td>checkStrictly</td>
 <td><code>bool</code></td>
+<td>false</td>
 <td>checkable状态下节点选择完全受控（父子节点选中状态不再关联）</td>
 <td>否</td>
 </tr>
@@ -145,24 +123,45 @@ import 'ref-tree/dist/index.css';
 <td>否</td>
 </tr>
 <tr>
+<td>showLine</td>
+<td><code>bool</code></td>
+<td>false</td>
+<td>是否显示连接线</td>
+<td>否</td>
+</tr>
+<tr>
 <td>searchable</td>
 <td><code>bool</code></td>
-<td>true</td>
+<td>false</td>
 <td>是否显示搜索框，弹出层是否带有搜索框，true 显示，false 不显示。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>lazyModal</td>
+<td><code>bool</code></td>
+<td>false</td>
+<td>树参照是异步加载，回调onLoadData</td>
+<td>否</td>
+</tr>
+<tr>
+<td>onLoadData</td>
+<td><code>function(treeNode)</code></td>
+<td>--</td>
+<td>懒加载传个树的回调方法。与lazyModal配合使用，lazyModal=true才会回调该函数</td>
 <td>否</td>
 </tr>
 <tr>
 <td>defaultExpandAll</td>
 <td><code>bool</code></td>
-<td>false</td>
-<td>展开所有节点 true 展开，false 不展开</td>
+<td>--</td>
+<td>展开所有节点，true 展开，false 不展开。懒加载下默认为false,defaultExpandAll不起效。</td>
 <td>否</td>
 </tr>
 <tr>
 <td>nodeDisplay</td>
 <td><code>string 或 function</code></td>
 <td>&#39;{refname}&#39;</td>
-<td>指定树节点渲染内容。<br/>当为字符串时则会根据<code>{}</code>包裹的增则匹配替换。<br/>如：<code>&#39;人员姓名：{refname}，编号：{refcode}&#39;</code><br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}。是树节点展示的内容</td>
+<td>指定树节点渲染内容，这里为了提供根据数据渲染节点图标使用。<br/>当为字符串时则会根据<code>{}</code>包裹的正则匹配替换。<br/>如： nodeDisplay:&#39;{refname}&#39;<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}。是树节点展示的内容</td>
 <td>否</td>
 </tr>
 <tr>
@@ -176,42 +175,55 @@ import 'ref-tree/dist/index.css';
 <td>showModal</td>
 <td><code>bool</code></td>
 <td>false</td>
-<td>是否展示参照 ，true显示，false不显示(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)</td>
+<td>是否展示参照 ，true显示，false不显示</td>
 <td>否</td>
 </tr>
 <tr>
 <td>onSave</td>
-<td><code>function(value)</code></td>
-<td>--</td>
-<td>参照确定的回调(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)</td>
+<td><code>function(arr)</code></td>
+<td>()=&gt;{}</td>
+<td>参照确定按钮的回调。arr是所有选中节点，数组形式。</td>
 <td>否</td>
 </tr>
 <tr>
 <td>onCancel</td>
-<td><code>function(value)</code></td>
-<td>--</td>
-<td>参照取消的回调(<span style="color: red; font-size: 15px;">refcorewithinput可以提供</span>)</td>
-<td>否</td>
-</tr>
-<tr>
-<td>value</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>默认值，RefWithInput和参照组件都会使用，可以初始化树选中的节点。例如 <code>&#39;{&quot;refname&quot;:&quot;初级-T1&quot;,&quot;refpk&quot;:&quot;level1&quot;}&#39;</code>。</td>
+<td><code>function()</code></td>
+<td>()=&gt;{}</td>
+<td>参照取消按钮的回调</td>
 <td>否</td>
 </tr>
 <tr>
 <td>matchData</td>
 <td><code>Array</code></td>
 <td>[]</td>
-<td>传给树选中的节点(<span style="color: red; font-size: 15px;">macthData优先，其次是value</span>)</td>
+<td>选中的节点，选中节点只从matchData中获取。matchData是全部选中的数据</td>
+<td>否</td>
+</tr>
+<tr>
+<td>theme</td>
+<td><code>String</code></td>
+<td>&#39;ref-red&#39;</td>
+<td>参照主题，现在就两种选择&#39;ref-red&#39;或者&#39;ref-blue&#39;</td>
+<td>否</td>
+</tr>
+<tr>
+<td>getRefTreeData</td>
+<td><code>function(value)</code></td>
+<td>--</td>
+<td>搜索的回调方法，value是搜索值</td>
+<td>否</td>
+</tr>
+<tr>
+<td>valueField</td>
+<td><code>string</code></td>
+<td>&#39;refpk&#39;</td>
+<td>指定真实数据的键。树节点key也是取valueField指定值</td>
 <td>否</td>
 </tr>
 </tbody>
 </table>
-<h3 id="refwithinput-api">RefWithInput  API</h3>
-<p><span style="color: red; font-size: 15px;">注意：RefWithInput（ref-core）可以和RefTreeBaseUI配套使用，下面是RefWithInput可以接收的参数，以及RefWithInput给RefTreBaseUI提供的参数</span></p>
-<h4 id="refwithinput接收的参数">RefWithInput接收的参数</h4>
+<h3 id="reftreewithinput">RefTreeWithInput</h3>
+<p>除了使用上述<RefTreeBaseUI/>的参数（showModal不可使用）还有以下参数。</p>
 <table>
 <thead>
 <tr>
@@ -252,38 +264,45 @@ import 'ref-tree/dist/index.css';
 <td>否</td>
 </tr>
 <tr>
-<td>displayField</td>
-<td><code>string 或 function</code></td>
-<td>&#39;{refname}&#39;</td>
-<td>记录中显示的键。<br/>当为字符串时则会根据<code>{}</code>包裹的增则匹配替换。<br/>如：<code>&#39;人员姓名：{refname}，编号：{refcode}&#39;</code><br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}，是input展示value</td>
+<td>filterUrlFunc</td>
+<td><code>function(value)</code></td>
+<td>()=&gt;{}</td>
+<td>必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc</td>
 <td>否</td>
 </tr>
 <tr>
-<td>valueField</td>
-<td><code>string</code></td>
-<td>&#39;refcode&#39;</td>
-<td>待提交的 value 的键。</td>
+<td>filertData</td>
+<td><code>Array</code></td>
+<td>[]</td>
+<td>必须配合filterUrlFunc使用，filterData是过滤列表全部数据</td>
+<td>否</td>
+</tr>
+<tr>
+<td>displayField</td>
+<td><code>string 或 function</code></td>
+<td>&#39;{refname}&#39;</td>
+<td>input中显示的内容的格式和过滤列表显示的内容格式。<br/>当为字符串时则会根据<code>{}</code>包裹的增则匹配替换。<br/>如：<code>{refname}</code><br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}，是input展示value</td>
 <td>否</td>
 </tr>
 <tr>
 <td>value</td>
 <td><code>string</code></td>
 <td>空</td>
-<td>默认值，例如 <code>&#39;{&quot;refname&quot;:&quot;初级-T1&quot;,&quot;refpk&quot;:&quot;level1&quot;}&#39;</code>。</td>
+<td>带有input框参照的input默认值，展示形式配合displayField。格式必须符合<code>&#39;{&quot;refname&quot;:&quot;初级-T1&quot;,&quot;refpk&quot;:&quot;level1&quot;}&#39;</code>。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值</td>
 <td>否</td>
 </tr>
 <tr>
 <td>disabled</td>
 <td><code>bool</code></td>
 <td>false</td>
-<td>禁用整个参照</td>
+<td>禁用整个input框</td>
 <td>否</td>
 </tr>
 <tr>
 <td>onChange</td>
 <td><code>function(values, record)</code></td>
 <td>--</td>
-<td>value改变、快捷录入和保存时数据回调</td>
+<td>value改变、选中过滤数据和保存时数据回调。values是obj，格式{&#39;refname&#39;:&#39;&#39;,&#39;refpk&#39;:&#39;&#39;},record是该条完整数据</td>
 <td>否</td>
 </tr>
 <tr>
@@ -302,71 +321,20 @@ import 'ref-tree/dist/index.css';
 </tr>
 </tbody>
 </table>
-<h4 id="refwithinput提供的参数">RefWithInput提供的参数</h4>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-<th>必选</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>showModal</td>
-<td><code>bool</code></td>
-<td>false</td>
-<td>是否展示参照 ，true显示，false不显示</td>
-<td>否</td>
-</tr>
-<tr>
-<td>onSave</td>
-<td><code>function(value)</code></td>
-<td>--</td>
-<td>参照确定的回调，会更新checkedArray，showname（input的value），showModal关闭,最后回调RefWithInput接收的参数onSave</td>
-<td>否</td>
-</tr>
-<tr>
-<td>onCancel</td>
-<td><code>function()</code></td>
-<td>--</td>
-<td>参照取消的回调，会更新showModal关闭,最后回调RefWithInput接收的参数onCancel</td>
-<td>否</td>
-</tr>
-<tr>
-<td>checkedArray</td>
-<td><code>Array</code></td>
-<td>[]</td>
-<td>传给参照选中的节点，所以参照中选中节点通过value和matchData来控制</td>
-<td>否</td>
-</tr>
-<tr>
-<td>onMatchInitValue</td>
-<td><code>function(value)</code></td>
-<td>onMatchInitValue = (checkedArray) =&gt; {this.setState({checkedArray})}</td>
-<td>更改checkedArray</td>
-<td>否</td>
-</tr>
-</tbody>
-</table>
 <h2 id="注意事项">注意事项</h2>
-<blockquote>
-<p>RefCoreWithInput提供的参数可以保证参照组件showModal关闭打开，因此在使用RefCoreWithInput就不需要额外手动维护showModal</p>
-</blockquote>
-<blockquote>
-<p>RefCoreWithInput使用value来展示input的值，参照组件使用matchData来初始化选中节点，若matchData为空，使用value来初始化参照中checkedArray（树组件可以，表不可以）</p>
-</blockquote>
-<blockquote>
-<p>注意：modalShow在refcorewithinput中有提供。因此若是refcorewithinput和refmultipletablebaseui配合使用，注意showModal onSave onCancel</p>
-</blockquote>
-<h3 id="reftreebaseui-1">RefTreeBaseUI</h3>
-<pre class="hljs"><code>树的通用ui，只有一个树组件</code></pre><h3 id="reftree">RefTree</h3>
-<pre class="hljs"><code>参照弹出窗，没有输入框，使用时可根据自己需要定义具体的文本框。实质是RefCoreGlobal和RefTreeBaseUI的组合</code></pre><h3 id="reftreewithinput">RefTreeWithInput</h3>
-<pre class="hljs"><code> 带文本框的参照弹出窗。在 RefTree 基础上封装实现，RefWithInput和 RefTree组合。</code></pre><h3 id="createreftree">createRefTree</h3>
-<pre class="hljs"><code> 非 ReactJS 调用方式，与 RefTree 相同没有输入框，使用时可根据自己需要定义具体的文本框。</code></pre><h3 id="createreftreewithinput">createRefTreeWithInput</h3>
-<pre class="hljs"><code>非 ReactJS 调用方式，与  RefTreeTableWithInput 相同带文本框的参照弹出窗。</code></pre><h2 id="更新日志">更新日志</h2>
+<h3 id="参数解析">参数解析</h3>
+<ul class="list">
+<li><p>value、displayField
+  value和displayField是针对input框来说。value格式必须符合<code>&#39;{&quot;refname&quot;:&quot;初级-T1&quot;,&quot;refpk&quot;:&quot;level1&quot;}&#39;</code>。refname字段不可变，refpk是该数据键，要求具有唯一性。
+  displayField确定input中显示内容的格式和过滤列表显示内容的格式</p>
+</li>
+<li><p>value、valueFiled
+  value是input需要使用的数据，要求如上。
+  valueFiled指定数据源的键，要求具有唯一性。
+  因此value中refpk指定值应与valueFiled取值一致。</p>
+</li>
+</ul>
+<h2 id="更新日志">更新日志</h2>
       </div>
     </div>
   </div>

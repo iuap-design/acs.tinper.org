@@ -22,7 +22,8 @@ const propTypes = {
 	backdrop: PropTypes.bool,
 	showLine: PropTypes.bool,
 	multiple: PropTypes.bool,
-	destory: PropTypes.func
+	destory: PropTypes.func,
+	matchData:PropTypes.array,
 };
 const defaultProps = {
 	title: '弹窗标题',
@@ -43,7 +44,7 @@ const defaultProps = {
 	backdrop: true,
 	showLine: false,
 	multiple: false,
-
+	matchData:[],
 	destory: () => { }
 };
 
@@ -51,17 +52,8 @@ const defaultProps = {
 class RefTreeTableBaseUI extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			//  condition: '',
-			// showLoading: true
-		};
-		this.checkedArray = props.checkedArray || [];
 	}
 	componentWillReceiveProps(nextProps){
-		if(nextProps.showModal && !this.props.showModal){
-			//按钮点击取消操作
-			this.checkedArray = Object.assign([],nextProps.matchData || []);
-		}
 	}
 	//table的所有点击
 	onSelectChange = (record) => {
@@ -94,7 +86,8 @@ class RefTreeTableBaseUI extends Component {
 		const _this = this;
 		const { className,showModal, searchable, backdrop, title, showLine, 
 			multiple, menuTitle, tableTitle, valueField,value,
-			lang,buttons,checkStrictly,defaultExpandAll,nodeDisplay} = this.props;
+			lang,buttons,checkStrictly,defaultExpandAll,nodeDisplay,
+		    lazyModal,onLoadData} = this.props;
 		let {showLoading , treeData,onTreeChange,onTreeSearch,matchData} = this.props;
 		let {
 			columnsData,
@@ -119,6 +112,8 @@ class RefTreeTableBaseUI extends Component {
 			treeData,
 			onTreeChange,
 			onTreeSearch,
+			lazyModal,
+			onLoadData
 		});
 		let tableProps = Object.assign({},{
 			className,
@@ -159,7 +154,6 @@ class RefTreeTableBaseUI extends Component {
 								<RefTreeBaseUI
 									onTreeChange={onTreeChange}
 									{...treeProps}
-									// onTreeLoading = {_this.onTreeLoading}
 								/>
 							</div>
 							<div className="ref-tree-table-layout-col">
@@ -171,7 +165,6 @@ class RefTreeTableBaseUI extends Component {
 								
 								<RefMultipleTableBaseUI
 									{...tableProps}
-									checkedArray={_this.checkedArray}
 									onChange={_this.onSelectChange}
 								/> 
 							</div>

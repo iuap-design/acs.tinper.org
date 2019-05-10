@@ -76,7 +76,7 @@ export default class TransferDiv extends Component {
 				}
 			})
 		})
-		console.log(targetKeys, selectedKeys, selectedTargetKeys)
+		// console.log(targetKeys, selectedKeys, selectedTargetKeys)
 		if (selectedTargetKeys.length == 1) {
 			this.scopeupupRecord(targetKeys, selectedTargetKeys[0].index)
 			this.setState({
@@ -123,7 +123,7 @@ export default class TransferDiv extends Component {
 				}
 			})
 		})
-		console.log(targetKeys, selectedKeys, selectedTargetKeys)
+		// console.log(targetKeys, selectedKeys, selectedTargetKeys)
 		if (selectedTargetKeys.length == 1) {
 			this.scopedownRecord(targetKeys, selectedTargetKeys[0].index)
 			this.setState({
@@ -141,7 +141,7 @@ export default class TransferDiv extends Component {
 				}
 			})
 		})
-		console.log(targetKeys, selectedKeys, selectedTargetKeys)
+		// console.log(targetKeys, selectedKeys, selectedTargetKeys)
 		if (selectedTargetKeys.length == 1) {
 			this.scopedowndownRecord(targetKeys, selectedTargetKeys[0].index)
 			this.setState({

@@ -24,10 +24,14 @@ let props = {
     fliterFormInputs: [],
     showLoading:false,
     filterUrl: '/pap_basedoc/common-ref/filterRefJSON',
+    matchData: [{"_checked":true,"rownum_":2,"code":"002","name":"人员2","mobile":"15011323234","refcode":"002","refpk":"de2d4d09-51ec-4108-8def-d6a6c5393c3b","id":"de2d4d09-51ec-4108-8def-d6a6c5393c3b","refname":"人员2","email":"22@11.com","key":"de2d4d09-51ec-4108-8def-d6a6c5393c3b"}],
+   
 }
 class Demo3 extends Component {
     onSave = (item) => {
-        console.log('save', JSON.stringify(item))
+        console.log('save', JSON.stringify(item));
+        props['matchData'] = item;
+        this.setState({random:Math.random()})
     }
     onCancel = () => {
     }
@@ -71,20 +75,14 @@ class Demo3 extends Component {
 							<Radio value={record[valueField]}></Radio>
 						</Radio.RadioGroup>   
 					)
-                    // return <div className={`ref-multiple-table-radio ${record._checked ? 'ref-multiple-table-radio-on' : ''}`} />
                 }
             })
 
         }
         props["columnsData"] = colunmsList;
     }
-    setMatchData = () =>{
-        //设置选中数据
-        props['matchData'] = [{"_checked":true,"rownum_":2,"code":"002","name":"人员2","mobile":"15011323234","refcode":"002","refpk":"de2d4d09-51ec-4108-8def-d6a6c5393c3b","id":"de2d4d09-51ec-4108-8def-d6a6c5393c3b","refname":"人员2","email":"22@11.com","key":"de2d4d09-51ec-4108-8def-d6a6c5393c3b"}];
-    }
     render() {
         this.launchTableHeader();
-        this.setMatchData();
         const { getFieldError, getFieldProps } = this.props.form;
         return (
             <div>
@@ -101,15 +99,16 @@ class Demo3 extends Component {
                     })}
                 >
                 </RefMultipleTableWithInput>
+                <Button colors="primary" onClick={() => {
+                    this.props.form.validateFields((err, values) => {
+                        if(!err){
+                            alert(JSON.stringify(values))
+                        }
+                    });
+                }}>提交</Button>
                 <span className='error'>
                     {getFieldError('valueField')}
                 </span>
-
-                <Button onClick={() => {
-                    this.props.form.validateFields((err, values) => {
-                        console.log(err, values)
-                    });
-                }}>submit</Button>
             </div>
 
         )

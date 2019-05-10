@@ -34,7 +34,7 @@ class RefMultipleTableBase extends Component {
   }
   shouldComponentUpdate(nextProps, nextState){
 		// let result  = !shallowequal(nextState, this.state);
-		//使用state是因为mustRender不同必须重新渲染，this中的三种data不一致也必须更新
+		// 使用state是因为mustRender不同必须重新渲染，this中的三种data不一致也必须更新
 		let dataEqual = nextProps.tableData === this.props.tableData && nextProps.columnsData === this.props.columnsData && nextProps.fliterFormInputs === this.props.fliterFormInputs
 		return !shallowequal(nextProps, this.props) || !shallowequal(nextState, this.state) || !dataEqual || nextProps.showModal !== this.props.showModal;
 	}
@@ -42,50 +42,23 @@ class RefMultipleTableBase extends Component {
 		let { strictMode,valueField = "refpk" ,matchData=[],value } = nextProps;
 		//严格模式下每次打开必须重置数据
 		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-			if( strictMode || !this.columnsData.length || this.currPageIndex !== 1 ) {
-				//开启严格模式 或 表头信息没有获取到，即初始化失败是必须重置
-				this.initComponent();
-			}
-            // 	//内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
-            // 	this.checkedArray = Object.assign(this.checkedArray,  nextProps.checkedArray || []);
-            // 	//内部缓存已选择值，缓存成 Map 便于检索
-            // 	this.checkedMap = {};
-            // 	this.checkedArray.forEach(item=>{
-            //     this.checkedMap[item[valueField]] = item;
-            //   });
-            //   this.setState({selectedDataLength:this.checkedArray.length,tableIsSelecting: true})
-            // }
-            //这里改用matchData，由于第一次运行到这里选中可能从value中取值
-            this.checkedArray = Object.assign([],nextProps.matchData || []);
-            this.checkedMap = {};
-            this.checkedArray.forEach(item=>{
-            this.checkedMap[item[valueField]] = item;
-            });
-            //内部缓存已选择值，缓存成 Map 便于检索
-            this.setState({selectedDataLength:this.checkedArray.length,tableIsSelecting: true})
-           
-       }
-		
+			// if( strictMode || !this.columnsData.length || this.currPageIndex !== 1 ) {
+			// 	//开启严格模式 或 表头信息没有获取到，即初始化失败是必须重置
+			// 	this.initComponent();
+			// }
+      //这里改用matchData，第一次运行也不在value中取值了，一切向matchData看齐
+      this.checkedArray = Object.assign([],nextProps.matchData || []);
+      this.checkedMap = {};
+      this.checkedArray.forEach(item=>{
+      this.checkedMap[item[valueField]] = item;
+      });
+      //内部缓存已选择值，缓存成 Map 便于检索
+      this.setState({
+        selectedDataLength:this.checkedArray.length,
+        tableIsSelecting: true
+      })
+    }
   }
-  initComponent = () => {
-		let { value, matchData=[], valueField = "refpk" } = this.props;
-		let valueMap = refValParse(value);
-		if (this.checkedArray.length == 0 && valueMap[valueField]) {
-			if (matchData.length>0) {
-				this.checkedMap = {};
-				this.checkedArray = matchData.map(item=>{
-					item.key = item[valueField];
-					item._checked = true;
-					this.checkedMap[item.key] = item;
-					return item;
-				});
-				this.setState({
-					selectedDataLength: this.checkedArray.length,
-					mustRender: Math.random()
-				})
-			}
-		};
-	}
   /**start:按钮操作 */
   handleBtnSave = () => {
     this.props.onSave(Object.assign([], this.checkedArray));
@@ -256,7 +229,7 @@ class RefMultipleTableBase extends Component {
   render() {
     const _this = this;
     let { className, miniSearch = true, title = '', backdrop, size = 'lg',
-      showModal, lang = 'zh_CN', valueField, emptyBut = false, buttons, fliterFormInputs = [],
+      showModal, lang = 'zh_CN', valueField='refpk', emptyBut = false, buttons, fliterFormInputs = [],
       showLoading,tableData, pageCount, currPageIndex, 
       columnsData, totalElements,theme='ref-red',searchPanelLocale} = this.props;
     let {checkedArray,checkedMap} = this;

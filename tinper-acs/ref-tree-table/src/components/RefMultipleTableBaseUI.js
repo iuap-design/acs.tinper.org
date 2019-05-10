@@ -38,35 +38,16 @@ class RefMultipleTableBaseUI extends Component {
 		super(props);
 		this.state = {
 			tableIsSelecting: true,
-			selectedDataLength: 0,
+			selectedDataLength: props.matchData.length,
 		};
 		this.filterInfo = ''
         this.checkedArray = [];
         this.checkedMap = {};
 		this.TableView = props.multiple ? multiSelect(Table, Checkbox) : Table;
-	}
-	componentDidMount(){
-		if(this.props.showModal)this.initComponent(this.props);
-	}
-	componentWillReceiveProps(nextProps) {
-		this.initComponent(nextProps);
-	}
-	initComponent = (props) => {
-        //内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
-		let { checkedArray,columnsData,tableData,page,valueField,matchData=[],value} = props;
-		this.checkedArray = Object.assign([],  checkedArray || []);
-		//内部缓存已选择值，缓存成 Map 便于检索
-		this.checkedMap = {};
-		this.checkedArray.forEach(item=>{
-			this.checkedMap[item[valueField]] = item;
-		});
-		this.columnsData = columnsData
-        this.tableData = tableData;
-        this.pageCount = page.pageCount || 0;
-        this.currPageIndex = page.currPageIndex + 1 || 0;
-		this.totalElements = page.totalElements || 0;
-		let valueMap = refValParse(value);
-		if (Boolean(this.checkedArray.length == 0 && valueMap[valueField] && matchData.length>0)) {
+		this.initMatchData = false;
+		//每次打开参照会走此处的逻辑
+		if(props.showModal){
+			let {matchData=[],valueField='refpk'} = props;
 			this.checkedMap = {};
 			this.checkedArray = matchData.map(item=>{
 				item.key = item[valueField];
@@ -74,14 +55,23 @@ class RefMultipleTableBaseUI extends Component {
 				this.checkedMap[item.key] = item;
 				return item;
 			});
-			this.setState({
-				selectedDataLength: this.checkedArray.length,
-				mustRender: Math.random()
-			},()=>{
-				//这里需要同步一下Reftreetablebaseui中的checkedArray
-				this.props.onChange(this.checkedArray)
-			})
+			props.onChange(this.checkedArray)
 		}
+
+	}
+	
+	componentWillReceiveProps(nextProps) {
+		this.initComponent(nextProps);
+	}
+	initComponent = (props) => {
+        //内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
+		let { columnsData,tableData,page,valueField,matchData=[],value} = props;
+		this.columnsData = columnsData
+        this.tableData = tableData;
+        this.pageCount = page.pageCount || 0;
+        this.currPageIndex = page.currPageIndex + 1 || 0;
+		this.totalElements = page.totalElements || 0;
+		
 	}
 	onChange = (checkedArray) => {
 		let { onChange } = this.props;

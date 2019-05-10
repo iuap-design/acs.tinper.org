@@ -147,8 +147,8 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
       var refValue = (0, _utils.refValParse)(value);
       this.setState({
         displayValue: refValue.refname,
-        value: refValue.refname,
-        sliderSearchVal: refValue.refname
+        value: refValue.refpk,
+        sliderSearchVal: refValue.refpk
       });
     }
   };
@@ -157,6 +157,9 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
     if (!(0, _immutable.is)(nextProps.storeData, this.props.storeData)) {
       var data = this.fixDataToMap(nextProps.storeData);
       this.afterLoad(data);
+    }
+    if (this.props.value !== nextProps.value) {
+      this.matchValues(nextProps);
     }
   };
   /**
@@ -280,12 +283,12 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
             _beeInputGroup2["default"].Button,
             { className: 'clearAll', shape: 'border', style: {
                 cursor: 'pointer'
-              }, onClick: function onClick(e) {
-                return _this3.clearAll(e);
               } },
             _react2["default"].createElement(
               'span',
-              { className: !inputVal ? '' : "uf uf-close-c" },
+              { className: !inputVal ? '' : "uf uf-close-c", onClick: function onClick(e) {
+                  return _this3.clearAll(e);
+                } },
               ' '
             )
           )
@@ -304,7 +307,9 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
     if (value) {
       var refValue = (0, _utils.refValParse)(value);
       _this4.setState({
-        displayValue: refValue.refname
+        displayValue: refValue.refname,
+        value: refValue.refpk,
+        sliderSearchVal: refValue.refpk
       });
     }
     return;
@@ -356,6 +361,7 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
       filterText: displayValue,
       filtering: false,
       value: value,
+      sliderSearchVal: value,
       popupVisible: false
     }, function () {
       _this.handleChange(value);
@@ -440,11 +446,15 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
     });
   };
 
-  this.onPopupAlign = function (value) {
+  this.onPopupAlign = function (e, value) {
     _this4.setState({ sliderSearchVal: _this4.state.value });
   };
 
-  this.onPopupVisibleChange = function (value) {
+  this.onPopupVisibleChange = function () {
+    var _props$onPopupVisible = _this4.props.onPopupVisibleChange,
+        onPopupVisibleChange = _props$onPopupVisible === undefined ? function () {} : _props$onPopupVisible;
+
+    onPopupVisibleChange(_this4.state.popupVisible, _this4.state.sliderSearchVal);
     if (_this4.state.filtering && _this4.state.popupVisible) {
       //手动输入不算数
       _this4.setState({

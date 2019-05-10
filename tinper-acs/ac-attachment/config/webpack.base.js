@@ -1,4 +1,6 @@
 const path = require('path')
+const pkg = require('../package.json');
+const webpack = require('webpack')
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -48,23 +50,19 @@ module.exports = {
         }]
       },
       {
-        test: /\.(eot|ttf|woff|woff2|svgz)(\?.+)?$/,
+        test: /\.(eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         use: [{
           loader: "file-loader",
           options: {
             name: "[name].[hash:8].[ext]"
           }
         }]
-      },
-      {
-        test: /\.svg/,
-        use: {
-            loader: 'svg-url-loader',
-            options: {
-              limit: 10000
-            }
-        }
       }
     ]
   },
+  plugins:[
+    new webpack.DefinePlugin({
+      COMPONENT:JSON.stringify(pkg.name)
+    })
+  ]
 }

@@ -66,7 +66,8 @@ var propTypes = {
 	backdrop: _propTypes2["default"].bool,
 	showLine: _propTypes2["default"].bool,
 	multiple: _propTypes2["default"].bool,
-	destory: _propTypes2["default"].func
+	destory: _propTypes2["default"].func,
+	matchData: _propTypes2["default"].array
 };
 var defaultProps = {
 	title: '弹窗标题',
@@ -85,7 +86,7 @@ var defaultProps = {
 	backdrop: true,
 	showLine: false,
 	multiple: false,
-
+	matchData: [],
 	destory: function destory() {}
 };
 
@@ -127,20 +128,10 @@ var RefTreeTableBaseUI = function (_Component) {
 			_this2.props.onCancel();
 		};
 
-		_this2.state = {
-			//  condition: '',
-			// showLoading: true
-		};
-		_this2.checkedArray = props.checkedArray || [];
 		return _this2;
 	}
 
-	RefTreeTableBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-		if (nextProps.showModal && !this.props.showModal) {
-			//按钮点击取消操作
-			this.checkedArray = (0, _assign2["default"])([], nextProps.matchData || []);
-		}
-	};
+	RefTreeTableBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {};
 	//table的所有点击
 
 
@@ -164,7 +155,9 @@ var RefTreeTableBaseUI = function (_Component) {
 		    buttons = _props.buttons,
 		    checkStrictly = _props.checkStrictly,
 		    defaultExpandAll = _props.defaultExpandAll,
-		    nodeDisplay = _props.nodeDisplay;
+		    nodeDisplay = _props.nodeDisplay,
+		    lazyModal = _props.lazyModal,
+		    onLoadData = _props.onLoadData;
 		var _props2 = this.props,
 		    showLoading = _props2.showLoading,
 		    treeData = _props2.treeData,
@@ -194,7 +187,9 @@ var RefTreeTableBaseUI = function (_Component) {
 			defaultExpandAll: defaultExpandAll,
 			treeData: treeData,
 			onTreeChange: onTreeChange,
-			onTreeSearch: onTreeSearch
+			onTreeSearch: onTreeSearch,
+			lazyModal: lazyModal,
+			onLoadData: onLoadData
 		});
 		var tableProps = (0, _assign2["default"])({}, {
 			className: className,
@@ -260,7 +255,6 @@ var RefTreeTableBaseUI = function (_Component) {
 							tableTitle || ''
 						),
 						_react2["default"].createElement(_RefMultipleTableBaseUI2["default"], _extends({}, tableProps, {
-							checkedArray: _this.checkedArray,
 							onChange: _this.onSelectChange
 						}))
 					)

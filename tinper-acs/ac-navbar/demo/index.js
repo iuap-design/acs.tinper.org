@@ -4,12 +4,11 @@ import { Con, Row, Col } from 'bee-layout';
 import { Panel } from 'bee-panel';
 import Drawer from 'bee-drawer';
 import Clipboard from 'bee-clipboard'; 
-import './demo.scss'
-
+import './demo.scss';
 
 
 import Demo1 from "./demolist/Demo1";
-var DemoArray = [{"example":<Demo1 />,"title":" 导航栏","code":"/**\n *\n * @title 导航栏\n * @description \n *\n */\n\nimport React, { Component } from 'react';\nimport AcNavbar from '../../src/index';\nclass Demo1 extends Component {\n    render () {\n        return (\n            <div className=\"demoPadding\">\n                <AcNavbar showHeader={true}/>\n            </div>\n        )\n    }\n}\n\n\n","desc":" "}]
+var DemoArray = [{"example":<Demo1 />,"title":" 导航栏","code":"/**\n *\n * @title 导航栏\n * @description 基础示例\n *\n */\n\nimport React, { Component } from 'react';\nimport AcNavbar from '../../src/index';\nclass Demo1 extends Component {\n    render () {\n        return (\n            <div className=\"demoPadding\">\n                <AcNavbar showHeader={true}/>\n            </div>\n        )\n    }\n}\n\n\n","desc":" 基础示例"}]
 
 
 class Demo extends Component {
@@ -49,7 +48,7 @@ class Demo extends Component {
                 <Clipboard action="copy" text={code}/>
             </div>
             <pre className="pre-js">
-                <code className="hljs javascript">{ code }</code>
+                <code className="hljs javascript">{ code.replace('../../src/index',COMPONENT).replace('../../src',COMPONENT) }</code>
             </pre >
             {!!scss_code ?<div className='component-code-copy copy-css'> SCSS代码 
                 <Clipboard action="copy" text={scss_code}/>

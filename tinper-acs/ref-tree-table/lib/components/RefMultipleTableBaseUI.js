@@ -10,6 +10,10 @@ var _create = require('babel-runtime/core-js/object/create');
 
 var _create2 = _interopRequireDefault(_create);
 
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
 var _stringify = require('babel-runtime/core-js/json/stringify');
 
 var _stringify2 = _interopRequireDefault(_stringify);
@@ -17,10 +21,6 @@ var _stringify2 = _interopRequireDefault(_stringify);
 var _keys = require('babel-runtime/core-js/object/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
-
-var _assign = require('babel-runtime/core-js/object/assign');
-
-var _assign2 = _interopRequireDefault(_assign);
 
 var _class, _temp, _initialiseProps;
 // import './RefMultipleTableBase.less'
@@ -106,21 +106,35 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 
 		_this2.state = {
 			tableIsSelecting: true,
-			selectedDataLength: 0
+			selectedDataLength: props.matchData.length
 		};
 		_this2.filterInfo = '';
 		_this2.checkedArray = [];
 		_this2.checkedMap = {};
 		_this2.TableView = props.multiple ? (0, _multiSelect2["default"])(_beeTable2["default"], _beeCheckbox2["default"]) : _beeTable2["default"];
+		_this2.initMatchData = false;
+		//每次打开参照会走此处的逻辑
+		if (props.showModal) {
+			var _props$matchData = props.matchData,
+			    matchData = _props$matchData === undefined ? [] : _props$matchData,
+			    _props$valueField = props.valueField,
+			    valueField = _props$valueField === undefined ? 'refpk' : _props$valueField;
+
+			_this2.checkedMap = {};
+			_this2.checkedArray = matchData.map(function (item) {
+				item.key = item[valueField];
+				item._checked = true;
+				_this2.checkedMap[item.key] = item;
+				return item;
+			});
+			props.onChange(_this2.checkedArray);
+		}
+
 		return _this2;
 	} //激活页码
 	//总页数
 	//表头数据
 
-
-	RefMultipleTableBaseUI.prototype.componentDidMount = function componentDidMount() {
-		if (this.props.showModal) this.initComponent(this.props);
-	};
 
 	RefMultipleTableBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 		this.initComponent(nextProps);
@@ -255,43 +269,19 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 
 	this.initComponent = function (props) {
 		//内部缓存已选择值，不通过 state 缓存，表格缓存状态自动实现
-		var checkedArray = props.checkedArray,
-		    columnsData = props.columnsData,
+		var columnsData = props.columnsData,
 		    tableData = props.tableData,
 		    page = props.page,
 		    valueField = props.valueField,
-		    _props$matchData = props.matchData,
-		    matchData = _props$matchData === undefined ? [] : _props$matchData,
+		    _props$matchData2 = props.matchData,
+		    matchData = _props$matchData2 === undefined ? [] : _props$matchData2,
 		    value = props.value;
 
-		_this3.checkedArray = (0, _assign2["default"])([], checkedArray || []);
-		//内部缓存已选择值，缓存成 Map 便于检索
-		_this3.checkedMap = {};
-		_this3.checkedArray.forEach(function (item) {
-			_this3.checkedMap[item[valueField]] = item;
-		});
 		_this3.columnsData = columnsData;
 		_this3.tableData = tableData;
 		_this3.pageCount = page.pageCount || 0;
 		_this3.currPageIndex = page.currPageIndex + 1 || 0;
 		_this3.totalElements = page.totalElements || 0;
-		var valueMap = (0, _utils.refValParse)(value);
-		if (Boolean(_this3.checkedArray.length == 0 && valueMap[valueField] && matchData.length > 0)) {
-			_this3.checkedMap = {};
-			_this3.checkedArray = matchData.map(function (item) {
-				item.key = item[valueField];
-				item._checked = true;
-				_this3.checkedMap[item.key] = item;
-				return item;
-			});
-			_this3.setState({
-				selectedDataLength: _this3.checkedArray.length,
-				mustRender: Math.random()
-			}, function () {
-				//这里需要同步一下Reftreetablebaseui中的checkedArray
-				_this3.props.onChange(_this3.checkedArray);
-			});
-		}
 	};
 
 	this.onChange = function (checkedArray) {
@@ -341,8 +331,8 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 	this.getSelectedDataFunc = function (checkedArray, recode) {
 		if (!_this3.props.multiple) return;
 		var _this = _this3;
-		var _props$valueField = _this3.props.valueField,
-		    valueField = _props$valueField === undefined ? "refpk" : _props$valueField;
+		var _props$valueField2 = _this3.props.valueField,
+		    valueField = _props$valueField2 === undefined ? "refpk" : _props$valueField2;
 
 		if (recode) {
 			//单条操作
@@ -405,8 +395,8 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 
 	this.onRowDoubleClick = function (record) {
 		if (_this3.props.multiple) return;
-		var _props$valueField2 = _this3.props.valueField,
-		    valueField = _props$valueField2 === undefined ? "refpk" : _props$valueField2;
+		var _props$valueField3 = _this3.props.valueField,
+		    valueField = _props$valueField3 === undefined ? "refpk" : _props$valueField3;
 
 		record._checked = true;
 		_this3.checkedArray = [record];

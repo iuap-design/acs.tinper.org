@@ -1,4 +1,6 @@
 const path = require('path')
+const pkg = require('../package.json');
+const webpack = require('webpack')
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -58,4 +60,9 @@ module.exports = {
       }
     ]
   },
+  plugins:[
+    new webpack.DefinePlugin({
+      COMPONENT:JSON.stringify(pkg.name)
+    })
+  ]
 }

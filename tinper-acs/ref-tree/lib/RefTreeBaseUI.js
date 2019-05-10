@@ -93,7 +93,6 @@ var propTypes = {
   emptyBut: _propTypes2["default"].bool, //清空按钮
   getRefTreeData: _propTypes2["default"].func,
   multiple: _propTypes2["default"].bool, //  默认单选
-  checkedArray: _propTypes2["default"].array,
   treeData: _propTypes2["default"].array, //接收树的数据
   onLoadData: _propTypes2["default"].func
 };
@@ -104,7 +103,6 @@ var defaultProps = {
   showLine: false, //  默认单选
   defaultExpandAll: true, // 数默认展开
   checkStrictly: false,
-  checkedArray: [], //  指定已选择数据id
   lazyModal: false,
   emptyBut: false,
   onCancel: noop,
@@ -126,13 +124,14 @@ var RefTreeBaseUI = function (_Component) {
 
     _initialiseProps.call(_this);
 
-    var checkedArray = props.checkedArray,
+    var _props$matchData = props.matchData,
+        matchData = _props$matchData === undefined ? [] : _props$matchData,
         valueField = props.valueField,
         showLoading = props.showLoading;
 
     _this.state = {
-      selectedArray: checkedArray || [], //  记录保存的选择项
-      checkedKeys: checkedArray.map(function (item) {
+      selectedArray: matchData || [], //  记录保存的选择项
+      checkedKeys: matchData.map(function (item) {
         return item[valueField];
       }),
       onSaveCheckItems: [],
@@ -140,6 +139,7 @@ var RefTreeBaseUI = function (_Component) {
     };
 
     _this.treeData = props.treeData;
+    _this.inited = false;
     return _this;
   }
   // shouldComponentUpdate(nextProps, nextState){
@@ -148,44 +148,11 @@ var RefTreeBaseUI = function (_Component) {
 
 
   RefTreeBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var strictMode = nextProps.strictMode,
-        value = nextProps.value,
-        valueField = nextProps.valueField,
-        _nextProps$matchData = nextProps.matchData,
-        matchData = _nextProps$matchData === undefined ? [] : _nextProps$matchData;
-    //严格模式下每次打开必须重置数据
-
-    if (nextProps.showModal && !this.props.showModal) {
-      //正在打开弹窗
-      if (strictMode || !this.treeData.length) {
-        //开启严格模式 
-        // this.setState({
-        // 	showLoading: true
-        // },() => {
-        // 	this.initComponent();
-        // });
-        this.initComponent();
-      }
-      //20190124因為不再走constructor，导致checkedKeys和selectedArray不一致,20190409baseui不会再走initcomponent但是选中需要添加
-      var valueMap = (0, _utils.refValParse)(value);
-      if (matchData.length > 0 || this.state.checkedKeys.length === 0 && valueMap[valueField]) {
-        if (matchData.length > 0) {
-          this.setState({
-            selectedArray: matchData || [], //  记录保存的选择项
-            checkedKeys: matchData.map(function (item) {
-              return item[valueField];
-            })
-          });
-        } else {
-          this.setState({
-            checkedArray: [valueMap],
-            selectedArray: [valueMap],
-            showLoading: false,
-            checkedKeys: valueMap.refpk.split(',')
-          });
-        }
-      }
-    }
+    //let { strictMode,value,valueField,matchData=[] } = nextProps;
+    // if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
+    //   this.initComponent(nextProps);
+    // }
+    this.initComponent(nextProps);
   };
 
   //  tree EventHandler
@@ -389,35 +356,21 @@ var RefTreeBaseUI = function (_Component) {
 var _initialiseProps = function _initialiseProps() {
   var _this4 = this;
 
-  this.initComponent = function () {
-    var _props3 = _this4.props,
-        _props3$matchData = _props3.matchData,
-        matchData = _props3$matchData === undefined ? [] : _props3$matchData,
-        checkedArray = _props3.checkedArray,
-        value = _props3.value,
-        treeData = _props3.treeData;
-    //当有已选值，不做校验，即二次打开弹出层不做校验
+  this.initComponent = function (props) {
+    var _props$matchData2 = props.matchData,
+        matchData = _props$matchData2 === undefined ? [] : _props$matchData2,
+        value = props.value,
+        valueField = props.valueField;
 
     var valueMap = (0, _utils.refValParse)(value);
-    if (checkedArray.length != 0 || !valueMap.refpk) return;
-    if (matchData.length > 0) {
-      _this4.setState({
-        checkedArray: matchData,
-        selectedArray: matchData,
-        showLoading: false,
-        checkedKeys: matchData.map(function (item) {
-          return item.refpk;
-        })
-      });
-    } else {
-      //当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
-      _this4.setState({
-        checkedArray: [valueMap],
-        selectedArray: [valueMap],
-        showLoading: false,
-        checkedKeys: valueMap.refpk.split(',')
-      });
-    }
+    _this4.setState({
+      checkedArray: matchData,
+      selectedArray: matchData,
+      showLoading: false,
+      checkedKeys: matchData.map(function (item) {
+        return item[valueField];
+      })
+    });
   };
 
   this.onSearchClick = function (value) {
@@ -429,9 +382,9 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onClickBtn = function (type) {
-    var _props4 = _this4.props,
-        onCancel = _props4.onCancel,
-        onSave = _props4.onSave;
+    var _props3 = _this4.props,
+        onCancel = _props3.onCancel,
+        onSave = _props3.onSave;
 
     switch (type) {
       case 'save':

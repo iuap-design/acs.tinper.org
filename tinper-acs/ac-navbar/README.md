@@ -7,7 +7,7 @@
 ## 如何使用
 
 ```
-import AcNavbar from 'ac-attachment';
+import AcNavbar from 'ac-navbar';
 import 'ac-navbar/dist/ac-navbar.css';
 
 ```

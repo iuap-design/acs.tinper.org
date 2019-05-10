@@ -1,6 +1,6 @@
 {
   "name": "ref-tree-transfer",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -71,7 +71,7 @@
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-babel": "~6.1.1",
-    "gulp-concat": "~2.6.0",
+    "gulp-concat": "^2.6.1",
     "gulp-conventional-changelog": "^1.1.6",
     "gulp-es3ify": "0.0.0",
     "gulp-eslint": "~2.0.0",
@@ -114,8 +114,8 @@
     "bee-form-control": "^2.0.1",
     "bee-icon": "^1.0.10",
     "bee-modal": "^2.0.3",
-    "bee-transfer": "^2.0.8",
+    "bee-transfer": "^2.0.12",
     "bee-tree": "^2.0.7",
-    "ref-core": "^0.3.4-beta.4"
+    "ref-core": "^0.2.3"
   }
 }

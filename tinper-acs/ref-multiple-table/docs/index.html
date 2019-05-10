@@ -21,7 +21,6 @@
     <li class="sidebar-header-2"><a href="#分类">分类</a></li>
     <li class="sidebar-header-2"><a href="#api">API</a></li>
     <li class="sidebar-header-3"><a href="#refmultipletablebaseui">RefMultipleTableBaseUI</a></li>
-    <li class="sidebar-header-3"><a href="#refmultipletablewalsinbaseui">RefMultipleTableWalsinBaseUI</a></li>
     <li class="sidebar-header-3"><a href="#refmultipletablewithinput">RefMultipleTableWithInput</a></li>
     <li class="sidebar-header-3"><a href="#searchpanelitem">SearchPanelItem</a></li>
     <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
@@ -39,6 +38,7 @@
 import RefMultipleTableBaseUI,{ SearchPanelItem }  from <span class="hljs-string">'ref-multiple-table'</span>
 
 或者
+
 import { RefMultipleTableWithInput } from <span class="hljs-string">'ref-multiple-table'</span>
 
 样式
@@ -49,8 +49,7 @@ import <span class="hljs-string">'ref-multiple-table/lib/index.css'</span>;
 <p>RefMultipleTableBaseUI（默认）</p>
 <pre class="hljs"><code>  表格参照的纯ui，需要正确的参数传入。</code></pre><p>RefMultipleTableWithInput</p>
 <pre class="hljs"><code>带文本框的参照弹出窗。</code></pre><p>SearchPanelItem</p>
-<pre class="hljs"><code>表格参照搜索面板处的搜索条件。（带有复杂搜索的表格参照需要使用此组件）</code></pre><p>RefMultipleTableWalsinBaseUI</p>
-<pre class="hljs"><code> 行内搜索表格参照的纯ui，需要正确的参数传入。</code></pre><h2 id="api">API</h2>
+<pre class="hljs"><code>表格参照搜索面板处的搜索条件。（带有复杂搜索的表格参照需要使用此组件）</code></pre><h2 id="api">API</h2>
 <h3 id="refmultipletablebaseui">RefMultipleTableBaseUI</h3>
 <p>以下参数为 <code>&lt;RefTreeTableBaseUI/&gt;</code>需要使用的，为了保证功能的正常使用请传入。</p>
 <table>
@@ -134,6 +133,12 @@ import <span class="hljs-string">'ref-multiple-table/lib/index.css'</span>;
 <td>否</td>
 </tr>
 <tr>
+<td>miniSearchFunc</td>
+<td><code>function(value)</code></td>
+<td>简单搜索的查询回调，将搜索条件带回</td>
+<td>否</td>
+</tr>
+<tr>
 <td>showLoading</td>
 <td><code>bool</code></td>
 <td>false</td>
@@ -144,7 +149,7 @@ import <span class="hljs-string">'ref-multiple-table/lib/index.css'</span>;
 <td><span style="color:red;">*</span>fliterFormInputs</td>
 <td><code>Array</code></td>
 <td>--</td>
-<td>查询条件</td>
+<td>查询条件dom集合，多配合组件SearchPanelItem一起使用</td>
 <td>否</td>
 </tr>
 <tr>
@@ -184,14 +189,14 @@ import <span class="hljs-string">'ref-multiple-table/lib/index.css'</span>;
 </tr>
 <tr>
 <td>dataNumSelect</td>
-<td><code>function()</code></td>
+<td><code>function(index,pagesize)</code></td>
 <td>—</td>
 <td>选择每页多少条的回调函数</td>
 <td>否</td>
 </tr>
 <tr>
 <td>handlePagination</td>
-<td><code>functitabon()</code></td>
+<td><code>function(currenIndex)</code></td>
 <td>—</td>
 <td>切换页的方法</td>
 <td>否</td>
@@ -247,196 +252,6 @@ import <span class="hljs-string">'ref-multiple-table/lib/index.css'</span>;
 </tr>
 </tbody>
 </table>
-<h3 id="refmultipletablewalsinbaseui">RefMultipleTableWalsinBaseUI</h3>
-<p>以下参数为 <code>&lt;RefMultipleTableWalsinBaseUI/&gt;</code>需要使用的，为了保证功能的正常使用请传入。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>类型</th>
-<th>默认值</th>
-<th>说明</th>
-<th>必选</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>className</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>参照class样式，作用于弹出层的样式，默认为空。</td>
-<td>否</td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>打开上传的模态框显示的标题文字</td>
-<td>否</td>
-</tr>
-<tr>
-<td>backdrop</td>
-<td><code>bool</code></td>
-<td>true</td>
-<td>弹出层是否有模态层，true 显示，false 不显示</td>
-<td>否</td>
-</tr>
-<tr>
-<td>lang</td>
-<td><code>string</code></td>
-<td><code>zh_CN</code></td>
-<td>多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN]</td>
-<td>否</td>
-</tr>
-<tr>
-<td>buttons</td>
-<td><code>object</code></td>
-<td>-</td>
-<td>{buttons:{cancelText:&#39;取消&#39;,clearText:&#39;清空已选&#39;,okText:&#39;确认&#39;}} 按钮文字展示</td>
-<td>否</td>
-</tr>
-<tr>
-<td>emptyBut</td>
-<td><code>bool</code></td>
-<td>false</td>
-<td>清空按钮是否展示</td>
-<td>否</td>
-</tr>
-<tr>
-<td>miniSearch</td>
-<td><code>Boolean</code></td>
-<td>true</td>
-<td>默认是简单搜索</td>
-<td>否</td>
-</tr>
-<tr>
-<td>size</td>
-<td><code>String</code></td>
-<td>&#39;lg&#39;</td>
-<td>modal的size</td>
-<td>否</td>
-</tr>
-<tr>
-<td>valueField</td>
-<td><code>string</code></td>
-<td>&#39;refcode&#39;</td>
-<td>待提交的 value 的键。</td>
-<td>否</td>
-</tr>
-<tr>
-<td>showLoading</td>
-<td><code>bool</code></td>
-<td>false</td>
-<td>是否展示loading，多用于请求中</td>
-<td>否</td>
-</tr>
-<tr>
-<td><span style="color:red;">*</span>tableData</td>
-<td><code>Array</code></td>
-<td>—</td>
-<td>表体数据</td>
-<td>否</td>
-</tr>
-<tr>
-<td><span style="color:red;">*</span>columsData</td>
-<td><code>Array</code></td>
-<td>—</td>
-<td>表头数据</td>
-<td>否</td>
-</tr>
-<tr>
-<td>pageCount</td>
-<td><code>number</code></td>
-<td>—</td>
-<td>总页数</td>
-<td>否</td>
-</tr>
-<tr>
-<td>currPageIndex</td>
-<td><code>number</code></td>
-<td>—</td>
-<td>当前页数</td>
-<td>否</td>
-</tr>
-<tr>
-<td>totalElements</td>
-<td><code>number</code></td>
-<td>—</td>
-<td>一共多少条</td>
-<td>否</td>
-</tr>
-<tr>
-<td>dataNumSelect</td>
-<td><code>function()</code></td>
-<td>—</td>
-<td>选择每页多少条的回调函数</td>
-<td>否</td>
-</tr>
-<tr>
-<td>handlePagination</td>
-<td><code>functitabon()</code></td>
-<td>—</td>
-<td>切换页的方法</td>
-<td>否</td>
-</tr>
-<tr>
-<td>showModal</td>
-<td><code>bool</code></td>
-<td>false</td>
-<td>是否展示参照 ，true显示，false不显示</td>
-<td>否</td>
-</tr>
-<tr>
-<td>onSave</td>
-<td><code>function(value)</code></td>
-<td>--</td>
-<td>参照确定的回调</td>
-<td>否</td>
-</tr>
-<tr>
-<td>onCancel</td>
-<td><code>function(value)</code></td>
-<td>--</td>
-<td>参照取消的回调</td>
-<td>否</td>
-</tr>
-<tr>
-<td>value</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>默认值，初始化input框值</td>
-<td>否</td>
-</tr>
-<tr>
-<td>matchData</td>
-<td><code>Array</code></td>
-<td>[]</td>
-<td>选中的节点，macthData和value配合使用，当value中refpk不为空且matchData有值，选中节点从matchData中获取</td>
-<td>否</td>
-</tr>
-<tr>
-<td>theme</td>
-<td><code>String</code></td>
-<td>&#39;ref-red&#39;</td>
-<td>参照主题，现在就两种选择&#39;ref-red&#39;或者&#39;ref-blue&#39;</td>
-<td>否</td>
-</tr>
-<tr>
-<td>onFilterChange</td>
-<td><code>function(field,value,condition)</code></td>
-<td>()=&gt;{}</td>
-<td>行内搜索回调函数</td>
-<td>否</td>
-</tr>
-<tr>
-<td>fliterColumn</td>
-<td><code>Array</code></td>
-<td>[]</td>
-<td>过滤条件，为空则没有行内搜索</td>
-<td>否</td>
-</tr>
-</tbody>
-</table>
 <h3 id="refmultipletablewithinput">RefMultipleTableWithInput</h3>
 <p>除了使用上述<RefMultipleTableBaseUI/>的参数（showModal不可使用）还可以使用以下参数。</p>
 <table>
@@ -450,13 +265,6 @@ import <span class="hljs-string">'ref-multiple-table/lib/index.css'</span>;
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>className</td>
-<td><code>string</code></td>
-<td>空</td>
-<td>参照class样式，作用于弹出层的样式，默认为空。className若是ref-walsin-modal，那么弹出的参照是行内过滤表格参照，否则是默认表格参照</td>
-<td>否 </td>
-</tr>
 <tr>
 <td>wrapClassName</td>
 <td><code>string</code></td>

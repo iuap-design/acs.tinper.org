@@ -8,6 +8,7 @@ var babel = require("gulp-babel");
 var sass = require("gulp-sass");
 var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
+var concat = require("gulp-concat");
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -44,31 +45,46 @@ gulp.task("pack_lib2", function(cb) {
     });
 });
 
-gulp.task("css_component", function() {
+gulp.task("move_style", function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/theme-red.css"),
+      // path.join(process.cwd(), "./src/theme-red.css"),
+      path.join(process.cwd(), "./src/**/*.less"),
   ])
     .pipe(gulp.dest("./lib"));
-  console.log("###### css_component done ######");
+  console.log("###### move_style done ######");
 });
 
-gulp.task("less_component", function() {
+gulp.task("less_component", ['move_style'],function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/*.less"),
+      path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
+//将lib下的index.css合并dist下的index.css生成完成的index.css
+gulp.task("change_dist",["less_component"], function() {
+  gulp.src([
+      path.join(process.cwd(), "./src/index.less"),
+      path.join(process.cwd(), "./dist/index.css"),
+  ])
+  .pipe(less())
+    .pipe(concat('./dist/index.css'))
+    .pipe(gulp.dest("./"));
+  console.log("###### change_dist done ######");
+});
+
 
 gulp.task("clean_lib2", function() {
   return shelljs.rm("-rf", getFromCwd("lib"));
 });
 
-gulp.task("lib2", ["clean_lib2","pack_lib2", "less_component",'css_component'], function() {});
 
-gulp.task('default',['lib2']);
+
+gulp.task("lib2", ["clean_lib2","pack_lib2"], function() {});
+
+gulp.task('default',['lib2',"change_dist"]);
 // gulp.task('default',['theme_src']);
 

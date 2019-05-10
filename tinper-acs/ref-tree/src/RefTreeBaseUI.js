@@ -30,7 +30,6 @@ const propTypes = {
   emptyBut: PropTypes.bool, //清空按钮
   getRefTreeData: PropTypes.func,
   multiple: PropTypes.bool, //  默认单选
-  checkedArray: PropTypes.array,
   treeData: PropTypes.array,//接收树的数据
   onLoadData:PropTypes.func,
 };
@@ -41,13 +40,13 @@ const defaultProps = {
 	showLine: false, //  默认单选
 	defaultExpandAll: true,  // 数默认展开
 	checkStrictly: false,
-	checkedArray: [], //  指定已选择数据id
 	lazyModal: false,
 	emptyBut: false,
 	onCancel: noop,
 	onSave: noop,
   lang: 'zh_CN',
   nodeDisplay:'{refname}',
+  valueField:'refpk',
   treeData:[],
   onLoadData:()=>{},
   getRefTreeData:()=>{}
@@ -55,10 +54,10 @@ const defaultProps = {
 class RefTreeBaseUI extends Component {
   constructor(props) {
     super(props);
-    const { checkedArray, valueField,showLoading} = props;
+    const { matchData=[], valueField,showLoading} = props;
     this.state = {
-      selectedArray: checkedArray || [], //  记录保存的选择项
-      checkedKeys: checkedArray.map(item => {
+      selectedArray: matchData || [], //  记录保存的选择项
+      checkedKeys: matchData.map(item => {
         return item[valueField];
       }),
       onSaveCheckItems:[],
@@ -66,69 +65,30 @@ class RefTreeBaseUI extends Component {
     };
 
     this.treeData = props.treeData;
+    this.inited = false;
   }
   // shouldComponentUpdate(nextProps, nextState){
 	// 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
 	// }
   componentWillReceiveProps(nextProps) {
-		let { strictMode,value,valueField,matchData=[] } = nextProps;
-		//严格模式下每次打开必须重置数据
-		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-			if( strictMode || !this.treeData.length) {
-				//开启严格模式 
-				// this.setState({
-				// 	showLoading: true
-				// },() => {
-				// 	this.initComponent();
-        // });
-        this.initComponent();
-			}
-      //20190124因為不再走constructor，导致checkedKeys和selectedArray不一致,20190409baseui不会再走initcomponent但是选中需要添加
-      let valueMap = refValParse(value)
-      if(matchData.length>0 || this.state.checkedKeys.length===0 && valueMap[valueField]){
-        if(matchData.length>0){
-          this.setState({
-            selectedArray: matchData || [], //  记录保存的选择项
-            checkedKeys: matchData.map(item=>{
-              return item[valueField];
-            }),
-          })
-        }else{
-          this.setState({
-            checkedArray: [valueMap],
-            selectedArray: [valueMap],
-            showLoading: false,
-            checkedKeys: valueMap.refpk.split(',')
-          });
-        }
-				
-			}
-		}
+		//let { strictMode,value,valueField,matchData=[] } = nextProps;
+		// if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
+    //   this.initComponent(nextProps);
+    // }
+    this.initComponent(nextProps);
   }
 
-  initComponent = () => {
-    let {matchData=[],checkedArray,value,treeData} = this.props;
-    //当有已选值，不做校验，即二次打开弹出层不做校验
+  initComponent = (props) => {
+    let {matchData=[],value,valueField} = props;
     let valueMap = refValParse(value)
-		if(checkedArray.length != 0 || !valueMap.refpk) return;
-    if(matchData.length>0){
-			this.setState({
-        checkedArray: matchData,
-        selectedArray: matchData,
-        showLoading: false,
-        checkedKeys: matchData.map(item=>{
-          return item.refpk;
-        })
-      });
-		}else{
-			//当时不使用 matchUrl 做校验时，直接使用默认数护具标记选项，但数据完整性会变弱。
-			this.setState({
-				checkedArray: [valueMap],
-				selectedArray: [valueMap],
-				showLoading: false,
-				checkedKeys: valueMap.refpk.split(',')
-			});
-		}
+    this.setState({
+      checkedArray: matchData,
+      selectedArray: matchData,
+      showLoading: false,
+      checkedKeys: matchData.map(item=>{
+        return item[valueField];
+      })
+    });
   }
   
   //  tree EventHandler

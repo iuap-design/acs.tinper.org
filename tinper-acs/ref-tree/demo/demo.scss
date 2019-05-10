@@ -1,5 +1,4 @@
 @import "./atom-one-dark.css";
-
 .demoPadding{
     button{
         margin: auto 5px;
@@ -10,4 +9,9 @@
         overflow: hidden;
         background-color: #e0e0e0;
     }
+}
+span.error{
+    display: block;
+    color: red;
+    font-size: 12px;
 }
