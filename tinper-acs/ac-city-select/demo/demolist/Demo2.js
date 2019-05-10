@@ -6,7 +6,7 @@
 */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import  Button  from 'bee-button';
 import CitySelect from '../../src';
 
 class Demo2 extends Component {

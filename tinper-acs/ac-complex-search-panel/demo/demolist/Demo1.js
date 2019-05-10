@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import SearchPanel from '../../src/index';
+import ACSearchPanel from '../../src/index';
 import { Col, Row, Icon, InputGroup, FormControl,Checkbox, Label, Message, Select, Radio } from "tinper-bee";
 import moment from "moment/moment";
 import DatePicker from 'bee-datepicker';
@@ -59,7 +59,7 @@ class Demo1 extends Component {
           }]
         return (
             <div className="demoPadding">
-                <SearchPanel form={self.props.form} 
+                <ACSearchPanel form={self.props.form} 
                 simple={(
                     <Row>
                         <Col md={4} xs={6}>
@@ -203,7 +203,7 @@ class Demo1 extends Component {
                             </FormItem>
                         </Col>
                     </Row>
-                </SearchPanel>
+                </ACSearchPanel>
             </div>
         )
     }

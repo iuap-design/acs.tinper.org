@@ -6,9 +6,8 @@
 */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import  Button  from 'bee-button';
-import CitySelect from '../../src';
+import ACCitySelect from '../../src';
 
 class Demo1 extends Component {
 
@@ -34,7 +33,7 @@ class Demo1 extends Component {
 		let value = { province:'山西',city:'长治',area:'长治县'};
 		return (
 			<div>
-				<CitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={value}/>
+				<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={value}/>
 				<Button shape="border" onClick={this.btnOnClick} style={{marginTop:"10px"}}>代码设置数据</Button>
 			</div>
 	)}
