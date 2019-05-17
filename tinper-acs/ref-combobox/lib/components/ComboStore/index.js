@@ -39,7 +39,7 @@ var propTypes = {
   displayField: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].func]),
   valueField: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].func]),
   afterLoad: _propTypes2["default"].func,
-  reload: _propTypes2["default"].bool,
+  // reload: PropTypes.bool,
   strictMode: _propTypes2["default"].bool //严格模式
 };
 var defaultProps = {
@@ -47,7 +47,7 @@ var defaultProps = {
   displayField: '{refname}',
   valueField: 'refcode',
   afterLoad: function afterLoad() {},
-  reload: true,
+  // reload: true,
   strictMode: false
 };
 

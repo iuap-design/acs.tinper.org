@@ -73,13 +73,9 @@ var propTypes = {
   displayField: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].func]),
   valueField: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].func]),
   sliderWidth: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].number]),
-  onClickItem: _propTypes2["default"].func,
-  matchUrl: _propTypes2["default"].string,
-  filterUrl: _propTypes2["default"].string,
+  onClickItemInner: _propTypes2["default"].func,
   onChange: _propTypes2["default"].func,
   style: _propTypes2["default"].object,
-  canClickGoOn: _propTypes2["default"].func,
-  canInputGoOn: _propTypes2["default"].func,
   onSave: _propTypes2["default"].func,
   comboboxStoreData: _propTypes2["default"].array,
   storeData: _propTypes2["default"].array,
@@ -93,20 +89,15 @@ var defaultProps = {
   children: '',
   value: '',
   displayField: '{refname}',
-  valueField: 'refcode',
+  valueField: 'refpk',
   style: {},
-  canClickGoOn: function canClickGoOn() {
-    return true;
-  },
-  canInputGoOn: function canInputGoOn() {
-    return true;
-  },
   onSave: function onSave() {},
   comboboxStoreData: [],
   storeData: [],
   onChangeFormControl: function onChangeFormControl() {},
   onFocusFormControl: function onFocusFormControl() {},
-  onSelect: function onSelect() {}
+  onSelect: function onSelect() {},
+  onClickItemInner: function onClickItemInner() {}
 };
 
 var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
@@ -125,12 +116,9 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
       showSlider: false,
       value: '',
       displayValue: props.displayValue ? props.displayValue : '',
-      activePage: 1,
       dataStore: {}, //缓存的数据
       slider: 'down',
       filterText: '',
-      filterItems: [],
-      filterDataMap: {},
       filtering: false,
       sliderSearchVal: '' }, _extends2['value'] = '', _extends2.popupVisible = false, _extends2), _this2.checkChildren(props));
 
@@ -219,7 +207,7 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
       },
       useStore ? children.map(function (item) {
         return _react2["default"].cloneElement(item, _extends({}, item.props, { //对于comboboxstore传进来的参数
-          reload: showSlider,
+          // reload: showSlider,
           comboboxStoreData: comboboxStoreData,
           pageCount: pageCount,
           currPageIndex: currPageIndex,
@@ -438,11 +426,9 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
       filterText: '',
       value: ''
     }, function () {
-      if (_this4.props.onClickItem) {
-        _this4.props.onClickItem('');
-      }
-      _this4.setState({ popupVisible: true });
-      _this4.props.onChangeFormControl('');
+      _this4.setState({ popupVisible: true }, function () {
+        _this4.props.onChangeFormControl('');
+      });
     });
   };
 
@@ -462,8 +448,7 @@ var RefComboBoxBaseUI = (_temp = _class = function (_Component) {
         displayValue: '',
         filterText: '',
         sliderSearchVal: '',
-        value: '',
-        filterUrl: false
+        value: ''
       });
       _this4.props.onClickItemInner({});
     } else {

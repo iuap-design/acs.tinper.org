@@ -44,22 +44,22 @@ ComboItem
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 className |`string`|空 | 参照class样式，作用于整个参照的样式，默认为空。 'ref-walsin-modal'特殊样式| 否
-style| `object`|{} | 参照style样式，作用域整个参照最外层|否
-displayField |<code>string 或 function</code>|'{refname}' |记录中显示的值。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}| 否
-valueField |`string`|'refcode' |待提交的 value 的键。 | 否
-value| `string` | ''|输入框展示的值| 否
-onClickItemInner | `function(record)`| -- | 下拉选中，返回缓存的数据对应的完整| 否
+style| `object`|{} | 参照style样式，作用域整个参照最外层和下拉panel|否
+displayField |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}| 否
+valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
+value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值|否
 sliderWidth|`number`或者`String`| 'auto'| 下拉菜单的宽度|否
 comboboxStoreData| `array` | [] | 下拉参照要展示dom集合，搭配<ComboItem>使用 | 否
 storeData| `array` | [] | 下拉参照数据集合，不传入storeData会导致onClickItemInner不能返回对应的完整数据 | 否
+onClickItemInner | `function(record)|function(value,displayValue,e)`| -- | 下拉选中，返回缓存的数据对应的数据。在没有传storeData情形下，不能返回完整数据，只能返回数据键值，展示值和event| 否
 onChangeFormControl| `function(value)` | - | 输入框输入值回调，value是输入内容 | 否
 onPopupVisibleChange| `function(popupVisible,sliderSearchVal)` | -| 下拉面板状态改变时回调函数| 否
 onSelect| `function(currentIndex)` | - | 翻页回调，返回当前页面| 否
-pageCount | `number` | 1 | 总页数 | 否
+pageCount | `number` | 10 | 总页数 | 否
 currPageIndex| `number` | 0 | 当前页码 | 否
-loading | `boolean` | false | 是否展示加载 | 否
+loading | `boolean` | -- | 是否展示加载 | 否
 totalElements | `number` | 0 | 总条数 | 否
-theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
+theme| `String` | 'ref-red' | 参照主题 | 否
 
 ## ComboStore 增量 API
 
@@ -68,7 +68,7 @@ theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或�
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 topPagination| `bool`| false
-lang| `String`| 'zh_CN'| 分页多语 | 否
+lang| `String`| 'zh_CN'| 分页多语['zh_CN','en_US','zh_TW']| 否
 
 
 

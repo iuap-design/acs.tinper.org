@@ -9,7 +9,7 @@ const propTypes = {
   displayField: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   valueField: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   afterLoad: PropTypes.func,
-  reload: PropTypes.bool,
+  // reload: PropTypes.bool,
   strictMode: PropTypes.bool //严格模式
 };
 const defaultProps = {
@@ -17,7 +17,7 @@ const defaultProps = {
   displayField: '{refname}',
   valueField: 'refcode',
   afterLoad: () => { },
-  reload: true,
+  // reload: true,
   strictMode: false
 };
 

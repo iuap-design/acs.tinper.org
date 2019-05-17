@@ -16,13 +16,9 @@ const propTypes = {
   displayField: PropTypes.oneOfType([PropTypes.string ,PropTypes.func]),
   valueField: PropTypes.oneOfType([PropTypes.string ,PropTypes.func]),
   sliderWidth : PropTypes.oneOfType([PropTypes.string ,PropTypes.number]),
-  onClickItem: PropTypes.func,
-  matchUrl: PropTypes.string,
-  filterUrl: PropTypes.string,
+  onClickItemInner: PropTypes.func,
   onChange: PropTypes.func,
   style: PropTypes.object,
-  canClickGoOn: PropTypes.func,
-  canInputGoOn: PropTypes.func,
   onSave: PropTypes.func,
   comboboxStoreData:PropTypes.array,
   storeData:PropTypes.array,
@@ -36,16 +32,15 @@ const defaultProps = {
   children: '',
   value: '',
   displayField: '{refname}',
-  valueField: 'refcode',
+  valueField: 'refpk',
   style: {},
-  canClickGoOn: () => { return true; },
-  canInputGoOn: () => { return true; },
   onSave: () => { },
   comboboxStoreData:[],
   storeData:[],
   onChangeFormControl:()=>{},
   onFocusFormControl:()=>{},
   onSelect:()=>{},
+  onClickItemInner:()=>{},
 };
 
 class RefComboBoxBaseUI extends Component {
@@ -55,12 +50,9 @@ class RefComboBoxBaseUI extends Component {
       showSlider: false,
       value: '',
       displayValue: props.displayValue?props.displayValue:'',
-      activePage: 1,
       dataStore: {}, //缓存的数据
       slider: 'down',
       filterText: '',
-      filterItems: [],
-      filterDataMap: {},
       filtering: false,
       sliderSearchVal: '',//是input的实时输入值，也是搜索的搜索内容
       value: '',//是最终选择的数据项，必须是接口返回的数据，在进入与保存sliderSearchVal与value同步
@@ -215,11 +207,9 @@ class RefComboBoxBaseUI extends Component {
       filterText: '',
       value: '',
     },()=>{
-      if (this.props.onClickItem) {
-        this.props.onClickItem('')
-      }
-      this.setState({popupVisible:true})
-      this.props.onChangeFormControl('');
+      this.setState({popupVisible:true},()=>{
+        this.props.onChangeFormControl('');
+      })
     });
   }
   onPopupAlign = (e,value) =>{
@@ -236,7 +226,6 @@ class RefComboBoxBaseUI extends Component {
         filterText: '',
         sliderSearchVal: '',
         value: '',
-        filterUrl: false,
       });
       this.props.onClickItemInner({});
     } else {
@@ -280,7 +269,7 @@ class RefComboBoxBaseUI extends Component {
           children.map((item) => {
             return React.cloneElement(item, {
               ...item.props,//对于comboboxstore传进来的参数
-              reload: showSlider,
+              // reload: showSlider,
               comboboxStoreData,
               pageCount,
               currPageIndex,

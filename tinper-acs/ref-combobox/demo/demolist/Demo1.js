@@ -121,13 +121,13 @@ class Demo1 extends Component {
                     displayField={(record)=>{return `${record.refname}-haha`}}
                     valueField={'refcode'}
                     lang={'zh_CN'}
-                    // {...getFieldProps('combobox', {
-                    //     initialValue:'{"refpk":"level1","refname":"初级"}',  //M0000000000002
-                    //     rules: [{
-                    //         message: '提示：请选择',
-                    //         pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
-                    //     }]
-                    // })}
+                    {...getFieldProps('combobox', {
+                        initialValue:this.state.value,  //M0000000000002
+                        rules: [{
+                            message: '提示：请选择',
+                            pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
+                        }]
+                    })}
                     comboboxStoreData={comboboxStoreData}
                     storeData={storeData}
                     loading={loading}
@@ -138,8 +138,6 @@ class Demo1 extends Component {
                     pageCount={10}
                     currPageIndex={currentIndex}
                     totalElements={70}
-                    value={this.state.value}
-
                 >
                     <ComboStore
                        {...op}
