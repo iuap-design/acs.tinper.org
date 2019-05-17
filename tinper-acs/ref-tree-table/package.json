@@ -1,6 +1,6 @@
 {
   "name": "ref-tree-table",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -110,6 +110,6 @@
     "bee-table": "^2.0.10",
     "bee-tree": "^2.0.7",
     "cross-env": "^5.2.0",
-    "ref-core": "^0.2.3"
+    "ref-core": "^0.2.4"
   }
 }

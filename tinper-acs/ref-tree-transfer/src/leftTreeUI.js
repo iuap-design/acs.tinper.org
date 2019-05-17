@@ -116,19 +116,25 @@ export default class leftTree extends Component {
 			autoExpandParent
 		} = this.state;
 		
-		var { data = [], valueField,lang } = this.props;
+		var { data = [], valueField,lang,nodeDisplay = `{refname}`,defaultExpandAll} = this.props;
 		const loop = data => data.map((item) => {
-			if(Object.prototype.toString.call(item.refname) !== "[object String]") item.refname = '';//refname不存在
-			const index = item.refname.search(searchValue);
-			const beforeStr = item.refname.substr(0, index);
-			const afterStr = item.refname.substr(index + searchValue.length);
+			let text = '';
+			if (typeof nodeDisplay === 'function') {
+				text = nodeDisplay(item);
+			  } else {
+				text = nodeDisplay.format(item);
+			  }
+			// if(Object.prototype.toString.call(item.refname) !== "[object String]") item.refname = '';//refname不存在
+			const index =text.search(searchValue);
+			const beforeStr =text.substr(0, index);
+			const afterStr =text.substr(index + searchValue.length);
 			const title = index > -1 ? (
 				<span>
 					{beforeStr}
 					<span className={'uTreeSearchableFilter'}>{searchValue}</span>
 					{afterStr}
 				</span>
-			) : <span>{item.refname}</span>;
+			) : <span>{text}</span>;
 			if (item.children && item.children.length > 0) {
 				return (
 					<TreeNode key={item[valueField]} title={title}>
@@ -147,10 +153,10 @@ export default class leftTree extends Component {
 				/>
 				<div className={'leftTreeStyle'}>
 					<Tree
-						checkStrictly={false}
+						checkStrictly={true}
 						multiple={false}
 						onExpand={this.onExpand}
-						defaultExpandAll={true}
+						defaultExpandAll={defaultExpandAll}
 						expandedKeys={expandedKeys}
 						autoExpandParent={autoExpandParent}
 						onSelect={this.onTreeSelect}

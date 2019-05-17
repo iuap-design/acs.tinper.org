@@ -181,14 +181,23 @@ var leftTree = function (_Component) {
 		    _props$data = _props.data,
 		    data = _props$data === undefined ? [] : _props$data,
 		    valueField = _props.valueField,
-		    lang = _props.lang;
+		    lang = _props.lang,
+		    _props$nodeDisplay = _props.nodeDisplay,
+		    nodeDisplay = _props$nodeDisplay === undefined ? '{refname}' : _props$nodeDisplay,
+		    defaultExpandAll = _props.defaultExpandAll;
 
 		var loop = function loop(data) {
 			return data.map(function (item) {
-				if (Object.prototype.toString.call(item.refname) !== "[object String]") item.refname = ''; //refname不存在
-				var index = item.refname.search(searchValue);
-				var beforeStr = item.refname.substr(0, index);
-				var afterStr = item.refname.substr(index + searchValue.length);
+				var text = '';
+				if (typeof nodeDisplay === 'function') {
+					text = nodeDisplay(item);
+				} else {
+					text = nodeDisplay.format(item);
+				}
+				// if(Object.prototype.toString.call(item.refname) !== "[object String]") item.refname = '';//refname不存在
+				var index = text.search(searchValue);
+				var beforeStr = text.substr(0, index);
+				var afterStr = text.substr(index + searchValue.length);
 				var title = index > -1 ? _react2["default"].createElement(
 					'span',
 					null,
@@ -202,7 +211,7 @@ var leftTree = function (_Component) {
 				) : _react2["default"].createElement(
 					'span',
 					null,
-					item.refname
+					text
 				);
 				if (item.children && item.children.length > 0) {
 					return _react2["default"].createElement(
@@ -228,10 +237,10 @@ var leftTree = function (_Component) {
 				_react2["default"].createElement(
 					_beeTree2["default"],
 					{
-						checkStrictly: false,
+						checkStrictly: true,
 						multiple: false,
 						onExpand: this.onExpand,
-						defaultExpandAll: true,
+						defaultExpandAll: defaultExpandAll,
 						expandedKeys: expandedKeys,
 						autoExpandParent: autoExpandParent,
 						onSelect: this.onTreeSelect

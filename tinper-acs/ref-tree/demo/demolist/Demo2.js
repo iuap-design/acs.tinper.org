@@ -11,22 +11,14 @@ import '../../src/index.less'
 import { Button, Form } from 'tinper-bee';
 
 const option = {
-    title: '树',
-    searchable: true,
-    multiple: true,
-    checkStrictly: true,
-    disabled: false,
+    emptyBut:true,
     nodeDisplay: (record) => {
         return record.refname
     },
     displayField: (record) => {
-        return record.refname
+        return record.name
     },//显示内容的键
     valueField: 'code',//真实 value 的键
-    lazyModal: false,
-    strictMode: true,
-    lang: 'zh_CN',
-    emptyBut:true,
     filterData:[],
     matchData:[{refname:'用友集团',code:'org1'}],
     treeData:[{"code":"org1","children":[

@@ -71,16 +71,9 @@ class Demo3 extends Component {
         <div className="demo-label">
           <span >组织人员：</span>
           <RefTreeTableWithInput
-            title='组织部门人员'
-            textOption={{
-              menuTitle: '组织',
-              tableTitle: '人员',
-            }}
             multiple={true}
-            filterUrl='/pap_basedoc/common-ref/filterRefJSON'
             displayField='{refname}'
             valueField='refpk'
-            lang='zh_CN'
             treeData={treeData}
             onTreeChange={this.onTreeChange}
             onTreeSearch={this.onTreeSearch}

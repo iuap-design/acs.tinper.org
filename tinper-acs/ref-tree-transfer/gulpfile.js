@@ -9,6 +9,7 @@ var sass = require("gulp-sass");
 var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
 var concat =  require("gulp-concat");
+var cleanCSS = require('gulp-clean-css');
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -74,6 +75,7 @@ gulp.task("less_component",['css_component'], function() {
       path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
+    .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
@@ -84,6 +86,7 @@ gulp.task("change_dist",["less_component"], function() {
       path.join(process.cwd(), "./dist/index.css"),
   ])
   .pipe(less())
+  .pipe(cleanCSS())
     .pipe(concat('./dist/index.css'))
     .pipe(gulp.dest("./"));
   console.log("###### change_dist done ######");

@@ -86,15 +86,14 @@ var SearchPanelItem = function SearchPanelItem(props) {
 
   return _react2["default"].createElement(
     _beeLayout.Col,
-    { md: 5, xs: 12, sm: 12 },
+    { md: 4, xs: 12, sm: 12 },
     _react2["default"].createElement(
       'div',
       { className: 'formItemCustomed' },
       _react2["default"].createElement(
         _beeLabel2["default"],
         null,
-        others.text,
-        ':'
+        others.text
       ),
       _react2["default"].createElement(
         'div',

@@ -10,14 +10,7 @@ import  '../../src/index.less';
 
 import { Button, Form } from 'tinper-bee';
 const props = {
-    placeholder: "自定义placeholder",
-    title: '复杂表格参照',
-    backdrop: true,
-    disabled: false,
-    multiple: true,
-    strictMode: false,
     miniSearch: false,
-    emptyBut: true,
     valueField: "refpk",
     displayField: "{refname}",
 }

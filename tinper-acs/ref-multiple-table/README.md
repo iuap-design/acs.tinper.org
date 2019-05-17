@@ -78,12 +78,12 @@ showModal | `bool` | false | 是否展示参照 ，true显示，false不显示| 
 onSave | `function(value)` | -- | 参照确定的回调| 否
 onCancel | `function()` | -- | 参照取消的回调| 否
 matchData | `Array` | [] | 选中的节点，选中节点只从matchData中获取。matchData是全部选中的数据| 否
-theme| `String` | 'ref-red' | 参照主题 | 否
+theme| `String` | 'ref-red' | 启用参照内部默认样式。theme=''，不使用参照默认样式。| 否
 searchPanelLocale | `Object` | {'title': '条件筛选','resetName': '重置','searchName': '查询','down':'打开','up':'关闭',} | 复杂搜索标题，按钮的文字等信息。与组件bee-search-panel保持一致 | 否
 
 ### RefMultipleTableWithInput
 
-除了使用上述<RefMultipleTableBaseUI/>的参数（showModal不可使用）还可以使用以下参数。
+RefMultipleTableWithInput除了使用上述RefMultipleTableBaseUI的参数（showModal除外）还可以使用以下参数。
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---

@@ -10,19 +10,6 @@ import RefTreeBaseUI from '../../src/index';
 import '../../src/index.less'
 import { Button } from 'tinper-bee';
 const option = {
-    title: '树',
-    searchable: true,
-    multiple: true,
-    checkStrictly: true,
-    disabled: false,
-    nodeDisplay: (record) => {
-        return `${record.refname}-标签`
-    },
-    valueField: 'refpk',//真实 value 的键
-    lazyModal: false,
-    // strictMode: false,
-    lang: 'zh_CN',
-    lazyModal:true,
     value: JSON.stringify({
         code: "bj",
         id: "5305416e-e7b4-4051-90bd-12d12942295b",

@@ -9,6 +9,7 @@ var sass = require("gulp-sass");
 var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
 var concat = require('gulp-concat');
+var cleanCSS = require('gulp-clean-css');
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -61,20 +62,29 @@ gulp.task("pack_lib2", function(cb) {
 gulp.task("move_style", function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/theme-red.css"),
       path.join(process.cwd(), "./src/theme-red.less"),
       path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(gulp.dest("./lib"));
-  console.log("###### move_style done ######");
+   console.log("###### move_style done ######");
+});
+gulp.task("css_minify", function() {
+  gulp
+    .src([
+      path.join(process.cwd(), "./src/theme-red.css"),
+  ])
+    .pipe(cleanCSS())
+    .pipe(gulp.dest("./lib"));
+  console.log("###### css_minify done ######");
 });
 
-gulp.task("less_component",['move_style'], function() {
+gulp.task("less_component",['move_style','css_minify'], function() {
   gulp
     .src([
       path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
+    .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
@@ -86,8 +96,9 @@ gulp.task("change_dist",["less_component"], function() {
       path.join(process.cwd(), "./dist/index.css"),
   ])
   .pipe(less())
-    .pipe(concat('./dist/index.css'))
-    .pipe(gulp.dest("./"));
+  .pipe(cleanCSS())
+  .pipe(concat('./dist/index.css'))
+  .pipe(gulp.dest("./"));
   console.log("###### change_dist done ######");
 });
 

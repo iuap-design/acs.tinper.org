@@ -61,18 +61,10 @@ class Demo1 extends Component {
                 <div className="demo-label">
                     <span >组织人员：</span>
                     <RefTreeTableBaseUI
-                        title='组织部门人员'
-                        textOption={{
-                            menuTitle: '组织',
-                            tableTitle: '人员',
-                        }}
-                        multiple={true}
                         displayField='{refname}'
                         valueField='refpk'
                         lang='zh_CN'
-                        showLoding={false}
                         treeData={treeData} 
-                        showLoading={false} 
                         onTreeChange={this.onTreeChange} 
                         onTreeSearch={this.onTreeSearch}
                         columnsData={this.columnsData}

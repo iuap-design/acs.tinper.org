@@ -9,17 +9,8 @@ import RefTreeTransferBaseUI from '../../src/index';
 import '../../src/index.less';
 import {Button} from 'tinper-bee';
 let op =  {
-	title : '参照默认标题',
-	textOption : { leftTitle : '默认树标题', rightTitle : '默认穿梭框', leftInfo :[], rightInfo :[] },
-	className:'',
-	backdrop:true,
-	refModelUrl:{},
 	displayField:'{refname}-{refcode}-jaja',
 	valueField:'refcode',
-	lang:'zh_CN',
-	theme : 'ref-red',
-	searchPlaceholder:'搜索自定义',
-	notFoundContent:'暂无数据自定义',
 };
 class Demo1 extends Component {
 	constructor(props) {
@@ -119,7 +110,7 @@ class Demo1 extends Component {
 		return (
 			<div>
 				<RefTreeTransferBaseUI {...baseProps} />
-				<Button onClick={()=>{this.setState({showModal:true})}}>打开</Button>
+				<Button colors="primary" onClick={()=>{this.setState({showModal:true})}}>打开</Button>
 			</div>
 		);
 	}

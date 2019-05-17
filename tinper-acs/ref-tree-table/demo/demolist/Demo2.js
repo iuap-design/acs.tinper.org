@@ -70,10 +70,8 @@ class Demo2 extends Component {
               tableTitle: '人员',
             }}
             multiple={true}
-            filterUrl='/pap_basedoc/common-ref/filterRefJSON'
             displayField='{refname}'
             valueField='refpk'
-            lang='zh_CN'
             treeData={treeData}
             onTreeChange={this.onTreeChange}
             onTreeSearch={this.onTreeSearch}
@@ -91,6 +89,7 @@ class Demo2 extends Component {
                 pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
               }]
             })}
+            // theme=''
           />
 
           <Button

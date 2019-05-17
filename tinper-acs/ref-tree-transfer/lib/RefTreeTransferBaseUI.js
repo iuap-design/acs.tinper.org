@@ -68,7 +68,6 @@ var propTypes = {
   classname: _propTypes2["default"].string,
   backdrop: _propTypes2["default"].bool,
   title: _propTypes2["default"].string,
-  param: _propTypes2["default"].object,
   checkedArray: _propTypes2["default"].array,
   defaultSelectNode: _propTypes2["default"].object,
   onCancel: _propTypes2["default"].func,
@@ -83,11 +82,6 @@ var defaultProps = {
   className: '',
   title: '弹窗标题',
   backdrop: true,
-  param: { //url请求参数
-    refCode: 'test_common', //test_common||test_grid||test_tree||test_treeTable
-    tenantId: 'xxx',
-    sysId: 'xxx'
-  },
   defaultSelectNode: {},
   checkedArray: [],
   onCancel: function onCancel(p) {},
@@ -187,7 +181,9 @@ var RefTreeTransferBaseUI = function (_Component) {
         _props$transferData = _props.transferData,
         transferData = _props$transferData === undefined ? [] : _props$transferData,
         setTargetKeys = _props.setTargetKeys,
-        targetKeys = _props.targetKeys;
+        targetKeys = _props.targetKeys,
+        _props$defaultExpandA = _props.defaultExpandAll,
+        defaultExpandAll = _props$defaultExpandA === undefined ? false : _props$defaultExpandA;
     var _textOption$leftTitle = textOption.leftTitle,
         leftTitle = _textOption$leftTitle === undefined ? '默认树标题' : _textOption$leftTitle,
         _textOption$rightTitl = textOption.rightTitle,
@@ -200,6 +196,7 @@ var RefTreeTransferBaseUI = function (_Component) {
         className: ' ' + theme + ' ref-core-modal ' + className + ' ref-core ref-tree-transfer',
         size: 'xlg',
         backdrop: backdrop,
+        autoFocus: false,
         onHide: function onHide() {
           _this2.onClickBtn('cancel');
         }
@@ -225,7 +222,13 @@ var RefTreeTransferBaseUI = function (_Component) {
             { className: 'ref-tree-transfer-tree-title' },
             leftTitle
           ),
-          _react2["default"].createElement(_leftTreeUI2["default"], { data: treeData, valueField: valueField, handleTreeSelect: handleTreeSelect, lang: lang })
+          _react2["default"].createElement(_leftTreeUI2["default"], {
+            data: treeData,
+            valueField: valueField,
+            handleTreeSelect: handleTreeSelect,
+            lang: lang,
+            defaultExpandAll: defaultExpandAll
+          })
         ),
         _react2["default"].createElement(
           'div',

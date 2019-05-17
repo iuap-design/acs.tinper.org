@@ -12,7 +12,6 @@ const propTypes = {
   classname: PropTypes.string,
   backdrop: PropTypes.bool,
   title: PropTypes.string,
-  param: PropTypes.object,
   checkedArray: PropTypes.array,
   defaultSelectNode: PropTypes.object,
   onCancel: PropTypes.func,
@@ -27,11 +26,6 @@ const defaultProps = {
   className: '',
   title: '弹窗标题',
   backdrop: true,
-  param: {//url请求参数
-    refCode: 'test_common',//test_common||test_grid||test_tree||test_treeTable
-    tenantId: 'xxx',
-    sysId: 'xxx'
-  },
   defaultSelectNode: {},
   checkedArray: [],
   onCancel: function (p) {
@@ -108,6 +102,7 @@ class RefTreeTransferBaseUI extends Component {
       transferData=[],
       setTargetKeys,
       targetKeys,
+      defaultExpandAll=false,
     } = this.props;
     let { leftTitle = '默认树标题', rightTitle = '默认穿梭框' } = textOption;
     return (
@@ -116,6 +111,7 @@ class RefTreeTransferBaseUI extends Component {
         className={` ${theme} ref-core-modal ${className} ref-core ref-tree-transfer`}
         size="xlg"
         backdrop={backdrop}
+        autoFocus={false}
         onHide={()=>{this.onClickBtn('cancel')}}
       >
         <Modal.Header closeButton={true}>
@@ -124,7 +120,13 @@ class RefTreeTransferBaseUI extends Component {
         <Modal.Body>
           <div className={'ref-tree-transfer-tree'}>
             {!!leftTitle && <div className={'ref-tree-transfer-tree-title'}>{leftTitle}</div>}
-            <LeftTree data={treeData} valueField={valueField} handleTreeSelect={handleTreeSelect} lang={lang} />
+            <LeftTree 
+                data={treeData} 
+                valueField={valueField} 
+                handleTreeSelect={handleTreeSelect} 
+                lang={lang} 
+                defaultExpandAll={defaultExpandAll} 
+            />
           </div>
           <div className={'ref-tree-transfer-right'}>
             {

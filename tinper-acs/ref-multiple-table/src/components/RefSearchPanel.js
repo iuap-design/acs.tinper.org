@@ -36,9 +36,9 @@ const SearchPanelItem = (props) => {
   const { form, ...others } = props;
   let { getFieldProps } = form;
   return (
-    <Col md={5} xs={12} sm={12}>
+    <Col md={4} xs={12} sm={12}>
       <div className="formItemCustomed">
-        <Label>{others.text}:</Label>
+        <Label>{others.text}</Label>
         <div className="ref-search-panel-search-item">
           {
             React.cloneElement(others.children, {

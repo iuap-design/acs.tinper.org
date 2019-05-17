@@ -36,29 +36,42 @@ RefTreeTransferWithInput
 
 ## API
 
+RefTreeTransferBaseUI接收的参数部分用于左树，部分用于右穿梭框。
+
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 title |``string``|空 |打开上传的模态框显示的标题文字 | 否
 className |`string`|空 | 参照class样式，作用于弹出层和 RefTreeTransferWithInput 输入框的样式，默认为空。| 否
 backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显示 | 否
-buttons |`object`| `okText`: "确认", //确认按钮<br/>`cancelText`: "取消", //取消按钮<br/>`clearText`: "清空已选" //清空已选按钮|弹出层工具栏三个按钮的文字。| 否
+buttons|`object`| - |{buttons:{cancelText:'取消',clearText:'清空已选',okText:'确认'}} 按钮文字展示| 否
 textOption | `object` | -- | 左边树和右边处穿梭框的标题<br /> 如：<br />{<br />    leftTitle:'树',<br />    rightTitle:'穿梭框',<br />leftTransferText:'左侧穿梭框上标题',<br/>rightTransferText:'右侧穿梭框上标题'}| 否
+theme| `String` | 'ref-red' | 启用参照内部默认样式。theme=''，不使用参照默认样式。| 否
+lang|`string`| `zh_CN` |多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN] | 否
+displayField |<code>string 或 function</code>|'{refname}' |右穿梭框显示的内容的格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
+valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
+showModal| `Bool`| -- | 参照展开状态 | 否
 onSave |`function( record:object )`|-- |保存回调函数，返回已选择的记录详细数据。 | 否
 onCancel `|function(  )`|-- |关闭弹出层 | 否
-theme| `String` | 'ref-red' | 参照主题，现在就两种选择'ref-red'或者'ref-blue' | 否
-searchPlaceholder| `String` | '搜索' |搜索框的默认显示文字 | 否
-notFoundContent| `String或者ReactNode` | '<div>无数据</div>' |当没有相关内容的显示内容	 | 否
-~~refModelUrl~~ |`object`|~~{tableBodyUrl:'',treeUrl:''，tableBodyUrlSearch:''}~~|~~弹出层数据接口地址，为了兼容其他参照保留了多连接配置。<br/>如：<br/>{ <br/>treeUrl: '/api/user/blobRefTreeTransfer.json',<br/>tableBodyUrl:'blobRefTreeTransferGrid',//表体请求<br />tableBodyUrlSearch:'blobRefTreeTransferGrid',//搜索时表体请求}。~~ | ~~是~~
-displayField |<code>string 或 function</code>|'{refname}' |记录中显示的内容的格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
-valueField |``string``|'refcode' |待提交的 value 的键。 | 否
-showModal| `Bool`| -- | 参照展开状态 | 否
-handleTreeSelect| `function(selectNode)` | --| 左树选择节点触发 | 否
-setTargetKeys| `function(targetKeys)` | --| 右穿梭选中数据触发，将穿梭右侧选中的数据传过去 | 否
-targetKeys| `Array` | [] | 右穿梭右表中选中的数据的valuefield值| 否
+
+tree专用
+参数 | 类型 |默认值| 说明 | 必选
+---|---|--- | --- | ---
+handleTreeSelect| `function(selectNode)` | --| 左树选择节点回调 | 否
 treeData| `Array` | [] | 左树的数据| 否
+nodeDisplay |<code>string 或 function</code>|'{refname}' |指定树节点渲染内容，这里为了提供根据数据渲染节点图标使用。<br/>当为字符串时则会根据`{}`包裹的正则匹配替换。<br/>如： nodeDisplay:'{refname}'<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}。是树节点展示的内容| 否
+defaultExpandAll |`bool`| false| 展开所有节点，true 展开，false 不展开| 否
+
+tree默认checkStrictly={true}、multiple={false}
+transfer专用
+参数 | 类型 |默认值| 说明 | 必选
+---|---|--- | --- | ---
+searchPlaceholder| `String` | '搜索' |穿梭框中搜索框的默认显示文字，bee-transfer使用字段 | 否
+notFoundContent| `String或者ReactNode` | '<div>无数据</div>' |穿梭框中当没有相关内容的显示内容，bee-transfer使用字段	 | 否
+refModelUrl |`object`|{tableBodyUrlSearch:''}| 右穿梭框最上方的搜索框，不是穿梭内部的搜索 | 是
+onChangerightSearch`|function(value)`|-- | 右穿梭框最上方的搜索框的回调函数  | 否
 transferData| `Array` | [] | 右穿梭的数据| 否
-
-
+targetKeys| `Array` | [] | 右穿梭右表中选中的数据对应valuefield字段的值| 否
+setTargetKeys| `function(targetKeys)` | --| 右穿梭选中数据触发，将穿梭右侧选中的数据传过去 | 否
 
 ## RefTreeTransferWithInput 增量 API
 除了使用上述<RefTreeTransferBaseUI/>的参数（showModal不可使用）还有以下参数。
@@ -70,17 +83,28 @@ placeholder|`string`| 空 |文本框的 placeholder | 否
 style| `object`| {width:200}| 文本框的style，默认宽度200px | 否 
 filterUrl| `string`|空|快捷录入接口。|否
 filterUrlFunc| `function(value)` | ()=>{} | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc | 否
-filertData| `Array`| [] | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会使用filterData| 否
-value| ``string``|空|默认值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。初始化input框值，搭配上面的matchData初始化表格选中数据|否
-disabled|`bool`| false |禁用整个参照 | 否
-onChange|`function(values, record)`|--|value改变、快捷录入和保存时数据回调|否
+filertData| `Array`| [] | 必须配合filterUrlFunc使用，filterData是过滤列表全部数据| 否
+displayField |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式和过滤列表显示的内容格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
+value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值|否
+disabled|`bool`| false |禁用整个input框 | 否
+onChange|`function(values, record)`|--| value改变、选中过滤数据和保存时数据回调。values是obj，格式{'refname':'','refpk':''},record是该条完整数据|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
 
 ## 注意事项
 
-暂无
+### 参数解析
 
+- value、displayField
+    value和displayField是针对input框来说。value格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname字段不可变，refpk是该数据键，要求具有唯一性。
+    displayField确定input中显示内容的格式和过滤列表显示内容的格式
+
+- value、valueFiled
+    value初始化input框值，是input需要使用的数据，要求如上。
+    valueFiled指定数据源的键，要求具有唯一性。
+    因此value中refpk指定值应与valueFiled取值一致。
+
+- value、matchData
+    value初始化input框值，matchData是指定参照中选中的节点。如果value有值matchData为空，那么input有值但是参照无选中数据，反之value空值matchData有值，那么input为空但是参照有选中数据
 
 ## 更新日志
-

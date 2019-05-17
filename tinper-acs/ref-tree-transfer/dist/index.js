@@ -28652,7 +28652,6 @@ var propTypes = {
   classname: _propTypes2.default.string,
   backdrop: _propTypes2.default.bool,
   title: _propTypes2.default.string,
-  param: _propTypes2.default.object,
   checkedArray: _propTypes2.default.array,
   defaultSelectNode: _propTypes2.default.object,
   onCancel: _propTypes2.default.func,
@@ -28667,11 +28666,6 @@ var defaultProps = {
   className: '',
   title: '弹窗标题',
   backdrop: true,
-  param: { //url请求参数
-    refCode: 'test_common', //test_common||test_grid||test_tree||test_treeTable
-    tenantId: 'xxx',
-    sysId: 'xxx'
-  },
   defaultSelectNode: {},
   checkedArray: [],
   onCancel: function onCancel(p) {},
@@ -28771,7 +28765,9 @@ var RefTreeTransferBaseUI = function (_Component) {
         _props$transferData = _props.transferData,
         transferData = _props$transferData === undefined ? [] : _props$transferData,
         setTargetKeys = _props.setTargetKeys,
-        targetKeys = _props.targetKeys;
+        targetKeys = _props.targetKeys,
+        _props$defaultExpandA = _props.defaultExpandAll,
+        defaultExpandAll = _props$defaultExpandA === undefined ? false : _props$defaultExpandA;
     var _textOption$leftTitle = textOption.leftTitle,
         leftTitle = _textOption$leftTitle === undefined ? '默认树标题' : _textOption$leftTitle,
         _textOption$rightTitl = textOption.rightTitle,
@@ -28784,6 +28780,7 @@ var RefTreeTransferBaseUI = function (_Component) {
         className: ' ' + theme + ' ref-core-modal ' + className + ' ref-core ref-tree-transfer',
         size: 'xlg',
         backdrop: backdrop,
+        autoFocus: false,
         onHide: function onHide() {
           _this2.onClickBtn('cancel');
         }
@@ -28809,7 +28806,13 @@ var RefTreeTransferBaseUI = function (_Component) {
             { className: 'ref-tree-transfer-tree-title' },
             leftTitle
           ),
-          _react2.default.createElement(_leftTreeUI2.default, { data: treeData, valueField: valueField, handleTreeSelect: handleTreeSelect, lang: lang })
+          _react2.default.createElement(_leftTreeUI2.default, {
+            data: treeData,
+            valueField: valueField,
+            handleTreeSelect: handleTreeSelect,
+            lang: lang,
+            defaultExpandAll: defaultExpandAll
+          })
         ),
         _react2.default.createElement(
           'div',
@@ -48548,14 +48551,23 @@ var leftTree = function (_Component) {
 		    _props$data = _props.data,
 		    data = _props$data === undefined ? [] : _props$data,
 		    valueField = _props.valueField,
-		    lang = _props.lang;
+		    lang = _props.lang,
+		    _props$nodeDisplay = _props.nodeDisplay,
+		    nodeDisplay = _props$nodeDisplay === undefined ? '{refname}' : _props$nodeDisplay,
+		    defaultExpandAll = _props.defaultExpandAll;
 
 		var loop = function loop(data) {
 			return data.map(function (item) {
-				if (Object.prototype.toString.call(item.refname) !== "[object String]") item.refname = ''; //refname不存在
-				var index = item.refname.search(searchValue);
-				var beforeStr = item.refname.substr(0, index);
-				var afterStr = item.refname.substr(index + searchValue.length);
+				var text = '';
+				if (typeof nodeDisplay === 'function') {
+					text = nodeDisplay(item);
+				} else {
+					text = nodeDisplay.format(item);
+				}
+				// if(Object.prototype.toString.call(item.refname) !== "[object String]") item.refname = '';//refname不存在
+				var index = text.search(searchValue);
+				var beforeStr = text.substr(0, index);
+				var afterStr = text.substr(index + searchValue.length);
 				var title = index > -1 ? _react2.default.createElement(
 					'span',
 					null,
@@ -48569,7 +48581,7 @@ var leftTree = function (_Component) {
 				) : _react2.default.createElement(
 					'span',
 					null,
-					item.refname
+					text
 				);
 				if (item.children && item.children.length > 0) {
 					return _react2.default.createElement(
@@ -48595,10 +48607,10 @@ var leftTree = function (_Component) {
 				_react2.default.createElement(
 					_beeTree2.default,
 					{
-						checkStrictly: false,
+						checkStrictly: true,
 						multiple: false,
 						onExpand: this.onExpand,
-						defaultExpandAll: true,
+						defaultExpandAll: defaultExpandAll,
 						expandedKeys: expandedKeys,
 						autoExpandParent: autoExpandParent,
 						onSelect: this.onTreeSelect

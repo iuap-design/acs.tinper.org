@@ -55,13 +55,13 @@ className |`string`|空 | 参照class样式，作用于弹出层和输入框的�
 backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显示 | 否
 value| ``string``|空|默认值，初始化input框值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
 lang|`string`| `zh_CN` |多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN] | 否
-buttons |`object`| `okText`: "确认", //确认按钮<br/>`cancelText`: "取消", //取消按钮<br/>`clearText`: "清空已选" //清空已选按钮|弹出层工具栏三个按钮的文字，若 
+buttons |`object`| {okText:'确认',cancelText:'取消',clearText:"清空已选"} |`okText`: "确认", //确认按钮<br/>`cancelText`: "取消", //取消按钮<br/>`clearText`: "清空已选" //清空已选按钮|弹出层工具栏三个按钮的文字，若 
 onSave |`function( record:object )`|-- |保存回调函数，返回已选择的记录详细数据。 | 否
 onCancel | `function(  )`|-- |关闭弹出层 | 否
 menuTitle | `String` | ''| 左树的标题| 否
 tableTitle | `String` | '' | 右表的标题 | 否
 showModal | `Boolean` | false | 参照是否打开。 | 是
-theme| `String` | 'ref-red' | 参照主题 | 否
+theme| `String` | 'ref-red' | 启用参照内部默认样式。theme=''，不使用参照默认样式。| 否
 showLoading | `bool` | false | 是否展示loading，多用于请求中| 否
 valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性。左树右表一致,都需要| 否
 左树
@@ -69,16 +69,16 @@ valueField |``string``|'refpk' |待提交的value的键。或者说指定真实�
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 searchable |`bool`|false |是否显示搜索框，弹出层是否带有搜索框，true 显示，false 不显示。 | 否
-checkStrictly |`bool`|false|checkable状态下节点选择完全受控（父子节点选中状态不再关联）, false 关联选择，true 不关联| 否
+~~checkStrictly~~ |~~`bool`~~|~~true~~|~~checkable状态下节点选择完全受控（父子节点选中状态不再关联）, false 关联选择，true 不关联~~| 否
 nodeDisplay |<code>string 或 function</code>| `{refname}` |节点渲染时可匹配的内容，这里为了提供根据数据渲染节点图标使用 | 否
 lazyModal | `bool`|false | 树参照是异步加载，回调onLoadData | 否
-defaultExpandAll |`bool`|-- | 展开所有节点，true 展开，false 不展开。前提lazyModal是false，懒加载下该属性不起效。| 否
+defaultExpandAll |`bool`| true| 展开所有节点，true 展开，false 不展开。前提lazyModal是false，懒加载下该属性不起效。| 否
 showLine|`bool`|false |树组件是否有连线| 否
 onChange| `function(checkedArray)`| -- | 右表选中回调函数| 否
 nodeDisplay|<code>string 或 function</code>|'{refname}' |左树节点展示形式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}| 否
 treeData | `Array` | [] | 左树数据 | 否
 onTreeChange | `function(checkedArray)` |()=>{} |选择树节点的回调，返回选中的树节点| 否 
-onTreeSearch`function(searchVal)` |()=>{} |左树上的搜索回调| 否 
+onTreeSearch| `function(searchVal)` |()=>{} |左树上的搜索回调| 否 
 onLoadData|  `function(treeNode)` | --| 懒加载传个树的回调方法。与lazyModal配合使用，lazyModal=true才会回调该函数| 否
 
 右表
@@ -92,8 +92,6 @@ tableData|Array | [] | 右表表体数据。具体参照tinper-bee的table组件
 page | `Object` | {pageCount:0,currPageIndex:0,totalElements:0}| 分页数据信息。 | 否
 loadTableData | `function(param)`|()=>{}| 分页下拉或者跳转的回调，返回参数。参数包含{refClientPageInfo.currPageIndex:分页当前页码,refClientPageInfo.pageSize:每页展示的数据量,content:搜索条件} | 否
 onTableSearch| `function(value)`|()=>{}| 表格搜索的回调，参数是搜索条件|否
-~~condition~~| `Object` | -- | ~~右表查询条件，带上左树信息。根据condition值不同来刷新页面~~| 否
-
 
 ### RefTreeWithInput
 

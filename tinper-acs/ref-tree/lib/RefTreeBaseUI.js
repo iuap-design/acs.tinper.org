@@ -64,6 +64,10 @@ var _beeModal = require('bee-modal');
 
 var _beeModal2 = _interopRequireDefault(_beeModal);
 
+var _shallowequal = require('shallowequal');
+
+var _shallowequal2 = _interopRequireDefault(_shallowequal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = (0, _getOwnPropertyNames2["default"])(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = (0, _getOwnPropertyDescriptor2["default"])(defaults, key); if (value && value.configurable && obj[key] === undefined) { (0, _defineProperty2["default"])(obj, key, value); } } return obj; }
@@ -102,13 +106,14 @@ var defaultProps = {
   multiple: false, //  默认单选
   showLine: false, //  默认单选
   defaultExpandAll: true, // 数默认展开
-  checkStrictly: false,
+  checkStrictly: true,
   lazyModal: false,
   emptyBut: false,
   onCancel: noop,
   onSave: noop,
   lang: 'zh_CN',
   nodeDisplay: '{refname}',
+  valueField: 'refpk',
   treeData: [],
   onLoadData: function onLoadData() {},
   getRefTreeData: function getRefTreeData() {}
@@ -137,24 +142,17 @@ var RefTreeBaseUI = function (_Component) {
       onSaveCheckItems: [],
       showLoading: showLoading
     };
-
-    _this.treeData = props.treeData;
-    _this.inited = false;
     return _this;
   }
-  // shouldComponentUpdate(nextProps, nextState){
-  // 	return !is(nextState, this.state) || nextProps.showModal !== this.props.showModal;
-  // }
-
 
   RefTreeBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    //let { strictMode,value,valueField,matchData=[] } = nextProps;
-    // if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
-    //   this.initComponent(nextProps);
-    // }
-    this.initComponent(nextProps);
+    //重新渲染数据获取selectedArray
+    if (!(0, _shallowequal2["default"])(nextProps.matchData, this.props.matchData)) {
+      this.initComponent(nextProps);
+    }
   };
 
+  //  tree EventHandler
   //  tree EventHandler
   RefTreeBaseUI.prototype.onCheck = function onCheck(selectedKeys, event) {
     var multiple = this.props.multiple;
@@ -167,23 +165,59 @@ var RefTreeBaseUI = function (_Component) {
         onSaveCheckItems: [event.node.props.attr]
       });
     } else {
-      var valueField = this.props.valueField;
+      //多选
+      //多选
+      var _props = this.props,
+          valueField = _props.valueField,
+          checkStrictly = _props.checkStrictly;
 
       var allProcessCheckedArray = [].concat(this.state.selectedArray);
+      var newCheckedKeys = this.state.checkedKeys;
       var key = event.node.props.attr[valueField];
       var currentNode = event.node.props.attr;
-      if (event.checked) {
-        //新增操作
-        allProcessCheckedArray.push(currentNode);
+      if (!checkStrictly) {
+        //下面涉及到checkStricly=false/true，涉及删除会多个删除，新增会新增多个
+        if (event.checked) {
+          //新增操作
+          event.checkedNodes.forEach(function (item) {
+            var curKey = item.props.attr[valueField];
+            if (newCheckedKeys.indexOf(curKey) < 0) {
+              allProcessCheckedArray.push(item.props.attr);
+              newCheckedKeys.push(item.props.attr[valueField]);
+            }
+          });
+        } else {
+          //删除操作，涉及删除会多个删除
+          allProcessCheckedArray = allProcessCheckedArray.filter(function (item) {
+            return item[valueField] !== key;
+          });
+          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+          //下面是多个时候
+          event.halfCheckedKeys.forEach(function (parentKeys) {
+            allProcessCheckedArray = allProcessCheckedArray.filter(function (item) {
+              return item[valueField] !== parentKeys;
+            });
+            if (newCheckedKeys.indexOf(parentKeys) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(parentKeys), 1);
+          });
+        }
       } else {
-        //删除操作
-        allProcessCheckedArray = allProcessCheckedArray.filter(function (item) {
-          return item[valueField] !== key;
-        });
+        if (event.checked) {
+          //新增操作
+          allProcessCheckedArray.push(currentNode);
+          if (newCheckedKeys.indexOf(key) < 0) {
+            newCheckedKeys.push(key);
+          }
+        } else {
+          //删除操作
+          allProcessCheckedArray = allProcessCheckedArray.filter(function (item) {
+            return item[valueField] !== key;
+          });
+          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+        }
       }
       this.setState({
         selectedArray: allProcessCheckedArray,
-        checkedKeys: selectedKeys,
+        checkedKeys: newCheckedKeys,
         onSaveCheckItems: allProcessCheckedArray
       });
     }
@@ -201,11 +235,13 @@ var RefTreeBaseUI = function (_Component) {
       _this2.onClickBtn('save');
     });
   };
+  //单选
+
 
   RefTreeBaseUI.prototype.onSelect = function onSelect(selectedKeys, event) {
-    var _props = this.props,
-        checkAllChildren = _props.checkAllChildren,
-        multiple = _props.multiple;
+    var _props2 = this.props,
+        checkAllChildren = _props2.checkAllChildren,
+        multiple = _props2.multiple;
 
     var eventKey = event.node.props.eventKey;
     var onSaveCheckItems = this.state.onSaveCheckItems;
@@ -261,35 +297,35 @@ var RefTreeBaseUI = function (_Component) {
   RefTreeBaseUI.prototype.render = function render() {
     var _this3 = this;
 
-    var _props2 = this.props,
-        title = _props2.title,
-        backdrop = _props2.backdrop,
-        className = _props2.className,
-        showLoading = _props2.showLoading,
-        searchable = _props2.searchable,
-        valueField = _props2.valueField,
-        checkStrictly = _props2.checkStrictly,
-        showLine = _props2.showLine,
-        lazyModal = _props2.lazyModal,
-        showModal = _props2.showModal,
-        lang = _props2.lang,
-        defaultExpandAll = _props2.defaultExpandAll,
-        _props2$nodeDisplay = _props2.nodeDisplay,
-        nodeDisplay = _props2$nodeDisplay === undefined ? "{refname}" : _props2$nodeDisplay,
-        buttons = _props2.buttons,
-        emptyBut = _props2.emptyBut,
-        multiple = _props2.multiple,
-        treeData = _props2.treeData,
-        _props2$theme = _props2.theme,
-        theme = _props2$theme === undefined ? 'ref-red' : _props2$theme;
-
-    this.treeData = treeData;
+    var _props3 = this.props,
+        title = _props3.title,
+        backdrop = _props3.backdrop,
+        className = _props3.className,
+        showLoading = _props3.showLoading,
+        searchable = _props3.searchable,
+        valueField = _props3.valueField,
+        checkStrictly = _props3.checkStrictly,
+        showLine = _props3.showLine,
+        lazyModal = _props3.lazyModal,
+        showModal = _props3.showModal,
+        lang = _props3.lang,
+        defaultExpandAll = _props3.defaultExpandAll,
+        _props3$nodeDisplay = _props3.nodeDisplay,
+        nodeDisplay = _props3$nodeDisplay === undefined ? "{refname}" : _props3$nodeDisplay,
+        buttons = _props3.buttons,
+        emptyBut = _props3.emptyBut,
+        multiple = _props3.multiple,
+        treeData = _props3.treeData,
+        _props3$theme = _props3.theme,
+        theme = _props3$theme === undefined ? 'ref-red' : _props3$theme,
+        _props3$modalProps = _props3.modalProps,
+        modalProps = _props3$modalProps === undefined ? {} : _props3$modalProps;
     var checkedKeys = this.state.checkedKeys;
 
     if (checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return _react2["default"].createElement(
       _beeModal2["default"],
-      {
+      _extends({
         show: showModal,
         size: 'sm',
         className: theme + ' ' + className + ' ref-core  ref-core-modal ref-tree',
@@ -298,7 +334,7 @@ var RefTreeBaseUI = function (_Component) {
           return _this3.onClickBtn('cancel');
         },
         autoFocus: false
-      },
+      }, modalProps),
       _react2["default"].createElement(
         _beeModal2["default"].Header,
         { closeButton: true },
@@ -318,17 +354,17 @@ var RefTreeBaseUI = function (_Component) {
         _react2["default"].createElement(_beeLoading2["default"], { container: this.modalRef, show: showLoading }),
         _react2["default"].createElement(_RefCoreSearch2["default"], {
           show: searchable,
-          onSearch: this.onSearchClick,
-          onChange: this.onSearchChange,
+          onSearch: this.onSearch,
+          onChange: this.onSearch,
           language: lang
         }),
-        this.treeData.length ? _react2["default"].createElement(_RefCoreTree2["default"], {
-          show: Boolean(this.treeData.length),
+        treeData.length ? _react2["default"].createElement(_RefCoreTree2["default"], {
+          show: Boolean(treeData.length),
           nodeKeys: function nodeKeys(item) {
             return item[valueField];
           },
           displayField: nodeDisplay,
-          data: this.treeData,
+          data: treeData,
           defaultExpandAll: lazyModal ? false : defaultExpandAll,
           checkable: multiple,
           multiple: multiple,
@@ -339,8 +375,9 @@ var RefTreeBaseUI = function (_Component) {
           selectedKeys: checkedKeys,
           checkStrictly: checkStrictly,
           showLine: showLine,
+          lazyModal: lazyModal,
           loadData: lazyModal ? this.props.onLoadData : null
-        }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(this.treeData.length), language: lang })
+        }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(treeData.length), language: lang })
       ),
       _react2["default"].createElement(
         _beeModal2["default"].Footer,
@@ -362,9 +399,7 @@ var _initialiseProps = function _initialiseProps() {
         value = props.value,
         valueField = props.valueField;
 
-    var valueMap = (0, _utils.refValParse)(value);
     _this4.setState({
-      checkedArray: matchData,
       selectedArray: matchData,
       showLoading: false,
       checkedKeys: matchData.map(function (item) {
@@ -373,18 +408,14 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 
-  this.onSearchClick = function (value) {
-    _this4.props.getRefTreeData(value);
-  };
-
-  this.onSearchChange = function (value) {
+  this.onSearch = function (value) {
     _this4.props.getRefTreeData(value);
   };
 
   this.onClickBtn = function (type) {
-    var _props3 = _this4.props,
-        onCancel = _props3.onCancel,
-        onSave = _props3.onSave;
+    var _props4 = _this4.props,
+        onCancel = _props4.onCancel,
+        onSave = _props4.onSave;
 
     switch (type) {
       case 'save':
