@@ -64,7 +64,8 @@ miniSearch| `bool`|true|默认是简单搜索。miniSearch=true则只展示简�
 size|`String`|'lg'|modal的size|否
 valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
 searchFilterInfo | `function(value)`| 复杂搜索的查询回调，将搜索条件带回。| 否
-miniSearchFunc| `function(value)`| 简单搜索的查询回调，将搜索条件带回| 否
+miniSearchFunc| `function(value)`| 简单搜索的实时查询回调，将搜索条件带回| 否
+onSearchClick| `function(value)`| 简单搜索的点击搜索按钮查询回调，将搜索条件带回| 否
 showLoading | `bool` | -- | 是否展示loading| 否
 <span style="color:red;">*</span>fliterFormInputs| `Array`| -- | 查询条件的dom，配合SearchPanelItem一起使用。| 否
 <span style="color:red;">*</span>tableData | `Array` | — | 表体数据 | 否
@@ -80,6 +81,11 @@ onCancel | `function()` | -- | 参照取消的回调| 否
 matchData | `Array` | [] | 选中的节点，选中节点只从matchData中获取。matchData是全部选中的数据| 否
 theme| `String` | 'ref-red' | 启用参照内部默认样式。theme=''，不使用参照默认样式。| 否
 searchPanelLocale | `Object` | {'title': '条件筛选','resetName': '重置','searchName': '查询','down':'打开','up':'关闭',} | 复杂搜索标题，按钮的文字等信息。与组件bee-search-panel保持一致 | 否
+mustPaginationShow | `bool` | false | true必须展示分页、false，当pageCount>1才展示分页| 否
+tableProps | `object`| {} | table上其他属性，具体接收的参数参照bee-table| 否
+modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
+
+
 
 ### RefMultipleTableWithInput
 

@@ -46,13 +46,17 @@ var _sort = require("bee-table/build/lib/sort");
 
 var _sort2 = _interopRequireDefault(_sort);
 
-var _sum2 = require("bee-table/build/lib/sum");
+var _sum = require("bee-table/build/lib/sum");
 
-var _sum3 = _interopRequireDefault(_sum2);
+var _sum2 = _interopRequireDefault(_sum);
 
 var _bigData = require("bee-table/build/lib/bigData");
 
 var _bigData2 = _interopRequireDefault(_bigData);
+
+var _singleSelect = require("bee-table/build/lib/singleSelect");
+
+var _singleSelect2 = _interopRequireDefault(_singleSelect);
 
 var _beeIcon = require("bee-icon");
 
@@ -69,6 +73,10 @@ var _beePopover2 = _interopRequireDefault(_beePopover);
 var _beePagination = require("bee-pagination");
 
 var _beePagination2 = _interopRequireDefault(_beePagination);
+
+var _beeRadio = require("bee-radio");
+
+var _beeRadio2 = _interopRequireDefault(_beeRadio);
 
 var _i18n = require("./i18n");
 
@@ -147,13 +155,19 @@ var Grid = function (_Component) {
       _this.sort = sortObj;
     }
     if (props.canSum) {
-      ComplexTable = (0, _sum3["default"])(ComplexTable);
+      ComplexTable = (0, _sum2["default"])(ComplexTable);
     }
     //根据条件生成Grid
     ComplexTable = (0, _sort2["default"])(_beeTable2["default"], _beeIcon2["default"]);
 
-    if (props.multiSelect !== false) {
-      ComplexTable = (0, _multiSelect2["default"])(ComplexTable, _beeCheckbox2["default"]);
+    if (Object.prototype.toString.call(props.multiSelect) === '[object Object]' && 'type' in props.multiSelect) {
+      if (props.multiSelect.type === "checkbox") {
+        //多选
+        ComplexTable = (0, _multiSelect2["default"])(ComplexTable, _beeCheckbox2["default"]);
+      } else if (props.multiSelect.type === "radio") {
+        //单选
+        ComplexTable = (0, _singleSelect2["default"])(ComplexTable, _beeRadio2["default"]);
+      }
     }
     if (props.loadLazy) {
       ComplexTable = (0, _bigData2["default"])(ComplexTable);
@@ -452,7 +466,18 @@ var _initialiseProps = function _initialiseProps() {
     var checkMinSize = _this4.props.checkMinSize;
 
     var fieldKey = item.props.data.fieldKey;
+    var sum = 0;
+    if (key !== 'rowFilter') {
+      //显示原则跟table组件同步，至少有一个非固定列显示
+
+      _this4.columns.forEach(function (da) {
+        !da.fixed && da.ifshow !== false ? sum++ : "";
+      });
+    }
     if (key == "fix") {
+      if (sum <= 1 && !item.props.data.fixed) {
+        return;
+      }
       _this4.columns = _this4.optFixCols(_this4.columns, fieldKey);
       // this.setState({
       //   columns
@@ -461,12 +486,7 @@ var _initialiseProps = function _initialiseProps() {
         renderFlag: !renderFlag
       });
     } else if (key == "show") {
-      //显示原则跟table组件同步，至少有一个非固定列显示
-      var _sum = 0;
-      _this4.columns.forEach(function (da) {
-        !da.fixed && da.ifshow !== false ? _sum++ : "";
-      });
-      if (_sum < checkMinSize || _sum <= 1) {
+      if (sum < checkMinSize || sum <= 1) {
         return;
       }
       _this4.columns = _this4.optShowCols(_this4.columns, fieldKey);
@@ -482,6 +502,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.afterFilter = function (optData, columns) {
+    var renderFlag = _this4.state.renderFlag;
+
     if (Array.isArray(optData)) {
       _this4.columns.forEach(function (da) {
         optData.forEach(function (optItem) {
@@ -502,6 +524,9 @@ var _initialiseProps = function _initialiseProps() {
     if (typeof _this4.props.afterFilter == "function") {
       _this4.props.afterFilter(optData, _this4.columns);
     }
+    // this.setState({
+    //   renderFlag:!renderFlag
+    // })
   };
 
   this.sortFun = function (sortParam) {

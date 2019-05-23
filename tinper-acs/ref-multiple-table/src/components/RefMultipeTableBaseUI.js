@@ -231,7 +231,8 @@ class RefMultipleTableBase extends Component {
     let { className, miniSearch = true, title = '', backdrop, size = 'lg',
       showModal, lang = 'zh_CN', valueField='refpk', emptyBut = false, buttons, fliterFormInputs = [],
       showLoading,tableData, pageCount, currPageIndex, 
-      columnsData, totalElements,theme='ref-red',searchPanelLocale} = this.props;
+      columnsData, totalElements,theme='ref-red',searchPanelLocale,
+      mustPaginationShow=false,tableProps={},modalProps={}} = this.props;
     let {checkedArray,checkedMap} = this;
     let {selectedDataLength,tableIsSelecting} = this.state;
     let _tableData = tableData.map(item => {
@@ -252,6 +253,7 @@ class RefMultipleTableBase extends Component {
         size={size}
         onHide={this.handleBtnCancel}
         autoFocus={false}
+        {...modalProps}
       >
           <Modal.Header closeButton={true}>
             <Modal.Title > {title}</Modal.Title>
@@ -283,7 +285,7 @@ class RefMultipleTableBase extends Component {
               {/*简单查询 */}
               <RefCoreSearch
                 className={`${miniSearch && tableIsSelecting ? '' : 'ref-multiple-table-tab-search-hide'}`}
-								onSearch={_this.props.miniSearchFunc}
+								onSearch={_this.props.onSearchClick}
 								onChange={_this.props.miniSearchFunc}
                 language={lang}
               />
@@ -299,6 +301,7 @@ class RefMultipleTableBase extends Component {
                 onRowDoubleClick: _this.onRowDoubleClick,
                 onRowClick: _this.onRowClick,
                 rowKey: _this.putRowKey,
+                ...tableProps
               }) :
                 <RefCoreError show={!Boolean(_tableData.length)} language={lang} />
             }
@@ -311,7 +314,7 @@ class RefMultipleTableBase extends Component {
                 next
                 showJump={true}
                 boundaryLinks
-                className={pageCount > 1 ? '' : `ref-multiple-table-pagination-hide`}
+                className={(pageCount > 1 || mustPaginationShow)? '' : `ref-multiple-table-pagination-hide`}
                 items={pageCount}
                 maxButtons={5}
                 total={totalElements}

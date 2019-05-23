@@ -33,6 +33,7 @@ const propTypes = {
   multiple: PropTypes.bool, //  默认单选
   treeData: PropTypes.array,//接收树的数据
   onLoadData:PropTypes.func,
+  onTreeSelecting:PropTypes.func,
 };
 const defaultProps = {
   title: '弹窗标题',
@@ -50,7 +51,8 @@ const defaultProps = {
   valueField:'refpk',
   treeData:[],
   onLoadData:()=>{},
-  getRefTreeData:()=>{}
+  getRefTreeData:()=>{},
+  onTreeSelecting:()=>{},
 }
 class RefTreeBaseUI extends Component {
   constructor(props) {
@@ -67,10 +69,8 @@ class RefTreeBaseUI extends Component {
   }
  
   componentWillReceiveProps(nextProps) {
-    //重新渲染数据获取selectedArray
-    if(!shallowEqual(nextProps.matchData,this.props.matchData)){
-      this.initComponent(nextProps);
-    }
+    //重新渲染数据获取selectedArray,因为取消操作重置了selectedArray，需要初始化
+    if(nextProps.showModal)this.initComponent(nextProps);
     
   }
 
@@ -86,7 +86,7 @@ class RefTreeBaseUI extends Component {
   }
   
   //  tree EventHandler
-	//  tree EventHandler
+	//  多选才走这里
   onCheck(selectedKeys, event) {
     const { multiple } = this.props;
     if (!multiple) {
@@ -95,6 +95,8 @@ class RefTreeBaseUI extends Component {
         selectedArray: [event.node.props.attr],
         checkedKeys: [event.node.props.eventKey],
         onSaveCheckItems: [event.node.props.attr]
+      },()=>{
+        this.props.onTreeSelecting([event.node.props.attr],[event.node.props.eventKey])
       });
     } else {
       //多选
@@ -154,6 +156,8 @@ class RefTreeBaseUI extends Component {
         selectedArray: allProcessCheckedArray,
         checkedKeys: newCheckedKeys,
         onSaveCheckItems: allProcessCheckedArray,
+      },()=>{
+        this.props.onTreeSelecting(allProcessCheckedArray,newCheckedKeys)
       });
 
     }
@@ -189,7 +193,9 @@ class RefTreeBaseUI extends Component {
 		if (ishaskey) {
 			this.setState({
 				checkedKeys: selectedKeys,
-			});
+			},()=>{
+        this.props.onTreeSelecting([event.node.props.attr],selectedKeys)
+      });
 			return false
 		}
 		if (!checkAllChildren) {
@@ -199,7 +205,9 @@ class RefTreeBaseUI extends Component {
 			this.setState({
 				selectedArray: arr,
 				checkedKeys: selectedKeys,
-			});
+			},()=>{
+        this.props.onTreeSelecting(arr,selectedKeys)
+      });
 		} else {
 			let arr = {}
 			event.selectedNodes.forEach((item) => {
@@ -218,7 +226,9 @@ class RefTreeBaseUI extends Component {
 				selectedArray: onSaveCheckItems,
 				checkedKeys: selectedKeys,
 				onSaveCheckItems: onSaveCheckItems
-			});
+			},()=>{
+        this.props.onTreeSelecting(onSaveCheckItems,selectedKeys)
+      });
 		}
 	}
 	onSearch = (value) => {

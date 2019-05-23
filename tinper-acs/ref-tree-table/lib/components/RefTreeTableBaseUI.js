@@ -153,7 +153,8 @@ var RefTreeTableBaseUI = function (_Component) {
 		    value = _props.value,
 		    lang = _props.lang,
 		    buttons = _props.buttons,
-		    checkStrictly = _props.checkStrictly,
+		    _props$checkStrictly = _props.checkStrictly,
+		    checkStrictly = _props$checkStrictly === undefined ? true : _props$checkStrictly,
 		    defaultExpandAll = _props.defaultExpandAll,
 		    nodeDisplay = _props.nodeDisplay,
 		    lazyModal = _props.lazyModal,
@@ -172,7 +173,13 @@ var RefTreeTableBaseUI = function (_Component) {
 		    onTableSearch = _props3.onTableSearch,
 		    condition = _props3.condition,
 		    _props3$theme = _props3.theme,
-		    theme = _props3$theme === undefined ? "ref-red" : _props3$theme;
+		    theme = _props3$theme === undefined ? "ref-red" : _props3$theme,
+		    _props3$modalProps = _props3.modalProps,
+		    modalProps = _props3$modalProps === undefined ? {} : _props3$modalProps,
+		    _props3$tableProps = _props3.tableProps,
+		    tableProps = _props3$tableProps === undefined ? {} : _props3$tableProps,
+		    _props3$mustPaginatio = _props3.mustPaginationShow,
+		    mustPaginationShow = _props3$mustPaginatio === undefined ? false : _props3$mustPaginatio;
 
 		var treeProps = (0, _assign2["default"])({}, {
 			className: className,
@@ -191,7 +198,7 @@ var RefTreeTableBaseUI = function (_Component) {
 			lazyModal: lazyModal,
 			onLoadData: onLoadData
 		});
-		var tableProps = (0, _assign2["default"])({}, {
+		var tablePropsAll = (0, _assign2["default"])({}, {
 			className: className,
 			lang: lang,
 			valueField: valueField,
@@ -205,17 +212,19 @@ var RefTreeTableBaseUI = function (_Component) {
 			loadTableData: loadTableData,
 			onTableSearch: onTableSearch,
 			matchData: matchData,
-			value: value
+			value: value,
+			tableProps: tableProps,
+			mustPaginationShow: mustPaginationShow
 		});
 		return _react2["default"].createElement(
 			_tinperBee.Modal,
-			{
+			_extends({
 				show: showModal, className: theme + '  ' + className + ' ref-core ref-core-modal ref-tree-table',
 				backdrop: backdrop,
 				size: 'xlg',
 				onHide: this.handleBtnCancel,
 				autoFocus: false
-			},
+			}, modalProps),
 			_react2["default"].createElement(
 				_tinperBee.Modal.Header,
 				{ closeButton: true },
@@ -254,7 +263,7 @@ var RefTreeTableBaseUI = function (_Component) {
 							{ className: 'ref-tree-table-layout-col-title' },
 							tableTitle || ''
 						),
-						_react2["default"].createElement(_RefMultipleTableBaseUI2["default"], _extends({}, tableProps, {
+						_react2["default"].createElement(_RefMultipleTableBaseUI2["default"], _extends({}, tablePropsAll, {
 							onChange: _this.onSelectChange
 						}))
 					)

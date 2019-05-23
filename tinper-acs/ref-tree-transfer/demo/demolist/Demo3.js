@@ -112,7 +112,7 @@ class Demo3 extends Component {
 			onSave:this.transferSave,
 			onCancel:this.transferCancel,
 			onChangeleftSearch:()=>{},
-			value:this.value
+			value:this.value,
 		}
 		return (
 			<div>

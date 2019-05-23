@@ -16,6 +16,10 @@ var _getOwnPropertyNames = require('babel-runtime/core-js/object/get-own-propert
 
 var _getOwnPropertyNames2 = _interopRequireDefault(_getOwnPropertyNames);
 
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
 var _iterator = require('babel-runtime/core-js/symbol/iterator');
 
 var _iterator2 = _interopRequireDefault(_iterator);
@@ -31,6 +35,8 @@ var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 var _create = require('babel-runtime/core-js/object/create');
 
 var _create2 = _interopRequireDefault(_create);
+
+var _extends = _assign2["default"] || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _typeof = typeof _symbol2["default"] === "function" && typeof _iterator2["default"] === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2["default"] === "function" && obj.constructor === _symbol2["default"] && obj !== _symbol2["default"].prototype ? "symbol" : typeof obj; };
 
@@ -290,7 +296,8 @@ var TransferDiv = function (_Component) {
 		    _props2$searchPlaceho = _props2.searchPlaceholder,
 		    searchPlaceholder = _props2$searchPlaceho === undefined ? "搜索" : _props2$searchPlaceho,
 		    _props2$notFoundConte = _props2.notFoundContent,
-		    notFoundContent = _props2$notFoundConte === undefined ? noDataDisplay : _props2$notFoundConte;
+		    notFoundContent = _props2$notFoundConte === undefined ? noDataDisplay : _props2$notFoundConte,
+		    transferProps = _props2.transferProps;
 
 		var tempTransferData = transferData.filter(function (v) {
 			return (typeof v === 'undefined' ? 'undefined' : _typeof(v)) == 'object';
@@ -361,7 +368,7 @@ var TransferDiv = function (_Component) {
 			_react2["default"].createElement(
 				'div',
 				{ className: 'transferWrap', style: !leftTransferText && !rightTransferText ? { marginTop: 15 } : {} },
-				_react2["default"].createElement(_beeTransfer2["default"], {
+				_react2["default"].createElement(_beeTransfer2["default"], _extends({
 					showSearch: isHasSearch ? false : true,
 					dataSource: tempTransferData,
 					onSelectChange: this.onSelectChange.bind(this),
@@ -374,7 +381,7 @@ var TransferDiv = function (_Component) {
 					},
 					searchPlaceholder: searchPlaceholder,
 					notFoundContent: notFoundContent
-				}),
+				}, transferProps)),
 				_react2["default"].createElement(
 					'button',
 					{ onClick: this.allTransferCancel, className: 'allTransferLeftBtnStyle' },

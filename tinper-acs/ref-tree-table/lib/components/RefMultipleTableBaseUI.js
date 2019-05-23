@@ -22,6 +22,8 @@ var _keys = require('babel-runtime/core-js/object/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
 
+var _extends = _assign2["default"] || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _class, _temp, _initialiseProps;
 // import './RefMultipleTableBase.less'
 
@@ -194,7 +196,9 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 		    _props$lang = _props.lang,
 		    lang = _props$lang === undefined ? 'zh_CN' : _props$lang,
 		    valueField = _props.valueField,
-		    showLoading = _props.showLoading;
+		    showLoading = _props.showLoading,
+		    tableProps = _props.tableProps,
+		    mustPaginationShow = _props.mustPaginationShow;
 		var tableData = _this.tableData,
 		    pageCount = _this.pageCount,
 		    currPageIndex = _this.currPageIndex,
@@ -228,7 +232,7 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 					language: lang
 				})
 			),
-			columnsData && columnsData.length ? _react2["default"].createElement(_this.TableView, {
+			columnsData && columnsData.length ? _react2["default"].createElement(_this.TableView, _extends({
 				bordered: true,
 				rowKey: this.putRowKey,
 				columns: columnsData,
@@ -238,7 +242,7 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 				onRowDoubleClick: this.onRowDoubleClick,
 				onRowClick: this.onRowClick,
 				scroll: { x: false, y: true }
-			}) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(tableData.length), language: lang }),
+			}, tableProps)) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(tableData.length), language: lang }),
 			_react2["default"].createElement(
 				'div',
 				{ className: 'ref-tree-table-base-pagination' },
@@ -249,7 +253,7 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 					next: true,
 					showJump: false,
 					boundaryLinks: true,
-					className: Boolean(columnsData.length) && tableIsSelecting ? '' : 'ref-tree-table-base-pagination-hide',
+					className: pageCount > 1 && tableIsSelecting || tableIsSelecting && mustPaginationShow ? '' : 'ref-tree-table-base-pagination-hide',
 					items: pageCount,
 					maxButtons: 3,
 					total: totalElements,
@@ -288,6 +292,9 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 		_this3.pageCount = page.pageCount || 0;
 		_this3.currPageIndex = page.currPageIndex + 1 || 0;
 		_this3.totalElements = page.totalElements || 0;
+		_this3.setState({
+			mustRender: Math.random()
+		});
 	};
 
 	this.onChange = function (checkedArray) {

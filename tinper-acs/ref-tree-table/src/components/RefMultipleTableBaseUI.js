@@ -75,6 +75,9 @@ class RefMultipleTableBaseUI extends Component {
         this.pageCount = page.pageCount || 0;
         this.currPageIndex = page.currPageIndex + 1 || 0;
 		this.totalElements = page.totalElements || 0;
+		this.setState({
+			mustRender:Math.random()
+		})
 		
 	}
 	onChange = (checkedArray) => {
@@ -272,7 +275,7 @@ class RefMultipleTableBaseUI extends Component {
 	render() {
         const _this = this;
         let { tableIsSelecting, selectedDataLength } = this.state;
-        let { className,  lang = 'zh_CN', valueField ,showLoading
+        let { className,  lang = 'zh_CN', valueField ,showLoading,tableProps,mustPaginationShow
         } = this.props;
         let { tableData, pageCount, currPageIndex, 
             columnsData, totalElements, checkedArray } = _this;
@@ -311,7 +314,8 @@ class RefMultipleTableBaseUI extends Component {
 							data:  tableIsSelecting ? _tableData : _this.checkedArray,
 							onRowDoubleClick: this.onRowDoubleClick,
 							onRowClick: this.onRowClick,
-							scroll:{ x: false, y: true }
+							scroll:{ x: false, y: true },
+							...tableProps,
 						}) :
 						<RefCoreError show={!Boolean(tableData.length)} language={lang} />
 					} 
@@ -324,7 +328,7 @@ class RefMultipleTableBaseUI extends Component {
 							next
 							showJump={false}
 							boundaryLinks
-							className={Boolean(columnsData.length) && tableIsSelecting ? '' : `ref-tree-table-base-pagination-hide`}
+							className={((pageCount > 1 && tableIsSelecting)|| tableIsSelecting && mustPaginationShow ) ? '' : `ref-tree-table-base-pagination-hide`}
 							items={pageCount}
 							maxButtons={3}
 							total={totalElements}

@@ -1,3 +1,39 @@
+<a name="2.0.15"></a>
+## [2.0.15](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.14...v2.0.15) (2019-05-22)
+
+
+### Bug Fixes
+
+* 表格中表头菜单和右侧隐藏过滤搭配使用在最后一非固定列下有问题 ([1be53a7](https://github.com/tinper-bee/bee-complex-grid/commit/1be53a7))
+* **Grid:** 表格中表头菜单和右侧隐藏过滤搭配使用在最后一非固定列锁定bug ([68b4b9f](https://github.com/tinper-bee/bee-complex-grid/commit/68b4b9f))
+
+
+
+<a name="2.0.14"></a>
+## [2.0.14](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.13...v2.0.14) (2019-05-21)
+
+
+### Bug Fixes
+
+* **Grid.js:** fix:当所有列都锁定了,表格内容消失 ([a66e9b9](https://github.com/tinper-bee/bee-complex-grid/commit/a66e9b9))
+
+
+
+<a name="2.0.13"></a>
+## [2.0.13](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.12...v2.0.13) (2019-04-29)
+
+
+
+<a name="2.0.12"></a>
+## [2.0.12](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.11...v2.0.12) (2019-04-29)
+
+
+
+<a name="2.0.11"></a>
+## [2.0.11](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.10...v2.0.11) (2019-04-28)
+
+
+
 <a name="2.0.10"></a>
 ## [2.0.10](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.9...v2.0.10) (2019-04-26)
 

@@ -75,7 +75,7 @@ class AcAttachment extends Component{
         this.selectedFiles = [];
         this.fileTypeIcons = ['css','doc','html','javascript','jpg','pdf','png','ppt','xls','xml'];
         bindAll(this,['fGetTableColumns','fLoadFileList','fDeleteFile','fUploadSuccess','fUploadDelete','fGetTableList','fGetUploadData',
-                      'fDownload','fDelete','onSelectData','fConClick','beforeUpload','fValidateFileType','fSetSelectedFiles','emptyFunc']);
+                      'fDownload','fDelete','onSelectData','fConClick','beforeUpload','fValidateFileType','fSetSelectedFiles']);
     }
     get uploadUrl(){
         return `${this.props.baseUrl}${this.props.uploadUrl}?t=${new Date().getTime()}`;
@@ -477,14 +477,6 @@ class AcAttachment extends Component{
     getMsg(id){
         return clearHtml(document.getElementById(id).innerHTML);
     }
-    emptyFunc(){
-        const {intl} = this.props;
-
-        return (<div>
-            <i className="uf uf-list-s-o" style={{fontSize:'60px'}}></i>
-            <div style={{marginTop: '-17px'}}>{intl.formatMessage({id:'intl.table.nodata'})}</div>
-        </div>);
-    }
     fGetUploadData(){
         let {recordId,groupname,permission,url} = this.props;
 
@@ -541,7 +533,6 @@ class AcAttachment extends Component{
                         data={tableList}
                         multiSelect={{type:'checkbox'}}
                         getSelectedDataFunc={this.onSelectData}
-                        emptyText={this.emptyFunc}
                     />
                 </div> 
 		)

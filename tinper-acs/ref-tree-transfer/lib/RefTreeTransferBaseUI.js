@@ -16,6 +16,10 @@ var _getOwnPropertyNames = require('babel-runtime/core-js/object/get-own-propert
 
 var _getOwnPropertyNames2 = _interopRequireDefault(_getOwnPropertyNames);
 
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
 var _setPrototypeOf = require('babel-runtime/core-js/object/set-prototype-of');
 
 var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
@@ -23,6 +27,8 @@ var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 var _create = require('babel-runtime/core-js/object/create');
 
 var _create2 = _interopRequireDefault(_create);
+
+var _extends = _assign2["default"] || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
 
@@ -183,7 +189,11 @@ var RefTreeTransferBaseUI = function (_Component) {
         setTargetKeys = _props.setTargetKeys,
         targetKeys = _props.targetKeys,
         _props$defaultExpandA = _props.defaultExpandAll,
-        defaultExpandAll = _props$defaultExpandA === undefined ? false : _props$defaultExpandA;
+        defaultExpandAll = _props$defaultExpandA === undefined ? false : _props$defaultExpandA,
+        _props$modalProps = _props.modalProps,
+        modalProps = _props$modalProps === undefined ? {} : _props$modalProps,
+        _props$transferProps = _props.transferProps,
+        transferProps = _props$transferProps === undefined ? {} : _props$transferProps;
     var _textOption$leftTitle = textOption.leftTitle,
         leftTitle = _textOption$leftTitle === undefined ? '默认树标题' : _textOption$leftTitle,
         _textOption$rightTitl = textOption.rightTitle,
@@ -191,16 +201,17 @@ var RefTreeTransferBaseUI = function (_Component) {
 
     return _react2["default"].createElement(
       _beeModal2["default"],
-      {
+      _extends({
         show: showModal,
         className: ' ' + theme + ' ref-core-modal ' + className + ' ref-core ref-tree-transfer',
         size: 'xlg',
         backdrop: backdrop,
-        autoFocus: false,
+        autoFocus: false
+      }, modalProps, {
         onHide: function onHide() {
           _this2.onClickBtn('cancel');
         }
-      },
+      }),
       _react2["default"].createElement(
         _beeModal2["default"].Header,
         { closeButton: true },
@@ -257,7 +268,8 @@ var RefTreeTransferBaseUI = function (_Component) {
             buttons: buttons,
             isHasSearch: refModelUrl.tableBodyUrlSearch,
             searchPlaceholder: searchPlaceholder,
-            notFoundContent: notFoundContent
+            notFoundContent: notFoundContent,
+            transferProps: transferProps
           })
         )
       ),

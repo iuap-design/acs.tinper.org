@@ -33,6 +33,9 @@ class Demo1 extends Component {
     }
     onTreeChange = (record) =>{
         this.tableData = this.tableData.length==0?this.originTableData:[];
+        this.setState({
+            mustRender:Math.random()
+        })
     }
     onTreeSearch = (value) =>{
         alert(value);

@@ -18,6 +18,8 @@ var _assign = require('babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
 
+var _extends = _assign2["default"] || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -367,7 +369,13 @@ var RefMultipleTableBase = function (_Component) {
         totalElements = _props.totalElements,
         _props$theme = _props.theme,
         theme = _props$theme === undefined ? 'ref-red' : _props$theme,
-        searchPanelLocale = _props.searchPanelLocale;
+        searchPanelLocale = _props.searchPanelLocale,
+        _props$mustPagination = _props.mustPaginationShow,
+        mustPaginationShow = _props$mustPagination === undefined ? false : _props$mustPagination,
+        _props$tableProps = _props.tableProps,
+        tableProps = _props$tableProps === undefined ? {} : _props$tableProps,
+        _props$modalProps = _props.modalProps,
+        modalProps = _props$modalProps === undefined ? {} : _props$modalProps;
     var checkedArray = this.checkedArray,
         checkedMap = this.checkedMap;
     var _state = this.state,
@@ -386,14 +394,14 @@ var RefMultipleTableBase = function (_Component) {
     }
     return _react2["default"].createElement(
       _beeModal2["default"],
-      {
+      _extends({
         show: showModal,
         className: ' ' + theme + ' ' + className + ' ref-core ref-multiple-table ref-core-modal',
         backdrop: backdrop,
         size: size,
         onHide: this.handleBtnCancel,
         autoFocus: false
-      },
+      }, modalProps),
       _react2["default"].createElement(
         _beeModal2["default"].Header,
         { closeButton: true },
@@ -435,12 +443,12 @@ var RefMultipleTableBase = function (_Component) {
           },
           _react2["default"].createElement(_RefCoreSearch2["default"], {
             className: '' + (miniSearch && tableIsSelecting ? '' : 'ref-multiple-table-tab-search-hide'),
-            onSearch: _this.props.miniSearchFunc,
+            onSearch: _this.props.onSearchClick,
             onChange: _this.props.miniSearchFunc,
             language: lang
           })
         ),
-        columnsData && columnsData.length ? _react2["default"].createElement(_this.TableView, {
+        columnsData && columnsData.length ? _react2["default"].createElement(_this.TableView, _extends({
           bordered: true,
           // scroll: { x: false, y: true },
           columns: columnsData,
@@ -450,7 +458,7 @@ var RefMultipleTableBase = function (_Component) {
           onRowDoubleClick: _this.onRowDoubleClick,
           onRowClick: _this.onRowClick,
           rowKey: _this.putRowKey
-        }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(_tableData.length), language: lang }),
+        }, tableProps)) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(_tableData.length), language: lang }),
         tableIsSelecting && _react2["default"].createElement(_beePagination2["default"], {
           first: true,
           last: true,
@@ -458,7 +466,7 @@ var RefMultipleTableBase = function (_Component) {
           next: true,
           showJump: true,
           boundaryLinks: true,
-          className: pageCount > 1 ? '' : 'ref-multiple-table-pagination-hide',
+          className: pageCount > 1 || mustPaginationShow ? '' : 'ref-multiple-table-pagination-hide',
           items: pageCount,
           maxButtons: 5,
           total: totalElements,

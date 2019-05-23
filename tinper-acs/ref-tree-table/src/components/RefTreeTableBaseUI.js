@@ -96,7 +96,10 @@ class RefTreeTableBaseUI extends Component {
 			loadTableData,
 			onTableSearch,
 			condition,
-			theme="ref-red"
+			theme="ref-red",
+			modalProps={},
+			tableProps={},
+			mustPaginationShow=false,
 		} = this.props;
 		let treeProps = Object.assign({},{
 			className,
@@ -115,7 +118,7 @@ class RefTreeTableBaseUI extends Component {
 			lazyModal,
 			onLoadData
 		});
-		let tableProps = Object.assign({},{
+		let tablePropsAll = Object.assign({},{
 			className,
 			lang,
 			valueField,
@@ -129,7 +132,9 @@ class RefTreeTableBaseUI extends Component {
 			loadTableData,
 			onTableSearch,
 			matchData,
-			value
+			value,
+			tableProps,
+			mustPaginationShow,
 		})
 		return (
 			<Modal
@@ -138,6 +143,7 @@ class RefTreeTableBaseUI extends Component {
 				size={'xlg'}
 				onHide={this.handleBtnCancel}
 				autoFocus={false}
+				{...modalProps}
 			>
 				<Modal.Header closeButton={true}>
 						<Modal.Title>{title}</Modal.Title>
@@ -164,7 +170,7 @@ class RefTreeTableBaseUI extends Component {
 								}
 								
 								<RefMultipleTableBaseUI
-									{...tableProps}
+									{...tablePropsAll}
 									onChange={_this.onSelectChange}
 								/> 
 							</div>

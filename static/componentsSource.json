@@ -32,6 +32,9 @@
     "ac-city-select": {
         "name": "城市选择"
     },
+    "ac-pagelayout": {
+        "name": "布局组件"
+    },
 
 
 

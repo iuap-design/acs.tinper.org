@@ -170,7 +170,9 @@ export default class TransferDiv extends Component {
 	render() {
 		const noDataDisplay = (<div>无数据</div>);
 		var { transferData, sourceDesc, targetDesc, selectedKeys, targetKeys } = this.state;
-		var { displayField, valueField, isHasSearch, searchPlaceholder="搜索",notFoundContent= noDataDisplay } = this.props
+		var { displayField, valueField, isHasSearch, searchPlaceholder="搜索",
+			notFoundContent= noDataDisplay,transferProps
+	    } = this.props
 		var tempTransferData = transferData.filter(v => typeof (v) == 'object').map((v, k) => {
 			v.key = v[valueField]
 			if (typeof displayField === 'function') {
@@ -217,6 +219,7 @@ export default class TransferDiv extends Component {
 						render={item => item.title}
 						searchPlaceholder={searchPlaceholder}
 						notFoundContent={notFoundContent}
+						{...transferProps}
 					/>
 
 

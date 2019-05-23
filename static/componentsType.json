@@ -9,7 +9,8 @@
         "ac-complex-search-panel",
         "ac-thermometer",
         "bee-complex-grid",
-        "ac-city-select"
+        "ac-city-select",
+        "ac-pagelayout"
     ],
     "others":[
         "ac-search-panel",

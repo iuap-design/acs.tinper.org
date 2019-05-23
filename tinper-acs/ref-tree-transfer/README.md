@@ -52,7 +52,8 @@ valueField |``string``|'refpk' |待提交的value的键。或者说指定真实�
 showModal| `Bool`| -- | 参照展开状态 | 否
 onSave |`function( record:object )`|-- |保存回调函数，返回已选择的记录详细数据。 | 否
 onCancel `|function(  )`|-- |关闭弹出层 | 否
-
+modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
+transferProps| `object`| {} | modal上其他属性，具体接收的参数参照bee-transfer| 否
 tree专用
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---

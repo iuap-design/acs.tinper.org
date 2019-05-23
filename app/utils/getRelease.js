@@ -9,7 +9,7 @@ const latestVersion = require('latest-version');
 
 
 const auth = {
-    token: 'ee841f712da9e3a59c57d59c890f950a439e9016',
+    token: '',
     user: 'liushaozhen'
 }
 

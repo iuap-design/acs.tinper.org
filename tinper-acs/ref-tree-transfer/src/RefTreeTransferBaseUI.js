@@ -103,6 +103,8 @@ class RefTreeTransferBaseUI extends Component {
       setTargetKeys,
       targetKeys,
       defaultExpandAll=false,
+      modalProps={},
+      transferProps={},
     } = this.props;
     let { leftTitle = '默认树标题', rightTitle = '默认穿梭框' } = textOption;
     return (
@@ -112,6 +114,7 @@ class RefTreeTransferBaseUI extends Component {
         size="xlg"
         backdrop={backdrop}
         autoFocus={false}
+        {...modalProps}
         onHide={()=>{this.onClickBtn('cancel')}}
       >
         <Modal.Header closeButton={true}>
@@ -154,6 +157,7 @@ class RefTreeTransferBaseUI extends Component {
               isHasSearch={refModelUrl.tableBodyUrlSearch}
               searchPlaceholder={searchPlaceholder}
               notFoundContent={notFoundContent}
+              transferProps={transferProps}
             />
           </div>
         </Modal.Body>

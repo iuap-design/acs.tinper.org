@@ -64,6 +64,9 @@ showModal | `Boolean` | false | 参照是否打开。 | 是
 theme| `String` | 'ref-red' | 启用参照内部默认样式。theme=''，不使用参照默认样式。| 否
 showLoading | `bool` | false | 是否展示loading，多用于请求中| 否
 valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性。左树右表一致,都需要| 否
+mustPaginationShow | `bool` | false | true必须展示分页、false，当pageCount>1才展示分页| 否
+tableProps | `object`| {} | table上其他属性，具体接收的参数参照bee-table| 否
+modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
 左树
 
 参数 | 类型 |默认值| 说明 | 必选
