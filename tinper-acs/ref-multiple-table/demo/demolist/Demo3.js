@@ -7,7 +7,9 @@
 import React, { Component } from 'react';
 import { FormControl,Button, Form } from 'tinper-bee';
 import { RefMultipleTableWithInput }  from '../../src/index';
-import  '../../src/index.less';
+// import  '../../src/index.less';
+import  '../../dist/index.css';
+
 let props = {
     fliterFormInputs: [],
     multiple:true,

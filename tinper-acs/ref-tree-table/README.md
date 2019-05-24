@@ -53,7 +53,7 @@ RefTreeTableBaseUI接收的参数部分用于左树，部分用于右表
 title |``string``|空 |打开上传的模态框显示的标题文字 | 否
 className |`string`|空 | 参照class样式，作用于弹出层和输入框的样式以及左树右表外层类名，默认为空。 | 否
 backdrop |`bool`| true |弹出层是否有模态层，true 显示，false 不显示 | 否
-value| ``string``|空|默认值，初始化input框值，例如 `'{"refname":"初级-T1","refpk":"level1"}'`。|否
+value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值。需要组装出详细记录，保证 displayField 和 valueField 所标记的字段存在|否
 lang|`string`| `zh_CN` |多语配置。取值范围[en_US,zh_TW,fr_FR,de_DE,ja_JP,zh_CN] | 否
 buttons |`object`| {okText:'确认',cancelText:'取消',clearText:"清空已选"} |`okText`: "确认", //确认按钮<br/>`cancelText`: "取消", //取消按钮<br/>`clearText`: "清空已选" //清空已选按钮|弹出层工具栏三个按钮的文字，若 
 onSave |`function( record:object )`|-- |保存回调函数，返回已选择的记录详细数据。 | 否

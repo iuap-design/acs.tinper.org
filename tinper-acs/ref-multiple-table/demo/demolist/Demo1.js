@@ -6,7 +6,9 @@
  */
 import React, { Component } from 'react';
 import RefMultipleTableBaseUI from '../../src/index';
-import  '../../src/index.less';
+// import  '../../src/index.less';
+import  '../../dist/index.css';
+
 
 import { Button, Form } from 'tinper-bee';
 const props = {
@@ -93,7 +95,8 @@ class Demo1 extends Component {
             searchFilterInfo: searchFilterInfo,
             onSave: this.onSave,
             onCancel: this.onCancel,
-            miniSearch:true
+            miniSearch:true,
+            multiple:true,
         });
         return (
             <div className="demoPadding">

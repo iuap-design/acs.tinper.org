@@ -62,6 +62,7 @@
     "gulp": "~3.9.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-babel": "~6.1.1",
+    "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-conventional-changelog": "^1.1.6",
     "gulp-es3ify": "0.0.0",
@@ -110,6 +111,6 @@
     "bee-radio": "^2.0.8",
     "bee-search-panel": "^2.0.14",
     "bee-table": "^2.0.11",
-    "ref-core": "^0.2.4"
+    "ref-core": "^0.2.7"
   }
 }

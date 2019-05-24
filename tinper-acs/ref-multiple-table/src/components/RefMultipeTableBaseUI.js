@@ -233,9 +233,10 @@ class RefMultipleTableBase extends Component {
       showLoading,tableData, pageCount, currPageIndex, 
       columnsData, totalElements,theme='ref-red',searchPanelLocale,
       mustPaginationShow=false,tableProps={},modalProps={}} = this.props;
+    let _newTableData = [].concat(tableData);
     let {checkedArray,checkedMap} = this;
     let {selectedDataLength,tableIsSelecting} = this.state;
-    let _tableData = tableData.map(item => {
+    let _tableData = _newTableData.map(item => {
       item._checked = checkedMap.hasOwnProperty(item[valueField]);
       return item;
     });

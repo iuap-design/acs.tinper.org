@@ -52,7 +52,7 @@ sliderWidth|`number`或者`String`| 'auto'| 下拉菜单的宽度|否
 comboboxStoreData| `array` | [] | 下拉参照要展示dom集合，搭配<ComboItem>使用 | 否
 storeData| `array` | [] | 下拉参照数据集合，不传入storeData会导致onClickItemInner不能返回对应的完整数据 | 否
 onClickItemInner | `function(record)|function(value,displayValue,e)`| -- | 下拉选中，返回缓存的数据对应的数据。在没有传storeData情形下，不能返回完整数据，只能返回数据键值，展示值和event| 否
-onChangeFormControl| `function(value)` | - | 输入框输入值回调，value是输入内容 | 否
+onChangeFormControl| `function(value)` | - | 输入框输入值回调，value是输入内容或者清空回调 | 否
 onPopupVisibleChange| `function(popupVisible,sliderSearchVal)` | -| 下拉面板状态改变时回调函数| 否
 onSelect| `function(currentIndex)` | - | 翻页回调，返回当前页面| 否
 pageCount | `number` | 10 | 总页数 | 否

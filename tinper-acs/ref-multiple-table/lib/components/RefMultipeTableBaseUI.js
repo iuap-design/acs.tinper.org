@@ -376,13 +376,15 @@ var RefMultipleTableBase = function (_Component) {
         tableProps = _props$tableProps === undefined ? {} : _props$tableProps,
         _props$modalProps = _props.modalProps,
         modalProps = _props$modalProps === undefined ? {} : _props$modalProps;
+
+    var _newTableData = [].concat(tableData);
     var checkedArray = this.checkedArray,
         checkedMap = this.checkedMap;
     var _state = this.state,
         selectedDataLength = _state.selectedDataLength,
         tableIsSelecting = _state.tableIsSelecting;
 
-    var _tableData = tableData.map(function (item) {
+    var _tableData = _newTableData.map(function (item) {
       item._checked = checkedMap.hasOwnProperty(item[valueField]);
       return item;
     });

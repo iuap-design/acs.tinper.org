@@ -9,6 +9,7 @@ var sass = require("gulp-sass");
 var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
 var concat = require("gulp-concat");
+var cleanCSS = require('gulp-clean-css');
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -71,8 +72,9 @@ gulp.task("change_dist",["less_component"], function() {
       path.join(process.cwd(), "./dist/index.css"),
   ])
   .pipe(less())
-    .pipe(concat('./dist/index.css'))
-    .pipe(gulp.dest("./"));
+  .pipe(concat('./dist/index.css'))
+  .pipe(cleanCSS())
+  .pipe(gulp.dest("./"));
   console.log("###### change_dist done ######");
 });
 

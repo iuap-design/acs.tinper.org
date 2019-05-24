@@ -73,7 +73,7 @@ gulp.task("css_minify", function() {
     .src([
       path.join(process.cwd(), "./src/theme-red.css"),
   ])
-    .pipe(cleanCSS())
+    // .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
   console.log("###### css_minify done ######");
 });
@@ -84,7 +84,7 @@ gulp.task("less_component",['move_style','css_minify'], function() {
       path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
-    .pipe(cleanCSS())
+    // .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
@@ -96,9 +96,9 @@ gulp.task("change_dist",["less_component"], function() {
       path.join(process.cwd(), "./dist/index.css"),
   ])
   .pipe(less())
-  .pipe(cleanCSS())
   .pipe(concat('./dist/index.css'))
-  .pipe(gulp.dest("./"));
+  .pipe(gulp.dest("./"))
+  .pipe(cleanCSS())
   console.log("###### change_dist done ######");
 });
 

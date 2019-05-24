@@ -75,7 +75,7 @@ gulp.task("less_component",['css_component'], function() {
       path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
-    .pipe(cleanCSS())
+    // .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
@@ -86,9 +86,9 @@ gulp.task("change_dist",["less_component"], function() {
       path.join(process.cwd(), "./dist/index.css"),
   ])
   .pipe(less())
+  .pipe(concat('./dist/index.css'))
   .pipe(cleanCSS())
-    .pipe(concat('./dist/index.css'))
-    .pipe(gulp.dest("./"));
+  .pipe(gulp.dest("./"));
   console.log("###### change_dist done ######");
 });
 

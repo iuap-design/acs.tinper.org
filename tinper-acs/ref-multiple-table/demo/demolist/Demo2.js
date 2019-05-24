@@ -8,7 +8,9 @@ import React, { Component } from 'react';
 import { FormControl,Button, Form } from 'tinper-bee';
 import Radio from 'bee-radio';
 import { SearchPanelItem,RefMultipleTableWithInput }  from '../../src/index';
-import  '../../src/index.less';
+// import  '../../src/index.less';
+import  '../../dist/index.css';
+
 // import '../tinper-bee-theme.css';
 let props = {
     valueField: "refpk",
