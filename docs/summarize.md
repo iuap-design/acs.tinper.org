@@ -4,7 +4,7 @@
 
 ## 如何获得源码
 
-tinper-acs 系列业务组件源码均开放到 Github中，请前往这里查看：https://github.com/tinper-acs。
+tinper-acs 系列业务组件源码均开放到 Github中，请前往这里查看：https://github.com/tinper-acs
 
 ## 如何基于 bee-tools 开发应用组件
 
