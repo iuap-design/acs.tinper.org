@@ -233,7 +233,8 @@ class RefMultipleTableBase extends Component {
       showLoading,tableData, pageCount, currPageIndex, 
       columnsData, totalElements,theme='ref-red',searchPanelLocale,
       mustPaginationShow=false,tableProps={},modalProps={}} = this.props;
-    let _newTableData = [].concat(tableData);
+    let temp = JSON.stringify(tableData)
+    let _newTableData = JSON.parse(temp);
     let {checkedArray,checkedMap} = this;
     let {selectedDataLength,tableIsSelecting} = this.state;
     let _tableData = _newTableData.map(item => {

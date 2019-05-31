@@ -10,6 +10,10 @@ var _create = require('babel-runtime/core-js/object/create');
 
 var _create2 = _interopRequireDefault(_create);
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _keys = require('babel-runtime/core-js/object/keys');
 
 var _keys2 = _interopRequireDefault(_keys);
@@ -377,7 +381,8 @@ var RefMultipleTableBase = function (_Component) {
         _props$modalProps = _props.modalProps,
         modalProps = _props$modalProps === undefined ? {} : _props$modalProps;
 
-    var _newTableData = [].concat(tableData);
+    var temp = (0, _stringify2["default"])(tableData);
+    var _newTableData = JSON.parse(temp);
     var checkedArray = this.checkedArray,
         checkedMap = this.checkedMap;
     var _state = this.state,
