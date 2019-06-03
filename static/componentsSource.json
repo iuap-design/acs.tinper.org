@@ -37,7 +37,9 @@
     },
 
 
-
+    "ac-editor-sany":{
+        "name":"富文本编辑器sany版本"
+    },
     "ac-multi-tabs":{
       "name":"多页签组件"  
     },

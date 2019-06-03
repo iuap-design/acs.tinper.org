@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>富文本编辑器sany版本 AcEditorSany</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+  </head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3"><ul class="nav nav-list">
+    <li class="sidebar-header-1"><a href="#富文本编辑器sany版本-aceditorsany">富文本编辑器sany版本 AcEditorSany</a></li>
+    <li class="sidebar-header-2"><a href="#何时使用">何时使用</a></li>
+    <li class="sidebar-header-2"><a href="#如何使用">如何使用</a></li>
+    <li class="sidebar-header-2"><a href="#代码演示">代码演示</a></li>
+    <li class="sidebar-header-2"><a href="#api">API</a></li>
+    <li class="sidebar-header-3"><a href="#aceditorsany-api">AcEditorSany API</a></li>
+    <li class="sidebar-header-3"><a href="#aceditorshow-api">AcEditorShow API</a></li>
+    <li class="sidebar-header-3"><a href="#aceditorpdf-api">AcEditorPDF API</a></li>
+    <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
+    <li class="sidebar-header-2"><a href="#更新日志">更新日志</a></li>
+</ul>
+      </div>
+      <div class="span9 main"><h1 id="富文本编辑器sany版本-aceditorsany">富文本编辑器sany版本 AcEditorSany</h1>
+<p>React复杂文本编辑器组件，可插入日期、下拉框、单选框、多选框、文本输入框等dom元素的复杂文本编辑器，同时提供文本编辑生成的页面支持动态交互、生成水印和内容动态替换功能，生成的页面支持前端打印功能。</p>
+<h2 id="何时使用">何时使用</h2>
+<p>富文本编辑器</p>
+<h2 id="如何使用">如何使用</h2>
+<p>1.AcEditorSany使用</p>
+<pre class="hljs"><code><span class="hljs-keyword">import</span> { AcEditorSany } <span class="hljs-keyword">from</span> <span class="hljs-string">'ac-editor-sany'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo1</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  saveFunc = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-comment">// doc 为文本编辑器里的html字符串</span>
+    <span class="hljs-comment">// idList 为组件的id,type,direction</span>
+    <span class="hljs-keyword">const</span> { doc, idList } = <span class="hljs-keyword">this</span>.child.getHtml2String();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'文本编辑器内容为'</span>, doc, idList);
+  };
+  render() {
+    <span class="hljs-keyword">const</span> htmlString = <span class="hljs-string">'&lt;h3&gt;xxxx公司供应商合同&lt;/h3&gt;'</span>;
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"demoPadding"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.saveFunc}</span>&gt;</span>保存<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AcEditorSany</span>
+          // 组件<span class="hljs-attr">id</span>
+          <span class="hljs-attr">editorId</span>=<span class="hljs-string">"acEditorSanyId"</span>
+          // 设置<span class="hljs-attr">ref</span>属性
+          <span class="hljs-attr">onRef</span>=<span class="hljs-string">{(ref)</span> =&gt;</span> {
+            this.child = ref;
+          }}
+          // 文本框默认值
+          htmlString={htmlString}
+          // 文本框默认最小高
+          height="300px"
+        /&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    );
+  }
+}
+
+export default Demo1;
+</span></code></pre><p>2.AcEditorShow 使用</p>
+<pre class="hljs"><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo2</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+  saveFunc = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-comment">// 为文本编辑器里的html字符串</span>
+    <span class="hljs-keyword">const</span> html = <span class="hljs-keyword">this</span>.child.getHtml2String();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'文本编辑器内容为'</span>, html);
+  };
+
+  render() {
+    <span class="hljs-keyword">const</span> defaultData = [
+      {
+        <span class="hljs-attr">direction</span>: <span class="hljs-string">'horizontal'</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'select'</span>,
+        <span class="hljs-attr">id</span>: <span class="hljs-string">'payterm'</span>,
+        <span class="hljs-attr">data</span>: <span class="hljs-string">'微信支付|||支付宝支付|||银行卡支付|||现金支付'</span>,
+        <span class="hljs-attr">defaultValue</span>: <span class="hljs-string">'银行卡支付'</span>,
+      },
+    ];
+    <span class="hljs-keyword">const</span> isActive = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">const</span> htmlString = <span class="hljs-string">'&lt;div&gt;&lt;h1 style="text-align: center;"&gt;xxx公司供应商合同&lt;/h1&gt;&lt;div&gt;&lt;div&gt;&lt;span&gt;买方名称&lt;/span&gt;&lt;textarea rows="1" cols="30" id="buyer" onkeyup="onKeyUpTextArea(\'buyer\')" style="resize: horizontal;vertical-align: middle;width: 80px;"&gt;xxxx&lt;/textarea&gt;&lt;span&gt;卖方名称&lt;/span&gt;&lt;textarea rows="1" cols="30" id="salername" onkeyup="onKeyUpTextArea(\'salername\')" style="resize: horizontal;vertical-align: middle;width: 80px;"&gt;xxxx&lt;/textarea&gt;&lt;span&gt;合同签订日期&lt;/span&gt;&lt;input type="text" id="contractsign" value="2019-03-13" actype="date" style="width: 90px"&gt;&lt;span&gt;合同开始日期&lt;/span&gt;&lt;input type="text" id="contractstr" value="2019-03-13" actype="date" style="width: 90px"&gt;&lt;span&gt;合同结束日期&lt;/span&gt;&lt;input type="text" id="contractend" value="2019-03-13" actype="date" style="width: 90px"&gt;&lt;span&gt;付款条件&lt;/span&gt;&lt;select id="payterm" class="select ac-select" onchange="onChangeSelect()"&gt;&lt;option name="payterm" value="0" selected=""&gt;现金支付&lt;/option&gt;,&lt;option name="payterm" value="1"&gt;微信支付&lt;/option&gt;,&lt;option name="payterm" value="2"&gt;支付宝支付&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;&lt;div class="form"&gt;&lt;div class="row"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;'</span>;
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"demoPadding"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.saveFunc}</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{marginLeft:</span>'<span class="hljs-attr">20px</span>',<span class="hljs-attr">marginBottom:</span>"<span class="hljs-attr">10px</span>"}}&gt;</span>保存<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AcEditorShow</span>
+          <span class="hljs-attr">htmlString</span>=<span class="hljs-string">{htmlString}</span> // 用 <span class="hljs-attr">AcEditorShow</span> 生成的<span class="hljs-attr">html</span>字符串
+          <span class="hljs-attr">editorId</span>=<span class="hljs-string">"showId"</span> // 组件 <span class="hljs-attr">id</span>
+          <span class="hljs-attr">isActive</span>=<span class="hljs-string">{isActive}</span> // 组件是否可以操作
+          <span class="hljs-attr">defaultData</span>=<span class="hljs-string">{defaultData}</span> // 替换组件默认值
+          <span class="hljs-attr">waterMarkerText</span>=<span class="hljs-string">"用友网络"</span> // 添加水印
+          // 设置<span class="hljs-attr">ref</span>属性
+          <span class="hljs-attr">onRef</span>=<span class="hljs-string">{(ref)</span> =&gt;</span> {
+            this.child = ref;
+          }}
+        /&gt;
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    );
+  }
+}
+export default Demo2;
+
+</span></code></pre><p>2.AcEditorPDF 使用</p>
+<pre class="hljs"><code>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo3</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+  render() {
+    <span class="hljs-keyword">const</span> defaultData = [
+      {
+        <span class="hljs-attr">direction</span>: <span class="hljs-string">'horizontal'</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'select'</span>,
+        <span class="hljs-attr">id</span>: <span class="hljs-string">'payterm'</span>,
+        <span class="hljs-attr">data</span>: <span class="hljs-string">'微信支付|||支付宝支付|||银行卡支付|||现金支付'</span>,
+        <span class="hljs-attr">defaultValue</span>: <span class="hljs-string">'银行卡支付'</span>,
+      },
+    ];
+    <span class="hljs-keyword">const</span> isActive = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">const</span> htmlString = <span class="hljs-string">'&lt;div&gt;&lt;h1 style="text-align: center;"&gt;xxx公司供应商合同&lt;/h1&gt;&lt;div&gt;&lt;div&gt;&lt;span&gt;买方名称&lt;/span&gt;&lt;textarea rows="1" cols="30" id="buyer" onkeyup="onKeyUpTextArea(\'buyer\')" style="resize: horizontal;vertical-align: middle;width: 80px;"&gt;xxxx&lt;/textarea&gt;&lt;span&gt;卖方名称&lt;/span&gt;&lt;textarea rows="1" cols="30" id="salername" onkeyup="onKeyUpTextArea(\'salername\')" style="resize: horizontal;vertical-align: middle;width: 80px;"&gt;xxxx&lt;/textarea&gt;&lt;span&gt;合同签订日期&lt;/span&gt;&lt;input type="text" id="contractsign" value="2019-03-13" actype="date" style="width: 90px"&gt;&lt;span&gt;合同开始日期&lt;/span&gt;&lt;input type="text" id="contractstr" value="2019-03-13" actype="date" style="width: 90px"&gt;&lt;span&gt;合同结束日期&lt;/span&gt;&lt;input type="text" id="contractend" value="2019-03-13" actype="date" style="width: 90px"&gt;&lt;span&gt;付款条件&lt;/span&gt;&lt;select id="payterm" class="select ac-select" onchange="onChangeSelect()"&gt;&lt;option name="payterm" value="0" selected=""&gt;现金支付&lt;/option&gt;,&lt;option name="payterm" value="1"&gt;微信支付&lt;/option&gt;,&lt;option name="payterm" value="2"&gt;支付宝支付&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;ul&gt;&lt;li&gt;&lt;div class="form"&gt;&lt;div class="row"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;'</span>;
+    <span class="hljs-keyword">return</span> (
+      &lt;div className="demoPadding"&gt;
+        &lt;div style={{
+          marginLeft: '20px',
+          marginBottom: '10px'
+        }}&gt;
+          &lt;AcEditorPDF
+            pdfId="demo3EditorId"
+            title={&lt;button&gt;打印&lt;/button&gt;}
+          /&gt;
+        &lt;/div&gt;
+        &lt;AcEditorShow
+          htmlString={htmlString} // 用 AcEditorShow 生成的html字符串
+          editorId="demo3EditorId" // 组件 id
+          isActive={isActive} // 组件是否可以操作
+          defaultData={defaultData} // 替换组件默认值
+          waterMarkerText="用友网络" // 添加水印
+        /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default Demo3;
+
+</code></pre><h2 id="代码演示">代码演示</h2>
+<h2 id="api">API</h2>
+<h3 id="aceditorsany-api">AcEditorSany API</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>editorId</td>
+<td>string</td>
+<td>必填项</td>
+<td>文本编辑器唯一id</td>
+</tr>
+<tr>
+<td>onRef</td>
+<td>function</td>
+<td>非必须</td>
+<td>设置ref属性</td>
+</tr>
+<tr>
+<td>htmlString</td>
+<td>string</td>
+<td>&quot;&quot;</td>
+<td>文本编辑器默认字符串</td>
+</tr>
+<tr>
+<td>height</td>
+<td>string</td>
+<td>&quot;0px&quot;</td>
+<td>文本编辑器默认最小高</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aceditorshow-api">AcEditorShow API</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>editorId</td>
+<td>string</td>
+<td>必填项</td>
+<td>展示文本内容组件唯一id</td>
+</tr>
+<tr>
+<td>onRef</td>
+<td>function</td>
+<td>非必须</td>
+<td>设置ref属性</td>
+</tr>
+<tr>
+<td>htmlString</td>
+<td>string</td>
+<td>&quot;&quot;</td>
+<td>展示文本内容</td>
+</tr>
+<tr>
+<td>isActive</td>
+<td>boolean</td>
+<td>true</td>
+<td>文本内容可交互</td>
+</tr>
+<tr>
+<td>defaultData</td>
+<td>array</td>
+<td>[]</td>
+<td>文本内容被替换信息</td>
+</tr>
+<tr>
+<td>waterMarkerText</td>
+<td>string</td>
+<td>“”</td>
+<td>生成水印</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aceditorpdf-api">AcEditorPDF API</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pdfId</td>
+<td>string</td>
+<td>必填项</td>
+<td>被打印部分id</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>element</td>
+<td>&quot;打印&quot;</td>
+<td>打印按钮</td>
+</tr>
+</tbody>
+</table>
+<h2 id="注意事项">注意事项</h2>
+<p>暂无</p>
+<h2 id="更新日志">更新日志</h2>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>
