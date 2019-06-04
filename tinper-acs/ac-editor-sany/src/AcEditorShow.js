@@ -1,15 +1,15 @@
-/* eslint-disable no-multiple-empty-lines,spaced-comment,no-multi-spaces,no-unused-vars,import/extensions,no-restricted-syntax,react/prop-types */
+/* eslint-disable no-multiple-empty-lines,spaced-comment,no-multi-spaces,no-unused-vars,import/extensions,no-restricted-syntax,react/prop-types,react/forbid-prop-types,react/no-unused-prop-types,react/sort-comp,react/destructuring-assignment,prefer-destructuring,no-param-reassign,prefer-const,react/jsx-tag-spacing,object-curly-newline */
 import React, { Component } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import DatePicker from 'tinper-bee/lib/Datepicker';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 
-import { initSelect, initRadio, initCheckbox } from './utils';
+import { initSelect, initRadio, initCheckbox, arrayObjClear, getStringLenght } from './utils';
 
-import './index.less';
+import './AcEditorShow.less';
 
-const formatRule = 'YYYY-MM-DD';
+const formatRule = 'YYYY年MM月DD日';
 
 
 const propTypes = {
@@ -35,19 +35,12 @@ class AcEditorShow extends Component {
       currentDateLeft: '0px',
       currentDateTop: '0px',
     };
-    window.onChangeSelect = () => this.onChangeSelect();
-    window.onClickRadio = id => this.onClickRadio(id);
-    window.onClickCheckbox = id => this.onClickCheckbox(id);
-    window.onKeyUpTextArea = id => this.onKeyUpTextArea(id);
   }
 
 
   componentWillReceiveProps(nextProps) {
-    const { htmlString } = this.props;
-    // 阅览弹框
-    if (nextProps.isShow && (htmlString !== nextProps.htmlString)) {
-      this.initContent(nextProps);
-    }
+    // todo 待优化
+    this.initContent(nextProps);
   }
 
   componentDidMount() {
@@ -64,6 +57,7 @@ class AcEditorShow extends Component {
       htmlString, editorId, isActive = true, defaultData, waterMarkerText,
     } = param;
 
+    this.setState({ idList: defaultData });
     document.getElementById(editorId).innerHTML = htmlString;
 
     // 添加水印
@@ -73,74 +67,71 @@ class AcEditorShow extends Component {
 
     // 修改默认值
     if (defaultData && Array.isArray(defaultData) && defaultData.length > 0) {
-
+      // 插入组件的类型 (text,select,radio,checkbox,date)
       for (const item of defaultData) {
-        // 插入组件的类型 (text,select,radio,checkbox,date)
-        const {
-          type, field: id, data, defaultValue, direction,
-        } = item;
 
-        const doc = document.getElementById(id);
+        const { type, field, data, defaultValue, } = item;
+        // const doc = document.getElementById(field);
 
+        let doc;
+        try {
+          doc = document.querySelector('#' + editorId + ' #' + field.toString());
+        } catch (err) {
+          doc = document.getElementById(field);
+        }
         // id是否存在
         if (!doc) {
           continue;
         }
-        // 日期直接修改值
-        if (type === 'date' &&  defaultValue) {
-          doc.setAttribute('value', defaultValue);
-          continue;
-        }
-
-        // 文本类型
-        if (type === 'text'  && defaultValue) {
-          doc.innerHTML = defaultValue;
-          continue;
-        }
-
+        // 用于包裹 select radio checkbox
         const newDoc = document.createElement('span');
-        // 更改select
-        if (type === 'select' && data && defaultValue) {
-          newDoc.innerHTML = initSelect({
-            data: data.split('|||'),
-            id,
-            defaultValue,
-          });
-        }
-        // 更改radio，
-        if (type === 'radio' && data && defaultValue) {
-          newDoc.innerHTML = initRadio({
-            data: data.split('|||'),
-            id,
-            defaultValue,
-            direction,
-          });
+        let status = false; // 是否创建新元素
+
+        switch (type) {  // 判断组件类型
+          case 'date': // 日期直接修改值
+          case 'text':  // 文本类型
+            // if(defaultValue)
+            doc.setAttribute('value', defaultValue);
+            const width = defaultValue ? `${getStringLenght(defaultValue) * 7 + 60}px` : '60px';
+            doc.style.width = width;
+            break;
+          case 'textarea': // 多行文本
+            doc.innerHTML = defaultValue.replace(/↵/g, '&#13;&#10;'); // 替换回车
+            break;
+          case 'select':
+            newDoc.innerHTML = initSelect({
+              ...item,
+              data: data.split('|||'),
+            });
+            status = true;
+            break;
+          case 'radio':
+            newDoc.innerHTML = initRadio({
+              ...item,
+              data: data.split('|||'),
+            });
+            status = true;
+            break;
+          case 'checkbox':
+            newDoc.innerHTML = initCheckbox({
+              ...item,
+              data: data.split('|||'),
+            });
+            status = true;
+            break;
+          default:
         }
 
-        // 更改checkbox，
-        if (type === 'checkbox' && data && defaultValue) {
-          newDoc.innerHTML = initCheckbox({
-            data: data.split('|||'),
-            id,
-            defaultValue,
-            direction,
-          });
-        }
-        // 有子节点才替换
-        if (defaultValue && newDoc.firstElementChild) {
+        if (status && newDoc.firstElementChild && doc.parentNode) { // 有子节点才替换
           doc.parentNode.replaceChild(newDoc.firstElementChild, doc);
         }
+
       }
     }
 
     // 是否让组件 disabled
     if (!isActive) {
       const activeDoc = document.getElementById(editorId);
-      // 修改 textarea
-      const textAreaList = activeDoc.getElementsByTagName('textarea');
-      for (const item of textAreaList) {
-        item.setAttribute('disabled', true);
-      }
       // 修改 input
       const inputList = activeDoc.getElementsByTagName('input');
       for (const item of inputList) {
@@ -152,120 +143,125 @@ class AcEditorShow extends Component {
         item.setAttribute('disabled', true);
       }
     }
+
+    window.onChangeSelect = function (event) { // select 选中事件
+      const target = event.target;
+      const index = target.selectedIndex;
+
+      const options = document.getElementsByName(target.id);
+      for (let i = 0; i < options.length; i += 1) {
+        options[i].removeAttribute('selected');
+      }
+      target[index].setAttribute('selected', true);
+    };
+
+    window.onClickRadio = function (event) {   // radio 点击事件
+      const target = event.target;
+      const id = target.getAttribute('name');
+      const radios = document.getElementsByName(id);
+      for (let i = 0; i < radios.length; i += 1) {
+        radios[i].removeAttribute('checked');
+      }
+      target.setAttribute('checked', true);
+    };
+
+    window.onClickCheckbox = function (event) { // checkbox 点击事件
+      const target = event.target;
+      const checked = target.getAttribute('checked');
+      if (!checked) {
+        target.setAttribute('checked', true);
+      } else {
+        target.removeAttribute('checked');
+      }
+    };
+
+    window.onKeyUpInput = function (event) { // input 根据输入框的值自动改变宽度
+      const target = event.target;
+      const { value } = target;
+      const width = value ? (getStringLenght(value) * 7 + 60) + 'px' : '60px';
+      target.style.width = width;
+    };
+
   };
 
 
   //保存方法回调
   getHtml2String = () => {
-    const idList = this.getFormId();
-    const doc = document.getElementById(this.props.editorId).innerHTML;
+    const { idList } = this.state;
+    const list = idList.filter(item => document.getElementById(item.field));  // 查看id是否真的有效
+    const clearList = arrayObjClear(list, 'field');  // 对象去重
+    const updList = this.updateIdList(clearList);  // 替换默认值和更新修改后的值
+    const doc = document.getElementById(this.props.editorId).innerHTML; // 获取dom
     return {
-      idList,
       doc,
+      idList: updList,
     };
   };
 
 
-  // 获取id值
+  // 重新修改组件默认值
+  updateIdList = array => array.map((item) => {
+    const { field, type } = item;
+    const doc = document.getElementById(field);
 
-  getFormId = () => {
-    const result = [];
-    const { editorId } = this.props;
-    const activeDoc = document.getElementById(editorId);
-    const inputList = activeDoc.getElementsByTagName('input');
-    // 获取 input 内容
-    for (const item of inputList) {
-      const type = item.getAttribute('type');
-      let field = item.getAttribute('id');
-      let value = item.getAttribute('value');
-      const { checked } = item;
-      if (type === 'radio' && checked) {
-        field = item.getAttribute('name');
-        value = item.parentNode.textContent.trim();
-      }
-      if (field) {
-        result.push({
-          field,
-          value,
-        });
-      }
+    if (type === 'date' || type === 'text') {  // 文本类型 日期||普通文本
+      const textValue = doc.value;
+      item.data = textValue;
+      item.defaultValue = textValue;
+      doc.setAttribute('value', textValue); // 修改输入框里的内容
+    }
+
+    if (type === 'textarea') { // 多行文本输入
+      const { value } = doc;
+      doc.innerHTML = value;
+      item.data = value;
+      item.defaultValue = value;
     }
 
 
-    // 获取 textarea 内容
-    const textareaList = activeDoc.getElementsByTagName('textarea');
-    for (const item of textareaList) {
-      const field = item.getAttribute('id');
-      const value = item.value.trim();
-      if (field) {
-        result.push({
-          field,
-          value,
-        });
-      }
-    }
-
-    // 获取 select 内容
-    const selectList = activeDoc.getElementsByTagName('select');
-    for (const item of selectList) {
-      const field = item.getAttribute('id');
-      let value = '';
-      const options = item.getElementsByTagName('option');
-      for (const option of options) {
-        // 获取选中的slect
-        if (option.selected) {
-          value = option.innerText.trim();
-          break;
+    if (type === 'radio') {  // 单选框
+      let data = [];
+      let defaultValue = '';
+      const radios = document.getElementsByName(field);
+      // 对单选框 重新赋值
+      for (let i = 0; i < radios.length; i += 1) {
+        const checked = radios[i].getAttribute('checked');
+        const textValue = radios[i].parentNode.innerText;
+        data.push(textValue);
+        radios[i].setAttribute('value', textValue);
+        if (checked) { //修改默认选中值
+          defaultValue = textValue;
         }
       }
-      if (field) {
-        result.push({
-          field,
-          value,
-        });
+      item.data = data.join('|||');
+      item.defaultValue = defaultValue;
+    }
+
+    if (type === 'checkbox') {  // 单选框
+      let data = [];
+      let defaultValue = [];
+      const checkboxs = document.getElementsByName(field);
+      // 对单选框 重新赋值
+      for (let i = 0; i < checkboxs.length; i += 1) {
+        const checked = checkboxs[i].getAttribute('checked');
+        const textValue = checkboxs[i].parentNode.innerText;
+        data.push(textValue);
+        checkboxs[i].setAttribute('value', textValue);
+        if (checked) { //修改默认选中值
+          defaultValue.push(textValue);
+        }
       }
+      item.data = data.join('|||');
+      item.defaultValue = defaultValue.join('|||');
     }
-    return result;
-  };
 
-
-  // 下拉框选择
-  onChangeSelect = () => {
-    const target = event.target;
-    const index = target.selectedIndex;
-    const options = document.getElementsByName(target.id);
-    for (let i = 0; i < options.length; i += 1) {
-      options[i].removeAttribute('selected');
+    if (type === 'select') { // 下拉框
+      const selectedIndex = doc.selectedIndex; // 选中索引
+      item.defaultValue = doc.options[selectedIndex].value; // 选中值
     }
-    target[index].setAttribute('selected', true);
-  };
+    return item;
+  });
 
-  // 实时更新checkbox 值
-  onClickCheckbox = () => {
-    const target = event.target;
-    const checked = target.getAttribute('checked');
-    if (!checked) {
-      target.setAttribute('checked', true);
-    } else {
-      target.removeAttribute('checked');
-    }
-  };
-
-  // 实时更新 radio值
-  onClickRadio = (id) => {
-    const target = event.target;
-    const radios = document.getElementsByName(id);
-    for (let i = 0; i < radios.length; i += 1) {
-      radios[i].removeAttribute('checked');
-    }
-    target.setAttribute('checked', true);
-  };
-
-  // 实时更新 TextArea值
-  onKeyUpTextArea = (id) => {
-    const doc = document.getElementById(id);
-    doc.innerHTML = doc.value;
-  };
 
   // 选择日期，将日期的值赋值给 选中的input
   onChangeDate = (param) => {
@@ -324,18 +320,13 @@ class AcEditorShow extends Component {
 
 
   render() {
-    const {
-      showDate, currentDateLeft, currentDateTop,
-    } = this.state;
+    const { showDate, currentDateLeft, currentDateTop, } = this.state;
     const { editorId } = this.props;
 
     return (
-      <div className="editor-sany">
+      <div className="editor-sany-show">
         <div>
-          <div
-            id={editorId}
-            onClick={this.onClickEditBody}
-          />
+          <div id={editorId} onClick={this.onClickEditBody}/>
         </div>
         <div className="ac-date-body">
           <DatePicker

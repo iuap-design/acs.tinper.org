@@ -29,11 +29,11 @@ RefComboBoxBaseUI
     
     带有输入框，下拉选择参照。默认，需要配合使用下面两个
 
-ComboStore
+[Deprecated]ComboStore
     
     可走缓存数据的下拉。
 
-ComboItem
+[Deprecated]ComboItem
     
     下拉的单条数据
 
@@ -43,44 +43,64 @@ ComboItem
 
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
-className |`string`|空 | 参照class样式，作用于整个参照的样式，默认为空。 'ref-walsin-modal'特殊样式| 否
-style| `object`|{} | 参照style样式，作用域整个参照最外层和下拉panel|否
-displayField |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否如：`'人员姓名：{refname}，编号：{refcode}'`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}| 否
-valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
-value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值|否
-sliderWidth|`number`或者`String`| 'auto'| 下拉菜单的宽度|否
-comboboxStoreData| `array` | [] | 下拉参照要展示dom集合，搭配<ComboItem>使用 | 否
-storeData| `array` | [] | 下拉参照数据集合，不传入storeData会导致onClickItemInner不能返回对应的完整数据 | 否
-onClickItemInner | `function(record)|function(value,displayValue,e)`| -- | 下拉选中，返回缓存的数据对应的数据。在没有传storeData情形下，不能返回完整数据，只能返回数据键值，展示值和event| 否
-onChangeFormControl| `function(value)` | - | 输入框输入值回调，value是输入内容或者清空回调 | 否
-onPopupVisibleChange| `function(popupVisible,sliderSearchVal)` | -| 下拉面板状态改变时回调函数| 否
-onSelect| `function(currentIndex)` | - | 翻页回调，返回当前页面| 否
+ className |`string`|空 | 参照class样式，作用于整个参照的样式，默认为空。 'ref-walsin-modal'特殊样式| 否
+ theme| `String` | 'ref-red' | 启用参照默认样式 | 否
+ style| `object`|{} | 参照style样式|否
+ dropdownStyle|object| - | 下拉菜单的样式|否
+ disabled |  boolean | false |是否禁用 |否 |
+ defaultOpen | boolean | -| 默认是否打开 | 否 |
+ dropdownClassName | string | - |下拉菜单的 className 属性 | 否 |
+dropdownMatchSelectWidth |boolean | true | 下拉菜单和选择器同宽 | 否 |
+dropdownStyle | object | - |下拉菜单的样式 | 否 |
+notFoundContent |  String | '无匹配结果' |设定搜索不到数据显示的内容 |否 |
+multiple |  boolean | false | 支持多选|否 |
+placeholder |  string | - | 选择框默认文字 |否 |
+searchPlaceholder | string | - |  搜索框默认文字 | 否 |
+maxTagCount | number | - |否 最多显示的tag数 |  |
+maxTagPlaceholder | ReactNode/function(omittedValues) | - | 隐藏 tag 时显示的内容 | 否 |
+searchValue | string | - |搜索框值 | 否 |
 pageCount | `number` | 10 | 总页数 | 否
 currPageIndex| `number` | 0 | 当前页码 | 否
 loading | `boolean` | -- | 是否展示加载 | 否
 totalElements | `number` | 0 | 总条数 | 否
-theme| `String` | 'ref-red' | 参照主题 | 否
-
-## ComboStore 增量 API
-
-><span style="color: red; font-size: 15px;">注意:以下参数为 `<ComboStore/>`独有。对其他两个类型的引用无效。</span>
-
-参数 | 类型 |默认值| 说明 | 必选
----|---|--- | --- | ---
-topPagination| `bool`| false
-lang| `String`| 'zh_CN'| 分页多语['zh_CN','en_US','zh_TW']| 否
-
-
-
-## ComboItem 增量 API
-
-参数 | 类型 |默认值| 说明 | 必选
----|---|--- | --- | ---
-active| `bool`| false | 该条数据是否是选中 | 否
-text| `String`| ''| 该条展示数据 | 否
-value | `String`| ''| data-value,自定义属性 | 否
-
+displayField |<code>string 或 function</code> | '{refname}' |下拉显示的内容的格式；<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为storeData中的数据项。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}| 否 | 
+inputDisplay |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数有两种：1：来源于value或者defaultValue；2：下拉选中storeData的数据项 <br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}。注意inputDisplay有字段限制| 否 |
+valueField |``string``|'refpk' |待提交的value的键。指定storeData数据项的键。要求具有唯一性| 否
+| defaultValue | string/string\[] | - | 指定默认选中的条目。格式同value |否 |
+value| `string/array`|-|指定当前选中的条目。可以是字符串格式或者数组格式。（一）字符串格式：其格式必须满足'{"refname":"","refpk":""}',refname是展示input框上的内容，格式自定义，多选以逗号隔开；refpk对应的是refname每项的键值，这个值要与valueField指定的值一样，此时使用inputDisplay注意，有字段限制。（二）数组格式：[{value:'',label:'',refname:''...}]，必须含有valueField指定的字段，展示按照inputField | string或者[] | - |
+onPaginationSelect| `function(currentIndex)` | - | 翻页回调，返回当前页面。替换之前的onChangeFormControlt| 否
+onSeach| `function(value)` | - | 搜索框输入值回调，value是输入内容 。替换之前的onForm| 否
+onSelectorChange | `function(status,id,item,selectedArray)`| -- |当input框值发生改变会回调此函数。status：选中还是删除该节点，id：valueField指定的字段值，item：该条完整数据，selectedArray：当前选中的全部数据。触发的情形：1.清空操作，返回参数（false,null,null,[]）;2.单选或者多选下拉选中数据；3.多选下删除单个数据；4.多选下delete删除数据| 否
+[Deprecated]sliderWidth|`number`或者`String`|  下拉菜单的宽度|否
+[Deprecated]comboboxStoreData| `array` | [] | 下拉参照要展示dom集合，搭配<ComboItem>使用 | 否
+[Deprecated]onClickItemInner | `function(id, item, status, selectedArray)`| -- | 下拉选中，返回缓存的数据对应的数据。在没有传storeData情形下，不能返回完整数据，只能返回数据键值，展示值和event。id是键，item完整数据，status是选中还是删除，selectedArray是当前选中全部数据| 否
+[Deprecated]onChangeFormControl| `function(value)` | - | 输入框输入值回调，value是输入内容或者清空回调 | 否
+[Deprecated]onSelect| `function(currentIndex)` | - | 翻页回调，返回跳转页面| 否
+[Deprecated]onPopupVisibleChange| `function(popupVisible,sliderSearchVal)` | -| 下拉面板状态改变时回调函数| 否
 
 ## 注意事项
+
+1.value vs displayField vs inputDisplay
+
+- displayField指定下拉列表menu的每条数据如何展示，可以带有icon
+```js
+displayField : (record) => {
+    return 
+    <div > 
+       <Icon type="uf-personin-o" style={{ color: 'red' }} />     {record.refname}-{record.refcode}-{record.type}
+    </div>
+}
+```
+- inputDisplay 指定input框上的值如何展示，inputDisplay与value的格式有很大关系。
+   -  字符串格式：value='{"refname":"用友集团1,用友集团2","refpk":"org1,org2"}'
+     inputDisplay指定的字段只能包含refname和refpk。
+   - 数组格式： value=[{label1:'label1',label2:'',label3:'',....,[valueField]:'键值'}]
+      inputDisplay指定的字段可以是label1~[valueField]
+```JS
+value:[{refname:'用友',refpk:'org1',id:'no.1'}]
+inputDisplay:(record) =>{
+  return `${record.refname}-${record.id}`
+}
+```
 
 ## 更新日志

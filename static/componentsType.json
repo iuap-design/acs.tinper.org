@@ -13,7 +13,8 @@
         "ac-pagelayout"
     ],
     "others":[
-        "富文本编辑器sany版本",
+        "ac-hand-table",
+        "ac-editor-sany",
         "ac-search-panel",
         "ac-spreadsheet",
         "ac-toast",

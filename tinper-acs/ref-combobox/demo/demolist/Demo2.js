@@ -9,7 +9,9 @@ import React, { Component } from 'react';
 
 import Form from "bee-form";
 import RefComboBoxBaseUI, { ComboStore,ComboItem } from '../../src';
-import '../../src/index.less';
+// import '../../src/index.less';
+import '../../lib/index.css';
+
 import Button from 'bee-button';
 import 'bee-button/build/Button.css';
 import Icon from 'bee-icon';
@@ -28,69 +30,25 @@ class Demo2 extends Component {
         this.state = {
           comboboxStoreData:[],//下拉的数据
           loading:false,
-          currentIndex:0,
-          value :'{"refpk":"5305416e-e7b4-4051-90bd-12d12942295b","refname":"北京总部-简"}',  //M0000000000002
+          currentIndex:1,
+          value :[{refname:'北京总部-简',code:"bj"},{refname:'test3',code:"yy3"}],  //M0000000000002
 
         };
-         //用于控制预加载的标记
-         this.loadCount = 0;
+        
       }
     componentDidMount(){
-        let {valueField,displayField} = op;
-        let value= JSON.parse(this.state.value).refname; //以上三个值都是传进参照的值
-        this.setState({
-            loading:true
-        })
-        let comboboxStoreData = storeData.map((item, index) => {
-            let text = '';
-            if (typeof displayField === 'string') {
-              text = displayField.format(item)
-            } else if (typeof displayField === 'function') {
-              text = displayField(item);
-            } else {
-              text = item.refname;
-            }
-            return <ComboItem 
-            active={item[valueField] === value || item.refname === value} 
-            key={`${item[valueField]}-index`} 
-            text={text} 
-            value={item[valueField]} 
-            />
-          });
-          this.setState({ 
-            comboboxStoreData,
-            loading:false,
-          });
+       
+          
     }
-    changeData(value){
-        let {valueField,displayField} = op;
+   
+    onClickItem=(id, item, status, selectedArray)=>{
+        console.log('clickItem',status,selectedArray)
+        let val = [];
+        let temp = JSON.stringify(selectedArray)
+        val = [].concat(JSON.parse(temp))
         this.setState({
-            loading:true
+          value:val
         })
-        let comboboxStoreData = storeData.map((item, index) => {
-            let text = '';
-            if (typeof displayField === 'string') {
-              text = displayField.format(item)
-            } else if (typeof displayField === 'function') {
-              text = displayField(item);
-            } else {
-              text = item.refname;
-            }
-            return <ComboItem 
-            active={item[valueField] === value || item.refname === value} 
-            key={`${item[valueField]}-index`} 
-            text={text} 
-            value={item[valueField]} 
-            />
-          });
-          this.setState({ 
-            comboboxStoreData,
-            loading:false,
-          });
-    }
-    onClickItem=(record)=>{
-        console.log('clickItem',record)
-        this.changeData(record["refcode"])
     }
     onChangeFormControl  = (value) =>{
         console.log('搜索',value)
@@ -102,33 +60,11 @@ class Demo2 extends Component {
     onSelect = (currentIndex) =>{
         console.log('分页下拉',currentIndex);
         this.setState({
-            currentIndex:currentIndex-1
+            currentIndex:currentIndex
         })
     }
     clearFunc = () =>{
-        let {valueField,displayField} = op;
-        let comboboxStoreData = storeData.map((item, index) => {
-            let text = '';
-            if (typeof displayField === 'string') {
-              text = displayField.format(item)
-            } else if (typeof displayField === 'function') {
-              text = displayField(item);
-            } else {
-              text = item.refname;
-            }
-            return <ComboItem 
-            active={false} 
-            key={`${item[valueField]}-index`} 
-            text={text} 
-            value={item[valueField]} 
-            />
-          });
-          this.setState({ 
-            comboboxStoreData,
-          },()=>{
-        this.props.form.setFieldsValue({combobox:{"refname":'',"refpk":''}})
-
-          });
+      this.props.form.setFieldsValue({combobox2:[]})
     }
     render() {
         const { getFieldError, getFieldProps } = this.props.form;
@@ -136,16 +72,8 @@ class Demo2 extends Component {
         return (
             <div className="demoPadding">
                 <RefComboBoxBaseUI
-                    displayField={(record)=>{return `${record.refname}-haha`}}
-                    valueField={'refcode'}
+                    displayField={(record)=>{return `${record.refname}-hassha`}}
                     lang={'zh_CN'}
-                    {...getFieldProps('combobox', {
-                        initialValue: this.state.value,  //M0000000000002
-                        rules: [{
-                            message: '提示：请选择',
-                            pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
-                        }]
-                    })}
                     comboboxStoreData={comboboxStoreData}
                     storeData={storeData}
                     loading={loading}
@@ -156,14 +84,34 @@ class Demo2 extends Component {
                     pageCount={10}
                     currPageIndex={currentIndex}
                     totalElements={70}
+                    multiple
+                    valueField={'code'}
+                    {...getFieldProps('combobox2', {
+                      initialValue: this.state.value,  //M0000000000002
+                      rules: [{
+                          message: '提示：请选择',
+                          pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/
+                      }]
+                  })}
                 >
-                    <ComboStore
-                       {...op}
-                    />
                 </RefComboBoxBaseUI>
                 <span style={{ color: 'red' }}>
-                    {getFieldError('combobox')}
+                    {getFieldError('combobox2')}
+                    
                 </span>
+                <Button
+                      colors="primary"
+                      onClick={() => {
+                        this.props.form.validateFields((err, values) => {
+                            if (err) {
+                                alert("" + JSON.stringify(err));
+                                return false;
+                            }
+                            alert("" + JSON.stringify(values))
+                        });
+                    }}>
+                    提交
+              </Button>
                 <Button
                     colors="primary"
                     onClick={this.clearFunc}>

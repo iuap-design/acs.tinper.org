@@ -9,28 +9,23 @@ class PreviewModal extends Component {
     super(props);
   }
 
-  // 获取插入的表格的行数和列数
-  getShowInfo = () => {
-    this.onCancel();
-  };
-
   // 关闭弹框
   onCancel = () => {
-    this.props.colsePop('previewPopStatus');
+    this.props.onHideModal('previewStatus');
   };
 
   render() {
-    const { visible, htmlString } = this.props;
+    const { status, htmlString } = this.props;
     return (
       <EditorModal
         onInsert={this.getShowInfo}
-        visible={visible}
+        visible={status}
         cancel={this.onCancel}
         title="预览"
         width="1000px"
       >
         <AcEditorShow
-          isShow={visible}
+          isShow={status}
           htmlString={htmlString} // 用 AcEditorShow 生成的html字符串
           editorId="pop-content-preview" // 组件 id
           isActive // 组件是否可以操作

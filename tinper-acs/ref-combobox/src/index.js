@@ -1,334 +1,167 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { is, fromJS } from 'immutable';
-import InputGroup from 'bee-input-group';
-import FormControl from 'bee-form-control';
-import Trigger from 'rc-trigger';
-import 'rc-trigger/assets/index.css';
+import Select from 'menu-selector';
 import SliderPanel, { ComboItem } from './components/SliderPanel';
 import ComboStore from './components/ComboStore';
-import { refValParse } from './utils/utils';
 import './utils/polyfill';
 
 const propTypes = {
   className: PropTypes.string,
-  value: PropTypes.string,
-  displayField: PropTypes.oneOfType([PropTypes.string ,PropTypes.func]),
-  valueField: PropTypes.oneOfType([PropTypes.string ,PropTypes.func]),
-  sliderWidth : PropTypes.oneOfType([PropTypes.string ,PropTypes.number]),
-  onClickItemInner: PropTypes.func,
-  onChange: PropTypes.func,
+  defaultValue : PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  displayField: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  valueField: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  sliderWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onClickItemInner: PropTypes.func,//[Deprecated]
+  onSelectorChange:   PropTypes.func,
   style: PropTypes.object,
-  onSave: PropTypes.func,
-  comboboxStoreData:PropTypes.array,
-  storeData:PropTypes.array,
-  onChangeFormControl: PropTypes.func,
-  onFocusFormControl: PropTypes.func,
-  onSelect: PropTypes.func,
+  comboboxStoreData: PropTypes.array,//[Deprecated]
+  storeData: PropTypes.array,
+  onChangeFormControl: PropTypes.func, //[Deprecated]
+  onFocusFormControl: PropTypes.func,//[Deprecated]
+  onSearch :  PropTypes.func,
+  onSelect: PropTypes.func, //[Deprecated]
+  onPaginationSelect:  PropTypes.func,
 };
 
 const defaultProps = {
   className: '',
-  children: '',
+  children: null,
+  default:'',
   value: '',
   displayField: '{refname}',
   valueField: 'refpk',
   style: {},
-  onSave: () => { },
-  comboboxStoreData:[],
-  storeData:[],
-  onChangeFormControl:()=>{},
-  onFocusFormControl:()=>{},
-  onSelect:()=>{},
-  onClickItemInner:()=>{},
+  comboboxStoreData: [],//[Deprecated]
+  storeData: [],
+  onChangeFormControl: () => { },//[Deprecated]
+  onFocusFormControl: () => { },//[Deprecated]
+  onSearch:() =>{},
+  onSelect: () => { },//[Deprecated]
+  onPaginationSelect:() =>{},
+  onClickItemInner: () => { },//[Deprecated]
+  onSelectorChange:()=>{},
 };
 
 class RefComboBoxBaseUI extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSlider: false,
-      value: '',
-      displayValue: props.displayValue?props.displayValue:'',
-      dataStore: {}, //缓存的数据
-      slider: 'down',
-      filterText: '',
-      filtering: false,
-      sliderSearchVal: '',//是input的实时输入值，也是搜索的搜索内容
-      value: '',//是最终选择的数据项，必须是接口返回的数据，在进入与保存sliderSearchVal与value同步
-      popupVisible: false,
-      ...this.checkChildren(props) // {children, useSotre}
+
     };
 
   }
-  componentDidMount() {
-    let { value,storeData } = this.props;
-    this.afterLoad(this.fixDataToMap(storeData))
-    if (value) {
-      let refValue = refValParse(value);
-      this.setState({
-        displayValue: refValue.refname,
-        value: refValue.refpk,
-        sliderSearchVal: refValue.refpk,
-      });
-    }
-  }
-  componentWillReceiveProps(nextProps){
-    if(!is(nextProps.storeData,this.props.storeData)){
-      let data = this.fixDataToMap(nextProps.storeData)
-      this.afterLoad(data)
-    }
-    if(this.props.value !== nextProps.value){
-      this.matchValues(nextProps);
-    }
-  }
-  matchValues = (props) => {
-    let { value } = props;
-    if (value) {
-      let refValue = refValParse(value);
-      this.setState({
-        displayValue: refValue.refname,
-        value:refValue.refpk,
-        sliderSearchVal: refValue.refpk,
-      });
-    }
-    return;
-  }
-	/**
-	 * 检查子节点 返回过滤后的节点列表
-	 */
-  checkChildren = (props) => {
-    let porpsChildren = React.Children.toArray(props.children),
-      useStore = false,
-      children = [],
-      $$children = fromJS([]);
-    for (let i = 0; i < porpsChildren.length; i++) {
-      let item = porpsChildren[i];
-      if (item.type && item.type.name === 'ComboStore' || item.type && item.type.prototype === ComboStore.prototype) {
-        useStore = true;
-        children = [item];
-        break;
-      } else if (item.type && item.type.name === 'ComboItem' || item.type &&item.type.prototype === ComboItem.prototype ) {
-        children.push(item);
-      }
-    }
-    return { children, useStore }
-  }
+  /**
+   * @msg: 下拉展开或者关闭
+   * @param {type} 
+   * @return: 
+   */
+  onDropdownVisibleChange = (open) =>{
+    const {onPopupVisibleChange} = this.props;
 
-	/**
-	 * 数据选择
-	 */
-  onClickItem = (item, e) => {
-    const _this = this;
-    let dataStore = this.state.dataStore;
-    let { valueField, displayField, onClickItemInner} = _this.props;
-    let value = item.dataset.value,
-      displayValue = item.textContent,
-      record = dataStore[value];
-    if (record) {
-      if (typeof valueField === 'string') {
-        value = record[valueField];
-      } else {
-        value = valueField(record)
-      }
-      if (typeof displayField === 'string') {
-        displayValue = displayField.format(record)
-      } else {
-        displayValue = displayField(record)
-      }
-    }
-    _this.setState({
-      displayValue: displayValue,
-      filterText: displayValue,
-      filtering: false,
-      value: value,
-      sliderSearchVal:value,
-      popupVisible: false,
-    }, () => {
-      _this.handleChange(value);
-      if (onClickItemInner && record) {
-        onClickItemInner(record)
-      }else{
-        onClickItemInner(value,displayValue,e)
-      }
-    });
   }
-  fixDataToMap = (data) => {
-    if(!data || !data.length) return {};
-    let { valueField = 'refpk' } = this.props;
-    let dataMap = {};
-    data.forEach(item => {
-        dataMap[item[valueField]] = item
-    })
-    return dataMap;
+  /**
+   * @msg: selector的值改变
+   * @param {type} 
+   * @return: 
+   */
+  selectorChange = (status, id, item, selectedArray) => {
+    const { onClickItemInner,onSelectorChange } = this.props;
+    onClickItemInner(id, item, status, selectedArray);//[Deprecated]
+    onSelectorChange(status,id,item,selectedArray);
   }
-  afterLoad = (dataMap) => {
-    this.setState({
-      dataStore: dataMap
-    });
+  /**
+   * @msg: 分页跳转
+   * @param {type} 
+   * @return: 
+   */
+  paginationSelect = (index) =>{
+    const {onSelect,onPaginationSelect} = this.props;
+    onSelect(index);//[Deprecated]
+    onPaginationSelect(index);
   }
-  handleChange = (values) => {
-    const { onChange } = this.props;
-    let { displayValue, value } = this.state;
-    if (onChange) {
-      onChange(JSON.stringify({
-        refpk: value,
-        refname: displayValue
-      }));
-    }
-  }
-  onChangeFormControl = (value) => {
-    let {onChangeFormControl} = this.props;
-    onChangeFormControl(value)
-    if (this.state.filtering) {
-      this.setState({
-        filterText: value,
-        sliderSearchVal:value,
-        popupVisible:true
-      });
-    } else {
-      this.setState({
-        filterText: value,
-        filtering: true,
-        sliderSearchVal:value,
-        popupVisible:true
-      });
-    }
-   
-  }
-  onFocusFormControl = () =>{
-    let {onFocusFormControl} = this.props;
-    onFocusFormControl(this.state.popupVisible)
-  }
-  clearAll = (e) => {
-    // window.event? window.event.cancelBubble = true : e.stopPropagation();
-    this.setState({
-      displayValue: '',
-      filterText: '',
-      value: '',
-    },()=>{
-      this.setState({popupVisible:true},()=>{
-        this.props.onChangeFormControl('');
-      })
-    });
-  }
-  onPopupAlign = (e,value) =>{
-    this.setState({sliderSearchVal:this.state.value});
-  }
-  onPopupVisibleChange = () => {
-    let {onPopupVisibleChange = () =>{}} = this.props;
-    onPopupVisibleChange(this.state.popupVisible,this.state.sliderSearchVal)
-    if (this.state.filtering && this.state.popupVisible) {
-      //手动输入不算数
-      this.setState({
-        popupVisible: !this.state.popupVisible,
-        displayValue: '',
-        filterText: '',
-        sliderSearchVal: '',
-        value: '',
-      });
-      this.props.onClickItemInner({});
-    } else {
-      this.setState({
-        popupVisible: !this.state.popupVisible,
-      })
-    }
-
+  /**
+   * @msg: 搜索
+   * @param {type} 
+   * @return: 
+   */
+  onSearch = (value) =>{
+    const {onChangeFormControl,onSearch } =  this.props;
+    onChangeFormControl(value);//[Deprecated]
+    onSearch(value);
   }
   render() {
-    const _this = this;
-    let { className, sliderWidth, 
+    const {
+      className,
+      children,
       style,
-      theme='ref-red',
-      comboboxStoreData=[],
-      pageCount=1,
-      currPageIndex=0,
-      onSelect,
+      theme = 'ref-red',
+      pageCount = 1,
+      currPageIndex = 0,
+      totalElements = 0,
+      storeData,
+      multiple = false,
+      displayField,
+      inputDisplay,
+      value,
+      defaultValue,
+      searchValue,
+      defaultopen,
+      disabled,
+      dropdownStyle,
+      notFoundContent,
+      placeholder,
+      searchPlaceholder,
+      maxTagCount,
+      maxTagPlaceholder,
       loading,
-      totalElements=0,
+      valueField
     } = this.props;
-    let { showSlider, displayValue, children, useStore, slider,
-      filtering, filterText
-    } = this.state;
-    let inputVal = filtering ? filterText.trim() : displayValue.trim();
-    const builtinPlacements = {
-      bottomLeft: {
-        points: ['tl', 'tl'],
-      },
-    };
-    let innerTrigger =
-      <SliderPanel
-        show={true}
-        style={{
-          width: sliderWidth || 'auto',
-        }}
-        slider={slider}
-        onClickItem={_this.onClickItem}
-      >  
-        {useStore ?
-          children.map((item) => {
-            return React.cloneElement(item, {
-              ...item.props,//对于comboboxstore传进来的参数
-              // reload: showSlider,
-              comboboxStoreData,
-              pageCount,
-              currPageIndex,
-              onSelect,
-              loading,
-              totalElements,
-            });
-          }) : children.map((item) => {
-            return item;
-          })}
-      </SliderPanel>
+    let {topPagination, dropdownClassName,} = this.props;//兼容之前版本topPagination放在childrencomboStore上了
+    if (children && children.props.topPagination) topPagination = children.props.topPagination;
+    dropdownClassName =  dropdownClassName?  dropdownClassName+' ref-red' : 'ref-red'
     return (
-      <div className={`${theme} ${className} ref-combobox`}
-        style={{
-          ...style,
-          width: style.width || 200
-        }}>
-        <Trigger
-          popupPlacement="bottomLeft"
-          action={['click']}
-          popupAlign={{
-            overflow: {
-              adjustX: 1,
-              adjustY: 1,
-            },
+      <div className={`${theme} ${className} ref-combobox`}>
+        <Select
+         style={{
+            ...style,
+            width: style.width || 300
           }}
-          mouseEnterDelay={0}
-          popupClassName={theme}
-          builtinPlacements={builtinPlacements}
-          popup={innerTrigger}
-          // /alignPoint={false}
-          onPopupAlign={this.onPopupAlign}
-          onPopupVisibleChange={this.onPopupVisibleChange}
-          popupVisible={this.state.popupVisible}
+          transitionName="rc-tree-select-dropdown-slide-up"
+          choiceTransitionName="rc-tree-select-selection__choice-zoom"
+          showSearch
+          allowClear
+          showMenuIcon //固定参数带有搜索，清空，menuIcon
+          disabled={disabled}
+          placeholder={placeholder}
+          searchPlaceholder={searchPlaceholder}
+          maxTagCount={maxTagCount}
+          maxTagPlaceholder={maxTagPlaceholder}
+          value={value}
+          defaultValue={defaultValue}
+          defaultopen={defaultopen}
+          searchValue={searchValue}
+          valueList={storeData}
+          valueField={valueField}
+          inputDisplay={inputDisplay}
+
+          dropdownClassName={dropdownClassName}
+          dropdownStyle={dropdownStyle}
+          loading={loading}
+          notFoundContent={notFoundContent}
+          topPagination={topPagination}
+          pageCount={pageCount}
+          currPageIndex={currPageIndex}
+          totalElements={totalElements}
+          multiple={multiple}
+          displayField={displayField}
+          onPaginationSelect={this.paginationSelect}
+          onSelectorChange={this.selectorChange}//为了配合ref-combobox的之前发版的操作
+          onSearch={this.onSearch}
+          onDropdownVisibleChange={this.onDropdownVisibleChange}
         >
-          <InputGroup simple style={{ width: '100%' }}>
-            <FormControl
-              type="text"
-              style={{
-                width: '100%'
-              }}
-              {
-              ...displayValue.trim() ? { readOnly: "readonly" } : ''
-              }
-              value={inputVal}
-              onChange={this.onChangeFormControl}
-              onFocus={this.onFocusFormControl}
-            />
-            <InputGroup.Button shape="border">
-              <span className="uf uf-navmenu" > </span>
-            </InputGroup.Button>
-            {!!inputVal && <InputGroup.Button className="clearAll" shape="border" style={{
-              cursor: 'pointer'
-            }}>
-              <span className={!inputVal ? '' : "uf uf-close-c"} onClick={e=>this.clearAll(e)} > </span>
-            </InputGroup.Button>
-            }
-          </InputGroup>
-        </Trigger>
+        </Select>
       </div>
     );
   }

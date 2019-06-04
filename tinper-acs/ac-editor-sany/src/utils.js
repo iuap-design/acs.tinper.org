@@ -1,6 +1,4 @@
-import React from 'react';
-import moment from 'moment';
-
+/* eslint-disable no-use-before-define */
 /**
  * 生成唯一字符串
  */
@@ -16,6 +14,7 @@ export function uuid() {
   s[13] = '-';
   s[18] = '-';
   s[23] = '-';
+  s[0] = 'abcdefghigklmnopqrst'.substr(Math.floor(Math.random() * 0x10), 1);
   return s.join('');
 }
 
@@ -50,9 +49,23 @@ export function initTable(rowNum, colNum) {
  */
 export function initInput(param) {
   // 输入框类型为文本
-  const { id, defaultValue } = param;
+  const { field, defaultValue } = param;
   const title = defaultValue || '';
-  return `<textarea rows="1" cols="30" id="${id}" onkeyup="onKeyUpTextArea('${id}')" style="resize: horizontal;vertical-align: middle;width: 80px;">${title}</textarea>`;
+  const width = title ? (getStringLenght(title) * 7 + 60) + 'px' : '60px';
+  return `<input id="${field}" type="text" value="${title}" onkeyup="onKeyUpInput(event)" acType="text" style="width: ${width}"/>`;
+}
+
+
+/**
+ * 获取 输入框的 html 字符串
+ * @param param
+ * @returns {string}
+ */
+export function initTextarea(param) {
+  // 输入框类型为文本
+  const { field, defaultValue } = param;
+  const title = defaultValue || 'XXX';
+  return `<textarea  id="${field}" acType="textarea" style="width: 100%;height: 60px">${title}</textarea>`;
 }
 
 
@@ -60,12 +73,12 @@ export function initInput(param) {
  * 插入下拉框
  */
 export function initSelect(param) {
-  const { data, id, defaultValue } = param;
+  const { data, field, defaultValue } = param;
   const option = data.map((item, index) => {
     const selected = defaultValue === item ? 'selected' : '';
-    return `<option name="${id}" value="${index}" ${selected} >${item}</option>`;
+    return `<option name="${field}" value="${item}" ${selected} >${item}</option>`;
   });
-  return `<select id="${id}" class="select ac-select" onchange="onChangeSelect()">${option}</select>`;
+  return `<select id="${field}" class="select ac-select" onchange="onChangeSelect(event)">${option}</select>`;
 }
 
 /**
@@ -75,19 +88,19 @@ export function initSelect(param) {
  */
 export function initRadio(param) {
   const {
-    data, id, defaultValue, direction,
+    data, field, defaultValue, direction,
   } = param;
   let radioString = '';
   for (let i = 0; i < data.length; i += 1) {
     // 默认选中
-    const checked = defaultValue === data[i] ? 'checked' : '';
+    const checked = defaultValue === data[i] ? 'checked="true"' : '';
     if (direction && direction !== 'horizontal') {
-      radioString += `<div><span><input name="${id}"  onclick="onClickRadio('${id}')" style="vertical-align: middle;" type="radio" ${checked} value=${data[i]} acType="radio" />&nbsp;&nbsp;&nbsp;&nbsp;${data[i]}</span></div>`;
+      radioString += `<div><span><input name="${field}" onclick="onClickRadio(event)" style="vertical-align: middle;" type="radio" ${checked} value=${data[i]} acType="radio" /><span style="margin: 0 10px">${data[i]}</span></span></div>`;
     } else {
-      radioString += `<span><input name="${id}" onclick="onClickRadio('${id}')" type="radio" ${checked} style="vertical-align: middle;" value=${data[i]} acType="radio" />&nbsp;&nbsp;&nbsp;&nbsp;${data[i]}&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+      radioString += `<span><input name="${field}" onclick="onClickRadio(event)" type="radio" ${checked} style="vertical-align: middle;" value=${data[i]} acType="radio" /><span style="margin: 0 10px">${data[i]}</span></span>`;
     }
   }
-  return `<span id="${id}">${radioString}</span>`;
+  return `<span id="${field}" class="ac-radio-group">${radioString}</span>`;
 }
 
 /**
@@ -97,23 +110,25 @@ export function initRadio(param) {
  */
 export function initCheckbox(param) {
   const {
-    data, id, defaultValue, direction,
+    data, field, defaultValue, direction,
   } = param;
   let checkboxString = '';
+
   for (let i = 0; i < data.length; i += 1) {
-    const checked = defaultValue === data[i] ? 'checked' : '';
+
+    const checked = defaultValue.split('|||').includes(data[i]) ? 'checked="true"' : '';
     if (direction && direction !== 'horizontal') {
-      checkboxString += `<div><input name="${id}" onclick="onClickCheckbox()"  type="checkbox" ${checked} value=${data[i]} />&nbsp;&nbsp;&nbsp;&nbsp;${data[i]}</div>`;
+      checkboxString += `<div><input name="${field}" onclick="onClickCheckbox(event)" type="checkbox" acType="checkbox" ${checked} value=${data[i]} /><span style="margin: 0 10px">${data[i]}</span></div>`;
     } else {
-      checkboxString += `<span><input name="${id}" onclick="onClickCheckbox()" type="checkbox"  ${checked} value=${data[i]}  />&nbsp;&nbsp;&nbsp;&nbsp;${data[i]}&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+      checkboxString += `<span><input name="${field}" onclick="onClickCheckbox(event)" type="checkbox" acType="checkbox" ${checked} value=${data[i]}  /><span style="margin: 0 10px">${data[i]}</span></span>`;
     }
   }
-  return `<span id="${id}">${checkboxString}</span>`;
+  return `<span id="${field}" class="ac-checkbox-group">${checkboxString}</span>`;
 }
 
 export function initDate(param) {
-  const { defaultValue="", id } = param;
-  return `<input type="text" id="${id}" value="${defaultValue}" acType="date" style="width: 100px" readOnly="true"/>`;
+  const { defaultValue = '', field } = param;
+  return `<input type="text" id="${field}" value="${defaultValue}" acType="date" style="width: 120px" readOnly="true"/>`;
 }
 
 
@@ -160,303 +175,11 @@ export function arrayObjClear(arr, key) {
   return result;
 }
 
+/**
+ * 获取字符串的长度，
+ * @param string 将中文字符串用两个 'aa' 替换然后计算宽度
+ */
+export function getStringLenght(str) {
+  return str.replace(/[\u0391-\uFFE5]/g, 'aa').length;
+}
 
-// CMD
-export var iconCmdList = [
-  {
-    cmd: 'bold',
-    icon: 'icon-bold',
-    title: '加粗',
-  },
-  {
-    cmd: 'italic',
-    icon: 'icon-italic',
-    title: '斜体',
-  },
-  {
-    cmd: 'underline',
-    icon: 'icon-underline',
-    title: '下划线',
-  },
-  {
-    cmd: 'strikeThrough',
-    icon: 'icon-strikethrough',
-    title: '删除线',
-  }, {
-    cmd: 'indent',
-    icon: 'icon-indent',
-    title: '前进',
-  }, {
-    cmd: 'outdent',
-    icon: 'icon-outdent',
-    title: '后退',
-  }, {
-    cmd: 'removeFormat',
-    icon: 'icon-geshishua',
-    title: '格式刷',
-  },
-];
-
-
-// 文字对齐
-export var textAlignList = [
-  {
-    cmd: 'justifyLeft',
-    title: '靠左',
-    icon: 'icon-align-left',
-  }, {
-    cmd: 'justifyCenter',
-    title: '居中',
-    icon: 'icon-align-center',
-  },
-  {
-    cmd: 'justifyRight',
-    title: '靠右',
-    icon: 'icon-align-right',
-  },
-];
-
-// 下拉列表
-export var popList = [
-  {
-    cmd: 'fontSize',
-    pTitle: '字体大小',
-    width: '160px',
-    icon: 'icon-font-size',
-    ulCss: 'w-e-list',
-    liCss: 'w-e-item',
-    selectList: [
-      {
-        value: '1',
-        title: 'x-small',
-        liCssText: { fontSize: 'x-small' },
-      },
-      {
-        value: '2',
-        title: 'small',
-        liCssText: { fontSize: 'small' },
-      },
-      {
-        value: '3',
-        title: 'normal',
-        liCssText: { fontSize: 'normal' },
-      },
-      {
-        value: '4',
-        title: 'large',
-        liCssText: { fontSize: 'large' },
-      },
-      {
-        value: '5',
-        title: 'x-large',
-        liCssText: { fontSize: 'x-large' },
-      },
-      {
-        value: '6',
-        title: 'xx-large',
-        liCssText: { fontSize: 'xx-large' },
-      },
-    ],
-  },
-  {
-    cmd: 'fontName',
-    pTitle: '字体名称',
-    width: '120px',
-    icon: 'icon-ai247',
-    ulCss: 'w-e-list',
-    liCss: 'w-e-item',
-    selectList: [
-      {
-        value: '宋体',
-        title: '宋体',
-        liCssText: { fontFamily: '宋体' },
-      },
-      {
-        value: '微软雅黑',
-        title: '微软雅黑',
-        liCssText: { fontFamily: '微软雅黑' },
-      },
-      {
-        value: 'Arial',
-        title: 'Arial',
-        liCssText: { fontFamily: 'Arial' },
-      },
-      {
-        value: 'Tahoma',
-        title: 'Tahoma',
-        liCssText: { fontFamily: 'Tahoma' },
-      },
-      {
-        value: 'Verdana',
-        title: 'Verdana',
-        liCssText: { fontFamily: 'Verdana' },
-      },
-    ],
-  }, {
-    cmd: 'forecolor',
-    pTitle: '字体颜色',
-    width: '100px',
-    icon: 'icon-highlight',
-    ulCss: 'w-e-block',
-    liCss: 'w-e-list-level',
-    selectList: [
-      {
-        value: '#000000',
-        title: '黑色',
-        spanCssText: { color: '#000000' },
-      },
-      {
-        value: 'red',
-        title: '红色',
-        spanCssText: { color: 'red' },
-      }, {
-        value: '#1c487f',
-        title: '',
-        spanCssText: { color: '#1c487f' },
-      }, {
-        value: '#4d80bf',
-        title: '',
-        spanCssText: { color: '#4d80bf' },
-      }, {
-        value: '#c24f4a',
-        title: '',
-        spanCssText: { color: '#c24f4a' },
-      }, {
-        value: '#8baa4a',
-        title: '',
-        spanCssText: { color: '#8baa4a' },
-      }, {
-        value: '#7b5ba1',
-        title: '',
-        spanCssText: { color: '#7b5ba1' },
-      }, {
-        value: '#46acc8',
-        title: '',
-        spanCssText: { color: '#46acc8' },
-      }, {
-        value: '#f9963b',
-        title: '',
-        spanCssText: { color: '#f9963b' },
-      },
-    ],
-  },
-  {
-    cmd: 'backColor',
-    pTitle: '背景色',
-    width: '100px',
-    icon: 'icon-brush',
-    ulCss: 'w-e-block',
-    liCss: 'w-e-list-level',
-    selectList: [
-      {
-        value: '#000000',
-        title: '',
-        spanCssText: { color: '#000000' },
-      },
-      {
-        value: 'red',
-        title: '',
-        spanCssText: { color: 'red' },
-      }, {
-        value: '#1c487f',
-        title: '',
-        spanCssText: { color: '#1c487f' },
-      }, {
-        value: '#4d80bf',
-        title: '',
-        spanCssText: { color: '#4d80bf' },
-      }, {
-        value: '#c24f4a',
-        title: '',
-        spanCssText: { color: '#c24f4a' },
-      }, {
-        value: '#8baa4a',
-        title: '',
-        spanCssText: { color: '#8baa4a' },
-      }, {
-        value: '#7b5ba1',
-        title: '',
-        spanCssText: { color: '#7b5ba1' },
-      }, {
-        value: '#46acc8',
-        title: '',
-        spanCssText: { color: '#46acc8' },
-      }, {
-        value: '#f9963b',
-        title: '',
-        spanCssText: { color: '#f9963b' },
-      },
-    ],
-  },
-  {
-    cmd: 'lineHeight',
-    pTitle: '行高',
-    icon: 'icon-line-height',
-    ulCss: 'w-e-list',
-    liCss: 'w-e-item',
-    selectList: [
-      {
-        title: '正常',
-        value: '1',
-      },
-      {
-        title: '1.2倍',
-        value: '1.2',
-      },
-      {
-        title: '1.5倍',
-        value: '1.5',
-      }, {
-        title: '1.8倍',
-        value: '1.8',
-      }, {
-        title: '2.0倍',
-        value: '2.0',
-      }, {
-        title: '2.5倍',
-        value: '2.5',
-      },
-      {
-        title: '3.0倍',
-        value: '3.0',
-      }, {
-        title: '4.0倍',
-        value: '4.0',
-      },
-    ],
-  }, {
-    cmd: 'letterSpacing',
-    pTitle: '字间距',
-    icon: 'icon-zuijialiekuan',
-    ulCss: 'w-e-list',
-    liCss: 'w-e-item',
-    selectList: [
-      {
-        title: '正常',
-        value: '0px',
-      },
-      {
-        title: '1px',
-        value: '1px',
-      },
-      {
-        title: '2px',
-        value: '2px',
-      }, {
-        title: '3px',
-        value: '3px',
-      }, {
-        title: '4px',
-        value: '4px',
-      }, {
-        title: '5px',
-        value: '5px',
-      },
-      {
-        title: '6px',
-        value: '6px',
-      },
-    ],
-  },
-
-];

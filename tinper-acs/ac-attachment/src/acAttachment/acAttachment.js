@@ -73,7 +73,7 @@ class AcAttachment extends Component{
             btnDelete: this.fGetBtnByType('delete',true)
         }
         this.selectedFiles = [];
-        this.fileTypeIcons = ['css','doc','html','javascript','jpg','pdf','png','ppt','xls','xml'];
+        this.fileTypeIcons = ['css','doc','html','javascript','jpg','pdf','png','ppt','xls','xlsx','xml'];
         bindAll(this,['fGetTableColumns','fLoadFileList','fDeleteFile','fUploadSuccess','fUploadDelete','fGetTableList','fGetUploadData',
                       'fDownload','fDelete','onSelectData','fConClick','beforeUpload','fValidateFileType','fSetSelectedFiles']);
     }

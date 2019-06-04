@@ -15276,8 +15276,7 @@ ul {
   .u-table-fixed-header .u-table-fixed-left .u-table-body-inner {
     padding-right: 0px; }
   .u-table-fixed-header .u-table-body-inner {
-    height: 100%;
-    overflow: scroll; }
+    height: 100%; }
   .u-table-fixed-header .u-table-scroll .u-table-header {
     overflow-x: scroll;
     padding-bottom: 20px;
@@ -16097,11 +16096,14 @@ ul {
     overflow: hidden;
     max-width: calc( 100% - 21px); }
 
+.u-grid th .title-con.drop-menu {
+  max-width: 100% !important; }
+
 .u-grid th .cansort.drop-menu {
   max-width: calc(100% - 32px) !important; }
 
 .u-grid th:last-child .cansort.drop-menu {
-  width: calc(100% - 64px) !important; }
+  width: calc(100% - 38px) !important; }
 
 .u-grid th .bee-table-column-sorter {
   margin-left: 0px; }

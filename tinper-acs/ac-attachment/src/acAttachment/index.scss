@@ -23,7 +23,7 @@
 .upload-btn:first-child{margin-left:0;}
 .upload-table{
     margin-top:10px;
-    th{padding: 10px 8px !important;}
+    // th{padding: 10px 8px !important;}
     td{
         height: 32px !important;
         padding: 0 8px;
@@ -67,6 +67,9 @@
     background-image:url('./icon/ppt.svg');
 }
 .upload-filetype-xls{
+    background-image:url('./icon/xls.svg');
+}
+.upload-filetype-xlsx{
     background-image:url('./icon/xls.svg');
 }
 .upload-filetype-xml{
