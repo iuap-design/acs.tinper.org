@@ -11,11 +11,13 @@ $ ynpm install ref-combobox --save
 
 引入
 
-import RefComboBoxBaseUI, {ComboStore,ComboItem} from 'ref-combobox';
+import RefComboBoxBaseUI from 'ref-combobox';
 
 样式
 
 import 'ref-combobox/lib/index.css';
+或者
+import 'ref-combobox/lib/index.less';
 
 ```
 
@@ -101,6 +103,10 @@ value:[{refname:'用友',refpk:'org1',id:'no.1'}]
 inputDisplay:(record) =>{
   return `${record.refname}-${record.id}`
 }
+
 ```
+
+2.多选功能下拉参照以及函数改名是在2.1.0稳定版本开始
+
 
 ## 更新日志

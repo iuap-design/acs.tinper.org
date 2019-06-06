@@ -63,7 +63,19 @@ const config = webpackMerge(baseConfig, {
         target: 'http://127.0.0.1:3333/',
         changeOrigin: true
         // pathRewrite: {'^/api': ''}
-      }
+      },
+      '/wbalone': {
+        target: 'http://172.20.52.123',
+        changeOrigin: true,
+      },
+      '/newref': {
+        target: 'http://172.20.52.123',
+        changeOrigin: true,
+      },
+      '/pap_basedoc': {
+        target: 'https://mock.yonyoucloud.com/mock/1264/',
+        changeOrigin: true,
+      },
     }
   },
   plugins: [

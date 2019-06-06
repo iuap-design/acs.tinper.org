@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /**
  *
- * @title AcHandTable
+ * @title 表格常用方法
  * @description 设置行样式、表格添加行、删除多选选中行、获取验证通过后数据、获取多选选中的数据、获取被修改后的数据、获取被格式化的数据、获取新增加的数据和获取删除的数据
  *
  */
@@ -58,8 +58,8 @@ class Demo2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      delRows: [],
       handData: data,
+      changeRowNum: 0,
     };
   }
 
@@ -72,6 +72,10 @@ class Demo2 extends Component {
       },
       allowInvalid: true,
       strict: true,
+      onChangeCell: (rowData, rowNum) => { // 单元格改变回调
+        console.log('rowData, rowNum', rowData, rowNum);
+        this.setState({ changeRowNum: rowNum });
+      },
     },
     {
       data: 'gender',
@@ -110,8 +114,39 @@ class Demo2 extends Component {
 
   // 表格添加行
   onInsertRowData = () => {
-    this.child.onInsertRowData();
+    const rowDefaultData = {
+      id: 99,
+      name: '张ssss三',
+      gender: '1',
+      date: '2018-07-02',
+      money: 10000,
+      staff: '李白',
+      staff_code: '',
+      department: '',
+      department_staff: '',
+      department_staff_transfer: '',
+    };
+    // this.child.onInsertRowData() // 默认从第一行添加
+    this.child.onInsertRowData(0, rowDefaultData);
   };
+
+  // 更新行
+  onUpdateRowData = () => {
+    const rowDefaultData = {
+      id: 99,
+      name: '张ssss三',
+      gender: '1',
+      date: '2018-07-02',
+      money: 10000,
+      staff: '李白',
+      staff_code: '',
+      department: '',
+      department_staff: '',
+      department_staff_transfer: '',
+    };
+    this.child.onUpdateRowData(0, rowDefaultData);
+  };
+
 
   // 删除多选选中的行
   onDelRowCheck = () => {
@@ -162,13 +197,14 @@ class Demo2 extends Component {
 
 
   render() {
-    const { handData } = this.state;
+    const { handData, changeRowNum } = this.state;
 
     return (
       <div className="demoPadding">
 
         <div style={{ marginBottom: '15px' }}>
           <Button colors="primary" onClick={this.onInsertRowData} size="sm"> 增行 </Button>
+          <Button colors="primary" onClick={this.onUpdateRowData} size="sm">修改行</Button>
           <Button colors="danger" onClick={this.onDelRowCheck} size="sm">删除选中行</Button>
           <Button colors="primary" onClick={this.getData} size="sm"> 获取验证数据</Button>
           <Button colors="primary" onClick={this.getCheckData} size="sm"> 获取选中行 </Button>

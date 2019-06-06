@@ -59,23 +59,18 @@ const config = webpackMerge(baseConfig, {
     //服务端压缩是否开启
     compress:true,
     proxy: {
-      '/api': {
-        target: 'http://10.4.100.48:7777',
-        changeOrigin: true
-        // pathRewrite: {'^/api': ''}
-      },
       '/wbalone': {
-        target: 'http://10.4.100.48:7777',
+        target: 'http://172.20.52.123/',
         changeOrigin: true,
       },
       '/newref': {
-        target: 'http://10.4.100.48:7777',
+        target: 'http://172.20.52.123/',
         changeOrigin: true,
       },
       '/pap_basedoc': {
-        target: 'http://10.4.100.48:7777',
+        target: 'https://mock.yonyoucloud.com/mock/1264/',
         changeOrigin: true,
-      }
+      },
     }
   },
   plugins: [

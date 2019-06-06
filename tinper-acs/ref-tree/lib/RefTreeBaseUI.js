@@ -99,7 +99,8 @@ var propTypes = {
   multiple: _propTypes2["default"].bool, //  默认单选
   treeData: _propTypes2["default"].array, //接收树的数据
   onLoadData: _propTypes2["default"].func,
-  onTreeSelecting: _propTypes2["default"].func
+  onTreeSelecting: _propTypes2["default"].func,
+  isLocalSearch: _propTypes2["default"].bool //  默搜索是否是本地
 };
 var defaultProps = {
   title: '弹窗标题',
@@ -118,7 +119,8 @@ var defaultProps = {
   treeData: [],
   onLoadData: function onLoadData() {},
   getRefTreeData: function getRefTreeData() {},
-  onTreeSelecting: function onTreeSelecting() {}
+  onTreeSelecting: function onTreeSelecting() {},
+  isLocalSearch: true //默认是true
 };
 
 var RefTreeBaseUI = function (_Component) {
@@ -142,7 +144,8 @@ var RefTreeBaseUI = function (_Component) {
         return item[valueField];
       }),
       onSaveCheckItems: [],
-      showLoading: showLoading
+      showLoading: showLoading,
+      searchValue: '' //20190527新增搜索
     };
     return _this;
   }
@@ -338,8 +341,11 @@ var RefTreeBaseUI = function (_Component) {
         _props3$theme = _props3.theme,
         theme = _props3$theme === undefined ? 'ref-red' : _props3$theme,
         _props3$modalProps = _props3.modalProps,
-        modalProps = _props3$modalProps === undefined ? {} : _props3$modalProps;
-    var checkedKeys = this.state.checkedKeys;
+        modalProps = _props3$modalProps === undefined ? {} : _props3$modalProps,
+        isLocalSearch = _props3.isLocalSearch;
+    var _state = this.state,
+        checkedKeys = _state.checkedKeys,
+        searchValue = _state.searchValue;
 
     if (checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return _react2["default"].createElement(
@@ -395,7 +401,8 @@ var RefTreeBaseUI = function (_Component) {
           checkStrictly: checkStrictly,
           showLine: showLine,
           lazyModal: lazyModal,
-          loadData: lazyModal ? this.props.onLoadData : null
+          loadData: lazyModal ? this.props.onLoadData : null,
+          searchValue: isLocalSearch ? searchValue : ''
         }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(treeData.length), language: lang })
       ),
       _react2["default"].createElement(
@@ -419,6 +426,7 @@ var _initialiseProps = function _initialiseProps() {
         valueField = props.valueField;
 
     _this6.setState({
+      searchValue: '', //清空搜索
       selectedArray: matchData,
       showLoading: false,
       checkedKeys: matchData.map(function (item) {
@@ -427,8 +435,14 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 
-  this.onSearch = function (value) {
-    _this6.props.getRefTreeData(value);
+  this.onSearch = function (searchValue) {
+    if (_this6.props.isLocalSearch) {
+      _this6.setState({
+        searchValue: searchValue
+      });
+    } else {
+      _this6.props.getRefTreeData(searchValue);
+    }
   };
 
   this.onClickBtn = function (type) {

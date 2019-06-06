@@ -58,7 +58,8 @@ class RefComboBoxBaseUI extends Component {
    * @return: 
    */
   onDropdownVisibleChange = (open) =>{
-    const {onPopupVisibleChange} = this.props;
+    const {onPopupVisibleChange=()=>{}} = this.props;
+    onPopupVisibleChange(open)
 
   }
   /**
@@ -124,6 +125,7 @@ class RefComboBoxBaseUI extends Component {
     return (
       <div className={`${theme} ${className} ref-combobox`}>
         <Select
+        {...this.props}
          style={{
             ...style,
             width: style.width || 300

@@ -73,9 +73,9 @@ const config = webpackMerge(baseConfig, {
         changeOrigin: true,
       },
       '/pap_basedoc': {
-        target: 'http://172.20.52.123',
+        target: 'https://mock.yonyoucloud.com/mock/1264/',
         changeOrigin: true,
-      }
+      },
     }
   },
   plugins: [

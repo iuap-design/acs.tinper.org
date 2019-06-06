@@ -17,7 +17,7 @@ const DemoArray = [
     code: `/* eslint-disable no-return-assign */
 /**
  *
- * @title AcHandTable
+ * @title 基础表格展示
  * @description 基础表格展示
  *
  */
@@ -120,7 +120,7 @@ export default Demo;
     code: `/* eslint-disable import/no-extraneous-dependencies */
 /**
  *
- * @title AcHandTable
+ * @title 表格常用方法
  * @description 设置行样式、表格添加行、删除多选选中行、获取验证通过后数据、获取多选选中的数据、获取被修改后的数据、获取被格式化的数据、获取新增加的数据和获取删除的数据
  *
  */
@@ -320,7 +320,7 @@ export default Demo2;
     title: '表格参照',
     code: `/**
  *
- * @title AcHandTable
+ * @title 表格参照
  * @description  下拉搜索、表参照、树参照、表格参照、树穿梭参照
  *
  */

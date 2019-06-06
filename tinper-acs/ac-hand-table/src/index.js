@@ -1,4 +1,4 @@
-/* eslint-disable import/first,prefer-const,no-shadow,guard-for-in,no-param-reassign,no-restricted-syntax,prefer-rest-params,no-return-assign,react/prop-types,valid-typeof,quotes,react/destructuring-assignment,padded-blocks,react/no-unused-state,prefer-template,no-underscore-dangle */
+/* eslint-disable import/first,prefer-const,no-shadow,guard-for-in,no-param-reassign,no-restricted-syntax,prefer-rest-params,no-return-assign,react/prop-types,valid-typeof,quotes,react/destructuring-assignment,padded-blocks,react/no-unused-state,prefer-template,no-underscore-dangle,object-curly-newline */
 /**
  * Created by ranyanchuan on 2018/3/11.
  */
@@ -18,6 +18,9 @@ import {
   getAddRowActive,
   changeSelectValue2Key,
   customRenderData,
+  getArrayObjByKey,
+  array2Obj,
+
 } from './utils';
 
 import 'handsontable/languages/zh-CN';
@@ -32,7 +35,7 @@ class AcHandTable extends React.Component {
 
     data: this.props.data,
     delDataList: [],
-    refTableConfig: {}, // 表格参照
+    refConfig: {}, // 参照配置
     currentRow: 0, // 选中当前参照行
     currentCol: 0, // 选中当前参照例
     currentKey: '', // 选中当前参照key
@@ -110,32 +113,65 @@ class AcHandTable extends React.Component {
       ...data,
 
       afterChange(changes, source) { // 表格被修改后执行
-        if (source === 'edit' && (changes[0][2] !== changes[0][3])) { // 表格被修改
+
+
+        if (source === 'edit') { // 表格被修改
+          const [rowNum, name, oldValue, newValue] = changes[0];
+
           const { data } = _this.state;
-          data[changes[0][0]].update_status = true;
-          _this.setState({ data });
+          const { columns } = _this.props;
+          // 添加修改标记
+          if (oldValue !== newValue) {
+            data[rowNum].update_status = true;
+            _this.setState({ data });
+          }
+          // 是否有回调
+          const { onChangeCell } = getArrayObjByKey(columns, name);
+          if (onChangeCell) {
+            const rowData = { ...data[rowNum] };
+            onChangeCell(rowData, rowNum);
+          }
         }
       },
+
+      // afterOnCellMouseOut(event, cell) {
+      //   const { row, col } = cell;
+      //   const { columns, data } = _this.props;
+      //   if (columns[col] && columns[col].onCellMouseDown) { // 返回鼠标 Down
+      //     const rowData = data[row];
+      //     columns[col].onCellMouseDown({
+      //       rowData,
+      //       rowNum: row,
+      //     });
+      //   }
+      // },
 
       // 用于拖拽 解决参照
       beforeAutofill(start, end, text) {
         const { columns } = _this.props;
-        const { data } = _this.state;
+        const { data, refConfig } = _this.state;
         const { row, col } = start;
         const column = columns[col];
-        const { isRef, data: key } = column;
+        const { isRef, data: currentKey } = column;
         if (isRef) {
 
+          // 最后行
           const { row: endRow } = end;
 
-          const totalRow = endRow > row ? row - 1 : row + 1; // 原始数据目标行
-          // 获取原始数据
-          const code = data[totalRow][key + '_code'];
-          const value = data[totalRow][key];
-
+          const originalRow = endRow > row ? row - 1 : row + 1; // 原始数据目标行
+          // 要返回key数组
+          const { columnsKey } = refConfig;
+          // 参照返回字段
+          const keyArray = columnsKey && columnsKey.length > 1 ? columnsKey : ['refname', 'refpk'];
           for (let i = row; i <= endRow; i++) {
-            data[i][key + '_code'] = code;
-            data[i][key] = value;
+            // 设置展示值
+            data[i][currentKey] = data[originalRow][currentKey];
+            // 返回参照多余字段用_链接
+            for (let i = 1; i < keyArray.length; i++) {
+              const key = keyArray[i];
+              data[i][currentKey + '_' + key] = data[originalRow][key];
+            }
+
           }
           _this.setState({ data });
         }
@@ -188,7 +224,7 @@ class AcHandTable extends React.Component {
         const newConfig = { ...refConfig, ...data };
         _this.setState({
           refConfig: newConfig,
-          refSource: refSource,
+          refSource,
           currentRow: row,
           currentCol: col,
           currentKey: prop,
@@ -329,7 +365,7 @@ class AcHandTable extends React.Component {
       columns,
       data,
       fillHandle: 'vertical', // 默认只能横向 为了解决参照问题
-      csvConfig: { ...csvDefault, ...csvConfig } // 导出csv 配置
+      csvConfig: { ...csvDefault, ...csvConfig }, // 导出csv 配置
 
     };
   };
@@ -349,10 +385,25 @@ class AcHandTable extends React.Component {
 
 
   // 插入行数据
-  onInsertRowData = (number = 0) => {
+  onInsertRowData = (number = 0, source) => {
     this.hot.alter('insert_row', number);
+    if (source && Object.prototype.toString.call(source === '[Object Object]')) {
+      const { data } = this.state;
+      data[number] = source;
+      this.setState({ data });
+      this.hot.render();
+    }
   };
 
+  // 修改行数据
+  onUpdateRowData = (number = 0, source) => {
+    if (source && Object.prototype.toString.call(source === '[Object Object]')) {
+      const { data } = this.state;
+      data[number] = source;
+      this.setState({ data });
+      this.hot.render();
+    }
+  };
 
   // 获取多选选中的数据
   getCheckbox = () => {
@@ -400,18 +451,22 @@ class AcHandTable extends React.Component {
   onSaveRef = (params) => {
     const _this = this;
 
-    let { currentRow, currentKey, data } = _this.state;
-    // todo 多个值问题
+    let { currentRow, currentKey, data, refConfig } = _this.state;
+
 
     if (params && Array.isArray(params) && params.length > 0) {
-
-      const { name } = params[0];
-      data[currentRow][currentKey] = name;
-      for (const key in params[0]) {
-        data[currentRow][currentKey + '_' + key] = params[0][key];
+      const { columnsKey } = refConfig;
+      // 参照返回字段
+      const keyArray = columnsKey && columnsKey.length > 1 ? columnsKey : ['refname', 'refpk'];
+      // 将多个对象的值用,链接
+      const paramObj = array2Obj(params, keyArray);
+      data[currentRow][currentKey] = paramObj[keyArray[0]];
+      // 返回参照多余字段用_链接
+      for (let i = 1; i < keyArray.length; i++) {
+        const key = keyArray[i];
+        data[currentRow][currentKey + '_' + key] = paramObj[key];
       }
     }
-
 
     _this.setState({
       data,

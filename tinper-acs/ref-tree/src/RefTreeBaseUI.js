@@ -34,6 +34,7 @@ const propTypes = {
   treeData: PropTypes.array,//接收树的数据
   onLoadData:PropTypes.func,
   onTreeSelecting:PropTypes.func,
+  isLocalSearch: PropTypes.bool, //  默搜索是否是本地
 };
 const defaultProps = {
   title: '弹窗标题',
@@ -53,6 +54,7 @@ const defaultProps = {
   onLoadData:()=>{},
   getRefTreeData:()=>{},
   onTreeSelecting:()=>{},
+  isLocalSearch:true,//默认是true
 }
 class RefTreeBaseUI extends Component {
   constructor(props) {
@@ -64,7 +66,8 @@ class RefTreeBaseUI extends Component {
         return item[valueField];
       }),
       onSaveCheckItems:[],
-      showLoading: showLoading
+      showLoading: showLoading,
+      searchValue:'',//20190527新增搜索
     };
   }
  
@@ -77,6 +80,7 @@ class RefTreeBaseUI extends Component {
   initComponent = (props) => {
     let {matchData=[],value,valueField} = props;
     this.setState({
+      searchValue:'',//清空搜索
       selectedArray: matchData,
       showLoading: false,
       checkedKeys: matchData.map(item=>{
@@ -231,8 +235,14 @@ class RefTreeBaseUI extends Component {
       });
 		}
 	}
-	onSearch = (value) => {
-		this.props.getRefTreeData(value);
+	onSearch = (searchValue) => {
+    if(this.props.isLocalSearch){
+      this.setState({
+        searchValue
+      })
+    }else{
+      this.props.getRefTreeData(searchValue);
+    }
 	};
 
   onClickBtn = (type) => {
@@ -283,8 +293,9 @@ class RefTreeBaseUI extends Component {
       treeData,
       theme= 'ref-red',
       modalProps={},
+      isLocalSearch,
     } = this.props;
-    const { checkedKeys } = this.state;
+    const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return (
       <Modal
@@ -327,6 +338,7 @@ class RefTreeBaseUI extends Component {
                   showLine={showLine}
                   lazyModal={lazyModal}
                   loadData={lazyModal ? this.props.onLoadData: null}
+                  searchValue={isLocalSearch?searchValue:''}
                 /> :
                 <RefCoreError show={!Boolean(treeData.length)} language={lang} />
             }

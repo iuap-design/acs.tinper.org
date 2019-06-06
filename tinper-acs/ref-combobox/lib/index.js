@@ -195,7 +195,7 @@ var RefComboBoxBaseUI = function (_Component) {
     return _react2["default"].createElement(
       'div',
       { className: theme + ' ' + className + ' ref-combobox' },
-      _react2["default"].createElement(_menuSelector2["default"], {
+      _react2["default"].createElement(_menuSelector2["default"], _extends({}, this.props, {
         style: _extends({}, style, {
           width: style.width || 300
         }),
@@ -231,7 +231,7 @@ var RefComboBoxBaseUI = function (_Component) {
         onSelectorChange: this.selectorChange //为了配合ref-combobox的之前发版的操作
         , onSearch: this.onSearch,
         onDropdownVisibleChange: this.onDropdownVisibleChange
-      })
+      }))
     );
   };
 

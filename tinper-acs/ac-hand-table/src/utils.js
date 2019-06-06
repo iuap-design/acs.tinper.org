@@ -189,3 +189,38 @@ export function getDelRows(state, physicalRows, rowKey) {
 export function arrayObjctClone(array) {
   return array.map(item => ({ ...item }));
 }
+
+// 根据对象key 找数组中对象
+export function getArrayObjByKey(array, key) {
+  for (const obj of array) {
+    if (obj.data === key) {
+      return obj;
+    }
+  }
+  return null;
+}
+
+
+// 根据数组合成对象
+export function array2Obj(array, keyArray) {
+  const result = {};
+  const temp = {};
+
+  // 生成数组
+  for (const key of keyArray) {
+    temp[key] = [];
+  }
+
+  for (const obj of array) {
+    for (const key in obj) {
+      if (keyArray.includes(key)) {
+        temp[key].push(obj[key]);
+      }
+    }
+  }
+  for (const item in temp) {
+    result[item] = temp[item].join(',');
+  }
+  debugger
+  return result;
+}

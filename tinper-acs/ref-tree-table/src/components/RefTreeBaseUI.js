@@ -55,6 +55,7 @@ class RefTreeBaseUI extends Component {
         return item[valueField];
       }),
       onSaveCheckItems: [],
+      searchValue:'',//搜索
     };
     this.treeData = props.treeData || [];
     this.treeDataCache = {};
@@ -71,7 +72,13 @@ class RefTreeBaseUI extends Component {
 	}
 
   onSearchChange = (value) => {
-    this.props.onTreeSearch(value);
+    if(this.props.isLocalSearch){
+      this.setState({
+        searchValue:value
+      })
+    }else{
+      this.props.onTreeSearch(value);
+    }
   };
 
   onSelectNode = (checkedArray) => {
@@ -182,9 +189,10 @@ class RefTreeBaseUI extends Component {
       lang,
       defaultExpandAll,
       nodeDisplay = "{refname}",
-      nodeKeysFunc
+      nodeKeysFunc,
+      isLocalSearch,//从RefTreeTableBaseUI传入
     } = this.props;
-    const { checkedKeys,  checkStrictly} = this.state;
+    const { checkedKeys,  checkStrictly,searchValue} = this.state;
     return (
       
       <div
@@ -215,6 +223,7 @@ class RefTreeBaseUI extends Component {
                 checkStrictly={checkStrictly}
                 showLine={showLine}
                 loadData={lazyModal ? this.props.onLoadData:null}
+                searchValue={isLocalSearch?searchValue:null}
               /> :
               <RefCoreError show={!Boolean(this.treeData.length)} language={lang} />
           }

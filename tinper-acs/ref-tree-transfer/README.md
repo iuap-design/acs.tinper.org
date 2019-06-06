@@ -14,7 +14,7 @@ $ ynpm install ref-tree-transfer --save
 
 import RefTreeTransferBaseUI from 'ref-tree-transfer';
 或者
-import { RefTreeTransferWithInput } from 'ref-tree-transfer';
+import { RefTreeTransferWithInput } from 'ref-tree-transfe
 
 样式
 
@@ -51,9 +51,11 @@ displayField |<code>string 或 function</code>|'{refname}' |右穿梭框显示�
 valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
 showModal| `Bool`| -- | 参照展开状态 | 否
 onSave |`function( record:object )`|-- |保存回调函数，返回已选择的记录详细数据。 | 否
-onCancel `|function(  )`|-- |关闭弹出层 | 否
+onCancel | `function(  )` |-- |关闭弹出层 | 否
 modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
 transferProps| `object`| {} | modal上其他属性，具体接收的参数参照bee-transfer| 否
+
+
 tree专用
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
@@ -62,7 +64,10 @@ treeData| `Array` | [] | 左树的数据| 否
 nodeDisplay |<code>string 或 function</code>|'{refname}' |指定树节点渲染内容，这里为了提供根据数据渲染节点图标使用。<br/>当为字符串时则会根据`{}`包裹的正则匹配替换。<br/>如： nodeDisplay:'{refname}'<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}。是树节点展示的内容| 否
 defaultExpandAll |`bool`| false| 展开所有节点，true 展开，false 不展开| 否
 
-tree默认checkStrictly={true}、multiple={false}
+
+**左树tree默认checkStrictly={true}、multiple={false}**
+
+
 transfer专用
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
@@ -74,6 +79,7 @@ transferData| `Array` | [] | 右穿梭的数据| 否
 targetKeys| `Array` | [] | 右穿梭右表中选中的数据对应valuefield字段的值| 否
 setTargetKeys| `function(targetKeys)` | --| 右穿梭选中数据触发，将穿梭右侧选中的数据传过去 | 否
 
+
 ## RefTreeTransferWithInput 增量 API
 除了使用上述<RefTreeTransferBaseUI/>的参数（showModal不可使用）还有以下参数。
 
@@ -84,13 +90,14 @@ placeholder|`string`| 空 |文本框的 placeholder | 否
 style| `object`| {width:200}| 文本框的style，默认宽度200px | 否 
 filterUrl| `string`|空|快捷录入接口。|否
 filterUrlFunc| `function(value)` | ()=>{} | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc | 否
-filertData| `Array`| [] | 必须配合filterUrlFunc使用，filterData是过滤列表全部数据| 否
+filterData| `Array`| [] | 必须配合filterUrlFunc使用，filterData是过滤列表全部数据| 否
 displayField |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式和过滤列表显示的内容格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
-value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值。需要组装出详细记录，保证 displayField 和 valueField 所标记的字段存在|否
+value| ``string``| 空 |带有input框参照的input初始值。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值。|否
 disabled|`bool`| false |禁用整个input框 | 否
 onChange|`function(values, record)`|--| value改变、选中过滤数据和保存时数据回调。values是obj，格式{'refname':'','refpk':''},record是该条完整数据|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
+
 
 ## 注意事项
 

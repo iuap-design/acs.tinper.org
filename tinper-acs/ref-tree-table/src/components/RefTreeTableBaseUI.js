@@ -24,6 +24,7 @@ const propTypes = {
 	multiple: PropTypes.bool,
 	destory: PropTypes.func,
 	matchData:PropTypes.array,
+	isLocalSearch: PropTypes.bool, //  默搜索是否是本地
 };
 const defaultProps = {
 	title: '弹窗标题',
@@ -45,7 +46,8 @@ const defaultProps = {
 	showLine: false,
 	multiple: false,
 	matchData:[],
-	destory: () => { }
+	destory: () => { },
+	isLocalSearch:false,
 };
 
 
@@ -100,6 +102,7 @@ class RefTreeTableBaseUI extends Component {
 			modalProps={},
 			tableProps={},
 			mustPaginationShow=false,
+			isLocalSearch,
 		} = this.props;
 		let treeProps = Object.assign({},{
 			className,
@@ -116,7 +119,8 @@ class RefTreeTableBaseUI extends Component {
 			onTreeChange,
 			onTreeSearch,
 			lazyModal,
-			onLoadData
+			onLoadData,
+			isLocalSearch
 		});
 		let tablePropsAll = Object.assign({},{
 			className,

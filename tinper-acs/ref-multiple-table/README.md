@@ -63,9 +63,9 @@ emptyBut| `bool` | false| 清空按钮是否展示 |否
 miniSearch| `bool`|true|默认是简单搜索。miniSearch=true则只展示简单搜索|否
 size|`String`|'lg'|modal的size|否
 valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
-searchFilterInfo | `function(value)`| 复杂搜索的查询回调，将搜索条件带回。| 否
-miniSearchFunc| `function(value)`| 简单搜索的实时查询回调，将搜索条件带回| 否
-onSearchClick| `function(value)`| 简单搜索的点击搜索按钮查询回调，将搜索条件带回| 否
+searchFilterInfo | `function(value)`| - | 复杂搜索的查询回调，将搜索条件带回。| 否
+miniSearchFunc| `function(value)`|- |  简单搜索的实时查询回调，将搜索条件带回| 否
+onSearchClick| `function(value)`|- | 简单搜索的点击搜索按钮查询回调，将搜索条件带回| 否
 showLoading | `bool` | -- | 是否展示loading| 否
 <span style="color:red;">*</span>fliterFormInputs| `Array`| -- | 查询条件的dom，配合SearchPanelItem一起使用。| 否
 <span style="color:red;">*</span>tableData | `Array` | — | 表体数据 | 否
@@ -100,7 +100,7 @@ filterUrl| `string`|空|快捷录入接口。|否
 filterUrlFunc| `function(value)` | ()=>{} | 必须配合filterUrl使用，当filterUrl为空或者不传入，才会回调filterUrlFunc | 否
 displayField |<code>string 或 function</code>|'{refname}' |input中显示的内容的格式和过滤列表显示的内容格式。<br/>当为字符串时则会根据`{}`包裹的增则匹配替换。<br/>如：`{refname}`<br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=>  ${record.refname}-${record.refname}，是input展示value| 否
 valueField |``string``|'refpk' |待提交的value的键。或者说指定真实数据的键。要求具有唯一性| 否
-value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值。需要组装出详细记录，保证 displayField 和 valueField 所标记的字段存在|否
+value| ``string``| 空 |带有input框参照的input默认值，展示形式配合displayField。格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname和refpk必须有，refpk表示该条数据的键，应取valueFiled指定值。需要组装出详细记录，displayField字段有限制，具体参考下面的注意事项|否
 disabled|`bool`| false |禁用整个参照 | 否
 onChange|`function(values, record)`|--| value改变、选中过滤数据和保存时数据回调。values是obj，格式{'refname':'','refpk':''},record是该条完整数据|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
@@ -119,19 +119,34 @@ text| `String`| ---| 搜索条件的左侧label标签内容| 否
 
 ## 注意事项
 
-
 ### 参数解析
 
+- input框的展示值
+
+    - input框的初始值，只从value的refname中获取
+    - 参照进行保存操作之后（点击参照确认按钮），input框展示由displayField来决定
+
+    **具体参考demo3，初始值从value的refname取，保存之后input框展示由displayField来决定**
+
 - value、displayField
-    value和displayField是针对input框来说。value格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname字段不可变，refpk是该数据键，要求具有唯一性。需要组装出详细记录，保证 displayField 和 valueField 所标记的字段存在
-    displayField确定input中显示内容的格式和过滤列表显示内容的格式
+  
+    value和displayField是针对input框来说。
+    - value格式必须符合`'{"refname":"初级-T1","refpk":"level1"}'`。refname字段不可变，refpk是该数据键，要求具有唯一性。
+    - displayField确定input中显示内容的格式和过滤列表显示内容的格式。displayField中使用到的字段必须是filterData,matchData和treeData数据项中都含有的字段。
+    
+    **具体参考demo3displayField的使用**
 
 - value、valueFiled
-    value是input需要使用的数据，要求如上。
+  
+    value初始化input框值，是input需要使用的数据，要求如上。
     valueFiled指定数据源的键，要求具有唯一性。
     因此value中refpk指定值应与valueFiled取值一致。
 
 - value、matchData
-    value初始化input框值，matchData是指定参照中选中的节点。如果value有值matchData为空，那么input有值但是参照无选中数据，反之value空值matchData有值，那么input为空但是参照有选中数据
+  
+    value初始化input框值，matchData是指定参照中选中的节点。**具体参考demo3，value与matchData并不完全相同**
+    - 如果value有值matchData为空，那么input有值但是参照无选中数据；
+    - 反之value空值matchData有值，那么input为空但是参照有选中数据；
+    - 如果value与matchData都有值，但是不匹配，树中选中数据按照matchData。
     
 ## 更新日志

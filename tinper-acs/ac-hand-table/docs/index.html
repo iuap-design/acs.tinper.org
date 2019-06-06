@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>ac-hand-table</title>
+    <title>电子表格 HandTable</title>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
@@ -14,15 +14,15 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span3"><ul class="nav nav-list">
-    <li class="sidebar-header-2"><a href="#ac-hand-table">ac-hand-table</a></li>
-    <li class="sidebar-header-2"><a href="#安装">安装</a></li>
-    <li class="sidebar-header-2"><a href="#使用方法">使用方法</a></li>
+    <li class="sidebar-header-2"><a href="#电子表格-handtable">电子表格 HandTable</a></li>
+    <li class="sidebar-header-2"><a href="#如何使用">如何使用</a></li>
     <li class="sidebar-header-2"><a href="#api">API</a></li>
     <li class="sidebar-header-3"><a href="#achandtable">AcHandTable</a></li>
     <li class="sidebar-header-3"><a href="#dropdownmenu-contextmenu">dropdownMenu contextMenu</a></li>
     <li class="sidebar-header-3"><a href="#column">Column</a></li>
     <li class="sidebar-header-3"><a href="#multicolumnsorting">multiColumnSorting</a></li>
     <li class="sidebar-header-3"><a href="#numericformat">numericFormat</a></li>
+    <li class="sidebar-header-3"><a href="#csvconfig">csvConfig</a></li>
     <li class="sidebar-header-3"><a href="#获取表格里的数据">获取表格里的数据</a></li>
     <li class="sidebar-header-3"><a href="#表格添加行">表格添加行</a></li>
     <li class="sidebar-header-3"><a href="#删除多选选中的行">删除多选选中的行</a></li>
@@ -32,107 +32,22 @@
     <li class="sidebar-header-3"><a href="#获取被格式化的数据">获取被格式化的数据</a></li>
     <li class="sidebar-header-3"><a href="#获取新增加的数据">获取新增加的数据</a></li>
     <li class="sidebar-header-3"><a href="#获取删除的数据">获取删除的数据</a></li>
+    <li class="sidebar-header-3"><a href="#导出csv">导出csv</a></li>
     <li class="sidebar-header-4"><a href="#日期国际化">日期国际化</a></li>
     <li class="sidebar-header-4"><a href="#开发调试">开发调试</a></li>
 </ul>
       </div>
-      <div class="span9 main"><h2 id="ac-hand-table">ac-hand-table</h2>
+      <div class="span9 main"><h2 id="电子表格-handtable">电子表格 HandTable</h2>
 <p>ac-hand-table 是基于 <code>handsontable</code> 的适用于 React 框架的电子表格，它提供了数据绑定、数据验证、行过滤、列排序、表格多选、表格样式、表头交互、表头拖拽、行高拖拽、行交换等操作</p>
-<h2 id="安装">安装</h2>
+<h2 id="如何使用">如何使用</h2>
 <p>使用 npm 安装最新版本</p>
-<pre class="hljs"><code>npm install ac-hand-<span class="hljs-keyword">table</span></code></pre><h2 id="使用方法">使用方法</h2>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> AcHandTable <span class="hljs-keyword">from</span> <span class="hljs-string">'ac-hand-table'</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">'ac-hand-table/dist/index.css'</span>;
+<pre class="hljs"><code>$ npm <span class="hljs-keyword">install</span> <span class="hljs-keyword">ref</span>-tree-<span class="hljs-keyword">table</span>  <span class="hljs-comment">--save</span>
 
-
-<span class="hljs-keyword">const</span> data = [
-  {
-    <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
-    <span class="hljs-attr">name</span>: {
-      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'张'</span>,
-      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'小贝'</span>,
-    },
-    <span class="hljs-attr">level</span>: <span class="hljs-number">19</span>,
-    <span class="hljs-attr">date</span>: <span class="hljs-string">'2018-07-02'</span>,
-  },
-  {
-    <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">name</span>: {
-      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'李'</span>,
-      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'小贝'</span>,
-    },
-    <span class="hljs-attr">level</span>: <span class="hljs-number">10</span>,
-    <span class="hljs-attr">date</span>: <span class="hljs-string">'2018-07-02'</span>,
-  },
-  {
-    <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
-    <span class="hljs-attr">name</span>: {
-      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'王'</span>,
-      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'小维'</span>,
-    },
-    <span class="hljs-attr">level</span>: <span class="hljs-number">20</span>,
-    <span class="hljs-attr">date</span>: <span class="hljs-string">'2018-07-02'</span>,
-  },
-  {
-    <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>,
-    <span class="hljs-attr">name</span>: {
-      <span class="hljs-attr">firstName</span>: <span class="hljs-string">'孙'</span>,
-      <span class="hljs-attr">lastName</span>: <span class="hljs-string">'大熊'</span>,
-    },
-    <span class="hljs-attr">level</span>: <span class="hljs-number">8</span>,
-    <span class="hljs-attr">date</span>: <span class="hljs-string">'2018-07-02'</span>,
-  },
-];
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
-
-  columns = [
-    { <span class="hljs-attr">data</span>: <span class="hljs-string">'name.firstName'</span> }, <span class="hljs-comment">// 对象文本类型</span>
-    { <span class="hljs-attr">data</span>: <span class="hljs-string">'name.lastName'</span> },
-    {
-      <span class="hljs-attr">data</span>: <span class="hljs-string">'level'</span>,
-      <span class="hljs-attr">type</span>: <span class="hljs-string">'numeric'</span>, <span class="hljs-comment">// 数字类型</span>
-    },
-    {
-      <span class="hljs-attr">data</span>: <span class="hljs-string">'date'</span>,
-      <span class="hljs-attr">type</span>: <span class="hljs-string">'date'</span>, <span class="hljs-comment">// 日期类型</span>
-      dateFormat: <span class="hljs-string">'YYYY-MM-DD'</span>, <span class="hljs-comment">// 日期格式</span>
-      correctFormat: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 当前值是否格式化</span>
-      defaultDate: <span class="hljs-string">'1900-01-01'</span>, <span class="hljs-comment">// 默认值</span>
-    },
-  ];
-
-  <span class="hljs-comment">// 获取多选框选中数据</span>
-   getCheckbox = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-    <span class="hljs-keyword">const</span> data=<span class="hljs-keyword">this</span>.child.getCheckbox();
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"data"</span>,data)
-  };
-
-  <span class="hljs-comment">// 获取验证通过后数据</span>
-   getData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-    <span class="hljs-keyword">this</span>.child.getData(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'data'</span>, data);
-    });
-  };
-
-
-  render() {
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AcHandTable</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">"example"</span> // 组件<span class="hljs-attr">id</span>
-        <span class="hljs-attr">onRef</span>=<span class="hljs-string">{(ref)</span> =&gt;</span> { // 设置ref属性 调用子组件方法
-          this.child = ref;
-        }}
-        colHeaders={['姓', '名', '等级', '日期']} // 表格表头
-        data={data} // 表体数据
-        columns={this.columns} // 列属性设置
-      /&gt;
-    );
-  }
-}
-
-export default Demo;</span></code></pre><h2 id="api">API</h2>
+引入
+<span class="hljs-keyword">import</span> AcHandTable <span class="hljs-keyword">from</span> <span class="hljs-string">'ac-hand-table'</span>;
+样式
+import 'ac-hand-table/dist/index.css';
+</code></pre><h2 id="api">API</h2>
 <h3 id="achandtable">AcHandTable</h3>
 <table>
 <thead>
@@ -178,6 +93,18 @@ export default Demo;</span></code></pre><h2 id="api">API</h2>
 <td style="text-align:left">colWidths</td>
 <td style="text-align:left">列宽</td>
 <td style="text-align:left"><code>number</code> 100或 <code>string</code> &#39;100px&#39;或 <code>array</code> [100,200]或 <code>func</code> (index)=&gt;{}</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">width</td>
+<td style="text-align:left">表格总宽度</td>
+<td style="text-align:left">&#39;%&#39; 或 &#39;px&#39;</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">height</td>
+<td style="text-align:left">表格总高度</td>
+<td style="text-align:left">&#39;%&#39; 或 &#39;px&#39; 或 &#39;auto&#39;</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
@@ -443,7 +370,7 @@ export default Demo;</span></code></pre><h2 id="api">API</h2>
 </tr>
 <tr>
 <td style="text-align:left">type</td>
-<td style="text-align:left">数据类型 <code>text</code> <code>numeric</code> <code>date</code> <code>time</code> <code>checkbox</code>  <code>select</code> <code>dropdown</code> <code>autocomplete</code> <code>password</code></td>
+<td style="text-align:left">数据类型 <code>text</code> <code>numeric</code> <code>date</code> <code>time</code> <code>checkbox</code>  <code>select</code> <code>dropdown</code> <code>autocomplete</code> <code>password</code> <code>refMultipleTable</code> <code>refTreeWithInput</code> <code>refTreeTableWithInput</code> <code>refTreeTransferWithInput</code></td>
 <td style="text-align:left">string</td>
 <td style="text-align:left">true</td>
 </tr>
@@ -601,6 +528,73 @@ export default Demo;</span></code></pre><h2 id="api">API</h2>
 </tr>
 </tbody>
 </table>
+<h3 id="csvconfig">csvConfig</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">filename</td>
+<td style="text-align:left">将导出文件名</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left"><code>CSV_[YYYY]-[MM]-[DD]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">exportHiddenRows</td>
+<td style="text-align:left">在导出的文件中包含隐藏的行</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">exportHiddenColumns</td>
+<td style="text-align:left">在导出的文件中包含隐藏列</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">columnHeaders</td>
+<td style="text-align:left">在导出的文件中包含列标题</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">rowHeaders</td>
+<td style="text-align:left">在导出的文件中包含行标题</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">columnDelimiter</td>
+<td style="text-align:left">列分隔符</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">&#39;,&#39;</td>
+</tr>
+<tr>
+<td style="text-align:left">rowDelimiter</td>
+<td style="text-align:left">行分隔符</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left"><code>\r\n</code></td>
+</tr>
+<tr>
+<td style="text-align:left">range</td>
+<td style="text-align:left">将导出到文件的单元格范围</td>
+<td style="text-align:left">[]</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">mimeType</td>
+<td style="text-align:left">将导出文件类型</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">&quot;text/csv&quot;</td>
+</tr>
+</tbody>
+</table>
 <h3 id="获取表格里的数据">获取表格里的数据</h3>
 <pre class="hljs"><code> getData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
     <span class="hljs-comment">// 获取数据</span>
@@ -644,7 +638,12 @@ export default Demo;</span></code></pre><h2 id="api">API</h2>
 <pre class="hljs"><code>  getDelRowData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
     <span class="hljs-keyword">const</span> delRowData = <span class="hljs-keyword">this</span>.child.getDelRowData();
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'delRowData'</span>, delRowData);
-  };</code></pre><h4 id="日期国际化">日期国际化</h4>
+  };</code></pre><h3 id="导出csv">导出csv</h3>
+<pre class="hljs"><code>
+  onDownCsv = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">this</span>.child.onExportCSV();
+  };
+</code></pre><h4 id="日期国际化">日期国际化</h4>
 <pre class="hljs"><code>i18n: {
       <span class="hljs-attr">previousMonth</span>: <span class="hljs-string">'Previous Month'</span>,
       <span class="hljs-attr">nextMonth</span>: <span class="hljs-string">'Next Month'</span>,
