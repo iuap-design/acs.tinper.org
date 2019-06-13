@@ -43,8 +43,8 @@ class Demo4 extends Component {
    */
   loadData = async () => {
     let refModelUrl = {
-      tableBodyUrl: '/pap_basedoc/common-ref/blobRefTreeGrid',//表体请求
-      refInfo: '/pap_basedoc/common-ref/refInfo',//表头请求
+      tableBodyUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',//表体请求
+      refInfo: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/refInfo',//表头请求
     }
     let requestList = [
       request(refModelUrl.refInfo, { method: 'get' }),//表头数据
@@ -206,7 +206,7 @@ class Demo4 extends Component {
       <div className="demoPadding">
         <RefMultipleTableWithInput
           {...childrenProps}
-
+          filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid'}
         />
         <Button
           colors="primary"

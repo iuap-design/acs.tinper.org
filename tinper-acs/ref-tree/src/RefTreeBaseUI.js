@@ -54,7 +54,7 @@ const defaultProps = {
   onLoadData:()=>{},
   getRefTreeData:()=>{},
   onTreeSelecting:()=>{},
-  isLocalSearch:true,//默认是true
+  isLocalSearch:false,//默认是true
 }
 class RefTreeBaseUI extends Component {
   constructor(props) {

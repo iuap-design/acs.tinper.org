@@ -11,8 +11,8 @@ import '../../src/index.less';
 import request from './request';
 let options;
 let refModelUrl = {
-  treeUrl: '/pap_basedoc/common-ref/blobRefTree',
-  tableBodyUrl: '/pap_basedoc/common-ref/blobRefTreeGrid',
+  treeUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
+  tableBodyUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',
 };
 class Demo3 extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Demo3 extends Component {
       confirmTargetKeys: [],
       transferData: [],
       targetKeys: ['005'],
-      value: '{"refname":"人员5-自定义","refcode":"005","refpk":"718dda50629e4f8a8833b5d17de85280"}'
+      value: [{"refname":"人员5-自定义","refcode":"005","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89"}]
     }
   }
   canClickGoOn = () => {
@@ -70,23 +70,22 @@ class Demo3 extends Component {
       transferData: tempTransferData,
     });
   }
-  /**
-   * @msg: 保存
+ /**
+   * @msg: 保存，下拉选择词条保存，和参照弹框保存按钮
    * @param {type} 
    * @return: 
    */
-  transferSave = () => {
+  transferSave = (selectedArray) => {
     var { transferData, targetKeys } = this.state;
-    let needTransferData = [];
-    targetKeys.forEach((v, i) => {
-      transferData.forEach((v2, i2) => {
-        if (v == v2['refcode']) {
-          needTransferData.push(v2)
-        }
-      })
+    const {valueField} = options;
+    let targetKeysVal = [];
+    selectedArray.forEach((v, i) => {
+      targetKeysVal.push(v[valueField])
     });
+   
     this.setState({
-      confirmTargetKeys: needTransferData,
+      targetKeys:targetKeysVal,
+      confirmTargetKeys: selectedArray,
     })
 
   }
@@ -97,10 +96,12 @@ class Demo3 extends Component {
    */
   transferCancel = () => {
     let { confirmTargetKeys } = this.state;
+    let {valueField} = options;
     let cancelTargetKeys = [];
     confirmTargetKeys.forEach((v, i) => {
-      cancelTargetKeys.push(v['refcode'])
+      cancelTargetKeys.push(v[valueField])
     });
+    console.log('取消',cancelTargetKeys)
     this.setState({
       targetKeys: cancelTargetKeys,
     })
@@ -148,6 +149,9 @@ class Demo3 extends Component {
       onCancel: this.transferCancel,
 
       canClickGoOn: this.canClickGoOn,
+
+      filterUrl:'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',
+      multiple:true,
     }
     return (
       <div>

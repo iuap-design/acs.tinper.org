@@ -35,7 +35,7 @@ class Demo1 extends Component {
           loading:true,
         })
         let ajax={
-            url: '/pap_basedoc/common-ref/blobRefCombobox',
+            url: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefCombobox',
 
         };
         let { currPageIndex,searchValue } = this.state;

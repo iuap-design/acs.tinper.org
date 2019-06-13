@@ -39,7 +39,7 @@ class Demo4 extends Component {
           loading:true,
         })
         let ajax={
-            url: '/pap_basedoc/common-ref/blobRefTree',
+            url: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
         };
         let results = await request(ajax);
         let treeData = [];

@@ -31,6 +31,8 @@ var _react2 = _interopRequireDefault(_react);
 
 require('ref-core/css/refcore.css');
 
+require('ref-core/css/refcoretree.css');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // import './index.less'; //webpack打包放开

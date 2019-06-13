@@ -36,7 +36,7 @@ class Demo3 extends Component {
           "email": "55@556.com"
         }
       ],
-      value: '{"refname":"人员5-自定义,人员8","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89,a9f4c869-ca0b-4d12-847e-00eca08bfef6"}',
+      value: '{"refname":"人员5-自定义;人员8","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89;a9f4c869-ca0b-4d12-847e-00eca08bfef6"}',
 
 
     }
@@ -68,9 +68,9 @@ class Demo3 extends Component {
       this.setState({ showLoading: true })
     }
     let refModelUrl = {
-      treeUrl: '/pap_basedoc/common-ref/blobRefTree',
-      refInfo: '/pap_basedoc/common-ref/refInfo',//表头请求
-      tableBodyUrl: '/pap_basedoc/common-ref/blobRefTreeGrid',//表体请求
+      treeUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
+      refInfo: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/refInfo',//表头请求
+      tableBodyUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',//表体请求
     };
     let requestList = [
       request(refModelUrl.treeUrl, {
@@ -246,6 +246,8 @@ class Demo3 extends Component {
           onSave={this.onSave}
 
           loadTableData={this.loadTableData}
+
+          filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid'}
           {...getFieldProps('treeTable3', {
             initialValue: value,
             rules: [{

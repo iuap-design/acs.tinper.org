@@ -67,7 +67,8 @@ var propTypes = {
 	showLine: _propTypes2["default"].bool,
 	multiple: _propTypes2["default"].bool,
 	destory: _propTypes2["default"].func,
-	matchData: _propTypes2["default"].array
+	matchData: _propTypes2["default"].array,
+	isLocalSearch: _propTypes2["default"].bool //  默搜索是否是本地
 };
 var defaultProps = {
 	title: '弹窗标题',
@@ -87,7 +88,8 @@ var defaultProps = {
 	showLine: false,
 	multiple: false,
 	matchData: [],
-	destory: function destory() {}
+	destory: function destory() {},
+	isLocalSearch: false
 };
 
 var RefTreeTableBaseUI = function (_Component) {
@@ -179,7 +181,8 @@ var RefTreeTableBaseUI = function (_Component) {
 		    _props3$tableProps = _props3.tableProps,
 		    tableProps = _props3$tableProps === undefined ? {} : _props3$tableProps,
 		    _props3$mustPaginatio = _props3.mustPaginationShow,
-		    mustPaginationShow = _props3$mustPaginatio === undefined ? false : _props3$mustPaginatio;
+		    mustPaginationShow = _props3$mustPaginatio === undefined ? false : _props3$mustPaginatio,
+		    isLocalSearch = _props3.isLocalSearch;
 
 		var treeProps = (0, _assign2["default"])({}, {
 			className: className,
@@ -196,7 +199,8 @@ var RefTreeTableBaseUI = function (_Component) {
 			onTreeChange: onTreeChange,
 			onTreeSearch: onTreeSearch,
 			lazyModal: lazyModal,
-			onLoadData: onLoadData
+			onLoadData: onLoadData,
+			isLocalSearch: isLocalSearch
 		});
 		var tablePropsAll = (0, _assign2["default"])({}, {
 			className: className,

@@ -18,7 +18,7 @@ function RefTreeTransfer(props) {
 
 function RefTreeTransferWithInput(props) {
   return (
-    <RefWithInput {...props}>
+    <RefWithInput {...props} multiple={true}>
       <RefTreeTransfer />
     </RefWithInput>
   );

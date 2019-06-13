@@ -67,6 +67,9 @@ valueField |``string``|'refpk' |待提交的value的键。或者说指定真实�
 mustPaginationShow | `bool` | false | true必须展示分页、false，当pageCount>1才展示分页| 否
 tableProps | `object`| {} | table上其他属性，具体接收的参数参照bee-table| 否
 modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
+isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用函数getRefTreeData(value),true是前端搜索 | 否
+
+
 左树
 
 参数 | 类型 |默认值| 说明 | 必选

@@ -21238,6 +21238,7 @@
   margin: 0 0 0 18px;
   padding: 0;
 }
+.ref-core-tree-node-text.uTreeSearchableFilter,
 .ref-core-tree .uTreeSearchableFilter {
   color: #f53c32;
 }

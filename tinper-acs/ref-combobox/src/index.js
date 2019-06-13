@@ -42,6 +42,8 @@ const defaultProps = {
   onPaginationSelect:() =>{},
   onClickItemInner: () => { },//[Deprecated]
   onSelectorChange:()=>{},
+  showMenuIcon:false,
+  showArrow:true,//不展示navmenu展示箭头
 };
 
 class RefComboBoxBaseUI extends Component {
@@ -117,7 +119,9 @@ class RefComboBoxBaseUI extends Component {
       maxTagCount,
       maxTagPlaceholder,
       loading,
-      valueField
+      valueField,
+      showMenuIcon,
+      showArrow
     } = this.props;
     let {topPagination, dropdownClassName,} = this.props;//兼容之前版本topPagination放在childrencomboStore上了
     if (children && children.props.topPagination) topPagination = children.props.topPagination;
@@ -162,6 +166,8 @@ class RefComboBoxBaseUI extends Component {
           onSelectorChange={this.selectorChange}//为了配合ref-combobox的之前发版的操作
           onSearch={this.onSearch}
           onDropdownVisibleChange={this.onDropdownVisibleChange}
+          showMenuIcon={showMenuIcon}
+          showArrow={showArrow}
         >
         </Select>
       </div>

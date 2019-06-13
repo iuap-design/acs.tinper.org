@@ -111,7 +111,8 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
       checkedKeys: checkedArray.map(function (item) {
         return item[valueField];
       }),
-      onSaveCheckItems: []
+      onSaveCheckItems: [],
+      searchValue: '' //搜索
     };
     _this.treeData = props.treeData || [];
     _this.treeDataCache = {};
@@ -243,10 +244,12 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
         defaultExpandAll = _props2.defaultExpandAll,
         _props2$nodeDisplay = _props2.nodeDisplay,
         nodeDisplay = _props2$nodeDisplay === undefined ? "{refname}" : _props2$nodeDisplay,
-        nodeKeysFunc = _props2.nodeKeysFunc;
+        nodeKeysFunc = _props2.nodeKeysFunc,
+        isLocalSearch = _props2.isLocalSearch;
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
-        checkStrictly = _state.checkStrictly;
+        checkStrictly = _state.checkStrictly,
+        searchValue = _state.searchValue;
 
     return _react2["default"].createElement(
       'div',
@@ -276,7 +279,8 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
         selectedKeys: checkedKeys,
         checkStrictly: checkStrictly,
         showLine: showLine,
-        loadData: lazyModal ? this.props.onLoadData : null
+        loadData: lazyModal ? this.props.onLoadData : null,
+        searchValue: isLocalSearch ? searchValue : null
       }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(this.treeData.length), language: lang })
     );
   };
@@ -286,7 +290,13 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
   var _this4 = this;
 
   this.onSearchChange = function (value) {
-    _this4.props.onTreeSearch(value);
+    if (_this4.props.isLocalSearch) {
+      _this4.setState({
+        searchValue: value
+      });
+    } else {
+      _this4.props.onTreeSearch(value);
+    }
   };
 
   this.onSelectNode = function (checkedArray) {

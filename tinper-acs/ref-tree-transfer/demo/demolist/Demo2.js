@@ -11,8 +11,8 @@ import '../../src/index.less';
 import request from './request';
 let options;
 let refModelUrl = {
-  treeUrl: '/pap_basedoc/common-ref/blobRefTree',
-  tableBodyUrl: '/pap_basedoc/common-ref/blobRefTreeGrid',
+  treeUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
+  tableBodyUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',
 };
 class Demo2 extends Component {
   constructor(props) {
@@ -21,14 +21,15 @@ class Demo2 extends Component {
       treeData: [],
       confirmTargetKeys: [],
       transferData : [],
-      targetKeys: ['005'],
-      value : '{"refname":"人员5-自定义","refcode":"005","refpk":"718dda50629e4f8a8833b5d17de85280"}'
+      targetKeys: ['5e3a85ec-5e14-4734-8b3a-1e6168426c89'],
+      value : '{"refname":"人员5-自定义","refcode":"005","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89"}'
     }
   }
   canClickGoOn=()=> {
     this.initComponent();
     return true
   }
+
 	/**
 	 * @msg: 获取mock数据，只获取tree的data
 	 * @param {type} 
@@ -44,13 +45,15 @@ class Demo2 extends Component {
     });
     this.handleTreeSelect({}, refModelUrl);
   }
+
 	/**
-	 * @msg: 由树节点获取穿梭框数据
+	 * @msg: 选中左侧树节点，更新穿梭框数据
 	 * @param {type} 
 	 * @return: 
 	 */
 
   handleTreeSelect = async (selectNode = {}) => {
+    console.log('树节点信息',selectNode)
     let { valueField } = options;
     let dataMap = await request(refModelUrl.tableBodyUrl, {
       method: 'get',
@@ -70,23 +73,23 @@ class Demo2 extends Component {
       transferData: tempTransferData,
     });
   }
+
   /**
-   * @msg: 保存
+   * @msg: 保存，下拉选择词条保存，和参照弹框保存按钮
    * @param {type} 
    * @return: 
    */
-  transferSave = () => {
+  transferSave = (selectedArray) => {
     var { transferData, targetKeys } = this.state;
-    let needTransferData = [];
-    targetKeys.forEach((v, i) => {
-      transferData.forEach((v2, i2) => {
-        if (v == v2['refcode']) {
-          needTransferData.push(v2)
-        }
-      })
+    const {valueField} = options;
+    let targetKeysVal = [];
+    selectedArray.forEach((v, i) => {
+      targetKeysVal.push(v[valueField])
     });
+   
     this.setState({
-      confirmTargetKeys: needTransferData,
+      targetKeys:targetKeysVal,
+      confirmTargetKeys: selectedArray,
     })
 
   }
@@ -97,10 +100,12 @@ class Demo2 extends Component {
    */
   transferCancel = () => {
     let { confirmTargetKeys } = this.state;
+    let {valueField} = options;
     let cancelTargetKeys = [];
     confirmTargetKeys.forEach((v, i) => {
-      cancelTargetKeys.push(v['refcode'])
+      cancelTargetKeys.push(v[valueField])
     });
+    console.log('取消',cancelTargetKeys)
     this.setState({
       targetKeys: cancelTargetKeys,
     })
@@ -118,14 +123,15 @@ class Demo2 extends Component {
 
   render() {
     options  =  {
-			displayField:'{refname}-{refcode}-jaja',
-			valueField:'refcode',
+      displayField:'{refname}--jaja',//下拉展示以及transfer每项展示
+      inputDisplay:'{refname}-自定义',//input框上的展示
+			valueField:'refpk',
 		};
     let { treeData, transferData = [], targetKeys,value } = this.state
     //20190226穿梭框没有清空按钮并且目前存在问题
     let baseProps = {
       ...options,
-
+      
       handleTreeSelect: this.handleTreeSelect,
       treeData,
       transferData,
@@ -137,10 +143,14 @@ class Demo2 extends Component {
       onCancel: this.transferCancel,
       
       canClickGoOn:this.canClickGoOn,
+
+      filterUrl:'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',
+      multiple:true,
+      
     }
     return (
       <div>
-        <RefTreeTransferWithInput {...baseProps} />
+        <RefTreeTransferWithInput {...baseProps}  />
         <Button colors="primary" onClick={() => { alert(JSON.stringify(this.state.targetKeys)) }}> 提交</Button>
       </div>
     );

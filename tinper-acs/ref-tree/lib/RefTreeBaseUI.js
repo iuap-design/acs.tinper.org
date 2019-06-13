@@ -120,7 +120,7 @@ var defaultProps = {
   onLoadData: function onLoadData() {},
   getRefTreeData: function getRefTreeData() {},
   onTreeSelecting: function onTreeSelecting() {},
-  isLocalSearch: true //默认是true
+  isLocalSearch: false //默认是true
 };
 
 var RefTreeBaseUI = function (_Component) {
@@ -346,6 +346,8 @@ var RefTreeBaseUI = function (_Component) {
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
         searchValue = _state.searchValue;
+
+    console.log(isLocalSearch, searchValue);
 
     if (checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return _react2["default"].createElement(

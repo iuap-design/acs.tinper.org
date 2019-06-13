@@ -52,9 +52,9 @@ class Demo1 extends Component {
       this.setState({ showLoading: true })
     }
     let refModelUrl = {
-      treeUrl: '/pap_basedoc/common-ref/blobRefTree',
-      refInfo: '/pap_basedoc/common-ref/refInfo',//表头请求
-      tableBodyUrl: '/pap_basedoc/common-ref/blobRefTreeGrid',//表体请求
+      treeUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
+      refInfo: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/refInfo',//表头请求
+      tableBodyUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',//表体请求
     };
     let requestList = [
       request(refModelUrl.treeUrl, {

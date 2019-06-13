@@ -18,9 +18,10 @@ class Demo3 extends Component {
             treeData:[],
             matchData:[{name:'用友集团',refname:'用友集团',code:'001'},{name:'用友金融',refname:'用友金融',code:'2002'}],
             value:JSON.stringify({
-                refname: "用友init,用友init",
-                refpk: "",  //value中指定的refpk要等于valueField对应的字段
+                refname: "用友集团;用友金融",
+                refpk: "001;2002",  //value中指定的refpk要等于valueField对应的字段
             }),
+            // value:[{name:'用友集团',refname:'用友集团',code:'001'},{name:'用友金融',refname:'用友金融',code:'2002'}],
             filterData:[],
         }
     }
@@ -43,7 +44,7 @@ class Demo3 extends Component {
           loading:true,
         })
         let ajax={
-            url: '/pap_basedoc/common-ref/blobRefTree',
+            url: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
         };
         let results = await request(ajax);
         let treeData = [];
@@ -133,7 +134,7 @@ class Demo3 extends Component {
                         return `${record.name}-${record.code}`
                     }}  //显示内容的键
                     valueField={ 'code'}    //真实 value 的键
-                    filterUrl={null}
+                    filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree'}
                     filterData={filterData}
                     filterUrlFunc={this.filterUrlFunc}
                     multiple={true}

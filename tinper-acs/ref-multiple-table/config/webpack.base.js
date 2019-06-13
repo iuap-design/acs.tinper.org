@@ -28,14 +28,16 @@ module.exports = {
       // },
       {
         test: /.jsx$/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        exclude:/node_modules/
       },
       {
         test: /.js$/,
         loader: 'babel-loader',
-        exclude: [
-          path.join(__dirname, '../node_modules')
-        ]
+        exclude:/node_modules/
+        // exclude: [
+        //   path.join(__dirname, '../node_modules')
+        // ]
       },
       
       {

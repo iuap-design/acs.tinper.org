@@ -10,8 +10,8 @@ import '../../src/index.less';
 import {Button} from 'tinper-bee';
 let options;
 let refModelUrl = {
-  treeUrl: '/pap_basedoc/common-ref/blobRefTree',
-  tableBodyUrl: '/pap_basedoc/common-ref/blobRefTreeGrid',
+  treeUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree',
+  tableBodyUrl: 'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid',
 };
 class Demo1 extends Component {
 	constructor(props) {

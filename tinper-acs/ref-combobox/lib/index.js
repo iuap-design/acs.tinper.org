@@ -84,7 +84,9 @@ var defaultProps = {
   onSelect: function onSelect() {}, //[Deprecated]
   onPaginationSelect: function onPaginationSelect() {},
   onClickItemInner: function onClickItemInner() {}, //[Deprecated]
-  onSelectorChange: function onSelectorChange() {}
+  onSelectorChange: function onSelectorChange() {},
+  showMenuIcon: false,
+  showArrow: true //不展示navmenu展示箭头
 };
 
 var RefComboBoxBaseUI = function (_Component) {
@@ -96,7 +98,10 @@ var RefComboBoxBaseUI = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
     _this.onDropdownVisibleChange = function (open) {
-      var onPopupVisibleChange = _this.props.onPopupVisibleChange;
+      var _this$props$onPopupVi = _this.props.onPopupVisibleChange,
+          onPopupVisibleChange = _this$props$onPopupVi === undefined ? function () {} : _this$props$onPopupVi;
+
+      onPopupVisibleChange(open);
     };
 
     _this.selectorChange = function (status, id, item, selectedArray) {
@@ -156,6 +161,8 @@ var RefComboBoxBaseUI = function (_Component) {
 
 
   RefComboBoxBaseUI.prototype.render = function render() {
+    var _extends2;
+
     var _props = this.props,
         className = _props.className,
         children = _props.children,
@@ -185,7 +192,9 @@ var RefComboBoxBaseUI = function (_Component) {
         maxTagCount = _props.maxTagCount,
         maxTagPlaceholder = _props.maxTagPlaceholder,
         loading = _props.loading,
-        valueField = _props.valueField;
+        valueField = _props.valueField,
+        showMenuIcon = _props.showMenuIcon,
+        showArrow = _props.showArrow;
     var _props2 = this.props,
         topPagination = _props2.topPagination,
         dropdownClassName = _props2.dropdownClassName; //兼容之前版本topPagination放在childrencomboStore上了
@@ -195,7 +204,7 @@ var RefComboBoxBaseUI = function (_Component) {
     return _react2["default"].createElement(
       'div',
       { className: theme + ' ' + className + ' ref-combobox' },
-      _react2["default"].createElement(_menuSelector2["default"], _extends({}, this.props, {
+      _react2["default"].createElement(_menuSelector2["default"], _extends({}, this.props, (_extends2 = {
         style: _extends({}, style, {
           width: style.width || 300
         }),
@@ -231,7 +240,7 @@ var RefComboBoxBaseUI = function (_Component) {
         onSelectorChange: this.selectorChange //为了配合ref-combobox的之前发版的操作
         , onSearch: this.onSearch,
         onDropdownVisibleChange: this.onDropdownVisibleChange
-      }))
+      }, _extends2['showMenuIcon'] = showMenuIcon, _extends2.showArrow = showArrow, _extends2)))
     );
   };
 

@@ -255,6 +255,7 @@ class RefMultipleTableBase extends Component {
         size={size}
         onHide={this.handleBtnCancel}
         autoFocus={false}
+        enforceFocus={false}
         {...modalProps}
       >
           <Modal.Header closeButton={true}>
