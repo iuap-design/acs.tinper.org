@@ -198,6 +198,17 @@ class Demo2 extends Component {
           })
           }
         />
+        <Button colors="primary" onClick={
+          ()=>{
+            this.props.form.validateFields((err, values) => {
+              if(err){
+                alert(""+JSON.stringify(err));
+                return false;
+              }
+              alert(""+JSON.stringify(values))
+            });
+          }
+        }>提交</Button>
         <span className='error'>
           {getFieldError('table2')}
         </span>

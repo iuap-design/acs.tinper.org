@@ -111,6 +111,6 @@
     "bee-radio": "^2.0.8",
     "bee-search-panel": "^2.0.14",
     "bee-table": "^2.0.11",
-    "ref-core": "^0.2.7"
+    "ref-core": "^1.0.0-beta.1"
   }
 }

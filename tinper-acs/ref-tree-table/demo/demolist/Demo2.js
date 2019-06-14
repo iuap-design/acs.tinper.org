@@ -33,8 +33,8 @@ class Demo2 extends Component {
         }
       ],
       value: '{"refname":"人员3-初始value","refpk":"004989bb-a705-45ce-88f3-662f87ee6e52"}',
-      // value:[{"refname":"人员3-初始value","code":"003"}]
-
+      displayField:'{refname}-{refcode}-displayField',
+      valueField:'refpk',
     }
     this.page = {
       pageCount: 1,//总页数
@@ -200,20 +200,19 @@ class Demo2 extends Component {
  
   render() {
     options = {
-      displayField: '{refname}',
-      valueField: 'code',
       lang: 'zh_CN',
       miniSearch: true,
       multiple: true,
       isLocalSearch:true,
     }
-    const {value , matchData} = this.state;
+    const {value , matchData,displayField,valueField} = this.state;
     const { getFieldProps, getFieldError } = this.props.form;
     return (
       <div className="demo-label">
         <RefTreeTableWithInput
           {...options}
-
+          displayField={displayField}
+          valueField={valueField}
           treeData={this.treeData}
           columnsData={this.columnsData}
           tableData={this.tableData}

@@ -22,7 +22,10 @@ class Demo3 extends Component {
       confirmTargetKeys: [],
       transferData: [],
       targetKeys: ['005'],
-      value: [{"refname":"人员5-自定义","refcode":"005","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89"}]
+      value: [{"refname":"人员5-自定义","refcode":"005","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89"}],
+      valueField: 'refpk',
+      displayField: '哈哈-{refname}-{refcode}-displayField',
+      inputDisplay:'哈哈-{refname}inputDisplay',
     }
   }
   canClickGoOn = () => {
@@ -129,14 +132,18 @@ class Demo3 extends Component {
   }
 
   render() {
-    options = {
-      displayField: '{refname}-{refcode}-jaja',
-      valueField: 'refcode',
-    };
-    let { treeData, transferData = [], targetKeys, value } = this.state
+   
+    let { treeData, transferData = [], targetKeys, value,valueField,displayField,inputDisplay } = this.state
     //20190226穿梭框没有清空按钮并且目前存在问题
+
+     options = {
+      valueField : valueField,
+      inputDisplay : inputDisplay,
+      displayField : displayField,
+
+    }
     let baseProps = {
-      ...options,
+       ...options,
 
       handleTreeSelect: this.handleTreeSelect,
       treeData,

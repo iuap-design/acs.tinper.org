@@ -111,6 +111,6 @@
     "bee-table": "^2.0.10",
     "bee-tree": "^2.0.7",
     "cross-env": "^5.2.0",
-    "ref-core": "^0.2.8"
+    "ref-core": "^1.0.0-beta.1"
   }
 }

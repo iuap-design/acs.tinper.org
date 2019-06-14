@@ -1,7 +1,7 @@
 /**
  *
  * @title 基础示例3
- * @description 清空功能：搭配form。同时注意两个特殊展示：1.matchData数据项不全在已选择下展示 2.保存操作之后，input展示与displayField有关
+ * @description 清空功能：搭配form。同时注意两个特殊展示：1.matchData数据项不全在已选择下展示 2.保存操作之后，input展示与inputDisplay有关
  *
  */
 import React, { Component } from 'react';
@@ -34,6 +34,9 @@ class Demo3 extends Component {
         }
       ],
       value: '{"refname":"人员5-自定义;人员8","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89;a9f4c869-ca0b-4d12-847e-00eca08bfef6"}',
+      valueField: 'refpk',
+      displayField: '哈哈-{refname}-{refcode}-displayField',
+      inputDisplay:'哈哈-{refname}inputDisplay',
     };
     this.page = {
       pageCount: 0,
@@ -179,13 +182,11 @@ class Demo3 extends Component {
 
   render() {
     let { getFieldProps, getFieldError } = this.props.form;
-    let { showLoading, showModal, matchData, value } = this.state;
+    let { showLoading, showModal, matchData, value ,valueField,inputDisplay,displayField} = this.state;
     let { columnsData, tableData, page, fliterFormInputs } = this;
     options = {
       miniSearch: false,
       multiple: true,
-      valueField: "refpk",
-      displayField: "{code}-大前端{name}",
       emptyBut: true
     }
     let childrenProps = Object.assign({}, options, {
@@ -206,7 +207,11 @@ class Demo3 extends Component {
       <div className="demoPadding">
         <RefMultipleTableWithInput
           {...childrenProps}
-          param={{credentials: "exclude"}}
+
+          valueField={valueField}
+          inputDisplay={inputDisplay}
+          displayField={displayField}
+
           filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid'}
           {
           ...getFieldProps('table3', {

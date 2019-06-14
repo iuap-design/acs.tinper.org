@@ -1,7 +1,7 @@
 /**
  *
  * @title 基础示例3
- * @description 清空功能：搭配form校验。同时注意两个特殊展示：1.matchData数据项不全在已选择下展示 2.保存操作之后，input展示与displayField有关
+ * @description 清空功能：搭配form校验。同时注意两个特殊展示：1.matchData数据项不全在已选择下展示 2.保存操作之后，input展示与inputDisplay有关
  *
  */
 
@@ -37,7 +37,10 @@ class Demo3 extends Component {
         }
       ],
       value: '{"refname":"人员5-自定义;人员8","refpk":"5e3a85ec-5e14-4734-8b3a-1e6168426c89;a9f4c869-ca0b-4d12-847e-00eca08bfef6"}',
-
+      valueField: 'refpk',
+      displayField: '哈哈-{refname}啦{refcode}',
+      inputDisplay:'哈哈-{refname}inputDisplay',
+      nodeDisplay: '哈哈-{refname}-{refcode}-nodeDisplay'
 
     }
     this.page = {
@@ -218,18 +221,21 @@ class Demo3 extends Component {
   
   render() {
     options = {
-      displayField: '哈哈-{refname}啦{refcode}',
-      valueField: 'refpk',
+     
       lang: 'zh_CN',
       miniSearch: true,
       multiple: true,
     }
-    const {value , matchData} = this.state;
+    const {value , matchData,valueField,displayField,nodeDisplay,inputDisplay} = this.state;
     const { getFieldProps, getFieldError } = this.props.form;
     return (
       <div className="demo-label">
         <RefTreeTableWithInput
           {...options}
+          valueField={valueField}
+          displayField={displayField}
+          nodeDisplay={nodeDisplay}
+          inputDisplay ={inputDisplay}
 
           treeData={this.treeData}
           columnsData={this.columnsData}

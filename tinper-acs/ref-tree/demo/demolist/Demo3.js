@@ -16,14 +16,23 @@ class Demo3 extends Component {
         super();
         this.state = {
             treeData:[],
-            matchData:[{name:'用友集团',refname:'用友集团',code:'001'},{name:'用友金融',refname:'用友金融',code:'2002'}],
+            nodeDisplay: (record) => {
+                return `${record.refname}-nodeDisplay`
+            },//树节点展示
+            displayField: (record) => {
+                return `${record.name}-${record.code}-displayField`
+            },//下拉展示的
+            inputDisplay:'{refname}-inputDisplay',//input框展示
+            matchData:[{name:'用友集团',refname:'用友集团',refpk: "45a6400c-f80a-47be-9cfc-91d9581f32f4"},{name:'用友金融',refname:'用友金融',refpk: "3a9ea0ca-a8e0-43ab-ae91-0c16f23ad671"}],
             value:JSON.stringify({
                 refname: "用友集团;用友金融",
-                refpk: "001;2002",  //value中指定的refpk要等于valueField对应的字段
+                refpk: "45a6400c-f80a-47be-9cfc-91d9581f32f4;3a9ea0ca-a8e0-43ab-ae91-0c16f23ad671",  //value中指定的refpk要等于valueField对应的字段
             }),
+            valueField:'refpk',
+            // matchData:[{name:'用友集团',refname:'用友集团',code:'001'},{name:'用友金融',refname:'用友金融',code:'2002'}],
             // value:[{name:'用友集团',refname:'用友集团',code:'001'},{name:'用友金融',refname:'用友金融',code:'2002'}],
-            filterData:[],
-        }
+            // valueField:'code'
+        }   
     }
     componentDidMount(){
     }
@@ -122,18 +131,15 @@ class Demo3 extends Component {
     }
     render() {
         const { getFieldProps, getFieldError } = this.props.form;
-        const {treeData,matchData,filterData,value} = this.state;
+        const {treeData,matchData,filterData,value,valueField,nodeDisplay,displayField,inputDisplay} = this.state;
         return (
             <div className="demoPadding">
                 <RefTreeWithInput
                     emptyBut={true}
-                    nodeDisplay={ (record) => {
-                        return record.refname
-                    }}
-                    displayField={ (record) => {
-                        return `${record.name}-${record.code}`
-                    }}  //显示内容的键
-                    valueField={ 'code'}    //真实 value 的键
+                    valueField={ valueField}    //真实 value 的键
+                    nodeDisplay={ nodeDisplay}
+                    displayField={displayField}  //显示内容的键
+                    inputDisplay={inputDisplay}
                     filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTree'}
                     filterData={filterData}
                     filterUrlFunc={this.filterUrlFunc}
