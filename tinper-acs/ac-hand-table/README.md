@@ -5,7 +5,7 @@ ac-hand-table 是基于 `handsontable` 的适用于 React 框架的电子表格�
 使用 npm 安装最新版本
 
 ```
-$ npm install ref-tree-table  --save
+$ npm install ac-hand-table  --save
 
 引入
 import AcHandTable from 'ac-hand-table';

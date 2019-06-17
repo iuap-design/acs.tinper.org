@@ -254,8 +254,8 @@ class RefMultipleTableBaseUI extends Component {
 	 * @record {object} 该行数据
 	 */
 	putRowKey = (record, i) => {
-		const _this = this;
-		return record.key
+		const {valueField} = this.props;
+		return record.key || record[valueField] || `ref-tree-table=${i}`
 	};
 	onSelectTabItem = (a, state) => {
 		if(state === 'selecting'){

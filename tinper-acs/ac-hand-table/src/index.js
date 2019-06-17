@@ -173,7 +173,7 @@ class AcHandTable extends React.Component {
         // 缓存行选中数据
         _this.setState({ rowDataCache: data[row] });
         if (onClick) {
-          onClick(data[row], col, data[row][columnKey]);
+          onClick(data[row], row, data[row][columnKey]);
         }
       },
 

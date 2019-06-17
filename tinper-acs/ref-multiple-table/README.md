@@ -108,38 +108,40 @@ canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录�
 
 ## 注意事项
 
-### 参数解析
+#### 参数解析
 
-- input框的展示值
+- 1.input框的展示值
 
-    - input框的初始值，只从value的refname中获取
-    - 参照进行保存操作之后（点击参照确认按钮），input框展示由inputDisplay来决定
+    - 1.1 input框的初始值，只从value的refname中获取
+    - 1.2 参照进行保存操作之后（点击参照确认按钮），input框展示由inputDisplay来决定
 
-- value、inputDisplay、 displayField
+- 2.value、inputDisplay、 displayField
   
-    value和inputDisplay是针对input框来说。
+    2.1 value和inputDisplay是针对input框来说。
 
-    value格式可以是`'{"refname":"初级-T1","refpk":"level1"}'`或者数组[object1,object2...]。refname字段不可变，refpk是该数据键，要求具有唯一性；object中应包含数据项具体信息。
+    2.2 value格式可以是`'{"refname":"初级-T1","refpk":"level1"}'`或者数组[object1,object2...]。refname字段不可变，refpk是该数据键，要求具有唯一性；object中应包含数据项具体信息。
    
-    inputDisplay确定input中显示内容的格式，displayField过滤列表显示内容的格式。inputDisplay和displayField中使用到的字段必须是filterData,matchData和treeData数据项中都含有的字段。
+    2.3 inputDisplay确定input中显示内容的格式，displayField过滤列表显示内容的格式。inputDisplay和displayField中使用到的字段必须是filterData,matchData和treeData数据项中都含有的字段。
     
     **inputDisplay和displayField具体使用参考demo3**
    
     > 注意：value格式是`'{"refname":"初级-T1","refpk":"level1"}'`，inputDisplay只包含refname或者refpk
 
-- value、valueFiled
+- 3.value、valueFiled
   
     value初始化input框值，是input需要使用的数据，要求如上。
     valueFiled指定数据源的键，要求具有唯一性。
     因此value中refpk指定值应与valueFiled取值一致。
+   
     > 注意，在多选情况下，value是字符串`'{"refname":"初级-T1","refpk":"level1"}'`格式，那么valueFiled只能指定是`refpk`；value是数组，valueField可以是其他字段 **具体使用参考demo3**
 
-- value、matchData
+- 4.value、matchData
   
     value初始化input框值，matchData是指定参照中选中的节点。**具体参照demo3，value与matchData并不完全相同**
-    - 如果value有值matchData为空，那么input有值但是参照无选中数据；
-    - 反之value空值matchData有值，那么input为空但是参照有选中数据；
-    - 如果value与matchData都有值，但是不匹配，树中选中数据按照matchData。
+
+    - 4.1 如果value有值matchData为空，那么input有值但是参照无选中数据；
+    - 4.2 反之value空值matchData有值，那么input为空但是参照有选中数据；
+    - 4.3 如果value与matchData都有值，但是不匹配，树中选中数据按照matchData。
 
 ## 更新日志
     

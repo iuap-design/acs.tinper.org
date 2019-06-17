@@ -105,7 +105,8 @@ class RefMultipleTableBase extends Component {
 	 * @record {object} 该行数据
 	 */
 	putRowKey = (record, i) => {
-		return record.key
+    let {valueField} = this.props;
+		return record.key || record[valueField] || `ref-multiple-table=${i}`
   };
   /**
 	 * 为选中行增加背景色，只在单选状态生效

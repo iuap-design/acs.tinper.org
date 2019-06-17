@@ -82,9 +82,10 @@ onSelectorChange | `function(status,id,item,selectedArray)`| -- |当input框值�
 
 ## 注意事项
 
+#### 参数解析
 1.value vs displayField vs inputDisplay
 
-- displayField指定下拉列表menu的每条数据如何展示，可以带有icon
+- 1.1 displayField指定下拉列表menu的每条数据如何展示，可以带有icon
 ```js
 displayField : (record) => {
     return 
@@ -93,12 +94,14 @@ displayField : (record) => {
     </div>
 }
 ```
-- inputDisplay 指定input框上的值如何展示，inputDisplay与value的格式有很大关系。
-   -  字符串格式：value='{"refname":"用友集团1,用友集团2","refpk":"org1,org2"}'
+
+- 1.2 inputDisplay 指定input框上的值如何展示，inputDisplay与value的格式有很大关系。
+   -  1.2.1 字符串格式：value='{"refname":"用友集团1,用友集团2","refpk":"org1,org2"}'
      inputDisplay指定的字段只能包含refname和refpk。
-   - 数组格式： value=[{label1:'label1',label2:'',label3:'',....,[valueField]:'键值'}]
+   - 1.2.2 数组格式： value=[{label1:'label1',label2:'',label3:'',....,[valueField]:'键值'}]
       inputDisplay指定的字段可以是label1~[valueField]
-```JS
+
+```js
 value:[{refname:'用友',refpk:'org1',id:'no.1'}]
 inputDisplay:(record) =>{
   return `${record.refname}-${record.id}`
