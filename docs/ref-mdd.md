@@ -1,105 +1,115 @@
-# 参照设计说明
+# ref-mdd 基于统一协议的参照组件实现
 
+## 关键特性
 
-<a name="pWMJg"></a>
-## 设计原理
- meta字段中的cControlType属性为‘refer’会自动解析成参照输入框组件。以下是具体的实现原理<br />![image.png](https://cdn.nlark.com/yuque/0/2019/png/192681/1557226365033-116f52b5-4be9-4f01-825a-c39b3b15ae6f.png#align=left&display=inline&height=551&name=image.png&originHeight=1102&originWidth=1910&size=163841&status=done&width=955)
+- 基于统一的参照描述协议实现可扩展的组件解析渲染
+- 支持树型、表型参照，树表型、combobox 型待支持
 
-- 参照字段说明：
-| 字段 | 默认字段 | 元数据字段 |
-| --- | --- | --- |
-| 保存值valueField | 'id' | refReturn |
-| 显示值textField | 'name' | displayname||valueField |
-| 显示值直接的分割符号separator | ',' | JSON.parse(data.cStyle).separator<br /> |
+## 如何使用
 
-<a name="jsnOh"></a>
-## 参照类型
+### 组件方式调用
 
-- refer
-  - table
-  - tree
-  - treetable
-- combobox
-  - ListRefer
-  - TreeRefer
+```
+import { MTLComponent } from 'ref-mdd';
 
-<a name="ArvUN"></a>
-## 外部获取model方式
+const RefTableComponent = () => (
+    <div className="home-wrap">
+        <MTLComponent url={mtlUrl.tableMetaUrl} dataUrl={mtlUrl.tableDataUrl} />
+    </div>
+);
 
-- 先获取页面输入框code值中对应的referModel
-- 获取模态框的对应的referViewModel
-- 获取模态框中的组件model
-```javascript
-//  输入框对应的参照referModel
-let referModel = viewmodel.get('name');//name为当前组件的code值
-
-let referViewModel = referModel.getCache('vm');
-
-//获取模态框中的tree组件
-let treeModel = referViewModel.get('tree');
-//获取模态框中的table组件
-let tableModel = referViewModel.get('table');
-//获取模态框中的搜索框组件
-let searchBox = referViewModel.get('searchBox');
 ```
 
-<a name="yRksq"></a>
-## 请求meta、data信息
-请求的meta、data信息的地址都是固定的。<br />meta地址：'/uniform/pub/ref/getRefMeta'<br />data地址：'/uniform/bill/ref/getRefData'
-
-<a name="Hfl2V"></a>
-## 参照的事件
-
-- afterBrowse： 点击参照框请求数据后的回调
-  - eg，获取ReferViewMode，并进行一些事件处理
-
-```javascript
-//  输入框对应的参照referModel
-let nameRef = viewmodel.get('name');//name为当前字段
-
-nameRef.on('afterBrowse',(params)=>{
-  // 弹出参照对应的referViewModel
-  const  refViewModel = nameRef.getCache('vm'); 
-  // 获取模态框中的参照
-  const treeTableRef = refViewModel.get('tree');
-  // 调用treeModel的方法
-  treeTableRef.on('beforeSetDataSource',function(data=[]){
-    console.log('**beforeSetDataSource****',data);
-  
-  })
-  
-
-})
-```
-**注** ：获取模态框里面的组件参照步骤：<br />1、获取输入框对应的referModel ；<br />2、获取模态框对应的参照referViewModel，referModel.getCache('vm');<br />3、获取模态框里面的组件参照，referViewModel.get('具体参照名称');获取树参照，名称就是tree,表格名称就是table
+### API 形式调用
 
 
-- beforeBrowse：点击参照框在请求数据之前的回调。可以在这个方法中设置获取参照数据的查询参数
+
+### `UMD` 规范的通用 `CDN` 文件
+
+- 全局加载文件：`<script type="text/javascript" src="https://design.yonyoucloud.com/static/ref-mdd/latest/ref-core.js"></script>`
+
+- 初始化：`window.MTLCore.initComponent(options)`
+
+## 组件接口说明
+|参数|说明|类型|默认值|是否必填|
+|:--|:---:|:--:|---:|---:|
+|url|参照中获取的meta信息的url|string|'/uniform/pub/ref/getRefMeta'|否|
+|dataUrl|参照中获取的数据data信息的url|string|'/uniform/bill/ref/getRefData'|否|
+|refCode|参照Code值|string||是|
+|host|请求meta和数据的域地址|string||否|
+|token|跨域时所需的token|string|否|
+|matchData|选中的行的数据|object||
+|beforeGetData|查询数据前的回调函数，用户可以在这个方法中返回附加的请求参数，返回值的类型为Object|function|否|
+|onOk|点击确认按钮的回调函数|Function||否|
 
 
-eg:下面是省市直接的参照联动场景
-```javascript
- // 在城市参照弹出之前，获取省参照的value，通过setFilter将value存放到过滤条件中（在
-      城市参照获取城市列表时，会通过getFilter()获取value，作为过滤参数传到服务端）
-      viewmodel.get("bankcity").on('beforeBrowse', function (data) {
-        var provinceValue;
-        if(!viewmodel.get("bankprovince").getValue()){
-          cb.utils.alert("请选择开户省");
-          return false;
-        }else{
-          provinceValue = viewmodel.get("bankprovince").getValue();
-        }
-        var condition = {
-          "isRefreshData": true,
-          "parentId":provinceValue,
-          "province":provinceValue
-        };
-        this.setFilter(condition);
-      });
+## 整体流程
+
+<img src="https://raw.githubusercontent.com/whizbz11/Img/master/ref-mdd/ref-mdd.png" height='500px' />
+## 协议说明
+
 ```
 
+{
+  "code": 200,
+  "message": "操作成功",
+  "data": {
+    "refEntity": {
+      "id": 1000002,
+      "code": "dept",
+      "name": "部门",
+      "description": "部门",
+      "refType": "dept",
+	    ...
+    },
+    "gridMeta": {
+      "viewmodel": {
+        "iBillId": 1001283066,
+        "cBillName": "部门参照",
+        "cBillNo": "deptref",
+        "cBillType": "Archive",
+        "cSubId": "AA",
+        "bBatchOperate": true,
+        "entities": [...]
+        "actions": [...]
+      },
+      "viewApplication": {
+        "billid": 1001283066,
+        "cBillName": "部门参照",
+        "cBillType": "Archive",
+        "cBillNo": "deptref",
+        "bAllowMultiTpl": false,
+        "cSubId": "AA",
+        "cCardKey": "dept",
+        "view": { ... },
+        "extscripturls": [...]
+      }
+    }
+  }
+}
+```
 
-- setValue: 设置参照选中的内容即某条数据，类型Object。
-- setFilter 设置过滤项内容。这个内容会在请求具体数据中使用
-- beforeValueChange 点击确认按钮选中参照前回调函数
-- afterValueChange 点击确认按钮选中参照后回调函数
+## 参与开发
+
+### 基于 lerna 的开发和调试
+
+> 基于lerna分包后的开发痛点：如果现在在开发module-2, 但是发现是module-1的bug, 把module-1的bug修改了, 需要发布一下到npm, 然后module-2再更新module-1的依赖。执行`lerna add package1 –-scope=package2`命令后，你本地的package1会依赖于本地的package2，而不用担心package2没发布或者已发布的版本是过时的。
+
+**解决方案：**
+
+```
+# 到项目根目录执行以下命令
+$ npm run link
+```
+
+然后到package/ref-core中执行调试监听
+
+```
+$ npm run dev
+```
+
+最后到package/ref-example中启动示例查看调试效果：
+
+```
+$ npm start
+```

@@ -109,8 +109,8 @@ var RefComboBoxBaseUI = function (_Component) {
           onClickItemInner = _this$props.onClickItemInner,
           onSelectorChange = _this$props.onSelectorChange;
 
-      onClickItemInner(id, item, status, selectedArray); //[Deprecated]
-      onSelectorChange(status, id, item, selectedArray);
+      onClickItemInner(selectedArray, item, status); //[Deprecated]
+      onSelectorChange(selectedArray, item, status);
     };
 
     _this.paginationSelect = function (index) {

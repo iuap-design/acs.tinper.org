@@ -453,8 +453,9 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 	};
 
 	this.putRowKey = function (record, i) {
-		var _this = _this3;
-		return record.key;
+		var valueField = _this3.props.valueField;
+
+		return record.key || record[valueField] || 'ref-tree-table=' + i;
 	};
 
 	this.onSelectTabItem = function (a, state) {

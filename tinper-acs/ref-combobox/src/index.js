@@ -71,8 +71,8 @@ class RefComboBoxBaseUI extends Component {
    */
   selectorChange = (status, id, item, selectedArray) => {
     const { onClickItemInner,onSelectorChange } = this.props;
-    onClickItemInner(id, item, status, selectedArray);//[Deprecated]
-    onSelectorChange(status,id,item,selectedArray);
+    onClickItemInner(selectedArray,item,status);//[Deprecated]
+    onSelectorChange(selectedArray,item,status);
   }
   /**
    * @msg: 分页跳转

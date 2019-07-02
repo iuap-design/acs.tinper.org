@@ -5,11 +5,11 @@ var shelljs = require("shelljs");
 // gulp & gulp plugin
 var gulp = require("gulp");
 var babel = require("gulp-babel");
-var sass = require("gulp-sass");
-var less = require("gulp-less");
+var sass = require('gulp-sass')
+// var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
 var concat = require('gulp-concat');
-var cleanCSS = require('gulp-clean-css');
+var cssUglify = require('gulp-minify-css');
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -63,27 +63,31 @@ gulp.task("move_style", function() {
   gulp
     .src([
       path.join(process.cwd(), "./src/theme-red.less"),
+      path.join(process.cwd(), "./src/theme-red.scss"),
       path.join(process.cwd(), "./src/index.less"),
+      path.join(process.cwd(), "./src/index.scss"),
+      path.join(process.cwd(), "./src/tree.less"),
   ])
     .pipe(gulp.dest("./lib"));
    console.log("###### move_style done ######");
 });
 gulp.task("css_minify", function() {
-  gulp
-    .src([
-      path.join(process.cwd(), "./src/theme-red.css"),
-  ])
-    // .pipe(cleanCSS())
-    .pipe(gulp.dest("./lib"));
-  console.log("###### css_minify done ######");
+  // gulp
+  //   .src([
+  //     path.join(process.cwd(), "./src/theme-red.css"),
+  // ])
+  //   // .pipe(cleanCSS())
+  //   .pipe(gulp.dest("./lib"));
+  // console.log("###### css_minify done ######");
 });
 
 gulp.task("less_component",['move_style','css_minify'], function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/index.less"),
+      path.join(process.cwd(), "./src/index.scss"),
   ])
-    .pipe(less())
+    .pipe(sass())
+    .pipe(cssUglify())
     // .pipe(cleanCSS())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
@@ -92,13 +96,13 @@ gulp.task("less_component",['move_style','css_minify'], function() {
 //将lib下的index.css合并dist下的index.css生成完成的index.css
 gulp.task("change_dist",["less_component"], function() {
   gulp.src([
-      path.join(process.cwd(), "./src/index.less"),
+      path.join(process.cwd(), "./src/index.scss"),
       path.join(process.cwd(), "./dist/index.css"),
   ])
-  .pipe(less())
+  .pipe(sass())
   .pipe(concat('./dist/index.css'))
+  .pipe(cssUglify())
   .pipe(gulp.dest("./"))
-  .pipe(cleanCSS())
   console.log("###### change_dist done ######");
 });
 

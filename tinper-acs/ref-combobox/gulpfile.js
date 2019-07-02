@@ -49,6 +49,7 @@ gulp.task("move_style", function() {
   gulp
     .src([
       path.join(process.cwd(), "./src/**/*.less"),
+      path.join(process.cwd(), "./src/**/*.scss"),
   ])
     .pipe(gulp.dest("./lib"));
   console.log("###### move_style done ######");
@@ -57,7 +58,7 @@ gulp.task("move_style", function() {
 gulp.task("less_component", ["move_style"],function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/*.less"),
+      path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
     .pipe(gulp.dest("./lib"));

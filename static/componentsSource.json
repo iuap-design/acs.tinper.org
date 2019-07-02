@@ -2,9 +2,6 @@
     "ac-button": {
         "name": "按钮"
     },
-    "ac-notification": {
-        "name": "提示"
-    },
     "ac-barcode": {
         "name": "条形码组件"
     },

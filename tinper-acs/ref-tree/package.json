@@ -1,6 +1,6 @@
 {
   "name": "ref-tree",
-  "version": "2.0.10",
+  "version": "2.1.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -73,6 +73,7 @@
     "gulp-eslint": "~2.0.0",
     "gulp-just-replace": "~1.0.2",
     "gulp-less": "^4.0.1",
+    "gulp-minify-css": "^1.2.4",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "~1.6.0",
     "html-loader": "^0.5.5",
@@ -109,7 +110,7 @@
   "dependencies": {
     "bee-loading": "^1.0.9",
     "bee-modal": "^2.0.4",
-    "ref-core": "^1.0.0-beta.1",
+    "ref-core": "^1.0.12",
     "shallowequal": "^1.1.0"
   }
 }

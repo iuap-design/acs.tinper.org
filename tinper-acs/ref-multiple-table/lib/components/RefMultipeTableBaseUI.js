@@ -149,7 +149,9 @@ var RefMultipleTableBase = function (_Component) {
     };
 
     _this2.putRowKey = function (record, i) {
-      return record.key;
+      var valueField = _this2.props.valueField;
+
+      return record.key || record[valueField] || 'ref-multiple-table=' + i;
     };
 
     _this2.renderRowClassName = function (recode) {
@@ -407,7 +409,8 @@ var RefMultipleTableBase = function (_Component) {
         backdrop: backdrop,
         size: size,
         onHide: this.handleBtnCancel,
-        autoFocus: false
+        autoFocus: false,
+        enforceFocus: false
       }, modalProps),
       _react2["default"].createElement(
         _beeModal2["default"].Header,

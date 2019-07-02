@@ -1,6 +1,6 @@
 
-# 第一章 基础概念
-## 1.1 背景
+## 第一章 基础概念
+### 1.1 背景
 开发过程中经常遇到一些限定输入（也即下拉选择输入）场景，有的备选项信息简单，有的备选项信息复杂；有的备选项可以穷举，有的备选项会持续扩展。有的是单项选取，有的是多项选取；有的无需关联查找，有的需关联查找……面对此类复杂的开发需求，常规的下拉输入框等控件是不能满足要求的，为此IUAP提供了一套参照组件，用来解决类似的问题，提高开发效率。
 
 使用参照的场景通常满足以下几个要求。第一，用户需要填写的数据不可以随意填写，且已经存在于数据库。第二，这些数据是一些常用和固定的数据，如组织、部门、人员、岗位等。第三，用户在选择数据时需要进行权限过滤，以防止用户越权选择自己无权管理的数据。
@@ -8,13 +8,13 @@
 举个简单的例子。一个经理创建了一个任务，需要把这个任务分配下去。那么他在选择分配的人员时，这个人员一定是他部门存在的人，而不是其他部门或者不存在的人。这时，选择人员这个地方就需要做成一个人员参照。
 
 
-## 1.2 名词解释
+### 1.2 名词解释
 参照组件是IUAP对外提供的一套UI组件，基于React开发，它提供固定的几种界面样式，用户可以按照规定的形式提供参数，即可实现完整的交互逻辑。
 
 
 
-# 第二章 技术架构
-## 2.1 架构设计
+## 第二章 技术架构
+### 2.1 架构设计
     参照目前为止存在了3个版本的设计，前两版的设计都是提供了一个统一的代理服务进行服务转发，代理服务分别为uitemplate_web以及newref；其中uitemplate_web是基于tinper的uui的开发规范的一套公共组件参照；而newref则是基于tinper的react的开发规范的组件；两套模式下，都由uitemplate_web以及newref负责给前端参照控件提供服务，前端开发时，需要携带refCode参照编码，后端参照服务，通过在参照表refinfo表中注册的参照信息，获取参照resturl地址，并进行服务的转发到业务参照实现的后端，请求相关的服务接口，如表格、树等搜索查询的接口；
 
 ![image](https://user-images.githubusercontent.com/33412781/60429529-d4d98f80-9c2d-11e9-9a2e-df64af02d08c.png)
@@ -29,7 +29,7 @@
 
 
 
-## 2.2 实现说明
+### 2.2 实现说明
     提供了两种方式，一种是基于ref.xml描述实现对树形参照、表形参照、树表形参照、树穿梭框参照的开发；另一种可以通过实现不同类型的参照抽象模型类进行参照服务开发
 
 * 提供了工具方法进行参照的id转换name的方法，以满足在数据查询时候，参照pk与name转换显示的场景
@@ -51,7 +51,7 @@
     * 如果不是当前模块得参照，通过newref提供得查询参照模型服务，确定参照得版本refversion，如果是1.0_common,则进行newref远程服务调用；如果是2.0_common或者2.0_ext则进行业务服务得远程调用；进行远程服务的restful调用，提供convertRemoteIdToName服务
 
 
-## 2.3 参照模型
+### 2.3 参照模型
 
 表名REF_REFINFO
 
@@ -82,7 +82,7 @@ REFNAME6 | 参照名称 | VARCHAR2(300)
 
 
 
-# 第三章 功能介绍
+## 第三章 功能介绍
 ## 3.1 参照类型说明
 | 类型名称 | 类型编码 | 类型值 |
 -|-|-
@@ -1225,7 +1225,7 @@ where DEPTID='9711d912-3184-4063-90c5-1facc727813c' or ORGID='a4cf0601-51e6-4012
 
 
 
-# 第四章 开发示例
+## 第四章 开发示例
 ## 4.1 开发流程
 ### 4.1.1 后端开发流程
 * 后端项目需要在pom文件中添加依赖
@@ -1454,11 +1454,12 @@ const requestParam = {
 
 
 
-# 第五章 典型业务场景介绍
+## 第五章 典型业务场景介绍
 ## 5.1 参照选择值将多余信息带入输入框
-![image](https://user-images.githubusercontent.com/33412781/60429836-84aefd00-9c2e-11e9-95b7-e302d6bf41e8.png)
-```javascript
 
+<img src="https://user-images.githubusercontent.com/33412781/60429836-84aefd00-9c2e-11e9-95b7-e302d6bf41e8.png" width="400" align=center />
+
+```javascript
 import React, { Component } from 'react';
 import PapRefStaff from 'pap-refer/lib/pap-ref-staff/src/index';
 import 'pap-refer/lib/pap-common-table/src/index.css';
@@ -1561,7 +1562,7 @@ export default Form.createForm()(Demo3);
 ## 5.2 参照级联
 > refcorewithinput中添加拦截操作，新增两个回调函数onClickGoOn、和 onHandleGoOn，示例中验证
 
-![image](https://user-images.githubusercontent.com/33412781/60429856-90022880-9c2e-11e9-84ad-c435e33fdcde.png)
+<img src="https://user-images.githubusercontent.com/33412781/60429856-90022880-9c2e-11e9-84ad-c435e33fdcde.png" width="1000" align=center />
 
 ### 5.2.1 参照级联单选
 > 前端部分：关键在参数param中clientParam字段
@@ -1990,7 +1991,7 @@ export default Form.createForm()(Demo2);
 
 
 
-# 第六章 开放接口规范
+## 第六章 开放接口规范
 ## 6.1 后端接口说明
 ### 6.1.1 请求参数说明
 请求参数就是RefViewModelVO这个vo里的成员变量

@@ -1,0 +1,39 @@
+@import './theme-red.scss';
+.ref-tree{
+  //主题-红色
+  &.ref-red{
+      .ref-core-button-empty{
+          color:#f53c32!important;
+      }
+  }
+  // 主题-蓝色
+  &.ref-blue{
+    .ref-core-button-empty{
+        color:#1e88e5!important;
+    }
+}
+.u-input-group-btn{
+  line-height: 32px;
+  color: #757575;
+}
+& .ref-core-search{
+  width: 100%;
+}
+& .ref-core-tree{
+  margin-top: 5px;
+  text-align: left;
+  .u-tree-node-content-wrapper{
+    &:hover{
+      .ref-core-tree-node-selected{
+        opacity: 0;
+      }
+    }
+    &.u-tree-node-selected:hover{
+      .ref-core-tree-node-selected{
+        opacity: 1;
+      }
+    }
+    
+  }
+}
+}

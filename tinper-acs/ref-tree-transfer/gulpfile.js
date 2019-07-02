@@ -9,7 +9,9 @@ var sass = require("gulp-sass");
 var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
 var concat =  require("gulp-concat");
-var cleanCSS = require('gulp-clean-css');
+// var cleanCSS = require('gulp-clean-css');
+var cssUglify = require('gulp-minify-css');
+
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -69,16 +71,17 @@ gulp.task("css_component", function() {
   console.log("###### css_component done ######");
 });
 
-gulp.task("less_component",['css_component'], function() {
+gulp.task("less_component", ['css_component'],function() {
   gulp
     .src([
       path.join(process.cwd(), "./src/index.less"),
   ])
     .pipe(less())
-    // .pipe(cleanCSS())
+    .pipe(cssUglify())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
+
 //将lib下的index.css合并dist下的index.css生成完成的index.css
 gulp.task("change_dist",["less_component"], function() {
   gulp.src([
@@ -87,7 +90,7 @@ gulp.task("change_dist",["less_component"], function() {
   ])
   .pipe(less())
   .pipe(concat('./dist/index.css'))
-  .pipe(cleanCSS())
+  .pipe(cssUglify())
   .pipe(gulp.dest("./"));
   console.log("###### change_dist done ######");
 });

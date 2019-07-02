@@ -6,10 +6,11 @@ var shelljs = require("shelljs");
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var sass = require("gulp-sass");
-var less = require("gulp-less");
+// var less = require("gulp-less");
 var es3ify = require("gulp-es3ify");
 var concat = require("gulp-concat")
-var cleancss  = require("gulp-clean-css");
+// var cleancss  = require("gulp-clean-css");
+var cssUglify = require('gulp-minify-css');
 colors.setTheme({
   silly: 'rainbow',
   input: 'grey',
@@ -51,6 +52,9 @@ gulp.task("move_style", function() {
     .src([
       // path.join(process.cwd(), "./src/theme-red.css"),
       path.join(process.cwd(), "./src/**/*.less"),
+      path.join(process.cwd(), "./src/theme-red.scss"),
+      path.join(process.cwd(), "./src/index.scss"),
+
   ])
     .pipe(gulp.dest("./lib"));
   console.log("###### move_style done ######");
@@ -59,21 +63,22 @@ gulp.task("move_style", function() {
 gulp.task("less_component",["move_style"], function() {
   gulp
     .src([
-      path.join(process.cwd(), "./src/index.less"),
+      path.join(process.cwd(), "./src/index.scss"),
   ])
-    .pipe(less())
+    .pipe(sass())
+    .pipe(cssUglify())
     .pipe(gulp.dest("./lib"));
   console.log("###### less_component done ######");
 });
 //将lib下的index.css合并dist下的index.css生成完成的index.css
 gulp.task("change_dist",["less_component"], function() {
   gulp.src([
-      path.join(process.cwd(), "./src/index.less"),
+      path.join(process.cwd(), "./src/index.scss"),
       path.join(process.cwd(), "./dist/index.css"),
   ])
-  .pipe(less())
+  .pipe(sass())
   .pipe(concat('./dist/index.css'))
-  .pipe(cleancss())
+  .pipe(cssUglify())
   .pipe(gulp.dest("./"));
   console.log("###### change_dist done ######");
 });

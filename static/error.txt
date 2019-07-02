@@ -1,13 +1,3 @@
-ac-input-locale 没有demoList，只有md文档 
-ac-mobile-locale 没有demoList，只有md文档 
-ac-city-select 没有demoList，只有md文档 
 ac-hand-table 没有demoList，只有md文档 
-ac-multi-tabs 没有demoList，只有md文档 
-ac-navbar 没有demoList，只有md文档 
-ac-attachment 没有demoList，只有md文档 
-yyuap-bpm 没有demoList，只有md文档 
-ac-upload 没有demoList，只有md文档 
-ref-tree-table 没有demoList，只有md文档 
-ref-combobox 没有demoList，只有md文档 
 yyuap-bpm 没有demoList，只有md文档 
 ac-upload 没有demoList，只有md文档 

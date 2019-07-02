@@ -347,8 +347,6 @@ var RefTreeBaseUI = function (_Component) {
         checkedKeys = _state.checkedKeys,
         searchValue = _state.searchValue;
 
-    console.log(isLocalSearch, searchValue);
-
     if (checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
     return _react2["default"].createElement(
       _beeModal2["default"],

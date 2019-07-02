@@ -108,6 +108,9 @@ class Demo1 extends Component {
             this.loadData()
         })
     }
+    onChange=(...arg)=>{
+        console.log('onchange',arg)
+    }
     render() {
         const { getFieldError, getFieldProps } = this.props.form;
         let {searchValue,currPageIndex,storeData,loading} = this.state;
@@ -129,6 +132,8 @@ class Demo1 extends Component {
                     onPopupVisibleChange={this.onPopupVisibleChange}
                     {...getFieldProps('combobox', {
                         initialValue:this.state.value,  //M0000000000002
+                        onChange:this.onChange,
+
                         rules: [{
                             message: '提示：请选择',
                             pattern: /[^{"refname":"","refpk":""}|{"refpk":"","refname":""}]/

@@ -49,7 +49,7 @@ function RefTreeTransfer(props) {
 function RefTreeTransferWithInput(props) {
   return _react2["default"].createElement(
     _RefCoreWithInput2["default"],
-    props,
+    _extends({}, props, { multiple: true }),
     _react2["default"].createElement(RefTreeTransfer, null)
   );
 }

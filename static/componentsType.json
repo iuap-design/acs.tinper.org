@@ -1,7 +1,6 @@
 {
     "standard":[
         "ac-button",
-        "ac-notification",
         "ac-barcode",
         "ac-qrcodes",
         "ac-input-locale",
