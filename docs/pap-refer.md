@@ -17,7 +17,7 @@
 ### 2.1 架构设计
     参照目前为止存在了3个版本的设计，前两版的设计都是提供了一个统一的代理服务进行服务转发，代理服务分别为uitemplate_web以及newref；其中uitemplate_web是基于tinper的uui的开发规范的一套公共组件参照；而newref则是基于tinper的react的开发规范的组件；两套模式下，都由uitemplate_web以及newref负责给前端参照控件提供服务，前端开发时，需要携带refCode参照编码，后端参照服务，通过在参照表refinfo表中注册的参照信息，获取参照resturl地址，并进行服务的转发到业务参照实现的后端，请求相关的服务接口，如表格、树等搜索查询的接口；
 
-![image](https://user-images.githubusercontent.com/33412781/60429529-d4d98f80-9c2d-11e9-9a2e-df64af02d08c.png)
+![avatar](/images/架构架构图2.png)
 
     基于以上设计的情况下，可以看到参照请求的调用链路较长，出现问题不容易排查；故做了以下的设计：
 
@@ -25,7 +25,7 @@
 2. 后端开发依赖pap-ref-sdk，并按照开发规范设置参照模型
 3. 前端发送加载参照请求直接到业务模块后台，并根据模型配置进行业务相关信息的获取，并返回数据给前端控件；
 
-![image](https://user-images.githubusercontent.com/33412781/60429583-ede24080-9c2d-11e9-9d33-74adea67c7b2.png)
+![avatar](/images/参照架构图.png)
 
 
 
@@ -107,7 +107,7 @@ REFNAME6 | 参照名称 | VARCHAR2(300)
     * 提供清空按钮
     * 懒加载多选
 
-![image](https://user-images.githubusercontent.com/33412781/60429619-0a7e7880-9c2e-11e9-98fe-e27373732871.png)
+![avatar](/images/reftree.png)
 
 * **组合树**支持特性
     * 单选、多选
@@ -125,7 +125,7 @@ REFNAME6 | 参照名称 | VARCHAR2(300)
     * 组合树选值问题：子树选中父树不可选中
     * 树形参照懒加载模式下三角号交互问题
 
-![image](https://user-images.githubusercontent.com/33412781/60429649-1b2eee80-9c2e-11e9-91ce-85f3d053ad1b.png)
+![avatar](/images/refaggtree.png)
 
 ### 2. 表格参照
 * 支持特性
@@ -140,7 +140,7 @@ REFNAME6 | 参照名称 | VARCHAR2(300)
 * 未支持特性
     * 快捷录入
 
-![image](https://user-images.githubusercontent.com/33412781/60429672-2bdf6480-9c2e-11e9-9a3a-713f9b633e2a.png)
+![avatar](/images/reftable.png)
 
 ### 3. 树表参照
 * 支持特性
@@ -157,7 +157,7 @@ REFNAME6 | 参照名称 | VARCHAR2(300)
 * 未支持特性
     * 快捷录入
 
-![image](https://user-images.githubusercontent.com/33412781/60429706-3c8fda80-9c2e-11e9-849d-31325bce2dac.png)
+![avatar](/images/reftreetable.png)
 
 ### 4. 穿梭框
 * 支持特性
@@ -175,7 +175,7 @@ REFNAME6 | 参照名称 | VARCHAR2(300)
     * 组合树提供entityType进行查询
     * 数据提供fid，通过fid进行树标记选择
 
-![image](https://user-images.githubusercontent.com/33412781/60429726-487b9c80-9c2e-11e9-9de9-af21e8ceb1d3.png)
+![avatar](/images/reftreetransfer.png)
 
 ### 5. 下拉参照
 
@@ -1433,11 +1433,11 @@ const requestParam = {
 >2. 访问参照示例地址
 >   http://refdemo.app.yyuap.com/dist/ucf-publish/iuap-pap-demo-fe/ref-demo/index.html
 
-![image](https://user-images.githubusercontent.com/33412781/60429765-60532080-9c2e-11e9-80bc-5bcfd51e2135.png)
+![avatar](/images/refdemo1.png)
 
-![image](https://user-images.githubusercontent.com/33412781/60429776-6b0db580-9c2e-11e9-823b-dfe2e3d61e59.png)
+![avatar](/images/refdemo2.png)
 
-![image](https://user-images.githubusercontent.com/33412781/60429789-752fb400-9c2e-11e9-945b-5e87d60daa15.png)
+![avatar](/images/refdemo3.png)
 
 ## 4.3 示例项目
 * 前端项目 iuap-pap-demo-fe 负责人：姚鑫
@@ -1457,7 +1457,7 @@ const requestParam = {
 ## 第五章 典型业务场景介绍
 ## 5.1 参照选择值将多余信息带入输入框
 
-<img src="https://user-images.githubusercontent.com/33412781/60429836-84aefd00-9c2e-11e9-95b7-e302d6bf41e8.png" width="400" align=center />
+<img src="./images/参照选值带入输入框.png" width="400" align=center />
 
 ```javascript
 import React, { Component } from 'react';
@@ -1562,7 +1562,7 @@ export default Form.createForm()(Demo3);
 ## 5.2 参照级联
 > refcorewithinput中添加拦截操作，新增两个回调函数onClickGoOn、和 onHandleGoOn，示例中验证
 
-<img src="https://user-images.githubusercontent.com/33412781/60429856-90022880-9c2e-11e9-84ad-c435e33fdcde.png" width="1000" align=center />
+<img src="./images/参照级联.png" width="1000" align=center />
 
 ### 5.2.1 参照级联单选
 > 前端部分：关键在参数param中clientParam字段

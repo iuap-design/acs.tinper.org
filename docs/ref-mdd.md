@@ -45,7 +45,7 @@ const RefTableComponent = () => (
 
 ## 整体流程
 
-<img src="https://raw.githubusercontent.com/whizbz11/Img/master/ref-mdd/ref-mdd.png" height='500px' />
+<img src="./images/ref-mdd.png" height='500px' />
 ## 协议说明
 
 ```
