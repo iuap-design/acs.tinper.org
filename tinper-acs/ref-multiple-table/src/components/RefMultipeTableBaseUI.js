@@ -41,7 +41,7 @@ class RefMultipleTableBase extends Component {
 	componentWillReceiveProps(nextProps) {
 		let { strictMode,valueField = "refpk" ,matchData=[],value } = nextProps;
 		//严格模式下每次打开必须重置数据
-		if( nextProps.showModal && !this.props.showModal ){ //正在打开弹窗
+		if( nextProps.showModal && !this.props.showModal || !shallowequal(nextProps.matchData ,this.props.matchData) ){ //正在打开弹窗
 			// if( strictMode || !this.columnsData.length || this.currPageIndex !== 1 ) {
 			// 	//开启严格模式 或 表头信息没有获取到，即初始化失败是必须重置
 			// 	this.initComponent();

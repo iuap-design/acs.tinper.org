@@ -291,7 +291,7 @@ var RefMultipleTableBase = function (_Component) {
         value = nextProps.value;
     //严格模式下每次打开必须重置数据
 
-    if (nextProps.showModal && !this.props.showModal) {
+    if (nextProps.showModal && !this.props.showModal || !(0, _shallowequal2["default"])(nextProps.matchData, this.props.matchData)) {
       //正在打开弹窗
       // if( strictMode || !this.columnsData.length || this.currPageIndex !== 1 ) {
       // 	//开启严格模式 或 表头信息没有获取到，即初始化失败是必须重置

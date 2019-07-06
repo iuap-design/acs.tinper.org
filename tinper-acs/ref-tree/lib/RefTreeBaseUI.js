@@ -342,7 +342,8 @@ var RefTreeBaseUI = function (_Component) {
         theme = _props3$theme === undefined ? 'ref-red' : _props3$theme,
         _props3$modalProps = _props3.modalProps,
         modalProps = _props3$modalProps === undefined ? {} : _props3$modalProps,
-        isLocalSearch = _props3.isLocalSearch;
+        isLocalSearch = _props3.isLocalSearch,
+        treeNodeDisabledKey = _props3.treeNodeDisabledKey;
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
         searchValue = _state.searchValue;
@@ -402,7 +403,8 @@ var RefTreeBaseUI = function (_Component) {
           showLine: showLine,
           lazyModal: lazyModal,
           loadData: lazyModal ? this.props.onLoadData : null,
-          searchValue: isLocalSearch ? searchValue : ''
+          searchValue: isLocalSearch ? searchValue : '',
+          treeNodeDisabledKey: treeNodeDisabledKey
         }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(treeData.length), language: lang })
       ),
       _react2["default"].createElement(

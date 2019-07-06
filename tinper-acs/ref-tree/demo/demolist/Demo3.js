@@ -148,6 +148,7 @@ class Demo3 extends Component {
                     matchData={matchData}
                     treeData={treeData}
                     canClickGoOn={this.canClickGoOn}
+                    treeNodeDisabledKey={'isLeaf'}
                     {...getFieldProps('tree3', {
                         initialValue:value,
                         rules: [{
