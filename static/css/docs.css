@@ -184,7 +184,7 @@ body {
     float: right;
 }
 .docs .doc-content .title-right .title-tag {
-    height: 24px;
+    /* height: 24px; */
     border: 1px solid #8D99AE;
     font-size: 14px;
     width: 80px;
@@ -210,10 +210,13 @@ body {
     bottom: -1px;
 }
 .docs .doc-content .title-right .title-tag.title-version{
-    width: 60px;
+    width: auto;
     text-align: center;
     margin: 0;
     font-size: 12px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    min-width: 80px;
 }
 /* 版本下拉 */
 .docs .doc-content .title-right #tagSelect{
