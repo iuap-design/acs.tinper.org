@@ -1,0 +1,16 @@
+@import "../node_modules/tinper-bee-core/scss/minxin-variables";
+@import "../node_modules/tinper-bee-core/scss/minxin-mixins";
+
+.ac-search-tabs{
+    &-item{
+        cursor: pointer;
+        &.active{
+            color: $button-primary-color
+        }
+    }
+    &-split{
+        margin: 0 15px;
+        color: #555;
+        font-size: 12px;
+    }
+}

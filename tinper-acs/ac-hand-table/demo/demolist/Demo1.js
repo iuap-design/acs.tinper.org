@@ -13,7 +13,7 @@ import React, { Component } from 'react';
 
 // demo 工程中引入方式
 import AcHandTable from '../../src/index';
-import '../../src/index.less';
+// import '../../src/index.less';
 
 // 项目中引入方式
 // import AcHandTable from 'ac-hand-table';
@@ -26,7 +26,9 @@ const data = [
       firstName: '张',
       lastName: '小贝',
     },
-    level: 19,
+    price: 19,
+    number: 10,
+    total: 190,
     date: '2018-07-02',
     time: '09:20:30',
   },
@@ -36,7 +38,9 @@ const data = [
       firstName: '李',
       lastName: '小贝',
     },
-    level: 10,
+    price: 19,
+    number: 10,
+    total: 190,
     date: '2018-07-02',
     time: '09:20:30',
   },
@@ -46,7 +50,9 @@ const data = [
       firstName: '王小维小维小维小维小维小维小维小维小维小维小维小维小维',
       lastName: '小维',
     },
-    level: 20,
+    price: 19,
+    number: 10,
+    total: 190,
     date: '2018-07-02',
     time: '09:20:30',
   },
@@ -56,7 +62,9 @@ const data = [
       firstName: '孙',
       lastName: '大熊',
     },
-    level: 20,
+    price: 19,
+    number: 10,
+    total: 190,
     date: '2018-07-02 09:20:30',
     time: '09:20:30',
   },
@@ -71,7 +79,6 @@ class Demo extends Component {
     };
   }
 
-
   columns = [
     {
       data: 'name.firstName',
@@ -81,9 +88,20 @@ class Demo extends Component {
       data: 'name.lastName',
     },
     {
-      data: 'level',
+      data: 'price',
       type: 'numeric', // 数字类型
-      readOnly: true, // 只读
+    },
+    {
+      data: 'number',
+      type: 'numeric', // 数字类型
+    },
+    {
+      data: 'total',
+      type: 'numeric', // 数字类型
+      customValue: (rowData) => { // 自定义列显示值
+        const { price = 0, number = 0 } = rowData;
+        return price * number;
+      },
     },
     {
       data: 'date',
@@ -105,7 +123,6 @@ class Demo extends Component {
     },
   ];
 
-
   onChange = (time, timeString) => {
     console.log(time, timeString);
   };
@@ -118,22 +135,25 @@ class Demo extends Component {
         <AcHandTable
           id="example" // 组件id
           onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
-          colHeaders={['姓', '名', '等级', '日期', '时间']} // 表格表头
+          colHeaders={['姓', '名', '单价', '数量', '合计', '日期', '时间']} // 表格表头
           data={handData} // 表体数据
           columns={this.columns} // 列属性设置
-          colWidths={[null, 50, 100, null, 120, null]}
+          colWidths={[null, 50, 100, 100, 120, 100, 100, null]}
           manualRowMove // 行移动
           fillHandle={{
-            // enable plugin in vertical direction and with autoInsertRow as false
             autoInsertRow: false,
             direction: 'vertical',
           }}
-          // headerTooltips={true}
+          fixedRowsTop={2} // 表格顶部固定
+          fixedColumnsLeft={2}  // 表格左侧固定
+          fixedShadow // 是否启用固定样式
+
         />
 
       </div>
 
-    );
+    )
+      ;
   }
 }
 

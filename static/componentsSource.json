@@ -32,6 +32,27 @@
     "ac-pagelayout": {
         "name": "布局组件"
     },
+    "ac-hotkey-button": {
+        "name": "快捷键按钮"
+    },
+    "ac-search-tabs": {
+        "name": "查询页签"
+    },
+    "ac-split-button": {
+        "name": "分割下拉按钮"
+    },
+    "nc-header": {
+        "name": "页头信息"
+    },
+    "nc-search-panel": {
+        "name": "查询面板"
+    },
+    "ac-form-layout": {
+        "name": "表单布局"
+    },
+    "nc-grid": {
+        "name": "复杂表格"
+    },
 
 
     "ac-editor-sany":{

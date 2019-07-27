@@ -247,9 +247,39 @@
 <td style="text-align:left">-</td>
 </tr>
 <tr>
-<td style="text-align:left">activeHeaderClassName</td>
-<td style="text-align:left">选中列标题样式</td>
-<td style="text-align:left">strig</td>
+<td style="text-align:left">columnHeaderHeight</td>
+<td style="text-align:left">列表头高</td>
+<td style="text-align:left">number</td>
+<td style="text-align:left">25</td>
+</tr>
+<tr>
+<td style="text-align:left">fixedShadow</td>
+<td style="text-align:left">是否固定表格阴影</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">fixedColumnsLeft</td>
+<td style="text-align:left">固定表格列</td>
+<td style="text-align:left">number</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">fixedRowsTop</td>
+<td style="text-align:left">是否固定表格顶部</td>
+<td style="text-align:left">number</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">fixedRowsBottom</td>
+<td style="text-align:left">是否固定表格底部</td>
+<td style="text-align:left">number</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">nestedHeaders</td>
+<td style="text-align:left">多表头</td>
+<td style="text-align:left">array <code>[[&#39;a&#39;,&#39;b&#39;]]</code>或者<code>[[&#39;a&#39;,{label:&#39;b&#39;,colspan:2}]]</code></td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
@@ -340,6 +370,11 @@
 <td style="text-align:left">copy</td>
 <td style="text-align:left">复制操作</td>
 <td style="text-align:left">copyPaste打开</td>
+</tr>
+<tr>
+<td style="text-align:left">merge_cells</td>
+<td style="text-align:left">合并单元格</td>
+<td style="text-align:left">-</td>
 </tr>
 <tr>
 <td style="text-align:left">freeze_column</td>
@@ -520,8 +555,14 @@
 <td style="text-align:left">-</td>
 </tr>
 <tr>
+<td style="text-align:left">customValue</td>
+<td style="text-align:left">自定义表格内容渲染,通常用于表格联动</td>
+<td style="text-align:left">(rowData)=&gt;{}</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
 <td style="text-align:left">renderer</td>
-<td style="text-align:left">自定义表格渲染，目前只支持dom</td>
+<td style="text-align:left">自定义表格渲染，支持dom</td>
 <td style="text-align:left">(instance, td, row, col, prop, value, cellProperties)=&gt;{}</td>
 <td style="text-align:left">-</td>
 </tr>

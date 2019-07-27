@@ -1050,6 +1050,7 @@ class Demo3 extends Component {
       },
       refConfig: {
         columnsKey: ['refname', 'id', 'code'], // 约定第一个为回写值,即表格中展示的数据
+        rowKey: ['autocomplete', 'yyy', 'zzzz'],
       },
       refOnChange: (refData, rowData, rowNum) => { // 下拉选中数据回调
         console.log('refData, rowData, rowNum', refData, rowData, rowNum);

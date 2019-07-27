@@ -9,7 +9,14 @@
         "ac-thermometer",
         "bee-complex-grid",
         "ac-city-select",
-        "ac-pagelayout"
+        "ac-pagelayout",
+        "ac-hotkey-button",
+        "ac-search-tabs",
+        "ac-split-button",
+        "nc-header",
+        "nc-search-panel",
+        "nc-grid",
+        "ac-form-layout"
     ],
     "others":[
         "ac-hand-table",

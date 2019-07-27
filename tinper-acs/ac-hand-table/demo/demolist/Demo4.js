@@ -97,6 +97,8 @@ class Demo4 extends Component {
       type: 'numeric', // 资薪
       readOnlyCellClassName: 'is-readOnly',
       readOnly: true,
+
+
     },
 
   ];
@@ -125,10 +127,10 @@ class Demo4 extends Component {
           <AcHandTable
             id="example4" // 组件id
             onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
-            colHeaders={['多选框', 'tinper日期', '时间', '数字']} // 表格表头
+            colHeaders={['多选框', 'tinper日期', '时间']} // 表格表头
             data={handData} // 表体数据
             columns={this.columns} // 列属性设置
-            // colWidths={[null, 50, 100, null, 120, null]}
+            colWidths={[null, 100, 200, 200]}
             manualRowMove // 行移动
             fillHandle={{
               autoInsertRow: false,

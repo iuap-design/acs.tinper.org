@@ -22,6 +22,7 @@ const propTypes = {
     backdrop: PropTypes.bool,  //是否弹出遮罩层/遮罩层点击是否触发关闭
     required: PropTypes.bool, // 是否要求当前语种和系统语种必填
     isPopConfirm: PropTypes.bool, // 录入时是否是popconfirm,还是modal的样式
+    showIcon:PropTypes.bool
 }
 
 const defaultProps = {
@@ -30,7 +31,8 @@ const defaultProps = {
     isTextarea:false,
     backdrop: true,
     required: false,
-    isPopConfirm: false
+    isPopConfirm: false,
+    showIcon:true
 }
 
 const getContent = (localeList) => {
@@ -292,17 +294,21 @@ class AcInputLocale extends Component {
     getPreviewElement (localeValue, defaultValue, localeList) {
       return (
         <div>
-          <span className="view-title-content">
-            {localeValue || defaultValue}
-          </span>
-          <Popover
-            placement="right"
-            content={getContent(localeList)}
-            trigger="hover"
-            id="right"
-          >
-          <i className="uf uf-globe"/>
-          </Popover>
+            <span className="view-title-content">
+              {localeValue || defaultValue}
+            </span>          
+          {
+            this.props.showIcon?
+              <Popover
+                placement="right"
+                content={getContent(localeList)}
+                trigger="hover"
+                id="right"
+              >
+                <i className="uf uf-globe"/>
+              </Popover>
+            :''
+          }
         </div>
       )
     }
@@ -381,7 +387,10 @@ class AcInputLocale extends Component {
                     }
                   }
                 />
-                <div className="input-icon" onClick = { this.open } ></div>
+                {
+                  this.props.showIcon? <div className="input-icon" onClick = { this.open } ></div>:''
+                }
+               
                 {
                   getFieldError(this.props.inputId + "_" +localeKey)?
                   <span className='error uf uf-exc-t'>
@@ -396,7 +405,7 @@ class AcInputLocale extends Component {
       })
     }
     render() {
-      const { className, onChange, isTextarea, backdrop, disabled } = this.props
+      const { className, onChange, isTextarea, backdrop, disabled,forceSync } = this.props
       let { localeValue, locale, localeList, status, modalLocale, sysLocale, required, isPopConfirm } = this.state
       let defaultValue;
       if(localeList && localeList[sysLocale] && localeList[sysLocale].value) {
@@ -446,6 +455,7 @@ class AcInputLocale extends Component {
                           Object.keys(localeList).forEach((localeKey)=>{
                             if(localeKey === locale){
                               localeList[localeKey].value = v
+                              if(forceSync)localeList[sysLocale].value=v
                             }
                           })
                           onChange && onChange(localeList, v)
@@ -476,8 +486,9 @@ class AcInputLocale extends Component {
                       onRootClose={this.close}
                       content={this.getLocaleFormElement(localeList, modalLocale, locale, getFieldProps, getFieldError)}
                     >
-                      <div className="input-pop-icon uf uf-globe">
-                      </div>
+                      {
+                        this.props.showIcon?<div className="input-pop-icon uf uf-globe"></div>:<span></span>
+                      }
                     </Popconfirm>
                     {
                       getFieldError(this.props.inputId)?<span className='error uf uf-exc-t'>
@@ -511,9 +522,11 @@ class AcInputLocale extends Component {
                       },
                       initialValue: localeValue,
                       onChange: (v) => {
+
                         Object.keys(localeList).forEach((localeKey)=>{
                           if(localeKey === locale){
                             localeList[localeKey].value=v
+                            if(forceSync)localeList[sysLocale].value=v
                           }
                         })
                         onChange && onChange(localeList,v)
@@ -530,7 +543,10 @@ class AcInputLocale extends Component {
                     }
                     ref={(input) => {this.textInput = input}}
                   />
-                  <div className="uf uf-globe input-icon" onClick = {disabled?()=>{}: this.open } />
+                  {
+                    this.props.showIcon?<div className="uf uf-globe input-icon" onClick = {disabled?()=>{}: this.open } />:''
+                  }
+                  
                   {
                     getFieldError(this.props.inputId)?<span className='error uf uf-exc-t'>
                     {getFieldError(this.props.inputId)}
@@ -570,6 +586,7 @@ class AcInputLocale extends Component {
                         Object.keys(localeList).forEach((localeKey) => {
                           if(localeKey === locale){
                             localeList[localeKey].value = v
+                            if(forceSync)localeList[sysLocale].value=v
                           }
                         })
                         onChange && onChange(localeList,v)
@@ -621,6 +638,7 @@ class AcInputLocale extends Component {
                       Object.keys(localeList).forEach((localeKey) => {
                         if(localeKey === locale){
                           localeList[localeKey].value = v
+                          if(forceSync)localeList[sysLocale].value=v
                         }
                       })
                       onChange && onChange(localeList,v)
@@ -636,7 +654,9 @@ class AcInputLocale extends Component {
                     }
                     ref={(input) => {this.textInput = input}}
                   />
-                  <div className="uf uf-globe input-icon" onClick = { this.open } />
+                  {
+                    this.props.showIcon?<div className="uf uf-globe input-icon" onClick = { this.open } />:''
+                  }
                 </div>
               )
             }

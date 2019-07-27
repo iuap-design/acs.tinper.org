@@ -43,6 +43,22 @@ const data = [
     money: 10000,
     custom: '自定义',
   },
+  {
+    id: 3,
+    name: '王五',
+    gender: null,
+    date: '2018-07-02',
+    money: 10000,
+    custom: '自定义',
+  },
+  {
+    id: 4,
+    name: '王五',
+    gender: null,
+    date: '2018-07-02',
+    money: 10000,
+    custom: '自定义',
+  },
 ];
 
 
@@ -91,7 +107,7 @@ class Demo2 extends Component {
         {
           value: '女',
           key: 0,
-        }
+        },
       ],
     },
     {
@@ -112,16 +128,17 @@ class Demo2 extends Component {
       // },
     },
     {
-      data: 'custom',
+      data: 'custom1',
       renderer: (instance, td, row, col, prop, value, cellProperties) => {
         // 插入内容
-        td.innerHTML = '嘻嘻嘻嘻  ' + value;
+        td.innerHTML = '自定义';
         return td;
       },
       dblClick: (rowData, rowNum, value) => {
         console.log('dblClick,rowData, rowNum, value', rowData, rowNum, value);
       },
-    }
+      // readOnly: true,
+    },
 
   ];
 
@@ -242,7 +259,7 @@ class Demo2 extends Component {
           <Button colors="primary" onClick={this.getFormatData} size="sm">格式化数据 </Button>
           <Button colors="primary" onClick={this.onDownCsv} size="sm">导出csv </Button>
 
-          <Button colors="primary" onClick={this.getSelectData} size="sm">获取选中行数据</Button>
+          <Button colors="primary" onClick={this.getSelectData} size="sm">逐行选中数据</Button>
           <Button colors="primary" onClick={this.onDelRowSelect} size="sm">删除选中行数据</Button>
 
 
@@ -263,6 +280,9 @@ class Demo2 extends Component {
             filename: '导出',
             rowHeaders: true,
           }}
+          mergeCells // 右键菜单是否开启单元格合并
+          // multiSelect={false} // 关闭多选框
+
         />
 
       </div>

@@ -13,7 +13,7 @@ fs.remove('tinper-acs')
             download(`${org}/${item}`,`tinper-acs/${item}`,
             function (error) {
                 if (error) {
-                    console.log(`❌ download ${item} 失败,还剩  ${length}  个` + error);
+                    console.log(`❌ download ${item} 失败,下载地址是 ${org}/${item},还剩  ${length}  个` + error);
                 }else{
                     console.log(`😀 download ${item} 成功,还剩  ${--length}  个`)
                 }

@@ -1,0 +1,93 @@
+.ac-split-button{
+    display: inline-block;
+    .icon-out{
+        display: inline-block;
+        border: 1px solid #a5adba;
+        position: relative;
+        bottom: 1px;
+        border-left: none;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        cursor: pointer;
+    }
+    .uf-anglearrowdown {
+        transform: rotateX(0deg);
+        display: inline-block;
+        padding: 0;
+        position: relative;
+        top: 3px;
+    }
+    .uf-anglearrowdown.show {
+        transform: rotateX(180deg);
+        display: inline-block;
+    }
+    &>.split-btn.u-button{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        color: #212121;
+        border: 1px solid #a5adba;
+        &:hover{
+            background-color: #fff;
+        }
+    }
+    &.primary {
+        &>.split-btn.u-button:hover,.icon-out:hover{
+            background-color: #fff;
+            border-color: #f53c32;
+            color: #f53c32;
+        }
+    }
+    &.success {
+        &>.split-btn.u-button:hover,.icon-out:hover{
+            background-color: #fff;
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+    }
+    &.info {
+        &>.split-btn.u-button:hover,.icon-out:hover{
+            background-color: #fff;
+            border-color: #00bcd4;
+            color: #00bcd4;
+        }
+    }
+    &.warning {
+        &>.split-btn.u-button:hover,.icon-out:hover{
+            background-color: #fff;
+            border-color: #ff9800;
+            color: #ff9800;
+        }
+    }
+    &.danger {
+        &>.split-btn.u-button:hover,.icon-out:hover{
+            background-color: #fff;
+            border-color: #f44336;
+            color: #f44336;
+        }
+    }
+    &.dark {
+        &>.split-btn.u-button:hover,.icon-out:hover{
+            background-color: #fff;
+            border-color: #616161;
+            color: #616161;
+        }
+    }
+    &.sm .icon-out{
+        bottom: -2px;
+        .uf-anglearrowdown{
+            top: 0;
+        }
+    }
+    &.lg .icon-out{
+        bottom: 5px;
+        .uf-anglearrowdown{
+            top: 7px;
+        }
+    }
+    &.xg .icon-out{
+        bottom: 9px;
+        .uf-anglearrowdown{
+            top: 11px;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-## 电子表格 HandTable
+## Hand表格 HandTable
 ac-hand-table 是基于 `handsontable` 的适用于 React 框架的电子表格，它提供了数据绑定、数据验证、行过滤、列排序、表格多选、表格样式、表头交互、表头拖拽、行高拖拽、行交换等操作
 
 ## 如何使用
@@ -50,7 +50,12 @@ import 'ac-hand-table/dist/index.css';
 |stretchH|表宽度不等于所有列宽的计算总和时，列宽设置|'none'或 'all' 或'last'|'none'|
 |rowStyle|行设置样式|func|-|
 |activeHeaderClassName|选中列标题样式|strig|-|
-|activeHeaderClassName|选中列标题样式|strig|-|
+|columnHeaderHeight|列表头高|number|25|
+|fixedShadow|是否固定表格阴影|boolean|false|
+|fixedColumnsLeft|固定表格列|number|-|
+|fixedRowsTop|是否固定表格顶部|number|-|
+|fixedRowsBottom|是否固定表格底部|number|-|
+|nestedHeaders|多表头|array `[['a','b']]`或者`[['a',{label:'b',colspan:2}]]` |-|
 |fillHandle|自动填充设置|`boolean` 或 `string`('vertical' or 'horizontal') 或者 `object`[见下表 fillHandle]()|'vertical'|
 
 
@@ -71,6 +76,7 @@ import 'ac-hand-table/dist/index.css';
 |alignment|	对齐操作|-|
 |cut|剪切操作|copyPaste打开|
 |copy|复制操作|copyPaste打开|
+|merge_cells|合并单元格|-|
 |freeze_column|锁定列操作|	manualColumnFreeze已开启|
 |unfreeze_column|解锁列操作|	manualColumnFreeze已开启|
 |borders|自定义边框操作|	customBorders已开启|
@@ -103,12 +109,14 @@ import 'ac-hand-table/dist/index.css';
 |refSource|参照数据回调|`func` (value, type, callback)=>{} 'type'值为`auto` `tree` `table`|-|
 |refOnChange|参照选中回调|`func` (refData, rowData, rowNum)=>{}|-|
 |refConfig|参照配置|[见下表 refConfig]()|-|
-|renderer|自定义表格渲染，目前只支持dom|(instance, td, row, col, prop, value, cellProperties)=>{}|-|
+|customValue|自定义表格内容渲染,通常用于表格联动|(rowData)=>{}|-|
+|renderer|自定义表格渲染，支持dom|(instance, td, row, col, prop, value, cellProperties)=>{}|-|
 
 ### refConfig [更多参考](http://bee.tinper.org/tinper-acs/)
 |参数|说明|类型|默认值|
 |:--|:---|:--|:--|
 |columnsKey|获取参照选中对象的值，约定数组第一个为表格回写值|array|['refname','refcode']|
+|rowKey|拖拽修改值关联key|array|-|
 |isThreeBar|表格中是否出现三道杠icon|boolean|false|
 |columnsData|表头数据|array|-|
 |tableData|表体数据|array|-|

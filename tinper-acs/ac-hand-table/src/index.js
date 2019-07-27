@@ -49,6 +49,7 @@ class AcHandTable extends React.Component {
     currentRefType: '', // 获取当前参照类型
 
     selectRowDataNum: [], // 选中行数据下标 select
+    eventCode: '', // 当前事件code
 
 
   };
@@ -84,11 +85,12 @@ class AcHandTable extends React.Component {
     // 对 this.props 处理，添加默认值、checkbox等
     const _this = this;
     const tempObj = this.dealData();
-    let { id, colHeaders } = tempObj;
+    let { id, colHeaders, nestedHeaders } = tempObj;
 
     // 将 信息交有 handsontable 组件处理
     const container = document.getElementById(id);
     this.onHandsonTable(container, tempObj);
+
 
     // 添加 mousedown
     Handsontable.dom.addEvent(container, 'mousedown', (event) => {
@@ -102,6 +104,7 @@ class AcHandTable extends React.Component {
       // 多选操作
       if (event.target.nodeName === 'INPUT' && event.target.className === 'multiSelectChecker') {
         let checked = !event.target.checked;
+        event.target.checked = checked;
         event.stopPropagation();
         if (checked) {
           colHeaders[0] = `<input type='checkbox' class='multiSelectChecker' checked />`;
@@ -110,6 +113,12 @@ class AcHandTable extends React.Component {
           colHeaders[0] = `<input type='checkbox' class='multiSelectChecker' />`;
           this.state.data.map(item => item.checkbox_status = false);
         }
+        // 更新多表头设置
+        if (nestedHeaders) {
+          nestedHeaders[nestedHeaders.length - 1] = colHeaders;
+          this.hot.updateSettings({ nestedHeaders });
+        }
+
         this.hot.render();
       }
     });
@@ -145,7 +154,7 @@ class AcHandTable extends React.Component {
       afterChange(changes, source) { // 表格被修改后执行
 
 
-        if (source === 'edit') { // 表格被修改
+        if (source === 'edit' || source === 'CopyPaste.paste' || source === 'Autofill.fill') { // 表格被修改
           const [rowNum, name, oldValue, newValue] = changes[0];
 
           const { data } = _this.state;
@@ -167,7 +176,7 @@ class AcHandTable extends React.Component {
 
           // 下拉自动补全
           if (type === 'autocomplete' && refSource) {
-            const { columnsKey = [] } = refConfig;
+            const { columnsKey = [], rowKey } = refConfig;
 
             let refValue = 'refname';
             if (columnsKey.length > 0) {
@@ -176,17 +185,26 @@ class AcHandTable extends React.Component {
 
             const currentAutoRow = arrayFindObj(cacheAutoData, refValue, newValue) || {};
             data[rowNum][currentKey] = newValue;
-            for (let i = 1; i < columnsKey.length; i++) {
-              const key = columnsKey[i];
-              data[rowNum][currentKey + '_' + key] = currentAutoRow[key];
+
+            if (rowKey && rowKey) { // 自定义列名
+              for (let i = 1; i < rowKey.length; i++) {
+                const key = columnsKey[i];
+                data[rowNum][rowKey[i]] = currentAutoRow[key];
+              }
+            } else {
+              for (let i = 1; i < columnsKey.length; i++) {
+                const key = columnsKey[i];
+                data[rowNum][currentKey + '_' + key] = currentAutoRow[key];
+              }
             }
+
+
             // 下拉回调change
             if (refOnChange) {
               refOnChange(currentAutoRow, data[rowNum], rowNum);
             }
           }
 
-          _this.setState({ data }); // 更新state
 
           // todo 方法将被弃用
           if (onChangeCell) {
@@ -198,6 +216,17 @@ class AcHandTable extends React.Component {
             const rowData = { ...data[rowNum] };
             onChange(newValue, oldValue, rowNum, rowData);
           }
+
+          // 是否自定义 col 显示值
+          for (const columnItem of columns) {
+            const { customValue, data: colName } = columnItem;
+            if (customValue) {
+              data[rowNum][colName] = customValue(data[rowNum]);
+              _this.onUpdateRowData(rowNum, data[rowNum]);
+            }
+          }
+
+          _this.setState({ data }); // 更新state
 
         }
       },
@@ -240,12 +269,13 @@ class AcHandTable extends React.Component {
           const defaultKey = ['refname', 'refpk'];
           let keyArray = (columnsKey && columnsKey.length > 1) ? columnsKey : (rowKey && rowKey.length > 0 ? rowKey : defaultKey);
 
+          console.log("keyArray",keyArray);
           for (let i = row; i <= endRow; i++) {
             // 设置展示值
             data[i][currentKey] = rowDataCache[currentKey];
             // 返回参照多余字段用_链接
             for (let j = 1; j < keyArray.length; j++) {
-              let key = currentKey + '_' + keyArray[j];
+              let key = currentKey + '_' + keyArray[j]; // 系统默认key
               if (rowKey && Array.isArray(rowKey) && rowKey.length > 1) { // 是否自定义隐藏例的 key
                 key = rowKey[j];
               }
@@ -259,6 +289,20 @@ class AcHandTable extends React.Component {
           data[i].update_status = true;
         }
         _this.setState({ data });
+
+
+        // // 是否自定义 col 显示值
+        for (const columnItem of columns) {
+          const { customValue, data: colName } = columnItem;
+          if (customValue) {
+            for (let i = row; i <= endRow; i++) {
+              data[i][currentKey] = rowDataCache[currentKey]; // 修改默认 auto值
+              data[i][colName] = customValue(data[i]); //  计算自定义规则
+              _this.onUpdateRowData(i, data[i]); // 更新
+            }
+          }
+        }
+
       },
 
       // afterCreateRow: function (index, amount) {  // 添加行后执行
@@ -268,22 +312,21 @@ class AcHandTable extends React.Component {
       //     _this.setState({data});
       // },
 
-      beforeKeyDown(event) {
-        // if (e.keyCode === 8 || e.keyCode == 46)
-        if (event.code.toLowerCase() === 'metaleft') { // 禁止表格行选中使用 ctr 多选
-          event.stopImmediatePropagation();
-        }
-
-      },
 
       // 选中行
-      afterSelection(startRow, startCol, endRow, endCol) {
-        const { columns } = _this.props;
-        if (columns && (columns.length - 1 === endCol) && startCol === 0) { // 只对选中整行处理
-          const selectRowDataNum = getBetweenNum(startRow, endRow);
-          _this.setState({ selectRowDataNum });
+      afterSelection(startRow, startCol, endRow, endCol, preventScrolling, selectionLayerLevel) {
+
+        let { selectRowDataNum } = _this.state;
+        const selectNum = getBetweenNum(startRow, endRow);
+
+        if (selectionLayerLevel) { // 是否ctr
+          selectRowDataNum.push(...selectNum);
+        } else {
+          selectRowDataNum = selectNum;
         }
+        _this.setState({ selectRowDataNum });
       },
+
 
       // todo 页面render 依旧保留上一次的数据
       beforeRemoveRow(index, amount, physicalRows, source) {
@@ -320,6 +363,18 @@ class AcHandTable extends React.Component {
           td.appendChild(createDiv);
         }
       },
+
+
+      // 粘贴后操作
+      afterPaste(values, coords) {
+        const { startRow, endRow } = coords[0];
+        let { data } = _this.state;
+        for (let i = startRow; i <= endRow; i++) {
+          data[i].update_status = true;
+        }
+        _this.setState({ data }); // 更新state
+      },
+
 
     });
   };
@@ -369,7 +424,7 @@ class AcHandTable extends React.Component {
     td.appendChild(createDiv);
 
     // 添加样式
-    const styles = rowStyle && rowStyle(row + 1, col, prop);
+    const styles = rowStyle && rowStyle(row, col, prop);
     if (styles) {
       for (const style in styles) { // 修改行样式
         td.style[style] = styles[style];
@@ -383,9 +438,11 @@ class AcHandTable extends React.Component {
   dealData = () => {
 
     let {
-      colHeaders, rowStyle,
+      colHeaders,
+      rowStyle,
       multiSelect = true, // 行多选框
       dropdownMenu = true, // 表头下拉
+      nestedHeaders, // 多表头
       csvConfig = {},
     } = this.props;
 
@@ -393,9 +450,22 @@ class AcHandTable extends React.Component {
     // 2.处理表格参照,
 
     let { data, columns } = customRenderData(this.state.data, this.props.columns, this.coverRenderer);
+    // 是否自定义 col 显示值
+    for (const columnItem of columns) {
+      const { customValue, data: colName } = columnItem;
+      if (customValue) {
+        for (const [index, ele] of data.entries()) {
+          data[index][colName] = customValue(data[index]);
+        }
+      }
+
+    }
+
 
     // 添加 多选框
     if (multiSelect && colHeaders && Array.isArray(colHeaders) && colHeaders.length > 0) {
+
+
       const checkedHeader = `<input type='checkbox' class='multiSelectChecker' />`;
       let className = 'htCenter htMiddle ';
       if (dropdownMenu) {
@@ -410,6 +480,14 @@ class AcHandTable extends React.Component {
       colHeaders.unshift(checkedHeader);
       if (columns[0].data !== 'checkbox_status') {
         columns.unshift(checkboxCell);
+      }
+
+      // 多表头处理
+      if (nestedHeaders) {
+        for (const index in nestedHeaders) {
+          nestedHeaders[index].unshift('');
+        }
+        nestedHeaders.push(colHeaders);
       }
     }
 
@@ -465,7 +543,7 @@ class AcHandTable extends React.Component {
             }
 
             // 添加自定义行样式
-            const styles = rowStyle ? rowStyle(row + 1, col, prop) : '';
+            const styles = rowStyle ? rowStyle(row, col, prop) : '';
             if (styles) {
               // 修改行样式
               for (const style in styles) {
@@ -509,12 +587,14 @@ class AcHandTable extends React.Component {
       allowEmpty: false,
       multiSelect: true, // 行多选框
       dropdownMenu: true, // 表头下拉
+      mergeCells: false, // 表格合并
       fillHandle: 'vertical', // 默认只能横向 为了解决参照问题
 
       ...this.props,
 
       columns,
       data,
+      nestedHeaders,
 
       csvConfig: { ...csvDefault, ...csvConfig }, // 导出csv 配置
 
@@ -606,21 +686,21 @@ class AcHandTable extends React.Component {
     this.hot.alter('remove_row', result);
   };
 
+
   // 删除选中行 selected
   onDelRowSelect = () => {
     const { selectRowDataNum } = this.state;
-    const result = selectRowDataNum.map(item => [item, item + 1]);
-    this.hot.alter('remove_row', result);
+    const result = selectRowDataNum.map(item => [item, 1]);
+    this.hot.alter('remove_row', [...result]);
     return this.getSelectData();
   };
 
 
-  // 获取选中行数据
+  // 获取选中行数据 通过多选框
   getSelectData = () => {
 
     const { selectRowDataNum, data } = this.state;
     const { columns } = this.props;
-
     const selectRowData = selectRowDataNum.map(item => data[item]);
     const selectResult = changeSelectValue2Key(selectRowData, columns); // 回写下拉框值
 
@@ -748,13 +828,19 @@ class AcHandTable extends React.Component {
   };
 
   render() {
-    const { id } = this.props;
+    const { id, dropdownMenu, fixedShadow } = this.props;
     const { refConfig } = this.state;
+
+    let tableClass = dropdownMenu !== false ? 'hand-table-drop-down-menu' : '';
+    if (fixedShadow) { // 固定阴影
+      tableClass += ' fixedShadow';
+    }
 
 
     return (
       <div>
-        <div id={id} />
+        {/* 多选通过 css 去掉表头下拉 */}
+        <div id={id} className={tableClass}/>
         {/* 表格 */}
         <RefMultipleTable
           {...refConfig}

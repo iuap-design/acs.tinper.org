@@ -52,7 +52,8 @@ var propTypes = {
   modalLocale: _propTypes2["default"].object,
   backdrop: _propTypes2["default"].bool, //是否弹出遮罩层/遮罩层点击是否触发关闭
   required: _propTypes2["default"].bool, // 是否要求当前语种和系统语种必填
-  isPopConfirm: _propTypes2["default"].bool // 录入时是否是popconfirm,还是modal的样式
+  isPopConfirm: _propTypes2["default"].bool, // 录入时是否是popconfirm,还是modal的样式
+  showIcon: _propTypes2["default"].bool
 };
 
 var defaultProps = {
@@ -61,7 +62,8 @@ var defaultProps = {
   isTextarea: false,
   backdrop: true,
   required: false,
-  isPopConfirm: false
+  isPopConfirm: false,
+  showIcon: true
 };
 
 var getContent = function getContent(localeList) {
@@ -240,7 +242,7 @@ var AcInputLocale = function (_Component) {
         { className: 'view-title-content' },
         localeValue || defaultValue
       ),
-      _react2["default"].createElement(
+      this.props.showIcon ? _react2["default"].createElement(
         _tinperBee.Popover,
         {
           placement: 'right',
@@ -249,7 +251,7 @@ var AcInputLocale = function (_Component) {
           id: 'right'
         },
         _react2["default"].createElement('i', { className: 'uf uf-globe' })
-      )
+      ) : ''
     );
   };
 
@@ -340,7 +342,7 @@ var AcInputLocale = function (_Component) {
                   e.stopPropagation();
                 }
               })),
-              _react2["default"].createElement('div', { className: 'input-icon', onClick: _this3.open }),
+              _this3.props.showIcon ? _react2["default"].createElement('div', { className: 'input-icon', onClick: _this3.open }) : '',
               getFieldError(_this3.props.inputId + "_" + localeKey) ? _react2["default"].createElement(
                 'span',
                 { className: 'error uf uf-exc-t' },
@@ -361,7 +363,8 @@ var AcInputLocale = function (_Component) {
         _onChange = _props.onChange,
         isTextarea = _props.isTextarea,
         backdrop = _props.backdrop,
-        disabled = _props.disabled;
+        disabled = _props.disabled,
+        forceSync = _props.forceSync;
     var _state = this.state,
         localeValue = _state.localeValue,
         locale = _state.locale,
@@ -421,6 +424,7 @@ var AcInputLocale = function (_Component) {
                 Object.keys(localeList).forEach(function (localeKey) {
                   if (localeKey === locale) {
                     localeList[localeKey].value = v;
+                    if (forceSync) localeList[sysLocale].value = v;
                   }
                 });
                 _onChange && _onChange(localeList, v);
@@ -452,7 +456,7 @@ var AcInputLocale = function (_Component) {
                 , onRootClose: this.close,
                 content: this.getLocaleFormElement(localeList, modalLocale, locale, getFieldProps, getFieldError)
               },
-              _react2["default"].createElement('div', { className: 'input-pop-icon uf uf-globe' })
+              this.props.showIcon ? _react2["default"].createElement('div', { className: 'input-pop-icon uf uf-globe' }) : _react2["default"].createElement('span', null)
             ),
             getFieldError(this.props.inputId) ? _react2["default"].createElement(
               'span',
@@ -483,9 +487,11 @@ var AcInputLocale = function (_Component) {
             },
             initialValue: localeValue,
             onChange: function onChange(v) {
+
               Object.keys(localeList).forEach(function (localeKey) {
                 if (localeKey === locale) {
                   localeList[localeKey].value = v;
+                  if (forceSync) localeList[sysLocale].value = v;
                 }
               });
               _onChange && _onChange(localeList, v);
@@ -501,7 +507,7 @@ var AcInputLocale = function (_Component) {
               _this4.textInput = input;
             }
           })),
-          _react2["default"].createElement('div', { className: 'uf uf-globe input-icon', onClick: disabled ? function () {} : this.open }),
+          this.props.showIcon ? _react2["default"].createElement('div', { className: 'uf uf-globe input-icon', onClick: disabled ? function () {} : this.open }) : '',
           getFieldError(this.props.inputId) ? _react2["default"].createElement(
             'span',
             { className: 'error uf uf-exc-t' },
@@ -539,6 +545,7 @@ var AcInputLocale = function (_Component) {
                 Object.keys(localeList).forEach(function (localeKey) {
                   if (localeKey === locale) {
                     localeList[localeKey].value = v;
+                    if (forceSync) localeList[sysLocale].value = v;
                   }
                 });
                 _onChange && _onChange(localeList, v);
@@ -589,6 +596,7 @@ var AcInputLocale = function (_Component) {
               Object.keys(localeList).forEach(function (localeKey) {
                 if (localeKey === locale) {
                   localeList[localeKey].value = v;
+                  if (forceSync) localeList[sysLocale].value = v;
                 }
               });
               _onChange && _onChange(localeList, v);
@@ -604,7 +612,7 @@ var AcInputLocale = function (_Component) {
               _this4.textInput = input;
             }
           })),
-          _react2["default"].createElement('div', { className: 'uf uf-globe input-icon', onClick: this.open })
+          this.props.showIcon ? _react2["default"].createElement('div', { className: 'uf uf-globe input-icon', onClick: this.open }) : ''
         ),
         _react2["default"].createElement(
           _modal2["default"],

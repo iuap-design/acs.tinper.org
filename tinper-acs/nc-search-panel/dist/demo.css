@@ -1,0 +1,95 @@
+.nc-search-panel-ctns-out {
+  padding-left: 20px;
+  background-color: #f3f3f3; }
+
+.nc-search-panel-ctns {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  .nc-search-panel-ctns.close {
+    display: none; }
+
+.nc-search-panel-ctn {
+  width: calc(100% - 100px);
+  display: inline-block; }
+
+.nc-search-panel-formitem {
+  width: calc(100% / 5);
+  padding-right: 10px;
+  display: inline-block;
+  margin-bottom: 8px;
+  position: relative;
+  vertical-align: bottom; }
+  .nc-search-panel-formitem-mast {
+    position: absolute;
+    color: #ff0000;
+    z-index: 2;
+    top: 8px;
+    left: 4px; }
+  .nc-search-panel-formitem .datepicker-input-group .u-form-control {
+    float: unset; }
+  .nc-search-panel-formitem .ref-input-wrap {
+    width: 100% !important; }
+  .nc-search-panel-formitem .u-input-number.u-input-group.simple {
+    display: inline-block; }
+    .nc-search-panel-formitem .u-input-number.u-input-group.simple .u-form-control {
+      float: unset;
+      height: 30px; }
+    .nc-search-panel-formitem .u-input-number.u-input-group.simple .u-input-group-btn {
+      position: absolute;
+      right: 2px; }
+      .nc-search-panel-formitem .u-input-number.u-input-group.simple .u-input-group-btn .icon-group {
+        height: 30px; }
+
+.nc-search-panel-btns {
+  width: 100px;
+  display: inline-block;
+  height: 32px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+  justify-content: flex-start; }
+  .nc-search-panel-btns .u-button {
+    padding: 0;
+    min-width: auto;
+    height: 32px;
+    line-height: 32px; }
+  .nc-search-panel-btns-search.u-button {
+    padding: 0 5px; }
+  .nc-search-panel-btns-reset.u-button {
+    margin-left: 6px; }
+
+.nc-search-panel-open {
+  text-align: center;
+  height: 0; }
+  .nc-search-panel-open .uf {
+    border: 1px solid #3333;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+    top: -20px;
+    background-color: #f3f3f3;
+    box-shadow: 0px -1px 2px #333333; }
+  .nc-search-panel-open .uf-2arrow-up {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; }
+  .nc-search-panel-open .uf-2arrow-down {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; }
+
+.nc-search-panel-header {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  background-color: #f3f3f3; }
+
+.nc-search-panel-case-list .u-dropdown-menu-item {
+  padding: 0 24px !important; }
+
+.nc-search-panel-selected {
+  color: #0073e1;
+  margin-left: 24px;
+  cursor: pointer; }
+
+/*# sourceMappingURL=demo.css.map */
