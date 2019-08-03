@@ -31,12 +31,6 @@ class Demo1 extends Component {
                     <SplitButton menuList={menuList} colors='warning'>warning按钮</SplitButton>
                     <SplitButton menuList={menuList} colors='danger'>danger按钮</SplitButton>
                     <SplitButton menuList={menuList} colors='dark'>dark按钮</SplitButton>
-
-                    <SplitButton menuList={menuList} colors='primary' size="sm">按钮</SplitButton>
-                    <SplitButton menuList={menuList} colors='primary'>按钮</SplitButton>
-                    <SplitButton menuList={menuList} colors='primary' size="lg">按钮</SplitButton>
-                    <SplitButton menuList={menuList} colors='primary' size="xg">按钮</SplitButton>
-                
             </div>
         )
     }

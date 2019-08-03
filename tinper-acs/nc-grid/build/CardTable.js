@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -20,11 +22,17 @@ var _SimpleTable = require('./SimpleTable');
 
 var _SimpleTable2 = _interopRequireDefault(_SimpleTable);
 
+var _EditTable = require('./EditTable');
+
+var _EditTable2 = _interopRequireDefault(_EditTable);
+
 var _utils = require('./utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -73,10 +81,15 @@ var CardTable = function (_Component) {
             _this.setState({ showMore: showMore });
         };
 
+        _this.openMaxTable = function (isMaximized) {
+            _this.setState({ isMaximized: isMaximized });
+        };
+
         _this.state = {
             status: 'browse', //browse(浏览态)、edit(编辑态)
             activeKey: '', //标识当前卡表的选中项
-            showMore: props.showMore //卡表是否展开
+            showMore: props.showMore, //卡表是否展开
+            isMaximized: false //是否最大化显示
         };
         return _this;
     }
@@ -85,6 +98,9 @@ var CardTable = function (_Component) {
 
 
     //卡表收起/展开状态改变时的回调
+
+
+    //最大化多表中表格
 
 
     CardTable.prototype.render = function render() {
@@ -97,11 +113,15 @@ var CardTable = function (_Component) {
             columns = _props.columns,
             dataRows = _props.data,
             tabLists = _props.tabLists,
-            showListView = _props.showListView;
+            showListView = _props.showListView,
+            isEdit = _props.isEdit,
+            otherProps = _objectWithoutProperties(_props, ['showMax', 'config', 'moduleId', 'columns', 'data', 'tabLists', 'showListView', 'isEdit']);
+
         var _state = this.state,
             status = _state.status,
             showMore = _state.showMore,
-            activeKey = _state.activeKey;
+            activeKey = _state.activeKey,
+            isMaximized = _state.isMaximized;
 
 
         var tabsOther = tabLists.map(function (item, index) {
@@ -118,12 +138,20 @@ var CardTable = function (_Component) {
                 key: code,
                 label: name,
                 render: function render() {
-                    return _react2["default"].createElement(_SimpleTable2["default"], {
-                        columns: columns,
-                        data: dataRows,
-                        multiSelect: config.showCheck,
-                        bodyStyle: { minHeight: 'auto' }
-                    });
+                    return (
+                        // <SimpleTable
+                        // columns={columns}
+                        // data={dataRows}
+                        // multiSelect={config.showCheck}
+                        // bodyStyle={{minHeight:'auto'}}
+                        // />
+                        _react2["default"].createElement(_EditTable2["default"], _extends({
+                            columns: columns,
+                            data: dataRows,
+                            moduleId: moduleId,
+                            isEdit: isEdit
+                        }, otherProps))
+                    );
                 }
             };
         });
@@ -138,7 +166,7 @@ var CardTable = function (_Component) {
             _react2["default"].createElement(
                 'div',
                 { className: 'lightapp-component-cardTable-table' },
-                !showMax ? _react2["default"].createElement(_FoldableTabs2["default"]
+                !isMaximized ? _react2["default"].createElement(_FoldableTabs2["default"]
                 // pageScope={pageScope}
                 , { tableScope: this,
                     config: config,
@@ -155,14 +183,47 @@ var CardTable = function (_Component) {
                         // status === 'edit' && cellFocusAfterTabChange(item);
                     },
                     showMore: showMore,
-                    onHeadAngleToggle: this.onHeadAngleToggle
+                    isMaximized: isMaximized,
+                    onHeadAngleToggle: this.onHeadAngleToggle,
+                    openMaxTable: this.openMaxTable
                 }) : null
-            )
+            ),
+            ReactDOM.createPortal(_react2["default"].createElement(
+                'section',
+                {
+                    className: (0, _classnames2["default"])('card-table-max ', {
+                        scaleFromOrigin: !!isMaximized
+                    })
+                },
+                isMaximized ? _react2["default"].createElement(_FoldableTabs2["default"]
+                // pageScope={pageScope}
+                , { tableScope: this,
+                    config: config,
+                    isEdit: status == 'edit',
+                    moduleId: moduleId,
+                    activeKey: activeKey,
+                    tabs: tabsOther,
+                    showListView: showListView,
+                    rows: dataRows
+                    // expandedList={expandedList}
+                    , handleTypeChange: function handleTypeChange(item) {
+                        _this2.onTypeChange(item);
+                        // 标签切换时，首个自动聚焦
+                        // status === 'edit' && cellFocusAfterTabChange(item);
+                    },
+                    showMore: showMore,
+                    isMaximized: isMaximized,
+                    onHeadAngleToggle: this.onHeadAngleToggle,
+                    openMaxTable: this.openMaxTable
+                }) : null
+            ), document.querySelector('body'))
         );
     };
 
     return CardTable;
 }(_react.Component);
 
+CardTable.propTypes = propTypes;
+CardTable.defaultProps = defaultProps;
 exports["default"] = CardTable;
 module.exports = exports['default'];

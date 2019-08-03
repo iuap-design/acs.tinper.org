@@ -1,3 +1,33 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.6...v0.0.7) (2019-08-01)
+
+
+### Features
+
+* **nc-search-panel:** 显示已选数据 ([159acbc](https://github.com/tinper-bee/nc-search-panel/commit/159acbc))
+
+
+
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.5...v0.0.6) (2019-08-01)
+
+
+
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.4...v0.0.5) (2019-07-30)
+
+
+### Bug Fixes
+
+* **nc-search-panel:** displayName ([47b5d20](https://github.com/tinper-bee/nc-search-panel/commit/47b5d20))
+
+
+
+<a name="0.0.4"></a>
+## [0.0.4](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.3...v0.0.4) (2019-07-30)
+
+
+
 <a name="0.0.3"></a>
 ## [0.0.3](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.2...v0.0.3) (2019-07-25)
 

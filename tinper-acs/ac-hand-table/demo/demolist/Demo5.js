@@ -89,7 +89,7 @@ class Demo5 extends Component {
           key: '0',
         },
       ],
-      dropdownMenu:true
+      dropdownMenu: true
     },
     {
       data: 'time',
@@ -165,43 +165,46 @@ class Demo5 extends Component {
 
         </div>
 
-        <AcHandTable
-          id="example5" // 组件id
-          onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
-          colHeaders={['姓名', '等级', '性别', '时间']} // 表格表头
-          data={handData} // 表体数据
-          columns={this.columns} // 列属性设置
-          colWidths={[50, 100, 100, 120, null]}
-          columnHeaderHeight={30}
-          manualRowMove // 行移动
-          fillHandle={{
-            autoInsertRow: false,
-            direction: 'vertical',
-          }}
-          csvConfig={{
-            filename: '导出',
-            columnHeaders: true,
-          }}
 
-          cells={(row, column) => { // 禁止修改
-            const cellProperties = {};
-            if (row === 1) {
-              cellProperties.editor = false;
-              cellProperties.readOnly = true;
-            }
-            return cellProperties;
-          }}
+        <div className="min-table">
+          <AcHandTable
+            id="example5" // 组件id
+            onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
+            colHeaders={['姓名', '等级', '性别', '时间']} // 表格表头
+            data={handData} // 表体数据
+            columns={this.columns} // 列属性设置
+            colWidths={[50, 100, 100, 120, null]}
+            columnHeaderHeight={30}
+            manualRowMove // 行移动
+            fillHandle={{
+              autoInsertRow: false,
+              direction: 'vertical',
+            }}
+            csvConfig={{
+              filename: '导出',
+              columnHeaders: true,
+            }}
 
-          rowStyle={(rowIndex) => { // 禁止修改样式
-            let bgColor = '#fff';
-            if (rowIndex === 1) {
-              bgColor = '#DFE1E6';
-            }
-            return { 'background-color': bgColor };
-          }}
+            cells={(row, column) => { // 禁止修改
+              const cellProperties = {};
+              if (row === 1) {
+                cellProperties.editor = false;
+                cellProperties.readOnly = true;
+              }
+              return cellProperties;
+            }}
+
+            rowStyle={(rowIndex) => { // 禁止修改样式
+              let bgColor = '#fff';
+              if (rowIndex === 1) {
+                bgColor = '#DFE1E6';
+              }
+              return { 'background-color': bgColor };
+            }}
 
 
-        />
+          />
+        </div>
 
       </div>
 

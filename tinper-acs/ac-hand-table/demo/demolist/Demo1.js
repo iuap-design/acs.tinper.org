@@ -132,23 +132,25 @@ class Demo extends Component {
 
     return (
       <div>
-        <AcHandTable
-          id="example" // 组件id
-          onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
-          colHeaders={['姓', '名', '单价', '数量', '合计', '日期', '时间']} // 表格表头
-          data={handData} // 表体数据
-          columns={this.columns} // 列属性设置
-          colWidths={[null, 50, 100, 100, 120, 100, 100, null]}
-          manualRowMove // 行移动
-          fillHandle={{
-            autoInsertRow: false,
-            direction: 'vertical',
-          }}
-          fixedRowsTop={2} // 表格顶部固定
-          fixedColumnsLeft={2}  // 表格左侧固定
-          fixedShadow // 是否启用固定样式
+        <div className="min-table">
+          <AcHandTable
+            id="example" // 组件id
+            onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
+            colHeaders={['姓', '名', '单价', '数量', '合计', '日期', '时间']} // 表格表头
+            data={handData} // 表体数据
+            columns={this.columns} // 列属性设置
+            colWidths={[null, 50, 100, 100, 120, 100, 100, null]}
+            manualRowMove // 行移动
+            fillHandle={{
+              autoInsertRow: false,
+              direction: 'vertical',
+            }}
+            fixedRowsTop={2} // 表格顶部固定
+            fixedColumnsLeft={2}  // 表格左侧固定
+            fixedShadow // 是否启用固定样式
 
-        />
+          />
+        </div>
 
       </div>
 

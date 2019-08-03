@@ -20,6 +20,10 @@ var _CardTable = require('./CardTable');
 
 var _CardTable2 = _interopRequireDefault(_CardTable);
 
+var _EditTable = require('./EditTable');
+
+var _EditTable2 = _interopRequireDefault(_EditTable);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -55,5 +59,6 @@ NCGrid.propTypes = propTypes;
 NCGrid.defaultProps = defaultProps;
 NCGrid.SimpleTable = _SimpleTable2["default"];
 NCGrid.CardTable = _CardTable2["default"];
+NCGrid.EditTable = _EditTable2["default"];
 exports["default"] = NCGrid;
 module.exports = exports['default'];

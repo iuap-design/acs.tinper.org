@@ -381,7 +381,9 @@ var RefMultipleTableBase = function (_Component) {
         _props$tableProps = _props.tableProps,
         tableProps = _props$tableProps === undefined ? {} : _props$tableProps,
         _props$modalProps = _props.modalProps,
-        modalProps = _props$modalProps === undefined ? {} : _props$modalProps;
+        modalProps = _props$modalProps === undefined ? {} : _props$modalProps,
+        _props$searchPlacehol = _props.searchPlaceholder,
+        searchPlaceholder = _props$searchPlacehol === undefined ? '搜索' : _props$searchPlacehol;
 
     var temp = (0, _stringify2["default"])(tableData);
     var _newTableData = JSON.parse(temp);
@@ -455,7 +457,8 @@ var RefMultipleTableBase = function (_Component) {
             className: '' + (miniSearch && tableIsSelecting ? '' : 'ref-multiple-table-tab-search-hide'),
             onSearch: _this.props.onSearchClick,
             onChange: _this.props.miniSearchFunc,
-            language: lang
+            language: lang,
+            placeholder: searchPlaceholder
           })
         ),
         columnsData && columnsData.length ? _react2["default"].createElement(_this.TableView, _extends({

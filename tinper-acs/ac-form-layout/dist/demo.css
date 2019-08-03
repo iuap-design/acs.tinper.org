@@ -11,9 +11,12 @@
   .ac-form-layout-item .u-label + * {
     width: calc(100% - 140px);
     display: inline-block; }
-  .ac-form-layout-item.error .u-form-control, .ac-form-layout-item.error .u-input-number, .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn {
+  .ac-form-layout-item.error .u-form-control,
+  .ac-form-layout-item.error .u-input-number,
+  .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn {
     border-color: #f53c32; }
-  .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus, .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
+  .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus,
+  .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
     color: #f53c32; }
   .ac-form-layout-item .datepicker-input-group .u-form-control {
     float: unset; }
@@ -29,6 +32,36 @@
       right: 2px; }
       .ac-form-layout-item .u-input-number.u-input-group.simple .u-input-group-btn .icon-group {
         height: 30px; }
+  .ac-form-layout-item-out {
+    position: relative; }
+  .ac-form-layout-item-error-msg {
+    color: #f53c32;
+    position: absolute;
+    z-index: 2;
+    top: -28px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 30px; }
+    .ac-form-layout-item-error-msg-text {
+      padding: 5px 10px;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3); }
+  .ac-form-layout-item-error-msg::after {
+    position: absolute;
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    content: " ";
+    left: calc(50% - 5px);
+    transform: rotate(45deg);
+    border-right: 1px solid #a5adba;
+    border-bottom: 1px solid #a5adba; }
 
 .ac-form-layout-mast {
   position: relative;
@@ -36,9 +69,21 @@
   color: #f53c32;
   right: 2px; }
 
-.ac-form-layout-error-msg.inverse.u-tooltip .tooltip-inner {
-  color: #f53c32;
-  border: none !important;
-  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3); }
+.ac-form-layout.disabled {
+  pointer-events: none; }
+  .ac-form-layout.disabled .rc-tree-select-selection,
+  .ac-form-layout.disabled .rc-tree-select-selection:hover,
+  .ac-form-layout.disabled .u-form-control {
+    background: none;
+    border: none;
+    color: #111111;
+    box-shadow: none; }
+  .ac-form-layout.disabled .u-select .u-select-selection {
+    background: none;
+    border: none; }
+  .ac-form-layout.disabled .u-select-arrow,
+  .ac-form-layout.disabled .rc-tree-select-menu-icon,
+  .ac-form-layout.disabled .u-input-group-btn {
+    display: none; }
 
 /*# sourceMappingURL=demo.css.map */

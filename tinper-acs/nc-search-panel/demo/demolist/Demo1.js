@@ -27,41 +27,65 @@ const orderTypes=[
     },
 ]
 
-class Demo1 extends Component {
 
-    render () {
+
+const translateKeyFunc=(values)=>{
+    let obj = {};
+    const translateKey = {
+        'username':'姓名',
+        'username1':'姓名',
+        'username2':'姓名',
+        'username3':'姓名',
+        'username4':'姓名',
+        'nl':'年龄',
+        'nl1':'年龄',
+        'nl2':'年龄',
+        'nl3':'年龄',
+        'nl4':'年龄',
+        'nl5':'年龄',
+        'nl6':'年龄',
+        'type':'类型'
+    }
+    for(let attr in values){
+        obj[translateKey[attr]] = values[attr];
+    }
+    console.log(obj)
+    return obj;
+}
+
+class SF extends Component{
+    render(){
         const { getFieldProps, getFieldError } = this.props.form;
-        
         return (
             <div>
-                <NcSearchPanel 
-                    search={()=>{console.log('search')}}
-                    reset={()=>{console.log('reset')}}
-                >
-                    <Sample>
-                        <FormItem label="姓名" required={true}>
-                            <FormControl placeholder="请输入用户名"
-                                {...getFieldProps('username', {
-                                    validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入用户名',
-                                    }],
-                                }) }
-                            />
-                        </FormItem>
-                        <FormItem label="年龄">
-                            <DatePicker
-                                {
-                                ...getFieldProps('time', {
-                                }
-                                ) }
-                                placeholder={'请选择需求日期'}
-                            />
-                        </FormItem>
-                    
-                    </Sample>
-                    <Complex>
-                        <FormItem label="年龄">
+                <FormItem label="姓名" required={true}>
+                    <FormControl placeholder="请输入用户名"
+                        {...getFieldProps('username', {
+                            validateTrigger: 'onBlur',
+                            rules: [{
+                                required: true, message: '请输入用户名',
+                            }],
+                        }) }
+                    />
+                </FormItem>
+                <FormItem label="年龄">
+                    <FormControl placeholder="请输入年龄"
+                        {...getFieldProps('nl', {
+                            validateTrigger: 'onBlur',
+                        }) }
+                    />
+                </FormItem>
+            </div>
+        )
+    }
+}
+
+class CF extends Component{
+    render(){
+        const { getFieldProps, getFieldError } = this.props.form;
+        return (
+            <div>
+                <FormItem label="类型">
                             <Select 
                                 {
                                 ...getFieldProps('type', {
@@ -80,112 +104,130 @@ class Demo1 extends Component {
                         </FormItem>
                         <FormItem label="年龄">
                             <FormControl placeholder="请输入年龄"
-                                {...getFieldProps('aaa', {
+                                {...getFieldProps('nl1', {
                                     validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入年龄',
-                                    }],
                                 }) }
                             />
                         </FormItem>
                         <FormItem label="年龄">
                             <FormControl placeholder="请输入年龄"
-                                {...getFieldProps('aaa', {
+                                {...getFieldProps('nl2', {
                                     validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入年龄',
-                                    }],
                                 }) }
                             />
                         </FormItem>
                         <FormItem label="年龄">
                             <FormControl placeholder="请输入年龄"
-                                {...getFieldProps('aaa', {
+                                {...getFieldProps('nl3', {
                                     validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入年龄',
-                                    }],
                                 }) }
                             />
                         </FormItem>
                         <FormItem label="年龄">
                             <FormControl placeholder="请输入年龄"
-                                {...getFieldProps('aaa', {
+                                {...getFieldProps('nl4', {
                                     validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入年龄',
-                                    }],
                                 }) }
                             />
                         </FormItem>
                         <FormItem label="年龄">
                             <FormControl placeholder="请输入年龄"
-                                {...getFieldProps('aaa', {
+                                {...getFieldProps('nl5', {
                                     validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入年龄',
-                                    }],
                                 }) }
                             />
                         </FormItem>
                         <FormItem label="年龄">
                             <FormControl placeholder="请输入年龄"
-                                {...getFieldProps('aaa', {
+                                {...getFieldProps('nl6', {
                                     validateTrigger: 'onBlur',
-                                    rules: [{
-                                        required: true, message: '请输入年龄',
-                                    }],
                                 }) }
                             />
                         </FormItem>
                         <div>
                             <FormItem label="姓名" required={true}>
                                 <FormControl placeholder="请输入用户名"
-                                    {...getFieldProps('username', {
+                                    {...getFieldProps('username1', {
                                         validateTrigger: 'onBlur',
-                                        rules: [{
-                                            required: true, message: '请输入用户名',
-                                        }],
                                     }) }
                                 />
                             </FormItem>
                             <FormItem label="姓名" required={true}>
                                 <FormControl placeholder="请输入用户名"
-                                    {...getFieldProps('username', {
+                                    {...getFieldProps('username2', {
                                         validateTrigger: 'onBlur',
-                                        rules: [{
-                                            required: true, message: '请输入用户名',
-                                        }],
+                                    }) }
+                                />
+                            </FormItem>
+                            <FormItem label="姓名" required={true}>
+                                <FormControl placeholder="请输入用户名"
+                                    {...getFieldProps('username3', {
+                                        validateTrigger: 'onBlur',
+                                    }) }
+                                />
+                            </FormItem>
+                            <FormItem label="姓名" required={true}>
+                                <FormControl placeholder="请输入用户名"
+                                    {...getFieldProps('username4', {
+                                        validateTrigger: 'onBlur',
                                     }) }
                                 />
                             </FormItem>
                         </div>
-                        <div>
-                            <FormItem label="姓名" required={true}>
-                                <FormControl placeholder="请输入用户名"
-                                    {...getFieldProps('username', {
-                                        validateTrigger: 'onBlur',
-                                        rules: [{
-                                            required: true, message: '请输入用户名',
-                                        }],
-                                    }) }
-                                />
-                            </FormItem>
-                            <FormItem label="姓名" required={true}>
-                                <FormControl placeholder="请输入用户名"
-                                    {...getFieldProps('username', {
-                                        validateTrigger: 'onBlur',
-                                        rules: [{
-                                            required: true, message: '请输入用户名',
-                                        }],
-                                    }) }
-                                />
-                            </FormItem>
-                            </div>
+            </div>
+        )
+    }
+}
+
+
+class Demo1 extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            searchObj:{}
+        }
+    }
+
+    search=()=>{
+        this.props.form.validateFields((err, values) => {
+            if (err) {
+                console.log('校验失败', values);
+            } else {
+                console.log('校验成功', values);
+                this.setState({
+                    searchObj:translateKeyFunc(values)
+                })
+            }
+        });
+    }
+
+    reset=()=>{
+        this.props.form.resetFields();
+        this.setState({
+            searchObj:{}
+        })
+    }
+
+    render () {
+        const { getFieldProps, getFieldError } = this.props.form;
+        
+        return (
+            <div>
+                <NcSearchPanel 
+                    search={this.search}
+                    reset={this.reset}
+                    selectedData={this.state.searchObj}
+                >
+                    <Sample>
+                        <SF form={this.props.form}/>
+                    </Sample>
+                    <Complex>
+                        <CF form={this.props.form}/>
                     </Complex>  
                 </NcSearchPanel>
             </div>
         )
     }
 }
+
 export default Form.createForm()(Demo1);

@@ -11,7 +11,7 @@ class Demo1 extends Component {
     render () {
         return (
             <div>
-                <NcHeader icon={<i className='uf uf-wechat'></i>} title='采购订单'>
+                <NcHeader icon={<i className='uf uf-cai-s'></i>} title='采购订单'>
                     <Button colors="primary">新增</Button>
                     <Button colors="primary">修改</Button>
                     <Button colors="primary">删除</Button>

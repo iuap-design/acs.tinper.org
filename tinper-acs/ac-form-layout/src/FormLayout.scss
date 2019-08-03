@@ -1,59 +1,136 @@
-.ac-form-layout{
-    &-row{
-       margin: 0
+.ac-form-layout {
+    &-row {
+        margin: 0
     }
-    &-item{
+
+    &-item {
         padding: 0;
         margin-bottom: 8px;
-        .u-label{
+
+        .u-label {
             display: inline-block;
             width: 140px;
             text-align: right;
         }
-        .u-label + *{
+
+        .u-label+* {
             width: calc(100% - 140px);
             display: inline-block;
         }
-        &.error{
-            .u-form-control,.u-input-number,.u-input-number.u-input-group.simple .u-input-group-btn{
+
+        &.error {
+
+            .u-form-control,
+            .u-input-number,
+            .u-input-number.u-input-group.simple .u-input-group-btn {
                 border-color: #f53c32;
             }
-            .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus,.u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce{
-                color:#f53c32;
+
+            .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus,
+            .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
+                color: #f53c32;
             }
         }
-        .datepicker-input-group .u-form-control{
+
+        .datepicker-input-group .u-form-control {
             float: unset;
         }
-        .ref-input-wrap{
-            width: 100%!important;
+
+        .ref-input-wrap {
+            width: 100% !important;
         }
-        .u-input-number.u-input-group.simple{
+
+        .u-input-number.u-input-group.simple {
             display: inline-block;
-            .u-form-control{
+
+            .u-form-control {
                 float: unset;
                 height: 30px;
             }
-            .u-input-group-btn{
+
+            .u-input-group-btn {
                 position: absolute;
                 right: 2px;
-                .icon-group{
+
+                .icon-group {
                     height: 30px;
                 }
             }
         }
+
+        &-out {
+            position: relative;
+        }
+
+        &-error-msg {
+            color: #f53c32;
+            position: absolute;
+            z-index: 2;
+            top: -28px;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            height: 30px;
+            &-text{
+                padding: 5px 10px;
+                border-radius: 4px;
+                background: #fff;
+                box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        &-error-msg::after {
+            position: absolute;
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            content: " ";
+            left: calc(50% - 5px);
+            transform: rotate(45deg);
+            border-right: 1px solid #a5adba;
+            border-bottom: 1px solid #a5adba;
+        }
     }
-    &-mast{
+
+    &-mast {
         position: relative;
         top: 2px;
         color: #f53c32;
         right: 2px;
     }
-    &-error-msg.inverse.u-tooltip{
-        .tooltip-inner{
-            color: #f53c32;
-            border: none!important;
-            box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3);
+
+    // &-error-msg.inverse.u-tooltip{
+    //     .tooltip-inner{
+    //         color: #f53c32;
+    //         border: none!important;
+    //         box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3);
+    //     }
+    // }
+    &.disabled {
+        pointer-events: none;
+
+        .rc-tree-select-selection,
+        .rc-tree-select-selection:hover,
+        .u-form-control {
+            background: none;
+            border: none;
+            color: #111111;
+            box-shadow: none;
+        }
+
+        .u-select .u-select-selection {
+            background: none;
+            border: none;
+        }
+
+        .u-select-arrow,
+        .rc-tree-select-menu-icon,
+        .u-input-group-btn {
+            display: none;
         }
     }
 }

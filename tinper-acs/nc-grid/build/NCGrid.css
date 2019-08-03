@@ -3855,7 +3855,7 @@ ul {
       left: 12px; }
 
 .light-tabs-header {
-  height: 100%;
+  height: 40px;
   padding-left: 12px;
   padding-right: 20px; }
   .light-tabs-header .light-tabs-angle {
@@ -3879,6 +3879,174 @@ ul {
     color: #555;
     display: block;
     height: 38px; }
+  .light-tabs-header .tabs-operation .iconfont {
+    font-family: 'uf'; }
+  .light-tabs-header .tabs-operation .icon {
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+    width: 30px;
+    height: 38px;
+    margin: 0 0 0 6px;
+    border-radius: 3px;
+    line-height: 38px;
+    padding: 4px;
+    box-shadow: 0 1px 1px 0 rgba(208, 208, 208, 0.5);
+    border: 1px solid #d0d0d0; }
+
+.card-table-max.scaleFromOrigin {
+  visibility: visible;
+  background: rgba(0, 0, 0, 0.3); }
+
+.card-table-max {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 210;
+  visibility: hidden;
+  width: 100%;
+  height: 100%; }
+  .card-table-max .light-tabs {
+    background-color: #eceff1;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 12px 34px 4px; }
+    .card-table-max .light-tabs .light-tabs-background {
+      height: 100%;
+      background: #fff; }
+    .card-table-max .light-tabs .light-tabs-content .u-table .u-table-content .u-table-expanded-row {
+      background: #fff; }
+    .card-table-max .light-tabs .light-tabs-header {
+      background: #fff;
+      padding: 0 20px; }
+      .card-table-max .light-tabs .light-tabs-header .light-tabs-angle {
+        position: relative; }
+        .card-table-max .light-tabs .light-tabs-header .light-tabs-angle .table-tabs-icon::before {
+          left: 0px; }
+    .card-table-max .light-tabs .lightapp-component-cardTable-view {
+      position: absolute;
+      background-color: #fff;
+      z-index: 20;
+      overflow-y: auto; }
+  .card-table-max > div {
+    height: 100%; }
+  .card-table-max .card-table-edit-td .iconfont {
+    display: none;
+    font-weight: normal;
+    color: #058ae5;
+    font-size: 13px; }
+  .card-table-max .card-table-edit-td:hover > div {
+    display: flex;
+    align-items: center; }
+  .card-table-max .card-table-edit-td:hover .text-left {
+    justify-content: flex-end; }
+  .card-table-max .card-table-edit-td:hover .iconfont {
+    display: inline-block;
+    padding-left: 3px;
+    font-weight: normal;
+    color: #058ae5;
+    font-size: 13px; }
+  .card-table-max .cardTable-view-item {
+    background-color: #fff; }
+    .card-table-max .cardTable-view-item .expanded-row-item {
+      width: 50%;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      display: inline-block; }
+      .card-table-max .cardTable-view-item .expanded-row-item .expanded-row-item-label {
+        width: 140px;
+        max-width: 140px;
+        min-width: 140px;
+        line-height: 14px;
+        padding-right: 20px;
+        text-align: right;
+        box-sizing: border-box;
+        color: #555555;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle; }
+        .card-table-max .cardTable-view-item .expanded-row-item .expanded-row-item-label .expanded-row-item-label-colon {
+          position: absolute;
+          left: 125px; }
+      .card-table-max .cardTable-view-item .expanded-row-item .expanded-row-item-control {
+        width: calc(100% - 140px);
+        text-align: left;
+        padding-right: 8px;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #111111;
+        display: inline-block;
+        vertical-align: middle; }
+        .card-table-max .cardTable-view-item .expanded-row-item .expanded-row-item-control .expanded-row-item-control-wrapper {
+          height: 28px;
+          line-height: 14px;
+          vertical-align: middle;
+          white-space: normal;
+          word-wrap: break-word;
+          word-break: break-all;
+          display: flex;
+          align-items: center;
+          max-height: 40px;
+          overflow: auto; }
+          .card-table-max .cardTable-view-item .expanded-row-item .expanded-row-item-control .expanded-row-item-control-wrapper span {
+            max-height: 28px; }
+  .card-table-max .mark-required {
+    color: #e14c46; }
+  .card-table-max .single-line-and-ellipsis {
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block; }
+  .card-table-max .title-container {
+    display: inline-block;
+    width: calc(100% - 23px); }
+  .card-table-max .bee-table-column-sorter > span {
+    width: 17px !important; }
+  .card-table-max .bee-table-column-sorter-flat {
+    opacity: 0.6 !important; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-header th:first-child,
+  .card-table-max .light-tabs-content .u-table-content .u-table-fixed-left .u-table-header th:first-child {
+    padding: 0 7px !important; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-header tr:first-child th:first-child,
+  .card-table-max .light-tabs-content .u-table-content .u-table-fixed-left .u-table-header tr:first-child th:first-child {
+    padding-left: 20px !important; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-header tr:first-child th.table-checkbox-class,
+  .card-table-max .light-tabs-content .u-table-content .u-table-fixed-left .u-table-header tr:first-child th.table-checkbox-class {
+    padding: 0 7px 0 20px !important; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-fixed-right .u-table-header th:first-child,
+  .card-table-max .light-tabs-content .u-table-content .u-table-fixed-left .u-table-fixed-right .u-table-header th:first-child {
+    padding: 0 7px 0 20px !important; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody tr td:first-child,
+  .card-table-max .light-tabs-content .u-table-content .u-table-fixed-left .u-table-tbody tr td:first-child {
+    padding: 0 7px 0 20px; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-thead .mark-required {
+    color: #e14c46; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody {
+    border: none !important; }
+    .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody tr .card-table-edit-line .nc-input.u-form-control:focus {
+      border-color: #d0d0d0; }
+    .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody .cardTable-selected-row {
+      background: #ebedf2; }
+      .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody .cardTable-selected-row .table-checkbox-class,
+      .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody .cardTable-selected-row .table-opr {
+        background: #ebedf2; }
+      .card-table-max .light-tabs-content .u-table-content .u-table-scroll .u-table-tbody .cardTable-selected-row .table-opr {
+        color: #007ace; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-bordered td,
+  .card-table-max .light-tabs-content .u-table-content .u-table-bordered th {
+    border-right: none; }
+  .card-table-max .light-tabs-content .u-table-content .u-table-fixed-right .u-table-header .u-table-fixed {
+    width: 100%; }
+  .card-table-max .light-tabs-content .u-table-footer .total-row .u-table-scroll .u-table-tbody tr td:first-child {
+    padding: 0 7px 0 8px; }
+  .card-table-max .light-tabs-content .u-table-footer .total-row .u-table-tbody tr td:first-child {
+    padding: 0 7px 0 5px; }
 
 /**布局类**/
 .fl {
@@ -3894,3 +4062,169 @@ ul {
     content: " "; }
   .cf:after {
     clear: both; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-fixed-left .u-table-header tr:first-child th:first-child > div {
+  text-align: left; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-scroll .u-table-header tr:first-child th:first-child,
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-fixed-left .u-table-header tr:first-child th:first-child {
+  padding: 0 7px 0 20px !important; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-scroll .u-table-header tr:first-child th.table-checkbox-class,
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-fixed-left .u-table-header tr:first-child th.table-checkbox-class {
+  padding: 0 7px 0 20px !important; }
+  .lightapp-component-editTable .nc-table > .u-table-content .u-table-scroll .u-table-header tr:first-child th.table-checkbox-class .u-checkbox,
+  .lightapp-component-editTable .nc-table > .u-table-content .u-table-fixed-left .u-table-header tr:first-child th.table-checkbox-class .u-checkbox {
+    margin: 0px; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-scroll .u-table-tbody tr td:first-child,
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-fixed-left .u-table-tbody tr td:first-child {
+  padding: 0 7px 0 20px; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-footer .total-row .u-table-scroll .u-table-tbody tr td:first-child {
+  padding: 0 7px 0 8px; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-footer .total-row .u-table-tbody tr td:first-child {
+  padding: 0 7px 0 5px; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-footer .total-row .u-table-body-inner {
+  margin-right: 0px;
+  overflow: hidden; }
+
+.lightapp-component-editTable .nc-table > .u-table-content .u-table-fixed .u-table-tbody .u-table-row td.table-checkbox-class {
+  padding-left: 20px; }
+
+.lightapp-component-editTable .multiple-head-border .u-table-content .u-table-thead tr th {
+  border: 1px solid #cdcdcd;
+  height: 26px; }
+
+.lightapp-component-editTable .editTable-component-paginationDiv {
+  height: 50px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 0 0 3px 3px;
+  padding: 0px 20px;
+  z-index: 10;
+  border-top: 1px solid #d9d9d9; }
+  .lightapp-component-editTable .editTable-component-paginationDiv .NC_PaginationStyle {
+    float: right; }
+  .lightapp-component-editTable .editTable-component-paginationDiv .fl {
+    line-height: 30px; }
+  .lightapp-component-editTable .editTable-component-paginationDiv .u-select-selection-rendered {
+    margin: 0; }
+  .lightapp-component-editTable .editTable-component-paginationDiv .page-size .u-form-control-wrapper {
+    max-width: 100px;
+    margin-top: 5px; }
+  .lightapp-component-editTable .editTable-component-paginationDiv .page-size .NC_total {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 12px !important;
+    color: #555555; }
+  .lightapp-component-editTable .editTable-component-paginationDiv .page-size .u-select-selection {
+    width: 83px;
+    height: 28px;
+    color: #555555; }
+    .lightapp-component-editTable .editTable-component-paginationDiv .page-size .u-select-selection .u-select-selection-selected-value {
+      font-size: 12px !important; }
+
+.lightapp-component-editTable .title-container {
+  display: inline-block;
+  width: calc(100% - 23px); }
+
+.lightapp-component-editTable .edittable-title .title-vertical-center {
+  vertical-align: sub;
+  display: inline-block;
+  width: 100%; }
+
+.lightapp-component-editTable .bee-table-column-sorter > span {
+  width: 17px !important; }
+
+.lightapp-component-editTable .bee-table-column-sorter-flat {
+  opacity: 0.6 !important; }
+
+.lightapp-component-editTable .editTable-selected-row {
+  background: #e4e4e4; }
+
+.lightapp-component-editTable .table-index .edit-table-browse a,
+.lightapp-component-editTable .table-index .edit-table-browse span {
+  max-width: 100%;
+  margin-right: 0; }
+
+.lightapp-component-editTable .edit-table-browse a,
+.lightapp-component-editTable .edit-table-browse span {
+  display: inline-block;
+  max-width: 100%;
+  height: 17px;
+  line-height: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap; }
+
+.lightapp-component-editTable .edit-table-browse a {
+  text-decoration: none; }
+
+.lightapp-component-editTable .single-line-and-ellipsis {
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block; }
+
+.lightapp-component-editTable .edit-table-edit-line .refer-wrapper .refer {
+  height: 28px; }
+
+.lightapp-component-editTable .customer-style a,
+.lightapp-component-editTable .customer-style span {
+  display: inline-block;
+  max-width: 100%; }
+
+.lightapp-component-editTable .customer-style a {
+  text-decoration: none; }
+
+.lightapp-component-editTable .edit-table-edit-td {
+  height: 100%; }
+  .lightapp-component-editTable .edit-table-edit-td .iconfont {
+    display: none;
+    font-weight: normal;
+    color: #058ae5;
+    font-size: 13px; }
+
+.lightapp-component-editTable .edit-table-edit-td:hover > div {
+  display: flex;
+  align-items: center; }
+
+.lightapp-component-editTable .edit-table-edit-td:hover .text-left {
+  justify-content: flex-end; }
+
+.lightapp-component-editTable .edit-table-edit-td:hover .iconfont {
+  font-family: 'uf';
+  display: inline-block;
+  padding-left: 3px;
+  font-weight: normal;
+  color: #058ae5;
+  font-size: 14px; }
+  .lightapp-component-editTable .edit-table-edit-td:hover .iconfont.icon-zhengbiaobianji1:before {
+    content: "\e69b"; }
+
+.lightapp-component-editTable .mark-required {
+  color: #e14c46; }
+
+.lightapp-component-editTable .parent-column {
+  text-align: center; }
+
+.lightapp-component-editTable .clear-right-scrollBar .u-table-fixed-right .u-table-body-inner::-webkit-scrollbar-thumb:horizontal,
+.lightapp-component-editTable .clear-right-scrollBar .u-table-fixed-left .u-table-body-inner::-webkit-scrollbar-thumb:horizontal {
+  background-color: transparent; }
+
+.lightapp-component-editTable .clear-right-scrollBar .u-table-fixed-right .u-table-body-inner,
+.lightapp-component-editTable .clear-right-scrollBar .u-table-fixed-left .u-table-body-inner {
+  scrollbar-arrow-color: #f6f6f6;
+  /*滚动条滑块按钮的颜色*/
+  scrollbar-face-color: #f6f6f6;
+  /*滚动条整体颜色*/
+  scrollbar-highlight-color: #f6f6f6;
+  /*滚动条阴影*/
+  scrollbar-shadow-color: #f6f6f6;
+  /*滚动条轨道颜色*/
+  scrollbar-track-color: #f6f6f6; }

@@ -1,4 +1,4 @@
-## Hand表格 HandTable
+## 电子表格 HandTable
 ac-hand-table 是基于 `handsontable` 的适用于 React 框架的电子表格，它提供了数据绑定、数据验证、行过滤、列排序、表格多选、表格样式、表头交互、表头拖拽、行高拖拽、行交换等操作
 
 ## 如何使用
@@ -112,7 +112,7 @@ import 'ac-hand-table/dist/index.css';
 |customValue|自定义表格内容渲染,通常用于表格联动|(rowData)=>{}|-|
 |renderer|自定义表格渲染，支持dom|(instance, td, row, col, prop, value, cellProperties)=>{}|-|
 
-### refConfig [更多参考](http://bee.tinper.org/tinper-acs/)
+### refConfig [更多参考](http://bee.tinpfer.org/tinper-acs/)
 |参数|说明|类型|默认值|
 |:--|:---|:--|:--|
 |columnsKey|获取参照选中对象的值，约定数组第一个为表格回写值|array|['refname','refcode']|

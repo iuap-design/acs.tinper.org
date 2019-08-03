@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'bee-layout';
 import Lable from 'bee-label';
-import Tooltip from 'bee-tooltip'
 
 
 const propTypes = {
@@ -16,6 +15,13 @@ const defaultProps = {
 };
 
 class FormItem extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            showError:false
+        }
+    }
+
 
     getChild=()=>{
         let { label , children, required, clsfix, errorMsg } = this.props;
@@ -24,17 +30,29 @@ class FormItem extends Component {
         if(children.length>1){
             React.Children.map(children,child=>{
                 errorMsg?ary.push(
-                    <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
-                        {child}
-                    </Tooltip>
+                    // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
+                        <div className={`${clsfix}-item-out`} title={errorMsg}>
+                            <span className={`${clsfix}-item-error-msg`}>
+                                <span className={`${clsfix}-item-error-msg-text`}>{errorMsg}</span>
+                            </span>
+                            {child}
+                        </div>
+                    // </Tooltip>
                 ):ary.push(child)
+                // ary.push(child)
             })
         }else{
             errorMsg?ary.push(
-                <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
-                    {children}
-                </Tooltip>
+                // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
+                    <div className={`${clsfix}-item-out`} title={errorMsg}>
+                        <span className={`${clsfix}-item-error-msg`}>
+                            <span className={`${clsfix}-item-error-msg-text`}>{errorMsg}</span>
+                        </span>
+                        {children}
+                    </div>
+                // </Tooltip>
             ):ary.push(children)
+            // ary.push(children)
         }
         return ary;
     }

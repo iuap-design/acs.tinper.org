@@ -80,15 +80,20 @@ class Demo2 extends Component {
       },
       allowInvalid: true,
       strict: true,
-      onChangeCell: (rowData, rowNum) => { // 单元格改变回调
-        console.log('rowData, rowNum', rowData, rowNum);
-        this.setState({ changeRowNum: rowNum });
-      },
+      // todo 被弃用
+      // onChangeCell: (rowData, rowNum) => { // 单元格改变回调
+      //   console.log('rowData, rowNum', rowData, rowNum);
+      //   this.setState({ changeRowNum: rowNum });
+      // },
       onClick: (rowData, rowNum, value) => {
         console.log('rowData, rowNum, value', rowData, rowNum, value);
       },
       dblClick: (rowData, rowNum, value) => {
         console.log('dblClick,rowData, rowNum, value', rowData, rowNum, value);
+      },
+      onChange: (rowData, rowNum,rowNumList, rowDataList) => { // 单元格改变回调
+        console.log('rowData, rowNum,rowNumList, rowDataList', rowData, rowNum,rowNumList, rowDataList);
+        // this.setState({ changeRowNum: rowNum });
       },
 
     },
@@ -143,7 +148,7 @@ class Demo2 extends Component {
   ];
 
   // 设置行样式
-  setStyle = (rowIndex) => {
+  setStyle = (rowIndex, colIndex, prop, value) => {
     let style = { 'background-color': '#fff' };
     if (rowIndex % 2 === 0) {
       style = { 'background-color': '#3fc8c1' };
@@ -265,25 +270,27 @@ class Demo2 extends Component {
 
         </div>
 
-        <AcHandTable
-          id="example2" // 组件id
-          onRef={(ref) => { // 设置ref属性 调用子组件方法
-            this.child = ref;
-          }}
-          colHeaders={['姓名', '性别', '日期', '资薪', '自定义', '钉耙日期']} // 表格表头
-          data={handData} // 表体数据
-          columns={this.columns} // 列属性设置
-          // 设置行样式
-          rowStyle={this.setStyle}
-          rowKey="id" // 数组对象中唯一id 默认值为'id'
-          csvConfig={{
-            filename: '导出',
-            rowHeaders: true,
-          }}
-          mergeCells // 右键菜单是否开启单元格合并
-          // multiSelect={false} // 关闭多选框
+        <div className="min-table">
+          <AcHandTable
+            id="example2" // 组件id
+            onRef={(ref) => { // 设置ref属性 调用子组件方法
+              this.child = ref;
+            }}
+            colHeaders={['姓名', '性别', '日期', '资薪', '自定义', '钉耙日期']} // 表格表头
+            data={handData} // 表体数据
+            columns={this.columns} // 列属性设置
+            // 设置行样式
+            rowStyle={this.setStyle}
+            rowKey="id" // 数组对象中唯一id 默认值为'id'
+            csvConfig={{
+              filename: '导出',
+              rowHeaders: true,
+            }}
+            mergeCells // 右键菜单是否开启单元格合并
+            // multiSelect={false} // 关闭多选框
 
-        />
+          />
+        </div>
 
       </div>
     );

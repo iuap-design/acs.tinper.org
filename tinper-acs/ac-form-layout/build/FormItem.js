@@ -20,10 +20,6 @@ var _beeLabel = require('bee-label');
 
 var _beeLabel2 = _interopRequireDefault(_beeLabel);
 
-var _beeTooltip = require('bee-tooltip');
-
-var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -49,16 +45,12 @@ var defaultProps = {
 var FormItem = function (_Component) {
     _inherits(FormItem, _Component);
 
-    function FormItem() {
-        var _temp, _this, _ret;
-
+    function FormItem(props) {
         _classCallCheck(this, FormItem);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.getChild = function () {
+        _this.getChild = function () {
             var _this$props = _this.props,
                 label = _this$props.label,
                 children = _this$props.children,
@@ -79,21 +71,54 @@ var FormItem = function (_Component) {
             ));
             if (children.length > 1) {
                 _react2["default"].Children.map(children, function (child) {
-                    errorMsg ? ary.push(_react2["default"].createElement(
-                        _beeTooltip2["default"],
-                        { inverse: true, overlay: errorMsg, placement: 'top', className: clsfix + '-error-msg' },
+                    errorMsg ? ary.push(
+                    // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
+                    _react2["default"].createElement(
+                        'div',
+                        { className: clsfix + '-item-out', title: errorMsg },
+                        _react2["default"].createElement(
+                            'span',
+                            { className: clsfix + '-item-error-msg' },
+                            _react2["default"].createElement(
+                                'span',
+                                { className: clsfix + '-item-error-msg-text' },
+                                errorMsg
+                            )
+                        ),
                         child
-                    )) : ary.push(child);
+                    )
+                    // </Tooltip>
+                    ) : ary.push(child);
+                    // ary.push(child)
                 });
             } else {
-                errorMsg ? ary.push(_react2["default"].createElement(
-                    _beeTooltip2["default"],
-                    { inverse: true, overlay: errorMsg, placement: 'top', className: clsfix + '-error-msg' },
+                errorMsg ? ary.push(
+                // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
+                _react2["default"].createElement(
+                    'div',
+                    { className: clsfix + '-item-out', title: errorMsg },
+                    _react2["default"].createElement(
+                        'span',
+                        { className: clsfix + '-item-error-msg' },
+                        _react2["default"].createElement(
+                            'span',
+                            { className: clsfix + '-item-error-msg-text' },
+                            errorMsg
+                        )
+                    ),
                     children
-                )) : ary.push(children);
+                )
+                // </Tooltip>
+                ) : ary.push(children);
+                // ary.push(children)
             }
             return ary;
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.state = {
+            showError: false
+        };
+        return _this;
     }
 
     FormItem.prototype.render = function render() {

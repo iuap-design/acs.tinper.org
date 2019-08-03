@@ -174,31 +174,22 @@ class AcHandTable extends React.Component {
             data[rowNum][name] = null;
           }
 
-          // 下拉自动补全
-          if (type === 'autocomplete' && refSource) {
-            const { columnsKey = [], rowKey } = refConfig;
+          // 下拉自动补全改变值
+          if (type === 'autocomplete' && refSource && source !== 'Autofill.fill') {
 
-            let refValue = 'refname';
-            if (columnsKey.length > 0) {
+            let { columnsKey = [], rowKey, refValue } = refConfig;
+            if (!refValue && columnsKey.length > 0) { // 获取显示值
               refValue = columnsKey[0];
             }
 
             const currentAutoRow = arrayFindObj(cacheAutoData, refValue, newValue) || {};
             data[rowNum][currentKey] = newValue;
-
-            if (rowKey && rowKey) { // 自定义列名
+            if (rowKey) { // 自定义列名
               for (let i = 1; i < rowKey.length; i++) {
                 const key = columnsKey[i];
                 data[rowNum][rowKey[i]] = currentAutoRow[key];
               }
-            } else {
-              for (let i = 1; i < columnsKey.length; i++) {
-                const key = columnsKey[i];
-                data[rowNum][currentKey + '_' + key] = currentAutoRow[key];
-              }
             }
-
-
             // 下拉回调change
             if (refOnChange) {
               refOnChange(currentAutoRow, data[rowNum], rowNum);
@@ -213,8 +204,19 @@ class AcHandTable extends React.Component {
           }
           // 表格内容改变回调
           if (onChange) {
-            const rowData = { ...data[rowNum] };
-            onChange(newValue, oldValue, rowNum, rowData);
+            // 获取行列表
+            let newValueList = []; // 新值
+            let oldValueList = []; // 旧值
+            let rowNumList = []; // 行号
+            for (const item of changes) {
+              rowNumList.push(item[0]);
+              oldValueList.push(item[2]);
+              newValueList.push(item[3]);
+            }
+
+            // 获取行数据
+            const rowDataList = rowNumList.map(item => data[item]);
+            onChange(rowNumList, rowDataList,newValueList, oldValueList);
           }
 
           // 是否自定义 col 显示值
@@ -263,33 +265,26 @@ class AcHandTable extends React.Component {
 
         const { data: currentKey, refConfig } = column;
 
-        if (refConfig) {
-          const { columnsKey, rowKey } = refConfig;
-          // 参照返回字段
-          const defaultKey = ['refname', 'refpk'];
-          let keyArray = (columnsKey && columnsKey.length > 1) ? columnsKey : (rowKey && rowKey.length > 0 ? rowKey : defaultKey);
 
-          console.log("keyArray",keyArray);
+        if (refConfig && refConfig.rowKey.length > 1) {
+          const { rowKey } = refConfig;
+          // 参照返回字段
           for (let i = row; i <= endRow; i++) {
-            // 设置展示值
-            data[i][currentKey] = rowDataCache[currentKey];
             // 返回参照多余字段用_链接
-            for (let j = 1; j < keyArray.length; j++) {
-              let key = currentKey + '_' + keyArray[j]; // 系统默认key
-              if (rowKey && Array.isArray(rowKey) && rowKey.length > 1) { // 是否自定义隐藏例的 key
-                key = rowKey[j];
-              }
+            for (let j = 0; j < rowKey.length; j++) {
+              let key = rowKey[j]; // 系统默认key
               data[i][key] = rowDataCache[key];
             }
           }
+
         }
 
         // 添加修改标记
         for (let i = row; i <= endRow; i++) {
           data[i].update_status = true;
         }
-        _this.setState({ data });
 
+        _this.setState({ data });
 
         // // 是否自定义 col 显示值
         for (const columnItem of columns) {
@@ -424,7 +419,7 @@ class AcHandTable extends React.Component {
     td.appendChild(createDiv);
 
     // 添加样式
-    const styles = rowStyle && rowStyle(row, col, prop);
+    const styles = rowStyle && rowStyle(row, col, prop, value);
     if (styles) {
       for (const style in styles) { // 修改行样式
         td.style[style] = styles[style];
@@ -464,7 +459,6 @@ class AcHandTable extends React.Component {
 
     // 添加 多选框
     if (multiSelect && colHeaders && Array.isArray(colHeaders) && colHeaders.length > 0) {
-
 
       const checkedHeader = `<input type='checkbox' class='multiSelectChecker' />`;
       let className = 'htCenter htMiddle ';
@@ -543,7 +537,7 @@ class AcHandTable extends React.Component {
             }
 
             // 添加自定义行样式
-            const styles = rowStyle ? rowStyle(row, col, prop) : '';
+            const styles = rowStyle ? rowStyle(row, col, prop, value) : '';
             if (styles) {
               // 修改行样式
               for (const style in styles) {

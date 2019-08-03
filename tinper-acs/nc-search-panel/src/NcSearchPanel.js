@@ -4,6 +4,7 @@ import Icon from 'bee-icon'
 import Button from 'bee-button'
 import Dropdown from 'bee-dropdown';
 import Menu from 'bee-menus';
+import Tooltip from 'bee-tooltip'
 
 const Item = Menu.Item;
 
@@ -13,7 +14,8 @@ const noop = ()=>{}
 const propTypes = {
     clsfix:PropTypes.string,
     search:PropTypes.func,
-    reset:PropTypes.func
+    reset:PropTypes.func,
+    selectedData:PropTypes.object
 };
 const defaultProps = {
     clsfix:'nc-search-panel',
@@ -21,12 +23,18 @@ const defaultProps = {
     reset:noop
 };
 
+const typeText = {
+    '1':'简单查询',
+    '2':'复杂查询'
+}
+
 class NcSearchPanel extends Component {
     constructor(props){
         super(props);
         this.state={
             open:true,
-            text:'简单查询'
+            type:'1',
+            show:false
         }
     }
     open=()=>{
@@ -36,7 +44,7 @@ class NcSearchPanel extends Component {
     }
     onSelect=(item)=>{
         this.setState({
-            text:item.item.props.children
+            type:item.selectedKeys[0]
         })
     }
     getChild=()=>{
@@ -44,23 +52,48 @@ class NcSearchPanel extends Component {
         let child = [];
         if(children.length>1){
             children.map(item=>{
-                if(this.state.text=='简单查询'&&item.type.name=='Sample'){
+                if(this.state.type=='1'&&item.type.displayName=='Sample'){
                     child = item.props.children;
-                }else if(this.state.text=='复杂查询'&&item.type.name=='Complex'){
+                }else if(this.state.type=='2'&&item.type.displayName=='Complex'){
                     child = item.props.children;
                 }
             })
         }else{
-            if(this.state.text=='简单查询'&&children.type.name=='Sample'){
+            if(this.state.type=='1'&&children.type.displayName=='Sample'){
                 child = children.props.children;
-            }else if(this.state.text=='复杂查询'&&children.type.name=='Complex'){
+            }else if(this.state.type=='2'&&children.type.displayName=='Complex'){
                 child = children.props.children;
             }
         }
         return child;
     }
+    getTip=()=>{
+        let { clsfix,selectedData } = this.props;
+        return (
+            <span className={`${clsfix}-selected-complex`}>
+                {
+                    Object.keys(selectedData).map((item,index)=>{
+                        if(selectedData[item]&&(selectedData[item]!='undefined'))return <div key={index} className={`${clsfix}-selected-complex-item`}>
+                                <span className={`${clsfix}-selected-complex-item-title`}>{item}:</span>
+                                <span className={`${clsfix}-selected-complex-item-ctn`}>{selectedData[item]}</span>
+                            </div>
+                        
+                    })
+                }
+            </span>
+        )
+    }
+    formatSearchDate=(selectedData)=>{
+        for(let attr in selectedData){
+            if(!selectedData[attr]){
+                delete selectedData[attr];
+            }
+        }
+        let length = Object.keys(selectedData).length;
+        return `查询条件(${length}):   ${Object.keys(selectedData).join(';')}`
+    }
     render(){
-        let { clsfix,search,reset } = this.props;
+        let { clsfix,search,reset,selectedData } = this.props;
         let ctns = `${clsfix}-ctns`;
         if(!this.state.open)ctns+=' close';
         const menus = (
@@ -70,7 +103,6 @@ class NcSearchPanel extends Component {
               <Item key="2">复杂查询</Item>
             </Menu>
         );
-
         return(
             <div className={clsfix}>
                 <div className={`${clsfix}-header`} >
@@ -80,12 +112,33 @@ class NcSearchPanel extends Component {
                             trigger={['click']}
                             overlay={menus}
                             animation="slide-up">
-                            <span>{this.state.text} <Icon type='uf-triangle-down'/></span>
+                            <span>{typeText[this.state.type]} <Icon type='uf-triangle-down'/></span>
                         </Dropdown>
                     </span>
 
                     <span className={`${clsfix}-selected`}>
-                        高级(暂不可用)
+                        高级
+                    </span>
+                    {
+                        Object.keys(selectedData).length&&!this.state.open?
+                        <span className={`${clsfix}-selected-data`}>
+                            <Tooltip inverse placement="bottom" overlay={this.getTip()}>
+                                <span className={`${clsfix}-selected-sample`} >
+                                    {this.formatSearchDate(selectedData)}
+                                </span>
+                            </Tooltip>
+                        </span>:''
+                    }
+                    <span className={`${clsfix}-open`} onClick={this.open}>
+                        {
+                            this.state.open?
+                            <span>
+                            展开<Icon type='uf-arrow-up'/>
+                            </span>
+                            :<span>
+                            收起<Icon type='uf-arrow-down'/>
+                            </span>
+                        }
                     </span>
                 </div>
                 <div className={`${clsfix}-ctns-out`}>
@@ -103,11 +156,6 @@ class NcSearchPanel extends Component {
                                 <Icon type='uf-clean'/>
                             </Button>
                         </div>
-                    </div>
-                    <div className={`${clsfix}-open`} onClick={this.open}>
-                        {
-                            this.state.open?<Icon type='uf-2arrow-up'/>:<Icon type='uf-2arrow-down'/>
-                        }
                     </div>
                 </div>
             </div>

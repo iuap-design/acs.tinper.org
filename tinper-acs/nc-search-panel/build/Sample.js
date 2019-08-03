@@ -34,5 +34,6 @@ var Sample = function (_React$Component) {
   return Sample;
 }(_react2["default"].Component);
 
+Sample.displayName = 'Sample';
 exports["default"] = Sample;
 module.exports = exports['default'];

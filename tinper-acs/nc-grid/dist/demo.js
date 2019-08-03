@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var Demo2 = __webpack_require__(716);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " SimpleTable", "code": "/**\n*\n* @title SimpleTable\n* @description \n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport NCGrid from \"tinper-bee/lib/src\";;\nconst SimpleTable = NCGrid.SimpleTable;\n\nconst columns = [\n    { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\n    { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\n    { title: \"性别\", dataIndex: \"c\", key: \"c\", width: 100},\n    { title: \"部门\", dataIndex: \"d\", key: \"d\", width: 100 },\n    { title: \"职级\", dataIndex: \"e\", key: \"e\", width: 100 }\n];\n  \nconst data = [\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"男\", d: \"财务二科\", e: \"M1\", key: \"1\" },\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"男\", d: \"财务一科\", e: \"T1\", key: \"2\" },\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"女\", d: \"财务一科\", e: \"T2\", key: \"3\" }\n];\n  \nclass Demo1 extends Component {\n    render () {\n        return (\n            <SimpleTable\n            columns={columns}\n            data={data}\n            showPagination={true}\n            pageInfo= {{\n                pageIndex: \"1\",\n                pageSize: \"10\",\n                total: \"3\",\n                totalPage: \"1\"\n            }}\n            />\n        )\n    }\n}\n", "desc": " " }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\r\n*\r\n* @title CardTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst CardTable = NCGrid.CardTable;\r\n\r\nconst columns = [\r\n    { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\r\n    { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\r\n    { title: \"性别\", dataIndex: \"c\", key: \"c\", width: 100},\r\n    { title: \"部门\", dataIndex: \"d\", key: \"d\", width: 100 },\r\n    { title: \"职级\", dataIndex: \"e\", key: \"e\", width: 100 }\r\n];\r\n  \r\nconst data = [\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"男\", d: \"财务二科\", e: \"M1\", key: \"1\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"男\", d: \"财务一科\", e: \"T1\", key: \"2\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"女\", d: \"财务一科\", e: \"T2\", key: \"3\" }\r\n];\r\n\r\nconst tabLists = [{\r\n    code: 'body', \r\n    name: '详细信息',\r\n    items: [], \r\n}];\r\n  \r\nclass Demo2 extends Component {\r\n    render () {\r\n        return (\r\n            <CardTable\r\n            columns={columns}\r\n            data={data}\r\n            tabLists={tabLists}\r\n            moduleId=\"body\"\r\n            showMore={true}\r\n            config={{\r\n                showCheck: true, //是否开启多选功能\r\n            }}\r\n            />\r\n        )\r\n    }\r\n}\r\n", "desc": " " }];
+	var Demo1 = __webpack_require__(268);var Demo2 = __webpack_require__(731);var Demo3 = __webpack_require__(732);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " SimpleTable", "code": "/**\n*\n* @title SimpleTable\n* @description \n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport NCGrid from \"tinper-bee/lib/src\";;\nconst SimpleTable = NCGrid.SimpleTable;\n\nconst columns = [\n    { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\n    { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\n    { title: \"性别\", dataIndex: \"c\", key: \"c\", width: 100},\n    { title: \"部门\", dataIndex: \"d\", key: \"d\", width: 100 },\n    { title: \"职级\", dataIndex: \"e\", key: \"e\", width: 100 }\n];\n  \nconst data = [\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"男\", d: \"财务二科\", e: \"M1\", key: \"1\" },\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"男\", d: \"财务一科\", e: \"T1\", key: \"2\" },\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"女\", d: \"财务一科\", e: \"T2\", key: \"3\" }\n];\n  \nclass Demo1 extends Component {\n    render () {\n        return (\n            <SimpleTable\n            columns={columns}\n            data={data}\n            showPagination={true}\n            pageInfo= {{\n                pageIndex: \"1\",\n                pageSize: \"10\",\n                total: \"3\",\n                totalPage: \"1\"\n            }}\n            />\n        )\n    }\n}\n", "desc": " " }, { "example": _react2['default'].createElement(Demo2, null), "title": " EditTable", "code": "/**\r\n*\r\n* @title EditTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst CardTable = NCGrid.CardTable;\r\n\r\nconst columns = [\r\n    {\r\n        itemtype: 'label', //label 类型不可编辑\r\n        maxlength: '20', //限制字段长度\r\n        visible: true, //是否显示列，设置为 false 或不设置，均不显示该列\r\n        width: '100px', //列宽\r\n        label: '行号', //列名称\r\n        disabled: true, //是否禁止编辑\r\n        attrcode: 'crowno' //字段名称\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '20',\r\n        label: '收入合同子实体',\r\n        width: '200px',\r\n        disabled: true,\r\n        required: true, //是否必填，列名称前加 *\r\n        visible: true,\r\n        attrcode: 'crevecontbid'\r\n    },\r\n    {\r\n        itemtype: 'input',\r\n        scale: '1',\r\n        maxlength: '28',\r\n        visible: true,\r\n        width: '200px',\r\n        label: '数量',\r\n        required: true, \r\n        attrcode: 'npobnum'\r\n    },\r\n    {\r\n        itemtype: 'select',\r\n        visible: true,\r\n        label: '确认收入时点',\r\n        width: '200px',\r\n        options: [\r\n            {\r\n                display: '销售发货',\r\n                value: '0'\r\n            },\r\n            {\r\n                display: '销售开票',\r\n                value: '1'\r\n            },\r\n            {\r\n                display: '手工',\r\n                value: '2'\r\n            }\r\n        ],\r\n        attrcode: 'fconfirmpoint'\r\n    },\r\n    {\r\n        itemtype: 'number',\r\n        scale: '2',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '分配金额',\r\n        disabled: true,\r\n        attrcode: 'nallotmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '已履约数量',\r\n        disabled: true,\r\n        attrcode: 'nfinishnum'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        label: '已履约金额',\r\n        disabled: true,\r\n        attrcode: 'nfinishmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '19',\r\n        width: '200px',\r\n        label: '时间戳',\r\n        disabled: true,\r\n        attrcode: 'ts'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '500',\r\n        width: '200px',\r\n        label: '行备注',\r\n        disabled: true,\r\n        attrcode: 'vrownote'\r\n    }\r\n];\r\n  \r\nconst data = [\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m43-434343wws',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8',\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9',\r\n            },\r\n            fclosetype: {\r\n                value: false,\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000',\r\n            },\r\n            fallocation: {\r\n                value: false,\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货',\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg',\r\n            },\r\n            npobnum: {\r\n                value: '10888',\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起',\r\n            },\r\n            cunitid: {\r\n                value: false,\r\n            },\r\n            crowno: {\r\n                value: 1\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-344543243-434bbb3fdsf',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nfinishnum: {\r\n                value: '哈哈哈'\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '广东,北京'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 2\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'h2345hg-345hbvc43-434bebb3sdsc',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: '1234'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '中国,美国'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 3\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: '5hhhg-345hbc43-434bebb3sddw',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            nfinishnum: {\r\n                value: 'ggefe'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '11955',\r\n                scale: '2',\r\n                disabled: false\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 2,\r\n                display: '手工'\r\n            },\r\n            npobnum: {\r\n                value: '10.888',\r\n                scale: '6'\r\n            },\r\n            cpobid: {\r\n                value: 1,\r\n                display: '1'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 4\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m143-4343431wwde',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 5\r\n            }\r\n        }\r\n    },\r\n];\r\n\r\nconst tabLists = [{\r\n    code: 'body', \r\n    name: '详细信息',\r\n    items: [], \r\n}];\r\n  \r\nclass Demo2 extends Component {\r\n    render () {\r\n        return (\r\n            <CardTable\r\n            columns={columns}\r\n            data={data}\r\n            moduleId=\"body\"\r\n            tabLists={tabLists}\r\n            showMore={true}\r\n            showMax={true}\r\n            config={{\r\n                showCheck: true, //是否开启多选功能\r\n                hideSwitch: () => false, //表格\r\n            }}\r\n            />\r\n        )\r\n    }\r\n}\r\n", "desc": " " }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditTable", "code": "/**\r\n*\r\n* @title EditTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\r\n\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst EditTable = NCGrid.EditTable;\r\n\r\nconst columns = [\r\n    {\r\n        itemtype: 'label', //label 类型不可编辑\r\n        maxlength: '20', //限制字段长度\r\n        visible: true, //是否显示列，设置为 false 或不设置，均不显示该列\r\n        width: '100px', //列宽\r\n        label: '行号', //列名称\r\n        disabled: true, //是否禁止编辑\r\n        attrcode: 'crowno' //字段名称\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '20',\r\n        label: '收入合同子实体',\r\n        width: '200px',\r\n        disabled: true,\r\n        required: true, //是否必填，列名称前加 *\r\n        visible: true,\r\n        attrcode: 'crevecontbid'\r\n    },\r\n    {\r\n        itemtype: 'input',\r\n        scale: '1',\r\n        maxlength: '28',\r\n        visible: true,\r\n        width: '200px',\r\n        label: '数量',\r\n        required: true, \r\n        attrcode: 'npobnum'\r\n    },\r\n    {\r\n        itemtype: 'select',\r\n        visible: true,\r\n        label: '确认收入时点',\r\n        width: '200px',\r\n        options: [\r\n            {\r\n                display: '销售发货',\r\n                value: '0'\r\n            },\r\n            {\r\n                display: '销售开票',\r\n                value: '1'\r\n            },\r\n            {\r\n                display: '手工',\r\n                value: '2'\r\n            }\r\n        ],\r\n        attrcode: 'fconfirmpoint'\r\n    },\r\n    {\r\n        itemtype: 'number',\r\n        scale: '2',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '分配金额',\r\n        // disabled: true,\r\n        attrcode: 'nallotmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '已履约数量',\r\n        disabled: true,\r\n        attrcode: 'nfinishnum'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        label: '已履约金额',\r\n        disabled: true,\r\n        attrcode: 'nfinishmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '19',\r\n        width: '200px',\r\n        label: '时间戳',\r\n        disabled: true,\r\n        attrcode: 'ts'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '500',\r\n        width: '200px',\r\n        label: '行备注',\r\n        disabled: true,\r\n        attrcode: 'vrownote'\r\n    }\r\n];\r\n  \r\nconst data = [\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m43-434343wws',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8',\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9',\r\n            },\r\n            fclosetype: {\r\n                value: false,\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000',\r\n            },\r\n            fallocation: {\r\n                value: false,\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货',\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg',\r\n            },\r\n            npobnum: {\r\n                value: '10888',\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起',\r\n            },\r\n            cunitid: {\r\n                value: false,\r\n            },\r\n            crowno: {\r\n                value: 1\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-344543243-434bbb3fdsf',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nfinishnum: {\r\n                value: '哈哈哈'\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '广东,北京'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 2\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'h2345hg-345hbvc43-434bebb3sdsc',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: '1234'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '中国,美国'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 3\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: '5hhhg-345hbc43-434bebb3sddw',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            nfinishnum: {\r\n                value: 'ggefe'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '11955',\r\n                scale: '2',\r\n                disabled: false\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 2,\r\n                display: '手工'\r\n            },\r\n            npobnum: {\r\n                value: '10.888',\r\n                scale: '6'\r\n            },\r\n            cpobid: {\r\n                value: 1,\r\n                display: '1'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 4\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m143-4343431wwde',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 5\r\n            }\r\n        }\r\n    },\r\n]\r\n  \r\nclass Demo3 extends Component {\r\n    handleClick = () => {\r\n        this.table.getTableRows();\r\n    }\r\n    //获取表格数据时返回的回调\r\n    getTableRows = (data) => {\r\n        console.log('保存数据',data);\r\n    }\r\n    render () {\r\n        return (\r\n            <div>\r\n                <Button colors=\"primary\" onClick={this.handleClick} style={{marginBottom:'8px'}}>保存表格数据</Button>\r\n                <EditTable\r\n                columns={columns}\r\n                data={data}\r\n                moduleId=\"purchase\"\r\n                isEdit={true}\r\n                onRef={(ref) => { this.table = ref; }} //获取EditTable组件实例\r\n                getTableRows={this.getTableRows}\r\n                />\r\n            </div>\r\n        )\r\n    }\r\n}\r\n", "desc": " " }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -34482,13 +34482,17 @@
 	
 	var _nc_Table2 = _interopRequireDefault(_nc_Table);
 	
-	var _SimpleTable = __webpack_require__(607);
+	var _SimpleTable = __webpack_require__(617);
 	
 	var _SimpleTable2 = _interopRequireDefault(_SimpleTable);
 	
-	var _CardTable = __webpack_require__(617);
+	var _CardTable = __webpack_require__(627);
 	
 	var _CardTable2 = _interopRequireDefault(_CardTable);
+	
+	var _EditTable = __webpack_require__(726);
+	
+	var _EditTable2 = _interopRequireDefault(_EditTable);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -34525,6 +34529,7 @@
 	NCGrid.defaultProps = defaultProps;
 	NCGrid.SimpleTable = _SimpleTable2['default'];
 	NCGrid.CardTable = _CardTable2['default'];
+	NCGrid.EditTable = _EditTable2['default'];
 	exports['default'] = NCGrid;
 	module.exports = exports['default'];
 
@@ -84155,20 +84160,55 @@
 
 /***/ }),
 /* 606 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.addZero = undefined;
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
 	exports['default'] = myBrowser;
+	exports.undefinedOrfalse = undefinedOrfalse;
 	exports.getSortColums = getSortColums;
 	exports.isArray = isArray;
 	exports.isString = isString;
 	exports.isFunction = isFunction;
+	exports.isObj = isObj;
+	exports.isBoolean = isBoolean;
+	exports.isWrong = isWrong;
+	exports.isNullOrVoid = isNullOrVoid;
+	exports.typeFormat = typeFormat;
+	exports.testType = testType;
+	exports.checkHasIndex = checkHasIndex;
 	exports.toggleCardTable = toggleCardTable;
 	exports.checkHasKey = checkHasKey;
+	exports.convertNum = convertNum;
+	exports.formatAcuracy = formatAcuracy;
+	exports.formatDot = formatDot;
+	exports.commafy = commafy;
+	exports.ncRounding = ncRounding;
+	exports.deepClone = deepClone;
+	exports.getDisplayByValue = getDisplayByValue;
+	exports.isEmpty = isEmpty;
+	
+	var _config = __webpack_require__(607);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _cloneDeep = __webpack_require__(608);
+	
+	var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	/***
 	 * 获取当前浏览器类型
 	 */
@@ -84193,6 +84233,18 @@
 	  if (!!window.ActiveXObject || 'ActiveXObject' in window) {
 	    return 'IE';
 	  }
+	}
+	
+	/*
+	 * @method   测试 不存在或者值为false 同等效力
+	 * @author   add by yangguoqiang @18/03/19
+	 * @params 
+	 *     one     {any}
+	 * @return   {boolean}       返回ture/false
+	 * @demo     undefinedOrfalse('')
+	 */
+	function undefinedOrfalse(one) {
+	  return typeof one === 'undefined' || one === false;
 	}
 	
 	// 处理多头排序标识
@@ -84237,6 +84289,76 @@
 	  return Object.prototype.toString.call(param).slice(8, -1) === 'Function';
 	}
 	
+	/*
+	 * 检测是否是常规的 Object  {} 这种形式
+	 */
+	function isObj(param) {
+	  return Object.prototype.toString.call(param).slice(8, -1) === 'Object';
+	}
+	
+	/*
+	 * @method   检测是否是需要是boolean类型
+	 * @author   add by yangguoqiang @18/04/11
+	 * @params 
+	 *     condition     {any}         
+	 * @return   {boolean}       返回ture/false
+	 * @demo     isWrong('')    因为后台返回数据不规范
+	 */
+	function isBoolean(param) {
+	  return _config2['default'].boolean.includes(param);
+	}
+	
+	/*
+	 * @method   if条件下为false   除去NaN、0、-0、false   剩余undefined、null、""
+	 * @author   add by yangguoqiang @18/03/19
+	 * @params 
+	 *     condition     {any}         
+	 * @return   {boolean}       返回ture/false
+	 * @demo     isWrong('')    因为后台返回数据不规范
+	 */
+	function isWrong(param) {
+	  return typeof param === 'undefined' || param === null || param === '';
+	}
+	
+	function isNullOrVoid(param) {
+	  return typeof param === 'undefined' || param === null;
+	}
+	
+	/*
+	 * @method   根据不同类型初始化 null 输出后台可用的数据格式。
+	 * @author   add by yangguoqiang @18/03/19
+	 * @params 
+	 *     origin    {any}      数据来源
+	 *     type      {string}   数据类型
+	 * @return   {any}          返回
+	 * @demo     typeFormat('', 'string')
+	 */
+	function typeFormat(origin, type) {
+	  var isVoid = isWrong.call(null, origin);
+	  switch (true) {
+	    // 'input', 'textarea', 'datepicker', 'select', 'checkbox', 'radio', 'refer', 'label' 和 number的空value处理
+	    case [].concat(_toConsumableArray(_config2['default'].string), _toConsumableArray(_config2['default'].number)).includes(type) && isVoid:
+	      return '';
+	    // switch 的空value处理为boolean值
+	    case _config2['default'].boolean.includes(type) && isVoid:
+	      return !!origin;
+	    default:
+	      return origin;
+	  }
+	}
+	
+	//获得数据类型
+	function testType(origin) {
+	  return Object.prototype.toString.call(origin).slice(8, -1);
+	}
+	
+	// 检测是否有一个含有numberindex
+	function checkHasIndex(arr) {
+	  return arr.some(function (item) {
+	    return item.attrcode == 'numberindex';
+	  });
+	}
+	
 	/**
 	 * 控制主表的收起展开
 	 * @param  tableId   meta的id号
@@ -84269,9 +84391,2772 @@
 	    return item.dataIndex === key;
 	  });
 	}
+	
+	// 将科学计数法转成数字字符串
+	function convertNum(num_str) {
+	  //参数必须为 字符串
+	  //科学计数法字符 转换 为数字字符， 突破正数21位和负数7位的Number自动转换
+	  // 兼容 小数点左边有多位数的情况，即 a×10^b（aEb），a非标准范围（1≤|a|<10）下的情况。如 3453.54E-6 or 3453.54E6
+	  var resValue = '',
+	      power = '',
+	      result = null,
+	      dotIndex = 0,
+	      resArr = [],
+	      sym = '';
+	  var numStr = String(num_str);
+	  if (!/e/i.test(numStr)) {
+	    return numStr;
+	  }
+	  if (numStr[0] == '-') {
+	    // 如果为负数，转成正数处理，先去掉‘-’号，并保存‘-’.
+	    numStr = numStr.substr(1);
+	    sym = '-';
+	  }
+	  var regExp = new RegExp('^(((\\d+.?\\d+)|(\\d+))[Ee]{1}((-(\\d+))|(\\d+)))$', 'ig');
+	  result = regExp.exec(numStr);
+	  if (result != null) {
+	    resValue = result[2];
+	    power = result[5];
+	    result = null;
+	  }
+	  if (!resValue && !power) {
+	    return false;
+	  }
+	  dotIndex = resValue.indexOf('.');
+	  resValue = resValue.replace('.', '');
+	  resArr = resValue.split('');
+	  if (Number(power) >= 0) {
+	    var subres = resValue.substr(dotIndex);
+	    power = Number(power);
+	    //幂数大于小数点后面的数字位数时，后面加0
+	    for (var i = 0; i < power - subres.length; i++) {
+	      resArr.push('0');
+	    }
+	    if (power - subres.length < 0) {
+	      resArr.splice(dotIndex + power, 0, '.');
+	    }
+	  } else {
+	    power = power.replace('-', '');
+	    power = Number(power);
+	    //幂数大于等于 小数点的index位置, 前面加0
+	    for (var _i = 0; _i <= power - 1; _i++) {
+	      resArr.unshift('0');
+	    }
+	    var n = power - dotIndex >= 0 ? 1 : -(power - dotIndex);
+	    resArr.splice(n, 0, '.');
+	  }
+	  resValue = resArr.join('');
+	  return sym + resValue;
+	}
+	
+	//精度 + 补0 + 千分位综合处理
+	function formatAcuracy(value) {
+	  var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+	
+	  if (value === null || value === undefined || String(value).endsWith('必输项')) {
+	    return value;
+	  }
+	  // 将科学计数法转成数字字符串
+	  value = convertNum(value);
+	  return commafy(addZero(formatDot(value, len), len));
+	}
+	
+	// 精度处理
+	function formatDot(value) {
+	  var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+	
+	  var formatVal = void 0,
+	      dotSplit = void 0,
+	      val = void 0;
+	
+	  val = (value || 0).toString();
+	
+	  dotSplit = val.split('.');
+	
+	  if (dotSplit.length > 2 || !value) {
+	    return value;
+	  }
+	
+	  if (val.indexOf('.') > -1) {
+	    if (len == 0) {
+	      formatVal = dotSplit[0];
+	    } else {
+	      formatVal = val.substring(0, val.indexOf('.') + len + 1);
+	    }
+	  } else {
+	    formatVal = val;
+	  }
+	
+	  return formatVal;
+	}
+	
+	//数字转换成千分位 格式
+	function commafy(num) {
+	  var pointIndex = void 0,
+	      intPart = void 0,
+	      pointPart = void 0;
+	  if (num === '-') {
+	    return '-';
+	  }
+	
+	  if (Number.isNaN(+(num + '').split(',').join(''))) {
+	    //这里暂时就处理一下千分位的逗号
+	    return '';
+	  }
+	
+	  num = num + '';
+	  if (/^.*\..*$/.test(num)) {
+	    pointIndex = num.lastIndexOf('.');
+	    intPart = num.substring(0, pointIndex);
+	    pointPart = num.substring(pointIndex + 1, num.length);
+	    intPart = intPart + '';
+	    var re = /(-?\d+)(\d{3})/;
+	    while (re.test(intPart)) {
+	      intPart = intPart.replace(re, '$1,$2');
+	    }
+	    num = intPart + '.' + pointPart;
+	  } else {
+	    num = num + '';
+	    var _re = /(-?\d+)(\d{3})/;
+	    while (_re.test(num)) {
+	      num = num.replace(_re, '$1,$2');
+	    }
+	  }
+	  return num;
+	}
+	
+	// 补0
+	var addZero = exports.addZero = function addZero(num, scale) {
+	  if (num === '' || num === undefined || num === null) {
+	    return '';
+	  }
+	
+	  if (scale > 0) {
+	    var start = String(num).split('.')[0];
+	    var end = String(num).split('.')[1];
+	    if (!end) {
+	      end = '';
+	    }
+	    var len = end.length;
+	    if (len < scale) {
+	      end = end.padEnd(scale, '0');
+	    }
+	    return start + '.' + end;
+	  } else {
+	    return num;
+	  }
+	};
+	
+	// 四舍五入 by wangyang
+	function ncRounding(value, scale) {
+	  // 如果没有精度，不需要处理四舍五入
+	  if (!scale) return value;
+	
+	  var _value = value,
+	      _scale = scale;
+	
+	
+	  if (!Object.prototype.toString.call(scale) !== "[object Number]" && !isNaN(Number(scale))) _scale = Number(scale);
+	
+	  // 校验参数
+	  if (Object.prototype.toString.call(value) !== "[object String]") _value = String(value);
+	
+	  var re = /^(\-|\+)?(\d+)?\.?(\d+)?$/;
+	
+	  if (!re.test(_value)) {
+	    console.warn("处理参数异常");
+	    return value;
+	  }
+	
+	  // 分割value
+	
+	  var _value$split = _value.split("."),
+	      _value$split2 = _slicedToArray(_value$split, 2),
+	      beforePoint = _value$split2[0],
+	      afterPoint = _value$split2[1];
+	
+	  // 有小数位数
+	
+	
+	  if (afterPoint && afterPoint !== "") {
+	    // 判断小数位数与精度的关系
+	    if (afterPoint.length > _scale) {
+	      _value = Number(_value);
+	      // 进行四舍五入操作
+	      _value = Number(_value.toFixed(_scale + 1));
+	
+	      _value = _value * Math.pow(10, _scale);
+	
+	      _value = Math.round(_value);
+	
+	      _value = _value / Math.pow(10, _scale);
+	    }
+	  }
+	
+	  return _value;
+	}
+	
+	// 深度拷贝
+	function deepClone(data) {
+	  return (0, _cloneDeep2['default'])(data);
+	}
+	
+	function getDisplayByValue(value, item) {
+	  //新加个value !== undefined的容错  当清除select的时候防止报错
+	  if (_config2['default'].getDisplay.includes(item.itemtype) && Array.isArray(item.options) && value !== undefined) {
+	    var display = item.options.filter(function (item) {
+	      return item.value == value;
+	    })[0].display;
+	
+	    return display;
+	  }
+	  return undefined;
+	}
+	
+	//判断数组,对象,字符串是否为空
+	function isEmpty(param) {
+	  var result = false;
+	
+	  if ((typeof param === 'undefined' ? 'undefined' : _typeof(param)) === 'object') {
+	    var hasvalue = false;
+	    if (Array.isArray(param)) {
+	      hasvalue = param.length !== 0;
+	    } else {
+	      for (var pro in param) {
+	        hasvalue = true;
+	        break;
+	      }
+	    }
+	
+	    result = !hasvalue;
+	  } else if (typeof param === 'string') {
+	    if (param === '') result = true;
+	  } else if (param === undefined) {
+	    result = true;
+	  }
+	  return result;
+	}
+	
+	// // 处理旧值函数
+	// export function saveChangedRowsOldValue(moduleId, index, attrcode, value) {
+	//   !Array.isArray(this.tableChangedRowsOldValue[moduleId]) && (this.tableChangedRowsOldValue[moduleId] = []);
+	//   !isObj(this.tableChangedRowsOldValue[moduleId][index]) && (this.tableChangedRowsOldValue[moduleId][index] = {});
+	//   this.tableChangedRowsOldValue[moduleId][index][attrcode] = value;
+	// }
+	
+	// // 获取旧值函数
+	// export function getChangedRowsOldValue(moduleId, index, attrcode) {
+	//   let isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
+	//   if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
+	//     return null;
+	//   }
+	//   return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
+	// }
+	
+	// // 删除旧值函数
+	// export function delChangedRowsOldValue(moduleId, index, attrcode) {
+	//   let isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
+	//   if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
+	//     return;
+	//   }
+	//   if (attrcode) {
+	//     this.tableChangedRowsOldValue[moduleId][index][attrcode] = null;
+	//   } else {
+	//     this.tableChangedRowsOldValue[moduleId][index] = {};
+	//   }
+	// }
 
 /***/ }),
 /* 607 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	
+	/**
+	 * 两列布局col取值为6 
+	 * 三列布局col取值为4
+	 * 
+	 */
+	// 有label
+	var Layout = {
+	    3: {
+	        label: 1,
+	        control: 2
+	    },
+	    4: {
+	        label: 1,
+	        control: 3
+	    },
+	    6: {
+	        label: 2,
+	        control: 4
+	    },
+	    12: {
+	        label: 1,
+	        control: 11
+	    }
+	};
+	
+	// 无label
+	var Layout4 = {
+	    3: {
+	        label: 0,
+	        control: 3
+	    },
+	    4: {
+	        label: 0,
+	        control: 4
+	    },
+	    6: {
+	        label: 0,
+	        control: 6
+	    },
+	    12: {
+	        label: 0,
+	        control: 12
+	    }
+	};
+	
+	var layouts = {
+	    Layout: Layout,
+	    Layout4: Layout4
+	};
+	
+	var fileType = {
+	    IMG: ['jpg', 'jpeg', 'bmp', 'gif'],
+	    DOC: [],
+	    XLS: []
+	
+	    // 总配置项
+	};exports['default'] = {
+	    allTypes: ['input', 'number', 'textarea', 'datepicker', 'rangepicker', 'switch', 'select', 'checkbox', 'radio', 'refer', 'customer', 'label', 'NCTZDatePickerStart', 'NCTZDatePickerEnd', 'checkbox_switch', 'switch_browse'],
+	    displayTypes: ['select', 'radio', 'checkbox', 'refer'],
+	    string: ['input', 'textarea', 'datepicker', 'select', 'checkbox', 'radio', 'refer', 'label'],
+	    boolean: ['switch', 'checkbox_switch', 'switch_browse'],
+	    number: ['number'],
+	    valueTypesExceptNumber: ['input', 'textarea'],
+	    changeTypes: ['datepicker', 'rangepicker', 'switch', 'select', 'checkbox', 'radio', 'refer', 'NCTZDatePickerStart', 'NCTZDatePickerEnd', 'checkbox_switch', 'switch_browse', 'timepicker', 'datetimepicker', 'datePickerNoTimeZone'],
+	    blurTypes: ['input', 'number', 'textarea'],
+	    valueTypes: ['input', 'number', 'textarea'],
+	    noEditType: ['label', 'customer'],
+	    getDisplay: ['select', 'radio', 'checkbox'],
+	    status: { // 表格内数据状态
+	        origin: '0',
+	        edit: '1',
+	        add: '2',
+	        'delete': '3'
+	    },
+	    timeTypes: ['datepicker', 'NCTZDatePickerStart', 'NCTZDatePickerEnd', 'timepicker', 'datetimepicker', 'rangepicker', 'datePickerNoTimeZone'],
+	    layouts: layouts, // 表单布局用
+	    beforeFocusTypes: ['residtxt', 'input', 'select', 'number', 'textarea', 'password', 'switch_browse', 'refer'],
+	    beforeChangeTypes: ['radio'],
+	    beforeClickTypes: ['datepicker', 'timepicker', 'datetimepicker', 'NCTZDatePickerStart', 'NCTZDatePickerEnd', 'rangepicker', 'datePickerNoTimeZone', 'checkbox_switch', 'checkbox'],
+	    hotKeyModuleIdPrefix: 'hot-key'
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 608 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	/**
+	 * Module dependenices
+	 */
+	
+	const clone = __webpack_require__(609);
+	const typeOf = __webpack_require__(614);
+	const isPlainObject = __webpack_require__(615);
+	
+	function cloneDeep(val, instanceClone) {
+	  switch (typeOf(val)) {
+	    case 'object':
+	      return cloneObjectDeep(val, instanceClone);
+	    case 'array':
+	      return cloneArrayDeep(val, instanceClone);
+	    default: {
+	      return clone(val);
+	    }
+	  }
+	}
+	
+	function cloneObjectDeep(val, instanceClone) {
+	  if (typeof instanceClone === 'function') {
+	    return instanceClone(val);
+	  }
+	  if (instanceClone || isPlainObject(val)) {
+	    const res = new val.constructor();
+	    for (let key in val) {
+	      res[key] = cloneDeep(val[key], instanceClone);
+	    }
+	    return res;
+	  }
+	  return val;
+	}
+	
+	function cloneArrayDeep(val, instanceClone) {
+	  const res = new val.constructor(val.length);
+	  for (let i = 0; i < val.length; i++) {
+	    res[i] = cloneDeep(val[i], instanceClone);
+	  }
+	  return res;
+	}
+	
+	/**
+	 * Expose `cloneDeep`
+	 */
+	
+	module.exports = cloneDeep;
+
+
+/***/ }),
+/* 609 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
+	 * shallow-clone <https://github.com/jonschlinkert/shallow-clone>
+	 *
+	 * Copyright (c) 2015-present, Jon Schlinkert.
+	 * Released under the MIT License.
+	 */
+	
+	'use strict';
+	
+	const valueOf = Symbol.prototype.valueOf;
+	const typeOf = __webpack_require__(614);
+	
+	function clone(val, deep) {
+	  switch (typeOf(val)) {
+	    case 'array':
+	      return val.slice();
+	    case 'object':
+	      return Object.assign({}, val);
+	    case 'date':
+	      return new val.constructor(Number(val));
+	    case 'map':
+	      return new Map(val);
+	    case 'set':
+	      return new Set(val);
+	    case 'buffer':
+	      return cloneBuffer(val);
+	    case 'symbol':
+	      return cloneSymbol(val);
+	    case 'arraybuffer':
+	      return cloneArrayBuffer(val);
+	    case 'float32array':
+	    case 'float64array':
+	    case 'int16array':
+	    case 'int32array':
+	    case 'int8array':
+	    case 'uint16array':
+	    case 'uint32array':
+	    case 'uint8clampedarray':
+	    case 'uint8array':
+	      return cloneTypedArray(val);
+	    case 'regexp':
+	      return cloneRegExp(val);
+	    case 'error':
+	      return Object.create(val);
+	    default: {
+	      return val;
+	    }
+	  }
+	}
+	
+	function cloneRegExp(val) {
+	  const flags = val.flags !== void 0 ? val.flags : (/\w+$/.exec(val) || void 0);
+	  const re = new val.constructor(val.source, flags);
+	  re.lastIndex = val.lastIndex;
+	  return re;
+	}
+	
+	function cloneArrayBuffer(val) {
+	  const res = new val.constructor(val.byteLength);
+	  new Uint8Array(res).set(new Uint8Array(val));
+	  return res;
+	}
+	
+	function cloneTypedArray(val, deep) {
+	  return new val.constructor(val.buffer, val.byteOffset, val.length);
+	}
+	
+	function cloneBuffer(val) {
+	  const len = val.length;
+	  const buf = Buffer.allocUnsafe ? Buffer.allocUnsafe(len) : Buffer.from(len);
+	  val.copy(buf);
+	  return buf;
+	}
+	
+	function cloneSymbol(val) {
+	  return valueOf ? Object(valueOf.call(val)) : {};
+	}
+	
+	/**
+	 * Expose `clone`
+	 */
+	
+	module.exports = clone;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(610).Buffer))
+
+/***/ }),
+/* 610 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/*!
+	 * The buffer module from node.js, for the browser.
+	 *
+	 * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+	 * @license  MIT
+	 */
+	/* eslint-disable no-proto */
+	
+	'use strict'
+	
+	var base64 = __webpack_require__(611)
+	var ieee754 = __webpack_require__(612)
+	var isArray = __webpack_require__(613)
+	
+	exports.Buffer = Buffer
+	exports.SlowBuffer = SlowBuffer
+	exports.INSPECT_MAX_BYTES = 50
+	
+	/**
+	 * If `Buffer.TYPED_ARRAY_SUPPORT`:
+	 *   === true    Use Uint8Array implementation (fastest)
+	 *   === false   Use Object implementation (most compatible, even IE6)
+	 *
+	 * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+	 * Opera 11.6+, iOS 4.2+.
+	 *
+	 * Due to various browser bugs, sometimes the Object implementation will be used even
+	 * when the browser supports typed arrays.
+	 *
+	 * Note:
+	 *
+	 *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+	 *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+	 *
+	 *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+	 *
+	 *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+	 *     incorrect length in some situations.
+	
+	 * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+	 * get the Object implementation, which is slower but behaves correctly.
+	 */
+	Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
+	  ? global.TYPED_ARRAY_SUPPORT
+	  : typedArraySupport()
+	
+	/*
+	 * Export kMaxLength after typed array support is determined.
+	 */
+	exports.kMaxLength = kMaxLength()
+	
+	function typedArraySupport () {
+	  try {
+	    var arr = new Uint8Array(1)
+	    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+	    return arr.foo() === 42 && // typed array instances can be augmented
+	        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+	        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+	  } catch (e) {
+	    return false
+	  }
+	}
+	
+	function kMaxLength () {
+	  return Buffer.TYPED_ARRAY_SUPPORT
+	    ? 0x7fffffff
+	    : 0x3fffffff
+	}
+	
+	function createBuffer (that, length) {
+	  if (kMaxLength() < length) {
+	    throw new RangeError('Invalid typed array length')
+	  }
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    // Return an augmented `Uint8Array` instance, for best performance
+	    that = new Uint8Array(length)
+	    that.__proto__ = Buffer.prototype
+	  } else {
+	    // Fallback: Return an object instance of the Buffer class
+	    if (that === null) {
+	      that = new Buffer(length)
+	    }
+	    that.length = length
+	  }
+	
+	  return that
+	}
+	
+	/**
+	 * The Buffer constructor returns instances of `Uint8Array` that have their
+	 * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+	 * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+	 * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+	 * returns a single octet.
+	 *
+	 * The `Uint8Array` prototype remains unmodified.
+	 */
+	
+	function Buffer (arg, encodingOrOffset, length) {
+	  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+	    return new Buffer(arg, encodingOrOffset, length)
+	  }
+	
+	  // Common case.
+	  if (typeof arg === 'number') {
+	    if (typeof encodingOrOffset === 'string') {
+	      throw new Error(
+	        'If encoding is specified then the first argument must be a string'
+	      )
+	    }
+	    return allocUnsafe(this, arg)
+	  }
+	  return from(this, arg, encodingOrOffset, length)
+	}
+	
+	Buffer.poolSize = 8192 // not used by this implementation
+	
+	// TODO: Legacy, not needed anymore. Remove in next major version.
+	Buffer._augment = function (arr) {
+	  arr.__proto__ = Buffer.prototype
+	  return arr
+	}
+	
+	function from (that, value, encodingOrOffset, length) {
+	  if (typeof value === 'number') {
+	    throw new TypeError('"value" argument must not be a number')
+	  }
+	
+	  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+	    return fromArrayBuffer(that, value, encodingOrOffset, length)
+	  }
+	
+	  if (typeof value === 'string') {
+	    return fromString(that, value, encodingOrOffset)
+	  }
+	
+	  return fromObject(that, value)
+	}
+	
+	/**
+	 * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+	 * if value is a number.
+	 * Buffer.from(str[, encoding])
+	 * Buffer.from(array)
+	 * Buffer.from(buffer)
+	 * Buffer.from(arrayBuffer[, byteOffset[, length]])
+	 **/
+	Buffer.from = function (value, encodingOrOffset, length) {
+	  return from(null, value, encodingOrOffset, length)
+	}
+	
+	if (Buffer.TYPED_ARRAY_SUPPORT) {
+	  Buffer.prototype.__proto__ = Uint8Array.prototype
+	  Buffer.__proto__ = Uint8Array
+	  if (typeof Symbol !== 'undefined' && Symbol.species &&
+	      Buffer[Symbol.species] === Buffer) {
+	    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+	    Object.defineProperty(Buffer, Symbol.species, {
+	      value: null,
+	      configurable: true
+	    })
+	  }
+	}
+	
+	function assertSize (size) {
+	  if (typeof size !== 'number') {
+	    throw new TypeError('"size" argument must be a number')
+	  } else if (size < 0) {
+	    throw new RangeError('"size" argument must not be negative')
+	  }
+	}
+	
+	function alloc (that, size, fill, encoding) {
+	  assertSize(size)
+	  if (size <= 0) {
+	    return createBuffer(that, size)
+	  }
+	  if (fill !== undefined) {
+	    // Only pay attention to encoding if it's a string. This
+	    // prevents accidentally sending in a number that would
+	    // be interpretted as a start offset.
+	    return typeof encoding === 'string'
+	      ? createBuffer(that, size).fill(fill, encoding)
+	      : createBuffer(that, size).fill(fill)
+	  }
+	  return createBuffer(that, size)
+	}
+	
+	/**
+	 * Creates a new filled Buffer instance.
+	 * alloc(size[, fill[, encoding]])
+	 **/
+	Buffer.alloc = function (size, fill, encoding) {
+	  return alloc(null, size, fill, encoding)
+	}
+	
+	function allocUnsafe (that, size) {
+	  assertSize(size)
+	  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+	  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+	    for (var i = 0; i < size; ++i) {
+	      that[i] = 0
+	    }
+	  }
+	  return that
+	}
+	
+	/**
+	 * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+	 * */
+	Buffer.allocUnsafe = function (size) {
+	  return allocUnsafe(null, size)
+	}
+	/**
+	 * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+	 */
+	Buffer.allocUnsafeSlow = function (size) {
+	  return allocUnsafe(null, size)
+	}
+	
+	function fromString (that, string, encoding) {
+	  if (typeof encoding !== 'string' || encoding === '') {
+	    encoding = 'utf8'
+	  }
+	
+	  if (!Buffer.isEncoding(encoding)) {
+	    throw new TypeError('"encoding" must be a valid string encoding')
+	  }
+	
+	  var length = byteLength(string, encoding) | 0
+	  that = createBuffer(that, length)
+	
+	  var actual = that.write(string, encoding)
+	
+	  if (actual !== length) {
+	    // Writing a hex string, for example, that contains invalid characters will
+	    // cause everything after the first invalid character to be ignored. (e.g.
+	    // 'abxxcd' will be treated as 'ab')
+	    that = that.slice(0, actual)
+	  }
+	
+	  return that
+	}
+	
+	function fromArrayLike (that, array) {
+	  var length = array.length < 0 ? 0 : checked(array.length) | 0
+	  that = createBuffer(that, length)
+	  for (var i = 0; i < length; i += 1) {
+	    that[i] = array[i] & 255
+	  }
+	  return that
+	}
+	
+	function fromArrayBuffer (that, array, byteOffset, length) {
+	  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+	
+	  if (byteOffset < 0 || array.byteLength < byteOffset) {
+	    throw new RangeError('\'offset\' is out of bounds')
+	  }
+	
+	  if (array.byteLength < byteOffset + (length || 0)) {
+	    throw new RangeError('\'length\' is out of bounds')
+	  }
+	
+	  if (byteOffset === undefined && length === undefined) {
+	    array = new Uint8Array(array)
+	  } else if (length === undefined) {
+	    array = new Uint8Array(array, byteOffset)
+	  } else {
+	    array = new Uint8Array(array, byteOffset, length)
+	  }
+	
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    // Return an augmented `Uint8Array` instance, for best performance
+	    that = array
+	    that.__proto__ = Buffer.prototype
+	  } else {
+	    // Fallback: Return an object instance of the Buffer class
+	    that = fromArrayLike(that, array)
+	  }
+	  return that
+	}
+	
+	function fromObject (that, obj) {
+	  if (Buffer.isBuffer(obj)) {
+	    var len = checked(obj.length) | 0
+	    that = createBuffer(that, len)
+	
+	    if (that.length === 0) {
+	      return that
+	    }
+	
+	    obj.copy(that, 0, 0, len)
+	    return that
+	  }
+	
+	  if (obj) {
+	    if ((typeof ArrayBuffer !== 'undefined' &&
+	        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+	      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+	        return createBuffer(that, 0)
+	      }
+	      return fromArrayLike(that, obj)
+	    }
+	
+	    if (obj.type === 'Buffer' && isArray(obj.data)) {
+	      return fromArrayLike(that, obj.data)
+	    }
+	  }
+	
+	  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+	}
+	
+	function checked (length) {
+	  // Note: cannot use `length < kMaxLength()` here because that fails when
+	  // length is NaN (which is otherwise coerced to zero.)
+	  if (length >= kMaxLength()) {
+	    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+	                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+	  }
+	  return length | 0
+	}
+	
+	function SlowBuffer (length) {
+	  if (+length != length) { // eslint-disable-line eqeqeq
+	    length = 0
+	  }
+	  return Buffer.alloc(+length)
+	}
+	
+	Buffer.isBuffer = function isBuffer (b) {
+	  return !!(b != null && b._isBuffer)
+	}
+	
+	Buffer.compare = function compare (a, b) {
+	  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+	    throw new TypeError('Arguments must be Buffers')
+	  }
+	
+	  if (a === b) return 0
+	
+	  var x = a.length
+	  var y = b.length
+	
+	  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+	    if (a[i] !== b[i]) {
+	      x = a[i]
+	      y = b[i]
+	      break
+	    }
+	  }
+	
+	  if (x < y) return -1
+	  if (y < x) return 1
+	  return 0
+	}
+	
+	Buffer.isEncoding = function isEncoding (encoding) {
+	  switch (String(encoding).toLowerCase()) {
+	    case 'hex':
+	    case 'utf8':
+	    case 'utf-8':
+	    case 'ascii':
+	    case 'latin1':
+	    case 'binary':
+	    case 'base64':
+	    case 'ucs2':
+	    case 'ucs-2':
+	    case 'utf16le':
+	    case 'utf-16le':
+	      return true
+	    default:
+	      return false
+	  }
+	}
+	
+	Buffer.concat = function concat (list, length) {
+	  if (!isArray(list)) {
+	    throw new TypeError('"list" argument must be an Array of Buffers')
+	  }
+	
+	  if (list.length === 0) {
+	    return Buffer.alloc(0)
+	  }
+	
+	  var i
+	  if (length === undefined) {
+	    length = 0
+	    for (i = 0; i < list.length; ++i) {
+	      length += list[i].length
+	    }
+	  }
+	
+	  var buffer = Buffer.allocUnsafe(length)
+	  var pos = 0
+	  for (i = 0; i < list.length; ++i) {
+	    var buf = list[i]
+	    if (!Buffer.isBuffer(buf)) {
+	      throw new TypeError('"list" argument must be an Array of Buffers')
+	    }
+	    buf.copy(buffer, pos)
+	    pos += buf.length
+	  }
+	  return buffer
+	}
+	
+	function byteLength (string, encoding) {
+	  if (Buffer.isBuffer(string)) {
+	    return string.length
+	  }
+	  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+	      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+	    return string.byteLength
+	  }
+	  if (typeof string !== 'string') {
+	    string = '' + string
+	  }
+	
+	  var len = string.length
+	  if (len === 0) return 0
+	
+	  // Use a for loop to avoid recursion
+	  var loweredCase = false
+	  for (;;) {
+	    switch (encoding) {
+	      case 'ascii':
+	      case 'latin1':
+	      case 'binary':
+	        return len
+	      case 'utf8':
+	      case 'utf-8':
+	      case undefined:
+	        return utf8ToBytes(string).length
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return len * 2
+	      case 'hex':
+	        return len >>> 1
+	      case 'base64':
+	        return base64ToBytes(string).length
+	      default:
+	        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+	        encoding = ('' + encoding).toLowerCase()
+	        loweredCase = true
+	    }
+	  }
+	}
+	Buffer.byteLength = byteLength
+	
+	function slowToString (encoding, start, end) {
+	  var loweredCase = false
+	
+	  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+	  // property of a typed array.
+	
+	  // This behaves neither like String nor Uint8Array in that we set start/end
+	  // to their upper/lower bounds if the value passed is out of range.
+	  // undefined is handled specially as per ECMA-262 6th Edition,
+	  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+	  if (start === undefined || start < 0) {
+	    start = 0
+	  }
+	  // Return early if start > this.length. Done here to prevent potential uint32
+	  // coercion fail below.
+	  if (start > this.length) {
+	    return ''
+	  }
+	
+	  if (end === undefined || end > this.length) {
+	    end = this.length
+	  }
+	
+	  if (end <= 0) {
+	    return ''
+	  }
+	
+	  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+	  end >>>= 0
+	  start >>>= 0
+	
+	  if (end <= start) {
+	    return ''
+	  }
+	
+	  if (!encoding) encoding = 'utf8'
+	
+	  while (true) {
+	    switch (encoding) {
+	      case 'hex':
+	        return hexSlice(this, start, end)
+	
+	      case 'utf8':
+	      case 'utf-8':
+	        return utf8Slice(this, start, end)
+	
+	      case 'ascii':
+	        return asciiSlice(this, start, end)
+	
+	      case 'latin1':
+	      case 'binary':
+	        return latin1Slice(this, start, end)
+	
+	      case 'base64':
+	        return base64Slice(this, start, end)
+	
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return utf16leSlice(this, start, end)
+	
+	      default:
+	        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+	        encoding = (encoding + '').toLowerCase()
+	        loweredCase = true
+	    }
+	  }
+	}
+	
+	// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+	// Buffer instances.
+	Buffer.prototype._isBuffer = true
+	
+	function swap (b, n, m) {
+	  var i = b[n]
+	  b[n] = b[m]
+	  b[m] = i
+	}
+	
+	Buffer.prototype.swap16 = function swap16 () {
+	  var len = this.length
+	  if (len % 2 !== 0) {
+	    throw new RangeError('Buffer size must be a multiple of 16-bits')
+	  }
+	  for (var i = 0; i < len; i += 2) {
+	    swap(this, i, i + 1)
+	  }
+	  return this
+	}
+	
+	Buffer.prototype.swap32 = function swap32 () {
+	  var len = this.length
+	  if (len % 4 !== 0) {
+	    throw new RangeError('Buffer size must be a multiple of 32-bits')
+	  }
+	  for (var i = 0; i < len; i += 4) {
+	    swap(this, i, i + 3)
+	    swap(this, i + 1, i + 2)
+	  }
+	  return this
+	}
+	
+	Buffer.prototype.swap64 = function swap64 () {
+	  var len = this.length
+	  if (len % 8 !== 0) {
+	    throw new RangeError('Buffer size must be a multiple of 64-bits')
+	  }
+	  for (var i = 0; i < len; i += 8) {
+	    swap(this, i, i + 7)
+	    swap(this, i + 1, i + 6)
+	    swap(this, i + 2, i + 5)
+	    swap(this, i + 3, i + 4)
+	  }
+	  return this
+	}
+	
+	Buffer.prototype.toString = function toString () {
+	  var length = this.length | 0
+	  if (length === 0) return ''
+	  if (arguments.length === 0) return utf8Slice(this, 0, length)
+	  return slowToString.apply(this, arguments)
+	}
+	
+	Buffer.prototype.equals = function equals (b) {
+	  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+	  if (this === b) return true
+	  return Buffer.compare(this, b) === 0
+	}
+	
+	Buffer.prototype.inspect = function inspect () {
+	  var str = ''
+	  var max = exports.INSPECT_MAX_BYTES
+	  if (this.length > 0) {
+	    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+	    if (this.length > max) str += ' ... '
+	  }
+	  return '<Buffer ' + str + '>'
+	}
+	
+	Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+	  if (!Buffer.isBuffer(target)) {
+	    throw new TypeError('Argument must be a Buffer')
+	  }
+	
+	  if (start === undefined) {
+	    start = 0
+	  }
+	  if (end === undefined) {
+	    end = target ? target.length : 0
+	  }
+	  if (thisStart === undefined) {
+	    thisStart = 0
+	  }
+	  if (thisEnd === undefined) {
+	    thisEnd = this.length
+	  }
+	
+	  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+	    throw new RangeError('out of range index')
+	  }
+	
+	  if (thisStart >= thisEnd && start >= end) {
+	    return 0
+	  }
+	  if (thisStart >= thisEnd) {
+	    return -1
+	  }
+	  if (start >= end) {
+	    return 1
+	  }
+	
+	  start >>>= 0
+	  end >>>= 0
+	  thisStart >>>= 0
+	  thisEnd >>>= 0
+	
+	  if (this === target) return 0
+	
+	  var x = thisEnd - thisStart
+	  var y = end - start
+	  var len = Math.min(x, y)
+	
+	  var thisCopy = this.slice(thisStart, thisEnd)
+	  var targetCopy = target.slice(start, end)
+	
+	  for (var i = 0; i < len; ++i) {
+	    if (thisCopy[i] !== targetCopy[i]) {
+	      x = thisCopy[i]
+	      y = targetCopy[i]
+	      break
+	    }
+	  }
+	
+	  if (x < y) return -1
+	  if (y < x) return 1
+	  return 0
+	}
+	
+	// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+	// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+	//
+	// Arguments:
+	// - buffer - a Buffer to search
+	// - val - a string, Buffer, or number
+	// - byteOffset - an index into `buffer`; will be clamped to an int32
+	// - encoding - an optional encoding, relevant is val is a string
+	// - dir - true for indexOf, false for lastIndexOf
+	function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+	  // Empty buffer means no match
+	  if (buffer.length === 0) return -1
+	
+	  // Normalize byteOffset
+	  if (typeof byteOffset === 'string') {
+	    encoding = byteOffset
+	    byteOffset = 0
+	  } else if (byteOffset > 0x7fffffff) {
+	    byteOffset = 0x7fffffff
+	  } else if (byteOffset < -0x80000000) {
+	    byteOffset = -0x80000000
+	  }
+	  byteOffset = +byteOffset  // Coerce to Number.
+	  if (isNaN(byteOffset)) {
+	    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+	    byteOffset = dir ? 0 : (buffer.length - 1)
+	  }
+	
+	  // Normalize byteOffset: negative offsets start from the end of the buffer
+	  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+	  if (byteOffset >= buffer.length) {
+	    if (dir) return -1
+	    else byteOffset = buffer.length - 1
+	  } else if (byteOffset < 0) {
+	    if (dir) byteOffset = 0
+	    else return -1
+	  }
+	
+	  // Normalize val
+	  if (typeof val === 'string') {
+	    val = Buffer.from(val, encoding)
+	  }
+	
+	  // Finally, search either indexOf (if dir is true) or lastIndexOf
+	  if (Buffer.isBuffer(val)) {
+	    // Special case: looking for empty string/buffer always fails
+	    if (val.length === 0) {
+	      return -1
+	    }
+	    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+	  } else if (typeof val === 'number') {
+	    val = val & 0xFF // Search for a byte value [0-255]
+	    if (Buffer.TYPED_ARRAY_SUPPORT &&
+	        typeof Uint8Array.prototype.indexOf === 'function') {
+	      if (dir) {
+	        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+	      } else {
+	        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+	      }
+	    }
+	    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+	  }
+	
+	  throw new TypeError('val must be string, number or Buffer')
+	}
+	
+	function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+	  var indexSize = 1
+	  var arrLength = arr.length
+	  var valLength = val.length
+	
+	  if (encoding !== undefined) {
+	    encoding = String(encoding).toLowerCase()
+	    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+	        encoding === 'utf16le' || encoding === 'utf-16le') {
+	      if (arr.length < 2 || val.length < 2) {
+	        return -1
+	      }
+	      indexSize = 2
+	      arrLength /= 2
+	      valLength /= 2
+	      byteOffset /= 2
+	    }
+	  }
+	
+	  function read (buf, i) {
+	    if (indexSize === 1) {
+	      return buf[i]
+	    } else {
+	      return buf.readUInt16BE(i * indexSize)
+	    }
+	  }
+	
+	  var i
+	  if (dir) {
+	    var foundIndex = -1
+	    for (i = byteOffset; i < arrLength; i++) {
+	      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+	        if (foundIndex === -1) foundIndex = i
+	        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+	      } else {
+	        if (foundIndex !== -1) i -= i - foundIndex
+	        foundIndex = -1
+	      }
+	    }
+	  } else {
+	    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+	    for (i = byteOffset; i >= 0; i--) {
+	      var found = true
+	      for (var j = 0; j < valLength; j++) {
+	        if (read(arr, i + j) !== read(val, j)) {
+	          found = false
+	          break
+	        }
+	      }
+	      if (found) return i
+	    }
+	  }
+	
+	  return -1
+	}
+	
+	Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+	  return this.indexOf(val, byteOffset, encoding) !== -1
+	}
+	
+	Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+	  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+	}
+	
+	Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+	  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+	}
+	
+	function hexWrite (buf, string, offset, length) {
+	  offset = Number(offset) || 0
+	  var remaining = buf.length - offset
+	  if (!length) {
+	    length = remaining
+	  } else {
+	    length = Number(length)
+	    if (length > remaining) {
+	      length = remaining
+	    }
+	  }
+	
+	  // must be an even number of digits
+	  var strLen = string.length
+	  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+	
+	  if (length > strLen / 2) {
+	    length = strLen / 2
+	  }
+	  for (var i = 0; i < length; ++i) {
+	    var parsed = parseInt(string.substr(i * 2, 2), 16)
+	    if (isNaN(parsed)) return i
+	    buf[offset + i] = parsed
+	  }
+	  return i
+	}
+	
+	function utf8Write (buf, string, offset, length) {
+	  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+	}
+	
+	function asciiWrite (buf, string, offset, length) {
+	  return blitBuffer(asciiToBytes(string), buf, offset, length)
+	}
+	
+	function latin1Write (buf, string, offset, length) {
+	  return asciiWrite(buf, string, offset, length)
+	}
+	
+	function base64Write (buf, string, offset, length) {
+	  return blitBuffer(base64ToBytes(string), buf, offset, length)
+	}
+	
+	function ucs2Write (buf, string, offset, length) {
+	  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+	}
+	
+	Buffer.prototype.write = function write (string, offset, length, encoding) {
+	  // Buffer#write(string)
+	  if (offset === undefined) {
+	    encoding = 'utf8'
+	    length = this.length
+	    offset = 0
+	  // Buffer#write(string, encoding)
+	  } else if (length === undefined && typeof offset === 'string') {
+	    encoding = offset
+	    length = this.length
+	    offset = 0
+	  // Buffer#write(string, offset[, length][, encoding])
+	  } else if (isFinite(offset)) {
+	    offset = offset | 0
+	    if (isFinite(length)) {
+	      length = length | 0
+	      if (encoding === undefined) encoding = 'utf8'
+	    } else {
+	      encoding = length
+	      length = undefined
+	    }
+	  // legacy write(string, encoding, offset, length) - remove in v0.13
+	  } else {
+	    throw new Error(
+	      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+	    )
+	  }
+	
+	  var remaining = this.length - offset
+	  if (length === undefined || length > remaining) length = remaining
+	
+	  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+	    throw new RangeError('Attempt to write outside buffer bounds')
+	  }
+	
+	  if (!encoding) encoding = 'utf8'
+	
+	  var loweredCase = false
+	  for (;;) {
+	    switch (encoding) {
+	      case 'hex':
+	        return hexWrite(this, string, offset, length)
+	
+	      case 'utf8':
+	      case 'utf-8':
+	        return utf8Write(this, string, offset, length)
+	
+	      case 'ascii':
+	        return asciiWrite(this, string, offset, length)
+	
+	      case 'latin1':
+	      case 'binary':
+	        return latin1Write(this, string, offset, length)
+	
+	      case 'base64':
+	        // Warning: maxLength not taken into account in base64Write
+	        return base64Write(this, string, offset, length)
+	
+	      case 'ucs2':
+	      case 'ucs-2':
+	      case 'utf16le':
+	      case 'utf-16le':
+	        return ucs2Write(this, string, offset, length)
+	
+	      default:
+	        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+	        encoding = ('' + encoding).toLowerCase()
+	        loweredCase = true
+	    }
+	  }
+	}
+	
+	Buffer.prototype.toJSON = function toJSON () {
+	  return {
+	    type: 'Buffer',
+	    data: Array.prototype.slice.call(this._arr || this, 0)
+	  }
+	}
+	
+	function base64Slice (buf, start, end) {
+	  if (start === 0 && end === buf.length) {
+	    return base64.fromByteArray(buf)
+	  } else {
+	    return base64.fromByteArray(buf.slice(start, end))
+	  }
+	}
+	
+	function utf8Slice (buf, start, end) {
+	  end = Math.min(buf.length, end)
+	  var res = []
+	
+	  var i = start
+	  while (i < end) {
+	    var firstByte = buf[i]
+	    var codePoint = null
+	    var bytesPerSequence = (firstByte > 0xEF) ? 4
+	      : (firstByte > 0xDF) ? 3
+	      : (firstByte > 0xBF) ? 2
+	      : 1
+	
+	    if (i + bytesPerSequence <= end) {
+	      var secondByte, thirdByte, fourthByte, tempCodePoint
+	
+	      switch (bytesPerSequence) {
+	        case 1:
+	          if (firstByte < 0x80) {
+	            codePoint = firstByte
+	          }
+	          break
+	        case 2:
+	          secondByte = buf[i + 1]
+	          if ((secondByte & 0xC0) === 0x80) {
+	            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+	            if (tempCodePoint > 0x7F) {
+	              codePoint = tempCodePoint
+	            }
+	          }
+	          break
+	        case 3:
+	          secondByte = buf[i + 1]
+	          thirdByte = buf[i + 2]
+	          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+	            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+	            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+	              codePoint = tempCodePoint
+	            }
+	          }
+	          break
+	        case 4:
+	          secondByte = buf[i + 1]
+	          thirdByte = buf[i + 2]
+	          fourthByte = buf[i + 3]
+	          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+	            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+	            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+	              codePoint = tempCodePoint
+	            }
+	          }
+	      }
+	    }
+	
+	    if (codePoint === null) {
+	      // we did not generate a valid codePoint so insert a
+	      // replacement char (U+FFFD) and advance only 1 byte
+	      codePoint = 0xFFFD
+	      bytesPerSequence = 1
+	    } else if (codePoint > 0xFFFF) {
+	      // encode to utf16 (surrogate pair dance)
+	      codePoint -= 0x10000
+	      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+	      codePoint = 0xDC00 | codePoint & 0x3FF
+	    }
+	
+	    res.push(codePoint)
+	    i += bytesPerSequence
+	  }
+	
+	  return decodeCodePointsArray(res)
+	}
+	
+	// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+	// the lowest limit is Chrome, with 0x10000 args.
+	// We go 1 magnitude less, for safety
+	var MAX_ARGUMENTS_LENGTH = 0x1000
+	
+	function decodeCodePointsArray (codePoints) {
+	  var len = codePoints.length
+	  if (len <= MAX_ARGUMENTS_LENGTH) {
+	    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+	  }
+	
+	  // Decode in chunks to avoid "call stack size exceeded".
+	  var res = ''
+	  var i = 0
+	  while (i < len) {
+	    res += String.fromCharCode.apply(
+	      String,
+	      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+	    )
+	  }
+	  return res
+	}
+	
+	function asciiSlice (buf, start, end) {
+	  var ret = ''
+	  end = Math.min(buf.length, end)
+	
+	  for (var i = start; i < end; ++i) {
+	    ret += String.fromCharCode(buf[i] & 0x7F)
+	  }
+	  return ret
+	}
+	
+	function latin1Slice (buf, start, end) {
+	  var ret = ''
+	  end = Math.min(buf.length, end)
+	
+	  for (var i = start; i < end; ++i) {
+	    ret += String.fromCharCode(buf[i])
+	  }
+	  return ret
+	}
+	
+	function hexSlice (buf, start, end) {
+	  var len = buf.length
+	
+	  if (!start || start < 0) start = 0
+	  if (!end || end < 0 || end > len) end = len
+	
+	  var out = ''
+	  for (var i = start; i < end; ++i) {
+	    out += toHex(buf[i])
+	  }
+	  return out
+	}
+	
+	function utf16leSlice (buf, start, end) {
+	  var bytes = buf.slice(start, end)
+	  var res = ''
+	  for (var i = 0; i < bytes.length; i += 2) {
+	    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+	  }
+	  return res
+	}
+	
+	Buffer.prototype.slice = function slice (start, end) {
+	  var len = this.length
+	  start = ~~start
+	  end = end === undefined ? len : ~~end
+	
+	  if (start < 0) {
+	    start += len
+	    if (start < 0) start = 0
+	  } else if (start > len) {
+	    start = len
+	  }
+	
+	  if (end < 0) {
+	    end += len
+	    if (end < 0) end = 0
+	  } else if (end > len) {
+	    end = len
+	  }
+	
+	  if (end < start) end = start
+	
+	  var newBuf
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    newBuf = this.subarray(start, end)
+	    newBuf.__proto__ = Buffer.prototype
+	  } else {
+	    var sliceLen = end - start
+	    newBuf = new Buffer(sliceLen, undefined)
+	    for (var i = 0; i < sliceLen; ++i) {
+	      newBuf[i] = this[i + start]
+	    }
+	  }
+	
+	  return newBuf
+	}
+	
+	/*
+	 * Need to make sure that buffer isn't trying to write out of bounds.
+	 */
+	function checkOffset (offset, ext, length) {
+	  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+	  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+	}
+	
+	Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+	  offset = offset | 0
+	  byteLength = byteLength | 0
+	  if (!noAssert) checkOffset(offset, byteLength, this.length)
+	
+	  var val = this[offset]
+	  var mul = 1
+	  var i = 0
+	  while (++i < byteLength && (mul *= 0x100)) {
+	    val += this[offset + i] * mul
+	  }
+	
+	  return val
+	}
+	
+	Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+	  offset = offset | 0
+	  byteLength = byteLength | 0
+	  if (!noAssert) {
+	    checkOffset(offset, byteLength, this.length)
+	  }
+	
+	  var val = this[offset + --byteLength]
+	  var mul = 1
+	  while (byteLength > 0 && (mul *= 0x100)) {
+	    val += this[offset + --byteLength] * mul
+	  }
+	
+	  return val
+	}
+	
+	Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 1, this.length)
+	  return this[offset]
+	}
+	
+	Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 2, this.length)
+	  return this[offset] | (this[offset + 1] << 8)
+	}
+	
+	Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 2, this.length)
+	  return (this[offset] << 8) | this[offset + 1]
+	}
+	
+	Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 4, this.length)
+	
+	  return ((this[offset]) |
+	      (this[offset + 1] << 8) |
+	      (this[offset + 2] << 16)) +
+	      (this[offset + 3] * 0x1000000)
+	}
+	
+	Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 4, this.length)
+	
+	  return (this[offset] * 0x1000000) +
+	    ((this[offset + 1] << 16) |
+	    (this[offset + 2] << 8) |
+	    this[offset + 3])
+	}
+	
+	Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+	  offset = offset | 0
+	  byteLength = byteLength | 0
+	  if (!noAssert) checkOffset(offset, byteLength, this.length)
+	
+	  var val = this[offset]
+	  var mul = 1
+	  var i = 0
+	  while (++i < byteLength && (mul *= 0x100)) {
+	    val += this[offset + i] * mul
+	  }
+	  mul *= 0x80
+	
+	  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+	
+	  return val
+	}
+	
+	Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+	  offset = offset | 0
+	  byteLength = byteLength | 0
+	  if (!noAssert) checkOffset(offset, byteLength, this.length)
+	
+	  var i = byteLength
+	  var mul = 1
+	  var val = this[offset + --i]
+	  while (i > 0 && (mul *= 0x100)) {
+	    val += this[offset + --i] * mul
+	  }
+	  mul *= 0x80
+	
+	  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+	
+	  return val
+	}
+	
+	Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 1, this.length)
+	  if (!(this[offset] & 0x80)) return (this[offset])
+	  return ((0xff - this[offset] + 1) * -1)
+	}
+	
+	Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 2, this.length)
+	  var val = this[offset] | (this[offset + 1] << 8)
+	  return (val & 0x8000) ? val | 0xFFFF0000 : val
+	}
+	
+	Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 2, this.length)
+	  var val = this[offset + 1] | (this[offset] << 8)
+	  return (val & 0x8000) ? val | 0xFFFF0000 : val
+	}
+	
+	Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 4, this.length)
+	
+	  return (this[offset]) |
+	    (this[offset + 1] << 8) |
+	    (this[offset + 2] << 16) |
+	    (this[offset + 3] << 24)
+	}
+	
+	Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 4, this.length)
+	
+	  return (this[offset] << 24) |
+	    (this[offset + 1] << 16) |
+	    (this[offset + 2] << 8) |
+	    (this[offset + 3])
+	}
+	
+	Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 4, this.length)
+	  return ieee754.read(this, offset, true, 23, 4)
+	}
+	
+	Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 4, this.length)
+	  return ieee754.read(this, offset, false, 23, 4)
+	}
+	
+	Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 8, this.length)
+	  return ieee754.read(this, offset, true, 52, 8)
+	}
+	
+	Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+	  if (!noAssert) checkOffset(offset, 8, this.length)
+	  return ieee754.read(this, offset, false, 52, 8)
+	}
+	
+	function checkInt (buf, value, offset, ext, max, min) {
+	  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+	  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+	  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+	}
+	
+	Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  byteLength = byteLength | 0
+	  if (!noAssert) {
+	    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+	    checkInt(this, value, offset, byteLength, maxBytes, 0)
+	  }
+	
+	  var mul = 1
+	  var i = 0
+	  this[offset] = value & 0xFF
+	  while (++i < byteLength && (mul *= 0x100)) {
+	    this[offset + i] = (value / mul) & 0xFF
+	  }
+	
+	  return offset + byteLength
+	}
+	
+	Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  byteLength = byteLength | 0
+	  if (!noAssert) {
+	    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+	    checkInt(this, value, offset, byteLength, maxBytes, 0)
+	  }
+	
+	  var i = byteLength - 1
+	  var mul = 1
+	  this[offset + i] = value & 0xFF
+	  while (--i >= 0 && (mul *= 0x100)) {
+	    this[offset + i] = (value / mul) & 0xFF
+	  }
+	
+	  return offset + byteLength
+	}
+	
+	Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+	  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+	  this[offset] = (value & 0xff)
+	  return offset + 1
+	}
+	
+	function objectWriteUInt16 (buf, value, offset, littleEndian) {
+	  if (value < 0) value = 0xffff + value + 1
+	  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+	    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+	      (littleEndian ? i : 1 - i) * 8
+	  }
+	}
+	
+	Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value & 0xff)
+	    this[offset + 1] = (value >>> 8)
+	  } else {
+	    objectWriteUInt16(this, value, offset, true)
+	  }
+	  return offset + 2
+	}
+	
+	Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value >>> 8)
+	    this[offset + 1] = (value & 0xff)
+	  } else {
+	    objectWriteUInt16(this, value, offset, false)
+	  }
+	  return offset + 2
+	}
+	
+	function objectWriteUInt32 (buf, value, offset, littleEndian) {
+	  if (value < 0) value = 0xffffffff + value + 1
+	  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+	    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+	  }
+	}
+	
+	Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset + 3] = (value >>> 24)
+	    this[offset + 2] = (value >>> 16)
+	    this[offset + 1] = (value >>> 8)
+	    this[offset] = (value & 0xff)
+	  } else {
+	    objectWriteUInt32(this, value, offset, true)
+	  }
+	  return offset + 4
+	}
+	
+	Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value >>> 24)
+	    this[offset + 1] = (value >>> 16)
+	    this[offset + 2] = (value >>> 8)
+	    this[offset + 3] = (value & 0xff)
+	  } else {
+	    objectWriteUInt32(this, value, offset, false)
+	  }
+	  return offset + 4
+	}
+	
+	Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) {
+	    var limit = Math.pow(2, 8 * byteLength - 1)
+	
+	    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+	  }
+	
+	  var i = 0
+	  var mul = 1
+	  var sub = 0
+	  this[offset] = value & 0xFF
+	  while (++i < byteLength && (mul *= 0x100)) {
+	    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+	      sub = 1
+	    }
+	    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+	  }
+	
+	  return offset + byteLength
+	}
+	
+	Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) {
+	    var limit = Math.pow(2, 8 * byteLength - 1)
+	
+	    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+	  }
+	
+	  var i = byteLength - 1
+	  var mul = 1
+	  var sub = 0
+	  this[offset + i] = value & 0xFF
+	  while (--i >= 0 && (mul *= 0x100)) {
+	    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+	      sub = 1
+	    }
+	    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+	  }
+	
+	  return offset + byteLength
+	}
+	
+	Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+	  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+	  if (value < 0) value = 0xff + value + 1
+	  this[offset] = (value & 0xff)
+	  return offset + 1
+	}
+	
+	Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value & 0xff)
+	    this[offset + 1] = (value >>> 8)
+	  } else {
+	    objectWriteUInt16(this, value, offset, true)
+	  }
+	  return offset + 2
+	}
+	
+	Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value >>> 8)
+	    this[offset + 1] = (value & 0xff)
+	  } else {
+	    objectWriteUInt16(this, value, offset, false)
+	  }
+	  return offset + 2
+	}
+	
+	Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value & 0xff)
+	    this[offset + 1] = (value >>> 8)
+	    this[offset + 2] = (value >>> 16)
+	    this[offset + 3] = (value >>> 24)
+	  } else {
+	    objectWriteUInt32(this, value, offset, true)
+	  }
+	  return offset + 4
+	}
+	
+	Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+	  value = +value
+	  offset = offset | 0
+	  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+	  if (value < 0) value = 0xffffffff + value + 1
+	  if (Buffer.TYPED_ARRAY_SUPPORT) {
+	    this[offset] = (value >>> 24)
+	    this[offset + 1] = (value >>> 16)
+	    this[offset + 2] = (value >>> 8)
+	    this[offset + 3] = (value & 0xff)
+	  } else {
+	    objectWriteUInt32(this, value, offset, false)
+	  }
+	  return offset + 4
+	}
+	
+	function checkIEEE754 (buf, value, offset, ext, max, min) {
+	  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+	  if (offset < 0) throw new RangeError('Index out of range')
+	}
+	
+	function writeFloat (buf, value, offset, littleEndian, noAssert) {
+	  if (!noAssert) {
+	    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+	  }
+	  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+	  return offset + 4
+	}
+	
+	Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+	  return writeFloat(this, value, offset, true, noAssert)
+	}
+	
+	Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+	  return writeFloat(this, value, offset, false, noAssert)
+	}
+	
+	function writeDouble (buf, value, offset, littleEndian, noAssert) {
+	  if (!noAssert) {
+	    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+	  }
+	  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+	  return offset + 8
+	}
+	
+	Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+	  return writeDouble(this, value, offset, true, noAssert)
+	}
+	
+	Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+	  return writeDouble(this, value, offset, false, noAssert)
+	}
+	
+	// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+	Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+	  if (!start) start = 0
+	  if (!end && end !== 0) end = this.length
+	  if (targetStart >= target.length) targetStart = target.length
+	  if (!targetStart) targetStart = 0
+	  if (end > 0 && end < start) end = start
+	
+	  // Copy 0 bytes; we're done
+	  if (end === start) return 0
+	  if (target.length === 0 || this.length === 0) return 0
+	
+	  // Fatal error conditions
+	  if (targetStart < 0) {
+	    throw new RangeError('targetStart out of bounds')
+	  }
+	  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+	  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+	
+	  // Are we oob?
+	  if (end > this.length) end = this.length
+	  if (target.length - targetStart < end - start) {
+	    end = target.length - targetStart + start
+	  }
+	
+	  var len = end - start
+	  var i
+	
+	  if (this === target && start < targetStart && targetStart < end) {
+	    // descending copy from end
+	    for (i = len - 1; i >= 0; --i) {
+	      target[i + targetStart] = this[i + start]
+	    }
+	  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+	    // ascending copy from start
+	    for (i = 0; i < len; ++i) {
+	      target[i + targetStart] = this[i + start]
+	    }
+	  } else {
+	    Uint8Array.prototype.set.call(
+	      target,
+	      this.subarray(start, start + len),
+	      targetStart
+	    )
+	  }
+	
+	  return len
+	}
+	
+	// Usage:
+	//    buffer.fill(number[, offset[, end]])
+	//    buffer.fill(buffer[, offset[, end]])
+	//    buffer.fill(string[, offset[, end]][, encoding])
+	Buffer.prototype.fill = function fill (val, start, end, encoding) {
+	  // Handle string cases:
+	  if (typeof val === 'string') {
+	    if (typeof start === 'string') {
+	      encoding = start
+	      start = 0
+	      end = this.length
+	    } else if (typeof end === 'string') {
+	      encoding = end
+	      end = this.length
+	    }
+	    if (val.length === 1) {
+	      var code = val.charCodeAt(0)
+	      if (code < 256) {
+	        val = code
+	      }
+	    }
+	    if (encoding !== undefined && typeof encoding !== 'string') {
+	      throw new TypeError('encoding must be a string')
+	    }
+	    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+	      throw new TypeError('Unknown encoding: ' + encoding)
+	    }
+	  } else if (typeof val === 'number') {
+	    val = val & 255
+	  }
+	
+	  // Invalid ranges are not set to a default, so can range check early.
+	  if (start < 0 || this.length < start || this.length < end) {
+	    throw new RangeError('Out of range index')
+	  }
+	
+	  if (end <= start) {
+	    return this
+	  }
+	
+	  start = start >>> 0
+	  end = end === undefined ? this.length : end >>> 0
+	
+	  if (!val) val = 0
+	
+	  var i
+	  if (typeof val === 'number') {
+	    for (i = start; i < end; ++i) {
+	      this[i] = val
+	    }
+	  } else {
+	    var bytes = Buffer.isBuffer(val)
+	      ? val
+	      : utf8ToBytes(new Buffer(val, encoding).toString())
+	    var len = bytes.length
+	    for (i = 0; i < end - start; ++i) {
+	      this[i + start] = bytes[i % len]
+	    }
+	  }
+	
+	  return this
+	}
+	
+	// HELPER FUNCTIONS
+	// ================
+	
+	var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+	
+	function base64clean (str) {
+	  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+	  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+	  // Node converts strings with length < 2 to ''
+	  if (str.length < 2) return ''
+	  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+	  while (str.length % 4 !== 0) {
+	    str = str + '='
+	  }
+	  return str
+	}
+	
+	function stringtrim (str) {
+	  if (str.trim) return str.trim()
+	  return str.replace(/^\s+|\s+$/g, '')
+	}
+	
+	function toHex (n) {
+	  if (n < 16) return '0' + n.toString(16)
+	  return n.toString(16)
+	}
+	
+	function utf8ToBytes (string, units) {
+	  units = units || Infinity
+	  var codePoint
+	  var length = string.length
+	  var leadSurrogate = null
+	  var bytes = []
+	
+	  for (var i = 0; i < length; ++i) {
+	    codePoint = string.charCodeAt(i)
+	
+	    // is surrogate component
+	    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+	      // last char was a lead
+	      if (!leadSurrogate) {
+	        // no lead yet
+	        if (codePoint > 0xDBFF) {
+	          // unexpected trail
+	          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	          continue
+	        } else if (i + 1 === length) {
+	          // unpaired lead
+	          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	          continue
+	        }
+	
+	        // valid lead
+	        leadSurrogate = codePoint
+	
+	        continue
+	      }
+	
+	      // 2 leads in a row
+	      if (codePoint < 0xDC00) {
+	        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	        leadSurrogate = codePoint
+	        continue
+	      }
+	
+	      // valid surrogate pair
+	      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+	    } else if (leadSurrogate) {
+	      // valid bmp char, but last char was a lead
+	      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+	    }
+	
+	    leadSurrogate = null
+	
+	    // encode utf8
+	    if (codePoint < 0x80) {
+	      if ((units -= 1) < 0) break
+	      bytes.push(codePoint)
+	    } else if (codePoint < 0x800) {
+	      if ((units -= 2) < 0) break
+	      bytes.push(
+	        codePoint >> 0x6 | 0xC0,
+	        codePoint & 0x3F | 0x80
+	      )
+	    } else if (codePoint < 0x10000) {
+	      if ((units -= 3) < 0) break
+	      bytes.push(
+	        codePoint >> 0xC | 0xE0,
+	        codePoint >> 0x6 & 0x3F | 0x80,
+	        codePoint & 0x3F | 0x80
+	      )
+	    } else if (codePoint < 0x110000) {
+	      if ((units -= 4) < 0) break
+	      bytes.push(
+	        codePoint >> 0x12 | 0xF0,
+	        codePoint >> 0xC & 0x3F | 0x80,
+	        codePoint >> 0x6 & 0x3F | 0x80,
+	        codePoint & 0x3F | 0x80
+	      )
+	    } else {
+	      throw new Error('Invalid code point')
+	    }
+	  }
+	
+	  return bytes
+	}
+	
+	function asciiToBytes (str) {
+	  var byteArray = []
+	  for (var i = 0; i < str.length; ++i) {
+	    // Node's code seems to be doing this and not & 0x7F..
+	    byteArray.push(str.charCodeAt(i) & 0xFF)
+	  }
+	  return byteArray
+	}
+	
+	function utf16leToBytes (str, units) {
+	  var c, hi, lo
+	  var byteArray = []
+	  for (var i = 0; i < str.length; ++i) {
+	    if ((units -= 2) < 0) break
+	
+	    c = str.charCodeAt(i)
+	    hi = c >> 8
+	    lo = c % 256
+	    byteArray.push(lo)
+	    byteArray.push(hi)
+	  }
+	
+	  return byteArray
+	}
+	
+	function base64ToBytes (str) {
+	  return base64.toByteArray(base64clean(str))
+	}
+	
+	function blitBuffer (src, dst, offset, length) {
+	  for (var i = 0; i < length; ++i) {
+	    if ((i + offset >= dst.length) || (i >= src.length)) break
+	    dst[i + offset] = src[i]
+	  }
+	  return i
+	}
+	
+	function isnan (val) {
+	  return val !== val // eslint-disable-line no-self-compare
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ }),
+/* 611 */
+/***/ (function(module, exports) {
+
+	'use strict'
+	
+	exports.byteLength = byteLength
+	exports.toByteArray = toByteArray
+	exports.fromByteArray = fromByteArray
+	
+	var lookup = []
+	var revLookup = []
+	var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+	
+	var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+	for (var i = 0, len = code.length; i < len; ++i) {
+	  lookup[i] = code[i]
+	  revLookup[code.charCodeAt(i)] = i
+	}
+	
+	// Support decoding URL-safe base64 strings, as Node.js does.
+	// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+	revLookup['-'.charCodeAt(0)] = 62
+	revLookup['_'.charCodeAt(0)] = 63
+	
+	function getLens (b64) {
+	  var len = b64.length
+	
+	  if (len % 4 > 0) {
+	    throw new Error('Invalid string. Length must be a multiple of 4')
+	  }
+	
+	  // Trim off extra bytes after placeholder bytes are found
+	  // See: https://github.com/beatgammit/base64-js/issues/42
+	  var validLen = b64.indexOf('=')
+	  if (validLen === -1) validLen = len
+	
+	  var placeHoldersLen = validLen === len
+	    ? 0
+	    : 4 - (validLen % 4)
+	
+	  return [validLen, placeHoldersLen]
+	}
+	
+	// base64 is 4/3 + up to two characters of the original data
+	function byteLength (b64) {
+	  var lens = getLens(b64)
+	  var validLen = lens[0]
+	  var placeHoldersLen = lens[1]
+	  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+	}
+	
+	function _byteLength (b64, validLen, placeHoldersLen) {
+	  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+	}
+	
+	function toByteArray (b64) {
+	  var tmp
+	  var lens = getLens(b64)
+	  var validLen = lens[0]
+	  var placeHoldersLen = lens[1]
+	
+	  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+	
+	  var curByte = 0
+	
+	  // if there are placeholders, only get up to the last complete 4 chars
+	  var len = placeHoldersLen > 0
+	    ? validLen - 4
+	    : validLen
+	
+	  for (var i = 0; i < len; i += 4) {
+	    tmp =
+	      (revLookup[b64.charCodeAt(i)] << 18) |
+	      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+	      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+	      revLookup[b64.charCodeAt(i + 3)]
+	    arr[curByte++] = (tmp >> 16) & 0xFF
+	    arr[curByte++] = (tmp >> 8) & 0xFF
+	    arr[curByte++] = tmp & 0xFF
+	  }
+	
+	  if (placeHoldersLen === 2) {
+	    tmp =
+	      (revLookup[b64.charCodeAt(i)] << 2) |
+	      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+	    arr[curByte++] = tmp & 0xFF
+	  }
+	
+	  if (placeHoldersLen === 1) {
+	    tmp =
+	      (revLookup[b64.charCodeAt(i)] << 10) |
+	      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+	      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+	    arr[curByte++] = (tmp >> 8) & 0xFF
+	    arr[curByte++] = tmp & 0xFF
+	  }
+	
+	  return arr
+	}
+	
+	function tripletToBase64 (num) {
+	  return lookup[num >> 18 & 0x3F] +
+	    lookup[num >> 12 & 0x3F] +
+	    lookup[num >> 6 & 0x3F] +
+	    lookup[num & 0x3F]
+	}
+	
+	function encodeChunk (uint8, start, end) {
+	  var tmp
+	  var output = []
+	  for (var i = start; i < end; i += 3) {
+	    tmp =
+	      ((uint8[i] << 16) & 0xFF0000) +
+	      ((uint8[i + 1] << 8) & 0xFF00) +
+	      (uint8[i + 2] & 0xFF)
+	    output.push(tripletToBase64(tmp))
+	  }
+	  return output.join('')
+	}
+	
+	function fromByteArray (uint8) {
+	  var tmp
+	  var len = uint8.length
+	  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+	  var parts = []
+	  var maxChunkLength = 16383 // must be multiple of 3
+	
+	  // go through the array every three bytes, we'll deal with trailing stuff later
+	  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+	    parts.push(encodeChunk(
+	      uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)
+	    ))
+	  }
+	
+	  // pad the end with zeros, but make sure to not forget the extra bytes
+	  if (extraBytes === 1) {
+	    tmp = uint8[len - 1]
+	    parts.push(
+	      lookup[tmp >> 2] +
+	      lookup[(tmp << 4) & 0x3F] +
+	      '=='
+	    )
+	  } else if (extraBytes === 2) {
+	    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+	    parts.push(
+	      lookup[tmp >> 10] +
+	      lookup[(tmp >> 4) & 0x3F] +
+	      lookup[(tmp << 2) & 0x3F] +
+	      '='
+	    )
+	  }
+	
+	  return parts.join('')
+	}
+
+
+/***/ }),
+/* 612 */
+/***/ (function(module, exports) {
+
+	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+	  var e, m
+	  var eLen = (nBytes * 8) - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var nBits = -7
+	  var i = isLE ? (nBytes - 1) : 0
+	  var d = isLE ? -1 : 1
+	  var s = buffer[offset + i]
+	
+	  i += d
+	
+	  e = s & ((1 << (-nBits)) - 1)
+	  s >>= (-nBits)
+	  nBits += eLen
+	  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+	
+	  m = e & ((1 << (-nBits)) - 1)
+	  e >>= (-nBits)
+	  nBits += mLen
+	  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+	
+	  if (e === 0) {
+	    e = 1 - eBias
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity)
+	  } else {
+	    m = m + Math.pow(2, mLen)
+	    e = e - eBias
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+	}
+	
+	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c
+	  var eLen = (nBytes * 8) - mLen - 1
+	  var eMax = (1 << eLen) - 1
+	  var eBias = eMax >> 1
+	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+	  var i = isLE ? 0 : (nBytes - 1)
+	  var d = isLE ? 1 : -1
+	  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+	
+	  value = Math.abs(value)
+	
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0
+	    e = eMax
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2)
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--
+	      c *= 2
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias)
+	    }
+	    if (value * c >= 2) {
+	      e++
+	      c /= 2
+	    }
+	
+	    if (e + eBias >= eMax) {
+	      m = 0
+	      e = eMax
+	    } else if (e + eBias >= 1) {
+	      m = ((value * c) - 1) * Math.pow(2, mLen)
+	      e = e + eBias
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+	      e = 0
+	    }
+	  }
+	
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+	
+	  e = (e << mLen) | m
+	  eLen += mLen
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+	
+	  buffer[offset + i - d] |= s * 128
+	}
+
+
+/***/ }),
+/* 613 */
+/***/ (function(module, exports) {
+
+	var toString = {}.toString;
+	
+	module.exports = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
+	};
+
+
+/***/ }),
+/* 614 */
+/***/ (function(module, exports) {
+
+	var toString = Object.prototype.toString;
+	
+	module.exports = function kindOf(val) {
+	  if (val === void 0) return 'undefined';
+	  if (val === null) return 'null';
+	
+	  var type = typeof val;
+	  if (type === 'boolean') return 'boolean';
+	  if (type === 'string') return 'string';
+	  if (type === 'number') return 'number';
+	  if (type === 'symbol') return 'symbol';
+	  if (type === 'function') {
+	    return isGeneratorFn(val) ? 'generatorfunction' : 'function';
+	  }
+	
+	  if (isArray(val)) return 'array';
+	  if (isBuffer(val)) return 'buffer';
+	  if (isArguments(val)) return 'arguments';
+	  if (isDate(val)) return 'date';
+	  if (isError(val)) return 'error';
+	  if (isRegexp(val)) return 'regexp';
+	
+	  switch (ctorName(val)) {
+	    case 'Symbol': return 'symbol';
+	    case 'Promise': return 'promise';
+	
+	    // Set, Map, WeakSet, WeakMap
+	    case 'WeakMap': return 'weakmap';
+	    case 'WeakSet': return 'weakset';
+	    case 'Map': return 'map';
+	    case 'Set': return 'set';
+	
+	    // 8-bit typed arrays
+	    case 'Int8Array': return 'int8array';
+	    case 'Uint8Array': return 'uint8array';
+	    case 'Uint8ClampedArray': return 'uint8clampedarray';
+	
+	    // 16-bit typed arrays
+	    case 'Int16Array': return 'int16array';
+	    case 'Uint16Array': return 'uint16array';
+	
+	    // 32-bit typed arrays
+	    case 'Int32Array': return 'int32array';
+	    case 'Uint32Array': return 'uint32array';
+	    case 'Float32Array': return 'float32array';
+	    case 'Float64Array': return 'float64array';
+	  }
+	
+	  if (isGeneratorObj(val)) {
+	    return 'generator';
+	  }
+	
+	  // Non-plain objects
+	  type = toString.call(val);
+	  switch (type) {
+	    case '[object Object]': return 'object';
+	    // iterators
+	    case '[object Map Iterator]': return 'mapiterator';
+	    case '[object Set Iterator]': return 'setiterator';
+	    case '[object String Iterator]': return 'stringiterator';
+	    case '[object Array Iterator]': return 'arrayiterator';
+	  }
+	
+	  // other
+	  return type.slice(8, -1).toLowerCase().replace(/\s/g, '');
+	};
+	
+	function ctorName(val) {
+	  return val.constructor ? val.constructor.name : null;
+	}
+	
+	function isArray(val) {
+	  if (Array.isArray) return Array.isArray(val);
+	  return val instanceof Array;
+	}
+	
+	function isError(val) {
+	  return val instanceof Error || (typeof val.message === 'string' && val.constructor && typeof val.constructor.stackTraceLimit === 'number');
+	}
+	
+	function isDate(val) {
+	  if (val instanceof Date) return true;
+	  return typeof val.toDateString === 'function'
+	    && typeof val.getDate === 'function'
+	    && typeof val.setDate === 'function';
+	}
+	
+	function isRegexp(val) {
+	  if (val instanceof RegExp) return true;
+	  return typeof val.flags === 'string'
+	    && typeof val.ignoreCase === 'boolean'
+	    && typeof val.multiline === 'boolean'
+	    && typeof val.global === 'boolean';
+	}
+	
+	function isGeneratorFn(name, val) {
+	  return ctorName(name) === 'GeneratorFunction';
+	}
+	
+	function isGeneratorObj(val) {
+	  return typeof val.throw === 'function'
+	    && typeof val.return === 'function'
+	    && typeof val.next === 'function';
+	}
+	
+	function isArguments(val) {
+	  try {
+	    if (typeof val.length === 'number' && typeof val.callee === 'function') {
+	      return true;
+	    }
+	  } catch (err) {
+	    if (err.message.indexOf('callee') !== -1) {
+	      return true;
+	    }
+	  }
+	  return false;
+	}
+	
+	/**
+	 * If you need to support Safari 5-7 (8-10 yr-old browser),
+	 * take a look at https://github.com/feross/is-buffer
+	 */
+	
+	function isBuffer(val) {
+	  if (val.constructor && typeof val.constructor.isBuffer === 'function') {
+	    return val.constructor.isBuffer(val);
+	  }
+	  return false;
+	}
+
+
+/***/ }),
+/* 615 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/*!
+	 * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
+	 *
+	 * Copyright (c) 2014-2017, Jon Schlinkert.
+	 * Released under the MIT License.
+	 */
+	
+	'use strict';
+	
+	var isObject = __webpack_require__(616);
+	
+	function isObjectObject(o) {
+	  return isObject(o) === true
+	    && Object.prototype.toString.call(o) === '[object Object]';
+	}
+	
+	module.exports = function isPlainObject(o) {
+	  var ctor,prot;
+	
+	  if (isObjectObject(o) === false) return false;
+	
+	  // If has modified constructor
+	  ctor = o.constructor;
+	  if (typeof ctor !== 'function') return false;
+	
+	  // If has modified prototype
+	  prot = ctor.prototype;
+	  if (isObjectObject(prot) === false) return false;
+	
+	  // If constructor does not have an Object-specific method
+	  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+	    return false;
+	  }
+	
+	  // Most likely a plain Object
+	  return true;
+	};
+
+
+/***/ }),
+/* 616 */
+/***/ (function(module, exports) {
+
+	/*!
+	 * isobject <https://github.com/jonschlinkert/isobject>
+	 *
+	 * Copyright (c) 2014-2017, Jon Schlinkert.
+	 * Released under the MIT License.
+	 */
+	
+	'use strict';
+	
+	module.exports = function isObject(val) {
+	  return val != null && typeof val === 'object' && Array.isArray(val) === false;
+	};
+
+
+/***/ }),
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84298,11 +87183,11 @@
 	
 	var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
 	
-	var _beeCheckbox = __webpack_require__(608);
+	var _beeCheckbox = __webpack_require__(618);
 	
 	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
 	
-	var _beePagination = __webpack_require__(611);
+	var _beePagination = __webpack_require__(621);
 	
 	var _beePagination2 = _interopRequireDefault(_beePagination);
 	
@@ -84310,11 +87195,11 @@
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _sort = __webpack_require__(615);
+	var _sort = __webpack_require__(625);
 	
 	var _sort2 = _interopRequireDefault(_sort);
 	
-	var _multiSelect = __webpack_require__(616);
+	var _multiSelect = __webpack_require__(626);
 	
 	var _multiSelect2 = _interopRequireDefault(_multiSelect);
 	
@@ -84678,7 +87563,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 608 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84687,11 +87572,11 @@
 	  value: true
 	});
 	
-	var _Checkbox = __webpack_require__(609);
+	var _Checkbox = __webpack_require__(619);
 	
 	var _Checkbox2 = _interopRequireDefault(_Checkbox);
 	
-	var _CheckboxGroup = __webpack_require__(610);
+	var _CheckboxGroup = __webpack_require__(620);
 	
 	var _CheckboxGroup2 = _interopRequireDefault(_CheckboxGroup);
 	
@@ -84702,7 +87587,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 609 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84898,7 +87783,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 610 */
+/* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84919,7 +87804,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Checkbox = __webpack_require__(609);
+	var _Checkbox = __webpack_require__(619);
 	
 	var _Checkbox2 = _interopRequireDefault(_Checkbox);
 	
@@ -85021,7 +87906,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 611 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85030,7 +87915,7 @@
 	  value: true
 	});
 	
-	var _Pagination = __webpack_require__(612);
+	var _Pagination = __webpack_require__(622);
 	
 	var _Pagination2 = _interopRequireDefault(_Pagination);
 	
@@ -85040,7 +87925,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 612 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -85059,7 +87944,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PaginationButton = __webpack_require__(613);
+	var _PaginationButton = __webpack_require__(623);
 	
 	var _PaginationButton2 = _interopRequireDefault(_PaginationButton);
 	
@@ -85083,7 +87968,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _i18n = __webpack_require__(614);
+	var _i18n = __webpack_require__(624);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
@@ -85609,7 +88494,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 613 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85723,7 +88608,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 614 */
+/* 624 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -85753,7 +88638,7 @@
 	};
 
 /***/ }),
-/* 615 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86132,7 +89017,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 616 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86382,7 +89267,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 617 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86390,6 +89275,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(1);
 	
@@ -86399,19 +89286,25 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _FoldableTabs = __webpack_require__(618);
+	var _FoldableTabs = __webpack_require__(628);
 	
 	var _FoldableTabs2 = _interopRequireDefault(_FoldableTabs);
 	
-	var _SimpleTable = __webpack_require__(607);
+	var _SimpleTable = __webpack_require__(617);
 	
 	var _SimpleTable2 = _interopRequireDefault(_SimpleTable);
+	
+	var _EditTable = __webpack_require__(726);
+	
+	var _EditTable2 = _interopRequireDefault(_EditTable);
 	
 	var _utils = __webpack_require__(606);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -86460,10 +89353,15 @@
 	            _this.setState({ showMore: showMore });
 	        };
 	
+	        _this.openMaxTable = function (isMaximized) {
+	            _this.setState({ isMaximized: isMaximized });
+	        };
+	
 	        _this.state = {
 	            status: 'browse', //browse(浏览态)、edit(编辑态)
 	            activeKey: '', //标识当前卡表的选中项
-	            showMore: props.showMore //卡表是否展开
+	            showMore: props.showMore, //卡表是否展开
+	            isMaximized: false //是否最大化显示
 	        };
 	        return _this;
 	    }
@@ -86472,6 +89370,9 @@
 	
 	
 	    //卡表收起/展开状态改变时的回调
+	
+	
+	    //最大化多表中表格
 	
 	
 	    CardTable.prototype.render = function render() {
@@ -86484,11 +89385,15 @@
 	            columns = _props.columns,
 	            dataRows = _props.data,
 	            tabLists = _props.tabLists,
-	            showListView = _props.showListView;
+	            showListView = _props.showListView,
+	            isEdit = _props.isEdit,
+	            otherProps = _objectWithoutProperties(_props, ['showMax', 'config', 'moduleId', 'columns', 'data', 'tabLists', 'showListView', 'isEdit']);
+	
 	        var _state = this.state,
 	            status = _state.status,
 	            showMore = _state.showMore,
-	            activeKey = _state.activeKey;
+	            activeKey = _state.activeKey,
+	            isMaximized = _state.isMaximized;
 	
 	
 	        var tabsOther = tabLists.map(function (item, index) {
@@ -86505,12 +89410,20 @@
 	                key: code,
 	                label: name,
 	                render: function render() {
-	                    return _react2['default'].createElement(_SimpleTable2['default'], {
-	                        columns: columns,
-	                        data: dataRows,
-	                        multiSelect: config.showCheck,
-	                        bodyStyle: { minHeight: 'auto' }
-	                    });
+	                    return (
+	                        // <SimpleTable
+	                        // columns={columns}
+	                        // data={dataRows}
+	                        // multiSelect={config.showCheck}
+	                        // bodyStyle={{minHeight:'auto'}}
+	                        // />
+	                        _react2['default'].createElement(_EditTable2['default'], _extends({
+	                            columns: columns,
+	                            data: dataRows,
+	                            moduleId: moduleId,
+	                            isEdit: isEdit
+	                        }, otherProps))
+	                    );
 	                }
 	            };
 	        });
@@ -86525,7 +89438,7 @@
 	            _react2['default'].createElement(
 	                'div',
 	                { className: 'lightapp-component-cardTable-table' },
-	                !showMax ? _react2['default'].createElement(_FoldableTabs2['default']
+	                !isMaximized ? _react2['default'].createElement(_FoldableTabs2['default']
 	                // pageScope={pageScope}
 	                , { tableScope: this,
 	                    config: config,
@@ -86542,20 +89455,53 @@
 	                        // status === 'edit' && cellFocusAfterTabChange(item);
 	                    },
 	                    showMore: showMore,
-	                    onHeadAngleToggle: this.onHeadAngleToggle
+	                    isMaximized: isMaximized,
+	                    onHeadAngleToggle: this.onHeadAngleToggle,
+	                    openMaxTable: this.openMaxTable
 	                }) : null
-	            )
+	            ),
+	            ReactDOM.createPortal(_react2['default'].createElement(
+	                'section',
+	                {
+	                    className: (0, _classnames2['default'])('card-table-max ', {
+	                        scaleFromOrigin: !!isMaximized
+	                    })
+	                },
+	                isMaximized ? _react2['default'].createElement(_FoldableTabs2['default']
+	                // pageScope={pageScope}
+	                , { tableScope: this,
+	                    config: config,
+	                    isEdit: status == 'edit',
+	                    moduleId: moduleId,
+	                    activeKey: activeKey,
+	                    tabs: tabsOther,
+	                    showListView: showListView,
+	                    rows: dataRows
+	                    // expandedList={expandedList}
+	                    , handleTypeChange: function handleTypeChange(item) {
+	                        _this2.onTypeChange(item);
+	                        // 标签切换时，首个自动聚焦
+	                        // status === 'edit' && cellFocusAfterTabChange(item);
+	                    },
+	                    showMore: showMore,
+	                    isMaximized: isMaximized,
+	                    onHeadAngleToggle: this.onHeadAngleToggle,
+	                    openMaxTable: this.openMaxTable
+	                }) : null
+	            ), document.querySelector('body'))
 	        );
 	    };
 	
 	    return CardTable;
 	}(_react.Component);
 	
+	CardTable.propTypes = propTypes;
+	CardTable.defaultProps = defaultProps;
 	exports['default'] = CardTable;
 	module.exports = exports['default'];
 
 /***/ }),
-/* 618 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86563,8 +89509,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(1);
 	
@@ -86574,17 +89518,17 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _noData = __webpack_require__(619);
+	var _noData = __webpack_require__(629);
 	
 	var _noData2 = _interopRequireDefault(_noData);
 	
 	var _utils = __webpack_require__(606);
 	
-	var _beeCollapse = __webpack_require__(620);
+	var _beeCollapse = __webpack_require__(630);
 	
 	var _beeCollapse2 = _interopRequireDefault(_beeCollapse);
 	
-	var _hotkeys = __webpack_require__(623);
+	var _hotkeys = __webpack_require__(633);
 	
 	var _hotkeys2 = _interopRequireDefault(_hotkeys);
 	
@@ -86601,6 +89545,14 @@
 	var maxTop = 0;
 	var height = 0;
 	
+	var propTypes = {
+	  showMore: PropTypes.bool, //是否展开详细信息
+	  isMaximized: PropTypes.bool, //是否最大化显示
+	  tabs: PropTypes.array //折叠区域左侧的 tabs 列表
+	};
+	
+	var defaultProps = {};
+	
 	var FoldableTabs = function (_Component) {
 	  _inherits(FoldableTabs, _Component);
 	
@@ -86616,6 +89568,7 @@
 	    var defaultActiveKey = props.tabs && props.tabs.length && props.tabs[0].key || '';
 	    _this.state = {
 	      showMore: props.showMore,
+	      isMaximized: props.isMaximized,
 	      activeKey: defaultActiveKey
 	    };
 	    return _this;
@@ -86624,9 +89577,11 @@
 	  FoldableTabs.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	    var _props = this.props,
 	        oldShowMore = _props.showMore,
-	        oldActiveKey = _props.activeKey;
+	        oldActiveKey = _props.activeKey,
+	        oldIsMaximized = _props.isMaximized;
 	    var newShowMore = nextProps.showMore,
-	        newActiveKey = nextProps.activeKey;
+	        newActiveKey = nextProps.activeKey,
+	        newIsMaximized = nextProps.isMaximized;
 	
 	    if (newShowMore !== oldShowMore) {
 	      this.setState({
@@ -86638,14 +89593,38 @@
 	        activeKey: newActiveKey
 	      });
 	    }
+	    if (newIsMaximized !== oldIsMaximized) {
+	      this.setState({
+	        isMaximized: newIsMaximized
+	      });
+	    }
 	  };
 	
-	  //控制主表收起展开
+	  /**
+	   * 控制主表收起展开
+	   */
 	  FoldableTabs.prototype.toggleCardTable = function toggleCardTable() {
 	    var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	    var onHeadAngleToggle = this.props.onHeadAngleToggle;
 	
 	    onHeadAngleToggle && onHeadAngleToggle(flag);
+	  };
+	
+	  /**
+	   * 最大化多表中表格
+	   */
+	
+	
+	  FoldableTabs.prototype.openMaxTable = function openMaxTable(flag) {
+	    // if (typeof tableId == 'string' && this.myTable[tableId].state.table) {
+	    //   this.myTable[tableId].state.table.isMaximized = flag;
+	    //   this.myTable[tableId].setState({
+	    //     table: this.myTable[tableId].state.table
+	    //   });
+	    // }
+	    var openMaxTable = this.props.openMaxTable;
+	
+	    openMaxTable && openMaxTable(flag);
 	  };
 	
 	  FoldableTabs.prototype.render = function render() {
@@ -86658,14 +89637,14 @@
 	        moduleId = _props2.moduleId,
 	        isEdit = _props2.isEdit,
 	        showListView = _props2.showListView,
-	        showMax = _props2.showMax,
 	        config = _props2.config,
 	        rows = _props2.rows,
 	        tableScope = _props2.tableScope,
 	        expandedList = _props2.expandedList;
 	    var _state = this.state,
 	        showMore = _state.showMore,
-	        activeKey = _state.activeKey;
+	        activeKey = _state.activeKey,
+	        isMaximized = _state.isMaximized;
 	
 	    var visibleRows = rows.filter(function (item) {
 	      return item.status !== '3';
@@ -86675,8 +89654,7 @@
 	      'uf-triangle-right': !showMore,
 	      'uf-triangle-down': showMore
 	    });
-	    var style = showMax ? { style: { width: '100vw' } } : {}; //暂且这样吧  先加个 style={{width: "100vw"}}
-	    // TODO showMore的问题，，设计不要改来改去好不好。。。暂且这样吧  先加个 style={{width: "100vw"}}
+	    // const style = isMaximized ? { style: { width: '100vw' } } : {}; //暂且这样吧  先加个 style={{width: "100vw"}}
 	    if (showMore && showListView) {
 	      var lightTabs_header = document.querySelector('#js_lightTabs_header_' + moduleId);
 	      var lightTabs = document.querySelector('#js_lightTabs_' + moduleId);
@@ -86685,9 +89663,10 @@
 	        height = lightTabs.getBoundingClientRect().height;
 	      }
 	    }
+	    console.log('isMaximized: ', isMaximized);
 	    return _react2['default'].createElement(
 	      'section',
-	      _extends({ className: 'light-tabs' }, style),
+	      { className: 'light-tabs' },
 	      _react2['default'].createElement(_hotkeys2['default'], {
 	        tabs: tabs,
 	        activeKey: activeKey,
@@ -86695,140 +89674,138 @@
 	        headerId: 'js_lightTabs_header_' + moduleId
 	      }),
 	      _react2['default'].createElement(
-	        'header',
-	        {
-	          className: (0, _classnames2['default'])('light-tabs-header cf', {
-	            'tabs-header-spread': showMore,
-	            'tabs-header-pack': !showMore
-	          }),
-	          id: 'js_lightTabs_header_' + moduleId
-	        },
+	        'div',
+	        { className: 'light-tabs-background' },
 	        _react2['default'].createElement(
-	          'div',
-	          { className: 'light-tabs-header-tabs fl' },
+	          'header',
+	          {
+	            className: (0, _classnames2['default'])('light-tabs-header cf', {
+	              'tabs-header-spread': showMore,
+	              'tabs-header-pack': !showMore
+	            }),
+	            id: 'js_lightTabs_header_' + moduleId
+	          },
 	          _react2['default'].createElement(
-	            'span',
-	            {
-	              className: (0, _classnames2['default'])('light-tabs-angle fl', {
-	                'angle-show': showMore
-	              }),
-	              onClick: function onClick() {
-	                //控制主表的收起展开
-	                _this2.toggleCardTable(!showMore);
-	              }
-	            },
-	            _react2['default'].createElement('span', { className: 'iconfont icon table-tabs-icon ' + iconClass })
+	            'div',
+	            { className: 'light-tabs-header-tabs fl' },
+	            _react2['default'].createElement(
+	              'span',
+	              {
+	                className: (0, _classnames2['default'])('light-tabs-angle fl', {
+	                  'angle-show': showMore
+	                }),
+	                onClick: function onClick() {
+	                  //控制主表的收起展开
+	                  _this2.toggleCardTable(!showMore);
+	                }
+	              },
+	              _react2['default'].createElement('span', { className: 'iconfont icon table-tabs-icon ' + iconClass })
+	            ),
+	            _react2['default'].createElement(
+	              'ul',
+	              {
+	                className: (0, _classnames2['default'])('tabs-wraps fl', {
+	                  'single-tab': tabs.length <= 1
+	                })
+	              },
+	              tabs.map(function (item, i) {
+	                if (item.key === activeKey) {
+	                  return _react2['default'].createElement(
+	                    'li',
+	                    { className: 'active' },
+	                    _react2['default'].createElement(
+	                      'a',
+	                      { href: 'javascript:;' },
+	                      item.label
+	                    ),
+	                    _react2['default'].createElement('span', null)
+	                  );
+	                } else {
+	                  return _react2['default'].createElement(
+	                    'li',
+	                    { onClick: _this2.changeActiveKey.bind(_this2, item) },
+	                    _react2['default'].createElement(
+	                      'a',
+	                      { href: 'javascript:;' },
+	                      item.label
+	                    )
+	                  );
+	                }
+	              })
+	            )
 	          ),
 	          _react2['default'].createElement(
-	            'ul',
+	            'div',
 	            {
-	              className: (0, _classnames2['default'])('tabs-wraps fl', {
-	                'single-tab': tabs.length <= 1
+	              className: (0, _classnames2['default'])('tabs-operation fr', {
+	                'tab-hide': !showMore
 	              })
 	            },
-	            tabs.map(function (item, i) {
-	              if (item.key === activeKey) {
-	                return _react2['default'].createElement(
-	                  'li',
-	                  { className: 'active' },
-	                  _react2['default'].createElement(
-	                    'a',
-	                    { href: 'javascript:;' },
-	                    item.label
-	                  ),
-	                  _react2['default'].createElement('span', null)
-	                );
-	              } else {
-	                return _react2['default'].createElement(
-	                  'li',
-	                  { onClick: _this2.changeActiveKey.bind(_this2, item) },
-	                  _react2['default'].createElement(
-	                    'a',
-	                    { href: 'javascript:;' },
-	                    item.label
-	                  )
-	                );
+	            _react2['default'].createElement('span', {
+	              className: 'icon iconfont  head-icon ' + (isMaximized ? 'uf-minimize' : 'uf-maxmize'),
+	              onClick: function onClick() {
+	                //最大化最小化
+	                _this2.openMaxTable(!isMaximized);
+	                // pageScope.cardTable.openMaxTable(moduleId, !isMaximized);
 	              }
 	            })
+	          ),
+	          config && config.tableHeadLeft && _react2['default'].createElement(
+	            'div',
+	            {
+	              className: (0, _classnames2['default'])('tabs-config fl', {
+	                'tab-hide': !showMore
+	              })
+	            },
+	            config.tableHeadLeft()
+	          ),
+	          config && config.tableHead && _react2['default'].createElement(
+	            'div',
+	            {
+	              className: (0, _classnames2['default'])('tabs-config fr', {
+	                'tab-hide': !showMore
+	              })
+	            },
+	            config.tableHead()
 	          )
 	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          {
-	            className: (0, _classnames2['default'])('tabs-operation fr', {
-	              'tab-hide': !showMore
-	            })
-	          },
-	          isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || _react2['default'].createElement('span', {
-	            className: 'icon iconfont head-icon ' + (showListView ? 'icon-shituqiehuan' : 'icon-shituliebiaoqiehuan'),
-	            onClick: function onClick() {
-	              //最大化多表中表体卡片列表
-	              // pageScope.cardTable.openListView(moduleId, !showListView);
-	            }
-	          }),
-	          _react2['default'].createElement('span', {
-	            className: 'icon iconfont  head-icon ' + (showMax ? 'icon-zuixiaohua' : 'icon-zuidahua'),
-	            onClick: function onClick() {
-	              //最大化最小化
-	              // pageScope.cardTable.openMaxTable(moduleId, !showMax);
-	            }
-	          })
-	        ),
-	        config && config.tableHeadLeft && _react2['default'].createElement(
-	          'div',
-	          {
-	            className: (0, _classnames2['default'])('tabs-config fl', {
-	              'tab-hide': !showMore
-	            })
-	          },
-	          config.tableHeadLeft()
-	        ),
-	        config && config.tableHead && _react2['default'].createElement(
-	          'div',
-	          {
-	            className: (0, _classnames2['default'])('tabs-config fr', {
-	              'tab-hide': !showMore
-	            })
-	          },
-	          config.tableHead()
-	        )
-	      ),
-	      isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || (showMore && showListView ? _react2['default'].createElement(
-	        _beeCollapse2['default'],
-	        { 'in': showListView },
-	        _react2['default'].createElement(
-	          'div',
-	          {
-	            className: 'lightapp-component-cardTable-view',
-	            style: {
-	              maxHeight: showMax ? '93%' : '300px',
-	              minHeight: showMax ? '' : '300px',
-	              top: showMax ? maxTop + 8 : maxTop,
-	              width: showMax ? 'calc(100vw - 32px)' : '100%'
-	            }
-	          },
+	        isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || (showMore && showListView ? _react2['default'].createElement(
+	          _beeCollapse2['default'],
+	          { 'in': showListView },
 	          _react2['default'].createElement(
-	            'ul',
-	            { className: 'card-table-expand-wraps' },
-	            visibleRows.length ? visibleRows.map(function (item) {
-	              return expandedList.call(tableScope, moduleId, item, pageScope);
-	            }) : _react2['default'].createElement(
-	              'li',
-	              { className: 'no-data-li' },
-	              _react2['default'].createElement(_noData2['default'], null)
+	            'div',
+	            {
+	              className: 'lightapp-component-cardTable-view',
+	              style: {
+	                maxHeight: isMaximized ? '93%' : '300px',
+	                minHeight: isMaximized ? '' : '300px',
+	                top: isMaximized ? maxTop + 8 : maxTop,
+	                width: isMaximized ? 'calc(100vw - 32px)' : '100%'
+	              }
+	            },
+	            _react2['default'].createElement(
+	              'ul',
+	              { className: 'card-table-expand-wraps' },
+	              visibleRows.length ? visibleRows.map(function (item) {
+	                return expandedList.call(tableScope, moduleId, item, pageScope);
+	              }) : _react2['default'].createElement(
+	                'li',
+	                { className: 'no-data-li' },
+	                _react2['default'].createElement(_noData2['default'], null)
+	              )
 	            )
 	          )
+	        ) : null),
+	        _react2['default'].createElement(
+	          'footer',
+	          { id: 'js_lightTabs_' + moduleId, className: 'light-tabs-content', style: isShow },
+	          tabs.map(function (item, i) {
+	            console.log(item.key, activeKey, '=====');
+	            if (item.key === activeKey) {
+	              return item.render();
+	            }
+	          })
 	        )
-	      ) : null),
-	      _react2['default'].createElement(
-	        'footer',
-	        { id: 'js_lightTabs_' + moduleId, className: 'light-tabs-content', style: isShow },
-	        tabs.map(function (item, i) {
-	          console.log(item.key, activeKey, '=====');
-	          if (item.key === activeKey) {
-	            return item.render();
-	          }
-	        })
 	      )
 	    );
 	  };
@@ -86840,7 +89817,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 619 */
+/* 629 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -86864,7 +89841,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 620 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86873,7 +89850,7 @@
 	  value: true
 	});
 	
-	var _Collapse = __webpack_require__(621);
+	var _Collapse = __webpack_require__(631);
 	
 	var _Collapse2 = _interopRequireDefault(_Collapse);
 	
@@ -86883,7 +89860,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 621 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86912,7 +89889,7 @@
 	
 	var _beeTransition = __webpack_require__(11);
 	
-	var _capitalize = __webpack_require__(622);
+	var _capitalize = __webpack_require__(632);
 	
 	var _capitalize2 = _interopRequireDefault(_capitalize);
 	
@@ -87127,7 +90104,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 622 */
+/* 632 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -87142,7 +90119,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 623 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87159,7 +90136,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactHotkeys = __webpack_require__(624);
+	var _reactHotkeys = __webpack_require__(634);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -87305,21 +90282,21 @@
 	exports["default"] = TabHotKey;
 
 /***/ }),
-/* 624 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(625);
+	  module.exports = __webpack_require__(635);
 	} else {
-	  module.exports = __webpack_require__(626);
+	  module.exports = __webpack_require__(636);
 	}
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
 
 /***/ }),
-/* 625 */
+/* 635 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -87336,7 +90313,7 @@
 
 
 /***/ }),
-/* 626 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87405,30 +90382,30 @@
 	  }
 	});
 	
-	var _HotKeys = _interopRequireDefault(__webpack_require__(627));
+	var _HotKeys = _interopRequireDefault(__webpack_require__(637));
 	
-	var _GlobalHotKeys = _interopRequireDefault(__webpack_require__(707));
+	var _GlobalHotKeys = _interopRequireDefault(__webpack_require__(717));
 	
-	var _IgnoreKeys = _interopRequireDefault(__webpack_require__(708));
+	var _IgnoreKeys = _interopRequireDefault(__webpack_require__(718));
 	
-	var _ObserveKeys = _interopRequireDefault(__webpack_require__(710));
+	var _ObserveKeys = _interopRequireDefault(__webpack_require__(720));
 	
-	var _withHotKeys = _interopRequireDefault(__webpack_require__(630));
+	var _withHotKeys = _interopRequireDefault(__webpack_require__(640));
 	
-	var _withIgnoreKeys = _interopRequireDefault(__webpack_require__(711));
+	var _withIgnoreKeys = _interopRequireDefault(__webpack_require__(721));
 	
-	var _withObserveKeys = _interopRequireDefault(__webpack_require__(712));
+	var _withObserveKeys = _interopRequireDefault(__webpack_require__(722));
 	
-	var _configure = _interopRequireDefault(__webpack_require__(713));
+	var _configure = _interopRequireDefault(__webpack_require__(723));
 	
-	var _getApplicationKeyMap = _interopRequireDefault(__webpack_require__(714));
+	var _getApplicationKeyMap = _interopRequireDefault(__webpack_require__(724));
 	
-	var _recordKeyCombination = _interopRequireDefault(__webpack_require__(715));
+	var _recordKeyCombination = _interopRequireDefault(__webpack_require__(725));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 627 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87442,9 +90419,9 @@
 	
 	var _react = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _withHotKeys = _interopRequireDefault(__webpack_require__(630));
+	var _withHotKeys = _interopRequireDefault(__webpack_require__(640));
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 	
@@ -87521,7 +90498,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 628 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87531,7 +90508,7 @@
 	});
 	exports.default = void 0;
 	
-	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(629));
+	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(639));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -87761,7 +90738,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 629 */
+/* 639 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -87785,7 +90762,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 630 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -87799,17 +90776,17 @@
 	
 	var _react = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _KeyEventManager = _interopRequireDefault(__webpack_require__(631));
+	var _KeyEventManager = _interopRequireDefault(__webpack_require__(641));
 	
-	var _isEmpty = _interopRequireDefault(__webpack_require__(672));
+	var _isEmpty = _interopRequireDefault(__webpack_require__(682));
 	
-	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(637));
+	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(647));
 	
-	var _backwardsCompatibleContext = _interopRequireDefault(__webpack_require__(706));
+	var _backwardsCompatibleContext = _interopRequireDefault(__webpack_require__(716));
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 	
@@ -88254,7 +91231,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 631 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88264,17 +91241,17 @@
 	});
 	exports.default = void 0;
 	
-	var _Logger = _interopRequireDefault(__webpack_require__(632));
+	var _Logger = _interopRequireDefault(__webpack_require__(642));
 	
-	var _FocusOnlyKeyEventStrategy = _interopRequireDefault(__webpack_require__(633));
+	var _FocusOnlyKeyEventStrategy = _interopRequireDefault(__webpack_require__(643));
 	
-	var _GlobalKeyEventStrategy = _interopRequireDefault(__webpack_require__(701));
+	var _GlobalKeyEventStrategy = _interopRequireDefault(__webpack_require__(711));
 	
-	var _isFromFocusOnlyComponent = _interopRequireDefault(__webpack_require__(705));
+	var _isFromFocusOnlyComponent = _interopRequireDefault(__webpack_require__(715));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _EventResponse = _interopRequireDefault(__webpack_require__(699));
+	var _EventResponse = _interopRequireDefault(__webpack_require__(709));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88826,7 +91803,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 632 */
+/* 642 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -88956,7 +91933,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 633 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88966,35 +91943,35 @@
 	});
 	exports.default = void 0;
 	
-	var _AbstractKeyEventStrategy = _interopRequireDefault(__webpack_require__(634));
+	var _AbstractKeyEventStrategy = _interopRequireDefault(__webpack_require__(644));
 	
-	var _KeyEventType = _interopRequireDefault(__webpack_require__(635));
+	var _KeyEventType = _interopRequireDefault(__webpack_require__(645));
 	
-	var _KeyEventCounter = _interopRequireDefault(__webpack_require__(693));
+	var _KeyEventCounter = _interopRequireDefault(__webpack_require__(703));
 	
-	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(689));
+	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(699));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _Logger = _interopRequireDefault(__webpack_require__(632));
+	var _Logger = _interopRequireDefault(__webpack_require__(642));
 	
-	var _printComponent = _interopRequireDefault(__webpack_require__(690));
+	var _printComponent = _interopRequireDefault(__webpack_require__(700));
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
-	var _getKeyName = _interopRequireDefault(__webpack_require__(694));
+	var _getKeyName = _interopRequireDefault(__webpack_require__(704));
 	
-	var _isCmdKey = _interopRequireDefault(__webpack_require__(697));
+	var _isCmdKey = _interopRequireDefault(__webpack_require__(707));
 	
-	var _describeKeyEvent = _interopRequireDefault(__webpack_require__(698));
+	var _describeKeyEvent = _interopRequireDefault(__webpack_require__(708));
 	
-	var _EventResponse = _interopRequireDefault(__webpack_require__(699));
+	var _EventResponse = _interopRequireDefault(__webpack_require__(709));
 	
-	var _KeyEventState = _interopRequireDefault(__webpack_require__(671));
+	var _KeyEventState = _interopRequireDefault(__webpack_require__(681));
 	
-	var _stateFromEvent = _interopRequireDefault(__webpack_require__(692));
+	var _stateFromEvent = _interopRequireDefault(__webpack_require__(702));
 	
-	var _EventPropagator = _interopRequireDefault(__webpack_require__(700));
+	var _EventPropagator = _interopRequireDefault(__webpack_require__(710));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -89683,7 +92660,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 634 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89693,45 +92670,45 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventType = _interopRequireDefault(__webpack_require__(635));
+	var _KeyEventType = _interopRequireDefault(__webpack_require__(645));
 	
-	var _ModifierFlagsDictionary = _interopRequireDefault(__webpack_require__(636));
+	var _ModifierFlagsDictionary = _interopRequireDefault(__webpack_require__(646));
 	
-	var _Logger = _interopRequireDefault(__webpack_require__(632));
+	var _Logger = _interopRequireDefault(__webpack_require__(642));
 	
-	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(637));
+	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(647));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _KeyHistory = _interopRequireDefault(__webpack_require__(664));
+	var _KeyHistory = _interopRequireDefault(__webpack_require__(674));
 	
-	var _KeyCombination = _interopRequireDefault(__webpack_require__(665));
+	var _KeyCombination = _interopRequireDefault(__webpack_require__(675));
 	
-	var _ComponentTree = _interopRequireDefault(__webpack_require__(675));
+	var _ComponentTree = _interopRequireDefault(__webpack_require__(685));
 	
-	var _ComponentOptionsList = _interopRequireDefault(__webpack_require__(679));
+	var _ComponentOptionsList = _interopRequireDefault(__webpack_require__(689));
 	
-	var _ActionResolver = _interopRequireDefault(__webpack_require__(682));
+	var _ActionResolver = _interopRequireDefault(__webpack_require__(692));
 	
-	var _arrayFrom = _interopRequireDefault(__webpack_require__(678));
+	var _arrayFrom = _interopRequireDefault(__webpack_require__(688));
 	
-	var _isObject = _interopRequireDefault(__webpack_require__(673));
+	var _isObject = _interopRequireDefault(__webpack_require__(683));
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
-	var _copyAttributes = _interopRequireDefault(__webpack_require__(688));
+	var _copyAttributes = _interopRequireDefault(__webpack_require__(698));
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
-	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(689));
+	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(699));
 	
-	var _printComponent = _interopRequireDefault(__webpack_require__(690));
+	var _printComponent = _interopRequireDefault(__webpack_require__(700));
 	
-	var _hasKeyPressEvent = _interopRequireDefault(__webpack_require__(691));
+	var _hasKeyPressEvent = _interopRequireDefault(__webpack_require__(701));
 	
-	var _keyupIsHiddenByCmd = _interopRequireDefault(__webpack_require__(686));
+	var _keyupIsHiddenByCmd = _interopRequireDefault(__webpack_require__(696));
 	
-	var _stateFromEvent = _interopRequireDefault(__webpack_require__(692));
+	var _stateFromEvent = _interopRequireDefault(__webpack_require__(702));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90230,7 +93207,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 635 */
+/* 645 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -90259,7 +93236,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 636 */
+/* 646 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -90278,7 +93255,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 637 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90288,21 +93265,21 @@
 	});
 	exports.default = void 0;
 	
-	var _resolveShiftedAlias = _interopRequireDefault(__webpack_require__(638));
+	var _resolveShiftedAlias = _interopRequireDefault(__webpack_require__(648));
 	
-	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(640));
+	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(650));
 	
-	var _KeyOSAndLayoutAliasesDictionary = _interopRequireDefault(__webpack_require__(644));
+	var _KeyOSAndLayoutAliasesDictionary = _interopRequireDefault(__webpack_require__(654));
 	
-	var _KeySequenceParser = _interopRequireDefault(__webpack_require__(645));
+	var _KeySequenceParser = _interopRequireDefault(__webpack_require__(655));
 	
-	var _resolveUnaltedAlias = _interopRequireDefault(__webpack_require__(656));
+	var _resolveUnaltedAlias = _interopRequireDefault(__webpack_require__(666));
 	
-	var _resolveAltedAlias = _interopRequireDefault(__webpack_require__(659));
+	var _resolveAltedAlias = _interopRequireDefault(__webpack_require__(669));
 	
-	var _resolveUnaltShiftedAlias = _interopRequireDefault(__webpack_require__(660));
+	var _resolveUnaltShiftedAlias = _interopRequireDefault(__webpack_require__(670));
 	
-	var _resolveAltShiftedAlias = _interopRequireDefault(__webpack_require__(663));
+	var _resolveAltShiftedAlias = _interopRequireDefault(__webpack_require__(673));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90427,7 +93404,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 638 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90437,7 +93414,7 @@
 	});
 	exports.default = void 0;
 	
-	var _ShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(639));
+	var _ShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(649));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90456,7 +93433,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 639 */
+/* 649 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -90509,7 +93486,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 640 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90519,7 +93496,7 @@
 	});
 	exports.default = void 0;
 	
-	var _UnshiftedKeysDictionary = _interopRequireDefault(__webpack_require__(641));
+	var _UnshiftedKeysDictionary = _interopRequireDefault(__webpack_require__(651));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90538,7 +93515,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 641 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90548,9 +93525,9 @@
 	});
 	exports.default = void 0;
 	
-	var _ShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(639));
+	var _ShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(649));
 	
-	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(642));
+	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(652));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90559,7 +93536,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 642 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90569,7 +93546,7 @@
 	});
 	exports.default = void 0;
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90609,7 +93586,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 643 */
+/* 653 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -90627,7 +93604,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 644 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90637,7 +93614,7 @@
 	});
 	exports.default = void 0;
 	
-	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(642));
+	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(652));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90655,7 +93632,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 645 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90665,11 +93642,11 @@
 	});
 	exports.default = void 0;
 	
-	var _stripSuperfluousWhitespace = _interopRequireDefault(__webpack_require__(646));
+	var _stripSuperfluousWhitespace = _interopRequireDefault(__webpack_require__(656));
 	
-	var _standardizeKeyName = _interopRequireDefault(__webpack_require__(648));
+	var _standardizeKeyName = _interopRequireDefault(__webpack_require__(658));
 	
-	var _isValidKey = _interopRequireWildcard(__webpack_require__(651));
+	var _isValidKey = _interopRequireWildcard(__webpack_require__(661));
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 	
@@ -90862,7 +93839,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 646 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90872,7 +93849,7 @@
 	});
 	exports.default = void 0;
 	
-	var _isString = _interopRequireDefault(__webpack_require__(647));
+	var _isString = _interopRequireDefault(__webpack_require__(657));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90888,7 +93865,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 647 */
+/* 657 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -90906,7 +93883,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 648 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90916,9 +93893,9 @@
 	});
 	exports.default = void 0;
 	
-	var _MousetrapToReactKeyNamesDictionary = _interopRequireDefault(__webpack_require__(649));
+	var _MousetrapToReactKeyNamesDictionary = _interopRequireDefault(__webpack_require__(659));
 	
-	var _KeyShorthandDictionary = _interopRequireDefault(__webpack_require__(650));
+	var _KeyShorthandDictionary = _interopRequireDefault(__webpack_require__(660));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -90946,7 +93923,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 649 */
+/* 659 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -91003,7 +93980,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 650 */
+/* 660 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -91023,7 +94000,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 651 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91033,9 +94010,9 @@
 	});
 	exports.default = exports.InvalidKeyNameError = void 0;
 	
-	var _isNonPrintableKeyName = _interopRequireDefault(__webpack_require__(652));
+	var _isNonPrintableKeyName = _interopRequireDefault(__webpack_require__(662));
 	
-	var _isCustomKeyName = _interopRequireDefault(__webpack_require__(655));
+	var _isCustomKeyName = _interopRequireDefault(__webpack_require__(665));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91098,7 +94075,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 652 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91108,7 +94085,7 @@
 	});
 	exports.default = void 0;
 	
-	var _NonPrintableKeysDictionary = _interopRequireDefault(__webpack_require__(653));
+	var _NonPrintableKeysDictionary = _interopRequireDefault(__webpack_require__(663));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91126,7 +94103,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 653 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91136,9 +94113,9 @@
 	});
 	exports.default = void 0;
 	
-	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(629));
+	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(639));
 	
-	var _translateToKey = _interopRequireDefault(__webpack_require__(654));
+	var _translateToKey = _interopRequireDefault(__webpack_require__(664));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91150,7 +94127,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 654 */
+/* 664 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -91207,7 +94184,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 655 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91217,7 +94194,7 @@
 	});
 	exports.default = void 0;
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91234,7 +94211,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 656 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91244,7 +94221,7 @@
 	});
 	exports.default = void 0;
 	
-	var _UnaltedKeysDictionary = _interopRequireDefault(__webpack_require__(657));
+	var _UnaltedKeysDictionary = _interopRequireDefault(__webpack_require__(667));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91263,7 +94240,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 657 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91273,9 +94250,9 @@
 	});
 	exports.default = void 0;
 	
-	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(642));
+	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(652));
 	
-	var _AltedKeysDictionary = _interopRequireDefault(__webpack_require__(658));
+	var _AltedKeysDictionary = _interopRequireDefault(__webpack_require__(668));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91284,7 +94261,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 658 */
+/* 668 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -91352,7 +94329,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 659 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91362,7 +94339,7 @@
 	});
 	exports.default = void 0;
 	
-	var _AltedKeysDictionary = _interopRequireDefault(__webpack_require__(658));
+	var _AltedKeysDictionary = _interopRequireDefault(__webpack_require__(668));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91381,7 +94358,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 660 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91391,9 +94368,9 @@
 	});
 	exports.default = void 0;
 	
-	var _UnaltShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(661));
+	var _UnaltShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(671));
 	
-	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(640));
+	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(650));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91412,7 +94389,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 661 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91422,9 +94399,9 @@
 	});
 	exports.default = void 0;
 	
-	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(642));
+	var _invertArrayDictionary = _interopRequireDefault(__webpack_require__(652));
 	
-	var _AltShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(662));
+	var _AltShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(672));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91433,7 +94410,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 662 */
+/* 672 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -91500,7 +94477,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 663 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91510,7 +94487,7 @@
 	});
 	exports.default = void 0;
 	
-	var _AltShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(662));
+	var _AltShiftedKeysDictionary = _interopRequireDefault(__webpack_require__(672));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91529,7 +94506,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 664 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91539,7 +94516,7 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyCombination = _interopRequireDefault(__webpack_require__(665));
+	var _KeyCombination = _interopRequireDefault(__webpack_require__(675));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91723,7 +94700,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 665 */
+/* 675 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91733,25 +94710,25 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventSequenceIndex = _interopRequireDefault(__webpack_require__(666));
+	var _KeyEventSequenceIndex = _interopRequireDefault(__webpack_require__(676));
 	
-	var _KeyEventType = _interopRequireDefault(__webpack_require__(635));
+	var _KeyEventType = _interopRequireDefault(__webpack_require__(645));
 	
-	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(637));
+	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(647));
 	
-	var _resolveKeyAlias = _interopRequireDefault(__webpack_require__(667));
+	var _resolveKeyAlias = _interopRequireDefault(__webpack_require__(677));
 	
-	var _applicableAliasFunctions = _interopRequireDefault(__webpack_require__(668));
+	var _applicableAliasFunctions = _interopRequireDefault(__webpack_require__(678));
 	
-	var _KeyEventStateArrayManager = _interopRequireDefault(__webpack_require__(669));
+	var _KeyEventStateArrayManager = _interopRequireDefault(__webpack_require__(679));
 	
-	var _isEmpty = _interopRequireDefault(__webpack_require__(672));
+	var _isEmpty = _interopRequireDefault(__webpack_require__(682));
 	
-	var _size = _interopRequireDefault(__webpack_require__(674));
+	var _size = _interopRequireDefault(__webpack_require__(684));
 	
-	var _KeyEventState = _interopRequireDefault(__webpack_require__(671));
+	var _KeyEventState = _interopRequireDefault(__webpack_require__(681));
 	
-	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(629));
+	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(639));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92184,7 +95161,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 666 */
+/* 676 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -92207,7 +95184,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 667 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92217,7 +95194,7 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyOSAndLayoutAliasesDictionary = _interopRequireDefault(__webpack_require__(644));
+	var _KeyOSAndLayoutAliasesDictionary = _interopRequireDefault(__webpack_require__(654));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92234,7 +95211,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 668 */
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92244,17 +95221,17 @@
 	});
 	exports.default = void 0;
 	
-	var _resolveAltShiftedAlias = _interopRequireDefault(__webpack_require__(663));
+	var _resolveAltShiftedAlias = _interopRequireDefault(__webpack_require__(673));
 	
-	var _resolveUnaltShiftedAlias = _interopRequireDefault(__webpack_require__(660));
+	var _resolveUnaltShiftedAlias = _interopRequireDefault(__webpack_require__(670));
 	
-	var _resolveShiftedAlias = _interopRequireDefault(__webpack_require__(638));
+	var _resolveShiftedAlias = _interopRequireDefault(__webpack_require__(648));
 	
-	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(640));
+	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(650));
 	
-	var _resolveAltedAlias = _interopRequireDefault(__webpack_require__(659));
+	var _resolveAltedAlias = _interopRequireDefault(__webpack_require__(669));
 	
-	var _resolveUnaltedAlias = _interopRequireDefault(__webpack_require__(656));
+	var _resolveUnaltedAlias = _interopRequireDefault(__webpack_require__(666));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92282,7 +95259,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 669 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92292,9 +95269,9 @@
 	});
 	exports.default = void 0;
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
-	var _KeyEventState = _interopRequireDefault(__webpack_require__(671));
+	var _KeyEventState = _interopRequireDefault(__webpack_require__(681));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92374,7 +95351,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 670 */
+/* 680 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -92392,7 +95369,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 671 */
+/* 681 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -92420,7 +95397,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 672 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92430,7 +95407,7 @@
 	});
 	exports.default = void 0;
 	
-	var _isObject = _interopRequireDefault(__webpack_require__(673));
+	var _isObject = _interopRequireDefault(__webpack_require__(683));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92446,7 +95423,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 673 */
+/* 683 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -92466,7 +95443,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 674 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92476,7 +95453,7 @@
 	});
 	exports.default = void 0;
 	
-	var _isObject = _interopRequireDefault(__webpack_require__(673));
+	var _isObject = _interopRequireDefault(__webpack_require__(683));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92488,7 +95465,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 675 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92498,9 +95475,9 @@
 	});
 	exports.default = void 0;
 	
-	var _Registry2 = _interopRequireDefault(__webpack_require__(676));
+	var _Registry2 = _interopRequireDefault(__webpack_require__(686));
 	
-	var _without = _interopRequireDefault(__webpack_require__(677));
+	var _without = _interopRequireDefault(__webpack_require__(687));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92645,7 +95622,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 676 */
+/* 686 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -92730,7 +95707,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 677 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92740,11 +95717,11 @@
 	});
 	exports.default = void 0;
 	
-	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(629));
+	var _dictionaryFrom = _interopRequireDefault(__webpack_require__(639));
 	
-	var _arrayFrom = _interopRequireDefault(__webpack_require__(678));
+	var _arrayFrom = _interopRequireDefault(__webpack_require__(688));
 	
-	var _isObject = _interopRequireDefault(__webpack_require__(673));
+	var _isObject = _interopRequireDefault(__webpack_require__(683));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92778,7 +95755,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 678 */
+/* 688 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -92802,7 +95779,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 679 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92812,29 +95789,29 @@
 	});
 	exports.default = void 0;
 	
-	var _removeAtIndex = _interopRequireDefault(__webpack_require__(680));
+	var _removeAtIndex = _interopRequireDefault(__webpack_require__(690));
 	
-	var _KeyEventStateArrayManager = _interopRequireDefault(__webpack_require__(669));
+	var _KeyEventStateArrayManager = _interopRequireDefault(__webpack_require__(679));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(637));
+	var _KeyCombinationSerializer = _interopRequireDefault(__webpack_require__(647));
 	
-	var _isObject = _interopRequireDefault(__webpack_require__(673));
+	var _isObject = _interopRequireDefault(__webpack_require__(683));
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
-	var _arrayFrom = _interopRequireDefault(__webpack_require__(678));
+	var _arrayFrom = _interopRequireDefault(__webpack_require__(688));
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
-	var _KeyEventType = _interopRequireDefault(__webpack_require__(635));
+	var _KeyEventType = _interopRequireDefault(__webpack_require__(645));
 	
-	var _KeySequenceParser = _interopRequireDefault(__webpack_require__(645));
+	var _KeySequenceParser = _interopRequireDefault(__webpack_require__(655));
 	
-	var _KeyEventState = _interopRequireDefault(__webpack_require__(671));
+	var _KeyEventState = _interopRequireDefault(__webpack_require__(681));
 	
-	var _ComponentOptionsListIterator = _interopRequireDefault(__webpack_require__(681));
+	var _ComponentOptionsListIterator = _interopRequireDefault(__webpack_require__(691));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -93342,7 +96319,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 680 */
+/* 690 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -93368,7 +96345,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 681 */
+/* 691 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -93449,7 +96426,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 682 */
+/* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -93459,7 +96436,7 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyHistoryMatcher = _interopRequireDefault(__webpack_require__(683));
+	var _KeyHistoryMatcher = _interopRequireDefault(__webpack_require__(693));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -93738,7 +96715,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 683 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -93748,13 +96725,13 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventStateArrayManager = _interopRequireDefault(__webpack_require__(669));
+	var _KeyEventStateArrayManager = _interopRequireDefault(__webpack_require__(679));
 	
-	var _indexFromEnd = _interopRequireDefault(__webpack_require__(684));
+	var _indexFromEnd = _interopRequireDefault(__webpack_require__(694));
 	
-	var _KeyCombinationMatcher = _interopRequireDefault(__webpack_require__(685));
+	var _KeyCombinationMatcher = _interopRequireDefault(__webpack_require__(695));
 	
-	var _KeyEventState = _interopRequireDefault(__webpack_require__(671));
+	var _KeyEventState = _interopRequireDefault(__webpack_require__(681));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -93951,7 +96928,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 684 */
+/* 694 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -93977,7 +96954,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 685 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -93987,11 +96964,11 @@
 	});
 	exports.default = void 0;
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _size = _interopRequireDefault(__webpack_require__(674));
+	var _size = _interopRequireDefault(__webpack_require__(684));
 	
-	var _keyupIsHiddenByCmd = _interopRequireDefault(__webpack_require__(686));
+	var _keyupIsHiddenByCmd = _interopRequireDefault(__webpack_require__(696));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94299,7 +97276,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 686 */
+/* 696 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94309,9 +97286,9 @@
 	});
 	exports.default = void 0;
 	
-	var _KeysWithKeyUpHiddenByCmd = _interopRequireDefault(__webpack_require__(687));
+	var _KeysWithKeyUpHiddenByCmd = _interopRequireDefault(__webpack_require__(697));
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94329,7 +97306,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 687 */
+/* 697 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -94366,7 +97343,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 688 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94376,7 +97353,7 @@
 	});
 	exports.default = void 0;
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94401,7 +97378,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 689 */
+/* 699 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -94433,7 +97410,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 690 */
+/* 700 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -94459,7 +97436,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 691 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94469,7 +97446,7 @@
 	});
 	exports.default = void 0;
 	
-	var _isNonPrintableKeyName = _interopRequireDefault(__webpack_require__(652));
+	var _isNonPrintableKeyName = _interopRequireDefault(__webpack_require__(662));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94486,7 +97463,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 692 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94496,7 +97473,7 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventState = _interopRequireDefault(__webpack_require__(671));
+	var _KeyEventState = _interopRequireDefault(__webpack_require__(681));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94508,7 +97485,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 693 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94518,7 +97495,7 @@
 	});
 	exports.default = void 0;
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94576,7 +97553,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 694 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94586,11 +97563,11 @@
 	});
 	exports.default = void 0;
 	
-	var _reactsGetEventKey = _interopRequireDefault(__webpack_require__(695));
+	var _reactsGetEventKey = _interopRequireDefault(__webpack_require__(705));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94632,7 +97609,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 695 */
+/* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94642,9 +97619,9 @@
 	});
 	exports.default = void 0;
 	
-	var _getEventCharCode = _interopRequireDefault(__webpack_require__(696));
+	var _getEventCharCode = _interopRequireDefault(__webpack_require__(706));
 	
-	var _translateToKey = _interopRequireDefault(__webpack_require__(654));
+	var _translateToKey = _interopRequireDefault(__webpack_require__(664));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94714,7 +97691,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 696 */
+/* 706 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -94775,7 +97752,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 697 */
+/* 707 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -94798,7 +97775,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 698 */
+/* 708 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94808,7 +97785,7 @@
 	});
 	exports.default = void 0;
 	
-	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(689));
+	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(699));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -94826,7 +97803,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 699 */
+/* 709 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -94856,7 +97833,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 700 */
+/* 710 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -94866,13 +97843,13 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventCounter = _interopRequireDefault(__webpack_require__(693));
+	var _KeyEventCounter = _interopRequireDefault(__webpack_require__(703));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _describeKeyEvent = _interopRequireDefault(__webpack_require__(698));
+	var _describeKeyEvent = _interopRequireDefault(__webpack_require__(708));
 	
-	var _KeyEventType = _interopRequireDefault(__webpack_require__(635));
+	var _KeyEventType = _interopRequireDefault(__webpack_require__(645));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -95253,7 +98230,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 701 */
+/* 711 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -95263,35 +98240,35 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventType = _interopRequireDefault(__webpack_require__(635));
+	var _KeyEventType = _interopRequireDefault(__webpack_require__(645));
 	
-	var _AbstractKeyEventStrategy = _interopRequireDefault(__webpack_require__(634));
+	var _AbstractKeyEventStrategy = _interopRequireDefault(__webpack_require__(644));
 	
-	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(689));
+	var _describeKeyEventType = _interopRequireDefault(__webpack_require__(699));
 	
-	var _KeyEventCounter = _interopRequireDefault(__webpack_require__(693));
+	var _KeyEventCounter = _interopRequireDefault(__webpack_require__(703));
 	
-	var _Logger = _interopRequireDefault(__webpack_require__(632));
+	var _Logger = _interopRequireDefault(__webpack_require__(642));
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
-	var _printComponent = _interopRequireDefault(__webpack_require__(690));
+	var _printComponent = _interopRequireDefault(__webpack_require__(700));
 	
-	var _getKeyName = _interopRequireDefault(__webpack_require__(694));
+	var _getKeyName = _interopRequireDefault(__webpack_require__(704));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _describeKeyEvent = _interopRequireDefault(__webpack_require__(698));
+	var _describeKeyEvent = _interopRequireDefault(__webpack_require__(708));
 	
-	var _isCmdKey = _interopRequireDefault(__webpack_require__(697));
+	var _isCmdKey = _interopRequireDefault(__webpack_require__(707));
 	
-	var _EventResponse = _interopRequireDefault(__webpack_require__(699));
+	var _EventResponse = _interopRequireDefault(__webpack_require__(709));
 	
-	var _contains = _interopRequireDefault(__webpack_require__(702));
+	var _contains = _interopRequireDefault(__webpack_require__(712));
 	
-	var _stateFromEvent = _interopRequireDefault(__webpack_require__(692));
+	var _stateFromEvent = _interopRequireDefault(__webpack_require__(702));
 	
-	var _normalizeEventName = _interopRequireDefault(__webpack_require__(703));
+	var _normalizeEventName = _interopRequireDefault(__webpack_require__(713));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -95926,7 +98903,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 702 */
+/* 712 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -95936,13 +98913,13 @@
 	});
 	exports.default = void 0;
 	
-	var _isObject = _interopRequireDefault(__webpack_require__(673));
+	var _isObject = _interopRequireDefault(__webpack_require__(683));
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
-	var _isString = _interopRequireDefault(__webpack_require__(647));
+	var _isString = _interopRequireDefault(__webpack_require__(657));
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -95972,7 +98949,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 703 */
+/* 713 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -95982,7 +98959,7 @@
 	});
 	exports.default = void 0;
 	
-	var _capitalize = _interopRequireDefault(__webpack_require__(704));
+	var _capitalize = _interopRequireDefault(__webpack_require__(714));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -95994,7 +98971,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 704 */
+/* 714 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -96014,7 +98991,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 705 */
+/* 715 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96024,7 +99001,7 @@
 	});
 	exports.default = void 0;
 	
-	var _isUndefined = _interopRequireDefault(__webpack_require__(670));
+	var _isUndefined = _interopRequireDefault(__webpack_require__(680));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96042,7 +99019,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 706 */
+/* 716 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96141,7 +99118,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 707 */
+/* 717 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96155,11 +99132,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _KeyEventManager = _interopRequireDefault(__webpack_require__(631));
+	var _KeyEventManager = _interopRequireDefault(__webpack_require__(641));
 	
-	var _backwardsCompatibleContext = _interopRequireDefault(__webpack_require__(706));
+	var _backwardsCompatibleContext = _interopRequireDefault(__webpack_require__(716));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96321,7 +99298,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 708 */
+/* 718 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96333,9 +99310,9 @@
 	
 	var _react = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(709));
+	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(719));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96407,7 +99384,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 709 */
+/* 719 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96421,29 +99398,29 @@
 	
 	var _react = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _KeyEventManager = _interopRequireDefault(__webpack_require__(631));
+	var _KeyEventManager = _interopRequireDefault(__webpack_require__(641));
 	
-	var _arrayFrom = _interopRequireDefault(__webpack_require__(678));
+	var _arrayFrom = _interopRequireDefault(__webpack_require__(688));
 	
-	var _standardizeKeyName = _interopRequireDefault(__webpack_require__(648));
+	var _standardizeKeyName = _interopRequireDefault(__webpack_require__(658));
 	
-	var _isValidKey = _interopRequireWildcard(__webpack_require__(651));
+	var _isValidKey = _interopRequireWildcard(__webpack_require__(661));
 	
-	var _isEmpty = _interopRequireDefault(__webpack_require__(672));
+	var _isEmpty = _interopRequireDefault(__webpack_require__(682));
 	
-	var _resolveAltShiftedAlias = _interopRequireDefault(__webpack_require__(663));
+	var _resolveAltShiftedAlias = _interopRequireDefault(__webpack_require__(673));
 	
-	var _resolveUnaltShiftedAlias = _interopRequireDefault(__webpack_require__(660));
+	var _resolveUnaltShiftedAlias = _interopRequireDefault(__webpack_require__(670));
 	
-	var _resolveShiftedAlias = _interopRequireDefault(__webpack_require__(638));
+	var _resolveShiftedAlias = _interopRequireDefault(__webpack_require__(648));
 	
-	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(640));
+	var _resolveUnshiftedAlias = _interopRequireDefault(__webpack_require__(650));
 	
-	var _resolveAltedAlias = _interopRequireDefault(__webpack_require__(659));
+	var _resolveAltedAlias = _interopRequireDefault(__webpack_require__(669));
 	
-	var _resolveUnaltedAlias = _interopRequireDefault(__webpack_require__(656));
+	var _resolveUnaltedAlias = _interopRequireDefault(__webpack_require__(666));
 	
-	var _hasKey = _interopRequireDefault(__webpack_require__(643));
+	var _hasKey = _interopRequireDefault(__webpack_require__(653));
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 	
@@ -96613,7 +99590,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 710 */
+/* 720 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96625,9 +99602,9 @@
 	
 	var _react = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
-	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(709));
+	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(719));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96699,7 +99676,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 711 */
+/* 721 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96709,7 +99686,7 @@
 	});
 	exports.default = void 0;
 	
-	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(709));
+	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(719));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96732,7 +99709,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 712 */
+/* 722 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96742,7 +99719,7 @@
 	});
 	exports.default = void 0;
 	
-	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(709));
+	var _withHotKeysIgnoreOverride = _interopRequireDefault(__webpack_require__(719));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96765,7 +99742,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 713 */
+/* 723 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96775,7 +99752,7 @@
 	});
 	exports.default = void 0;
 	
-	var _Configuration = _interopRequireDefault(__webpack_require__(628));
+	var _Configuration = _interopRequireDefault(__webpack_require__(638));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96794,7 +99771,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 714 */
+/* 724 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96804,7 +99781,7 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventManager = _interopRequireDefault(__webpack_require__(631));
+	var _KeyEventManager = _interopRequireDefault(__webpack_require__(641));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96826,7 +99803,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 715 */
+/* 725 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -96836,7 +99813,7 @@
 	});
 	exports.default = void 0;
 	
-	var _KeyEventManager = _interopRequireDefault(__webpack_require__(631));
+	var _KeyEventManager = _interopRequireDefault(__webpack_require__(641));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96859,7 +99836,2700 @@
 	exports.default = _default;
 
 /***/ }),
-/* 716 */
+/* 726 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _nc_Table = __webpack_require__(271);
+	
+	var _nc_Table2 = _interopRequireDefault(_nc_Table);
+	
+	var _beeIcon = __webpack_require__(78);
+	
+	var _beeIcon2 = _interopRequireDefault(_beeIcon);
+	
+	var _beeSelect = __webpack_require__(538);
+	
+	var _beeSelect2 = _interopRequireDefault(_beeSelect);
+	
+	var _Cell = __webpack_require__(727);
+	
+	var _Cell2 = _interopRequireDefault(_Cell);
+	
+	var _utils = __webpack_require__(606);
+	
+	var _sort = __webpack_require__(625);
+	
+	var _sort2 = _interopRequireDefault(_sort);
+	
+	var _multiSelect = __webpack_require__(626);
+	
+	var _multiSelect2 = _interopRequireDefault(_multiSelect);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  ***************   前 言   ***************
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  1、此类表格适用于 “单表”  特点：无分页，表头固定，有横向和纵向的滚动条。
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *  1、visible 为false或者没有visible属性当前列不显示，只有为ture才显示
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *	2、新增的操作列需要有 itemtype: 'customer'
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	
+	var ComplexTable = (0, _sort2['default'])(_nc_Table2['default'], _beeIcon2['default']);
+	
+	var propTypes = {
+	    moduleId: PropTypes.string, //meta的id号
+	    config: PropTypes.object, //表格配置项
+	    isEdit: PropTypes.bool //true为编辑态
+	};
+	
+	var defaultProps = {
+	    config: {},
+	    isEdit: false
+	
+	    // 页面级别配置项
+	};var _DEFAULT = {
+	    // node执行环境是否是test
+	    // test_env: NODE_ENV === 'test',
+	    // 是否是多表头
+	    isMultipleHead: false
+	    // 做个开关，1期EditTable的快捷键不上线
+	    // tabindex: NODE_ENV === 'development' ? '0' : '-1'
+	};
+	
+	var EditTable = function (_Component) {
+	    _inherits(EditTable, _Component);
+	
+	    function EditTable(props) {
+	        _classCallCheck(this, EditTable);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.getTableRows = function () {
+	            var rows = _this.state.table.rows;
+	            var getTableRows = _this.props.getTableRows;
+	
+	            getTableRows && getTableRows(rows);
+	        };
+	
+	        _this.state = {
+	            table: {
+	                pageInfo: {
+	                    pageSize: '10',
+	                    pageIndex: '1'
+	                },
+	                rows: [],
+	                checkedAll: false,
+	                // 设置全选多选框的是否禁用
+	                disabledAll: false,
+	                model: false, //是否打开侧滑面板
+	                origin: {},
+	                operType: 'add',
+	                allpks: [] //所有 data 的 id 属性集合
+	            },
+	            currentIndex: -1
+	        };
+	        // 是否获取到多语的标识，让cell正确更新
+	        _this.isGetPlatform = false;
+	        return _this;
+	    }
+	
+	    EditTable.prototype.componentWillMount = function componentWillMount() {
+	        var data = this.props.data;
+	
+	        this.setState({
+	            table: _extends({}, this.state.table, { rows: data })
+	        });
+	    };
+	    //为了回传Table的行数据
+	
+	
+	    EditTable.prototype.componentDidMount = function componentDidMount() {
+	        var onRef = this.props.onRef;
+	
+	        onRef && onRef(this);
+	    };
+	
+	    EditTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        var oldData = this.props.data;
+	        var newData = nextProps.data;
+	        var table = this.state.table;
+	
+	        if (newData !== oldData && newData.length !== oldData.length) {
+	            this.setState({
+	                table: _extends.apply(undefined, _toConsumableArray(table).concat([{ rows: newData }]))
+	            });
+	        }
+	    };
+	
+	    //获取表格数据时触发的回调函数
+	
+	
+	    /**把index行设置为选中行 */
+	    EditTable.prototype.focusRowByIndex = function focusRowByIndex(index) {
+	        this.setState({
+	            currentIndex: index
+	        });
+	    };
+	    /**设置当前点击行 */
+	
+	
+	    EditTable.prototype.setClickRowIndex = function setClickRowIndex(record, index) {
+	        var data = { record: record, index: index };
+	        // this.table.currentInfo = data;
+	    };
+	
+	    /**
+	     * 创建 EditTable
+	     * @param {*} props 
+	     * @param {*} edittable_dom 
+	     * @param {*} isGetPlatform 
+	     */
+	
+	
+	    EditTable.prototype.createEditTable = function createEditTable(props, edittable_dom, isGetPlatform) {
+	        var _this2 = this;
+	
+	        // 分页显示最多按钮
+	        var MAX_BUTTONS = 5;
+	        // 获取table的meta信息 注意异步时候 meta中没有此id 为undefined
+	
+	        var columns = props.columns,
+	            moduleId = props.moduleId,
+	            pageScope = props.pageScope,
+	            config = _objectWithoutProperties(props, ['columns', 'moduleId', 'pageScope']);
+	
+	        var meta = {};
+	        // let { renderItem } = pageScope.state;
+	        var renderItem = {};
+	        // 将缓存的数据方法组件的state上
+	        // let myEditData = pageScope.myTableData.myEditData[moduleId];
+	        // if (myEditData) {
+	        //     this.state.table = myEditData;
+	        //     pageScope.myTableData.myEditData[moduleId] = null;
+	        // }
+	        // if (!meta || meta.moduletype !== 'table') return;
+	        // 整体引用当前table数据
+	        var table = this.state.table;
+	        // 多语
+	        var json = this.state.json;
+	        var _table$rows = table.rows,
+	            rows = _table$rows === undefined ? [] : _table$rows,
+	            _table$checkedAll = table.checkedAll,
+	            checkedAll = _table$checkedAll === undefined ? false : _table$checkedAll,
+	            _table$disabledAll = table.disabledAll,
+	            disabledAll = _table$disabledAll === undefined ? false : _table$disabledAll,
+	            _table$indeterminate = table.indeterminate,
+	            indeterminate = _table$indeterminate === undefined ? false : _table$indeterminate,
+	            _table$model = table.model,
+	            model = _table$model === undefined ? false : _table$model,
+	            _table$origin = table.origin,
+	            origin = _table$origin === undefined ? null : _table$origin,
+	            _table$operType = table.operType,
+	            operType = _table$operType === undefined ? 'add' : _table$operType,
+	            modelIndex = table.modelIndex,
+	            _table$modelValue = table.modelValue,
+	            modelValue = _table$modelValue === undefined ? null : _table$modelValue,
+	            modelScale = table.modelScale,
+	            _table$modelDisabled = table.modelDisabled,
+	            modelDisabled = _table$modelDisabled === undefined ? false : _table$modelDisabled,
+	            _table$focusIndex = table.focusIndex,
+	            focusIndex = _table$focusIndex === undefined ? -1 : _table$focusIndex;
+	        // 展示在页面上的数据
+	        // status: '0'(编辑态)，'1'()，'2'()，'3'()
+	
+	        var tablePageData = rows.filter(function (e) {
+	            return e.status != '3';
+	        });
+	        // 左侧多选框
+	        // if (config && config.selectedChange && typeof config.selectedChange === 'function') {
+	        //     table.selectedChange = config.selectedChange;
+	        // } else {
+	        //     table.selectedChange = null;
+	        // }
+	
+	        // if (config && typeof config.selectedChange === 'function') {
+	        //     table.statusChange = config.statusChange;
+	        // }
+	        //侧拉面板data
+	        // let tableModeldata = pageScope.state.tableModeldata[moduleId] || {
+	        //     rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+	        //     status: '0',
+	        //     values: {}
+	        // };
+	
+	        //计算行号，存在 numberindex 字段中
+	        tablePageData.map(function (item, index) {
+	            var values = item.values;
+	            var rowsLenght = 1;
+	            if ((0, _utils.isFunction)(config.merge) && (0, _utils.isObj)(config.merge(index, 'numberindex')) && config.merge(index, 'numberindex').rowsLength) {
+	                rowsLenght = config.merge(index, 'numberindex').rowsLength;
+	            }
+	            values.numberindex = { value: '' + (index / rowsLenght + 1) };
+	        });
+	        // 去掉设置为隐藏的列
+	        var tempColums = (0, _utils.deepClone)(columns.filter(function (item) {
+	            return !!item.visible;
+	        }));
+	        // const verify = {};
+	        // let stateVerify = pageScope.myTable[moduleId];
+	
+	        // 递归处理添加日期标识
+	        // setDTOpen(tempColums, verify, stateVerify);
+	        // 日期控件编辑前处理加了DTOpen
+	        // pageScope.myTable[moduleId] = {};
+	        // pageScope.myTable[moduleId].verify = verify;
+	
+	        // 将有onBeforeEvent的时候存在数据上，以后有用的时候用
+	        if (config && config.onBeforeEvent && typeof config.onBeforeEvent == 'function') {
+	            table.onBeforeEvent = config.onBeforeEvent;
+	        } else {
+	            table.onBeforeEvent = null;
+	        }
+	
+	        // 序号开关 默认始终显示序号
+	        if (config && config.showIndex && !(0, _utils.checkHasIndex)(columns) && json) {
+	            tempColums.unshift({
+	                label: '序号',
+	                title: '序号',
+	                attrcode: 'numberindex',
+	                dataIndex: 'numberindex',
+	                className: 'table-index',
+	                visible: true,
+	                itemtype: 'customer',
+	                width: '60px'
+	            });
+	        }
+	        columns = this.handleMeta.call(this, tempColums, meta, moduleId, config, renderItem, model, edittable_dom, pageScope, isGetPlatform);
+	
+	        // pageSize事件
+	        var pageSizeChange = function pageSizeChange(val) {
+	            // 如果表格没有数据，则不能使用该方法
+	            if (table.allpks.length <= 0) {
+	                return;
+	            }
+	            var total = table.pageInfo.total;
+	            table.pageInfo.pageSize = +val;
+	            table.pageInfo.pageIndex = 1;
+	            table.pageInfo.totalPage = Math.ceil(total / table.pageInfo.pageSize);
+	
+	            if (config && config.handlePageInfoChange) {
+	                config.handlePageInfoChange(_extends({}, pageScope.props, pageScope.output), config, splitPks(table.allpks, table.pageInfo.pageIndex, table.pageInfo.pageSize), total);
+	            }
+	        };
+	        // pageIndex 事件
+	        var pageIndexChange = function pageIndexChange(val) {
+	            // 如果表格没有数据，则不能使用该方法
+	            if (table.allpks.length <= 0) {
+	                return;
+	            }
+	            var total = table.pageInfo.total;
+	            table.pageInfo.pageIndex = val;
+	
+	            if (config && config.handlePageInfoChange) {
+	                config.handlePageInfoChange(_extends({}, pageScope.props, pageScope.output), config, splitPks(table.allpks, table.pageInfo.pageIndex, table.pageInfo.pageSize), total);
+	            }
+	        };
+	        {} /* 
+	           // 合计行列配置
+	           let totalColums = gettotalColums(columns);
+	           // 合计行数据
+	           let totalData = [];
+	           // 处理过精度的合计行数据
+	           let finalTotalData = [];
+	           // 合计行精度
+	           let totalScale = null;
+	           // 当展示合计行的时候执行
+	           if ((config && config.showTotal) || getMetaIsTotal(totalColums)) {
+	              // 不展示合计行时不执行
+	              totalData = _getTotalData.call(pageScope, totalColums, tablePageData, moduleId, config);
+	              totalScale = getTotalScale(totalColums, tablePageData);
+	           }
+	           if (config && config.showIndex && !config.showCheck && (config.showTotal || getMetaIsTotal(totalColums)) && json) {
+	           // 有序好没有多选框序号位置为合计
+	           totalColums.forEach(eve => {
+	              // 因为有重复渲染，所以在没有多选框的时候,将合计单元格设为80px
+	              if (eve.key === 'numberindex') {
+	              eve.width = '60px';
+	              }
+	           });
+	           totalData[0].numberindex = json['table002'];
+	           }
+	           */
+	        // let fixed = table.checkboxFix ? {} : { fixed: 'left' };
+	        {} /* 
+	           let defaultColumns = [
+	              {
+	                  title: (
+	                  <div>
+	                      <Checkbox
+	                      className="table-checkbox"
+	                      checked={checkedAll}
+	                      disabled={disabledAll}
+	                      indeterminate={indeterminate && !checkedAll}
+	                      tabindex="-1"
+	                      onChange={onAllCheckChange.bind(this, moduleId, config, pageScope)}
+	                      />
+	                  </div>
+	                  ),
+	                  key: 'checkbox',
+	                  dataIndex: 'checkbox',
+	                  className: 'table-checkbox-class',
+	                  visible: true,
+	                  itemtype: 'customer',
+	                  ...fixed,
+	                  width: '60px',
+	                  render: (text, record, index) => {
+	                  return {
+	                      children: (
+	                      <div>
+	                          <Checkbox
+	                          className="table-checkbox"
+	                          checked={!!record.selected}
+	                          disabled={!!record.disabled}
+	                          tabindex="-1"
+	                          onChange={() => {
+	                              onCheckboxChange.call(this, moduleId, text, record, index, config, pageScope);
+	                          }}
+	                          onMouseDown={e => {
+	                              e.preventDefault();
+	                          }}
+	                          onClick={e => {
+	                              // 阻止冒泡防止触发，表格行的click事件
+	                              e.stopPropagation();
+	                          }}
+	                          />
+	                      </div>
+	                      ),
+	                      props: isFunction(config.merge) ? config.merge(index, 'checkbox') : {}
+	                  };
+	                  }
+	              }
+	           ];
+	           */
+	        // if (config && config.showCheck) {
+	        //     // columns = defaultColumns.concat(columns);
+	        //     ComplexTable = multiSelect(ComplexTable,Checkbox);
+	        // }
+	        // if (config && config.showCheck && (config.showTotal || getMetaIsTotal(totalColums)) && json) {
+	        //     // 合并列增加字段
+	        //     totalColums.unshift({
+	        //         key: 'checkbox',
+	        //         dataIndex: 'checkbox',
+	        //         width: '60px',
+	        //         fixed: 'left'
+	        //     });
+	        //     totalData[0].checkbox = json['table002'];
+	        // }
+	        // if (totalScale !== null) {
+	        //     // 不展示合计行时不执行
+	        //     finalTotalData = getFinalTotalData(totalData[0], totalScale);
+	        // }
+	        //添加侧滑面板的动画
+	        var animation = function (model) {
+	            var usual = {
+	                mask: 'edit-table-modal-mask animated',
+	                dialog: 'edit-table-modal-dialog animated'
+	            };
+	            switch (model) {
+	                case 'origin':
+	                    return usual;
+	                    break;
+	                case 'open':
+	                    usual.mask += ' fadeIn';
+	                    usual.dialog += ' slideInRight';
+	                    break;
+	                case 'close':
+	                    usual.mask += ' fadeOut';
+	                    usual.dialog += ' slideOutRight';
+	                    break;
+	                default:
+	                    break;
+	            }
+	            return usual;
+	        }(model);
+	        var screenWidth = window.screen.width || 768;
+	        var rowHeight = 30; //--liuxis
+	        var tableMaxHeight = 300;
+	        // simple和edittable设置自定义高度的
+	        var tableHight = config && config.height ? { height: config.height } : { minHeight: tableMaxHeight };
+	        // 表格body默认高度
+	        var bodyHeight = config && config.height ? config.height : tableMaxHeight + 'px';
+	        var regex = new RegExp('px');
+	        bodyHeight = String(bodyHeight).replace(regex, '');
+	        // 表格渲染所有行的行高
+	        var rowsHeight = tablePageData.length * rowHeight;
+	        // 后端排序和前端排序, 不传config.sort就走前端排序的sort逻辑
+	        var sort = config.sort ? { sort: config.sort } : {
+	            sort: {
+	                mode: 'single',
+	                backSource: false,
+	                sortFun: function sortFun(sortParam, sortData) {
+	                    var sortObj = {};
+	                    var myEditScope = pageScope.myTable.myEditTable[moduleId];
+	                    sortParam.forEach(function (item) {
+	                        sortObj[item.field] = item;
+	                    });
+	                    // 处理排序多表头
+	                    getSortColums({ colums: pageScope.state.meta[moduleId].items, sortObj: sortObj });
+	                    myEditScope.setState({ table: _extends({}, _this2.state.table, { rows: sortData }) });
+	                }
+	            }
+	        };
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'lightapp-component-editTable', ref: 'table' },
+	                _react2['default'].createElement(
+	                    'div',
+	                    {
+	                        className: (_DEFAULT.isMultipleHead ? ' multiple-head-border ' : '') + ' ' + (rowsHeight <= bodyHeight ? 'clear-right-scrollBar' : '')
+	                    },
+	                    _react2['default'].createElement(ComplexTable, _extends({
+	                        rowKey: props.rowKey ? props.rowKey : "rowid",
+	                        height: config && !config.multipleRowCell && rowHeight,
+	                        headerHeight: _DEFAULT.isMultipleHead ? undefined : 30
+	                        // ref={dom => (pageScope.primordialTable[moduleId] = findDOMNode(dom))}
+	                        // isTotal={!!((config && config.showTotal) || getMetaIsTotal(totalColums))}
+	                        // totalData={finalTotalData}
+	                        // totalColums={totalColums}
+	                        , data: tablePageData,
+	                        columns: columns,
+	                        currentIndex: focusIndex,
+	                        isDrag: config && config.isDrag,
+	                        bodyStyle: _extends({}, tableHight),
+	                        useFixedHeader: true,
+	                        scroll: {
+	                            x: true,
+	                            y: config && config.height ? config.height : tableMaxHeight
+	                        },
+	                        haveExpandIcon: function haveExpandIcon() {
+	                            return true;
+	                        },
+	                        rowClassName: function rowClassName(record, current) {
+	                            return table.currentIndex === current ? 'editTable-selected-row' : '';
+	                        },
+	                        onRowClick: function onRowClick(record, index, e) {
+	                            // 行点击操作 1、根据index设置行样式 2、自定义点击事件
+	                            _this2.focusRowByIndex(index);
+	                            _this2.setClickRowIndex(record, index);
+	                            if (config && typeof config.onRowClick === 'function') {
+	                                config.onRowClick.call(_this2, record, index, e);
+	                            }
+	                        },
+	                        onRowDoubleClick: function onRowDoubleClick(record, index, e) {
+	                            _this2.focusRowByIndex(index);
+	                            _this2.setClickRowIndex(record, index);
+	                            // 行双击的方法 判断配置文件是否有，并且config.onRowDoubleClick是否是函数  zhanghengh 18/5/8
+	                            if (config && config.onRowDoubleClick && typeof config.onRowDoubleClick === 'function') {
+	                                config.onRowDoubleClick.call(_this2, record, index, e);
+	                            }
+	                        }
+	                        // 是否取消滚动分页
+	                        , lazyload: config.lazyload
+	                    }, sort))
+	                ),
+	                config && config.showPagination && meta.status === 'browse' && _react2['default'].createElement(
+	                    'div',
+	                    { className: 'editTable-component-paginationDiv' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'page-size' },
+	                        _react2['default'].createElement(
+	                            _beeSelect2['default'],
+	                            {
+	                                value: String(table.pageInfo.pageSize),
+	                                style: { width: 85 },
+	                                onSelect: function onSelect(val) {
+	                                    pageSizeChange.call(_this2, val);
+	                                },
+	                                className: 'fl',
+	                                showClear: false
+	                            },
+	                            _react2['default'].createElement(
+	                                Option,
+	                                { value: '10' },
+	                                _react2['default'].createElement(
+	                                    NCTooltip,
+	                                    {
+	                                        className: 'tooltip-word-color',
+	                                        placement: 'top',
+	                                        delay: 1,
+	                                        overlay: '10' + (json && json['table_pagination002']) + '/' + (json && json['table_pagination001'])
+	                                    },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'select-single-line-and-ellipsis' },
+	                                        '10' + (json && json['table_pagination002']) + '/' + (json && json['table_pagination001'])
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                Option,
+	                                { value: '20' },
+	                                _react2['default'].createElement(
+	                                    NCTooltip,
+	                                    {
+	                                        className: 'tooltip-word-color',
+	                                        placement: 'top',
+	                                        delay: 1,
+	                                        overlay: '20' + (json && json['table_pagination003']) + '/' + (json && json['table_pagination001'])
+	                                    },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'select-single-line-and-ellipsis' },
+	                                        '20' + (json && json['table_pagination003']) + '/' + (json && json['table_pagination001'])
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                Option,
+	                                { value: '50' },
+	                                _react2['default'].createElement(
+	                                    NCTooltip,
+	                                    {
+	                                        className: 'tooltip-word-color',
+	                                        placement: 'top',
+	                                        delay: 1,
+	                                        overlay: '50' + (json && json['table_pagination003']) + '/' + (json && json['table_pagination001'])
+	                                    },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'select-single-line-and-ellipsis' },
+	                                        '50' + (json && json['table_pagination003']) + '/' + (json && json['table_pagination001'])
+	                                    )
+	                                )
+	                            ),
+	                            _react2['default'].createElement(
+	                                Option,
+	                                { value: '100' },
+	                                _react2['default'].createElement(
+	                                    NCTooltip,
+	                                    {
+	                                        className: 'tooltip-word-color',
+	                                        placement: 'top',
+	                                        delay: 1,
+	                                        overlay: '100' + (json && json['table_pagination003']) + '/' + (json && json['table_pagination001'])
+	                                    },
+	                                    _react2['default'].createElement(
+	                                        'div',
+	                                        { className: 'select-single-line-and-ellipsis' },
+	                                        '100' + (json && json['table_pagination003']) + '/' + (json && json['table_pagination001'])
+	                                    )
+	                                )
+	                            )
+	                        ),
+	                        !!+table.pageInfo.total && _react2['default'].createElement(
+	                            'span',
+	                            { className: 'fl NC_total' },
+	                            ' ',
+	                            (json && json['table_pagination002']) + '\n                                                ' + table.pageInfo.total + '\n                                                ' + (json && json['table_pagination003'])
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'table-pagination' },
+	                        _react2['default'].createElement(NCPagination, {
+	                            prev: true,
+	                            next: true,
+	                            boundaryLinks: true,
+	                            items: Number(table.pageInfo.totalPage),
+	                            maxButtons: Number(table.pageInfo.totalPage) === 7 ? 6 : MAX_BUTTONS,
+	                            activePage: Number(table.pageInfo.pageIndex),
+	                            onSelect: function onSelect(val) {
+	                                pageIndexChange.call(_this2, val);
+	                            }
+	                        })
+	                    )
+	                )
+	            ),
+	            model === 'open' && _react2['default'].createElement(SideBox, {
+	                model: model,
+	                origin: origin,
+	                config: config,
+	                modelIndex: modelIndex,
+	                moduleId: moduleId,
+	                operType: operType,
+	                tableScope: this,
+	                renderItem: renderItem,
+	                pageScope: pageScope,
+	                mask: animation.mask,
+	                dialog: animation.dialog,
+	                modelValue: modelValue,
+	                modelScale: modelScale,
+	                tempColums: tempColums,
+	                edittable_dom: edittable_dom,
+	                tableModeldata: tableModeldata,
+	                modelDisabled: modelDisabled
+	            })
+	        );
+	    };
+	
+	    /**
+	     * 多表头函数
+	     * @param {*} items 表格列数据 columns
+	     * @param {*} meta 
+	     * @param {*} moduleId 
+	     * @param {*} config 
+	     * @param {*} renderItem 
+	     * @param {*} model 
+	     * @param {*} edittable_dom 
+	     * @param {*} pageScope 
+	     * @param {*} isGetPlatform 
+	     */
+	
+	
+	    EditTable.prototype.handleMeta = function handleMeta(items, meta, moduleId, config, renderItem, model, edittable_dom, pageScope, isGetPlatform) {
+	        var _this3 = this;
+	
+	        return items.map(function (item) {
+	            // if (item.children) {
+	            //     // 多表头情况
+	            //     _DEFAULT.isMultipleHead = true;
+	            //     handleParentMeta(item);
+	            //     return {
+	            //         ...item,
+	            //         children: handleMeta.call(
+	            //             this,
+	            //             item.children,
+	            //             meta,
+	            //             moduleId,
+	            //             config,
+	            //             renderItem,
+	            //             model,
+	            //             edittable_dom,
+	            //             pageScope,
+	            //             isGetPlatform
+	            //         )
+	            //     };
+	            // }
+	            return _this3.handleChildMeta.call(_this3, item, meta, moduleId, config, renderItem, model, edittable_dom, pageScope, isGetPlatform);
+	        });
+	    };
+	    /**
+	     * 处理子表头
+	     * @param {*} item 表格列数据 columns 中的每一项
+	     * @param {*} meta 
+	     * @param {*} moduleId 
+	     * @param {*} config 
+	     * @param {*} renderItem 
+	     * @param {*} model 
+	     * @param {*} edittable_dom 
+	     * @param {*} pageScope 
+	     * @param {*} isGetPlatform 
+	     */
+	
+	
+	    EditTable.prototype.handleChildMeta = function handleChildMeta(item, meta, moduleId, config, renderItem, model, edittable_dom, pageScope, isGetPlatform) {
+	        var _this4 = this;
+	
+	        var ICode = item.attrcode,
+	            IType = item.itemtype,
+	            IReq = item.required,
+	            metaDisabled = item.disabled,
+	            ILable = item.label,
+	            IChildren = item.children,
+	            renderStatus = item.renderStatus,
+	            color = item.color,
+	            IScale = item.scale,
+	            hyperlinkflag = item.hyperlinkflag,
+	            LanguageMeta = item.languageMeta,
+	            _item$isSort = item.isSort,
+	            isSort = _item$isSort === undefined ? true : _item$isSort,
+	            Isorter = item.sorter,
+	            headerClick = item.headerClick;
+	        var isEdit = this.props.isEdit;
+	
+	        var render = void 0;
+	        // 表格状态
+	        var status = isEdit ? 'edit' : 'browse';
+	        // 每个column单项的render函数
+	        if (IType === 'customer' && ICode !== 'numberindex') {
+	            render = item.render;
+	        } else {
+	            render = function render(text, record, index) {
+	                // 比如操作列不走此分支
+	                var _ref = [record.values],
+	                    values = _ref[0],
+	                    editItem = _ref[1],
+	                    value = _ref[2],
+	                    display = _ref[3],
+	                    scale = _ref[4],
+	                    disabled = _ref[5],
+	                    isEdit = _ref[6];
+	                // 如果有这个键取这个键的value值，否则为null
+	
+	                value = (0, _utils.isObj)(values[ICode]) ? (0, _utils.typeFormat)(values[ICode].value, IType) : null;
+	                display = (0, _utils.isObj)(values[ICode]) ? values[ICode].display : null;
+	                scale = (0, _utils.isObj)(values[ICode]) ? !(0, _utils.isWrong)(values[ICode].scale) && values[ICode].scale != '-1' ? +values[ICode].scale : +IScale || 0 : +IScale || 0;
+	                // true为不可编辑
+	                disabled = (0, _utils.isObj)(values[ICode]) ? values[ICode].disabled || false : false;
+	                // true为渲染控件
+	                isEdit = (0, _utils.isObj)(values[ICode]) ? values[ICode].isEdit || false : false;
+	                return _react2['default'].createElement(_Cell2['default'], {
+	                    text: text,
+	                    item: item,
+	                    refcode: item.refcode,
+	                    ICode: ICode,
+	                    scale: scale,
+	                    value: value,
+	                    IType: IType,
+	                    isEdit: isEdit,
+	                    config: config,
+	                    record: record,
+	                    model: model,
+	                    index: index,
+	                    values: values,
+	                    display: display,
+	                    moduleId: moduleId,
+	                    disabled: disabled,
+	                    tableScope: _this4,
+	                    pageScope: pageScope,
+	                    renderItem: renderItem,
+	                    tableStatus: status,
+	                    renderStatus: renderStatus,
+	                    LanguageMeta: LanguageMeta,
+	                    metaDisabled: metaDisabled,
+	                    hyperlinkflag: hyperlinkflag,
+	                    edittable_dom: edittable_dom,
+	                    isGetPlatform: isGetPlatform,
+	                    tableInfo: _this4.state.table,
+	                    focusRowByIndex: _this4.focusRowByIndex,
+	                    setClickRowIndex: _this4.setClickRowIndex
+	                });
+	            };
+	        }
+	        // 缓存render，防止递归造成栈溢出
+	        // let newRender = render;
+	        // render = (text, record, index) => {
+	        //     /**
+	        //      * @desc 为了查找过程更快，把属性名设置成唯一的, 此属性用于自动聚焦
+	        //      * @type {{[p: string]: string}}
+	        //      * @author jinfjk
+	        //      */
+	        //     let hotKeyPrefix = CONFIG.hotKeyModuleIdPrefix;
+	        //     let autoFocusIdentifier = {
+	        //         [`${hotKeyPrefix}-${moduleId}-${ICode}-${index}`]: `${hotKeyPrefix}-${moduleId}-${ICode}-${index}`
+	        //     };
+	        //     // 给每个单元格添加上测试标记，不管什么状态
+	        //     return {
+	        //         children: (
+	        //         <div
+	        //             {...autoFocusIdentifier}
+	        //             className={`${config && isFunction(config.setCellClass) && config.setCellClass(index, record, ICode)}`}
+	        //         >
+	        //             {newRender(text, record, index)}
+	        //         </div>
+	        //         ),
+	        //         props: isFunction(config.merge) ? config.merge(index, ICode) : {}
+	        //     };
+	        // };
+	        var title = function (req, dis, color, sta) {
+	            // req为true为必输  dis为false为可编辑
+	            return _react2['default'].createElement(
+	                'div',
+	                {
+	                    className: 'edittable-title single-line-and-ellipsis'
+	                    // 增加过滤的交互，给表格加个onclick事件
+	                    , onClick: function onClick() {
+	                        (0, _utils.isFunction)(headerClick) && headerClick(_extends({}, _this4.props), ICode);
+	                    },
+	                    style: IType === 'number' ? { paddingRight: '9px', textAlign: 'right', color: color } : { color: color }
+	                },
+	                _react2['default'].createElement(
+	                    'span',
+	                    { className: '' + (ICode !== 'numberindex' ? 'title-vertical-center' : '') },
+	                    req && sta && _react2['default'].createElement(
+	                        'i',
+	                        { className: 'mark-required' },
+	                        '*'
+	                    ),
+	                    item.label
+	                )
+	            );
+	        }(IReq, metaDisabled, color, status === 'edit');
+	        item.title = _react2['default'].createElement(
+	            'div',
+	            { className: '' + (ICode !== 'numberindex' ? 'title-container' : '') },
+	            title
+	        );
+	        item.key = ICode;
+	        item.dataIndex = ICode;
+	
+	        // 添加默认宽度datetimepicker
+	        if ((0, _utils.isWrong)(item.width)) {
+	            if (item.itemtype === 'datetimepicker') {
+	                item.width = '240px';
+	            } else if (item.itemtype === 'rangepicker') {
+	                item.width = '390px';
+	            } else if (CONFIG.timeTypes.includes(item.itemtype)) {
+	                item.width = '160px';
+	            } else {
+	                item.width = '120px';
+	            }
+	        }
+	        // 为所有列添加默认前端排序功能， 通过模版的isSort字段和自定义sorter配置
+	        if (isSort && !(0, _utils.isFunction)(Isorter)) {
+	            // switch (true) {
+	            //     case IType === 'number':
+	            //         item.sorter = (front, behind) => {
+	            //             const frontValue = front.values[ICode] ? front.values[ICode].value || '0' : '0';
+	            //             const behindValue = behind.values[ICode] ? behind.values[ICode].value || '0' : '0';
+	            //             return Subtr(Number(frontValue.replace(/,/g, '')), Number(behindValue.replace(/,/g, '')));
+	            //         };
+	            //         break;
+	            //     case CONFIG.timeTypes.includes(IType):
+	            //         item.sorter = (front, behind) => {
+	            //             const frontValue = front.values[ICode] ? front.values[ICode].value || '0' : '0';
+	            //             const behindValue = behind.values[ICode] ? behind.values[ICode].value || '0' : '0';
+	            //             return Number(new Date(frontValue).getTime()) - Number(new Date(behindValue).getTime());
+	            //         };
+	            //         break;
+	            //     case CONFIG.displayTypes.includes(IType):
+	            //         item.sorter = (front, behind) => {
+	            //             const frontValue = String(front.values[ICode] ? front.values[ICode].display || '' : '');
+	            //             const behindValue = String(behind.values[ICode] ? behind.values[ICode].display || '' : '');
+	            //             if (behindValue > frontValue) {
+	            //                 return -1;
+	            //             } else if (behindValue < frontValue) {
+	            //                 return 1;
+	            //             } else {
+	            //                 return 0;
+	            //             }
+	            //         };
+	            //         break;
+	            //     case IType === 'label':
+	            //         item.sorter = (front, behind) => {
+	            //             const fvalue = front.values[ICode] ? front.values[ICode].value || '' : '';
+	            //             const fdisplay = front.values[ICode] ? front.values[ICode].display : '';
+	            //             const bvalue = behind.values[ICode] ? behind.values[ICode].value || '' : '';
+	            //             const bdisplay = behind.values[ICode] ? behind.values[ICode].display : '';
+	            //             const frontValue = String(isNullOrVoid(fdisplay) ? fvalue : fdisplay);
+	            //             const behindValue = String(isNullOrVoid(bdisplay) ? bvalue : bdisplay);
+	            //             if (behindValue > frontValue) {
+	            //                 return -1;
+	            //             } else if (behindValue < frontValue) {
+	            //                 return 1;
+	            //             } else {
+	            //                 return 0;
+	            //             }
+	            //         };
+	            //         break;
+	            //     case ICode !== 'numberindex' && ICode !== 'opr':
+	            //         item.sorter = (front, behind) => {
+	            //             const frontValue = String(front.values[ICode] ? front.values[ICode].value || '' : '');
+	            //             const behindValue = String(behind.values[ICode] ? behind.values[ICode].value || '' : '');
+	            //             if (behindValue > frontValue) {
+	            //                 return -1;
+	            //             } else if (behindValue < frontValue) {
+	            //                 return 1;
+	            //             } else {
+	            //                 return 0;
+	            //             }
+	            //         };
+	            //         break;
+	            // }
+	        }
+	        return _extends({}, item, { render: render });
+	    };
+	
+	    /**
+	     * 添加日期框打开收起标识
+	     * @param {*} tempColums 
+	     * @param {*} verify 
+	     * @param {*} stateVerify 
+	     */
+	
+	
+	    EditTable.prototype.setDTOpen = function (_setDTOpen) {
+	        function setDTOpen(_x, _x2, _x3) {
+	            return _setDTOpen.apply(this, arguments);
+	        }
+	
+	        setDTOpen.toString = function () {
+	            return _setDTOpen.toString();
+	        };
+	
+	        return setDTOpen;
+	    }(function (tempColums, verify, stateVerify) {
+	        tempColums.forEach(function (eve) {
+	            // 日期控件编辑前处理加了DTOpen
+	            var attrcode = eve.attrcode,
+	                children = eve.children;
+	
+	            if (!isUndefined(children)) {
+	                // 判断和并列的情况
+	                setDTOpen(children, verify, stateVerify);
+	            } else {
+	                verify[attrcode] = stateVerify && stateVerify.verify[attrcode] || { DTOpen: false, selectOpen: false };
+	            }
+	        });
+	    });
+	
+	    EditTable.prototype.render = function render() {
+	        var _this5 = this;
+	
+	        // console.log('渲染表格');
+	        var _props$moduleId = this.props.moduleId,
+	            moduleId = _props$moduleId === undefined ? '' : _props$moduleId;
+	
+	        return _react2['default'].createElement(
+	            'div',
+	            _extends({ ref: function ref(e) {
+	                    return _this5.edittable_dom = e;
+	                } }, this.props),
+	            _react2['default'].createElement(
+	                'div',
+	                { id: '' + moduleId },
+	                this.createEditTable.call(this, this.props, this.edittable_dom, this.isGetPlatform)
+	            )
+	        );
+	    };
+	
+	    return EditTable;
+	}(_react.Component);
+	
+	EditTable.propTypes = propTypes;
+	EditTable.defaultProps = defaultProps;
+	exports['default'] = EditTable;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 727 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeTooltip = __webpack_require__(107);
+	
+	var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
+	
+	var _nc_FormControl = __webpack_require__(728);
+	
+	var _nc_FormControl2 = _interopRequireDefault(_nc_FormControl);
+	
+	var _beeInputNumber = __webpack_require__(574);
+	
+	var _beeInputNumber2 = _interopRequireDefault(_beeInputNumber);
+	
+	var _beeSelect = __webpack_require__(538);
+	
+	var _beeSelect2 = _interopRequireDefault(_beeSelect);
+	
+	var _Item = __webpack_require__(729);
+	
+	var _Item2 = _interopRequireDefault(_Item);
+	
+	var _config = __webpack_require__(607);
+	
+	var _config2 = _interopRequireDefault(_config);
+	
+	var _utils = __webpack_require__(606);
+	
+	var _getFocusRowIndex = __webpack_require__(730);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } // 单元格组件部分
+	
+	// import pureRender from './pureRender';
+	// import { createEditableItem } from './create';
+	// import { NCTooltip as Tooltip } from '../../base';
+	
+	// import linkTo from '../../api/linkTo';
+	
+	// import {
+	//     isTimeType,
+	//     changeTime,
+	//     getLangCode,
+	// } from '../../public';
+	
+	
+	var Option = _beeSelect2['default'].Option;
+	// 表格侧拉编辑前siwtch类型的标识
+	var switchContinue = true;
+	// 表格侧拉编辑前checkbox_siwtch类型的标识
+	var checkboxSwitchContinue = true;
+	// 表格侧拉编辑前focus类型的标识
+	var blurContinue = true;
+	
+	// @pureRender()
+	
+	var Cell = function (_Component) {
+	    _inherits(Cell, _Component);
+	
+	    function Cell(props) {
+	        _classCallCheck(this, Cell);
+	
+	        var _this2 = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this2.hanlder = function () {
+	            var _this2$props = _this2.props,
+	                item = _this2$props.item,
+	                record = _this2$props.record,
+	                tableScope = _this2$props.tableScope;
+	
+	            if (!(0, _utils.isObj)(record.values[item.attrcode])) {
+	                record.values[item.attrcode] = {};
+	            }
+	            record.values[item.attrcode].isEdit = true;
+	            tableScope.setState({
+	                table: tableScope.state.table
+	            });
+	        };
+	
+	        _this2.hanlderBeforeEvent = function (isBoolean, isContinue, isPromise) {
+	            if (isBoolean && isContinue) {
+	                _this2.hanlder();
+	            } else if (!isBoolean) {
+	                var dist = isPromise ? isContinue : isContinue();
+	                dist.then(function (data) {
+	                    !!data && _this2.hanlder();
+	                });
+	            }
+	        };
+	
+	        _this2.handleBrowse = function (IType, display, value, scale, attrcode, languageMeta, values) {
+	            var json = this.state.json;
+	            switch (true) {
+	                case (0, _utils.isBoolean)(IType):
+	                    return value == 'Y' || value == true ? json && json['table_yes'] : json && json['table_no'];
+	                // case isTimeType(IType):
+	                //     if (IType === 'datetimepicker') {
+	                //         // 时间这里先这样判断，有好方法再说
+	                //         return changeTime(value, 'YYYY-MM-DD HH:mm:ss');
+	                //     } else if (IType === 'timepicker' || IType === 'datePickerNoTimeZone') {
+	                //         return value;
+	                //     } else {
+	                //         return changeTime(value);
+	                //     }
+	                case IType === 'number':
+	                    // 表格浏览态加了四舍五入
+	                    return (0, _utils.formatAcuracy)((0, _utils.ncRounding)(value, scale), scale);
+	                case IType === 'residtxt':
+	                    // 这里是多语文本的编辑显示逻辑
+	                    // attrcode字段对应的value是主语言
+	                    // 显示规则是有登陆语言显示登陆语言，登陆语言通过getLangCode获得，没有登陆语言显示主语言，attrcode字段对应的value，主语言语言在没有，就什么也不显示
+	                    var LangCode = getLangCode();
+	                    var loginLang = languageMeta.filter(function (i) {
+	                        return i.languageCode == LangCode;
+	                    });
+	                    if (loginLang.length > 0) {
+	                        loginLang[0].index === '1' ? loginLang[0].index = '' : '';
+	                        if (values[attrcode + loginLang[0].index] && values[attrcode + loginLang[0].index].value) {
+	                            value = values[attrcode + loginLang[0].index].value;
+	                            return value;
+	                        }
+	                        return value;
+	                    }
+	                    return value;
+	                default:
+	                    return (0, _utils.isNullOrVoid)(display) ? value : display;
+	            }
+	        };
+	
+	        _this2.handleClick = function () {
+	            var _this = _this2;
+	            var _this2$props2 = _this2.props,
+	                values = _this2$props2.values,
+	                item = _this2$props2.item,
+	                config = _this2$props2.config,
+	                record = _this2$props2.record,
+	                pageScope = _this2$props2.pageScope,
+	                ICode = _this2$props2.ICode,
+	                moduleId = _this2$props2.moduleId,
+	                disabled = _this2$props2.disabled,
+	                metaDisabled = _this2$props2.metaDisabled,
+	                index = _this2$props2.index;
+	
+	            setTimeout(function () {
+	                _this.props.setClickRowIndex({ record: record, index: index });
+	                if (disabled === 'off' || !disabled && !metaDisabled) {
+	                    // 如果当前单元格被禁用，就不渲染
+	                    if (config && typeof config.onBeforeEvent == 'function') {
+	                        var isContinue = config.onBeforeEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item, index, values[ICode], record);
+	                        var type = (0, _utils.testType)(isContinue);
+	                        switch (type) {
+	                            // true/flase
+	                            case 'Boolean':
+	                                _this2.hanlderBeforeEvent(true, isContinue);
+	                                break;
+	                            // 返回的是async函数
+	                            case 'AsyncFunction':
+	                                _this2.hanlderBeforeEvent(false, isContinue, false);
+	                                break;
+	                            // 返回的Promise对象
+	                            case 'Promise':
+	                                _this2.hanlderBeforeEvent(false, isContinue, true);
+	                                break;
+	                            // 取Boolean值
+	                            default:
+	                                _this2.hanlderBeforeEvent(true, !!isContinue);
+	                                break;
+	                        }
+	                        return false;
+	                    }
+	                    _this2.hanlder();
+	                    return false;
+	                }
+	            }, 0);
+	        };
+	
+	        _this2._createContent = function () {
+	            var _this2$props3 = _this2.props,
+	                IType = _this2$props3.IType,
+	                text = _this2$props3.text,
+	                index = _this2$props3.index,
+	                item = _this2$props3.item,
+	                IScale = _this2$props3.scale,
+	                config = _this2$props3.config,
+	                record = _this2$props3.record,
+	                model = _this2$props3.model,
+	                pageScope = _this2$props3.pageScope,
+	                edittable_dom = _this2$props3.edittable_dom,
+	                ICode = _this2$props3.ICode,
+	                moduleId = _this2$props3.moduleId,
+	                renderItem = _this2$props3.renderItem,
+	                renderStatus = _this2$props3.renderStatus,
+	                LanguageMeta = _this2$props3.LanguageMeta,
+	                metaDisabled = _this2$props3.metaDisabled,
+	                hyperlinkflag = _this2$props3.hyperlinkflag,
+	                tableScope = _this2$props3.tableScope,
+	                tableStatus = _this2$props3.tableStatus;
+	            //===========================================================================================
+	            // 比如操作列不走此分支
+	
+	            var _ref = [record.values],
+	                values = _ref[0],
+	                editItem = _ref[1],
+	                value = _ref[2],
+	                display = _ref[3],
+	                scale = _ref[4],
+	                disabled = _ref[5],
+	                isEdit = _ref[6];
+	            // 如果有这个键取这个键的value值，否则为null
+	
+	            value = (0, _utils.isObj)(values[ICode]) ? (0, _utils.typeFormat)(values[ICode].value, IType) : null;
+	            display = (0, _utils.isObj)(values[ICode]) ? values[ICode].display : null;
+	            scale = (0, _utils.isObj)(values[ICode]) ? !(0, _utils.isWrong)(values[ICode].scale) && values[ICode].scale != '-1' ? +values[ICode].scale : +IScale || 0 : +IScale || 0;
+	            // true为不可编辑
+	            disabled = (0, _utils.isObj)(values[ICode]) ? values[ICode].disabled || false : false;
+	            // true为渲染控件
+	            isEdit = (0, _utils.isObj)(values[ICode]) ? values[ICode].isEdit || false : false;
+	            //===========================================================================================
+	            // tableStatus = isEdit ? 'edit' : 'browse'
+	            // 编辑态isEdit = 'true' 且  不是label、customer类型  走编辑态   或者switch类型
+	            if (!_config2['default'].noEditType.includes(IType) && tableStatus === 'edit' || IType === 'switch_browse') {
+	                // if (isEdit || IType === "switch_browse" || IType === "checkbox_switch" || IType === "switch") {
+	                if (isEdit || IType === 'switch_browse') {
+	                    return _react2['default'].createElement(
+	                        'div',
+	                        {
+	                            className: 'edit-table-edit-line ' + (config.multipleRowCell ? '' : 'single-line-and-ellipsis'),
+	                            tabindex: '0'
+	                        },
+	                        _this2.createEditableItem.call(_this2, {
+	                            moduleId: moduleId,
+	                            config: config,
+	                            type: 'line',
+	                            renderItem: renderItem,
+	                            item: item,
+	                            index: index,
+	                            value: (0, _utils.typeFormat)(value, item.itemtype),
+	                            scale: scale,
+	                            disabled: disabled,
+	                            record: record,
+	                            model: model,
+	                            status: tableStatus === 'edit',
+	                            edittable_dom: edittable_dom,
+	                            pageScope: pageScope
+	                        })
+	                    );
+	                } else {
+	                    // !isEdit渲染td的文字区域  小铅笔这里有点问题，之后看一下
+	                    var tableItemValue = _this2.handleBrowse.call(tableScope, IType, display, value, scale, ICode, LanguageMeta, values);
+	                    return _react2['default'].createElement(
+	                        'div',
+	                        {
+	                            style: IType === 'number' ? { textAlign: 'right' } : {}
+	                            // onClick={e => {
+	                            // 之前在click写的切换状态时机
+	                            //   this.mousedown && this.handleClick(e);
+	                            //   this.mousedown = false;
+	                            // }}
+	                            , onMouseDown: function onMouseDown(eve) {
+	                                // 为了解决blur的比click快的问题，将切换状态时机改到onMouseDown中执行
+	                                // 这里为了保持和在click中执行一样的效果, 所以将行点击事件中的逻辑在这里也写了一份，但是e不一样, 但是应该不会影响逻辑，所以将这里的e穿出去防止报错
+	                                _this2.props.focusRowByIndex.call(_this2, index);
+	                                if (config && typeof config.onRowClick === 'function') {
+	                                    config.onRowClick.call(_this2, record, index, eve);
+	                                }
+	                                _this2.handleClick();
+	                                eve.preventDefault();
+	                            },
+	                            onFocus: function onFocus(e) {
+	                                // 记录当前行，虽然表格以提供setClickRowIndex方法，但内部调用setState方法，如果tab切换频繁会导致效率问题因此用新的方法实现
+	                                (0, _getFocusRowIndex.setFocusRowIndex)(index);
+	                                /*
+	                                * issue: 当业务组通过代码自动执行focus时为防止死循环添加判断
+	                                * resolve: 'sourceCapabilities' => which provides information about the physical device responsible for generating a touch event
+	                                *           如果是我们内部的代码执行focus，先给聚焦的元素添加ncExecuteFocus属性，如果有此属性就执行click方法
+	                                *           当前元素如果没有ncExecuteFocus就判断此事件是用户触发还是业务组的代码触发
+	                                * */
+	                                var sourceCapabilities = e.nativeEvent.sourceCapabilities;
+	                                // sourceCapabilities ie 下不能支持
+	                                if (e.target.ncExecuteFocus) {
+	                                    !_this2.mousedown && _this2.handleClick(e);
+	                                } else {
+	                                    !_this2.mousedown && pageScope && pageScope.output.ViewModel.shouldAutoFocus && _this2.handleClick(e);
+	                                    // pageScope && (pageScope.output.ViewModel.shouldAutoFocus = false);
+	                                }
+	                            },
+	                            tabindex: disabled === 'off' || !disabled && !metaDisabled ? '0' : '-1',
+	                            className: 'edit-table-edit-td ' + (config.multipleRowCell ? '' : 'single-line-and-ellipsis')
+	                        },
+	                        (0, _utils.isWrong)(tableItemValue) ? _react2['default'].createElement(
+	                            'span',
+	                            null,
+	                            tableItemValue,
+	                            '\xA0',
+	                            disabled === 'off' || !disabled && !metaDisabled ? _react2['default'].createElement('span', { className: 'iconfont icon-zhengbiaobianji' }) : ''
+	                        ) : _react2['default'].createElement(
+	                            'div',
+	                            { className: IType === 'number' ? 'text-left edit-center' : 'edit-center' },
+	                            _react2['default'].createElement(
+	                                _beeTooltip2['default'],
+	                                { inverse: true, className: 'tooltip-word-color', placement: 'top', delay: 1, overlay: tableItemValue },
+	                                _react2['default'].createElement(
+	                                    'span',
+	                                    { className: config.multipleRowCell ? '' : 'single-line-and-ellipsis' },
+	                                    tableItemValue,
+	                                    '\xA0'
+	                                )
+	                            ),
+	                            disabled === 'off' || !disabled && !metaDisabled ? _react2['default'].createElement('span', { className: 'iconfont icon-zhengbiaobianji1' }) : ''
+	                        )
+	                    );
+	                }
+	            } else {
+	                if (item.render && renderStatus === 'browse') {
+	                    // 浏览态，业务组重写render的判断 ，这里只是让他返回展示内容 添加允许重写render的状态判断，业务组需要加renderstatus进行判断
+	                    // 这里加了一个类名single-line-and-ellipsis， 让注册进来的render的内容也是一行省略的
+	                    return _react2['default'].createElement(
+	                        _beeTooltip2['default'],
+	                        {
+	                            inverse: true,
+	                            className: 'tooltip-word-color',
+	                            placement: 'top',
+	                            delay: 1,
+	                            overlay: item.render.call(null, text, record, index)
+	                        },
+	                        _react2['default'].createElement(
+	                            'div',
+	                            {
+	                                className: 'customer-style ' + (config.multipleRowCell ? '' : 'single-line-and-ellipsis'),
+	                                style: IType === 'number' ? { textAlign: 'right' } : {}
+	                            },
+	                            item.render.call(null, text, record, index)
+	                        )
+	                    );
+	                } else {
+	                    var _tableItemValue = _this2.handleBrowse.call(tableScope, IType, display, value, scale, ICode, LanguageMeta, values);
+	                    return _react2['default'].createElement(
+	                        'div',
+	                        {
+	                            className: 'edit-table-browse ' + (config.multipleRowCell ? '' : 'single-line-and-ellipsis'),
+	                            style: IType === 'number' ? { textAlign: 'right' } : {}
+	                        },
+	                        _react2['default'].createElement(
+	                            _beeTooltip2['default'],
+	                            { inverse: true, className: 'tooltip-word-color', placement: 'top', delay: 1, overlay: _tableItemValue },
+	                            // 如果模板里有hyperlinkflag:true
+	                            hyperlinkflag ? _react2['default'].createElement(
+	                                'a',
+	                                {
+	                                    href: 'javascript:;',
+	                                    onClick: function onClick() {
+	                                        // 超链接跳转
+	                                        // linkTo(pageScope.state.meta.pageid, moduleId, ICode, value);
+	                                    }
+	                                },
+	                                _tableItemValue
+	                            ) : _react2['default'].createElement(
+	                                'span',
+	                                null,
+	                                _tableItemValue
+	                            )
+	                        )
+	                    );
+	                }
+	            }
+	        };
+	
+	        _this2.state = {
+	            table: {
+	                pageInfo: {
+	                    pageSize: '10',
+	                    pageIndex: '1'
+	                },
+	                rows: [],
+	                checkedAll: false,
+	                // 设置全选多选框的是否禁用
+	                disabledAll: false,
+	                model: false, //是否打开侧滑面板
+	                origin: {},
+	                operType: 'add',
+	                allpks: []
+	            }
+	        };
+	        _this2.batchData = null;
+	        _this2.tableChangedRowsOldValue = null;
+	        return _this2;
+	    }
+	
+	    Cell.prototype.componentWillMount = function componentWillMount() {
+	        var tableInfo = this.props.tableInfo;
+	
+	        this.setState({
+	            table: tableInfo
+	        });
+	        this.tableChangedRowsOldValue = tableInfo.rows;
+	    };
+	    /**
+	     * 处理onchang和onblur时变化数据的格式
+	     */
+	
+	
+	    Cell.prototype.handleChangeData = function handleChangeData(itemtype, foolval, val, item) {
+	        // console.log('this.batchData',this.batchData);
+	        switch (true) {
+	            // 参照
+	            case itemtype:
+	                return foolval;
+	            // 其他
+	            default:
+	                return {
+	                    value: val,
+	                    display: (0, _utils.getDisplayByValue)(val, item)
+	                };
+	        }
+	    };
+	    /**
+	     * 浏览态渲染函数
+	     * @param {*} IType
+	     * @param {*} display
+	     * @param {*} value
+	     */
+	
+	
+	    // 处理旧值函数
+	    Cell.prototype.saveChangedRowsOldValue = function saveChangedRowsOldValue(moduleId, index, attrcode, value) {
+	        !Array.isArray(this.tableChangedRowsOldValue[moduleId]) && (this.tableChangedRowsOldValue[moduleId] = []);
+	        !(0, _utils.isObj)(this.tableChangedRowsOldValue[moduleId][index]) && (this.tableChangedRowsOldValue[moduleId][index] = {});
+	        // this.tableChangedRowsOldValue[moduleId][index][attrcode] = value;
+	    };
+	
+	    // 获取旧值函数
+	
+	
+	    Cell.prototype.getChangedRowsOldValue = function getChangedRowsOldValue(moduleId, index, attrcode) {
+	        var isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
+	        if (!isArr || isArr && !(0, _utils.isObj)(this.tableChangedRowsOldValue[moduleId][index])) {
+	            return null;
+	        }
+	        return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
+	    };
+	
+	    // 删除旧值函数
+	
+	
+	    Cell.prototype.delChangedRowsOldValue = function delChangedRowsOldValue(moduleId, index, attrcode) {
+	        var isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
+	        if (!isArr || isArr && !(0, _utils.isObj)(this.tableChangedRowsOldValue[moduleId][index])) {
+	            return;
+	        }
+	        if (attrcode) {
+	            this.tableChangedRowsOldValue[moduleId][index][attrcode] = null;
+	        } else {
+	            this.tableChangedRowsOldValue[moduleId][index] = {};
+	        }
+	    };
+	
+	    /**
+	     * 创建 EditableItem
+	     * @param {*} moduleId 
+	     * @param {*} config 
+	     * @param {*} type 
+	     * @param {*} renderItem 
+	     * @param {*} item 
+	     * @param {*} index 
+	     * @param {*} value 
+	     * @param {*} scale 
+	     * @param {*} disabled 
+	     * @param {*} record 
+	     * @param {*} model 
+	     * @param {*} status 
+	     * @param {*} edittable_dom 
+	     * @param {*} pageScope 
+	     */
+	
+	
+	    Cell.prototype.createEditableItem = function createEditableItem(_ref2) {
+	        var moduleId = _ref2.moduleId,
+	            _ref2$config = _ref2.config,
+	            config = _ref2$config === undefined ? {} : _ref2$config,
+	            _ref2$type = _ref2.type,
+	            type = _ref2$type === undefined ? 'line' : _ref2$type,
+	            _ref2$renderItem = _ref2.renderItem,
+	            renderItem = _ref2$renderItem === undefined ? {} : _ref2$renderItem,
+	            _ref2$item = _ref2.item,
+	            item = _ref2$item === undefined ? {} : _ref2$item,
+	            _ref2$index = _ref2.index,
+	            index = _ref2$index === undefined ? 1 : _ref2$index,
+	            _ref2$value = _ref2.value,
+	            value = _ref2$value === undefined ? null : _ref2$value,
+	            scale = _ref2.scale,
+	            _ref2$disabled = _ref2.disabled,
+	            disabled = _ref2$disabled === undefined ? false : _ref2$disabled,
+	            record = _ref2.record,
+	            _ref2$model = _ref2.model,
+	            model = _ref2$model === undefined ? 'origin' : _ref2$model,
+	            _ref2$status = _ref2.status,
+	            status = _ref2$status === undefined ? false : _ref2$status,
+	            edittable_dom = _ref2.edittable_dom,
+	            pageScope = _ref2.pageScope;
+	
+	        record = Object.keys(record).length ? record : {
+	            rowid: null,
+	            status: '0',
+	            values: {}
+	        };
+	        // console.log('渲染单元格',value,record)
+	        return this.renderTableItem.call(this, moduleId, config, type, record, item, index, value, scale, disabled, renderItem, model, status, edittable_dom, pageScope);
+	    };
+	
+	    /**
+	     * 渲染 Item 组件
+	     * @param {*} moduleId 
+	     * @param {*} config 
+	     * @param {*} type 
+	     * @param {*} record 
+	     * @param {*} item 
+	     * @param {*} index 
+	     * @param {*} value 
+	     * @param {*} scale 
+	     * @param {*} disabled 
+	     * @param {*} renderItem 
+	     * @param {*} model 
+	     * @param {*} status 
+	     * @param {*} edittable_dom 
+	     * @param {*} pageScope 
+	     */
+	
+	
+	    Cell.prototype.renderTableItem = function renderTableItem(moduleId, config, type, record, item, index, value, scale, disabled, renderItem, model, status, edittable_dom, pageScope) {
+	        var _this3 = this;
+	
+	        var _renderTableItemByTyp = this._renderTableItemByType.call(this, moduleId, record, item, value, scale, disabled, renderItem, model, status, index, type, pageScope),
+	            editItem = _renderTableItemByTyp.editItem,
+	            isdisabled = _renderTableItemByTyp.isdisabled,
+	            valueData = _renderTableItemByTyp.value,
+	            scaleData = _renderTableItemByTyp.scale;
+	
+	        if (!editItem) return _react2['default'].createElement('div', null);
+	        var showDisable = function (disabled) {
+	            switch (disabled) {
+	                case false:
+	                    return !(0, _utils.undefinedOrfalse)(item.disabled);
+	                case 'on':
+	                    return true;
+	                case 'off':
+	                    return false;
+	                default:
+	                    return false;
+	            }
+	        }(isdisabled);
+	        var _ref3 =
+	        // 用于 onblur 和onchange常量
+	        [_config2['default'].blurTypes.includes(item.itemtype), _config2['default'].changeTypes.includes(item.itemtype), type === 'line', []],
+	            isInputType = _ref3[0],
+	            unInputType = _ref3[1],
+	            isLineStatus = _ref3[2],
+	            changedrows = _ref3[3];
+	        // 侧拉框不自动获取焦点
+	
+	        var focus = type !== 'modal';
+	        // 新写的需求还有问题，勿删
+	        // const focus = type !== 'modal' && item.itemtype !== 'checkbox_switch' && item.itemtype !== 'switch' ? true : false;
+	        var isMaxlength = !!(item.itemtype === 'residtxt' || item.itemtype === 'number');
+	        var placeholder = type === 'modal' && item.itemtype == 'refer' ? { placeholder: '' } : {};
+	        // 多语
+	        var json = this.state.json;
+	        // 表格行数据
+	        var rows = this.state.table.rows;
+	        // 表格侧拉数据
+	        // const tableModeldata = pageScope.state.tableModeldata[moduleId];
+	        return _react2['default'].createElement(_Item2['default'], {
+	            content: _extends({}, editItem, {
+	                edittable_dom: edittable_dom,
+	                props: _extends({}, editItem.props, item, placeholder, {
+	                    scale: scaleData, // number的精度 这里是判断了模版和传入的之后的结果
+	                    value: valueData, // 给其他组件设置value
+	                    foolValue: valueData, // 给参照设置的value
+	                    autoFocus: focus, // 当打开侧拉框的时候不获取焦点判断
+	                    autofocus: focus, // 当打开侧拉框的时候不获取焦点判断
+	                    title: '', // 将列的title替换掉，避免出现不必要的值，如果有bug在改zhanghengh
+	                    disabled: showDisable, // 如果没有disabled或者false 看成false
+	                    maxlength: isMaxlength ? item.maxlength : null,
+	                    isLineStatus: isLineStatus, // 当前表格是侧拉状态还是表体状态
+	                    onChange: function onChange(valueChange, foolValue) {
+	                        // 控制侧拉编辑前switch和checkbox_switch类型返回false, 不可编辑
+	                        if (!checkboxSwitchContinue || !switchContinue) {
+	                            checkboxSwitchContinue = true;
+	                            switchContinue = true;
+	                            return;
+	                        }
+	                        if (_config2['default'].blurTypes.includes(item.itemtype)) {
+	                            if ((0, _utils.isString)(valueChange)) {
+	                                valueChange = valueChange.trim();
+	                            }
+	                        }
+	                        // 用于侧拉框状态下执行编辑前
+	                        if (!isLineStatus && _config2['default'].beforeChangeTypes.includes(item.itemtype)) {
+	                            // 如果当前单元格被禁用，就不渲染
+	                            if (config && typeof config.onBeforeEvent == 'function') {
+	                                var isContinue = config.onBeforeEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item, index, record.values[item.attrcode], record);
+	                                // 编辑前返回false直接return，这样才不影响逻辑
+	                                if (!isContinue) {
+	                                    return;
+	                                }
+	                            }
+	                        }
+	                        // 适配多语 //这是最新适配的多语，可以了在放开 有问题看一下
+	                        if (item.itemtype === 'residtxt') {
+	                            if (model == 'open') {
+	                                // 当侧拉的情况下
+	                                Object.keys(valueChange).forEach(function (i) {
+	                                    if (tableModeldata.values[i]) {
+	                                        tableModeldata.values[i] = _extends({}, tableModeldata.values[i], valueChange[i] || {});
+	                                    } else {
+	                                        tableModeldata.values[i] = valueChange[i] || {};
+	                                    }
+	                                    // 同步侧拉更改的数据到表体
+	                                    if (rows[index].values[i]) {
+	                                        rows[index].values[i] = _extends({}, rows[index].values[i], valueChange[i] || {});
+	                                    } else {
+	                                        rows[index].values[i] = _extends({}, valueChange[i] || {});
+	                                    }
+	                                }, _this3);
+	                            } else {
+	                                // 当表体的情况下
+	                                Object.keys(valueChange).forEach(function (i) {
+	                                    if (rows[index].values[i]) {
+	                                        rows[index].values[i] = _extends({}, rows[index].values[i], valueChange[i] || {}, {
+	                                            isEdit: true
+	                                        });
+	                                    } else {
+	                                        rows[index].values[i] = _extends({}, valueChange[i] || {}, { isEdit: true });
+	                                    }
+	                                }, _this3);
+	                            }
+	                        }
+	                        // 校验输入长度
+	                        var flag = isInputType ? item.itemtype !== 'number' ? foolValue.target ? foolValue.target.isFlag : false : false : false;
+	                        if (!flag && item.maxlength && isInputType && valueChange && foolValue) {
+	                            var arr = Array(valueChange.length);
+	                            var count = arr.length;
+	                            arr.fill(1);
+	                            valueChange.replace(/[^\x00-\xff]/g, function (a, b, c) {
+	                                arr[b] = 2;
+	                            });
+	                            var reducer = arr.reduce(function (a, b) {
+	                                if (a + b > item.maxlength) {
+	                                    count--;
+	                                }
+	                                return a + b;
+	                            }, 0);
+	                            if (!flag && reducer > item.maxlength) {
+	                                valueChange = rows[index].values[item.attrcode].value;
+	                                toast({
+	                                    color: 'danger',
+	                                    title: '' + (json && json['table_tips']),
+	                                    content: (json && json['table_tips_content']) + '\n                                                        ' + item.maxlength
+	                                });
+	                                foolValue.target && foolValue.target.blur();
+	                            }
+	
+	                            rows[index].values[item.attrcode].value = valueChange;
+	                        }
+	
+	                        // 判断是否为多选参照start
+	                        var isMul = void 0;
+	                        editItem.props.hasOwnProperty('isMultiSelectedEnabled') && (isMul = editItem.props.isMultiSelectedEnabled);
+	                        item.hasOwnProperty('isMultiSelectedEnabled') && (isMul = item.isMultiSelectedEnabled);
+	                        var _getValue = function _getValue(init) {
+	                            return (0, _utils.isObj)(init) ? init.refpk : init;
+	                        };
+	                        // 判断是否为多选参照end
+	
+	                        var attr = (0, _utils.isObj)(rows[index].values[item.attrcode]);
+	                        if (!attr) {
+	                            // 因为有些字段为空值，后台默认为过滤去了
+	                            rows[index].values[item.attrcode] = {};
+	                            if (model == 'open') {
+	                                tableModeldata.values[item.attrcode] = {};
+	                            } else {
+	                                rows[index].values[item.attrcode] = {};
+	                            }
+	                        }
+	
+	                        // 因为timepicker的value特殊，所以特殊转换一下start，有问题在看一下
+	                        if (item.itemtype === 'timepicker') {
+	                            if (valueChange && valueChange.format) {
+	                                valueChange = valueChange.format('hh:mm:ss');
+	                            }
+	                        }
+	                        // 因为timepicker的value特殊，所以特殊转换一下end
+	
+	                        // 处理单元格变化的数据zhnghengh
+	                        var theValue = _this3.handleChangeData(item.itemtype === 'refer', foolValue, valueChange, item);
+	                        if (item.itemtype !== 'residtxt') {
+	                            // 多语文本暂时不支持批改
+	                            _this3.batchData = {
+	                                // 在onchange时缓存列数据的key 和value  用于批量更改   zhanghengh 18/6/29
+	                                batchChangeIndex: index,
+	                                batchChangeKey: item.attrcode,
+	                                batchChangeValue: isMul ? theValue : theValue.value,
+	                                batchChangeDisplay: isMul ? null : theValue.display
+	                            };
+	                        } else {
+	                            // 多语批改
+	                            _this3.batchData = {
+	                                batchChangeIndex: index,
+	                                batchChangeKey: item.attrcode,
+	                                batchChangeValue: valueChange,
+	                                batchChangeDisplay: null
+	                            };
+	                        }
+	                        if (item.itemtype !== 'residtxt') {
+	                            // 多语文本不走这里
+	                            if (model == 'open') {
+	                                _extends(tableModeldata.values[item.attrcode], theValue);
+	                            } else {
+	                                _extends(rows[index].values[item.attrcode], theValue);
+	                            }
+	                        }
+	
+	                        // 把status置为1，标识修改     状态不为1的不动 (比如用户自己set但是状态为2的)
+	                        if (rows[index].status == '0') {
+	                            rows[index].status = '1';
+	                        }
+	
+	                        _this3.setState({ table: _this3.state.table });
+	
+	                        if (unInputType) {
+	
+	                            // 判断新旧值是否相等
+	                            var isValEqual = function isValEqual(newVal, oldVal) {
+	                                if ((newVal === null || newVal === '' || newVal === ' ') && (oldVal === null || oldVal === '' || oldVal === ' ')) {
+	                                    return true;
+	                                } else if (newVal == oldVal) {
+	                                    return true;
+	                                }
+	                                return false;
+	                            };
+	
+	                            // 新的取旧值
+	                            var initVal = _this3.getChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode);
+	                            var isRefpk = _getValue(initVal);
+	                            if (isMul) {
+	                                if (valueChange.length > 0) {
+	                                    valueChange.forEach(function (one, ind) {
+	                                        changedrows.push({
+	                                            rowid: record.rowid,
+	                                            newvalue: {
+	                                                value: _getValue(one) || ''
+	                                            },
+	                                            oldvalue: {
+	                                                value: ind <= 0 ? isRefpk || '' : ''
+	                                            }
+	                                        });
+	                                    });
+	                                } else {
+	                                    changedrows.push({
+	                                        rowid: record.rowid,
+	                                        newvalue: {
+	                                            value: ''
+	                                        },
+	                                        oldvalue: {
+	                                            value: isRefpk || ''
+	                                        }
+	                                    });
+	                                }
+	                            } else {
+	                                changedrows.push({
+	                                    rowid: record.rowid,
+	                                    newvalue: {
+	                                        value: item.itemtype == 'refer' ? foolValue.value || '' : valueChange || ''
+	                                    },
+	                                    oldvalue: {
+	                                        value: initVal || ''
+	                                    }
+	                                });
+	                            }
+	
+	                            if (item.editAfterFlag && !isValEqual(changedrows[0].newvalue.value, changedrows[0].oldvalue.value)) {
+	                                pageScope.handleRelationItems({
+	                                    type: 'table',
+	                                    areaCode: moduleId,
+	                                    key: item.attrcode,
+	                                    changedrows: changedrows,
+	                                    index: index,
+	                                    rowid: record.rowid,
+	                                    record: rows[index],
+	                                    callback: function callback() {
+	                                        config && typeof config.onAfterEvent == 'function' && config.onAfterEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item.attrcode, valueChange, changedrows, index, rows[index], type, 'change');
+	                                        /***
+	                                         * 二开的编辑后事件 --liuxis
+	                                         */
+	                                        var secFns = pageScope.NCCSecondDevelop;
+	                                        secFns && secFns.onAfterEvent && secFns.onAfterEvent({
+	                                            moduleId: moduleId,
+	                                            record: rows[index],
+	                                            attrcode: item.attrcode,
+	                                            methods: pageScope.output
+	                                        });
+	                                    }
+	                                });
+	                            } else {
+	                                config && typeof config.onAfterEvent == 'function' && config.onAfterEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item.attrcode, valueChange, changedrows, index, rows[index], type, 'change');
+	
+	                                /***
+	                                 * 二开的编辑后事件 --liuxis
+	                                 */
+	                                // let secFns = pageScope.NCCSecondDevelop;
+	                                var secFns = void 0;
+	                                secFns && secFns.onAfterEvent && secFns.onAfterEvent({
+	                                    moduleId: moduleId,
+	                                    record: rows[index],
+	                                    attrcode: item.attrcode,
+	                                    methods: pageScope.output
+	                                });
+	                            }
+	                            var OldVal = isMul ? valueChange.length > 0 ? valueChange[0] : null : item.itemtype === 'refer' ? foolValue.vlaue == '' ? null : foolValue.vlaue : valueChange;
+	                            _this3.saveChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode, OldVal);
+	                        }
+	                    },
+	                    onOpenChange: function onOpenChange(val) {
+	                        if (!isLineStatus) {
+	                            if (val) {
+	                                return;
+	                            }
+	                            pageScope.myTable[moduleId].verify[item.attrcode].DTOpen = val;
+	                            _this3.setState({ table: _this3.state.table });
+	                        }
+	                    },
+	                    onClick: function onClick(evt, event) {
+	                        // 新需求还有点问题，勿删
+	                        // if (((!isLineStatus || item.itemtype === 'checkbox_switch') && CONFIG.beforeClickTypes.includes(item.itemtype))) {
+	                        if (!isLineStatus && _config2['default'].beforeClickTypes.includes(item.itemtype)) {
+	                            // 获取事件对象
+	                            var target = evt && evt.target || event && event.target || event;
+	                            // 侧拉编辑前回调
+	                            if (config && typeof config.onBeforeEvent == 'function') {
+	                                var isContinue = config.onBeforeEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item, index, record.values[item.attrcode], record);
+	                                // 用于处理侧拉框编辑前所要执行的函数
+	                                var modelHanlder = function modelHanlder(flag, target) {
+	                                    if (!flag && target) {
+	                                        if (item.itemtype === 'checkbox_switch') {
+	                                            checkboxSwitchContinue = false;
+	                                        }
+	                                        target.blur && target.blur();
+	                                    }
+	                                };
+	                                var result = null;
+	                                var _type = (0, _utils.testType)(isContinue);
+	                                switch (_type) {
+	                                    // true/flase
+	                                    case 'Boolean':
+	                                        result = hanlderModelBeforeEvent(true, isContinue, null, modelHanlder, target);
+	                                        break;
+	                                    // 返回的是async函数
+	                                    case 'AsyncFunction':
+	                                        result = hanlderModelBeforeEvent(false, isContinue, false, modelHanlder, target);
+	                                        break;
+	                                    // 返回的Promise对象
+	                                    case 'Promise':
+	                                        result = hanlderModelBeforeEvent(false, isContinue, true, modelHanlder, target);
+	                                        break;
+	                                    // 取Boolean值
+	                                    default:
+	                                        result = hanlderModelBeforeEvent(true, !!isContinue, null, modelHanlder, target);
+	                                        break;
+	                                }
+	                                // 处理日期控件编辑前
+	                                result.then(function (value) {
+	                                    pageScope.myTable[moduleId].verify[item.attrcode].DTOpen = value;
+	                                    _this3.setState({ table: _this3.state.table });
+	                                });
+	                            } else {
+	                                pageScope.myTable[moduleId].verify[item.attrcode].DTOpen = true;
+	                                _this3.setState({ table: _this3.state.table });
+	                            }
+	                        }
+	                    },
+	                    onFocus: function onFocus(evt, event) {
+	                        // 新需求还有点问题，勿删
+	                        // if (((!isLineStatus || item.itemtype === 'switch') && CONFIG.beforeFocusTypes.includes(item.itemtype))) {
+	                        if (!isLineStatus && _config2['default'].beforeFocusTypes.includes(item.itemtype)) {
+	                            // 获取事件对象
+	                            var target = evt && evt.target || event && event.target || event;
+	                            // 侧拉编辑前回调
+	                            if (config && typeof config.onBeforeEvent == 'function') {
+	                                var isContinue = config.onBeforeEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item, index, record.values[item.attrcode], record);
+	
+	                                // 用于处理侧拉框编辑前所要执行的函数
+	                                var modelHanlder = function modelHanlder(flag, target) {
+	                                    if (!flag && target) {
+	                                        if (_config2['default'].blurTypes.includes(item.itemtype) || item.itemtype === 'residtxt') {
+	                                            blurContinue = false;
+	                                        }
+	                                        target.blur && target.blur();
+	                                    }
+	                                };
+	                                var _type2 = (0, _utils.testType)(isContinue);
+	                                var result = null;
+	                                switch (_type2) {
+	                                    // true/flase
+	                                    case 'Boolean':
+	                                        result = hanlderModelBeforeEvent(true, isContinue, null, modelHanlder, target);
+	                                        break;
+	                                    // 返回的是async函数
+	                                    case 'AsyncFunction':
+	                                        result = hanlderModelBeforeEvent(false, isContinue, false, modelHanlder, target);
+	                                        break;
+	                                    // 返回的Promise对象
+	                                    case 'Promise':
+	                                        result = hanlderModelBeforeEvent(false, isContinue, true, modelHanlder, target);
+	                                        break;
+	                                    // 取Boolean值
+	                                    default:
+	                                        result = hanlderModelBeforeEvent(true, !!isContinue, null, modelHanlder, target);
+	                                        break;
+	                                }
+	                                if (item.itemtype === 'refer') {
+	                                    // 这里就先这么处理了，侧拉批改会有问题
+	                                    return result;
+	                                }
+	                                if (item.itemtype === 'select') {
+	                                    result.then(function (value) {
+	                                        if (pageScope.myTable[moduleId].verify[item.attrcode].selectOpen) {
+	                                            pageScope.myTable[moduleId].verify[item.attrcode].selectOpen = false;
+	                                            _this3.setState({ table: _this3.state.table });
+	                                        } else {
+	                                            pageScope.myTable[moduleId].verify[item.attrcode].selectOpen = value;
+	                                            _this3.setState({ table: _this3.state.table });
+	                                        }
+	                                    });
+	                                }
+	                            } else {
+	                                if (item.itemtype === 'select') {
+	                                    if (pageScope.myTable[moduleId].verify[item.attrcode].selectOpen) {
+	                                        pageScope.myTable[moduleId].verify[item.attrcode].selectOpen = false;
+	                                        _this3.setState({ table: _this3.state.table });
+	                                    } else {
+	                                        pageScope.myTable[moduleId].verify[item.attrcode].selectOpen = true;
+	                                        _this3.setState({ table: _this3.state.table });
+	                                    }
+	                                }
+	                            }
+	                        }
+	
+	                        // 检验输入字符长度
+	                        // if (isInputType && item.maxlength) {
+	                        //     evt.target.isFlag = false;
+	                        //     evt.target.addEventListener(
+	                        //         'compositionstart',
+	                        //         e => {
+	                        //             e.target.isFlag = true;
+	                        //         },
+	                        //         false
+	                        //     );
+	                        //     evt.target.addEventListener(
+	                        //         'compositionend',
+	                        //         e => {
+	                        //             e.target.isFlag = false;
+	                        //             let flag = e.target.isFlag;
+	                        //             let val = e.target.defaultValue;
+	                        //             let arr = Array(val.length);
+	                        //             let count = arr.length;
+	                        //             arr.fill(1);
+	                        //             val.replace(/[^\x00-\xff]/g, (a, b, c) => {
+	                        //                 arr[b] = 2;
+	                        //             });
+	                        //             let reducer = arr.reduce((a, b) => {
+	                        //                 if (a + b > item.maxlength) {
+	                        //                     count--;
+	                        //                 }
+	                        //                 return a + b;
+	                        //             }, 0);
+	                        //             if (!flag && reducer > item.maxlength) {
+	                        //                 val = val.substring(0, count);
+	                        //                 rows[index].values[item.attrcode].value = val;
+	                        //                 toast({
+	                        //                     color: 'danger',
+	                        //                     title: `${json && json['table_tips']}`,
+	                        //                     content: `${json && json['table_tips_content']}${item.maxlength}`
+	                        //                 });
+	                        //                 e.target && e.target.blur();
+	                        //             }
+	                        //         },
+	                        //         false
+	                        //     );
+	                        //     this.setState({ table: this.state.table });
+	                        // }
+	                        // 多语控件都不走这里
+	                        if (item.itemtype !== 'residtxt') {
+	                            // onFocus 和value  用于批量更改   zhanghengh 18/6/29 先注释，以后可能有用
+	                            _this3.batchData = {
+	                                batchChangeIndex: index,
+	                                batchChangeKey: item.attrcode,
+	                                batchChangeValue: record.values[item.attrcode] ? record.values[item.attrcode].value : '',
+	                                batchChangeDisplay: record.values[item.attrcode] ? record.values[item.attrcode].display : ''
+	                            };
+	                        }
+	
+	                        // 为了兼容refer，否则报错
+	                        return new Promise(function (resolve) {
+	                            resolve(true);
+	                        });
+	                    },
+	                    onMouseDown: function onMouseDown() {
+	                        // 在这个方法里处理switch类型组件编辑前返回false的情况
+	                        if (!isLineStatus && item.itemtype === 'switch') {
+	                            // 如果当前单元格被禁用，就不渲染
+	                            if (config && typeof config.onBeforeEvent == 'function') {
+	                                var isContinue = config.onBeforeEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item, index, record.values[item.attrcode], record);
+	
+	                                // 用于处理侧拉框编辑前所要执行的函数
+	                                var modelHanlder = function modelHanlder(flag) {
+	                                    if (!flag) {
+	                                        if (item.itemtype === 'switch') {
+	                                            switchContinue = false;
+	                                        }
+	                                    }
+	                                };
+	                                var _type3 = (0, _utils.testType)(isContinue);
+	                                var result = null;
+	                                switch (_type3) {
+	                                    // true/flase
+	                                    case 'Boolean':
+	                                        result = hanlderModelBeforeEvent(true, isContinue, null, modelHanlder);
+	                                        break;
+	                                    // 返回的是async函数
+	                                    case 'AsyncFunction':
+	                                        result = hanlderModelBeforeEvent(false, isContinue, false, modelHanlder);
+	                                        break;
+	                                    // 返回的Promise对象
+	                                    case 'Promise':
+	                                        result = hanlderModelBeforeEvent(false, isContinue, true, modelHanlder);
+	                                        break;
+	                                    // 取Boolean值
+	                                    default:
+	                                        result = hanlderModelBeforeEvent(true, !!isContinue, null, modelHanlder);
+	                                        break;
+	                                }
+	                            }
+	                        }
+	                    },
+	                    onBlur: function onBlur(val) {
+	                        // 处理blur类型的组件，编辑前返回false，不可以在执行编辑后的问题
+	                        if (!blurContinue) {
+	                            blurContinue = true;
+	                            return;
+	                        }
+	                        if (_config2['default'].blurTypes.includes(item.itemtype)) {
+	                            if ((0, _utils.isString)(val)) {
+	                                val = val.trim();
+	                            }
+	                        }
+	                        // 当数值类型只输入一个'-'的时候就将它赋值成0
+	                        if (item.itemtype === 'number' && val === '-') {
+	                            val = 0;
+	                            rows[index].values[item.attrcode].value = 0;
+	                        }
+	                        if (item.itemtype === 'select') {
+	                            // pageScope.myTable[moduleId].verify[item.attrcode].selectOpen = false;
+	                            _this3.setState({ table: _this3.state.table });
+	                        }
+	                        /*
+	                        * onBlur编辑后 和 切换控件状态
+	                        * 1、input类型    line   编辑后 + 切状态
+	                        *                model  编辑后
+	                        * 2、uninput类型  line   切状态
+	                        *                model  无编辑后  无切状态
+	                        */
+	                        setTimeout(function () {
+	                            // 处理input类型编辑后，ajax同步问题，以后好办法在改一下
+	                            if (isInputType || item.itemtype == 'residtxt') {
+	                                if (isLineStatus) {
+	                                    rows[index].values[item.attrcode].isEdit = false;
+	                                }
+	
+	                                var oldValue = _this3.getChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode);
+	                                changedrows.push({
+	                                    rowid: record.rowid,
+	                                    newvalue: {
+	                                        value: val || ''
+	                                    },
+	                                    oldvalue: {
+	                                        value: oldValue ? item.itemtype === 'number' ? (0, _utils.formatAcuracy)(oldValue, scaleData) : oldValue : ''
+	                                    }
+	                                });
+	                                _this3.saveChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode, val);
+	                                if (item.itemtype === 'residtxt') {
+	                                    if (model == 'open') {
+	                                        // 当侧拉的情况下
+	                                        // 多语  登陆语言值 赋值给主语言
+	                                        tableModeldata.values[item.attrcode] = _extends({}, tableModeldata.values[item.attrcode], {
+	                                            value: val[item.attrcode].value
+	                                        });
+	                                    } else {
+	                                        // 当表体的情况下
+	                                        // 多语  登陆语言值 赋值给主语言
+	                                        var LangCode = getLangCode();
+	                                        var loginLang = item.languageMeta.filter(function (i) {
+	                                            return i.languageCode == LangCode;
+	                                        });
+	                                        if (loginLang[0] && !record.values[item.attrcode].value) {
+	                                            loginLang[0].index = loginLang[0].index == '1' ? '' : loginLang[0].index;
+	                                            rows[index].values[item.attrcode] = _extends({}, record.values[item.attrcode], record.values[item.attrcode + loginLang[0].index], {
+	                                                isEdit: false
+	                                            });
+	                                        }
+	                                    }
+	                                }
+	
+	                                if (item.editAfterFlag) {
+	                                    pageScope.handleRelationItems({
+	                                        type: 'table',
+	                                        areaCode: moduleId,
+	                                        key: item.attrcode,
+	                                        changedrows: changedrows,
+	                                        index: index,
+	                                        rowid: record.rowid,
+	                                        record: rows[index],
+	                                        callback: function callback() {
+	                                            config && typeof config.onAfterEvent == 'function' && config.onAfterEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item.attrcode, val, changedrows, index, rows[index], type, 'blur');
+	                                            /***
+	                                             * 二开的编辑后事件 --liuxis
+	                                             */
+	                                            var secFns = pageScope.NCCSecondDevelop;
+	                                            secFns && secFns.onAfterEvent && secFns.onAfterEvent({
+	                                                moduleId: moduleId,
+	                                                record: rows[index],
+	                                                attrcode: item.attrcode,
+	                                                methods: pageScope.output
+	                                            });
+	                                        }
+	                                    });
+	                                } else {
+	                                    config && typeof config.onAfterEvent == 'function' && config.onAfterEvent(_extends({}, pageScope.props, pageScope.output), moduleId, item.attrcode, val, changedrows, index, rows[index], type, 'blur');
+	                                    /***
+	                                     * 二开的编辑后事件 --liuxis
+	                                     */
+	                                    // let secFns = pageScope.NCCSecondDevelop;
+	                                    // secFns &&
+	                                    // secFns.onAfterEvent &&
+	                                    // secFns.onAfterEvent({
+	                                    //     moduleId,
+	                                    //     record: rows[index],
+	                                    //     attrcode: item.attrcode,
+	                                    //     methods: pageScope.output
+	                                    // });
+	                                }
+	                            } else {
+	                                if (isLineStatus && !(0, _utils.isEmpty)(rows)) {
+	                                    rows[index].values[item.attrcode].isEdit = false;
+	                                }
+	                            }
+	
+	                            // 多语控件都不走这里
+	                            if (item.itemtype !== 'residtxt') {
+	                                // 在onblur时缓存列数据的key 和value  用于批量更改   zhanghengh 18/6/29
+	                                _this3.batchData = {
+	                                    batchChangeIndex: index,
+	                                    batchChangeKey: item.attrcode,
+	                                    batchChangeValue: record.values[item.attrcode] ? record.values[item.attrcode].value : '',
+	                                    batchChangeDisplay: record.values[item.attrcode] ? record.values[item.attrcode].display : ''
+	                                };
+	                            }
+	
+	                            var isSwitch_browseDisabled = item.itemtype === 'switch_browse' && showDisable; // 开关且不可编辑
+	                            // let allRows = pageScope.editTable.getNumberOfRows(moduleId);
+	                            /*
+	                            * 增一行的条件：
+	                            * 1、最后一行
+	                            * 2、isAddRow 为true
+	                            * 3、当前单元格值不为空
+	                            */
+	
+	                            // if (
+	                            // allRows == index + 1 &&
+	                            // config &&
+	                            // !!config.isAddRow &&
+	                            // !isSwitch_browseDisabled &&
+	                            // !isWrong(val) &&
+	                            // pageScope.state.meta[moduleId].status === 'edit'
+	                            // ) {
+	                            //     // 添加自动增行后的回调
+	                            //     const callback = isFunction(config.addRowCallback) ? config.addRowCallback : undefined;
+	                            //     pageScope.editTable.addRow(moduleId, undefined, false, null, callback, true);
+	                            // } else {
+	                            //     // 为了保证不是最后一行 渲染浏览态
+	                            //     this.setState({ table: this.state.table });
+	                            // }
+	                        }, 0);
+	                    }
+	                })
+	            })
+	        });
+	    };
+	
+	    /**
+	     * 根据字段类型渲染单元格内容
+	     * @param {*} moduleId 
+	     * @param {*} record 
+	     * @param {*} item 
+	     * @param {*} value 
+	     * @param {*} scale  number的精度 这里是判断了模版和传入的之后的结果
+	     * @param {*} disabled 
+	     * @param {*} renderItem 
+	     * @param {*} model 
+	     * @param {*} status 
+	     * @param {*} index 
+	     * @param {*} type 
+	     * @param {*} pageScope 
+	     */
+	
+	
+	    Cell.prototype._renderTableItemByType = function _renderTableItemByType(moduleId, record, item, value, scale, disabled, renderItem, model, status, index, type, pageScope) {
+	        var editItem = null;
+	        var _item$renderStatus = item.renderStatus,
+	            renderStatus = _item$renderStatus === undefined ? 'edit' : _item$renderStatus;
+	
+	        if (item.render && renderStatus === 'edit') {
+	            editItem = item.render.call(null, value ? value.display || value.value : '', record, index);
+	        } else if (renderItem.table && renderItem.table[moduleId] && renderItem.table[moduleId][item.attrcode]) {
+	            editItem = renderItem.table[moduleId][item.attrcode];
+	        } else {
+	            var DTOpen = type === 'modal' ? {
+	                open: pageScope.myTable[moduleId].verify[item.attrcode].DTOpen
+	            } : {};
+	            var selectOpen = type === 'modal' ? {
+	                open: pageScope.myTable[moduleId].verify[item.attrcode].selectOpen
+	            } : {};
+	            switch (item.itemtype) {
+	                // case 'refer':
+	                //     editItem = <ReferLoader />;
+	                //     break;
+	                case 'input':
+	                    //编辑态
+	                    editItem = _react2['default'].createElement(_nc_FormControl2['default'], { size: 'sm', autoFocus: true });
+	                    break;
+	                case 'label':
+	                    //浏览态
+	                    editItem = _react2['default'].createElement(_nc_FormControl2['default'], { size: 'sm', autoFocus: true, isViewMode: true });
+	                    break;
+	                case 'number':
+	                    scale = (0, _utils.isWrong)(scale) || scale == '-1' ? +item.scale || 0 : scale;
+	                    editItem = _react2['default'].createElement(_beeInputNumber2['default'], { autoFocus: true });
+	                    break;
+	                // case 'textarea':
+	                //     editItem = <NCTextArea autoFocus={true} style={{ height: '33px' }} />;
+	                //     break;
+	                // case 'datepicker':
+	                //     editItem = (
+	                //         <NCTZDatePickClientHourTime
+	                //         {...DTOpen}
+	                //         autofocus={true}
+	                //         tableOpen={true}
+	                //         format="YYYY-MM-DD"
+	                //         locale={zhCN}
+	                //         placeholder={item.placeholder || ''}
+	                //         />
+	                //     );
+	                //     break;
+	                // case 'NCTZDatePickerStart':
+	                //     editItem = <NCTZDatePickerStart {...DTOpen} tableOpen={true} placeholder={item.placeholder || ''} />;
+	                //     break;
+	                // case 'datetimepicker':
+	                //     editItem = <NCTZDatePickClientTime {...DTOpen} tableOpen={true} placeholder={item.placeholder || ''} />;
+	                //     break;
+	                // case 'NCTZDatePickerEnd':
+	                //     editItem = <NCTZDatePickerEnd {...DTOpen} tableOpen={true} placeholder={item.placeholder || ''} />;
+	                //     break;
+	                // case 'rangepicker':
+	                //     editItem = <NCRangePickerClient {...DTOpen} tableOpen={true} placeholder={item.placeholder || ''} />;
+	                //     break;
+	                // case 'datePickerNoTimeZone':
+	                //     editItem = <NCDatePickerNoTimeZone {...DTOpen} tableOpen={true} placeholder={item.placeholder || ''} />;
+	                //     break;
+	                // case 'timepicker':
+	                //     value = record.values[item.attrcode].value ? moment(record.values[item.attrcode].value, 'hh:mm:ss') : null;
+	                //     editItem = <NCTimepicker {...DTOpen} tableOpen={true} placeholder={item.placeholder || ''} format="HH:mm:ss" />;
+	                //     break;
+	                case 'select':
+	                    var fixed = model == 'open' ? {
+	                        getPopupContainer: function getPopupContainer() {
+	                            return document.querySelector('#tableModal');
+	                        }
+	                    } : {};
+	                    editItem = _react2['default'].createElement(
+	                        _beeSelect2['default'],
+	                        _extends({}, fixed, selectOpen, {
+	                            size: 'sm',
+	                            isTable: true
+	                            // dropdownClassName={NODE_ENV === 'test' && item.attrcode + '-' + 'select'}
+	                        }),
+	                        item.options.length && item.options.map(function (one, i) {
+	                            return _react2['default'].createElement(
+	                                Option,
+	                                { key: i, value: String(one.value) },
+	                                ' ' + one.display + ' '
+	                            );
+	                        })
+	                    );
+	                    break;
+	                // case 'radio':
+	                //     // 需要value
+	                //     editItem = (
+	                //         <RadioGroup selectedValue={String(value)}>
+	                //         {item.options.map((e, i) => {
+	                //             return (
+	                //             <Radio key={i} value={String(e.value)}>
+	                //                 {e.display}
+	                //             </Radio>
+	                //             );
+	                //         })}
+	                //         </RadioGroup>
+	                //     );
+	                //     break;
+	                // case 'switch':
+	                //     // 需要value
+	                //     editItem = <Switch checked={!!value} />;
+	                //     break;
+	                // case 'checkbox':
+	                //     value = String(value);
+	                //     editItem = (
+	                //         <span>
+	                //         {item.options.map((item, i) => {
+	                //             return (
+	                //             <Checkbox colors="primary" checked={false} key={i}>
+	                //                 {item.display}
+	                //             </Checkbox>
+	                //             );
+	                //         })}
+	                //         </span>
+	                //     );
+	                //     break;
+	                // case 'checkbox_switch':
+	                //     editItem = <Checkbox colors="primary" checked={!!value} type="switch" />;
+	                //     break;
+	                // case 'switch_browse':
+	                //     disabled = status ? 'on' : disabled === 'on' ? 'on' : 'off';
+	                //     editItem = <NCPopconfirmSwitch checked={!!value} showTip={false} />;
+	                //     break;
+	                // // 密码输入框
+	                // case 'password':
+	                //     editItem = <FormControl type="password" />;
+	                //     break;
+	                // case 'residtxt':
+	                //     value = {};
+	                //     let rows = this.state.table.rows;
+	                //     item.languageMeta.forEach(i => {
+	                //         i.index = i.index === '1' ? '' : i.index;
+	                //     });
+	                //     item.languageMeta
+	                //         .map(i => item.attrcode + i.index)
+	                //         .forEach(i => {
+	                //         value[i] = rows[index].values[i] ? rows[index].values[i] : {};
+	                //         });
+	                //     editItem = <NCMultiLangText />;
+	                //     break;
+	            }
+	        }
+	
+	        switch (item.itemtype) {
+	            case 'select':
+	                value = String(value);
+	                break;
+	            case 'refer':
+	                value = record.values[item.attrcode];
+	                break;
+	            default:
+	                break;
+	        }
+	
+	        return {
+	            editItem: editItem,
+	            value: value,
+	            scale: scale,
+	            isdisabled: disabled
+	        };
+	    };
+	
+	    Cell.prototype.render = function render() {
+	        // console.log('渲染cell');
+	        return _react2['default'].createElement(
+	            'div',
+	            { style: { width: '100%' } },
+	            this._createContent()
+	        );
+	    };
+	
+	    return Cell;
+	}(_react.Component);
+	
+	exports['default'] = Cell;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 728 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeFormControl = __webpack_require__(266);
+	
+	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var NCFormControl = function (_Component) {
+		_inherits(NCFormControl, _Component);
+	
+		function NCFormControl(props) {
+			_classCallCheck(this, NCFormControl);
+	
+			var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+			_this.handleFocus = function (value, e) {
+				var _this$props = _this.props,
+				    onFocus = _this$props.onFocus,
+				    itemtype = _this$props.itemtype;
+	
+				onFocus && onFocus(e, value);
+	
+				//this.mouseDown 表示用户用鼠标点击此组件
+				_this.mouseDown !== true && itemtype === 'input' && _this.executeSelection(e);
+			};
+	
+			_this.handleBlur = function (value, e) {
+				//let value = typeof e === 'object' ? e.target.value : e;
+				var onBlur = _this.props.onBlur;
+	
+				onBlur && onBlur(value, e);
+			};
+	
+			_this.closeClick = function () {
+				_this.i.clearValue();
+				if (_this.i.props.clearSearch && Object.prototype.toString.call(_this.i.props.clearSearch).slice(8, 16) === 'Function') {
+					_this.i.props.clearSearch();
+				}
+			};
+	
+			_this.searchClick = function () {
+				_this.i.props.onSearch && _this.i.props.onSearch(_this.i.props.value);
+			};
+	
+			_this.mySearch = function (e) {
+				if (e.keyCode === 13) {
+					_this.i.props.onSearch && _this.i.props.onSearch(_this.i.props.value);
+				}
+			};
+	
+			return _this;
+		}
+	
+		/**
+	  * @author bbqin
+	  */
+	
+	
+		NCFormControl.prototype.componentDidUpdate = function componentDidUpdate() {}
+		// TODO  目前逻辑在 setstate后
+		// TODO 做一些事件绑定的工作
+		// typeof Message ? Message.listen('', this.)
+	
+		/**
+	  * @author bbqin
+	  */
+		;
+	
+		NCFormControl.prototype.executeSelection = function executeSelection(e) {
+			var length = e.target.value.length;
+			e.target.setSelectionRange(0, length);
+		};
+		// icon clock event
+	
+	
+		NCFormControl.prototype.render = function render() {
+			var _this2 = this;
+	
+			var _props = this.props,
+			    isViewMode = _props.isViewMode,
+			    className = _props.className,
+			    onBlur = _props.onBlur,
+			    showStar = _props.showStar,
+			    value = _props.value,
+			    type = _props.type,
+			    disabled = _props.disabled,
+			    others = _objectWithoutProperties(_props, ['isViewMode', 'className', 'onBlur', 'showStar', 'value', 'type', 'disabled']);
+	
+			var flag = false;
+			if (type === 'search') {
+				flag = true;
+				type = 'text';
+			} else if (type === 'password') {
+				var _others = others,
+				    title = _others.title,
+				    otherss = _objectWithoutProperties(_others, ['title']);
+	
+				others = otherss;
+			}
+			if (value === undefined || value === null) {
+				value = '';
+			}
+			if (others.hasOwnProperty('maxlength') && others.maxlength > 0) {
+				value = String(value).slice(0, others.maxlength);
+			}
+	
+			return isViewMode ? _react2['default'].createElement(
+				'span',
+				null,
+				value
+			) : _react2['default'].createElement(
+				'div',
+				{ className: 'u-form-control-wrapper' },
+				showStar ? _react2['default'].createElement(
+					'span',
+					{ className: 'form-control-required-tag' },
+					'*'
+				) : '',
+				_react2['default'].createElement(_beeFormControl2['default'], _extends({
+					ref: function ref(i) {
+						return _this2.i = i;
+					},
+					className: 'nc-input ' + className,
+					onBlur: this.handleBlur,
+					value: value,
+					type: type,
+					onKeyUp: this.mySearch,
+					disabled: disabled
+				}, others, {
+					onFocus: this.handleFocus,
+					onMouseDown: function onMouseDown() {
+						_this2.mouseDown = true;
+					},
+					onMouseUp: function onMouseUp() {
+						_this2.mouseDown = false;
+					}
+				})),
+				flag ? _react2['default'].createElement(
+					'div',
+					{ className: 'u-form-control-search-text' },
+					' ',
+					value.length && !disabled ? _react2['default'].createElement('i', { onClick: this.closeClick, className: 'iconfont icon-qingkong ' }) : null,
+					' ',
+					_react2['default'].createElement('i', { onClick: this.searchClick, className: 'iconfont icon-sousuo' })
+				) : null
+			);
+		};
+	
+		return NCFormControl;
+	}(_react.Component);
+	
+	exports['default'] = NCFormControl;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 729 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } // 单元格编辑态组件
+	
+	
+	var Item = function (_Component) {
+	    _inherits(Item, _Component);
+	
+	    function Item(props) {
+	        _classCallCheck(this, Item);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.blur = function (e) {
+	            var _this$props$content = _this.props.content,
+	                _this$props$content$p = _this$props$content.props,
+	                onBlur = _this$props$content$p.onBlur,
+	                value = _this$props$content$p.value,
+	                edittable_dom = _this$props$content.edittable_dom;
+	
+	            if (edittable_dom.contains(_this.item) && !_this.item.contains(e.target) && edittable_dom.contains(e.target)) {
+	                typeof onBlur === 'function' && onBlur(value);
+	            }
+	        };
+	
+	        return _this;
+	    }
+	
+	    Item.prototype.componentDidMount = function componentDidMount() {
+	        var _props = this.props,
+	            itemtype = _props.content.props.itemtype,
+	            isLineStatus = _props.isLineStatus;
+	
+	        if ((itemtype === 'refer' || itemtype === 'residtxt') && isLineStatus) {
+	            // 点击参照之外其他部分掉用参照onblur
+	            document.addEventListener('click', this.blur, false);
+	        }
+	    };
+	
+	    Item.prototype.componentWillUnmount = function componentWillUnmount() {
+	        var _props2 = this.props,
+	            itemtype = _props2.content.props.itemtype,
+	            isLineStatus = _props2.isLineStatus;
+	
+	        if ((itemtype === 'refer' || itemtype === 'residtxt') && isLineStatus) {
+	            // 移除document事件
+	            document.removeEventListener('click', this.blur);
+	        }
+	    };
+	
+	    Item.prototype.render = function render() {
+	        var _this2 = this;
+	
+	        var content = this.props.content;
+	
+	        return _react2['default'].createElement(
+	            'div',
+	            {
+	                style: content.props.itemtype === 'number' ? { textAlign: 'right' } : {},
+	                ref: function ref(dom) {
+	                    _this2.item = dom;
+	                }
+	            },
+	            content
+	        );
+	    };
+	
+	    return Item;
+	}(_react.Component);
+	
+	exports['default'] = Item;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 730 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var currentIndex = void 0;
+	
+	function getFocusRowIndex() {
+	    return currentIndex;
+	}
+	
+	function setFocusRowIndex(index) {
+	    currentIndex = index;
+	}
+	
+	exports.getFocusRowIndex = getFocusRowIndex;
+	exports.setFocusRowIndex = setFocusRowIndex;
+
+/***/ }),
+/* 731 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -96886,7 +102556,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @title CardTable
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @title EditTable
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @description 
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
@@ -96894,9 +102564,309 @@
 	
 	var CardTable = _src2['default'].CardTable;
 	
-	var columns = [{ title: "员工编号", dataIndex: "a", key: "a", width: 150 }, { title: "员工姓名", dataIndex: "b", key: "b", width: 100 }, { title: "性别", dataIndex: "c", key: "c", width: 100 }, { title: "部门", dataIndex: "d", key: "d", width: 100 }, { title: "职级", dataIndex: "e", key: "e", width: 100 }];
+	var columns = [{
+	    itemtype: 'label', //label 类型不可编辑
+	    maxlength: '20', //限制字段长度
+	    visible: true, //是否显示列，设置为 false 或不设置，均不显示该列
+	    width: '100px', //列宽
+	    label: '行号', //列名称
+	    disabled: true, //是否禁止编辑
+	    attrcode: 'crowno' //字段名称
+	}, {
+	    itemtype: 'label',
+	    maxlength: '20',
+	    label: '收入合同子实体',
+	    width: '200px',
+	    disabled: true,
+	    required: true, //是否必填，列名称前加 *
+	    visible: true,
+	    attrcode: 'crevecontbid'
+	}, {
+	    itemtype: 'input',
+	    scale: '1',
+	    maxlength: '28',
+	    visible: true,
+	    width: '200px',
+	    label: '数量',
+	    required: true,
+	    attrcode: 'npobnum'
+	}, {
+	    itemtype: 'select',
+	    visible: true,
+	    label: '确认收入时点',
+	    width: '200px',
+	    options: [{
+	        display: '销售发货',
+	        value: '0'
+	    }, {
+	        display: '销售开票',
+	        value: '1'
+	    }, {
+	        display: '手工',
+	        value: '2'
+	    }],
+	    attrcode: 'fconfirmpoint'
+	}, {
+	    itemtype: 'number',
+	    scale: '2',
+	    width: '200px',
+	    maxlength: '28',
+	    visible: true,
+	    label: '分配金额',
+	    disabled: true,
+	    attrcode: 'nallotmny'
+	}, {
+	    itemtype: 'label',
+	    scale: '8',
+	    width: '200px',
+	    maxlength: '28',
+	    visible: true,
+	    label: '已履约数量',
+	    disabled: true,
+	    attrcode: 'nfinishnum'
+	}, {
+	    itemtype: 'label',
+	    scale: '8',
+	    width: '200px',
+	    maxlength: '28',
+	    label: '已履约金额',
+	    disabled: true,
+	    attrcode: 'nfinishmny'
+	}, {
+	    itemtype: 'label',
+	    maxlength: '19',
+	    width: '200px',
+	    label: '时间戳',
+	    disabled: true,
+	    attrcode: 'ts'
+	}, {
+	    itemtype: 'label',
+	    maxlength: '500',
+	    width: '200px',
+	    label: '行备注',
+	    disabled: true,
+	    attrcode: 'vrownote'
+	}];
 	
-	var data = [{ a: "ASVAL_20190328", b: "小张", c: "男", d: "财务二科", e: "M1", key: "1" }, { a: "ASVAL_20190320", b: "小明", c: "男", d: "财务一科", e: "T1", key: "2" }, { a: "ASVAL_20190312", b: "小红", c: "女", d: "财务一科", e: "T2", key: "3" }];
+	var data = [{
+	    status: '0',
+	    rowid: 'hhghg-34343m43-434343wws',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        nfinishnum: {
+	            value: 'gggg'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '夏侯惇,白起'
+	        },
+	        cunitid: {
+	            value: false
+	        },
+	        crowno: {
+	            value: 1
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: 'hhghg-344543243-434bbb3fdsf',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nfinishnum: {
+	            value: '哈哈哈'
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '广东,北京'
+	        },
+	        cunitid: {
+	            value: true
+	        },
+	        crowno: {
+	            value: 2
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: 'h2345hg-345hbvc43-434bebb3sdsc',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        nfinishnum: {
+	            value: '1234'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '中国,美国'
+	        },
+	        cunitid: {
+	            value: true
+	        },
+	        crowno: {
+	            value: 3
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: '5hhhg-345hbc43-434bebb3sddw',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        nfinishnum: {
+	            value: 'ggefe'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '11955',
+	            scale: '2',
+	            disabled: false
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 2,
+	            display: '手工'
+	        },
+	        npobnum: {
+	            value: '10.888',
+	            scale: '6'
+	        },
+	        cpobid: {
+	            value: 1,
+	            display: '1'
+	        },
+	        cunitid: {
+	            value: false
+	        },
+	        crowno: {
+	            value: 4
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: 'hhghg-34343m143-4343431wwde',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        nfinishnum: {
+	            value: 'gggg'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '夏侯惇,白起'
+	        },
+	        cunitid: {
+	            value: false
+	        },
+	        crowno: {
+	            value: 5
+	        }
+	    }
+	}];
 	
 	var tabLists = [{
 	    code: 'body',
@@ -96917,11 +102887,15 @@
 	        return _react2['default'].createElement(CardTable, {
 	            columns: columns,
 	            data: data,
-	            tabLists: tabLists,
 	            moduleId: 'body',
+	            tabLists: tabLists,
 	            showMore: true,
+	            showMax: true,
 	            config: {
-	                showCheck: true //是否开启多选功能
+	                showCheck: true, //是否开启多选功能
+	                hideSwitch: function hideSwitch() {
+	                    return false;
+	                } //表格
 	            }
 	        });
 	    };
@@ -96930,6 +102904,401 @@
 	}(_react.Component);
 	
 	exports['default'] = Demo2;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 732 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeButton = __webpack_require__(264);
+	
+	var _beeButton2 = _interopRequireDefault(_beeButton);
+	
+	var _src = __webpack_require__(269);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @title EditTable
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @description 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
+	
+	var EditTable = _src2['default'].EditTable;
+	
+	var columns = [{
+	    itemtype: 'label', //label 类型不可编辑
+	    maxlength: '20', //限制字段长度
+	    visible: true, //是否显示列，设置为 false 或不设置，均不显示该列
+	    width: '100px', //列宽
+	    label: '行号', //列名称
+	    disabled: true, //是否禁止编辑
+	    attrcode: 'crowno' //字段名称
+	}, {
+	    itemtype: 'label',
+	    maxlength: '20',
+	    label: '收入合同子实体',
+	    width: '200px',
+	    disabled: true,
+	    required: true, //是否必填，列名称前加 *
+	    visible: true,
+	    attrcode: 'crevecontbid'
+	}, {
+	    itemtype: 'input',
+	    scale: '1',
+	    maxlength: '28',
+	    visible: true,
+	    width: '200px',
+	    label: '数量',
+	    required: true,
+	    attrcode: 'npobnum'
+	}, {
+	    itemtype: 'select',
+	    visible: true,
+	    label: '确认收入时点',
+	    width: '200px',
+	    options: [{
+	        display: '销售发货',
+	        value: '0'
+	    }, {
+	        display: '销售开票',
+	        value: '1'
+	    }, {
+	        display: '手工',
+	        value: '2'
+	    }],
+	    attrcode: 'fconfirmpoint'
+	}, {
+	    itemtype: 'number',
+	    scale: '2',
+	    width: '200px',
+	    maxlength: '28',
+	    visible: true,
+	    label: '分配金额',
+	    // disabled: true,
+	    attrcode: 'nallotmny'
+	}, {
+	    itemtype: 'label',
+	    scale: '8',
+	    width: '200px',
+	    maxlength: '28',
+	    visible: true,
+	    label: '已履约数量',
+	    disabled: true,
+	    attrcode: 'nfinishnum'
+	}, {
+	    itemtype: 'label',
+	    scale: '8',
+	    width: '200px',
+	    maxlength: '28',
+	    label: '已履约金额',
+	    disabled: true,
+	    attrcode: 'nfinishmny'
+	}, {
+	    itemtype: 'label',
+	    maxlength: '19',
+	    width: '200px',
+	    label: '时间戳',
+	    disabled: true,
+	    attrcode: 'ts'
+	}, {
+	    itemtype: 'label',
+	    maxlength: '500',
+	    width: '200px',
+	    label: '行备注',
+	    disabled: true,
+	    attrcode: 'vrownote'
+	}];
+	
+	var data = [{
+	    status: '0',
+	    rowid: 'hhghg-34343m43-434343wws',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        nfinishnum: {
+	            value: 'gggg'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '夏侯惇,白起'
+	        },
+	        cunitid: {
+	            value: false
+	        },
+	        crowno: {
+	            value: 1
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: 'hhghg-344543243-434bbb3fdsf',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nfinishnum: {
+	            value: '哈哈哈'
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '广东,北京'
+	        },
+	        cunitid: {
+	            value: true
+	        },
+	        crowno: {
+	            value: 2
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: 'h2345hg-345hbvc43-434bebb3sdsc',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        nfinishnum: {
+	            value: '1234'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '中国,美国'
+	        },
+	        cunitid: {
+	            value: true
+	        },
+	        crowno: {
+	            value: 3
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: '5hhhg-345hbc43-434bebb3sddw',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        nfinishnum: {
+	            value: 'ggefe'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '11955',
+	            scale: '2',
+	            disabled: false
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 2,
+	            display: '手工'
+	        },
+	        npobnum: {
+	            value: '10.888',
+	            scale: '6'
+	        },
+	        cpobid: {
+	            value: 1,
+	            display: '1'
+	        },
+	        cunitid: {
+	            value: false
+	        },
+	        crowno: {
+	            value: 4
+	        }
+	    }
+	}, {
+	    status: '0',
+	    rowid: 'hhghg-34343m143-4343431wwde',
+	    values: {
+	        ts: {
+	            value: '2018-03-21 10:53:18'
+	        },
+	        crevecontid: {
+	            value: '1001A310000000005SC8'
+	        },
+	        crevecontbid: {
+	            value: '1001A310000000005SC9'
+	        },
+	        fclosetype: {
+	            value: false
+	        },
+	        nallotmny: {
+	            value: '1199.000'
+	        },
+	        fallocation: {
+	            value: false
+	        },
+	        fconfirmpoint: {
+	            value: 1,
+	            display: '销售发货'
+	        },
+	        nfinishnum: {
+	            value: 'gggg'
+	        },
+	        npobnum: {
+	            value: '10888'
+	        },
+	        cpobid: {
+	            value: '10,3',
+	            display: '夏侯惇,白起'
+	        },
+	        cunitid: {
+	            value: false
+	        },
+	        crowno: {
+	            value: 5
+	        }
+	    }
+	}];
+	
+	var Demo3 = function (_Component) {
+	    _inherits(Demo3, _Component);
+	
+	    function Demo3() {
+	        var _temp, _this, _ret;
+	
+	        _classCallCheck(this, Demo3);
+	
+	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	            args[_key] = arguments[_key];
+	        }
+	
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.handleClick = function () {
+	            _this.table.getTableRows();
+	        }, _this.getTableRows = function (data) {
+	            console.log('保存数据', data);
+	        }, _temp), _possibleConstructorReturn(_this, _ret);
+	    }
+	    //获取表格数据时返回的回调
+	
+	
+	    Demo3.prototype.render = function render() {
+	        var _this2 = this;
+	
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                _beeButton2['default'],
+	                { colors: 'primary', onClick: this.handleClick, style: { marginBottom: '8px' } },
+	                '\u4FDD\u5B58\u8868\u683C\u6570\u636E'
+	            ),
+	            _react2['default'].createElement(EditTable, {
+	                columns: columns,
+	                data: data,
+	                moduleId: 'purchase',
+	                isEdit: true,
+	                onRef: function onRef(ref) {
+	                    _this2.table = ref;
+	                } //获取EditTable组件实例
+	                , getTableRows: this.getTableRows
+	            })
+	        );
+	    };
+	
+	    return Demo3;
+	}(_react.Component);
+	
+	exports['default'] = Demo3;
 	module.exports = exports['default'];
 
 /***/ })

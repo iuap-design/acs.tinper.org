@@ -73,6 +73,8 @@ value| `string/array`|-|指定当前选中的条目。可以是字符串格式�
 onPaginationSelect| `function(currentIndex)` | - | 翻页回调，返回当前页面。替换之前的onChangeFormControlt| 否
 onSeach| `function(value)` | - | 搜索框输入值回调，value是输入内容 。替换之前的onForm| 否
 onSelectorChange | `function(selectedArray,item,status)`| -- |当input框值发生改变会回调此函数。status：选中还是删除该节点，id：valueField指定的字段值，item：该条完整数据，selectedArray：当前选中的全部数据。触发的情形：1.清空操作，返回参数（false,null,null,[]）;2.单选或者多选下拉选中数据；3.多选下删除单个数据；4.多选下delete删除数据| 否
+disabled| `Boolean` | false | 是否禁用下拉参照 | 否
+placeholder| `String` | '' | placeholder | 否
 [Deprecated]sliderWidth|`number`或者`String`|  下拉菜单的宽度|否
 [Deprecated]comboboxStoreData| `array` | [] | 下拉参照要展示dom集合，搭配<ComboItem>使用 | 否
 [Deprecated]onClickItemInner | `function(selectedArray,item, status)`| -- | 下拉选中，返回缓存的数据对应的数据。在没有传storeData情形下，不能返回完整数据，只能返回数据键值，展示值和event。id是键，item完整数据，status是选中还是删除，selectedArray是当前选中全部数据| 否

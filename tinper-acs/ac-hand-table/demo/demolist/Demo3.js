@@ -27,7 +27,7 @@ const data = [
     staff: '杜甫',
     department: '用友集团',
     department_staff: '张一',
-    department_staff_transfer: '花43-43-jaja',
+    department_staff_transfer: '',
   },
   {
     id: 2,
@@ -1030,31 +1030,42 @@ class Demo3 extends Component {
     {
       data: 'autocomplete',
       type: 'autocomplete',  // 下拉框
+      validator: (value, callback) => { // 必输项
+        callback(!!value);
+      },
       refSource: (value, type, callback) => {
         const data = [
           {
             id: '1',
             code: '1',
             refname: 'xxxx',
+            selectValue: 'xxxx-1-1',
           }, {
             id: '2',
             code: '2',
             refname: 'yyyyy',
+            selectValue: 'yyyyy-2-2',
           }, {
             id: '3',
             code: '3',
             refname: 'zzzz',
+            selectValue: 'zzzz-3-3',
           }];
 
         return callback(data);
       },
       refConfig: {
-        columnsKey: ['refname', 'id', 'code'], // 约定第一个为回写值,即表格中展示的数据
-        rowKey: ['autocomplete', 'yyy', 'zzzz'],
+        refValue: 'selectValue', // 下拉显示值
+        rowKey: ['autocomplete', 'yyy'],
       },
       refOnChange: (refData, rowData, rowNum) => { // 下拉选中数据回调
-        console.log('refData, rowData, rowNum', refData, rowData, rowNum);
+        const { refname, code } = refData;
+        rowData.autocomplete = refname;
+        rowData.yyy = code;
+        console.log("refData",refData); // 如果为空对象表示没有选中
+        this.child.onUpdateRowData(rowNum, rowData);
       },
+
     },
 
     {
@@ -1065,6 +1076,7 @@ class Demo3 extends Component {
         columnsData: refTableData.columnsData,
         columnsKey: ['name', 'email', 'mobile'], // 约定第一个为回写值
         rowKey: ['staff', 'staffEmail', 'staffMobile'],
+
       },
       refSource: (value, type, callback) => { // 表格简单搜索
         console.log('refSearch--table', value, type);
@@ -1182,16 +1194,19 @@ class Demo3 extends Component {
           <Button colors="primary" onClick={this.getFormatData} size="sm">格式化数据 </Button>
         </div>
 
-        <AcHandTable
-          id="example3" // 组件id
-          onRef={(ref) => { // 设置ref属性 调用子组件方法
-            this.child = ref;
-          }}
-          colHeaders={['编码', '下拉搜索', '表格参照-人员', '树参照-部门', '树表参照-部门人员', '树穿梭-人员']} // 表格表头
-          data={handData} // 表体数据
-          columns={this.columns} // 列属性设置
-          rowKey="id" // 数组对象中唯一id 默认值为'id'
-        />
+        <div className="min-table">
+          <AcHandTable
+            id="example3" // 组件id
+            onRef={(ref) => { // 设置ref属性 调用子组件方法
+              this.child = ref;
+            }}
+            colHeaders={['编码', '下拉', '表格参照', '树参照', '树表参照', '树穿梭']} // 表格表头
+            data={handData} // 表体数据
+            columns={this.columns} // 列属性设置
+            colWidths={[null, 100, 100, 100, 100, 100, 100, null]}
+            rowKey="id" // 数组对象中唯一id 默认值为'id'
+          />
+        </div>
 
       </div>
     );

@@ -84,7 +84,7 @@ searchPanelLocale | `Object` | {'title': '条件筛选','resetName': '重置','s
 mustPaginationShow | `bool` | false | true必须展示分页、false，当pageCount>1才展示分页| 否
 tableProps | `object`| {} | table上其他属性，具体接收的参数参照bee-table| 否
 modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
-
+searchPlaceholder| `String` | '搜索' | 打开弹框上简单搜索的placeholder | 否
 
 
 ### RefMultipleTableWithInput

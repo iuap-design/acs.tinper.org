@@ -23,7 +23,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
 var propTypes = {
-    clsfix: _propTypes2["default"].string
+    clsfix: _propTypes2["default"].string,
+    disabled: _propTypes2["default"].bool
 };
 var defaultProps = {
     clsfix: 'ac-form-layout'
@@ -41,11 +42,16 @@ var FormLayout = function (_Component) {
     FormLayout.prototype.render = function render() {
         var _props = this.props,
             clsfix = _props.clsfix,
-            children = _props.children;
+            children = _props.children,
+            disabled = _props.disabled,
+            className = _props.className;
 
+        var clsses = clsfix;
+        if (className) clsses += ' ' + className;
+        if (disabled) clsses += ' disabled';
         return _react2["default"].createElement(
             'div',
-            { className: clsfix },
+            { className: clsses },
             children
         );
     };

@@ -4,8 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -41,6 +39,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var maxTop = 0;
 var height = 0;
 
+var propTypes = {
+  showMore: PropTypes.bool, //是否展开详细信息
+  isMaximized: PropTypes.bool, //是否最大化显示
+  tabs: PropTypes.array //折叠区域左侧的 tabs 列表
+};
+
+var defaultProps = {};
+
 var FoldableTabs = function (_Component) {
   _inherits(FoldableTabs, _Component);
 
@@ -56,6 +62,7 @@ var FoldableTabs = function (_Component) {
     var defaultActiveKey = props.tabs && props.tabs.length && props.tabs[0].key || '';
     _this.state = {
       showMore: props.showMore,
+      isMaximized: props.isMaximized,
       activeKey: defaultActiveKey
     };
     return _this;
@@ -64,9 +71,11 @@ var FoldableTabs = function (_Component) {
   FoldableTabs.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     var _props = this.props,
         oldShowMore = _props.showMore,
-        oldActiveKey = _props.activeKey;
+        oldActiveKey = _props.activeKey,
+        oldIsMaximized = _props.isMaximized;
     var newShowMore = nextProps.showMore,
-        newActiveKey = nextProps.activeKey;
+        newActiveKey = nextProps.activeKey,
+        newIsMaximized = nextProps.isMaximized;
 
     if (newShowMore !== oldShowMore) {
       this.setState({
@@ -78,14 +87,38 @@ var FoldableTabs = function (_Component) {
         activeKey: newActiveKey
       });
     }
+    if (newIsMaximized !== oldIsMaximized) {
+      this.setState({
+        isMaximized: newIsMaximized
+      });
+    }
   };
 
-  //控制主表收起展开
+  /**
+   * 控制主表收起展开
+   */
   FoldableTabs.prototype.toggleCardTable = function toggleCardTable() {
     var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     var onHeadAngleToggle = this.props.onHeadAngleToggle;
 
     onHeadAngleToggle && onHeadAngleToggle(flag);
+  };
+
+  /**
+   * 最大化多表中表格
+   */
+
+
+  FoldableTabs.prototype.openMaxTable = function openMaxTable(flag) {
+    // if (typeof tableId == 'string' && this.myTable[tableId].state.table) {
+    //   this.myTable[tableId].state.table.isMaximized = flag;
+    //   this.myTable[tableId].setState({
+    //     table: this.myTable[tableId].state.table
+    //   });
+    // }
+    var openMaxTable = this.props.openMaxTable;
+
+    openMaxTable && openMaxTable(flag);
   };
 
   FoldableTabs.prototype.render = function render() {
@@ -98,14 +131,14 @@ var FoldableTabs = function (_Component) {
         moduleId = _props2.moduleId,
         isEdit = _props2.isEdit,
         showListView = _props2.showListView,
-        showMax = _props2.showMax,
         config = _props2.config,
         rows = _props2.rows,
         tableScope = _props2.tableScope,
         expandedList = _props2.expandedList;
     var _state = this.state,
         showMore = _state.showMore,
-        activeKey = _state.activeKey;
+        activeKey = _state.activeKey,
+        isMaximized = _state.isMaximized;
 
     var visibleRows = rows.filter(function (item) {
       return item.status !== '3';
@@ -115,8 +148,7 @@ var FoldableTabs = function (_Component) {
       'uf-triangle-right': !showMore,
       'uf-triangle-down': showMore
     });
-    var style = showMax ? { style: { width: '100vw' } } : {}; //暂且这样吧  先加个 style={{width: "100vw"}}
-    // TODO showMore的问题，，设计不要改来改去好不好。。。暂且这样吧  先加个 style={{width: "100vw"}}
+    // const style = isMaximized ? { style: { width: '100vw' } } : {}; //暂且这样吧  先加个 style={{width: "100vw"}}
     if (showMore && showListView) {
       var lightTabs_header = document.querySelector('#js_lightTabs_header_' + moduleId);
       var lightTabs = document.querySelector('#js_lightTabs_' + moduleId);
@@ -125,9 +157,10 @@ var FoldableTabs = function (_Component) {
         height = lightTabs.getBoundingClientRect().height;
       }
     }
+    console.log('isMaximized: ', isMaximized);
     return _react2["default"].createElement(
       'section',
-      _extends({ className: 'light-tabs' }, style),
+      { className: 'light-tabs' },
       _react2["default"].createElement(_hotkeys2["default"], {
         tabs: tabs,
         activeKey: activeKey,
@@ -135,140 +168,138 @@ var FoldableTabs = function (_Component) {
         headerId: 'js_lightTabs_header_' + moduleId
       }),
       _react2["default"].createElement(
-        'header',
-        {
-          className: (0, _classnames2["default"])('light-tabs-header cf', {
-            'tabs-header-spread': showMore,
-            'tabs-header-pack': !showMore
-          }),
-          id: 'js_lightTabs_header_' + moduleId
-        },
+        'div',
+        { className: 'light-tabs-background' },
         _react2["default"].createElement(
-          'div',
-          { className: 'light-tabs-header-tabs fl' },
+          'header',
+          {
+            className: (0, _classnames2["default"])('light-tabs-header cf', {
+              'tabs-header-spread': showMore,
+              'tabs-header-pack': !showMore
+            }),
+            id: 'js_lightTabs_header_' + moduleId
+          },
           _react2["default"].createElement(
-            'span',
-            {
-              className: (0, _classnames2["default"])('light-tabs-angle fl', {
-                'angle-show': showMore
-              }),
-              onClick: function onClick() {
-                //控制主表的收起展开
-                _this2.toggleCardTable(!showMore);
-              }
-            },
-            _react2["default"].createElement('span', { className: 'iconfont icon table-tabs-icon ' + iconClass })
+            'div',
+            { className: 'light-tabs-header-tabs fl' },
+            _react2["default"].createElement(
+              'span',
+              {
+                className: (0, _classnames2["default"])('light-tabs-angle fl', {
+                  'angle-show': showMore
+                }),
+                onClick: function onClick() {
+                  //控制主表的收起展开
+                  _this2.toggleCardTable(!showMore);
+                }
+              },
+              _react2["default"].createElement('span', { className: 'iconfont icon table-tabs-icon ' + iconClass })
+            ),
+            _react2["default"].createElement(
+              'ul',
+              {
+                className: (0, _classnames2["default"])('tabs-wraps fl', {
+                  'single-tab': tabs.length <= 1
+                })
+              },
+              tabs.map(function (item, i) {
+                if (item.key === activeKey) {
+                  return _react2["default"].createElement(
+                    'li',
+                    { className: 'active' },
+                    _react2["default"].createElement(
+                      'a',
+                      { href: 'javascript:;' },
+                      item.label
+                    ),
+                    _react2["default"].createElement('span', null)
+                  );
+                } else {
+                  return _react2["default"].createElement(
+                    'li',
+                    { onClick: _this2.changeActiveKey.bind(_this2, item) },
+                    _react2["default"].createElement(
+                      'a',
+                      { href: 'javascript:;' },
+                      item.label
+                    )
+                  );
+                }
+              })
+            )
           ),
           _react2["default"].createElement(
-            'ul',
+            'div',
             {
-              className: (0, _classnames2["default"])('tabs-wraps fl', {
-                'single-tab': tabs.length <= 1
+              className: (0, _classnames2["default"])('tabs-operation fr', {
+                'tab-hide': !showMore
               })
             },
-            tabs.map(function (item, i) {
-              if (item.key === activeKey) {
-                return _react2["default"].createElement(
-                  'li',
-                  { className: 'active' },
-                  _react2["default"].createElement(
-                    'a',
-                    { href: 'javascript:;' },
-                    item.label
-                  ),
-                  _react2["default"].createElement('span', null)
-                );
-              } else {
-                return _react2["default"].createElement(
-                  'li',
-                  { onClick: _this2.changeActiveKey.bind(_this2, item) },
-                  _react2["default"].createElement(
-                    'a',
-                    { href: 'javascript:;' },
-                    item.label
-                  )
-                );
+            _react2["default"].createElement('span', {
+              className: 'icon iconfont  head-icon ' + (isMaximized ? 'uf-minimize' : 'uf-maxmize'),
+              onClick: function onClick() {
+                //最大化最小化
+                _this2.openMaxTable(!isMaximized);
+                // pageScope.cardTable.openMaxTable(moduleId, !isMaximized);
               }
             })
+          ),
+          config && config.tableHeadLeft && _react2["default"].createElement(
+            'div',
+            {
+              className: (0, _classnames2["default"])('tabs-config fl', {
+                'tab-hide': !showMore
+              })
+            },
+            config.tableHeadLeft()
+          ),
+          config && config.tableHead && _react2["default"].createElement(
+            'div',
+            {
+              className: (0, _classnames2["default"])('tabs-config fr', {
+                'tab-hide': !showMore
+              })
+            },
+            config.tableHead()
           )
         ),
-        _react2["default"].createElement(
-          'div',
-          {
-            className: (0, _classnames2["default"])('tabs-operation fr', {
-              'tab-hide': !showMore
-            })
-          },
-          isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || _react2["default"].createElement('span', {
-            className: 'icon iconfont head-icon ' + (showListView ? 'icon-shituqiehuan' : 'icon-shituliebiaoqiehuan'),
-            onClick: function onClick() {
-              //最大化多表中表体卡片列表
-              // pageScope.cardTable.openListView(moduleId, !showListView);
-            }
-          }),
-          _react2["default"].createElement('span', {
-            className: 'icon iconfont  head-icon ' + (showMax ? 'icon-zuixiaohua' : 'icon-zuidahua'),
-            onClick: function onClick() {
-              //最大化最小化
-              // pageScope.cardTable.openMaxTable(moduleId, !showMax);
-            }
-          })
-        ),
-        config && config.tableHeadLeft && _react2["default"].createElement(
-          'div',
-          {
-            className: (0, _classnames2["default"])('tabs-config fl', {
-              'tab-hide': !showMore
-            })
-          },
-          config.tableHeadLeft()
-        ),
-        config && config.tableHead && _react2["default"].createElement(
-          'div',
-          {
-            className: (0, _classnames2["default"])('tabs-config fr', {
-              'tab-hide': !showMore
-            })
-          },
-          config.tableHead()
-        )
-      ),
-      isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || (showMore && showListView ? _react2["default"].createElement(
-        _beeCollapse2["default"],
-        { 'in': showListView },
-        _react2["default"].createElement(
-          'div',
-          {
-            className: 'lightapp-component-cardTable-view',
-            style: {
-              maxHeight: showMax ? '93%' : '300px',
-              minHeight: showMax ? '' : '300px',
-              top: showMax ? maxTop + 8 : maxTop,
-              width: showMax ? 'calc(100vw - 32px)' : '100%'
-            }
-          },
+        isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || (showMore && showListView ? _react2["default"].createElement(
+          _beeCollapse2["default"],
+          { 'in': showListView },
           _react2["default"].createElement(
-            'ul',
-            { className: 'card-table-expand-wraps' },
-            visibleRows.length ? visibleRows.map(function (item) {
-              return expandedList.call(tableScope, moduleId, item, pageScope);
-            }) : _react2["default"].createElement(
-              'li',
-              { className: 'no-data-li' },
-              _react2["default"].createElement(_noData2["default"], null)
+            'div',
+            {
+              className: 'lightapp-component-cardTable-view',
+              style: {
+                maxHeight: isMaximized ? '93%' : '300px',
+                minHeight: isMaximized ? '' : '300px',
+                top: isMaximized ? maxTop + 8 : maxTop,
+                width: isMaximized ? 'calc(100vw - 32px)' : '100%'
+              }
+            },
+            _react2["default"].createElement(
+              'ul',
+              { className: 'card-table-expand-wraps' },
+              visibleRows.length ? visibleRows.map(function (item) {
+                return expandedList.call(tableScope, moduleId, item, pageScope);
+              }) : _react2["default"].createElement(
+                'li',
+                { className: 'no-data-li' },
+                _react2["default"].createElement(_noData2["default"], null)
+              )
             )
           )
+        ) : null),
+        _react2["default"].createElement(
+          'footer',
+          { id: 'js_lightTabs_' + moduleId, className: 'light-tabs-content', style: isShow },
+          tabs.map(function (item, i) {
+            console.log(item.key, activeKey, '=====');
+            if (item.key === activeKey) {
+              return item.render();
+            }
+          })
         )
-      ) : null),
-      _react2["default"].createElement(
-        'footer',
-        { id: 'js_lightTabs_' + moduleId, className: 'light-tabs-content', style: isShow },
-        tabs.map(function (item, i) {
-          console.log(item.key, activeKey, '=====');
-          if (item.key === activeKey) {
-            return item.render();
-          }
-        })
       )
     );
   };

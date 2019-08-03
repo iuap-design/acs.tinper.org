@@ -161,58 +161,59 @@ class Demo6 extends Component {
           <Button colors="primary" onClick={this.getFormatData} size="sm">格式化数据 </Button>
         </div>
 
+        <div className="min-table">
+          <AcHandTable
+            id="example6" // 组件id
+            onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
+            colHeaders={['姓', '名', '单价', '数量', '合计', '日期', '时间', '备注']} // 表格表头
+            data={handData} // 表体数据
+            columns={this.columns} // 列属性设置
+            colWidths={[null, 50, 100, 100, 120, 100, 100, 100, null]}
+            manualRowMove // 行移动
+            fillHandle={{
+              autoInsertRow: false,
+              direction: 'vertical',
+            }}
+            headerTooltips
+            nestedHeaders={[ // 多表头
+              [
+                {
+                  label: '个人信息',
+                  colspan: 2,
+                },
+                {
+                  label: '统计',
+                  colspan: 3,
+                },
+                {
+                  label: '消费记录',
+                  colspan: 3,
+                },
+              ],
+            ]}
+            contextMenu={false}
 
-        <AcHandTable
-          id="example6" // 组件id
-          onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
-          colHeaders={['姓', '名', '单价', '数量', '合计', '日期', '时间', '备注']} // 表格表头
-          data={handData} // 表体数据
-          columns={this.columns} // 列属性设置
-          colWidths={[null, 50, 100, 100, 120, 100, 100, 100, null]}
-          manualRowMove // 行移动
-          fillHandle={{
-            autoInsertRow: false,
-            direction: 'vertical',
-          }}
-          headerTooltips
-          nestedHeaders={[ // 多表头
-            [
+            mergeCells={[ // 合并单元格
               {
-                label: '个人信息',
-                colspan: 2,
+                row: 0, // 合并行开始
+                rowspan: 4, // 合并行数量
+                col: 8, //  合并列开始
+                colspan: 1, // 合并列数量
               },
+            ]}
+
+            cell={[ // 设置表格样式
               {
-                label: '统计',
-                colspan: 3,
+                row: 0, // 行号
+                col: 8, //  列号
+                className: 'htMiddle htCenter', // 样式名
               },
-              {
-                label: '消费记录',
-                colspan: 3,
-              },
-            ],
-          ]}
-          contextMenu={false}
 
-          mergeCells={[ // 合并单元格
-            {
-              row: 0, // 合并行开始
-              rowspan: 4, // 合并行数量
-              col: 8, //  合并列开始
-              colspan: 1, // 合并列数量
-            },
-          ]}
+            ]}
 
-          cell={[ // 设置表格样式
-            {
-              row: 0, // 行号
-              col: 8, //  列号
-              className: 'htMiddle htCenter', // 样式名
-            },
+          />
 
-          ]}
-
-        />
-
+        </div>
       </div>
 
     );

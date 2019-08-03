@@ -121,9 +121,10 @@ class Demo4 extends Component {
 
 
     return (
-      <div>
+      <div className="demoPadding">
 
-        <div>
+
+        <div className="min-table">
           <AcHandTable
             id="example4" // 组件id
             onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法

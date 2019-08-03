@@ -1,6 +1,6 @@
 {
  "name": "nc-search-panel",
- "version": "0.0.3",
+ "version": "0.0.7",
  "description": "NcSearchPanel ui component for react",
  "keywords": [
   "react",
@@ -41,6 +41,7 @@
   "bee-dropdown": "^2.0.9",
   "bee-icon": "^1.0.11",
   "bee-menus": "^2.0.8",
+  "bee-tooltip": "^2.1.2",
   "classnames": "^2.2.5"
  },
  "devDependencies": {

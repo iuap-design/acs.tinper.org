@@ -34,5 +34,6 @@ var Complex = function (_React$Component) {
   return Complex;
 }(_react2["default"].Component);
 
+Complex.displayName = 'Complex';
 exports["default"] = Complex;
 module.exports = exports['default'];
