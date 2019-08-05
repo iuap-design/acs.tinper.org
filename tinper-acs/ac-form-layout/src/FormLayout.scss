@@ -74,6 +74,7 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             height: 30px;
+            pointer-events: none;
             &-text{
                 padding: 5px 10px;
                 border-radius: 4px;

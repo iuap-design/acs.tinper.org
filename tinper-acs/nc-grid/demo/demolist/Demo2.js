@@ -1,6 +1,6 @@
 /**
 *
-* @title EditTable
+* @title CardTable
 * @description 
 *
 */
@@ -340,6 +340,22 @@ const tabLists = [{
   
 class Demo2 extends Component {
     render () {
+        const tableHead = [{
+            bordered:true,
+            itemtype:1 ,//控件类型，0为Button，1为ButtonGroup
+            children:[
+                {
+                    value:'增行',
+                    operation: 'addRow'
+                },{
+                    value:'删行',
+                    operation: 'delRow'
+                },{
+                    value:'复制行',
+                    operation: 'pasteRow'
+                }
+            ]
+        }]
         return (
             <CardTable
             columns={columns}
@@ -348,10 +364,10 @@ class Demo2 extends Component {
             tabLists={tabLists}
             showMore={true}
             showMax={true}
-            config={{
-                showCheck: true, //是否开启多选功能
-                hideSwitch: () => false, //表格
-            }}
+            showCheck= {true} //是否开启多选功能
+            hideSwitch= {() => false} //表格
+            tableHead={tableHead}
+            isEdit={true}
             />
         )
     }

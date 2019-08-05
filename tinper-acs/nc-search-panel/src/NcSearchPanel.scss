@@ -48,6 +48,11 @@
                 }
             }
         }
+        .u-input-number-group {
+            .u-input-number-group-split{
+                position: unset;
+            }
+        }
     }
     &-btns{
         width: 100px;

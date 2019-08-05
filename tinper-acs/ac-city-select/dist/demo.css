@@ -332,7 +332,7 @@ ul {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  content: "\E62E"; }
+  content: "\e66b"; }
 
 .u-select-selection-clear:hover {
   color: #999; }
@@ -599,7 +599,8 @@ ul {
   position: absolute;
   outline: none;
   overflow: hidden;
-  font-size: 12px; }
+  font-size: 12px;
+  margin-bottom: 20px; }
   .u-select-dropdown.slide-up-enter.slide-up-enter-active.u-select-dropdown-placement-bottomLeft, .u-select-dropdown.slide-up-appear.slide-up-appear-active.u-select-dropdown-placement-bottomLeft {
     animation-name: uSlideUpIn; }
   .u-select-dropdown.slide-up-enter.slide-up-enter-active.u-select-dropdown-placement-topLeft, .u-select-dropdown.slide-up-appear.slide-up-appear-active.u-select-dropdown-placement-topLeft {

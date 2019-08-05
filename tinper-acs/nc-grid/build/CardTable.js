@@ -85,6 +85,18 @@ var CardTable = function (_Component) {
             _this.setState({ isMaximized: isMaximized });
         };
 
+        _this.addRow = function () {
+            _this.editTable.addRow();
+        };
+
+        _this.delRow = function () {
+            _this.editTable.delRowByRowId();
+        };
+
+        _this.pasteRow = function () {
+            _this.editTable.pasteRow();
+        };
+
         _this.state = {
             status: 'browse', //browse(浏览态)、edit(编辑态)
             activeKey: '', //标识当前卡表的选中项
@@ -102,20 +114,22 @@ var CardTable = function (_Component) {
 
     //最大化多表中表格
 
+    //调用editTable实例中的方法
+
 
     CardTable.prototype.render = function render() {
         var _this2 = this;
 
         var _props = this.props,
             showMax = _props.showMax,
-            config = _props.config,
             moduleId = _props.moduleId,
             columns = _props.columns,
             dataRows = _props.data,
             tabLists = _props.tabLists,
             showListView = _props.showListView,
             isEdit = _props.isEdit,
-            otherProps = _objectWithoutProperties(_props, ['showMax', 'config', 'moduleId', 'columns', 'data', 'tabLists', 'showListView', 'isEdit']);
+            tableRightHead = _props.tableRightHead,
+            config = _objectWithoutProperties(_props, ['showMax', 'moduleId', 'columns', 'data', 'tabLists', 'showListView', 'isEdit', 'tableRightHead']);
 
         var _state = this.state,
             status = _state.status,
@@ -138,20 +152,15 @@ var CardTable = function (_Component) {
                 key: code,
                 label: name,
                 render: function render() {
-                    return (
-                        // <SimpleTable
-                        // columns={columns}
-                        // data={dataRows}
-                        // multiSelect={config.showCheck}
-                        // bodyStyle={{minHeight:'auto'}}
-                        // />
-                        _react2["default"].createElement(_EditTable2["default"], _extends({
-                            columns: columns,
-                            data: dataRows,
-                            moduleId: moduleId,
-                            isEdit: isEdit
-                        }, otherProps))
-                    );
+                    return _react2["default"].createElement(_EditTable2["default"], _extends({
+                        columns: columns,
+                        data: dataRows,
+                        moduleId: moduleId,
+                        isEdit: isEdit,
+                        onRef: function onRef(ref) {
+                            _this2.editTable = ref;
+                        } //获取EditTable组件实例
+                    }, config));
                 }
             };
         });
@@ -168,8 +177,7 @@ var CardTable = function (_Component) {
                 { className: 'lightapp-component-cardTable-table' },
                 !isMaximized ? _react2["default"].createElement(_FoldableTabs2["default"]
                 // pageScope={pageScope}
-                , { tableScope: this,
-                    config: config,
+                , _extends({ tableScope: this,
                     isEdit: status == 'edit',
                     moduleId: moduleId,
                     activeKey: activeKey,
@@ -185,8 +193,11 @@ var CardTable = function (_Component) {
                     showMore: showMore,
                     isMaximized: isMaximized,
                     onHeadAngleToggle: this.onHeadAngleToggle,
-                    openMaxTable: this.openMaxTable
-                }) : null
+                    openMaxTable: this.openMaxTable,
+                    addRow: this.addRow,
+                    delRow: this.delRow,
+                    pasteRow: this.pasteRow
+                }, config)) : null
             ),
             ReactDOM.createPortal(_react2["default"].createElement(
                 'section',
@@ -197,7 +208,7 @@ var CardTable = function (_Component) {
                 },
                 isMaximized ? _react2["default"].createElement(_FoldableTabs2["default"]
                 // pageScope={pageScope}
-                , { tableScope: this,
+                , _extends({ tableScope: this,
                     config: config,
                     isEdit: status == 'edit',
                     moduleId: moduleId,
@@ -214,8 +225,11 @@ var CardTable = function (_Component) {
                     showMore: showMore,
                     isMaximized: isMaximized,
                     onHeadAngleToggle: this.onHeadAngleToggle,
-                    openMaxTable: this.openMaxTable
-                }) : null
+                    openMaxTable: this.openMaxTable,
+                    addRow: this.addRow,
+                    delRow: this.delRow,
+                    pasteRow: this.pasteRow
+                }, config)) : null
             ), document.querySelector('body'))
         );
     };

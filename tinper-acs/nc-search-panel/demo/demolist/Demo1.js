@@ -5,10 +5,13 @@
 *
 */
 import React, { Component } from 'react';
-import {  Icon, Button, Label, CitySelect, Rate, InputNumber, Slider, Switch, Checkbox, Radio, Select,  Col,Row , FormControl } from 'tinper-bee';
+import {  Icon, Button, Label, CitySelect, Rate, Slider, Switch, Checkbox, Radio, Select,  Col,Row , FormControl } from 'tinper-bee';
 import DatePicker from 'bee-datepicker';
 import NcSearchPanel from '../../src';
 import Form from 'bee-form';
+import InputNumber from 'bee-input-number';
+
+const InputNumberGroup = InputNumber.InputNumberGroup;
 
 const { Sample,Complex, FormItem } = NcSearchPanel;
 const Option = Select.Option;
@@ -68,11 +71,15 @@ class SF extends Component{
                         }) }
                     />
                 </FormItem>
-                <FormItem label="年龄">
-                    <FormControl placeholder="请输入年龄"
-                        {...getFieldProps('nl', {
+                <FormItem label={['金额最小值','金额最大值']}>
+                    <InputNumberGroup 
+                        iconStyle='two'
+                        {...getFieldProps('money', {
                             validateTrigger: 'onBlur',
-                        }) }
+                            rules: [{
+                                required: true, message: '请输入用户名',
+                            }],
+                        })}
                     />
                 </FormItem>
             </div>

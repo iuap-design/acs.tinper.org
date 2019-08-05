@@ -74,10 +74,10 @@ var fileType = {
     noEditType: ['label', 'customer'],
     getDisplay: ['select', 'radio', 'checkbox'],
     status: { // 表格内数据状态
-        origin: '0',
-        edit: '1',
-        add: '2',
-        "delete": '3'
+        origin: '0', //原始
+        edit: '1', //修改
+        add: '2', //新增
+        "delete": '3' //已删除
     },
     timeTypes: ['datepicker', 'NCTZDatePickerStart', 'NCTZDatePickerEnd', 'timepicker', 'datetimepicker', 'rangepicker', 'datePickerNoTimeZone'],
     layouts: layouts, // 表单布局用

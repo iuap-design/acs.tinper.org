@@ -39,6 +39,8 @@
       right: 2px; }
       .nc-search-panel-formitem .u-input-number.u-input-group.simple .u-input-group-btn .icon-group {
         height: 30px; }
+  .nc-search-panel-formitem .u-input-number-group .u-input-number-group-split {
+    position: unset; }
 
 .nc-search-panel-btns {
   width: 100px;

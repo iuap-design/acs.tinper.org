@@ -11,6 +11,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 exports["default"] = myBrowser;
 exports.undefinedOrfalse = undefinedOrfalse;
+exports.isUndefined = isUndefined;
 exports.getSortColums = getSortColums;
 exports.isArray = isArray;
 exports.isString = isString;
@@ -81,6 +82,12 @@ function myBrowser() {
  */
 function undefinedOrfalse(one) {
   return typeof one === 'undefined' || one === false;
+}
+/*
+ * @method   是否是undefined
+ */
+function isUndefined(origin) {
+  return typeof origin === 'undefined' || origin === void 0;
 }
 
 // 处理多头排序标识

@@ -45,7 +45,8 @@
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
-    height: 30px; }
+    height: 30px;
+    pointer-events: none; }
     .ac-form-layout-item-error-msg-text {
       padding: 5px 10px;
       border-radius: 4px;

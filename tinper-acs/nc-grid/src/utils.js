@@ -37,6 +37,12 @@ export default function myBrowser() {
 export function undefinedOrfalse(one) {
   return typeof one === 'undefined' || one === false;
 }
+/*
+ * @method   是否是undefined
+ */
+export function isUndefined(origin) {
+  return typeof origin === 'undefined' || origin === void 0;
+}
 
 // 处理多头排序标识
 export function getSortColums({ colums, sortObj }) {

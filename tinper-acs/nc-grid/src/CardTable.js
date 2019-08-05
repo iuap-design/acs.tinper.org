@@ -54,18 +54,28 @@ class CardTable extends Component {
     openMaxTable = (isMaximized) => {
         this.setState({ isMaximized })
     }
+    //调用editTable实例中的方法
+    addRow = () => {
+        this.editTable.addRow();
+    }
+    delRow = () => {
+        this.editTable.delRowByRowId();
+    }
+    pasteRow = () => {
+        this.editTable.pasteRow();
+    }
 
     render(){
         let {
             showMax,
-            config,
             moduleId,
             columns,
             data: dataRows,
             tabLists,
             showListView,
             isEdit,
-            ...otherProps
+            tableRightHead,
+            ...config
         } = this.props;
 
         let { status,showMore,activeKey,isMaximized } = this.state;
@@ -81,18 +91,13 @@ class CardTable extends Component {
                 key: code,
                 label: name,
                 render: () => (
-                    // <SimpleTable
-                    // columns={columns}
-                    // data={dataRows}
-                    // multiSelect={config.showCheck}
-                    // bodyStyle={{minHeight:'auto'}}
-                    // />
                     <EditTable
                     columns={columns}
                     data={dataRows}
                     moduleId={moduleId}
                     isEdit={isEdit}
-                    {...otherProps}
+                    onRef={(ref) => { this.editTable = ref }} //获取EditTable组件实例
+                    {...config}
                     />
                 )
             };
@@ -110,7 +115,6 @@ class CardTable extends Component {
                     <FoldableTabs
                         // pageScope={pageScope}
                         tableScope={this}
-                        config={config}
                         isEdit={status == 'edit'}
                         moduleId={moduleId}
                         activeKey={activeKey}
@@ -127,6 +131,10 @@ class CardTable extends Component {
                         isMaximized={isMaximized}
                         onHeadAngleToggle={this.onHeadAngleToggle}
                         openMaxTable={this.openMaxTable}
+                        addRow={this.addRow}
+                        delRow={this.delRow}
+                        pasteRow={this.pasteRow}
+                        {...config}
                     />
                 ) : null}
             </div>
@@ -200,6 +208,10 @@ class CardTable extends Component {
                     isMaximized={isMaximized}
                     onHeadAngleToggle={this.onHeadAngleToggle}
                     openMaxTable={this.openMaxTable}
+                    addRow={this.addRow}
+                    delRow={this.delRow}
+                    pasteRow={this.pasteRow}
+                    {...config}
                 />
                 ) : null}
                 </section>,

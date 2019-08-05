@@ -4,6 +4,8 @@ import Nodata from './nc_Table/noData';
 import { isFunction } from './utils';
 import Collapse from 'bee-collapse';
 import TabHotKey from './hotkeys';
+import Button from 'bee-button';
+import ButtonGroup from 'bee-button-group';
 
 let maxTop = 0;
 let height = 0;
@@ -14,7 +16,11 @@ const propTypes = {
   tabs: PropTypes.array, //折叠区域左侧的 tabs 列表
 }
 
-const defaultProps = {}
+const defaultProps = {
+  addRow: () => {},
+  delRow: () => {},
+  pasteRow: () => {}
+}
 class FoldableTabs extends Component {
   constructor(props) {
     super(props);
@@ -70,14 +76,64 @@ class FoldableTabs extends Component {
    * 最大化多表中表格
    */
   openMaxTable(flag) {
-    // if (typeof tableId == 'string' && this.myTable[tableId].state.table) {
-    //   this.myTable[tableId].state.table.isMaximized = flag;
-    //   this.myTable[tableId].setState({
-    //     table: this.myTable[tableId].state.table
-    //   });
-    // }
     let { openMaxTable } = this.props;
     openMaxTable && openMaxTable(flag);
+  }
+  //生成表头右侧操作栏
+  getTableHead = (toolBtns) => {
+    let rs = [];
+    rs = toolBtns.map(item=>{
+        let {value,bordered,itemtype,btnSize} = item;
+        let btn,className = item.className?item.className:'' ;
+        if(itemtype === 1 && item.children){
+            btn = this.getBtnGroup(item);
+        }else{
+            btn = <Button size={btnSize} bordered={bordered} {...item} className={className} >
+                    {value}
+                  </Button>
+        }
+        return btn;
+    })
+    if (rs.length==0){
+      return ''
+    }else {
+      return (
+        <div className="shoulder-definition-area">
+            {rs}
+        </div>
+      )
+    }
+  }
+  //生成按钮组
+  getBtnGroup = (btns) => {
+    let {bordered,btnSize} = btns;
+    let btnGroupItems = btns.children.map((item,index)=>{
+      return (
+        <Button key={index} size={btnSize} bordered={bordered} onClick={(e) => this.handleClickByOptType(item.operation)}>{item.value}</Button>
+      ) 
+    })
+    return (
+      <ButtonGroup>
+        {btnGroupItems}
+      </ButtonGroup>
+    )
+  }
+  //根据 operation 的值选择相应的事件处理程序
+  handleClickByOptType(operation){
+    let { addRow, delRow, pasteRow } = this.props;
+    switch(operation){
+      case 'addRow': //增行
+        addRow();
+        break;
+      case 'delRow': //删行
+        delRow();
+        break;
+      case 'pasteRow': //复制粘贴行
+        pasteRow();
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
@@ -87,10 +143,10 @@ class FoldableTabs extends Component {
       moduleId,
       isEdit, //是否为编辑态
       showListView, //是否以列表形式展示
-      config, //表格配置项
       rows, //表格行数据
       tableScope,
-      expandedList
+      expandedList,
+      ...config
     } = this.props;
     let { showMore,activeKey,isMaximized } = this.state;
     let visibleRows = rows.filter(item => item.status !== '3'); // 界面显示行 分页新加
@@ -200,7 +256,7 @@ class FoldableTabs extends Component {
                   'tab-hide': !showMore
                 })}
               >
-                {config.tableHead()}
+                {this.getTableHead(config.tableHead)}
               </div>
             )}
           </header>

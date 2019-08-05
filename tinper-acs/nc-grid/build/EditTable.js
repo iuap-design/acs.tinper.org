@@ -22,6 +22,10 @@ var _beeSelect = require('bee-select');
 
 var _beeSelect2 = _interopRequireDefault(_beeSelect);
 
+var _beeCheckbox = require('bee-checkbox');
+
+var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
+
 var _Cell = require('./Cell');
 
 var _Cell2 = _interopRequireDefault(_Cell);
@@ -35,6 +39,10 @@ var _sort2 = _interopRequireDefault(_sort);
 var _multiSelect = require('bee-table/build/lib/multiSelect.js');
 
 var _multiSelect2 = _interopRequireDefault(_multiSelect);
+
+var _config = require('./config');
+
+var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -55,8 +63,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 *	2、新增的操作列需要有 itemtype: 'customer'
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-
-var ComplexTable = (0, _sort2["default"])(_nc_Table2["default"], _beeIcon2["default"]);
 
 var propTypes = {
     moduleId: PropTypes.string, //meta的id号
@@ -93,6 +99,168 @@ var EditTable = function (_Component) {
             getTableRows && getTableRows(rows);
         };
 
+        _this.addRow = function (index, data) {
+            var autoFocus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+            var callback = arguments[3];
+            var flag = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+            var isAutoAddRow = arguments[5];
+
+            // if (addRowControl(isAutoAddRow)) return;
+            var myCardTable = _this.state.table;
+
+            var rows = myCardTable.rows;
+            //根据id获取表格中所有(可见)的行的数量
+            var getVisibleRows = (0, _utils.isArray)(rows) && rows.filter(function (item) {
+                return item.status != _config2["default"].status["delete"];
+            });
+            var len = getVisibleRows.length || 1;
+            var numFlag = (0, _utils.isUndefined)(index) || !Number.isNaN(Number.parseInt(index, 10)) && index >= 0 && index <= len;
+            if (numFlag) {
+                index = (0, _utils.isUndefined)(index) ? len : index;
+                // 当前应该聚焦到的行
+                // setStatus.call(this, tableId, 'edit');
+                // myCardScope.state.status = 'edit';
+                var newRow = {
+                    rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+                    status: _config2["default"].status.add,
+                    values: {}
+                };
+                // let sumItems = _sumItemsCode.call(this, tableId, flag);
+                var template = rows.length > 0 && (0, _utils.isObj)(rows[0].values) && rows[0].values;
+                var sumItems = {};
+                Object.keys(template).forEach(function (key) {
+                    var item = template[key];
+                    sumItems[key] = {
+                        attrcode: key,
+                        initialvalue: item.initialvalue,
+                        itemtype: item.itemtype
+                    };
+                });
+                Object.keys(sumItems).forEach(function (key) {
+                    var item = sumItems[key];
+                    // hasData 有data，那么走data   无data再看hasInit看是否有初始值
+                    var _ref = [item.attrcode, (0, _utils.isObj)(data), (0, _utils.isObj)(item.initialvalue)],
+                        code = _ref[0],
+                        hasData = _ref[1],
+                        hasInit = _ref[2];
+
+                    var checkData = hasData && (0, _utils.isObj)(data[code]);
+                    newRow.values[code] = {
+                        display: checkData ? data[code].display : hasInit ? item.initialvalue.display : null,
+                        scale: checkData ? data[code].scale : hasInit ? item.initialvalue.scale : null,
+                        value: checkData ? data[code].value : hasInit ? item.initialvalue.value : (0, _utils.typeFormat)(null, item.itemtype)
+                    };
+                });
+                // 规整数据
+                _this._reviseRows(rows);
+                rows.splice(index, 0, newRow);
+                myCardTable.focusIndex = -1;
+                // console.log('rows',rows)
+                // debugger
+
+                // 控制增行后的行定位
+                myCardTable.focusIndex = index === 0 ? index : index + 1; //修改tab切换不到新增行问题renyjk
+                _this.setState({
+                    table: myCardTable
+                });
+            }
+        };
+
+        _this.delRowByRowId = function (rowid, callback) {
+            var _this$state = _this.state,
+                myCardTable = _this$state.table,
+                selectedList = _this$state.selectedList;
+
+            var rows = myCardTable.rows,
+                selectedPks = [];
+            selectedList.forEach(function (item) {
+                selectedPks.push(item.rowid);
+            });
+            if (myCardTable) {
+                if (typeof rowid == 'string') {
+                    //删除单行
+                    rows.map(function (item, index) {
+                        if (item.rowid == rowid) {
+                            var stat = item.status;
+                            if (stat == _config2["default"].status.edit || stat == _config2["default"].status.origin) {
+                                item.status = _config2["default"].status["delete"];
+                                rows.push(item);
+                            }
+                            rows.splice(index, 1);
+                            // delChangedRowsOldValue.call(this, tableId, index);
+                            // 删除自动选中到下一个行的逻辑 , 与快捷键的的删除逻辑冲突 by bbqin
+                            if (index >= 0 && index == myCardTable.currentIndex) {
+                                myCardTable.currentIndex = -1;
+                            }
+                        }
+                    });
+                    _this.setState({
+                        table: myCardTable
+                    }, function () {
+                        // _selectedChangeFn.call(this, tableId)
+                        callback && typeof callback === 'function' && callback.call(_this, rowid, myCardTable);
+                    });
+                } else {
+                    //删除多行
+                    rows.map(function (item, index) {
+                        if (selectedPks.indexOf(item.rowid) > -1) {
+                            var stat = item.status;
+                            if (stat == _config2["default"].status.edit || stat == _config2["default"].status.origin) {
+                                item.status = _config2["default"].status["delete"];
+                                rows.push(item);
+                            }
+                            rows.splice(index, 1);
+                            // 删除自动选中到下一个行的逻辑 , 与快捷键的的删除逻辑冲突 by bbqin
+                            if (index >= 0 && index == myCardTable.currentIndex) {
+                                myCardTable.currentIndex = -1;
+                            }
+                        }
+                    });
+                    console.log('rows', rows);
+                    debugger;
+                    _this.setState({
+                        table: myCardTable
+                    });
+                }
+            }
+        };
+
+        _this.pasteRow = function () {};
+
+        _this._reviseRows = function (rows) {
+            rows.map(function (item, index) {
+                if (item.status == _config2["default"].status["delete"]) {
+                    rows.push(item);
+                    rows.splice(index, 1);
+                }
+            });
+            return rows;
+        };
+
+        _this.getSelectedDataFunc = function (selectedList, record, index) {
+            var myCardTable = _this.state.table;
+
+            var rows = myCardTable.rows;
+            // 如果在回调中增加setState逻辑，需要同步data中的_checked属性。即下面的代码
+            var allChecked = selectedList.length == 0 ? false : true;
+            // record为undefind则为全选或者全不选
+            if (!record) {
+                rows.forEach(function (item) {
+                    item._checked = allChecked;
+                });
+            } else {
+                rows[index]['_checked'] = record._checked;
+            }
+            _this.setState({
+                table: myCardTable,
+                selectedList: selectedList
+            });
+        };
+
+        var ComplexTable = (0, _sort2["default"])(_nc_Table2["default"], _beeIcon2["default"]);
+        if (typeof props.showCheck === 'boolean' && !!props.showCheck) {
+            ComplexTable = (0, _multiSelect2["default"])(ComplexTable, _beeCheckbox2["default"]);
+        }
         _this.state = {
             table: {
                 pageInfo: {
@@ -106,12 +274,14 @@ var EditTable = function (_Component) {
                 model: false, //是否打开侧滑面板
                 origin: {},
                 operType: 'add',
-                allpks: [] //所有 data 的 id 属性集合
+                allpks: [], //所有 data 的 id 属性集合
+                selectedList: [] //所有已选 data 的集合
             },
             currentIndex: -1
         };
         // 是否获取到多语的标识，让cell正确更新
         _this.isGetPlatform = false;
+        _this.ComplexTable = ComplexTable;
         return _this;
     }
 
@@ -146,6 +316,38 @@ var EditTable = function (_Component) {
     //获取表格数据时触发的回调函数
 
 
+    /**
+     * 新增行(通过index值)
+     * @param  index  增加行的位置index   0为行首 不传为和len为行尾部
+     * @param  data   新增的默认data 格式：{key: {display: '', scale: 0, value: ''}, key2: {display: '', scale: 0, value: ''}}
+     * @param  flag   增加flag标识位，判断是否为多表头，默认是false，不是多表头
+     */
+
+    /**
+     * 根据rowId的删除行方法
+     * 规则：1、当state == ‘2’    新增        这时候直接删除数组就可以了
+     *      2、当state == ‘0/1’  原始/修改   这时候数组的内容不能删除，把state置位3
+     *      3、当state == ‘3’    已删除      这时候数组的内容不会显示，所以没删除功能
+     * 解决思路： 把不是新增的 置位3 并push到结尾，其余的按index删除即可。 控制index的最大取值。
+     * 注意点：   _selectedChangeFn方法调用
+     * @param  tableId   meta的id号
+     * @param  rowid     删除的行rowId
+     */
+
+    /**
+     * 复制粘贴行，默认粘贴到该行下方
+     * @param  tableId   meta的id号
+     * @param  index     行序号index
+     * @param  keys      不去复制的键值
+     */
+
+
+    /**
+     * 修正rows  把删除项永远放在最后 （为了保证渲染层与数据层 index的同一性）
+     * @param  rows   表内数据行
+     */
+
+
     /**把index行设置为选中行 */
     EditTable.prototype.focusRowByIndex = function focusRowByIndex(index) {
         this.setState({
@@ -159,6 +361,10 @@ var EditTable = function (_Component) {
         var data = { record: record, index: index };
         // this.table.currentInfo = data;
     };
+    /**
+     * 多选的回调
+     */
+
 
     /**
      * 创建 EditTable
@@ -166,11 +372,10 @@ var EditTable = function (_Component) {
      * @param {*} edittable_dom 
      * @param {*} isGetPlatform 
      */
-
-
     EditTable.prototype.createEditTable = function createEditTable(props, edittable_dom, isGetPlatform) {
         var _this2 = this;
 
+        var ComplexTable = this.ComplexTable;
         // 分页显示最多按钮
         var MAX_BUTTONS = 5;
         // 获取table的meta信息 注意异步时候 meta中没有此id 为undefined
@@ -217,10 +422,10 @@ var EditTable = function (_Component) {
             _table$focusIndex = table.focusIndex,
             focusIndex = _table$focusIndex === undefined ? -1 : _table$focusIndex;
         // 展示在页面上的数据
-        // status: '0'(编辑态)，'1'()，'2'()，'3'()
+        // status: '0'(原始)，'1'(修改)，'2'(新增)，'3'(已删除)
 
         var tablePageData = rows.filter(function (e) {
-            return e.status != '3';
+            return e.status != _config2["default"].status["delete"];
         });
         // 左侧多选框
         // if (config && config.selectedChange && typeof config.selectedChange === 'function') {
@@ -389,8 +594,8 @@ var EditTable = function (_Component) {
            ];
            */
         // if (config && config.showCheck) {
-        //     // columns = defaultColumns.concat(columns);
-        //     ComplexTable = multiSelect(ComplexTable,Checkbox);
+        // columns = defaultColumns.concat(columns);
+        // ComplexTable = multiSelect(ComplexTable,Checkbox);
         // }
         // if (config && config.showCheck && (config.showTotal || getMetaIsTotal(totalColums)) && json) {
         //     // 合并列增加字段
@@ -492,6 +697,7 @@ var EditTable = function (_Component) {
                         rowClassName: function rowClassName(record, current) {
                             return table.currentIndex === current ? 'editTable-selected-row' : '';
                         },
+                        getSelectedDataFunc: this.getSelectedDataFunc,
                         onRowClick: function onRowClick(record, index, e) {
                             // 行点击操作 1、根据index设置行样式 2、自定义点击事件
                             _this2.focusRowByIndex(index);
@@ -510,7 +716,7 @@ var EditTable = function (_Component) {
                         }
                         // 是否取消滚动分页
                         , lazyload: config.lazyload
-                    }, sort))
+                    }, sort, config))
                 ),
                 config && config.showPagination && meta.status === 'browse' && _react2["default"].createElement(
                     'div',
@@ -732,14 +938,14 @@ var EditTable = function (_Component) {
         } else {
             render = function render(text, record, index) {
                 // 比如操作列不走此分支
-                var _ref = [record.values],
-                    values = _ref[0],
-                    editItem = _ref[1],
-                    value = _ref[2],
-                    display = _ref[3],
-                    scale = _ref[4],
-                    disabled = _ref[5],
-                    isEdit = _ref[6];
+                var _ref2 = [record.values],
+                    values = _ref2[0],
+                    editItem = _ref2[1],
+                    value = _ref2[2],
+                    display = _ref2[3],
+                    scale = _ref2[4],
+                    disabled = _ref2[5],
+                    isEdit = _ref2[6];
                 // 如果有这个键取这个键的value值，否则为null
 
                 value = (0, _utils.isObj)(values[ICode]) ? (0, _utils.typeFormat)(values[ICode].value, IType) : null;
@@ -845,7 +1051,7 @@ var EditTable = function (_Component) {
                 item.width = '240px';
             } else if (item.itemtype === 'rangepicker') {
                 item.width = '390px';
-            } else if (CONFIG.timeTypes.includes(item.itemtype)) {
+            } else if (_config2["default"].timeTypes.includes(item.itemtype)) {
                 item.width = '160px';
             } else {
                 item.width = '120px';
@@ -940,7 +1146,7 @@ var EditTable = function (_Component) {
             var attrcode = eve.attrcode,
                 children = eve.children;
 
-            if (!isUndefined(children)) {
+            if (!(0, _utils.isUndefined)(children)) {
                 // 判断和并列的情况
                 setDTOpen(children, verify, stateVerify);
             } else {

@@ -1,3 +1,13 @@
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.7...v0.0.8) (2019-08-05)
+
+
+### Features
+
+* **nc-search-panel:** 新增金额区间 ([1e9148a](https://github.com/tinper-bee/nc-search-panel/commit/1e9148a))
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/tinper-bee/nc-search-panel/compare/v0.0.6...v0.0.7) (2019-08-01)
 

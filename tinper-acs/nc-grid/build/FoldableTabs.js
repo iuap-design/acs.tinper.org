@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -26,9 +28,19 @@ var _hotkeys = require('./hotkeys');
 
 var _hotkeys2 = _interopRequireDefault(_hotkeys);
 
+var _beeButton = require('bee-button');
+
+var _beeButton2 = _interopRequireDefault(_beeButton);
+
+var _beeButtonGroup = require('bee-button-group');
+
+var _beeButtonGroup2 = _interopRequireDefault(_beeButtonGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -45,7 +57,11 @@ var propTypes = {
   tabs: PropTypes.array //折叠区域左侧的 tabs 列表
 };
 
-var defaultProps = {};
+var defaultProps = {
+  addRow: function addRow() {},
+  delRow: function delRow() {},
+  pasteRow: function pasteRow() {}
+};
 
 var FoldableTabs = function (_Component) {
   _inherits(FoldableTabs, _Component);
@@ -57,6 +73,58 @@ var FoldableTabs = function (_Component) {
 
     _this.changeActiveKey = function (item) {
       _this.props.handleTypeChange && _this.props.handleTypeChange(item.key);
+    };
+
+    _this.getTableHead = function (toolBtns) {
+      var rs = [];
+      rs = toolBtns.map(function (item) {
+        var value = item.value,
+            bordered = item.bordered,
+            itemtype = item.itemtype,
+            btnSize = item.btnSize;
+
+        var btn = void 0,
+            className = item.className ? item.className : '';
+        if (itemtype === 1 && item.children) {
+          btn = _this.getBtnGroup(item);
+        } else {
+          btn = _react2["default"].createElement(
+            _beeButton2["default"],
+            _extends({ size: btnSize, bordered: bordered }, item, { className: className }),
+            value
+          );
+        }
+        return btn;
+      });
+      if (rs.length == 0) {
+        return '';
+      } else {
+        return _react2["default"].createElement(
+          'div',
+          { className: 'shoulder-definition-area' },
+          rs
+        );
+      }
+    };
+
+    _this.getBtnGroup = function (btns) {
+      var bordered = btns.bordered,
+          btnSize = btns.btnSize;
+
+      var btnGroupItems = btns.children.map(function (item, index) {
+        return _react2["default"].createElement(
+          _beeButton2["default"],
+          { key: index, size: btnSize, bordered: bordered, onClick: function onClick(e) {
+              return _this.handleClickByOptType(item.operation);
+            } },
+          item.value
+        );
+      });
+      return _react2["default"].createElement(
+        _beeButtonGroup2["default"],
+        null,
+        btnGroupItems
+      );
     };
 
     var defaultActiveKey = props.tabs && props.tabs.length && props.tabs[0].key || '';
@@ -110,31 +178,55 @@ var FoldableTabs = function (_Component) {
 
 
   FoldableTabs.prototype.openMaxTable = function openMaxTable(flag) {
-    // if (typeof tableId == 'string' && this.myTable[tableId].state.table) {
-    //   this.myTable[tableId].state.table.isMaximized = flag;
-    //   this.myTable[tableId].setState({
-    //     table: this.myTable[tableId].state.table
-    //   });
-    // }
     var openMaxTable = this.props.openMaxTable;
 
     openMaxTable && openMaxTable(flag);
+  };
+  //生成表头右侧操作栏
+
+  //生成按钮组
+
+
+  //根据 operation 的值选择相应的事件处理程序
+  FoldableTabs.prototype.handleClickByOptType = function handleClickByOptType(operation) {
+    var _props2 = this.props,
+        addRow = _props2.addRow,
+        delRow = _props2.delRow,
+        pasteRow = _props2.pasteRow;
+
+    switch (operation) {
+      case 'addRow':
+        //增行
+        addRow();
+        break;
+      case 'delRow':
+        //删行
+        delRow();
+        break;
+      case 'pasteRow':
+        //复制粘贴行
+        pasteRow();
+        break;
+      default:
+        break;
+    }
   };
 
   FoldableTabs.prototype.render = function render() {
     var _this2 = this;
 
-    var _props2 = this.props,
-        _props2$tabs = _props2.tabs,
-        tabs = _props2$tabs === undefined ? [] : _props2$tabs,
-        pageScope = _props2.pageScope,
-        moduleId = _props2.moduleId,
-        isEdit = _props2.isEdit,
-        showListView = _props2.showListView,
-        config = _props2.config,
-        rows = _props2.rows,
-        tableScope = _props2.tableScope,
-        expandedList = _props2.expandedList;
+    var _props3 = this.props,
+        _props3$tabs = _props3.tabs,
+        tabs = _props3$tabs === undefined ? [] : _props3$tabs,
+        pageScope = _props3.pageScope,
+        moduleId = _props3.moduleId,
+        isEdit = _props3.isEdit,
+        showListView = _props3.showListView,
+        rows = _props3.rows,
+        tableScope = _props3.tableScope,
+        expandedList = _props3.expandedList,
+        config = _objectWithoutProperties(_props3, ['tabs', 'pageScope', 'moduleId', 'isEdit', 'showListView', 'rows', 'tableScope', 'expandedList']);
+
     var _state = this.state,
         showMore = _state.showMore,
         activeKey = _state.activeKey,
@@ -260,7 +352,7 @@ var FoldableTabs = function (_Component) {
                 'tab-hide': !showMore
               })
             },
-            config.tableHead()
+            this.getTableHead(config.tableHead)
           )
         ),
         isEdit || config && (0, _utils.isFunction)(config.hideSwitch) && !config.hideSwitch() || (showMore && showListView ? _react2["default"].createElement(
