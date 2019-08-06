@@ -28,20 +28,24 @@ class FoldableTabs extends Component {
     this.state = {
       showMore : props.showMore,
       isMaximized : props.isMaximized,
-      activeKey : defaultActiveKey
+      activeKey : defaultActiveKey,
+      inPaste : false,
+      hasSelectedRows: props.selectedList.length > 0 ? true : false
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { 
-      showMore: oldShowMore, 
+      showMore: oldShowMore,
       activeKey: oldActiveKey ,
-      isMaximized: oldIsMaximized
+      isMaximized: oldIsMaximized,
+      selectedList: oldSelectedList
     } = this.props;
     const { 
       showMore: newShowMore, 
       activeKey: newActiveKey,
-      isMaximized: newIsMaximized
+      isMaximized: newIsMaximized,
+      selectedList: newSelectedList
     } = nextProps;
     if (newShowMore !== oldShowMore) {
       this.setState({
@@ -58,6 +62,11 @@ class FoldableTabs extends Component {
         isMaximized: newIsMaximized
       })
     }
+    if(newSelectedList !== oldSelectedList) {
+      this.setState({
+        hasSelectedRows: newSelectedList.length > 0 ? true : false
+      })
+    }
   }
 
   changeActiveKey = item => {
@@ -69,6 +78,9 @@ class FoldableTabs extends Component {
    */
   toggleCardTable(flag = false) {
     let { onHeadAngleToggle } = this.props;
+    this.setState({
+      showMore: flag
+    })
     onHeadAngleToggle && onHeadAngleToggle(flag);
   }
 
@@ -106,21 +118,37 @@ class FoldableTabs extends Component {
   }
   //生成按钮组
   getBtnGroup = (btns) => {
+    let { inPaste, hasSelectedRows } = this.state;
     let {bordered,btnSize} = btns;
-    let btnGroupItems = btns.children.map((item,index)=>{
+    if(inPaste){ //复制行后，待粘贴状态
       return (
-        <Button key={index} size={btnSize} bordered={bordered} onClick={(e) => this.handleClickByOptType(item.operation)}>{item.value}</Button>
-      ) 
-    })
-    return (
-      <ButtonGroup>
-        {btnGroupItems}
-      </ButtonGroup>
-    )
+        <div className="in-paste-status">
+          <Button size={btnSize} bordered onClick={this.props.pasteRow}>粘贴至末行</Button>
+          <Button size={btnSize} bordered onClick={this.cancelPaste}>取消</Button>
+        </div>
+      )
+    }else { //初始状态。包含 '增行'/'删行'/'复制行'
+      let btnGroupItems = btns.children.map((item,index)=>{
+        return <Button 
+                key={index} 
+                size={btnSize} 
+                bordered={bordered} 
+                disabled={index !== 0 && !hasSelectedRows} 
+                onClick={(e) => this.handleClickByOptType(e,item.operation)}>
+                {item.value}
+                </Button>
+      })
+      return (
+        <ButtonGroup>
+          {btnGroupItems}
+        </ButtonGroup>
+      )
+    }
   }
   //根据 operation 的值选择相应的事件处理程序
-  handleClickByOptType(operation){
-    let { addRow, delRow, pasteRow } = this.props;
+  handleClickByOptType(eve,operation){
+    eve.stopPropagation();
+    let { addRow, delRow } = this.props;
     switch(operation){
       case 'addRow': //增行
         addRow();
@@ -129,11 +157,19 @@ class FoldableTabs extends Component {
         delRow();
         break;
       case 'pasteRow': //复制粘贴行
-        pasteRow();
+        this.setState({
+          inPaste: true
+        });
         break;
       default:
         break;
     }
+  }
+  //取消复制行操作
+  cancelPaste = () => {
+    this.setState({
+      inPaste: false
+    })
   }
 
   render() {
@@ -149,6 +185,7 @@ class FoldableTabs extends Component {
       ...config
     } = this.props;
     let { showMore,activeKey,isMaximized } = this.state;
+    // console.log('showMore',showMore);
     let visibleRows = rows.filter(item => item.status !== '3'); // 界面显示行 分页新加
     const isShow = { display: showMore ? 'block' : 'none' };
     let iconClass = classnames({
@@ -164,7 +201,6 @@ class FoldableTabs extends Component {
         height = lightTabs.getBoundingClientRect().height;
       }
     }
-    console.log('isMaximized: ',isMaximized)
     return (
       <section className="light-tabs">
         <TabHotKey
@@ -290,7 +326,6 @@ class FoldableTabs extends Component {
             ) : null)}
           <footer id={'js_lightTabs_' + moduleId} className="light-tabs-content" style={isShow}>
             {tabs.map((item, i) => {
-              console.log(item.key, activeKey,'=====')
               if (item.key === activeKey) {
                 return item.render();
               }

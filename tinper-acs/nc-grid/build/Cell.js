@@ -453,7 +453,7 @@ var Cell = function (_Component) {
         if (!isArr || isArr && !(0, _utils.isObj)(this.tableChangedRowsOldValue[moduleId][index])) {
             return null;
         }
-        return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
+        // return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
     };
 
     // 删除旧值函数
@@ -833,7 +833,7 @@ var Cell = function (_Component) {
                                 });
                             }
                             var OldVal = isMul ? valueChange.length > 0 ? valueChange[0] : null : item.itemtype === 'refer' ? foolValue.vlaue == '' ? null : foolValue.vlaue : valueChange;
-                            _this3.saveChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode, OldVal);
+                            // this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, OldVal);
                         }
                     },
                     onOpenChange: function onOpenChange(val) {
@@ -1102,7 +1102,7 @@ var Cell = function (_Component) {
                                         value: oldValue ? item.itemtype === 'number' ? (0, _utils.formatAcuracy)(oldValue, scaleData) : oldValue : ''
                                     }
                                 });
-                                _this3.saveChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode, val);
+                                // this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, val);
                                 if (item.itemtype === 'residtxt') {
                                     if (model == 'open') {
                                         // 当侧拉的情况下

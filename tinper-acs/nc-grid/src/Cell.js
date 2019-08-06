@@ -207,7 +207,7 @@ export default class Cell extends Component {
         if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
             return null;
         }
-        return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
+        // return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
     }
   
     // 删除旧值函数
@@ -650,7 +650,7 @@ export default class Cell extends Component {
                             ? null
                             : foolValue.vlaue
                         : valueChange;
-                        this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, OldVal);
+                        // this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, OldVal);
                     }
                     },
                     onOpenChange: val => {
@@ -940,7 +940,7 @@ export default class Cell extends Component {
                                 value: oldValue ? (item.itemtype === 'number' ? formatAcuracy(oldValue, scaleData) : oldValue) : ''
                                 }
                             });
-                            this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, val);
+                            // this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, val);
                             if (item.itemtype === 'residtxt') {
                                 if (model == 'open') {
                                 // 当侧拉的情况下

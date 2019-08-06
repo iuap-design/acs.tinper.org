@@ -1194,7 +1194,7 @@ class Demo3 extends Component {
           <Button colors="primary" onClick={this.getFormatData} size="sm">格式化数据 </Button>
         </div>
 
-        <div className="min-table">
+
           <AcHandTable
             id="example3" // 组件id
             onRef={(ref) => { // 设置ref属性 调用子组件方法
@@ -1205,8 +1205,9 @@ class Demo3 extends Component {
             columns={this.columns} // 列属性设置
             colWidths={[null, 100, 100, 100, 100, 100, 100, null]}
             rowKey="id" // 数组对象中唯一id 默认值为'id'
+            width="100%"
+            height="106px"
           />
-        </div>
 
       </div>
     );

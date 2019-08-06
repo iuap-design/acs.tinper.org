@@ -124,7 +124,7 @@ class Demo4 extends Component {
       <div className="demoPadding">
 
 
-        <div className="min-table">
+
           <AcHandTable
             id="example4" // 组件id
             onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
@@ -137,8 +137,9 @@ class Demo4 extends Component {
               autoInsertRow: false,
               direction: 'vertical',
             }}
+            width="100%"
+            height="100px"
           />
-        </div>
 
 
         {/* 日期组件 */}

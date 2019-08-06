@@ -108,30 +108,65 @@ var FoldableTabs = function (_Component) {
     };
 
     _this.getBtnGroup = function (btns) {
+      var _this$state = _this.state,
+          inPaste = _this$state.inPaste,
+          hasSelectedRows = _this$state.hasSelectedRows;
       var bordered = btns.bordered,
           btnSize = btns.btnSize;
 
-      var btnGroupItems = btns.children.map(function (item, index) {
+      if (inPaste) {
+        //复制行后，待粘贴状态
         return _react2["default"].createElement(
-          _beeButton2["default"],
-          { key: index, size: btnSize, bordered: bordered, onClick: function onClick(e) {
-              return _this.handleClickByOptType(item.operation);
-            } },
-          item.value
+          'div',
+          { className: 'in-paste-status' },
+          _react2["default"].createElement(
+            _beeButton2["default"],
+            { size: btnSize, bordered: true, onClick: _this.props.pasteRow },
+            '\u7C98\u8D34\u81F3\u672B\u884C'
+          ),
+          _react2["default"].createElement(
+            _beeButton2["default"],
+            { size: btnSize, bordered: true, onClick: _this.cancelPaste },
+            '\u53D6\u6D88'
+          )
         );
+      } else {
+        //初始状态。包含 '增行'/'删行'/'复制行'
+        var btnGroupItems = btns.children.map(function (item, index) {
+          return _react2["default"].createElement(
+            _beeButton2["default"],
+            {
+              key: index,
+              size: btnSize,
+              bordered: bordered,
+              disabled: index !== 0 && !hasSelectedRows,
+              onClick: function onClick(e) {
+                return _this.handleClickByOptType(e, item.operation);
+              } },
+            item.value
+          );
+        });
+        return _react2["default"].createElement(
+          _beeButtonGroup2["default"],
+          null,
+          btnGroupItems
+        );
+      }
+    };
+
+    _this.cancelPaste = function () {
+      _this.setState({
+        inPaste: false
       });
-      return _react2["default"].createElement(
-        _beeButtonGroup2["default"],
-        null,
-        btnGroupItems
-      );
     };
 
     var defaultActiveKey = props.tabs && props.tabs.length && props.tabs[0].key || '';
     _this.state = {
       showMore: props.showMore,
       isMaximized: props.isMaximized,
-      activeKey: defaultActiveKey
+      activeKey: defaultActiveKey,
+      inPaste: false,
+      hasSelectedRows: props.selectedList.length > 0 ? true : false
     };
     return _this;
   }
@@ -140,10 +175,12 @@ var FoldableTabs = function (_Component) {
     var _props = this.props,
         oldShowMore = _props.showMore,
         oldActiveKey = _props.activeKey,
-        oldIsMaximized = _props.isMaximized;
+        oldIsMaximized = _props.isMaximized,
+        oldSelectedList = _props.selectedList;
     var newShowMore = nextProps.showMore,
         newActiveKey = nextProps.activeKey,
-        newIsMaximized = nextProps.isMaximized;
+        newIsMaximized = nextProps.isMaximized,
+        newSelectedList = nextProps.selectedList;
 
     if (newShowMore !== oldShowMore) {
       this.setState({
@@ -160,6 +197,11 @@ var FoldableTabs = function (_Component) {
         isMaximized: newIsMaximized
       });
     }
+    if (newSelectedList !== oldSelectedList) {
+      this.setState({
+        hasSelectedRows: newSelectedList.length > 0 ? true : false
+      });
+    }
   };
 
   /**
@@ -169,6 +211,9 @@ var FoldableTabs = function (_Component) {
     var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     var onHeadAngleToggle = this.props.onHeadAngleToggle;
 
+    this.setState({
+      showMore: flag
+    });
     onHeadAngleToggle && onHeadAngleToggle(flag);
   };
 
@@ -188,11 +233,11 @@ var FoldableTabs = function (_Component) {
 
 
   //根据 operation 的值选择相应的事件处理程序
-  FoldableTabs.prototype.handleClickByOptType = function handleClickByOptType(operation) {
+  FoldableTabs.prototype.handleClickByOptType = function handleClickByOptType(eve, operation) {
+    eve.stopPropagation();
     var _props2 = this.props,
         addRow = _props2.addRow,
-        delRow = _props2.delRow,
-        pasteRow = _props2.pasteRow;
+        delRow = _props2.delRow;
 
     switch (operation) {
       case 'addRow':
@@ -205,12 +250,16 @@ var FoldableTabs = function (_Component) {
         break;
       case 'pasteRow':
         //复制粘贴行
-        pasteRow();
+        this.setState({
+          inPaste: true
+        });
         break;
       default:
         break;
     }
   };
+  //取消复制行操作
+
 
   FoldableTabs.prototype.render = function render() {
     var _this2 = this;
@@ -231,6 +280,7 @@ var FoldableTabs = function (_Component) {
         showMore = _state.showMore,
         activeKey = _state.activeKey,
         isMaximized = _state.isMaximized;
+    // console.log('showMore',showMore);
 
     var visibleRows = rows.filter(function (item) {
       return item.status !== '3';
@@ -249,7 +299,6 @@ var FoldableTabs = function (_Component) {
         height = lightTabs.getBoundingClientRect().height;
       }
     }
-    console.log('isMaximized: ', isMaximized);
     return _react2["default"].createElement(
       'section',
       { className: 'light-tabs' },
@@ -386,7 +435,6 @@ var FoldableTabs = function (_Component) {
           'footer',
           { id: 'js_lightTabs_' + moduleId, className: 'light-tabs-content', style: isShow },
           tabs.map(function (item, i) {
-            console.log(item.key, activeKey, '=====');
             if (item.key === activeKey) {
               return item.render();
             }

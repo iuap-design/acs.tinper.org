@@ -50,7 +50,8 @@ var propTypes = {
     clsfix: _propTypes2["default"].string,
     search: _propTypes2["default"].func,
     reset: _propTypes2["default"].func,
-    selectedData: _propTypes2["default"].object
+    selectedData: _propTypes2["default"].object,
+    hasChose: _propTypes2["default"].bool //是否可以选择查询方案
 };
 var defaultProps = {
     clsfix: 'nc-search-panel',
@@ -114,6 +115,8 @@ var NcSearchPanel = function (_Component) {
                 'span',
                 { className: clsfix + '-selected-complex' },
                 Object.keys(selectedData).map(function (item, index) {
+                    var v = selectedData[item];
+                    if (Object.prototype.toString.call(v) == '[object Array]') v = v.join(' ~ ');
                     if (selectedData[item] && selectedData[item] != 'undefined') return _react2["default"].createElement(
                         'div',
                         { key: index, className: clsfix + '-selected-complex-item' },
@@ -126,7 +129,7 @@ var NcSearchPanel = function (_Component) {
                         _react2["default"].createElement(
                             'span',
                             { className: clsfix + '-selected-complex-item-ctn' },
-                            selectedData[item]
+                            v
                         )
                     );
                 })
@@ -156,7 +159,9 @@ var NcSearchPanel = function (_Component) {
             clsfix = _props.clsfix,
             search = _props.search,
             reset = _props.reset,
-            selectedData = _props.selectedData;
+            selectedData = _props.selectedData,
+            hasChose = _props.hasChose,
+            children = _props.children;
 
         var ctns = clsfix + '-ctns';
         if (!this.state.open) ctns += ' close';
@@ -181,7 +186,7 @@ var NcSearchPanel = function (_Component) {
             _react2["default"].createElement(
                 'div',
                 { className: clsfix + '-header' },
-                _react2["default"].createElement(
+                hasChose ? _react2["default"].createElement(
                     'span',
                     { className: clsfix + '-case' },
                     _react2["default"].createElement(
@@ -199,12 +204,7 @@ var NcSearchPanel = function (_Component) {
                             _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-triangle-down' })
                         )
                     )
-                ),
-                _react2["default"].createElement(
-                    'span',
-                    { className: clsfix + '-selected' },
-                    '\u9AD8\u7EA7'
-                ),
+                ) : '',
                 Object.keys(selectedData).length && !this.state.open ? _react2["default"].createElement(
                     'span',
                     { className: clsfix + '-selected-data' },
@@ -243,7 +243,7 @@ var NcSearchPanel = function (_Component) {
                     _react2["default"].createElement(
                         'div',
                         { className: clsfix + '-ctn' },
-                        this.getChild()
+                        hasChose ? this.getChild() : children
                     ),
                     _react2["default"].createElement(
                         'div',

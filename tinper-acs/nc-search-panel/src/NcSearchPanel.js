@@ -15,7 +15,8 @@ const propTypes = {
     clsfix:PropTypes.string,
     search:PropTypes.func,
     reset:PropTypes.func,
-    selectedData:PropTypes.object
+    selectedData:PropTypes.object,
+    hasChose:PropTypes.bool//是否可以选择查询方案
 };
 const defaultProps = {
     clsfix:'nc-search-panel',
@@ -34,7 +35,7 @@ class NcSearchPanel extends Component {
         this.state={
             open:true,
             type:'1',
-            show:false
+            show:false,
         }
     }
     open=()=>{
@@ -73,9 +74,11 @@ class NcSearchPanel extends Component {
             <span className={`${clsfix}-selected-complex`}>
                 {
                     Object.keys(selectedData).map((item,index)=>{
+                        let v = selectedData[item];
+                        if(Object.prototype.toString.call(v)=='[object Array]')v=v.join(' ~ ');
                         if(selectedData[item]&&(selectedData[item]!='undefined'))return <div key={index} className={`${clsfix}-selected-complex-item`}>
                                 <span className={`${clsfix}-selected-complex-item-title`}>{item}:</span>
-                                <span className={`${clsfix}-selected-complex-item-ctn`}>{selectedData[item]}</span>
+                                <span className={`${clsfix}-selected-complex-item-ctn`}>{v}</span>
                             </div>
                         
                     })
@@ -93,7 +96,7 @@ class NcSearchPanel extends Component {
         return `查询条件(${length}):   ${Object.keys(selectedData).join(';')}`
     }
     render(){
-        let { clsfix,search,reset,selectedData } = this.props;
+        let { clsfix,search,reset,selectedData,hasChose,children } = this.props;
         let ctns = `${clsfix}-ctns`;
         if(!this.state.open)ctns+=' close';
         const menus = (
@@ -106,19 +109,22 @@ class NcSearchPanel extends Component {
         return(
             <div className={clsfix}>
                 <div className={`${clsfix}-header`} >
-                    <span className={`${clsfix}-case`}>
-                        <Dropdown
-                            overlayClassName={`${clsfix}-case-list`}
-                            trigger={['click']}
-                            overlay={menus}
-                            animation="slide-up">
-                            <span>{typeText[this.state.type]} <Icon type='uf-triangle-down'/></span>
-                        </Dropdown>
-                    </span>
+                {
+                    hasChose? <span className={`${clsfix}-case`}>
+                    <Dropdown
+                        overlayClassName={`${clsfix}-case-list`}
+                        trigger={['click']}
+                        overlay={menus}
+                        animation="slide-up">
+                        <span>{typeText[this.state.type]} <Icon type='uf-triangle-down'/></span>
+                    </Dropdown>
+                </span>:''
+                }
+                   
 
-                    <span className={`${clsfix}-selected`}>
+                    {/* <span className={`${clsfix}-selected`}>
                         高级
-                    </span>
+                    </span> */}
                     {
                         Object.keys(selectedData).length&&!this.state.open?
                         <span className={`${clsfix}-selected-data`}>
@@ -145,7 +151,7 @@ class NcSearchPanel extends Component {
                     <div className={ctns}>
                         <div className={`${clsfix}-ctn`}>
                             {
-                                this.getChild()
+                                hasChose?this.getChild():children
                             }
                         </div>
                         <div className={`${clsfix}-btns`}>

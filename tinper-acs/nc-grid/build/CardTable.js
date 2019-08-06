@@ -18,15 +18,9 @@ var _FoldableTabs = require('./FoldableTabs');
 
 var _FoldableTabs2 = _interopRequireDefault(_FoldableTabs);
 
-var _SimpleTable = require('./SimpleTable');
-
-var _SimpleTable2 = _interopRequireDefault(_SimpleTable);
-
 var _EditTable = require('./EditTable');
 
 var _EditTable2 = _interopRequireDefault(_EditTable);
-
-var _utils = require('./utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -51,7 +45,7 @@ var propTypes = {
 };
 
 var defaultProps = {
-    showMore: true,
+    showMore: false,
     showMax: false,
     moduleId: '',
     config: {},
@@ -77,8 +71,10 @@ var CardTable = function (_Component) {
             onTabChange && isFunction(onTabChange) && onTabChange();
         };
 
-        _this.onHeadAngleToggle = function (showMore) {
-            _this.setState({ showMore: showMore });
+        _this.onHeadAngleToggle = function (flag) {
+            _this.setState({
+                showMore: flag
+            });
         };
 
         _this.openMaxTable = function (isMaximized) {
@@ -86,23 +82,40 @@ var CardTable = function (_Component) {
         };
 
         _this.addRow = function () {
-            _this.editTable.addRow();
+            _this.addRowFoo();
         };
 
         _this.delRow = function () {
-            _this.editTable.delRowByRowId();
+            _this.delRowFoo();
         };
 
         _this.pasteRow = function () {
-            _this.editTable.pasteRow();
+            _this.pasteRowFoo();
         };
 
+        _this.parentFoo = function (addRow, delRow, pasteRow) {
+            _this.addRowFoo = addRow;
+            _this.delRowFoo = delRow;
+            _this.pasteRowFoo = pasteRow;
+        };
+
+        _this.getSelectedDataFunc = function (selectedList) {
+            _this.setState({
+                selectedList: selectedList
+            });
+        };
+
+        var defaultShown = props.showMore || false;
         _this.state = {
             status: 'browse', //browse(浏览态)、edit(编辑态)
             activeKey: '', //标识当前卡表的选中项
-            showMore: props.showMore, //卡表是否展开
-            isMaximized: false //是否最大化显示
+            showMore: defaultShown, //卡表是否展开
+            isMaximized: false, //是否最大化显示
+            selectedList: [] //已勾选的行数据集合
         };
+        _this.addRowFoo = function () {};
+        _this.delRowFoo = function () {};
+        _this.pasteRowFoo = function () {};
         return _this;
     }
 
@@ -116,9 +129,16 @@ var CardTable = function (_Component) {
 
     //调用editTable实例中的方法
 
+    /**
+     * 勾选表行时触发的回调
+     * @param selectedList 已勾选的行数据集合
+     */
+
 
     CardTable.prototype.render = function render() {
         var _this2 = this;
+
+        var self = this;
 
         var _props = this.props,
             showMax = _props.showMax,
@@ -135,8 +155,8 @@ var CardTable = function (_Component) {
             status = _state.status,
             showMore = _state.showMore,
             activeKey = _state.activeKey,
-            isMaximized = _state.isMaximized;
-
+            isMaximized = _state.isMaximized,
+            selectedList = _state.selectedList;
 
         var tabsOther = tabLists.map(function (item, index) {
             var code = item.code,
@@ -152,15 +172,15 @@ var CardTable = function (_Component) {
                 key: code,
                 label: name,
                 render: function render() {
-                    return _react2["default"].createElement(_EditTable2["default"], _extends({
+                    return _react2["default"].createElement(_EditTable2["default"], _extends({}, config, {
                         columns: columns,
                         data: dataRows,
                         moduleId: moduleId,
-                        isEdit: isEdit,
-                        onRef: function onRef(ref) {
-                            _this2.editTable = ref;
-                        } //获取EditTable组件实例
-                    }, config));
+                        isEdit: isEdit
+                        // onRef={(ref) => { self[moduleId] = ref }} //获取EditTable组件实例
+                        , getSelectedDataFunc: _this2.getSelectedDataFunc,
+                        parentFoo: _this2.parentFoo
+                    }));
                 }
             };
         });
@@ -196,7 +216,8 @@ var CardTable = function (_Component) {
                     openMaxTable: this.openMaxTable,
                     addRow: this.addRow,
                     delRow: this.delRow,
-                    pasteRow: this.pasteRow
+                    pasteRow: this.pasteRow,
+                    selectedList: selectedList
                 }, config)) : null
             ),
             ReactDOM.createPortal(_react2["default"].createElement(
@@ -228,7 +249,8 @@ var CardTable = function (_Component) {
                     openMaxTable: this.openMaxTable,
                     addRow: this.addRow,
                     delRow: this.delRow,
-                    pasteRow: this.pasteRow
+                    pasteRow: this.pasteRow,
+                    selectedList: selectedList
                 }, config)) : null
             ), document.querySelector('body'))
         );

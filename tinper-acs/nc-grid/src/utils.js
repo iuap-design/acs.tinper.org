@@ -412,31 +412,7 @@ export function isEmpty(param) {
   return result;
 }
 
-// // 处理旧值函数
-// export function saveChangedRowsOldValue(moduleId, index, attrcode, value) {
-//   !Array.isArray(this.tableChangedRowsOldValue[moduleId]) && (this.tableChangedRowsOldValue[moduleId] = []);
-//   !isObj(this.tableChangedRowsOldValue[moduleId][index]) && (this.tableChangedRowsOldValue[moduleId][index] = {});
-//   this.tableChangedRowsOldValue[moduleId][index][attrcode] = value;
-// }
-
-// // 获取旧值函数
-// export function getChangedRowsOldValue(moduleId, index, attrcode) {
-//   let isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
-//   if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
-//     return null;
-//   }
-//   return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
-// }
-
-// // 删除旧值函数
-// export function delChangedRowsOldValue(moduleId, index, attrcode) {
-//   let isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
-//   if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
-//     return;
-//   }
-//   if (attrcode) {
-//     this.tableChangedRowsOldValue[moduleId][index][attrcode] = null;
-//   } else {
-//     this.tableChangedRowsOldValue[moduleId][index] = {};
-//   }
-// }
+//获取随机数
+export function getRandom() {
+  return String(new Date().getTime()).slice(-5) + Math.random().toString(12);
+}

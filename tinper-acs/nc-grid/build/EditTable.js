@@ -67,12 +67,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var propTypes = {
     moduleId: PropTypes.string, //meta的id号
     config: PropTypes.object, //表格配置项
-    isEdit: PropTypes.bool //true为编辑态
+    isEdit: PropTypes.bool, //true为编辑态
+    getSelectedDataFunc: PropTypes.func //勾选行时触发的回调
 };
 
 var defaultProps = {
     config: {},
-    isEdit: false
+    isEdit: false,
+    getSelectedDataFunc: function getSelectedDataFunc() {}
 
     // 页面级别配置项
 };var _DEFAULT = {
@@ -152,11 +154,10 @@ var EditTable = function (_Component) {
                     };
                 });
                 // 规整数据
-                _this._reviseRows(rows);
+                _this._reviseRows(rows, 'add');
                 rows.splice(index, 0, newRow);
                 myCardTable.focusIndex = -1;
                 // console.log('rows',rows)
-                // debugger
 
                 // 控制增行后的行定位
                 myCardTable.focusIndex = index === 0 ? index : index + 1; //修改tab切换不到新增行问题renyjk
@@ -169,7 +170,8 @@ var EditTable = function (_Component) {
         _this.delRowByRowId = function (rowid, callback) {
             var _this$state = _this.state,
                 myCardTable = _this$state.table,
-                selectedList = _this$state.selectedList;
+                _this$state$selectedL = _this$state.selectedList,
+                selectedList = _this$state$selectedL === undefined ? [] : _this$state$selectedL;
 
             var rows = myCardTable.rows,
                 selectedPks = [];
@@ -196,28 +198,27 @@ var EditTable = function (_Component) {
                     });
                     _this.setState({
                         table: myCardTable
-                    }, function () {
-                        // _selectedChangeFn.call(this, tableId)
-                        callback && typeof callback === 'function' && callback.call(_this, rowid, myCardTable);
                     });
                 } else {
                     //删除多行
-                    rows.map(function (item, index) {
+                    rows.forEach(function (item, index) {
                         if (selectedPks.indexOf(item.rowid) > -1) {
                             var stat = item.status;
                             if (stat == _config2["default"].status.edit || stat == _config2["default"].status.origin) {
                                 item.status = _config2["default"].status["delete"];
-                                rows.push(item);
+                                // rows.push(item);
+                                // rows.splice(index, 1);
                             }
-                            rows.splice(index, 1);
+                            // rows.splice(index, 1);
                             // 删除自动选中到下一个行的逻辑 , 与快捷键的的删除逻辑冲突 by bbqin
                             if (index >= 0 && index == myCardTable.currentIndex) {
                                 myCardTable.currentIndex = -1;
                             }
                         }
                     });
-                    console.log('rows', rows);
-                    debugger;
+                    // 规整数据
+                    _this._reviseRows(rows, 'delete');
+                    // console.log('删除后rows: ',rows);
                     _this.setState({
                         table: myCardTable
                     });
@@ -225,12 +226,91 @@ var EditTable = function (_Component) {
             }
         };
 
-        _this.pasteRow = function () {};
+        _this.pasteRow = function (index, keys) {
+            var _this$state2 = _this.state,
+                myCardTable = _this$state2.table,
+                _this$state2$selected = _this$state2.selectedList,
+                selectedList = _this$state2$selected === undefined ? [] : _this$state2$selected;
 
-        _this._reviseRows = function (rows) {
+            var rows = myCardTable.rows,
+                selectedIndexs = [],
+                allpks = [];
+            rows.forEach(function (item) {
+                if (allpks.indexOf(item.rowid) < 0) {
+                    allpks.push(item.rowid);
+                }
+            });
+            selectedList.forEach(function (item) {
+                var index = allpks.indexOf(item.rowid);
+                selectedIndexs.push(index);
+            });
+            if ((0, _utils.isUndefined)(index)) {
+                _this.pasteRowToEnd(myCardTable, rows, selectedIndexs);
+                return;
+            }
+            var copy = JSON.parse(JSON.stringify(rows[index]));
+            var allRows = (0, _utils.isArray)(rows) && rows.filter(function (item) {
+                return item.status != _config2["default"].status["delete"];
+            }).length || 0; // 总行数大于等于1
+            var numFlag = (0, _utils.isUndefined)(index) || !isNaN(Number.parseInt(index, 10)) && index >= 0 && index <= allRows - 1;
+            if (numFlag && allRows) {
+                var temp = {
+                    rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+                    status: _config2["default"].status.add
+                };
+                if (keys && Array.isArray(keys)) {
+                    keys.forEach(function (item) {
+                        copy.rowid = (0, _utils.getRandom)();
+                        var defautVal = {
+                            display: null,
+                            value: null
+                        };
+                        _extends(copy.values[item], defautVal);
+                    });
+                }
+                var newRow = _extends({}, copy, temp);
+                var values = newRow.values;
+                var pasteIndex = ++index;
+                rows.splice(pasteIndex, 0, newRow);
+                // 给新复制的行存旧值
+                // Object.keys(values).forEach(value => {
+                // const OldVal = values[value] ? values[value].value : null;
+                // saveChangedRowsOldValue.call(this, tableId, pasteIndex, value, OldVal);
+                // });
+                _this.setState({
+                    table: myCardTable
+                });
+            }
+        };
+
+        _this.pasteRowToEnd = function (myCardTable, rows, selectedIndexs) {
+            var allRows = (0, _utils.isArray)(rows) && rows.filter(function (item) {
+                return item.status != _config2["default"].status["delete"];
+            }).length || 0; // 总行数大于等于1
+            var temp = {
+                rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+                status: _config2["default"].status.add,
+                _checked: false
+            };
+            selectedIndexs.forEach(function (_index) {
+                var copy = JSON.parse(JSON.stringify(rows[_index]));
+                copy.rowid = (0, _utils.getRandom)();
+                var newRow = _extends({}, copy, temp);
+                rows.splice(allRows, 0, newRow);
+            });
+            // console.log('rows',rows);
+            _this.setState({
+                table: myCardTable
+            });
+        };
+
+        _this._reviseRows = function (rows, operation) {
             rows.map(function (item, index) {
                 if (item.status == _config2["default"].status["delete"]) {
                     rows.push(item);
+                    rows.splice(index, 1);
+                }
+                if (operation === 'delete' && item.status == _config2["default"].status.add) {
                     rows.splice(index, 1);
                 }
             });
@@ -239,6 +319,7 @@ var EditTable = function (_Component) {
 
         _this.getSelectedDataFunc = function (selectedList, record, index) {
             var myCardTable = _this.state.table;
+            var getSelectedDataFunc = _this.props.getSelectedDataFunc;
 
             var rows = myCardTable.rows;
             // 如果在回调中增加setState逻辑，需要同步data中的_checked属性。即下面的代码
@@ -255,6 +336,7 @@ var EditTable = function (_Component) {
                 table: myCardTable,
                 selectedList: selectedList
             });
+            getSelectedDataFunc(selectedList);
         };
 
         var ComplexTable = (0, _sort2["default"])(_nc_Table2["default"], _beeIcon2["default"]);
@@ -296,9 +378,12 @@ var EditTable = function (_Component) {
 
 
     EditTable.prototype.componentDidMount = function componentDidMount() {
-        var onRef = this.props.onRef;
+        var _props = this.props,
+            onRef = _props.onRef,
+            parentFoo = _props.parentFoo;
 
         onRef && onRef(this);
+        parentFoo && parentFoo(this.addRow, this.delRowByRowId, this.pasteRow);
     };
 
     EditTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -341,10 +426,18 @@ var EditTable = function (_Component) {
      * @param  keys      不去复制的键值
      */
 
+    /**
+     * 粘贴至末尾
+     * @param myCardTable
+     * @param rows 表行数据
+     * @param selectedIndexs 已选行的 index 集合
+     */
+
 
     /**
      * 修正rows  把删除项永远放在最后 （为了保证渲染层与数据层 index的同一性）
      * @param  rows   表内数据行
+     * @param  operation  数据操作：add、delete、paste
      */
 
 
@@ -673,7 +766,7 @@ var EditTable = function (_Component) {
                     {
                         className: (_DEFAULT.isMultipleHead ? ' multiple-head-border ' : '') + ' ' + (rowsHeight <= bodyHeight ? 'clear-right-scrollBar' : '')
                     },
-                    _react2["default"].createElement(ComplexTable, _extends({
+                    _react2["default"].createElement(ComplexTable, _extends({}, config, {
                         rowKey: props.rowKey ? props.rowKey : "rowid",
                         height: config && !config.multipleRowCell && rowHeight,
                         headerHeight: _DEFAULT.isMultipleHead ? undefined : 30
@@ -685,7 +778,7 @@ var EditTable = function (_Component) {
                         columns: columns,
                         currentIndex: focusIndex,
                         isDrag: config && config.isDrag,
-                        bodyStyle: _extends({}, tableHight),
+                        bodyStyle: { minHeight: '40px' },
                         useFixedHeader: true,
                         scroll: {
                             x: true,
@@ -716,7 +809,7 @@ var EditTable = function (_Component) {
                         }
                         // 是否取消滚动分页
                         , lazyload: config.lazyload
-                    }, sort, config))
+                    }, sort))
                 ),
                 config && config.showPagination && meta.status === 'browse' && _react2["default"].createElement(
                     'div',

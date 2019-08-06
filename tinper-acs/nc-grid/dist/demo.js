@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var Demo2 = __webpack_require__(733);var Demo3 = __webpack_require__(734);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " SimpleTable", "code": "/**\n*\n* @title SimpleTable\n* @description \n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport NCGrid from \"tinper-bee/lib/src\";;\nconst SimpleTable = NCGrid.SimpleTable;\n\nconst columns = [\n    { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\n    { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\n    { title: \"性别\", dataIndex: \"c\", key: \"c\", width: 100},\n    { title: \"部门\", dataIndex: \"d\", key: \"d\", width: 100 },\n    { title: \"职级\", dataIndex: \"e\", key: \"e\", width: 100 }\n];\n  \nconst data = [\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"男\", d: \"财务二科\", e: \"M1\", key: \"1\" },\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"男\", d: \"财务一科\", e: \"T1\", key: \"2\" },\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"女\", d: \"财务一科\", e: \"T2\", key: \"3\" }\n];\n  \nclass Demo1 extends Component {\n    render () {\n        return (\n            <SimpleTable\n            columns={columns}\n            data={data}\n            showPagination={true}\n            pageInfo= {{\n                pageIndex: \"1\",\n                pageSize: \"10\",\n                total: \"3\",\n                totalPage: \"1\"\n            }}\n            />\n        )\n    }\n}\n", "desc": " " }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\r\n*\r\n* @title CardTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst CardTable = NCGrid.CardTable;\r\n\r\nconst columns = [\r\n    {\r\n        itemtype: 'label', //label 类型不可编辑\r\n        maxlength: '20', //限制字段长度\r\n        visible: true, //是否显示列，设置为 false 或不设置，均不显示该列\r\n        width: '100px', //列宽\r\n        label: '行号', //列名称\r\n        disabled: true, //是否禁止编辑\r\n        attrcode: 'crowno' //字段名称\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '20',\r\n        label: '收入合同子实体',\r\n        width: '200px',\r\n        disabled: true,\r\n        required: true, //是否必填，列名称前加 *\r\n        visible: true,\r\n        attrcode: 'crevecontbid'\r\n    },\r\n    {\r\n        itemtype: 'input',\r\n        scale: '1',\r\n        maxlength: '28',\r\n        visible: true,\r\n        width: '200px',\r\n        label: '数量',\r\n        required: true, \r\n        attrcode: 'npobnum'\r\n    },\r\n    {\r\n        itemtype: 'select',\r\n        visible: true,\r\n        label: '确认收入时点',\r\n        width: '200px',\r\n        options: [\r\n            {\r\n                display: '销售发货',\r\n                value: '0'\r\n            },\r\n            {\r\n                display: '销售开票',\r\n                value: '1'\r\n            },\r\n            {\r\n                display: '手工',\r\n                value: '2'\r\n            }\r\n        ],\r\n        attrcode: 'fconfirmpoint'\r\n    },\r\n    {\r\n        itemtype: 'number',\r\n        scale: '2',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '分配金额',\r\n        disabled: true,\r\n        attrcode: 'nallotmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '已履约数量',\r\n        disabled: true,\r\n        attrcode: 'nfinishnum'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        label: '已履约金额',\r\n        disabled: true,\r\n        attrcode: 'nfinishmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '19',\r\n        width: '200px',\r\n        label: '时间戳',\r\n        disabled: true,\r\n        attrcode: 'ts'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '500',\r\n        width: '200px',\r\n        label: '行备注',\r\n        disabled: true,\r\n        attrcode: 'vrownote'\r\n    }\r\n];\r\n  \r\nconst data = [\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m43-434343wws',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8',\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9',\r\n            },\r\n            fclosetype: {\r\n                value: false,\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000',\r\n            },\r\n            fallocation: {\r\n                value: false,\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货',\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg',\r\n            },\r\n            npobnum: {\r\n                value: '10888',\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起',\r\n            },\r\n            cunitid: {\r\n                value: false,\r\n            },\r\n            crowno: {\r\n                value: 1\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-344543243-434bbb3fdsf',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nfinishnum: {\r\n                value: '哈哈哈'\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '广东,北京'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 2\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'h2345hg-345hbvc43-434bebb3sdsc',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: '1234'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '中国,美国'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 3\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: '5hhhg-345hbc43-434bebb3sddw',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            nfinishnum: {\r\n                value: 'ggefe'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '11955',\r\n                scale: '2',\r\n                disabled: false\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 2,\r\n                display: '手工'\r\n            },\r\n            npobnum: {\r\n                value: '10.888',\r\n                scale: '6'\r\n            },\r\n            cpobid: {\r\n                value: 1,\r\n                display: '1'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 4\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m143-4343431wwde',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 5\r\n            }\r\n        }\r\n    },\r\n];\r\n\r\nconst tabLists = [{\r\n    code: 'body', \r\n    name: '详细信息',\r\n    items: [], \r\n}];\r\n  \r\nclass Demo2 extends Component {\r\n    render () {\r\n        const tableHead = [{\r\n            bordered:true,\r\n            itemtype:1 ,//控件类型，0为Button，1为ButtonGroup\r\n            children:[\r\n                {\r\n                    value:'增行',\r\n                    operation: 'addRow'\r\n                },{\r\n                    value:'删行',\r\n                    operation: 'delRow'\r\n                },{\r\n                    value:'复制行',\r\n                    operation: 'pasteRow'\r\n                }\r\n            ]\r\n        }]\r\n        return (\r\n            <CardTable\r\n            columns={columns}\r\n            data={data}\r\n            moduleId=\"body\"\r\n            tabLists={tabLists}\r\n            showMore={true}\r\n            showMax={true}\r\n            showCheck= {true} //是否开启多选功能\r\n            hideSwitch= {() => false} //表格\r\n            tableHead={tableHead}\r\n            isEdit={true}\r\n            />\r\n        )\r\n    }\r\n}\r\n", "desc": " " }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditTable", "code": "/**\r\n*\r\n* @title EditTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\r\n\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst EditTable = NCGrid.EditTable;\r\n\r\nconst columns = [\r\n    {\r\n        itemtype: 'label', //label 类型不可编辑\r\n        maxlength: '20', //限制字段长度\r\n        visible: true, //是否显示列，设置为 false 或不设置，均不显示该列\r\n        width: '100px', //列宽\r\n        label: '行号', //列名称\r\n        disabled: true, //是否禁止编辑\r\n        attrcode: 'crowno' //字段名称\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '20',\r\n        label: '收入合同子实体',\r\n        width: '200px',\r\n        disabled: true,\r\n        required: true, //是否必填，列名称前加 *\r\n        visible: true,\r\n        attrcode: 'crevecontbid'\r\n    },\r\n    {\r\n        itemtype: 'input',\r\n        scale: '1',\r\n        maxlength: '28',\r\n        visible: true,\r\n        width: '200px',\r\n        label: '数量',\r\n        required: true, \r\n        attrcode: 'npobnum'\r\n    },\r\n    {\r\n        itemtype: 'select',\r\n        visible: true,\r\n        label: '确认收入时点',\r\n        width: '200px',\r\n        options: [\r\n            {\r\n                display: '销售发货',\r\n                value: '0'\r\n            },\r\n            {\r\n                display: '销售开票',\r\n                value: '1'\r\n            },\r\n            {\r\n                display: '手工',\r\n                value: '2'\r\n            }\r\n        ],\r\n        attrcode: 'fconfirmpoint'\r\n    },\r\n    {\r\n        itemtype: 'number',\r\n        scale: '2',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '分配金额',\r\n        // disabled: true,\r\n        attrcode: 'nallotmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '已履约数量',\r\n        disabled: true,\r\n        attrcode: 'nfinishnum'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        label: '已履约金额',\r\n        disabled: true,\r\n        attrcode: 'nfinishmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '19',\r\n        width: '200px',\r\n        label: '时间戳',\r\n        disabled: true,\r\n        attrcode: 'ts'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '500',\r\n        width: '200px',\r\n        label: '行备注',\r\n        disabled: true,\r\n        attrcode: 'vrownote'\r\n    }\r\n];\r\n  \r\nconst data = [\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m43-434343wws',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8',\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9',\r\n            },\r\n            fclosetype: {\r\n                value: false,\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000',\r\n            },\r\n            fallocation: {\r\n                value: false,\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货',\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg',\r\n            },\r\n            npobnum: {\r\n                value: '10888',\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起',\r\n            },\r\n            cunitid: {\r\n                value: false,\r\n            },\r\n            crowno: {\r\n                value: 1\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-344543243-434bbb3fdsf',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nfinishnum: {\r\n                value: '哈哈哈'\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '广东,北京'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 2\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'h2345hg-345hbvc43-434bebb3sdsc',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: '1234'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '中国,美国'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 3\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: '5hhhg-345hbc43-434bebb3sddw',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            nfinishnum: {\r\n                value: 'ggefe'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '11955',\r\n                scale: '2',\r\n                disabled: false\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 2,\r\n                display: '手工'\r\n            },\r\n            npobnum: {\r\n                value: '10.888',\r\n                scale: '6'\r\n            },\r\n            cpobid: {\r\n                value: 1,\r\n                display: '1'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 4\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m143-4343431wwde',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 5\r\n            }\r\n        }\r\n    },\r\n]\r\n  \r\nclass Demo3 extends Component {\r\n    handleClick = () => {\r\n        this.table.getTableRows();\r\n    }\r\n    //获取表格数据时返回的回调\r\n    getTableRows = (data) => {\r\n        console.log('保存数据',data);\r\n    }\r\n    render () {\r\n        return (\r\n            <div>\r\n                <Button colors=\"primary\" onClick={this.handleClick} style={{marginBottom:'8px'}}>保存表格数据</Button>\r\n                <EditTable\r\n                columns={columns}\r\n                data={data}\r\n                moduleId=\"purchase\"\r\n                isEdit={true}\r\n                onRef={(ref) => { this.table = ref; }} //获取EditTable组件实例\r\n                getTableRows={this.getTableRows}\r\n                />\r\n            </div>\r\n        )\r\n    }\r\n}\r\n", "desc": " " }];
+	var Demo1 = __webpack_require__(268);var Demo2 = __webpack_require__(733);var Demo3 = __webpack_require__(734);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " SimpleTable", "code": "/**\n*\n* @title SimpleTable\n* @description \n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport NCGrid from \"tinper-bee/lib/src\";;\nconst SimpleTable = NCGrid.SimpleTable;\n\nconst columns = [\n    { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\n    { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\n    { title: \"性别\", dataIndex: \"c\", key: \"c\", width: 100},\n    { title: \"部门\", dataIndex: \"d\", key: \"d\", width: 100 },\n    { title: \"职级\", dataIndex: \"e\", key: \"e\", width: 100 }\n];\n  \nconst data = [\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"男\", d: \"财务二科\", e: \"M1\", key: \"1\" },\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"男\", d: \"财务一科\", e: \"T1\", key: \"2\" },\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"女\", d: \"财务一科\", e: \"T2\", key: \"3\" }\n];\n  \nclass Demo1 extends Component {\n    render () {\n        return (\n            <SimpleTable\n            columns={columns}\n            data={data}\n            showPagination={true}\n            pageInfo= {{\n                pageIndex: \"1\",\n                pageSize: \"10\",\n                total: \"3\",\n                totalPage: \"1\"\n            }}\n            />\n        )\n    }\n}\n", "desc": " " }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\r\n*\r\n* @title CardTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\r\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst CardTable = NCGrid.CardTable;\r\n\r\nconst columns = [\r\n    {\r\n        itemtype: 'label', //label 类型不可编辑\r\n        maxlength: '20', //限制字段长度\r\n        visible: true, //是否显示列，设置为 false 或不设置，均不显示该列\r\n        width: '100px', //列宽\r\n        label: '行号', //列名称\r\n        disabled: true, //是否禁止编辑\r\n        attrcode: 'crowno' //字段名称\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '20',\r\n        label: '收入合同子实体',\r\n        width: '200px',\r\n        disabled: true,\r\n        required: true, //是否必填，列名称前加 *\r\n        visible: true,\r\n        attrcode: 'crevecontbid'\r\n    },\r\n    {\r\n        itemtype: 'input',\r\n        scale: '1',\r\n        maxlength: '28',\r\n        visible: true,\r\n        width: '200px',\r\n        label: '数量',\r\n        required: true, \r\n        attrcode: 'npobnum'\r\n    },\r\n    {\r\n        itemtype: 'select',\r\n        visible: true,\r\n        label: '确认收入时点',\r\n        width: '200px',\r\n        options: [\r\n            {\r\n                display: '销售发货',\r\n                value: '0'\r\n            },\r\n            {\r\n                display: '销售开票',\r\n                value: '1'\r\n            },\r\n            {\r\n                display: '手工',\r\n                value: '2'\r\n            }\r\n        ],\r\n        attrcode: 'fconfirmpoint'\r\n    },\r\n    {\r\n        itemtype: 'number',\r\n        scale: '2',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '分配金额',\r\n        disabled: true,\r\n        attrcode: 'nallotmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '已履约数量',\r\n        disabled: true,\r\n        attrcode: 'nfinishnum'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        label: '已履约金额',\r\n        disabled: true,\r\n        attrcode: 'nfinishmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '19',\r\n        width: '200px',\r\n        label: '时间戳',\r\n        disabled: true,\r\n        attrcode: 'ts'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '500',\r\n        width: '200px',\r\n        label: '行备注',\r\n        disabled: true,\r\n        attrcode: 'vrownote'\r\n    }\r\n];\r\n  \r\nconst data = [\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m43-434343wws',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8',\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9',\r\n            },\r\n            fclosetype: {\r\n                value: false,\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000',\r\n            },\r\n            fallocation: {\r\n                value: false,\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货',\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg',\r\n            },\r\n            npobnum: {\r\n                value: '10888',\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起',\r\n            },\r\n            cunitid: {\r\n                value: false,\r\n            },\r\n            crowno: {\r\n                value: 1\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-344543243-434bbb3fdsf',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nfinishnum: {\r\n                value: '哈哈哈'\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '广东,北京'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 2\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'h2345hg-345hbvc43-434bebb3sdsc',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: '1234'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '中国,美国'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 3\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: '5hhhg-345hbc43-434bebb3sddw',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            nfinishnum: {\r\n                value: 'ggefe'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '11955',\r\n                scale: '2',\r\n                disabled: false\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 2,\r\n                display: '手工'\r\n            },\r\n            npobnum: {\r\n                value: '10.888',\r\n                scale: '6'\r\n            },\r\n            cpobid: {\r\n                value: 1,\r\n                display: '1'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 4\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m143-4343431wwde',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 5\r\n            }\r\n        }\r\n    },\r\n];\r\n\r\nconst tabLists = [{\r\n    code: 'body', \r\n    name: '详细信息',\r\n    items: [], \r\n}];\r\n\r\n//获取表格数据时返回的回调\r\nfunction getTableRows(data){\r\n    console.log('保存数据',data);\r\n}\r\n  \r\nclass Demo2 extends Component {\r\n    handleClick = () => {\r\n        this.body.getTableRows();\r\n    }\r\n    render () {\r\n        const tableHead = [{\r\n            bordered:true,\r\n            itemtype:1 ,//控件类型，0为Button，1为ButtonGroup\r\n            children:[\r\n                {\r\n                    value:'增行',\r\n                    operation: 'addRow'\r\n                },{\r\n                    value:'删行',\r\n                    operation: 'delRow'\r\n                },{\r\n                    value:'复制行',\r\n                    operation: 'pasteRow'\r\n                }\r\n            ]\r\n        }]\r\n        return (\r\n            <div>\r\n                <CardTable\r\n                columns={columns}\r\n                data={data}\r\n                moduleId=\"body\"\r\n                tabLists={tabLists}\r\n                showMore={true}\r\n                showMax={true}\r\n                showCheck= {true} //是否开启多选功能\r\n                hideSwitch= {() => false} //表格\r\n                tableHead={tableHead}\r\n                isEdit={true}\r\n                onRef={(ref) => { this.body = ref; }} //获取EditTable组件实例\r\n                getTableRows={getTableRows}\r\n                />\r\n                <button onClick={this.handleClick} style={{marginTop:'30px'}}>aaa</button>\r\n            </div>\r\n            \r\n        )\r\n    }\r\n}\r\n", "desc": " " }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditTable", "code": "/**\r\n*\r\n* @title EditTable\r\n* @description \r\n*\r\n*/\r\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\r\n\nimport NCGrid from \"tinper-bee/lib/src\";;\r\nconst EditTable = NCGrid.EditTable;\r\n\r\nconst columns = [\r\n    {\r\n        itemtype: 'label', //label 类型不可编辑\r\n        maxlength: '20', //限制字段长度\r\n        visible: true, //是否显示列，设置为 false 或不设置，均不显示该列\r\n        width: '100px', //列宽\r\n        label: '行号', //列名称\r\n        disabled: true, //是否禁止编辑\r\n        attrcode: 'crowno' //字段名称\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '20',\r\n        label: '收入合同子实体',\r\n        width: '200px',\r\n        disabled: true,\r\n        required: true, //是否必填，列名称前加 *\r\n        visible: true,\r\n        attrcode: 'crevecontbid'\r\n    },\r\n    {\r\n        itemtype: 'input',\r\n        scale: '1',\r\n        maxlength: '28',\r\n        visible: true,\r\n        width: '200px',\r\n        label: '数量',\r\n        required: true, \r\n        attrcode: 'npobnum'\r\n    },\r\n    {\r\n        itemtype: 'select',\r\n        visible: true,\r\n        label: '确认收入时点',\r\n        width: '200px',\r\n        options: [\r\n            {\r\n                display: '销售发货',\r\n                value: '0'\r\n            },\r\n            {\r\n                display: '销售开票',\r\n                value: '1'\r\n            },\r\n            {\r\n                display: '手工',\r\n                value: '2'\r\n            }\r\n        ],\r\n        attrcode: 'fconfirmpoint'\r\n    },\r\n    {\r\n        itemtype: 'number',\r\n        scale: '2',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '分配金额',\r\n        // disabled: true,\r\n        attrcode: 'nallotmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        visible: true,\r\n        label: '已履约数量',\r\n        disabled: true,\r\n        attrcode: 'nfinishnum'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        scale: '8',\r\n        width: '200px',\r\n        maxlength: '28',\r\n        label: '已履约金额',\r\n        disabled: true,\r\n        attrcode: 'nfinishmny'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '19',\r\n        width: '200px',\r\n        label: '时间戳',\r\n        disabled: true,\r\n        attrcode: 'ts'\r\n    },\r\n    {\r\n        itemtype: 'label',\r\n        maxlength: '500',\r\n        width: '200px',\r\n        label: '行备注',\r\n        disabled: true,\r\n        attrcode: 'vrownote'\r\n    }\r\n];\r\n  \r\nconst data = [\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m43-434343wws',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8',\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9',\r\n            },\r\n            fclosetype: {\r\n                value: false,\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000',\r\n            },\r\n            fallocation: {\r\n                value: false,\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货',\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg',\r\n            },\r\n            npobnum: {\r\n                value: '10888',\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起',\r\n            },\r\n            cunitid: {\r\n                value: false,\r\n            },\r\n            crowno: {\r\n                value: 1\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-344543243-434bbb3fdsf',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nfinishnum: {\r\n                value: '哈哈哈'\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '广东,北京'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 2\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'h2345hg-345hbvc43-434bebb3sdsc',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: '1234'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '中国,美国'\r\n            },\r\n            cunitid: {\r\n                value: true\r\n            },\r\n            crowno: {\r\n                value: 3\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: '5hhhg-345hbc43-434bebb3sddw',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            nfinishnum: {\r\n                value: 'ggefe'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '11955',\r\n                scale: '2',\r\n                disabled: false\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 2,\r\n                display: '手工'\r\n            },\r\n            npobnum: {\r\n                value: '10.888',\r\n                scale: '6'\r\n            },\r\n            cpobid: {\r\n                value: 1,\r\n                display: '1'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 4\r\n            }\r\n        }\r\n    },\r\n    {\r\n        status: '0',\r\n        rowid: 'hhghg-34343m143-4343431wwde',\r\n        values: {\r\n            ts: {\r\n                value: '2018-03-21 10:53:18'\r\n            },\r\n            crevecontid: {\r\n                value: '1001A310000000005SC8'\r\n            },\r\n            crevecontbid: {\r\n                value: '1001A310000000005SC9'\r\n            },\r\n            fclosetype: {\r\n                value: false\r\n            },\r\n            nallotmny: {\r\n                value: '1199.000'\r\n            },\r\n            fallocation: {\r\n                value: false\r\n            },\r\n            fconfirmpoint: {\r\n                value: 1,\r\n                display: '销售发货'\r\n            },\r\n            nfinishnum: {\r\n                value: 'gggg'\r\n            },\r\n            npobnum: {\r\n                value: '10888'\r\n            },\r\n            cpobid: {\r\n                value: '10,3',\r\n                display: '夏侯惇,白起'\r\n            },\r\n            cunitid: {\r\n                value: false\r\n            },\r\n            crowno: {\r\n                value: 5\r\n            }\r\n        }\r\n    },\r\n]\r\n  \r\nclass Demo3 extends Component {\r\n    handleClick = () => {\r\n        this.table.getTableRows();\r\n    }\r\n    //获取表格数据时返回的回调\r\n    getTableRows = (data) => {\r\n        console.log('保存数据',data);\r\n    }\r\n    render () {\r\n        return (\r\n            <div>\r\n                <Button colors=\"primary\" onClick={this.handleClick} style={{marginBottom:'8px'}}>保存表格数据</Button>\r\n                <EditTable\r\n                columns={columns}\r\n                data={data}\r\n                moduleId=\"purchase\"\r\n                isEdit={true}\r\n                onRef={(ref) => { this.table = ref; }} //获取EditTable组件实例\r\n                getTableRows={this.getTableRows}\r\n                />\r\n            </div>\r\n        )\r\n    }\r\n}\r\n", "desc": " " }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -193,7 +193,7 @@
 	        return _react2['default'].createElement(
 	            _beeLayout.Row,
 	            null,
-	            DemoArray.map(function (child, index) {
+	            [DemoArray[1]].map(function (child, index) {
 	
 	                return _react2['default'].createElement(Demo, { example: child.example, title: child.title, code: child.code, scss_code: child.scss_code, desc: child.desc, key: index });
 	            })
@@ -35107,7 +35107,8 @@
 	  hoverContent: _propTypes2["default"].func,
 	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
 	  rowDraggAble: _propTypes2["default"].bool,
-	  onDropRow: _propTypes2["default"].func
+	  onDropRow: _propTypes2["default"].func,
+	  onDragRowStart: _propTypes2["default"].func
 	};
 	
 	var defaultProps = {
@@ -35153,7 +35154,8 @@
 	  heightConsistent: false,
 	  size: 'md',
 	  rowDraggAble: false,
-	  onDropRow: function onDropRow() {}
+	  onDropRow: function onDropRow() {},
+	  onDragRowStart: function onDragRowStart() {}
 	};
 	
 	var Table = function (_Component) {
@@ -35181,6 +35183,21 @@
 	      div.className = "u-table-drag-hidden-cont";
 	      div.id = uid;
 	      _this.contentTable.appendChild(div);
+	    };
+	
+	    _this.onDragRowStart = function (currentKey) {
+	      var data = _this.state.data,
+	          currentIndex = void 0,
+	          record = void 0;
+	      data.forEach(function (da, i) {
+	        // tr 的唯一标识通过 data.key 或 rowKey 两种方式传进来
+	        var trKey = da.key ? da.key : _this.getRowKey(da, i);
+	        if (trKey == currentKey) {
+	          currentIndex = i;
+	          record = da;
+	        }
+	      });
+	      _this.props.onDragRowStart && _this.props.onDragRowStart(record, currentIndex);
 	    };
 	
 	    _this.onDragRow = function (currentKey, targetKey) {
@@ -35309,6 +35326,7 @@
 	    _this.computeTableWidth = _this.computeTableWidth.bind(_this);
 	    _this.onBodyMouseLeave = _this.onBodyMouseLeave.bind(_this);
 	    _this.tableUid = null;
+	    _this.contentTable = null;
 	    return _this;
 	  }
 	
@@ -35395,6 +35413,7 @@
 	  };
 	
 	  Table.prototype.componentWillUnmount = function componentWillUnmount() {
+	    this.contentTable = null;
 	    _utils.EventUtil.removeHandler(this.contentTable, 'keydown', this.onKeyDown);
 	    _utils.EventUtil.removeHandler(this.contentTable, 'focus', this.onFocus);
 	    if (this.resizeEvent) {
@@ -35543,7 +35562,8 @@
 	        afterDragColWidth = _props.afterDragColWidth,
 	        headerScroll = _props.headerScroll,
 	        bordered = _props.bordered,
-	        onDropBorder = _props.onDropBorder;
+	        onDropBorder = _props.onDropBorder,
+	        onDraggingBorder = _props.onDraggingBorder;
 	
 	    var rows = this.getHeaderRows(columns);
 	    if (expandIconAsCell && fixed !== 'right') {
@@ -35557,7 +35577,7 @@
 	
 	    var trStyle = headerHeight && !fixed ? { height: headerHeight } : fixed ? this.getHeaderRowStyle(columns, rows) : null;
 	    var drop = draggable ? { onDragStart: onDragStart, onDragOver: onDragOver, onDrop: onDrop, onDragEnter: onDragEnter, draggable: draggable } : {};
-	    var dragBorder = dragborder ? { onMouseDown: onMouseDown, onMouseMove: onMouseMove, onMouseUp: onMouseUp, dragborder: dragborder, onThMouseMove: onThMouseMove, dragborderKey: dragborderKey, onDropBorder: onDropBorder } : {};
+	    var dragBorder = dragborder ? { onMouseDown: onMouseDown, onMouseMove: onMouseMove, onMouseUp: onMouseUp, dragborder: dragborder, onThMouseMove: onThMouseMove, dragborderKey: dragborderKey, onDropBorder: onDropBorder, onDraggingBorder: onDraggingBorder } : {};
 	    var contentWidthDiff = 0;
 	    //非固定表格,宽度不够时自动扩充
 	    if (!fixed) {
@@ -35681,7 +35701,8 @@
 	    } else if (fixed === 'right') {
 	      colCount = this.columnManager.rightLeafColumns().length;
 	    } else {
-	      colCount = this.columnManager.leafColumns().length;
+	      // colCount = this.columnManager.leafColumns().length;
+	      colCount = this.columnManager.centerColumns().length; //计算非固定列的个数，fix: 嵌套表格场景，右侧列断开的问题
 	    }
 	
 	    function contentContainer() {
@@ -35722,9 +35743,16 @@
 	      store: this.store,
 	      dragborderKey: this.props.dragborderKey,
 	      rowDraggAble: this.props.rowDraggAble,
-	      onDragRow: this.onDragRow
+	      onDragRow: this.onDragRow,
+	      onDragRowStart: this.onDragRowStart
 	    });
 	  };
+	
+	  /**
+	   * 行拖拽开始时触发
+	   * @param currentKey 当前拖拽目标的key
+	   */
+	
 	
 	  /**
 	   * 行拖拽结束时触发
@@ -35876,6 +35904,7 @@
 	        bodyDisplayInRow: props.bodyDisplayInRow,
 	        rowDraggAble: this.props.rowDraggAble,
 	        onDragRow: this.onDragRow,
+	        onDragRowStart: this.onDragRowStart,
 	        contentTable: this.contentTable,
 	        tableUid: this.tableUid,
 	        expandedIcon: props.expandedIcon,
@@ -36593,7 +36622,8 @@
 	  expandRowByClick: _propTypes2["default"].bool,
 	  store: _propTypes2["default"].object.isRequired,
 	  rowDraggAble: _propTypes2["default"].bool,
-	  onDragRow: _propTypes2["default"].func
+	  onDragRow: _propTypes2["default"].func,
+	  onDragRowStart: _propTypes2["default"].func
 	};
 	
 	var defaultProps = {
@@ -36644,6 +36674,8 @@
 	    };
 	
 	    _this.onDragStart = function (e) {
+	      var onDragRowStart = _this.props.onDragRowStart;
+	
 	      if (!_this.props.rowDraggAble) return;
 	      var event = _utils.Event.getEvent(e),
 	          target = _utils.Event.getTarget(event);
@@ -36656,6 +36688,8 @@
 	      // event.dataTransfer.setDragImage(crt, 0, 0);
 	      event.dataTransfer.effectAllowed = "move";
 	      event.dataTransfer.setData("Text", _this.currentIndex);
+	
+	      onDragRowStart && onDragRowStart(_this.currentIndex);
 	    };
 	
 	    _this.onDragOver = function (e) {
@@ -36692,10 +36726,14 @@
 	    };
 	
 	    _this.onTouchStart = function (e) {
+	      var onDragRowStart = _this.props.onDragRowStart;
+	
 	      var event = _utils.Event.getEvent(e),
 	          _target = _utils.Event.getTarget(event),
 	          target = _target.parentNode;
 	      _this.currentIndex = target.getAttribute("data-row-key");
+	
+	      onDragRowStart && onDragRowStart(_this.currentIndex);
 	    };
 	
 	    _this.onTouchMove = function (e) {
@@ -36992,6 +37030,10 @@
 	  };
 	
 	  TableRow.prototype.onRowClick = function onRowClick(event) {
+	    // fix: 解决 onRowClick 回调函数中，事件对象属性均为 null 的问题
+	    // 异步访问事件属性
+	    // 调用 event.persist() 会从事件池中移除该合成函数并允许对该合成事件的引用被保留下来。
+	    event.persist();
 	    var _props5 = this.props,
 	        record = _props5.record,
 	        index = _props5.index,
@@ -39394,6 +39436,7 @@
 	          lastShowIndex = _this$props.lastShowIndex;
 	
 	      var currentElement = _this.getOnLineObject(targetEvent);
+	      // let currentElement = this.getTargetToTh(targetEvent);
 	      if (!currentElement) return;
 	      var type = currentElement.getAttribute('data-type');
 	      if (!_this.props.dragborder && !_this.props.draggable) return;
@@ -39460,7 +39503,8 @@
 	          scrollbarWidth = _this$props2.scrollbarWidth,
 	          contentTable = _this$props2.contentTable,
 	          headerScroll = _this$props2.headerScroll,
-	          lastShowIndex = _this$props2.lastShowIndex;
+	          lastShowIndex = _this$props2.lastShowIndex,
+	          onDraggingBorder = _this$props2.onDraggingBorder;
 	
 	      _utils.Event.stopPropagation(e);
 	      var event = _utils.Event.getEvent(e);
@@ -39527,9 +39571,11 @@
 	        }
 	      } else if (_this.props.draggable && _this.drag.option == "draggable") {
 	        // console.log(" --onTrMouseMove--draggable- ",this.drag.option);
-	      } else {
-	          // console.log("onTrMouseMove dragborder or draggable is all false !");
-	        }
+	      } else {}
+	        // console.log("onTrMouseMove dragborder or draggable is all false !");
+	
+	        // 增加拖拽列宽动作的回调函数
+	      _this.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this.drag.newWidth);
 	    };
 	
 	    _this.onTrMouseUp = function (e) {
@@ -39563,7 +39609,8 @@
 	      if (table) {
 	        var innerTable = table.querySelector('.u-table-body-inner');
 	        if (innerTable) {
-	          overflow.x && (innerTable.style.overflowX = overflow.x);
+	          //fixbug: 拖拽列宽后，滚动条滚到表格底部，会导致固定列和非固定列错行
+	          // overflow.x && (innerTable.style.overflowX = overflow.x);
 	          overflow.y && (innerTable.style.overflowY = overflow.y);
 	        }
 	      }
@@ -39784,6 +39831,7 @@
 	    _this._thead = null; //当前对象
 	    _this.event = false; //避免多次绑定问题
 	    _this.lastColumWidth = null; //非固定列最后一列的初始化宽度
+	    _this.fixedTable = {};
 	    return _this;
 	  }
 	
@@ -39800,6 +39848,7 @@
 	  };
 	
 	  TableHeader.prototype.componentWillUnmount = function componentWillUnmount() {
+	    this.fixedTable = null;
 	    if (!this.table) return;
 	    if (this.props.draggable) {
 	      this.removeDragAbleEvent();
@@ -39808,6 +39857,7 @@
 	      this.removeDragBorderEvent();
 	    }
 	    this.eventListen([{ key: 'mousedown', fun: this.onTrMouseDown }], 'remove', this.table.tr[0]);
+	    this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], 'remove', document.body);
 	  };
 	
 	  /**
@@ -39862,15 +39912,20 @@
 	  TableHeader.prototype.initEvent = function initEvent() {
 	    var _props = this.props,
 	        dragborder = _props.dragborder,
-	        draggable = _props.draggable;
+	        draggable = _props.draggable,
+	        rows = _props.rows;
+	    // 当传入的 columns 为空时，不绑定拖拽事件
 	
+	    if (Object.prototype.toString.call(rows) === '[object Array]' && rows.length === 0) {
+	      return;
+	    }
 	    if (!this.event) {
 	      //避免多次绑定问题。
 	      this.event = true;
 	      if (dragborder) {
 	        this.dragBorderEventInit(); //列宽
 	      }
-	      if (dragborder) {
+	      if (draggable) {
 	        this.dragAbleEventInit(); //交换列
 	      }
 	      if (this.table && this.table.tr) {
@@ -83482,6 +83537,7 @@
 	        if (nextProps.data.length > 0) {
 	          _this.endIndex = _this.currentIndex - nextProps.loadBuffer + _this.loadCount; //数据结束位置
 	        }
+	        this.scrollTop = 0;
 	      }
 	      //如果传currentIndex，会判断该条数据是否在可视区域，如果没有的话，则重新计算startIndex和endIndex
 	      if (currentIndex !== -1 && currentIndex !== this.currentIndex) {
@@ -84197,6 +84253,7 @@
 	exports.deepClone = deepClone;
 	exports.getDisplayByValue = getDisplayByValue;
 	exports.isEmpty = isEmpty;
+	exports.getRandom = getRandom;
 	
 	var _config = __webpack_require__(607);
 	
@@ -84644,34 +84701,10 @@
 	  return result;
 	}
 	
-	// // 处理旧值函数
-	// export function saveChangedRowsOldValue(moduleId, index, attrcode, value) {
-	//   !Array.isArray(this.tableChangedRowsOldValue[moduleId]) && (this.tableChangedRowsOldValue[moduleId] = []);
-	//   !isObj(this.tableChangedRowsOldValue[moduleId][index]) && (this.tableChangedRowsOldValue[moduleId][index] = {});
-	//   this.tableChangedRowsOldValue[moduleId][index][attrcode] = value;
-	// }
-	
-	// // 获取旧值函数
-	// export function getChangedRowsOldValue(moduleId, index, attrcode) {
-	//   let isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
-	//   if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
-	//     return null;
-	//   }
-	//   return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
-	// }
-	
-	// // 删除旧值函数
-	// export function delChangedRowsOldValue(moduleId, index, attrcode) {
-	//   let isArr = Array.isArray(this.tableChangedRowsOldValue[moduleId]);
-	//   if (!isArr || (isArr && !isObj(this.tableChangedRowsOldValue[moduleId][index]))) {
-	//     return;
-	//   }
-	//   if (attrcode) {
-	//     this.tableChangedRowsOldValue[moduleId][index][attrcode] = null;
-	//   } else {
-	//     this.tableChangedRowsOldValue[moduleId][index] = {};
-	//   }
-	// }
+	//获取随机数
+	function getRandom() {
+	  return String(new Date().getTime()).slice(-5) + Math.random().toString(12);
+	}
 
 /***/ }),
 /* 607 */
@@ -89297,15 +89330,9 @@
 	
 	var _FoldableTabs2 = _interopRequireDefault(_FoldableTabs);
 	
-	var _SimpleTable = __webpack_require__(617);
-	
-	var _SimpleTable2 = _interopRequireDefault(_SimpleTable);
-	
 	var _EditTable = __webpack_require__(728);
 	
 	var _EditTable2 = _interopRequireDefault(_EditTable);
-	
-	var _utils = __webpack_require__(606);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -89330,7 +89357,7 @@
 	};
 	
 	var defaultProps = {
-	    showMore: true,
+	    showMore: false,
 	    showMax: false,
 	    moduleId: '',
 	    config: {},
@@ -89356,8 +89383,10 @@
 	            onTabChange && isFunction(onTabChange) && onTabChange();
 	        };
 	
-	        _this.onHeadAngleToggle = function (showMore) {
-	            _this.setState({ showMore: showMore });
+	        _this.onHeadAngleToggle = function (flag) {
+	            _this.setState({
+	                showMore: flag
+	            });
 	        };
 	
 	        _this.openMaxTable = function (isMaximized) {
@@ -89365,23 +89394,40 @@
 	        };
 	
 	        _this.addRow = function () {
-	            _this.editTable.addRow();
+	            _this.addRowFoo();
 	        };
 	
 	        _this.delRow = function () {
-	            _this.editTable.delRowByRowId();
+	            _this.delRowFoo();
 	        };
 	
 	        _this.pasteRow = function () {
-	            _this.editTable.pasteRow();
+	            _this.pasteRowFoo();
 	        };
 	
+	        _this.parentFoo = function (addRow, delRow, pasteRow) {
+	            _this.addRowFoo = addRow;
+	            _this.delRowFoo = delRow;
+	            _this.pasteRowFoo = pasteRow;
+	        };
+	
+	        _this.getSelectedDataFunc = function (selectedList) {
+	            _this.setState({
+	                selectedList: selectedList
+	            });
+	        };
+	
+	        var defaultShown = props.showMore || false;
 	        _this.state = {
 	            status: 'browse', //browse(浏览态)、edit(编辑态)
 	            activeKey: '', //标识当前卡表的选中项
-	            showMore: props.showMore, //卡表是否展开
-	            isMaximized: false //是否最大化显示
+	            showMore: defaultShown, //卡表是否展开
+	            isMaximized: false, //是否最大化显示
+	            selectedList: [] //已勾选的行数据集合
 	        };
+	        _this.addRowFoo = function () {};
+	        _this.delRowFoo = function () {};
+	        _this.pasteRowFoo = function () {};
 	        return _this;
 	    }
 	
@@ -89395,9 +89441,16 @@
 	
 	    //调用editTable实例中的方法
 	
+	    /**
+	     * 勾选表行时触发的回调
+	     * @param selectedList 已勾选的行数据集合
+	     */
+	
 	
 	    CardTable.prototype.render = function render() {
 	        var _this2 = this;
+	
+	        var self = this;
 	
 	        var _props = this.props,
 	            showMax = _props.showMax,
@@ -89414,8 +89467,8 @@
 	            status = _state.status,
 	            showMore = _state.showMore,
 	            activeKey = _state.activeKey,
-	            isMaximized = _state.isMaximized;
-	
+	            isMaximized = _state.isMaximized,
+	            selectedList = _state.selectedList;
 	
 	        var tabsOther = tabLists.map(function (item, index) {
 	            var code = item.code,
@@ -89431,15 +89484,15 @@
 	                key: code,
 	                label: name,
 	                render: function render() {
-	                    return _react2['default'].createElement(_EditTable2['default'], _extends({
+	                    return _react2['default'].createElement(_EditTable2['default'], _extends({}, config, {
 	                        columns: columns,
 	                        data: dataRows,
 	                        moduleId: moduleId,
-	                        isEdit: isEdit,
-	                        onRef: function onRef(ref) {
-	                            _this2.editTable = ref;
-	                        } //获取EditTable组件实例
-	                    }, config));
+	                        isEdit: isEdit
+	                        // onRef={(ref) => { self[moduleId] = ref }} //获取EditTable组件实例
+	                        , getSelectedDataFunc: _this2.getSelectedDataFunc,
+	                        parentFoo: _this2.parentFoo
+	                    }));
 	                }
 	            };
 	        });
@@ -89475,7 +89528,8 @@
 	                    openMaxTable: this.openMaxTable,
 	                    addRow: this.addRow,
 	                    delRow: this.delRow,
-	                    pasteRow: this.pasteRow
+	                    pasteRow: this.pasteRow,
+	                    selectedList: selectedList
 	                }, config)) : null
 	            ),
 	            ReactDOM.createPortal(_react2['default'].createElement(
@@ -89507,7 +89561,8 @@
 	                    openMaxTable: this.openMaxTable,
 	                    addRow: this.addRow,
 	                    delRow: this.delRow,
-	                    pasteRow: this.pasteRow
+	                    pasteRow: this.pasteRow,
+	                    selectedList: selectedList
 	                }, config)) : null
 	            ), document.querySelector('body'))
 	        );
@@ -89635,30 +89690,65 @@
 	    };
 	
 	    _this.getBtnGroup = function (btns) {
+	      var _this$state = _this.state,
+	          inPaste = _this$state.inPaste,
+	          hasSelectedRows = _this$state.hasSelectedRows;
 	      var bordered = btns.bordered,
 	          btnSize = btns.btnSize;
 	
-	      var btnGroupItems = btns.children.map(function (item, index) {
+	      if (inPaste) {
+	        //复制行后，待粘贴状态
 	        return _react2['default'].createElement(
-	          _beeButton2['default'],
-	          { key: index, size: btnSize, bordered: bordered, onClick: function onClick(e) {
-	              return _this.handleClickByOptType(item.operation);
-	            } },
-	          item.value
+	          'div',
+	          { className: 'in-paste-status' },
+	          _react2['default'].createElement(
+	            _beeButton2['default'],
+	            { size: btnSize, bordered: true, onClick: _this.props.pasteRow },
+	            '\u7C98\u8D34\u81F3\u672B\u884C'
+	          ),
+	          _react2['default'].createElement(
+	            _beeButton2['default'],
+	            { size: btnSize, bordered: true, onClick: _this.cancelPaste },
+	            '\u53D6\u6D88'
+	          )
 	        );
+	      } else {
+	        //初始状态。包含 '增行'/'删行'/'复制行'
+	        var btnGroupItems = btns.children.map(function (item, index) {
+	          return _react2['default'].createElement(
+	            _beeButton2['default'],
+	            {
+	              key: index,
+	              size: btnSize,
+	              bordered: bordered,
+	              disabled: index !== 0 && !hasSelectedRows,
+	              onClick: function onClick(e) {
+	                return _this.handleClickByOptType(e, item.operation);
+	              } },
+	            item.value
+	          );
+	        });
+	        return _react2['default'].createElement(
+	          _beeButtonGroup2['default'],
+	          null,
+	          btnGroupItems
+	        );
+	      }
+	    };
+	
+	    _this.cancelPaste = function () {
+	      _this.setState({
+	        inPaste: false
 	      });
-	      return _react2['default'].createElement(
-	        _beeButtonGroup2['default'],
-	        null,
-	        btnGroupItems
-	      );
 	    };
 	
 	    var defaultActiveKey = props.tabs && props.tabs.length && props.tabs[0].key || '';
 	    _this.state = {
 	      showMore: props.showMore,
 	      isMaximized: props.isMaximized,
-	      activeKey: defaultActiveKey
+	      activeKey: defaultActiveKey,
+	      inPaste: false,
+	      hasSelectedRows: props.selectedList.length > 0 ? true : false
 	    };
 	    return _this;
 	  }
@@ -89667,10 +89757,12 @@
 	    var _props = this.props,
 	        oldShowMore = _props.showMore,
 	        oldActiveKey = _props.activeKey,
-	        oldIsMaximized = _props.isMaximized;
+	        oldIsMaximized = _props.isMaximized,
+	        oldSelectedList = _props.selectedList;
 	    var newShowMore = nextProps.showMore,
 	        newActiveKey = nextProps.activeKey,
-	        newIsMaximized = nextProps.isMaximized;
+	        newIsMaximized = nextProps.isMaximized,
+	        newSelectedList = nextProps.selectedList;
 	
 	    if (newShowMore !== oldShowMore) {
 	      this.setState({
@@ -89687,6 +89779,11 @@
 	        isMaximized: newIsMaximized
 	      });
 	    }
+	    if (newSelectedList !== oldSelectedList) {
+	      this.setState({
+	        hasSelectedRows: newSelectedList.length > 0 ? true : false
+	      });
+	    }
 	  };
 	
 	  /**
@@ -89696,6 +89793,9 @@
 	    var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 	    var onHeadAngleToggle = this.props.onHeadAngleToggle;
 	
+	    this.setState({
+	      showMore: flag
+	    });
 	    onHeadAngleToggle && onHeadAngleToggle(flag);
 	  };
 	
@@ -89715,11 +89815,11 @@
 	
 	
 	  //根据 operation 的值选择相应的事件处理程序
-	  FoldableTabs.prototype.handleClickByOptType = function handleClickByOptType(operation) {
+	  FoldableTabs.prototype.handleClickByOptType = function handleClickByOptType(eve, operation) {
+	    eve.stopPropagation();
 	    var _props2 = this.props,
 	        addRow = _props2.addRow,
-	        delRow = _props2.delRow,
-	        pasteRow = _props2.pasteRow;
+	        delRow = _props2.delRow;
 	
 	    switch (operation) {
 	      case 'addRow':
@@ -89732,12 +89832,16 @@
 	        break;
 	      case 'pasteRow':
 	        //复制粘贴行
-	        pasteRow();
+	        this.setState({
+	          inPaste: true
+	        });
 	        break;
 	      default:
 	        break;
 	    }
 	  };
+	  //取消复制行操作
+	
 	
 	  FoldableTabs.prototype.render = function render() {
 	    var _this2 = this;
@@ -89758,6 +89862,7 @@
 	        showMore = _state.showMore,
 	        activeKey = _state.activeKey,
 	        isMaximized = _state.isMaximized;
+	    // console.log('showMore',showMore);
 	
 	    var visibleRows = rows.filter(function (item) {
 	      return item.status !== '3';
@@ -89776,7 +89881,6 @@
 	        height = lightTabs.getBoundingClientRect().height;
 	      }
 	    }
-	    console.log('isMaximized: ', isMaximized);
 	    return _react2['default'].createElement(
 	      'section',
 	      { className: 'light-tabs' },
@@ -89913,7 +90017,6 @@
 	          'footer',
 	          { id: 'js_lightTabs_' + moduleId, className: 'light-tabs-content', style: isShow },
 	          tabs.map(function (item, i) {
-	            console.log(item.key, activeKey, '=====');
 	            if (item.key === activeKey) {
 	              return item.render();
 	            }
@@ -100189,12 +100292,14 @@
 	var propTypes = {
 	    moduleId: PropTypes.string, //meta的id号
 	    config: PropTypes.object, //表格配置项
-	    isEdit: PropTypes.bool //true为编辑态
+	    isEdit: PropTypes.bool, //true为编辑态
+	    getSelectedDataFunc: PropTypes.func //勾选行时触发的回调
 	};
 	
 	var defaultProps = {
 	    config: {},
-	    isEdit: false
+	    isEdit: false,
+	    getSelectedDataFunc: function getSelectedDataFunc() {}
 	
 	    // 页面级别配置项
 	};var _DEFAULT = {
@@ -100274,11 +100379,10 @@
 	                    };
 	                });
 	                // 规整数据
-	                _this._reviseRows(rows);
+	                _this._reviseRows(rows, 'add');
 	                rows.splice(index, 0, newRow);
 	                myCardTable.focusIndex = -1;
 	                // console.log('rows',rows)
-	                // debugger
 	
 	                // 控制增行后的行定位
 	                myCardTable.focusIndex = index === 0 ? index : index + 1; //修改tab切换不到新增行问题renyjk
@@ -100291,7 +100395,8 @@
 	        _this.delRowByRowId = function (rowid, callback) {
 	            var _this$state = _this.state,
 	                myCardTable = _this$state.table,
-	                selectedList = _this$state.selectedList;
+	                _this$state$selectedL = _this$state.selectedList,
+	                selectedList = _this$state$selectedL === undefined ? [] : _this$state$selectedL;
 	
 	            var rows = myCardTable.rows,
 	                selectedPks = [];
@@ -100318,18 +100423,16 @@
 	                    });
 	                    _this.setState({
 	                        table: myCardTable
-	                    }, function () {
-	                        // _selectedChangeFn.call(this, tableId)
-	                        callback && typeof callback === 'function' && callback.call(_this, rowid, myCardTable);
 	                    });
 	                } else {
 	                    //删除多行
-	                    rows.map(function (item, index) {
+	                    rows.forEach(function (item, index) {
 	                        if (selectedPks.indexOf(item.rowid) > -1) {
 	                            var stat = item.status;
 	                            if (stat == _config2['default'].status.edit || stat == _config2['default'].status.origin) {
 	                                item.status = _config2['default'].status['delete'];
-	                                rows.push(item);
+	                                // rows.push(item);
+	                                // rows.splice(index, 1);
 	                            }
 	                            // rows.splice(index, 1);
 	                            // 删除自动选中到下一个行的逻辑 , 与快捷键的的删除逻辑冲突 by bbqin
@@ -100338,8 +100441,9 @@
 	                            }
 	                        }
 	                    });
-	                    console.log('rows', rows);
-	                    debugger;
+	                    // 规整数据
+	                    _this._reviseRows(rows, 'delete');
+	                    // console.log('删除后rows: ',rows);
 	                    _this.setState({
 	                        table: myCardTable
 	                    });
@@ -100347,12 +100451,91 @@
 	            }
 	        };
 	
-	        _this.pasteRow = function () {};
+	        _this.pasteRow = function (index, keys) {
+	            var _this$state2 = _this.state,
+	                myCardTable = _this$state2.table,
+	                _this$state2$selected = _this$state2.selectedList,
+	                selectedList = _this$state2$selected === undefined ? [] : _this$state2$selected;
 	
-	        _this._reviseRows = function (rows) {
+	            var rows = myCardTable.rows,
+	                selectedIndexs = [],
+	                allpks = [];
+	            rows.forEach(function (item) {
+	                if (allpks.indexOf(item.rowid) < 0) {
+	                    allpks.push(item.rowid);
+	                }
+	            });
+	            selectedList.forEach(function (item) {
+	                var index = allpks.indexOf(item.rowid);
+	                selectedIndexs.push(index);
+	            });
+	            if ((0, _utils.isUndefined)(index)) {
+	                _this.pasteRowToEnd(myCardTable, rows, selectedIndexs);
+	                return;
+	            }
+	            var copy = JSON.parse(JSON.stringify(rows[index]));
+	            var allRows = (0, _utils.isArray)(rows) && rows.filter(function (item) {
+	                return item.status != _config2['default'].status['delete'];
+	            }).length || 0; // 总行数大于等于1
+	            var numFlag = (0, _utils.isUndefined)(index) || !isNaN(Number.parseInt(index, 10)) && index >= 0 && index <= allRows - 1;
+	            if (numFlag && allRows) {
+	                var temp = {
+	                    rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+	                    status: _config2['default'].status.add
+	                };
+	                if (keys && Array.isArray(keys)) {
+	                    keys.forEach(function (item) {
+	                        copy.rowid = (0, _utils.getRandom)();
+	                        var defautVal = {
+	                            display: null,
+	                            value: null
+	                        };
+	                        _extends(copy.values[item], defautVal);
+	                    });
+	                }
+	                var newRow = _extends({}, copy, temp);
+	                var values = newRow.values;
+	                var pasteIndex = ++index;
+	                rows.splice(pasteIndex, 0, newRow);
+	                // 给新复制的行存旧值
+	                // Object.keys(values).forEach(value => {
+	                // const OldVal = values[value] ? values[value].value : null;
+	                // saveChangedRowsOldValue.call(this, tableId, pasteIndex, value, OldVal);
+	                // });
+	                _this.setState({
+	                    table: myCardTable
+	                });
+	            }
+	        };
+	
+	        _this.pasteRowToEnd = function (myCardTable, rows, selectedIndexs) {
+	            var allRows = (0, _utils.isArray)(rows) && rows.filter(function (item) {
+	                return item.status != _config2['default'].status['delete'];
+	            }).length || 0; // 总行数大于等于1
+	            var temp = {
+	                rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+	                status: _config2['default'].status.add,
+	                _checked: false
+	            };
+	            selectedIndexs.forEach(function (_index) {
+	                var copy = JSON.parse(JSON.stringify(rows[_index]));
+	                copy.rowid = (0, _utils.getRandom)();
+	                var newRow = _extends({}, copy, temp);
+	                rows.splice(allRows, 0, newRow);
+	            });
+	            // console.log('rows',rows);
+	            _this.setState({
+	                table: myCardTable
+	            });
+	        };
+	
+	        _this._reviseRows = function (rows, operation) {
 	            rows.map(function (item, index) {
 	                if (item.status == _config2['default'].status['delete']) {
 	                    rows.push(item);
+	                    rows.splice(index, 1);
+	                }
+	                if (operation === 'delete' && item.status == _config2['default'].status.add) {
 	                    rows.splice(index, 1);
 	                }
 	            });
@@ -100361,6 +100544,7 @@
 	
 	        _this.getSelectedDataFunc = function (selectedList, record, index) {
 	            var myCardTable = _this.state.table;
+	            var getSelectedDataFunc = _this.props.getSelectedDataFunc;
 	
 	            var rows = myCardTable.rows;
 	            // 如果在回调中增加setState逻辑，需要同步data中的_checked属性。即下面的代码
@@ -100377,6 +100561,7 @@
 	                table: myCardTable,
 	                selectedList: selectedList
 	            });
+	            getSelectedDataFunc(selectedList);
 	        };
 	
 	        var ComplexTable = (0, _sort2['default'])(_nc_Table2['default'], _beeIcon2['default']);
@@ -100418,9 +100603,12 @@
 	
 	
 	    EditTable.prototype.componentDidMount = function componentDidMount() {
-	        var onRef = this.props.onRef;
+	        var _props = this.props,
+	            onRef = _props.onRef,
+	            parentFoo = _props.parentFoo;
 	
 	        onRef && onRef(this);
+	        parentFoo && parentFoo(this.addRow, this.delRowByRowId, this.pasteRow);
 	    };
 	
 	    EditTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -100463,10 +100651,18 @@
 	     * @param  keys      不去复制的键值
 	     */
 	
+	    /**
+	     * 粘贴至末尾
+	     * @param myCardTable
+	     * @param rows 表行数据
+	     * @param selectedIndexs 已选行的 index 集合
+	     */
+	
 	
 	    /**
 	     * 修正rows  把删除项永远放在最后 （为了保证渲染层与数据层 index的同一性）
 	     * @param  rows   表内数据行
+	     * @param  operation  数据操作：add、delete、paste
 	     */
 	
 	
@@ -100795,7 +100991,7 @@
 	                    {
 	                        className: (_DEFAULT.isMultipleHead ? ' multiple-head-border ' : '') + ' ' + (rowsHeight <= bodyHeight ? 'clear-right-scrollBar' : '')
 	                    },
-	                    _react2['default'].createElement(ComplexTable, _extends({
+	                    _react2['default'].createElement(ComplexTable, _extends({}, config, {
 	                        rowKey: props.rowKey ? props.rowKey : "rowid",
 	                        height: config && !config.multipleRowCell && rowHeight,
 	                        headerHeight: _DEFAULT.isMultipleHead ? undefined : 30
@@ -100807,7 +101003,7 @@
 	                        columns: columns,
 	                        currentIndex: focusIndex,
 	                        isDrag: config && config.isDrag,
-	                        bodyStyle: _extends({}, tableHight),
+	                        bodyStyle: { minHeight: '40px' },
 	                        useFixedHeader: true,
 	                        scroll: {
 	                            x: true,
@@ -100838,7 +101034,7 @@
 	                        }
 	                        // 是否取消滚动分页
 	                        , lazyload: config.lazyload
-	                    }, sort, config))
+	                    }, sort))
 	                ),
 	                config && config.showPagination && meta.status === 'browse' && _react2['default'].createElement(
 	                    'div',
@@ -101764,7 +101960,7 @@
 	        if (!isArr || isArr && !(0, _utils.isObj)(this.tableChangedRowsOldValue[moduleId][index])) {
 	            return null;
 	        }
-	        return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
+	        // return this.tableChangedRowsOldValue[moduleId][index][attrcode] || null;
 	    };
 	
 	    // 删除旧值函数
@@ -102144,7 +102340,7 @@
 	                                });
 	                            }
 	                            var OldVal = isMul ? valueChange.length > 0 ? valueChange[0] : null : item.itemtype === 'refer' ? foolValue.vlaue == '' ? null : foolValue.vlaue : valueChange;
-	                            _this3.saveChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode, OldVal);
+	                            // this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, OldVal);
 	                        }
 	                    },
 	                    onOpenChange: function onOpenChange(val) {
@@ -102413,7 +102609,7 @@
 	                                        value: oldValue ? item.itemtype === 'number' ? (0, _utils.formatAcuracy)(oldValue, scaleData) : oldValue : ''
 	                                    }
 	                                });
-	                                _this3.saveChangedRowsOldValue.call(_this3, moduleId, index, item.attrcode, val);
+	                                // this.saveChangedRowsOldValue.call(this, moduleId, index, item.attrcode, val);
 	                                if (item.itemtype === 'residtxt') {
 	                                    if (model == 'open') {
 	                                        // 当侧拉的情况下
@@ -103361,16 +103557,31 @@
 	    items: []
 	}];
 	
+	//获取表格数据时返回的回调
+	function getTableRows(data) {
+	    console.log('保存数据', data);
+	}
+	
 	var Demo2 = function (_Component) {
 	    _inherits(Demo2, _Component);
 	
 	    function Demo2() {
+	        var _temp, _this, _ret;
+	
 	        _classCallCheck(this, Demo2);
 	
-	        return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	            args[_key] = arguments[_key];
+	        }
+	
+	        return _ret = (_temp = (_this = _possibleConstructorReturn(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.handleClick = function () {
+	            _this.body.getTableRows();
+	        }, _temp), _possibleConstructorReturn(_this, _ret);
 	    }
 	
 	    Demo2.prototype.render = function render() {
+	        var _this2 = this;
+	
 	        var tableHead = [{
 	            bordered: true,
 	            itemtype: 1, //控件类型，0为Button，1为ButtonGroup
@@ -103385,20 +103596,33 @@
 	                operation: 'pasteRow'
 	            }]
 	        }];
-	        return _react2['default'].createElement(CardTable, {
-	            columns: columns,
-	            data: data,
-	            moduleId: 'body',
-	            tabLists: tabLists,
-	            showMore: true,
-	            showMax: true,
-	            showCheck: true //是否开启多选功能
-	            , hideSwitch: function hideSwitch() {
-	                return false;
-	            } //表格
-	            , tableHead: tableHead,
-	            isEdit: true
-	        });
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(CardTable, {
+	                columns: columns,
+	                data: data,
+	                moduleId: 'body',
+	                tabLists: tabLists,
+	                showMore: true,
+	                showMax: true,
+	                showCheck: true //是否开启多选功能
+	                , hideSwitch: function hideSwitch() {
+	                    return false;
+	                } //表格
+	                , tableHead: tableHead,
+	                isEdit: true,
+	                onRef: function onRef(ref) {
+	                    _this2.body = ref;
+	                } //获取EditTable组件实例
+	                , getTableRows: getTableRows
+	            }),
+	            _react2['default'].createElement(
+	                'button',
+	                { onClick: this.handleClick, style: { marginTop: '30px' } },
+	                'aaa'
+	            )
+	        );
 	    };
 	
 	    return Demo2;

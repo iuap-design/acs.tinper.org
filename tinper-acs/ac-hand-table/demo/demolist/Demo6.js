@@ -211,6 +211,8 @@ class Demo6 extends Component {
 
             ]}
 
+            width="100%"
+            height="158px"
           />
 
         </div>

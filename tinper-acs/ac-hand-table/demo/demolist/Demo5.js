@@ -166,7 +166,7 @@ class Demo5 extends Component {
         </div>
 
 
-        <div className="min-table">
+
           <AcHandTable
             id="example5" // 组件id
             onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
@@ -202,9 +202,9 @@ class Demo5 extends Component {
               return { 'background-color': bgColor };
             }}
 
-
+            width="100%"
+            height="130px"
           />
-        </div>
 
       </div>
 

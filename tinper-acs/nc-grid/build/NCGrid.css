@@ -3858,6 +3858,8 @@ ul {
   height: 40px;
   padding-left: 12px;
   padding-right: 20px; }
+  .light-tabs-header .tab-hide {
+    display: none; }
   .light-tabs-header .light-tabs-angle {
     height: 100%;
     line-height: 20px;
@@ -3895,6 +3897,8 @@ ul {
     border: 1px solid #d0d0d0; }
   .light-tabs-header .tabs-config {
     line-height: 38px; }
+    .light-tabs-header .tabs-config .in-paste-status .u-button {
+      margin-left: 8px; }
 
 .card-table-max.scaleFromOrigin {
   visibility: visible;

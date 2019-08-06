@@ -10,7 +10,7 @@ import Icon from 'bee-icon';
 import Select from 'bee-select';
 import Checkbox from 'bee-checkbox';
 import Cell from './Cell';
-import { isFunction,checkHasIndex,deepClone,isWrong,isObj,typeFormat,isArray,isUndefined } from './utils';
+import { isFunction,checkHasIndex,deepClone,isWrong,isObj,typeFormat,isArray,isUndefined,getRandom } from './utils';
 import sort from 'bee-table/build/lib/sort.js';
 import multiSelect from "bee-table/build/lib/multiSelect.js";
 import CONFIG from './config';
@@ -19,11 +19,13 @@ const propTypes = {
     moduleId: PropTypes.string, //meta的id号
     config: PropTypes.object, //表格配置项
     isEdit: PropTypes.bool, //true为编辑态
+    getSelectedDataFunc: PropTypes.func, //勾选行时触发的回调
 }
 
 const defaultProps = {
     config: {},
-    isEdit: false
+    isEdit: false,
+    getSelectedDataFunc: () => {}
 }
 
 // 页面级别配置项
@@ -73,8 +75,9 @@ class EditTable extends Component {
     }
     //为了回传Table的行数据
     componentDidMount(){
-        let {onRef} = this.props;
-        onRef && onRef(this)
+        let {onRef,parentFoo} = this.props;
+        onRef && onRef(this);
+        parentFoo && parentFoo(this.addRow, this.delRowByRowId ,this.pasteRow);
     }
 
     componentWillReceiveProps(nextProps){
@@ -83,7 +86,7 @@ class EditTable extends Component {
         let {table} = this.state;
         if(newData !== oldData && newData.length !== oldData.length){
             this.setState({
-                table: Object.assign(...table,{rows: newData})
+                table: Object.assign(...table, {rows: newData})
             })
         }
     }
@@ -142,11 +145,10 @@ class EditTable extends Component {
                     };
                 });
                 // 规整数据
-                this._reviseRows(rows);
+                this._reviseRows(rows, 'add');
                 rows.splice(index, 0, newRow);
                 myCardTable.focusIndex = -1;
                 // console.log('rows',rows)
-                // debugger
 
                 // 控制增行后的行定位
                 myCardTable.focusIndex = index === 0 ? index : index + 1; //修改tab切换不到新增行问题renyjk
@@ -166,7 +168,7 @@ class EditTable extends Component {
      * @param  rowid     删除的行rowId
      */
     delRowByRowId = (rowid, callback) => {
-        const { table:myCardTable, selectedList } = this.state;
+        const { table:myCardTable, selectedList=[] } = this.state;
         let rows = myCardTable.rows, 
             selectedPks = [];
         selectedList.forEach((item) => {
@@ -189,34 +191,28 @@ class EditTable extends Component {
                         }
                     }
                 });
-                this.setState(
-                    {
+                this.setState({
                     table: myCardTable
-                    },
-                    () => {
-                    // _selectedChangeFn.call(this, tableId)
-                    callback &&
-                        typeof callback === 'function' &&
-                        callback.call(this, rowid, myCardTable);
-                    }
-                );
+                });
             } else { //删除多行
-                rows.map((item, index) => {
+                rows.forEach((item, index) => {
                     if (selectedPks.indexOf(item.rowid) > -1) {
                         let stat = item.status;
                         if (stat == CONFIG.status.edit || stat == CONFIG.status.origin) {
                             item.status = CONFIG.status.delete;
-                            rows.push(item);
+                            // rows.push(item);
+                            // rows.splice(index, 1);
                         }
-                        rows.splice(index, 1);
+                        // rows.splice(index, 1);
                         // 删除自动选中到下一个行的逻辑 , 与快捷键的的删除逻辑冲突 by bbqin
                         if (index >= 0 && index == myCardTable.currentIndex) {
                             myCardTable.currentIndex = -1;
                         }
                     }
                 });
-                console.log('rows',rows);
-                debugger
+                // 规整数据
+                this._reviseRows(rows, 'delete');
+                // console.log('删除后rows: ',rows);
                 this.setState({
                     table: myCardTable
                 });
@@ -229,18 +225,93 @@ class EditTable extends Component {
      * @param  index     行序号index
      * @param  keys      不去复制的键值
      */
-    pasteRow = () => {
-        
+    pasteRow = (index, keys) => {
+        let { table:myCardTable, selectedList = [] } = this.state;
+        let rows = myCardTable.rows,
+            selectedIndexs = [],
+            allpks = [];
+        rows.forEach((item)=>{
+            if(allpks.indexOf(item.rowid) < 0){
+                allpks.push(item.rowid);
+            }
+        })
+        selectedList.forEach((item) => {
+            let index = allpks.indexOf(item.rowid);
+            selectedIndexs.push(index)
+        })
+        if(isUndefined(index)){
+            this.pasteRowToEnd(myCardTable, rows, selectedIndexs);
+            return
+        }
+        let copy = JSON.parse(JSON.stringify(rows[index]));
+        let allRows = (isArray(rows) && rows.filter(item => item.status != CONFIG.status.delete).length) || 0; // 总行数大于等于1
+        let numFlag = isUndefined(index) || (!isNaN(Number.parseInt(index, 10)) && index >= 0 && index <= allRows - 1);
+        if (numFlag && allRows) {
+            let temp = {
+                rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+                status: CONFIG.status.add
+            };
+            if (keys && Array.isArray(keys)) {
+                keys.forEach(item => {
+                    copy.rowid = getRandom();
+                    const defautVal = {
+                        display: null,
+                        value: null
+                    };
+                    Object.assign(copy.values[item], defautVal);
+                });
+            }
+            const newRow = Object.assign({}, copy, temp);
+            const values = newRow.values;
+            const pasteIndex = ++index;
+            rows.splice(pasteIndex, 0, newRow);
+            // 给新复制的行存旧值
+            // Object.keys(values).forEach(value => {
+                // const OldVal = values[value] ? values[value].value : null;
+                // saveChangedRowsOldValue.call(this, tableId, pasteIndex, value, OldVal);
+            // });
+            this.setState({
+                table: myCardTable
+            });
+        }
+    }
+    /**
+     * 粘贴至末尾
+     * @param myCardTable
+     * @param rows 表行数据
+     * @param selectedIndexs 已选行的 index 集合
+     */
+    pasteRowToEnd = (myCardTable, rows, selectedIndexs) => {
+        let allRows = (isArray(rows) && rows.filter(item => item.status != CONFIG.status.delete).length) || 0; // 总行数大于等于1
+        let temp = {
+            rowid: String(new Date().getTime()).slice(-5) + Math.random().toString(12),
+            status: CONFIG.status.add,
+            _checked: false
+        };
+        selectedIndexs.forEach((_index) => {
+            let copy = JSON.parse(JSON.stringify(rows[_index]));
+            copy.rowid = getRandom();
+            const newRow = Object.assign({}, copy, temp);
+            rows.splice(allRows, 0, newRow);
+        });
+        // console.log('rows',rows);
+        this.setState({
+            table: myCardTable
+        });
     }
 
     /**
      * 修正rows  把删除项永远放在最后 （为了保证渲染层与数据层 index的同一性）
      * @param  rows   表内数据行
+     * @param  operation  数据操作：add、delete、paste
      */
-    _reviseRows = (rows) => {
+    _reviseRows = (rows, operation) => {
         rows.map((item, index) => {
             if (item.status == CONFIG.status.delete) {
                 rows.push(item);
+                rows.splice(index, 1);
+            }
+            if(operation === 'delete' && item.status == CONFIG.status.add) {
                 rows.splice(index, 1);
             }
         });
@@ -263,6 +334,7 @@ class EditTable extends Component {
      */
     getSelectedDataFunc = (selectedList,record,index) => {
         const { table:myCardTable } = this.state;
+        let { getSelectedDataFunc } = this.props;
         let rows = myCardTable.rows;
         // 如果在回调中增加setState逻辑，需要同步data中的_checked属性。即下面的代码
         const allChecked = selectedList.length == 0?false:true;
@@ -278,6 +350,7 @@ class EditTable extends Component {
             table: myCardTable,
             selectedList: selectedList
         })
+        getSelectedDataFunc(selectedList);
     };
 
     /**
@@ -593,6 +666,7 @@ class EditTable extends Component {
                     }`}
                 >
                     <ComplexTable
+                    {...config}
                     rowKey={props.rowKey ? props.rowKey : "rowid"}
                     height={config && !config.multipleRowCell && rowHeight}
                     headerHeight={_DEFAULT.isMultipleHead ? undefined : 30}
@@ -604,7 +678,7 @@ class EditTable extends Component {
                     columns={columns}
                     currentIndex={focusIndex}
                     isDrag={config && config.isDrag}
-                    bodyStyle={{ ...tableHight }}
+                    bodyStyle={{ minHeight: '40px' }}
                     useFixedHeader={true}
                     scroll={{
                         x: true,
@@ -634,7 +708,6 @@ class EditTable extends Component {
                     // 是否取消滚动分页
                     lazyload={config.lazyload}
                     {...sort}
-                    {...config}
                     />
                 </div>
         

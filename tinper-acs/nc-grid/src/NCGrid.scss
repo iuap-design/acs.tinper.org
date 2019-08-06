@@ -657,6 +657,9 @@ $t-bgcolor: #f5f5f5;
   height: 40px;
   padding-left: 12px;
   padding-right: 20px;
+  .tab-hide{
+    display: none;
+  }
   .light-tabs-angle {
     height: 100%;
     line-height: 20px;
@@ -704,6 +707,9 @@ $t-bgcolor: #f5f5f5;
   }
   .tabs-config {
     line-height: 38px;
+    .in-paste-status .u-button {
+      margin-left: 8px;
+    }
   }
 }
 

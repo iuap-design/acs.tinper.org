@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import FoldableTabs from './FoldableTabs';
-import SimpleTable from './SimpleTable';
 import EditTable from './EditTable';
-import {checkHasKey} from './utils';
 
 const propTypes = {
     showMore: PropTypes.bool, //是否展开详细信息
@@ -16,7 +14,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-    showMore: true,
+    showMore: false,
     showMax: false,
     moduleId: '',
     config: {},
@@ -28,12 +26,17 @@ const defaultProps = {
 class CardTable extends Component {
     constructor(props){
         super(props);
+        let defaultShown = props.showMore || false;
         this.state = {
             status: 'browse', //browse(浏览态)、edit(编辑态)
             activeKey: '', //标识当前卡表的选中项
-            showMore: props.showMore, //卡表是否展开
+            showMore: defaultShown, //卡表是否展开
             isMaximized: false, //是否最大化显示
+            selectedList: [], //已勾选的行数据集合
         }
+        this.addRowFoo = () => {}
+        this.delRowFoo = () => {}
+        this.pasteRowFoo = () => {}
     }
 
     //activeKey 改变时触发的回调
@@ -46,8 +49,10 @@ class CardTable extends Component {
     }
 
     //卡表收起/展开状态改变时的回调
-    onHeadAngleToggle = (showMore) => {
-        this.setState({ showMore });
+    onHeadAngleToggle = (flag) => {
+        this.setState({ 
+            showMore: flag
+        });
     }
 
     //最大化多表中表格
@@ -56,16 +61,32 @@ class CardTable extends Component {
     }
     //调用editTable实例中的方法
     addRow = () => {
-        this.editTable.addRow();
+        this.addRowFoo();
     }
     delRow = () => {
-        this.editTable.delRowByRowId();
+        this.delRowFoo();
     }
     pasteRow = () => {
-        this.editTable.pasteRow();
+        this.pasteRowFoo();
+    }
+    
+    parentFoo = (addRow, delRow ,pasteRow) => {
+        this.addRowFoo = addRow;
+        this.delRowFoo = delRow;
+        this.pasteRowFoo = pasteRow;
+    }
+    /**
+     * 勾选表行时触发的回调
+     * @param selectedList 已勾选的行数据集合
+     */
+    getSelectedDataFunc = (selectedList) => {
+        this.setState({
+            selectedList: selectedList
+        })
     }
 
     render(){
+        let self = this;
         let {
             showMax,
             moduleId,
@@ -78,8 +99,7 @@ class CardTable extends Component {
             ...config
         } = this.props;
 
-        let { status,showMore,activeKey,isMaximized } = this.state;
-
+        let { status,showMore,activeKey,isMaximized,selectedList } = this.state;
         let tabsOther = tabLists.map((item, index) => {
             let { code, items, name } = item;
             // let curColumn = columns[code];
@@ -92,12 +112,14 @@ class CardTable extends Component {
                 label: name,
                 render: () => (
                     <EditTable
+                    {...config}
                     columns={columns}
                     data={dataRows}
                     moduleId={moduleId}
                     isEdit={isEdit}
-                    onRef={(ref) => { this.editTable = ref }} //获取EditTable组件实例
-                    {...config}
+                    // onRef={(ref) => { self[moduleId] = ref }} //获取EditTable组件实例
+                    getSelectedDataFunc={this.getSelectedDataFunc}
+                    parentFoo={this.parentFoo}
                     />
                 )
             };
@@ -134,6 +156,7 @@ class CardTable extends Component {
                         addRow={this.addRow}
                         delRow={this.delRow}
                         pasteRow={this.pasteRow}
+                        selectedList={selectedList}
                         {...config}
                     />
                 ) : null}
@@ -211,6 +234,7 @@ class CardTable extends Component {
                     addRow={this.addRow}
                     delRow={this.delRow}
                     pasteRow={this.pasteRow}
+                    selectedList={selectedList}
                     {...config}
                 />
                 ) : null}

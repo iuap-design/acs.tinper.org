@@ -61,6 +61,10 @@ const data = [
   },
 ];
 
+const btn_style = {
+  "marginBottom": "10px"
+}
+
 
 class Demo2 extends Component {
   constructor(props) {
@@ -91,8 +95,8 @@ class Demo2 extends Component {
       dblClick: (rowData, rowNum, value) => {
         console.log('dblClick,rowData, rowNum, value', rowData, rowNum, value);
       },
-      onChange: (rowData, rowNum,rowNumList, rowDataList) => { // 单元格改变回调
-        console.log('rowData, rowNum,rowNumList, rowDataList', rowData, rowNum,rowNumList, rowDataList);
+      onChange: (rowData, rowNum, rowNumList, rowDataList) => { // 单元格改变回调
+        console.log('rowData, rowNum,rowNumList, rowDataList', rowData, rowNum, rowNumList, rowDataList);
         // this.setState({ changeRowNum: rowNum });
       },
 
@@ -126,24 +130,24 @@ class Demo2 extends Component {
     {
       data: 'money',
       type: 'numeric', // 资薪
-      // allowInvalid: false,
-      // numericFormat: {
-      //   pattern: '$0,0.00',
-      //   culture: 'en-US' // this is the default culture, set up for USD
-      // },
-    },
-    {
-      data: 'custom1',
-      renderer: (instance, td, row, col, prop, value, cellProperties) => {
-        // 插入内容
-        td.innerHTML = '自定义';
-        return td;
+      allowInvalid: false,
+      numericFormat: {
+        pattern: '$0,0.00',
+        culture: 'en-US' // this is the default culture, set up for USD
       },
-      dblClick: (rowData, rowNum, value) => {
-        console.log('dblClick,rowData, rowNum, value', rowData, rowNum, value);
-      },
-      // readOnly: true,
     },
+    // {
+    //   data: 'custom1',
+    //   renderer: (instance, td, row, col, prop, value, cellProperties) => {
+    //     // 插入内容
+    //     td.innerHTML = '自定义';
+    //     return td;
+    //   },
+    //   dblClick: (rowData, rowNum, value) => {
+    //     console.log('dblClick,rowData, rowNum, value', rowData, rowNum, value);
+    //   },
+    //   // readOnly: true,
+    // },
 
   ];
 
@@ -253,44 +257,45 @@ class Demo2 extends Component {
       <div className="demoPadding">
 
         <div style={{ marginBottom: '15px' }}>
-          <Button colors="primary" onClick={this.onInsertRowData} size="sm"> 增行 </Button>
-          <Button colors="primary" onClick={this.onUpdateRowData} size="sm">修改行</Button>
-          <Button colors="danger" onClick={this.onDelRowCheck} size="sm">删除选中行</Button>
-          <Button colors="primary" onClick={this.getData} size="sm"> 获取验证数据</Button>
-          <Button colors="primary" onClick={this.getCheckData} size="sm"> 获取选中行 </Button>
-          <Button colors="primary" onClick={this.getUpdateData} size="sm">获取修改行 </Button>
-          <Button colors="primary" onClick={this.getAddRowData} size="sm">获取新增加行</Button>
-          <Button colors="primary" onClick={this.getDelRowData} size="sm">获取删除行</Button>
-          <Button colors="primary" onClick={this.getFormatData} size="sm">格式化数据 </Button>
-          <Button colors="primary" onClick={this.onDownCsv} size="sm">导出csv </Button>
+          <Button colors="primary" style={btn_style} onClick={this.onInsertRowData} size="sm"> 增行 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.onUpdateRowData} size="sm">修改行</Button>
+          <Button colors="danger" style={btn_style} onClick={this.onDelRowCheck} size="sm">删除选中行</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getData} size="sm"> 获取验证数据</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getCheckData} size="sm"> 获取选中行 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.getUpdateData} size="sm">获取修改行 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.getAddRowData} size="sm">获取新增加行</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getDelRowData} size="sm">获取删除行</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getFormatData} size="sm">格式化数据 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.onDownCsv} size="sm">导出csv </Button>
 
-          <Button colors="primary" onClick={this.getSelectData} size="sm">逐行选中数据</Button>
-          <Button colors="primary" onClick={this.onDelRowSelect} size="sm">删除选中行数据</Button>
-
-
+          <Button colors="primary" style={btn_style} onClick={this.getSelectData} size="sm">逐行选中数据</Button>
+          <Button colors="primary" style={btn_style} onClick={this.onDelRowSelect} size="sm">删除选中行数据</Button>
         </div>
 
-        <div className="min-table">
-          <AcHandTable
-            id="example2" // 组件id
-            onRef={(ref) => { // 设置ref属性 调用子组件方法
-              this.child = ref;
-            }}
-            colHeaders={['姓名', '性别', '日期', '资薪', '自定义', '钉耙日期']} // 表格表头
-            data={handData} // 表体数据
-            columns={this.columns} // 列属性设置
-            // 设置行样式
-            rowStyle={this.setStyle}
-            rowKey="id" // 数组对象中唯一id 默认值为'id'
-            csvConfig={{
-              filename: '导出',
-              rowHeaders: true,
-            }}
-            mergeCells // 右键菜单是否开启单元格合并
-            // multiSelect={false} // 关闭多选框
 
-          />
-        </div>
+
+        <AcHandTable
+          id="example2" // 组件id
+          onRef={(ref) => { // 设置ref属性 调用子组件方法
+            this.child = ref;
+          }}
+          colHeaders={['姓名', '性别', '日期', '资薪', '自定义', '钉耙日期']} // 表格表头
+          data={handData} // 表体数据
+          columns={this.columns} // 列属性设置
+          // 设置行样式
+          rowStyle={this.setStyle}
+          rowKey="id" // 数组对象中唯一id 默认值为'id'
+          colWidths={100}
+          csvConfig={{
+            filename: '导出',
+            rowHeaders: true,
+          }}
+          // mergeCells // 右键菜单是否开启单元格合并
+          // multiSelect={false} // 关闭多选框
+          width="100%"
+          height="150px"
+        />
+
 
       </div>
     );
