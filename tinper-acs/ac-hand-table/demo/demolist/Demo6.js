@@ -8,13 +8,13 @@
 
 import React, { Component } from 'react';
 
+import { Button } from 'tinper-bee';
 
 // 引入 AcHandTable 组件
 
 // demo 工程中引入方式
 import AcHandTable from '../../src/index';
 import '../../src/index.less';
-import { Button } from 'tinper-bee';
 
 // 项目中引入方式
 // import AcHandTable from 'ac-hand-table';

@@ -13,7 +13,7 @@ import React, { Component } from 'react';
 
 // demo 工程中引入方式
 import AcHandTable from '../../src/index';
-// import '../../src/index.less';
+import '../../src/index.less';
 
 // 项目中引入方式
 // import AcHandTable from 'ac-hand-table';
@@ -154,8 +154,7 @@ class Demo extends Component {
 
       </div>
 
-    )
-      ;
+    );
   }
 }
 

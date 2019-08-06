@@ -227,7 +227,7 @@
                 "version": "0.0.1",
                 "component": "nc-grid"
             },
-            "Hand表格 HandTable": {
+            "Hand表格 AcHandTable": {
                 "version": "1.0.0",
                 "component": "ac-hand-table"
             }
