@@ -1,6 +1,6 @@
 {
  "name": "ac-city-select",
- "version": "0.0.2",
+ "version": "0.0.5",
  "description": "CitySelect ui component for react",
  "keywords": [
   "react",
@@ -48,6 +48,7 @@
   "bee-button": "latest",
   "bee-clipboard": "^2.0.0",
   "bee-drawer": "0.0.2",
+  "bee-form": "^2.0.11",
   "bee-layout": "latest",
   "bee-panel": "latest",
   "chai": "^3.5.0",

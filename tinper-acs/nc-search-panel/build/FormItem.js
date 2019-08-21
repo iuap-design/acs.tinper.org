@@ -12,9 +12,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _beeTooltip = require('bee-tooltip');
-
-var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
+var _miniStore = require('mini-store');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -61,78 +59,140 @@ var FormItem = function (_Component) {
             }
         };
 
-        _this.onClick = function (str) {
-            var show = _this.state.show;
-            if (show) {} else {
-                if (str) {
-                    _this.setState({
-                        show: true
-                    });
-                }
-            }
-        };
-
         _this.getStr = function () {
             var _this$props2 = _this.props,
                 children = _this$props2.children,
-                label = _this$props2.label;
+                label = _this$props2.label,
+                tooltip = _this$props2.tooltip,
+                store = _this$props2.store;
 
+            var toolTips = store.getState().toolTips;
             var value = children.props.value || '';
             var str = '';
-            if (children.type.displayName == 'InputNumberGroup') {
+            if (tooltip) {
+                str = label + ': ' + tooltip;
+                toolTips[label] = tooltip;
+            } else if (children.type.displayName == 'InputNumberGroup') {
                 //金额区间
                 if (value.length > 0 && (value[0] || value[1])) {
-                    str = label[0] + ': ' + value[0] + ' , ' + label[1] + ': ' + value[1];
+                    str = label[0] + ': ' + (value[0] || '') + ' , ' + label[1] + ': ' + (value[1] || '');
+                    toolTips[label[0]] = value[0] || '';
+                    toolTips[label[1]] = value[1] || '';
+                } else {
+                    delete toolTips[label[0]];
+                    delete toolTips[label[1]];
                 }
             } else if (children.type.displayName == 'acRangepicker') {
                 //日期区间
                 var format = children.props.format;
                 if (value.length > 0) {
                     str = label + ': ' + value[0].format(format) + ' ~ ' + value[1].format(format);
+                    toolTips[label] = value[0].format(format) + ' ~ ' + value[1].format(format);
+                } else {
+                    delete toolTips[label];
                 }
             } else if (value) {
                 str = label + ': ' + value;
+                toolTips[label] = value;
+            } else {
+                delete toolTips[label];
             }
+            store.setState({ toolTips: toolTips });
             return str;
         };
 
+        _this.onMouseEnter = function (str) {
+            var show = _this.state.show;
+            if (!show) {
+                if (str) {
+                    _this.timer && clearTimeout(_this.timer);
+                    _this.timer = setTimeout(function () {
+                        _this.setState({
+                            show: true
+                        }, function () {
+                            var top = _this.str && _this.str.offsetHeight;
+                            if (top) {
+                                _this.setState({
+                                    strTop: '-' + (top + 5) + 'px'
+                                });
+                            }
+                        });
+                    }, 1000);
+                }
+            }
+        };
+
+        _this.mouseLeave = function () {
+            _this.timer && clearTimeout(_this.timer);
+            _this.timer = setTimeout(function () {
+                _this.setState({
+                    show: false
+                });
+            }, 1000);
+        };
+
+        _this.innerMouseEnter = function () {
+            _this.timer && clearTimeout(_this.timer);
+        };
+
+        _this.inneronMouseLeave = function () {
+            _this.timer && clearTimeout(_this.timer);
+            _this.timer = setTimeout(function () {
+                _this.setState({
+                    show: false
+                });
+            }, 2000);
+        };
+
         _this.state = {
-            show: false
+            show: false,
+            strTop: '-28px'
         };
 
         return _this;
     }
+
+    FormItem.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
+        var top = this.str && this.str.offsetHeight;
+        if (top && '-' + top + 'px' != this.state.strTop) {
+            this.setState({
+                strTop: '-' + (top + 5) + 'px'
+            });
+        }
+    };
 
     FormItem.prototype.render = function render() {
         var _this2 = this;
 
         var required = this.props.required;
 
-        var classes = 'nc-search-panel-formitem';
+        var classes = 'ac-search-cn-formitem';
         if (required) classes += ' require';
         var str = this.getStr();
         return _react2["default"].createElement(
             'div',
             { className: classes,
                 onMouseEnter: function onMouseEnter() {
-                    _this2.onClick(str);
-                }, onMouseLeave: function onMouseLeave() {
-                    _this2.setState({
-                        show: false
-                    });
-                } },
+                    _this2.onMouseEnter(str);
+                },
+                onMouseLeave: this.mouseLeave },
             this.state.show ? _react2["default"].createElement(
                 'span',
-                { className: 'nc-search-panel-formitem-value' },
+                { className: 'ac-search-cn-formitem-value',
+                    onMouseEnter: this.innerMouseEnter,
+                    onMouseLeave: this.inneronMouseLeave,
+                    style: { 'top': this.state.strTop } },
                 _react2["default"].createElement(
                     'span',
-                    { className: 'nc-search-panel-formitem-value-text' },
+                    { className: 'ac-search-cn-formitem-value-text ' + (this.state.strTop == '-28px' ? '' : 'top'), ref: function ref(_ref) {
+                            return _this2.str = _ref;
+                        } },
                     str
                 )
             ) : '',
             required ? _react2["default"].createElement(
                 'span',
-                { className: 'nc-search-panel-formitem-mast' },
+                { className: 'ac-search-cn-formitem-mast' },
                 '*'
             ) : '',
             this.getChild()
@@ -146,5 +206,5 @@ var FormItem = function (_Component) {
 
 FormItem.propTypes = propTypes;
 FormItem.defaultProps = defaultProps;
-exports["default"] = FormItem;
+exports["default"] = (0, _miniStore.connect)()(FormItem);
 module.exports = exports['default'];

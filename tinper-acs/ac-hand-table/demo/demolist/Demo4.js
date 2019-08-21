@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 /**
  *
  * @title tinper 组件

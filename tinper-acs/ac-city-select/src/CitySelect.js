@@ -16,26 +16,28 @@ const propTypes = {
     disabled: PropTypes.bool,  //设置组件是否被禁用；
     disabledProvinceArr: PropTypes.array, //设置禁用的省份
     disabledCityArr: PropTypes.array,  //设置禁用的地级市
-    disabledAreaObj: PropTypes.object //设置不可用的区域；
-}
+    disabledAreaObj: PropTypes.object, //设置不可用的区域；
+    allowClear : PropTypes.bool  //设置城市选择框是否可以被清除；
+};
 const defaultProps = {
     defaultValue: zh.defaultValue,
-    value: null,
+    value: zh.defaultValue,
     onChange: () => { },
     provinceData: zh.provinceData,
     lang: 'zh_CN',
     disabled: false,
+    allowClear : false,
     disabledProvinceArr: [],
     disabledCityArr: [],
     disabledAreaObj: null
-}
+};
 class CitySelect extends Component {
     constructor(props) {
         super(props);
         let { provinceData, disabledProvinceArr, disabledCityArr, disabledAreaObj, lang } = props;
-        if (props.lang == 'zh_TW') {
+        if (props.lang === 'zh_TW') {
             provinceData = tw.provinceData;
-        } else if (props.lang == 'en_US') {
+        } else if (props.lang === 'en_US') {
             provinceData = en.provinceData
         }
         this.state = {
@@ -52,11 +54,11 @@ class CitySelect extends Component {
     componentDidMount() {
         let { defaultValue: _defaultValue, value, lang, disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.props;
         let provinceData = this.state.provinceData;
-        if (lang == 'zh_TW') {
+        if (lang === 'zh_TW') {
             provinceData = tw.provinceData;
             _defaultValue = tw.defaultValue;
-        } else if (lang == 'en_US') {
-            provinceData = en.provinceData
+        } else if (lang === 'en_US') {
+            provinceData = en.provinceData;
             _defaultValue = en.defaultValue;
         }
         let defaultValue = value ? value : _defaultValue;
@@ -82,18 +84,39 @@ class CitySelect extends Component {
             areas: areasInitData,
             secondArea,
             provinceData: provinceInitData
-        })
+        });
     }
 
     componentWillReceiveProps(nextProps) {
         if (!nextProps.value) return;
+        const { province:oldProvince, city:oldCity, area:oldArea } = this.props.value;
         const { province, city, area } = nextProps.value;
-        this.setState({
-            province,
-            secondCity: city,
-            secondArea: area
-        })
-        this.handleProvinceChange(province);
+        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+        //     this.setState({
+        //         province,
+        //         secondCity: city,
+        //         secondArea: area
+        //     });
+        //     this.handleProvinceChange(province, city, area);
+        // }
+        if(province !== oldProvince) {
+            this.setState({
+                province,
+            });
+            return this.handleProvinceChange(province, city, area);
+        }
+        if(city !== oldCity) {
+            this.setState({
+                secondCity: city,
+            });
+            return this.handleCityChange(city);
+        }
+        if(area !== oldArea) {
+            this.setState({
+                secondArea: area
+            });
+            this.onSecondAreaChange(area);
+        }
     }
 
     /**
@@ -102,16 +125,16 @@ class CitySelect extends Component {
      * @param disabledCityArr  对应禁用的数据；
      * @param lang 获取语言类型；
      *  */
-    buildInitDataArr = (objoriginalArr, disabledCityArr, lang) => {
-        let newDataArr = JSON.parse(JSON.stringify(objoriginalArr));
-        disabledCityArr = JSON.parse(JSON.stringify(disabledCityArr))
+    buildInitDataArr = (originalArr, disabledCityArr, lang) => {
+        let newDataArr = JSON.parse(JSON.stringify(originalArr));
+        disabledCityArr = JSON.parse(JSON.stringify(disabledCityArr));
         newDataArr.forEach(function (newDataArr, index, obj) {
             newDataArr.disabled = false;
             let provinceName = newDataArr.name;
             if (disabledCityArr.length > 0) {
                 for (let i = 0; i < disabledCityArr.length; i++) {
-                    if (lang == "en_US") {
-                        if (provinceName.toLowerCase() == disabledCityArr[i].toLowerCase()) {
+                    if (lang === "en_US") {
+                        if (provinceName.toLowerCase() === disabledCityArr[i].toLowerCase()) {
                             newDataArr.disabled = true;
                         }
                     } else {
@@ -121,9 +144,9 @@ class CitySelect extends Component {
                     }
                 }
             }
-        })
+        });
         return newDataArr;
-    }
+    };
 
     /**
      * 构建区域所在的基本数据；
@@ -141,7 +164,7 @@ class CitySelect extends Component {
             if (disabledAreaObj != undefined && disabledAreaObj[cityName] != undefined) {
                 let disabledAreaArr = disabledAreaObj[cityName];
                 for (let j = 0; j < disabledAreaArr.length; j++) {
-                    if (lang == "en_US") {
+                    if (lang === "en_US") {
                         if (areaArr[i].toLowerCase() === disabledAreaArr[j].toLowerCase()) {
                             jsonItem.disabled = true;
                         }
@@ -155,7 +178,7 @@ class CitySelect extends Component {
             newArr.push(jsonItem);
         }
         return newArr;
-    }
+    };
 
     getIndex = (type, name, provinceIndex) => {
         let provinceData = this.state.provinceData;
@@ -166,22 +189,28 @@ class CitySelect extends Component {
                 return findIndex(provinceData, function (province) {
                     return province.name === name;
                 });
-                break;
             case 'city':
                 return findIndex(provinceData[provinceI].city, function (city) {
                     return city.name === name;
                 });
-                break;
         }
-    }
-    handleProvinceChange = (value) => {
-        let { provinceData } = this.state;
-        let { disabledCityArr, disabledAreaObj, lang } = this.props;
-        let index = this.getIndex('province', value);
-        let citesInitArr = this.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
-        let areasInitData = this.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-        let city = citesInitArr[0].name;
-        let area = areasInitData[0].name;
+    };
+    handleProvinceChange = (value, cityValue, areaValue) => {
+        value = (value) ? value : '';
+        let city = '',
+            area = '',
+            index = 0,
+            citesInitArr = [],
+            areasInitData = [];
+        if(value !== ''){
+            let { provinceData } = this.state;
+            let { disabledCityArr, disabledAreaObj, lang } = this.props;
+            index = this.getIndex('province', value);
+            citesInitArr = this.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
+            areasInitData = this.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
+            city = cityValue ? cityValue : citesInitArr[0].name;
+            area = areaValue ? areaValue : areasInitData[0].name;
+        }
         this.setState({
             province: value,
             cities: citesInitArr,
@@ -190,38 +219,46 @@ class CitySelect extends Component {
             areas: areasInitData,
             secondArea: area,
         });
-        this.onChange(value, city, area)
-    }
+        this.onChange(value, city, area);
+    };
     handleCityChange = (value) => {
-        let { cities } = this.state;
+        value = (value) ? value : '';
+        let index = '',
+            area = '',
+            areasInitData = [];
+        let { province,cities } = this.state;
         let { disabledAreaObj, lang } = this.props;
-        let index = this.getIndex('city', value);
-        let areasInitData = this.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-        let area = areasInitData[0].name;
+        if(value !== ''){
+            index = this.getIndex('city', value);
+            areasInitData = this.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
+            area = areasInitData[0].name;
+        }
         this.setState({
             secondCity: value,
             areas: areasInitData,
             secondArea: area,
             cityIndex: value
         });
-        this.onChange(undefined, value, area);
-    }
+        this.onChange(province, value, area);
+    };
     onSecondAreaChange = (value) => {
+        value = (value) ? value : '';
+        let { province,secondCity } = this.state;
         this.setState({
             secondArea: value,
         });
-        this.onChange(undefined, undefined, value);
-    }
+        this.onChange(province, secondCity, value);
+    };
     onChange = (province, city, area) => {
         this.props.onChange({
-            province: province || this.state.province,
-            city: city || this.state.secondCity,
+            province: province,
+            city: city,
             area: area
         })
-    }
-
+    };
     render() {
         let { provinceData, cities, areas } = this.state;
+
         const provinceOptions = provinceData.map((province, index) => {
             if (province.disabled) {
                 return (<Option key={province.name} disabled>{province.name}</Option>);
@@ -244,28 +281,30 @@ class CitySelect extends Component {
                 return (<Option key={area.name} >{area.name}</Option>)
             }
         });
-
         return (
             <div className={classNames("u-city-select", this.props.className)}>
                 <Select
                     value={this.state.province}
                     className="province"
                     disabled={this.props.disabled}
-                    onChange={this.handleProvinceChange}>
+                    allowClear = {this.state.province && this.props.allowClear}
+                    onChange={(value) => this.handleProvinceChange(value)}>
                     {provinceOptions}
                 </Select>
                 <Select
                     value={this.state.secondCity}
                     disabled={this.props.disabled}
+                    allowClear = {this.state.secondCity && this.props.allowClear}
                     className="city"
-                    onChange={this.handleCityChange}>
+                    onChange={(value) => this.handleCityChange(value)}>
                     {cityOptions}
                 </Select>
                 <Select
                     value={this.state.secondArea}
                     className="area"
+                    allowClear = {this.state.secondArea && this.props.allowClear}
                     disabled={this.props.disabled}
-                    onChange={this.onSecondAreaChange}>
+                    onChange={(value) => this.onSecondAreaChange(value)}>
                     {areaOptions}
                 </Select>
             </div>

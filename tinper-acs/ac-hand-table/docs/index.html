@@ -39,6 +39,7 @@
     <li class="sidebar-header-3"><a href="#删除通过鼠标选中的行">删除通过鼠标选中的行</a></li>
     <li class="sidebar-header-3"><a href="#导出csv">导出csv</a></li>
     <li class="sidebar-header-3"><a href="#导出模板">导出模板</a></li>
+    <li class="sidebar-header-3"><a href="#动态更新设置">动态更新设置</a></li>
     <li class="sidebar-header-4"><a href="#日期国际化">日期国际化</a></li>
     <li class="sidebar-header-4"><a href="#开发调试">开发调试</a></li>
 </ul>
@@ -98,6 +99,12 @@
 </tr>
 <tr>
 <td style="text-align:left">colWidths</td>
+<td style="text-align:left">列宽</td>
+<td style="text-align:left"><code>number</code> 100或 <code>string</code> &#39;100px&#39;或 <code>array</code> [100,200]或 <code>func</code> (index)=&gt;{}</td>
+<td style="text-align:left">-</td>
+</tr>
+<tr>
+<td style="text-align:left">rowHeights</td>
 <td style="text-align:left">列宽</td>
 <td style="text-align:left"><code>number</code> 100或 <code>string</code> &#39;100px&#39;或 <code>array</code> [100,200]或 <code>func</code> (index)=&gt;{}</td>
 <td style="text-align:left">-</td>
@@ -850,14 +857,17 @@
 <pre class="hljs"><code>onExportHeader = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   <span class="hljs-keyword">this</span>.child.onExportHeader();
 };
-</code></pre><h4 id="日期国际化">日期国际化</h4>
+</code></pre><h3 id="动态更新设置">动态更新设置</h3>
+<pre class="hljs"><code> <span class="hljs-keyword">this</span>.child.updateSettings({
+      <span class="hljs-attr">readOnly</span>: <span class="hljs-literal">false</span>,
+});</code></pre><h4 id="日期国际化">日期国际化</h4>
 <pre class="hljs"><code>i18n: {
       <span class="hljs-attr">previousMonth</span>: <span class="hljs-string">'Previous Month'</span>,
       <span class="hljs-attr">nextMonth</span>: <span class="hljs-string">'Next Month'</span>,
       <span class="hljs-attr">months</span>: [<span class="hljs-string">'一月'</span>, <span class="hljs-string">'二月'</span>, <span class="hljs-string">'三月'</span>, <span class="hljs-string">'四月'</span>, <span class="hljs-string">'五月'</span>, <span class="hljs-string">'六月'</span>, <span class="hljs-string">'七月'</span>, <span class="hljs-string">'八月'</span>, <span class="hljs-string">'九月'</span>, <span class="hljs-string">'十月'</span>, <span class="hljs-string">'十一月'</span>, <span class="hljs-string">'十二月'</span>],
       <span class="hljs-attr">weekdays</span>: [<span class="hljs-string">'日'</span>, <span class="hljs-string">'一'</span>, <span class="hljs-string">'二'</span>, <span class="hljs-string">'三'</span>, <span class="hljs-string">'四'</span>, <span class="hljs-string">'五'</span>, <span class="hljs-string">'六'</span>],
       <span class="hljs-attr">weekdaysShort</span>: [<span class="hljs-string">'日'</span>, <span class="hljs-string">'一'</span>, <span class="hljs-string">'二'</span>, <span class="hljs-string">'三'</span>, <span class="hljs-string">'四'</span>, <span class="hljs-string">'五'</span>, <span class="hljs-string">'六'</span>]
-        },</code></pre><h4 id="开发调试">开发调试</h4>
+      },</code></pre><h4 id="开发调试">开发调试</h4>
 <pre class="hljs"><code>$ npm install -g bee-tools
 $ git <span class="hljs-built_in">clone</span> https://github.com/tinper-acs/ac-hand-table
 $ <span class="hljs-built_in">cd</span> ac-hand-table

@@ -383,7 +383,9 @@ var RefMultipleTableBase = function (_Component) {
         _props$modalProps = _props.modalProps,
         modalProps = _props$modalProps === undefined ? {} : _props$modalProps,
         _props$searchPlacehol = _props.searchPlaceholder,
-        searchPlaceholder = _props$searchPlacehol === undefined ? '搜索' : _props$searchPlacehol;
+        searchPlaceholder = _props$searchPlacehol === undefined ? '搜索' : _props$searchPlacehol,
+        _props$paginationProp = _props.paginationProps,
+        paginationProps = _props$paginationProp === undefined ? {} : _props$paginationProp;
 
     var temp = (0, _stringify2["default"])(tableData);
     var _newTableData = JSON.parse(temp);
@@ -472,7 +474,7 @@ var RefMultipleTableBase = function (_Component) {
           onRowClick: _this.onRowClick,
           rowKey: _this.putRowKey
         }, tableProps)) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(_tableData.length), language: lang }),
-        tableIsSelecting && _react2["default"].createElement(_beePagination2["default"], {
+        tableIsSelecting && _react2["default"].createElement(_beePagination2["default"], _extends({
           first: true,
           last: true,
           prev: true,
@@ -487,7 +489,7 @@ var RefMultipleTableBase = function (_Component) {
           onDataNumSelect: _this.props.dataNumSelect,
           onSelect: _this.props.handlePagination,
           locale: (0, _locale.paginationLocale)(lang)
-        })
+        }, paginationProps))
       ),
       _react2["default"].createElement(
         _beeModal2["default"].Footer,

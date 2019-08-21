@@ -12,6 +12,7 @@ import Icon from 'bee-icon';
 import sort from 'bee-table/build/lib/sort.js';
 import multiSelect from "bee-table/build/lib/multiSelect.js";
 import { getSortColums } from './utils';
+import ExportJsonExcel from "./ExportExcel";
 
 const Option = Select.Option;
 // 最大页码数
@@ -29,13 +30,11 @@ const propTypes = {
     config: PropTypes.object, //Table 配置项
     pageInfo: PropTypes.object, //分页信息
     multiSelect: PropTypes.bool, //多选功能
+    sheetIsRowFilter: PropTypes.bool,
+    sheetName: PropTypes.string,
+    exportData:PropTypes.array,
+    exportData:[],
 }
-// config:{
-//   sort,
-//   height,
-//   onRowClick,
-//   onRowDoubleClick
-// }
 
 const defaultProps = {
     isMultipleHead: false,
@@ -46,7 +45,9 @@ const defaultProps = {
       table_pagination001:'页',
       table_pagination002:'共',
       table_pagination003:'条'
-    }
+    },
+    sheetIsRowFilter: false, //是否要设置行样式，是否遍历
+    sheetName: "sheet", //导出表格的name
 }
 
 class SimpleTable extends Component {
@@ -75,6 +76,79 @@ class SimpleTable extends Component {
     let data = {record, index};
     this.table.currentkInfo = data;
   }
+
+  /**Excel 导出 */
+  exportExcel = () => {
+    let { sheetIsRowFilter, sheetName, sheetHeader: _sheetHeader ,exportData,exportFileName} = this.props;
+    let colsAndTablePros = this.getColumnsAndTablePros();
+    let sheetHeader = [],
+      columnAttr = [],
+      rowAttr = [],
+      sheetFilter = [];
+    colsAndTablePros.columns.forEach(column => { 
+     
+      let _show = false,  _hidden = false;
+      if(column.ifshow != undefined && column.ifshow === false){
+        _show = true;
+      }
+      // _hidden = _exportHidden?column.exportHidden:_show //column.exportHidden // column.excelHidden === false ? true : false
+      _hidden = column.exportHidden?true:_show;
+      if(!_hidden){
+        let _width = String(column.width).indexOf("%") != -1?100:column.width
+        columnAttr.push({
+          wpx: _width
+        });
+        let _cloum = column.exportKey?column.exportKey:column.dataIndex
+        sheetFilter.push(_cloum);
+        sheetHeader.push(column.title);
+      }
+    });
+    if (_sheetHeader) {
+      rowAttr.push(this.getItem(_sheetHeader));
+    }
+    if (sheetIsRowFilter) {
+      this.getRowList(colsAndTablePros.tablePros.data);
+    }
+    let option = {
+      datas: [
+        {
+          fileName:exportFileName,
+          sheetData: exportData,
+          sheetName,
+          sheetFilter,
+          sheetHeader,
+          columnAttr,
+          rowAttr
+        }
+      ]
+    };
+    let toExcel = new ExportJsonExcel(option,exportFileName);
+    toExcel.saveExcel();
+  };
+
+  /**
+   * 获取所有列以及table属性值
+   */
+  getColumnsAndTablePros = () => {
+    const columns = this.props.columns.slice();
+    
+    if (this.dragColsData) {
+      const dragColsKeyArr = Object.keys(this.dragColsData);
+      dragColsKeyArr.some(itemKey => {
+        columns.forEach(col => {
+          if (col.dataIndex == itemKey) {
+            col.width = this.dragColsData[itemKey].width;
+            return true;
+          }
+        });
+      });
+    }
+    const rs = {
+      columns: columns,
+      tablePros: this.props
+    };
+    return rs;
+  };
 
   /**创建表格主体 */
   creatTable() {

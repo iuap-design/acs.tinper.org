@@ -50,8 +50,6 @@ function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaul
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -374,29 +372,28 @@ var EditTable = function (_Component) {
             table: _extends({}, this.state.table, { rows: data })
         });
     };
-    //为了回传Table的行数据
-
 
     EditTable.prototype.componentDidMount = function componentDidMount() {
         var _props = this.props,
             onRef = _props.onRef,
             parentFoo = _props.parentFoo;
+        //为了回传Table的行数据
 
         onRef && onRef(this);
+        //把增行、删行、复制行的方法作为参数，传递到父组件中去，为了让 CardTable 能够调用到 EditTable 中的方法。
         parentFoo && parentFoo(this.addRow, this.delRowByRowId, this.pasteRow);
     };
 
-    EditTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-        var oldData = this.props.data;
-        var newData = nextProps.data;
-        var table = this.state.table;
-
-        if (newData !== oldData && newData.length !== oldData.length) {
-            this.setState({
-                table: _extends.apply(undefined, _toConsumableArray(table).concat([{ rows: newData }]))
-            });
-        }
-    };
+    // componentWillReceiveProps(nextProps){
+    //     let {data: oldData} = this.props;
+    //     let {data: newData} = nextProps;
+    //     let {table} = this.state;
+    //     if(newData !== oldData && newData.length !== oldData.length){
+    //         this.setState({
+    //             table: Object.assign(...table, {rows: newData})
+    //         })
+    //     }
+    // }
 
     //获取表格数据时触发的回调函数
 

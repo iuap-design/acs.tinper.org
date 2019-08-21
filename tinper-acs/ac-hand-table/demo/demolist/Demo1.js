@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 /**
  *
  * @title 基础表格展示
@@ -7,7 +6,6 @@
  */
 
 import React, { Component } from 'react';
-
 
 // 引入 AcHandTable 组件
 

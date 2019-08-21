@@ -343,7 +343,9 @@ var RefTreeBaseUI = function (_Component) {
         _props3$modalProps = _props3.modalProps,
         modalProps = _props3$modalProps === undefined ? {} : _props3$modalProps,
         isLocalSearch = _props3.isLocalSearch,
-        treeNodeDisabledKey = _props3.treeNodeDisabledKey;
+        treeNodeDisabledKey = _props3.treeNodeDisabledKey,
+        _props3$treeProps = _props3.treeProps,
+        treeProps = _props3$treeProps === undefined ? {} : _props3$treeProps;
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
         searchValue = _state.searchValue;
@@ -384,7 +386,7 @@ var RefTreeBaseUI = function (_Component) {
           onChange: this.onSearch,
           language: lang
         }),
-        treeData.length ? _react2["default"].createElement(_RefCoreTree2["default"], {
+        treeData.length ? _react2["default"].createElement(_RefCoreTree2["default"], _extends({}, treeProps, {
           show: Boolean(treeData.length),
           nodeKeys: function nodeKeys(item) {
             return item[valueField];
@@ -405,7 +407,7 @@ var RefTreeBaseUI = function (_Component) {
           loadData: lazyModal ? this.props.onLoadData : null,
           searchValue: isLocalSearch ? searchValue : '',
           treeNodeDisabledKey: treeNodeDisabledKey
-        }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(treeData.length), language: lang })
+        })) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(treeData.length), language: lang })
       ),
       _react2["default"].createElement(
         _beeModal2["default"].Footer,

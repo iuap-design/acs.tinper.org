@@ -26,6 +26,7 @@ import 'ac-hand-table/dist/index.css';
 |language|表格语言|'zh-CN'或 'en-US'或 'zh-TW'|'zh-CN'|
 |rowHeaders|表头信息|`boolean`或 `array`或 `function` (index)=>{}|true|
 |colWidths|列宽|`number` 100或 `string` '100px'或 `array` [100,200]或 `func` (index)=>{}|-|
+|rowHeights|列宽|`number` 100或 `string` '100px'或 `array` [100,200]或 `func` (index)=>{}|-|
 |width|表格总宽度|'%' 或 'px'|-|
 |height|表格总高度|'%' 或 'px' 或 'auto'|-|
 |multiSelect|是否含有多选框|boolean|true|
@@ -275,7 +276,12 @@ onExportHeader = () => {
 };
 
 ```
-
+### 动态更新设置
+```js
+ this.child.updateSettings({
+      readOnly: false,
+});
+```
 #### 日期国际化
 ```js
 i18n: {
@@ -284,7 +290,7 @@ i18n: {
       months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
       weekdays: ['日', '一', '二', '三', '四', '五', '六'],
       weekdaysShort: ['日', '一', '二', '三', '四', '五', '六']
-        },
+      },
 ```
 
 #### 开发调试

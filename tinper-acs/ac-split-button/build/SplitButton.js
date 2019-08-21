@@ -63,7 +63,6 @@ var SplitButton = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
         _this.onVisibleChange = function (show) {
-            console.log(show);
             _this.setState({
                 show: show
             });
@@ -77,6 +76,11 @@ var SplitButton = function (_Component) {
             _this.setState({
                 show: !_this.state.show
             });
+        };
+
+        _this.onBtnClick = function (e) {
+            e.stopPropagation();
+            _this.props.onClick && _this.props.onClick(e);
         };
 
         _this.state = {
@@ -110,18 +114,12 @@ var SplitButton = function (_Component) {
             colors = _props.colors,
             _props$size = _props.size,
             size = _props$size === undefined ? '' : _props$size,
-            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size']);
+            onClick = _props.onClick,
+            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick']);
 
         return _react2["default"].createElement(
             'div',
             { className: 'ac-split-button ' + colors + ' ' + size },
-            _react2["default"].createElement(
-                _beeButton2["default"],
-                _extends({}, other, { ref: function ref(btn) {
-                        return _this2.btn = btn;
-                    }, colors: colors, bordered: true, size: size, className: 'split-btn' }),
-                children
-            ),
             _react2["default"].createElement(
                 _beeDropdown2["default"],
                 {
@@ -129,20 +127,33 @@ var SplitButton = function (_Component) {
                     overlay: this.getMenuElement(),
                     animation: 'slide-up',
                     onVisibleChange: this.onVisibleChange,
-                    onClick: onListIconClick
+                    onClick: onListIconClick,
+                    overlayClassName: 'ac-split-button-dropdown'
                 },
                 _react2["default"].createElement(
                     'span',
-                    { className: 'icon-out',
-                        style: {
-                            'height': this.state.height
-                        }
-                    },
-                    _react2["default"].createElement(_beeIcon2["default"], {
-                        type: 'uf-anglearrowdown',
-                        className: (0, _classnames2["default"])({ 'show': this.state.show })
-
-                    })
+                    null,
+                    _react2["default"].createElement(
+                        _beeButton2["default"],
+                        _extends({}, other, {
+                            onClick: this.onBtnClick,
+                            ref: function ref(btn) {
+                                return _this2.btn = btn;
+                            }, colors: colors, bordered: true, size: size, className: 'split-btn' }),
+                        children
+                    ),
+                    _react2["default"].createElement(
+                        'span',
+                        { className: 'icon-out',
+                            style: {
+                                'height': this.state.height
+                            }
+                        },
+                        _react2["default"].createElement(_beeIcon2["default"], {
+                            type: 'uf-anglearrowdown',
+                            className: (0, _classnames2["default"])({ 'show': this.state.show })
+                        })
+                    )
                 )
             )
         );

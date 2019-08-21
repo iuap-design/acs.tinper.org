@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies,no-multi-spaces */
 /**
  *
  * @title 表格参照

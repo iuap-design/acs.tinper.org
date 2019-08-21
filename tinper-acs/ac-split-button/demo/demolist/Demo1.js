@@ -24,7 +24,7 @@ class Demo1 extends Component {
         );
         return (
             <div>
-                    <SplitButton menuList={menuList}>按钮</SplitButton>
+                    <SplitButton menuList={menuList} onClick={()=>{console.log('click')}}>按钮</SplitButton>
                     <SplitButton menuList={menuList} colors='primary'>primary按钮</SplitButton>
                     <SplitButton menuList={menuList} colors='success'>success按钮</SplitButton>
                     <SplitButton menuList={menuList} colors='info'>info按钮</SplitButton>

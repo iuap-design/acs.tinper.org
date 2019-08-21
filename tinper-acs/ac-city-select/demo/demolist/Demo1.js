@@ -15,7 +15,7 @@ class Demo1 extends Component {
 		super();
 		this.state = {
 			defaultValue:{ province:'北京',city:'北京',area:'东城区'},
-			value:null
+			value:{ province:'北京',city:'北京',area:'东城区'}
 		}
 	}
 
@@ -30,10 +30,9 @@ class Demo1 extends Component {
 	}
 
 	render () {
-		let value = { province:'山西',city:'长治',area:'长治县'};
 		return (
 			<div>
-				<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={value}/>
+				<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={this.state.value}/>
 				<Button shape="border" onClick={this.btnOnClick} style={{marginTop:"10px"}}>代码设置数据</Button>
 			</div>
 	)}

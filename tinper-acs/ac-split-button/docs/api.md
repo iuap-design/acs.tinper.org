@@ -18,6 +18,7 @@ import 'ac-split-button/build/SplitButton.css';
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |onListIconClick|下拉图标点击回调|func|-|
+|onClick|按钮点击回调|func|-|
 |menuList|下拉内容，必填|node|-|
 
 

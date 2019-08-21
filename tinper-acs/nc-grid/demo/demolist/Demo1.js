@@ -6,6 +6,7 @@
 */
 import React, { Component } from 'react';
 import NCGrid from '../../src';
+import Button from 'bee-button';
 const SimpleTable = NCGrid.SimpleTable;
 
 const columns = [
@@ -23,19 +24,28 @@ const data = [
 ];
   
 class Demo1 extends Component {
+    exportExcel = ()=>{
+        this.refs.simpleTable.exportExcel();
+    }
     render () {
         return (
-            <SimpleTable
-            columns={columns}
-            data={data}
-            showPagination={true}
-            pageInfo= {{
-                pageIndex: "1",
-                pageSize: "10",
-                total: "3",
-                totalPage: "1"
-            }}
-            />
+            <div>
+                <Button colors="primary" onClick={this.exportExcel} style={{marginBottom:'8px'}}>导出Excel</Button>
+                <SimpleTable
+                ref="simpleTable"
+                exportFileName="bee-grid-excel" //导出excel的文件名称设置，如果不设置为dowloand
+                exportData={data}
+                columns={columns}
+                data={data}
+                showPagination={true}
+                pageInfo= {{
+                    pageIndex: "1",
+                    pageSize: "10",
+                    total: "3",
+                    totalPage: "1"
+                }}
+                />
+            </div>
         )
     }
 }

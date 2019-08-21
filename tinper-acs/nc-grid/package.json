@@ -1,6 +1,6 @@
 {
  "name": "nc-grid",
- "version": "0.0.7",
+ "version": "0.0.8-beta.0",
  "description": "Grid ui component for react",
  "keywords": [
   "react",
@@ -46,10 +46,14 @@
   "bee-pagination": "^2.0.8",
   "bee-select": "^2.0.14",
   "bee-table": "^2.1.11",
+  "blob.js": "^1.0.1",
   "classnames": "^2.2.5",
   "clone-deep": "^4.0.1",
+  "file-saver": "^2.0.2",
   "react-hotkeys": "^2.0.0",
-  "tinper-bee-core": "latest"
+  "script-loader": "^0.7.2",
+  "tinper-bee-core": "latest",
+  "xlsx": "^0.15.0"
  },
  "devDependencies": {
   "chai": "^3.5.0",

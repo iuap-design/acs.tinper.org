@@ -16,8 +16,17 @@
         .u-label+* {
             width: calc(100% - 140px);
             display: inline-block;
+            height: 32px;
         }
-
+        .container-refer{//mdf参照
+            .ant-search-input-wrapper{
+                vertical-align: middle;
+                height: 32px;
+                .ant-input{
+                    border: 1px solid #a5adba;
+                }
+            }
+        }
         &.error {
 
             .u-form-control,
@@ -29,6 +38,13 @@
             .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus,
             .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
                 color: #f53c32;
+            }
+            .container-refer{//mdf参照
+                .ant-search-input-wrapper{
+                    .ant-input{
+                        border-color: #f53c32;
+                    }
+                }
             }
         }
 
@@ -132,6 +148,17 @@
         .rc-tree-select-menu-icon,
         .u-input-group-btn {
             display: none;
+        }
+        .container-refer{//mdf参照
+            .ant-search-input-wrapper{
+                .ant-input{
+                    border: none;
+                    background: none;
+                }
+                .ant-input-suffix{
+                    display: none;
+                }
+            }
         }
     }
 }

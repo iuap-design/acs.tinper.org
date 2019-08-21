@@ -44,6 +44,10 @@ var _multiSelect2 = _interopRequireDefault(_multiSelect);
 
 var _utils = require('./utils');
 
+var _ExportExcel = require('./ExportExcel');
+
+var _ExportExcel2 = _interopRequireDefault(_ExportExcel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -52,15 +56,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * SimpleTable
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /**
+                                                                                                                                                                                                                   * SimpleTable
+                                                                                                                                                                                                                   */
 
 var Option = _beeSelect2["default"].Option;
 // 最大页码数
 var MAX_BUTTONS = 5;
 
-var propTypes = {
+var propTypes = _defineProperty({
   isMultipleHead: PropTypes.bool, //是否为多表头
   data: PropTypes.array, //传入的表格数据
   columns: PropTypes.array, //表格列
@@ -71,16 +77,13 @@ var propTypes = {
   pageSizeChange: PropTypes.func, //分页回调
   config: PropTypes.object, //Table 配置项
   pageInfo: PropTypes.object, //分页信息
-  multiSelect: PropTypes.bool //多选功能
+  multiSelect: PropTypes.bool, //多选功能
+  sheetIsRowFilter: PropTypes.bool,
+  sheetName: PropTypes.string,
+  exportData: PropTypes.array
+}, 'exportData', []);
 
-  // config:{
-  //   sort,
-  //   height,
-  //   onRowClick,
-  //   onRowDoubleClick
-  // }
-
-};var defaultProps = {
+var defaultProps = {
   isMultipleHead: false,
   config: {},
   data: [],
@@ -89,7 +92,9 @@ var propTypes = {
     table_pagination001: '页',
     table_pagination002: '共',
     table_pagination003: '条'
-  }
+  },
+  sheetIsRowFilter: false, //是否要设置行样式，是否遍历
+  sheetName: "sheet" //导出表格的name
 };
 
 var SimpleTable = function (_Component) {
@@ -99,6 +104,80 @@ var SimpleTable = function (_Component) {
     _classCallCheck(this, SimpleTable);
 
     var _this2 = _possibleConstructorReturn(this, _Component.call(this, props));
+
+    _this2.exportExcel = function () {
+      var _this2$props = _this2.props,
+          sheetIsRowFilter = _this2$props.sheetIsRowFilter,
+          sheetName = _this2$props.sheetName,
+          _sheetHeader = _this2$props.sheetHeader,
+          exportData = _this2$props.exportData,
+          exportFileName = _this2$props.exportFileName;
+
+      var colsAndTablePros = _this2.getColumnsAndTablePros();
+      var sheetHeader = [],
+          columnAttr = [],
+          rowAttr = [],
+          sheetFilter = [];
+      colsAndTablePros.columns.forEach(function (column) {
+
+        var _show = false,
+            _hidden = false;
+        if (column.ifshow != undefined && column.ifshow === false) {
+          _show = true;
+        }
+        // _hidden = _exportHidden?column.exportHidden:_show //column.exportHidden // column.excelHidden === false ? true : false
+        _hidden = column.exportHidden ? true : _show;
+        if (!_hidden) {
+          var _width = String(column.width).indexOf("%") != -1 ? 100 : column.width;
+          columnAttr.push({
+            wpx: _width
+          });
+          var _cloum = column.exportKey ? column.exportKey : column.dataIndex;
+          sheetFilter.push(_cloum);
+          sheetHeader.push(column.title);
+        }
+      });
+      if (_sheetHeader) {
+        rowAttr.push(_this2.getItem(_sheetHeader));
+      }
+      if (sheetIsRowFilter) {
+        _this2.getRowList(colsAndTablePros.tablePros.data);
+      }
+      var option = {
+        datas: [{
+          fileName: exportFileName,
+          sheetData: exportData,
+          sheetName: sheetName,
+          sheetFilter: sheetFilter,
+          sheetHeader: sheetHeader,
+          columnAttr: columnAttr,
+          rowAttr: rowAttr
+        }]
+      };
+      var toExcel = new _ExportExcel2["default"](option, exportFileName);
+      toExcel.saveExcel();
+    };
+
+    _this2.getColumnsAndTablePros = function () {
+      var columns = _this2.props.columns.slice();
+
+      if (_this2.dragColsData) {
+        var dragColsKeyArr = Object.keys(_this2.dragColsData);
+        dragColsKeyArr.some(function (itemKey) {
+          columns.forEach(function (col) {
+            if (col.dataIndex == itemKey) {
+              col.width = _this2.dragColsData[itemKey].width;
+              return true;
+            }
+          });
+        });
+      }
+      var rs = {
+        columns: columns,
+        tablePros: _this2.props
+      };
+      return rs;
+    };
 
     var ComplexTable = (0, _sort2["default"])(_nc_Table2["default"], _beeIcon2["default"]);
     if (typeof props.multiSelect === 'boolean' && !!props.multiSelect) {
@@ -129,9 +208,15 @@ var SimpleTable = function (_Component) {
     this.table.currentkInfo = data;
   };
 
+  /**Excel 导出 */
+
+
+  /**
+   * 获取所有列以及table属性值
+   */
+
+
   /**创建表格主体 */
-
-
   SimpleTable.prototype.creatTable = function creatTable() {
     var _this = this;
     var props = this.props;

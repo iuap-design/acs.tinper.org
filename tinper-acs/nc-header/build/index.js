@@ -4,11 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _NcHeader = require('./NcHeader');
+var _AcHeader = require('./AcHeader');
 
-var _NcHeader2 = _interopRequireDefault(_NcHeader);
+var _AcHeader2 = _interopRequireDefault(_AcHeader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-exports["default"] = _NcHeader2["default"];
+exports["default"] = _AcHeader2["default"];
 module.exports = exports['default'];

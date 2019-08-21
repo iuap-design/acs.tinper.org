@@ -1,22 +1,22 @@
 {
- "name": "nc-header",
- "version": "0.0.1",
- "description": "NcHeader ui component for react",
+ "name": "ac-header",
+ "version": "0.0.2",
+ "description": "AcHeader ui component for react",
  "keywords": [
   "react",
   "react-component",
-  "nc-header",
+  "ac-header",
   "iuap-design",
   "tinper-bee",
-  "NcHeader"
+  "AcHeader"
  ],
  "engines": {
   "node": ">=4.0.0"
  },
- "homepage": "https://github.com/tinper-acs/nc-header.git",
+ "homepage": "https://github.com/tinper-acs/ac-header.git",
  "author": "Yonyou FED",
- "repository": "http://github.com/tinper-acs/nc-header",
- "bugs": "https://github.com/tinper-acs/nc-header.git/issues",
+ "repository": "http://github.com/tinper-acs/ac-header",
+ "bugs": "https://github.com/tinper-acs/ac-header.git/issues",
  "license": "MIT",
  "main": "./build/index.js",
  "config": {

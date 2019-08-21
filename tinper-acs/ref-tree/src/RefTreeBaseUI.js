@@ -295,6 +295,7 @@ class RefTreeBaseUI extends Component {
       modalProps={},
       isLocalSearch,
       treeNodeDisabledKey,
+      treeProps={},
     } = this.props;
     const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
@@ -323,6 +324,7 @@ class RefTreeBaseUI extends Component {
             {
               treeData.length ?
                 <RefCoreTree
+                  {...treeProps}
                   show={Boolean(treeData.length)}
                   nodeKeys={(item) => item[valueField]}
                   displayField={nodeDisplay}

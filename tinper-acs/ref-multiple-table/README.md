@@ -84,6 +84,7 @@ searchPanelLocale | `Object` | {'title': '条件筛选','resetName': '重置','s
 mustPaginationShow | `bool` | false | true必须展示分页、false，当pageCount>1才展示分页| 否
 tableProps | `object`| {} | table上其他属性，具体接收的参数参照bee-table| 否
 modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
+paginationProps | `object`| {} | 具体接收的参数参照bee-pagination| 否
 searchPlaceholder| `String` | '搜索' | 打开弹框上简单搜索的placeholder | 否
 
 
@@ -105,6 +106,7 @@ disabled|`bool`| false |禁用整个input框 | 否
 onChange|`function(values, record)`|--| value改变、选中过滤数据和保存时数据回调。values是obj，格式{'refname':'','refpk':''},record是该条完整数据|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
+menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
 
 ## 注意事项
 

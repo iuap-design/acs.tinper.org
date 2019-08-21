@@ -21,52 +21,63 @@
         transform: rotateX(180deg);
         display: inline-block;
     }
-    &>.split-btn.u-button{
+    .split-btn.u-button{
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         color: #212121;
         border: 1px solid #a5adba;
-        &:hover{
-            background-color: #fff;
+        // &:hover{
+        //     background-color: #fff;
+        // }
+    }
+    &-dropdown{
+        .u-dropdown-menu>.u-dropdown-menu-item-selected{
+            color: #000;
+            background: none;
+            &:hover{
+                background: #ebecf0;
+            }
         }
     }
+
+
     &.primary {
-        &>.split-btn.u-button:hover,.icon-out:hover{
+        .split-btn.u-button:hover,.icon-out:hover{
             background-color: #fff;
             border-color: #f53c32;
             color: #f53c32;
         }
     }
     &.success {
-        &>.split-btn.u-button:hover,.icon-out:hover{
+        .split-btn.u-button:hover,.icon-out:hover{
             background-color: #fff;
             border-color: #4caf50;
             color: #4caf50;
         }
     }
     &.info {
-        &>.split-btn.u-button:hover,.icon-out:hover{
+        .split-btn.u-button:hover,.icon-out:hover{
             background-color: #fff;
             border-color: #00bcd4;
             color: #00bcd4;
         }
     }
     &.warning {
-        &>.split-btn.u-button:hover,.icon-out:hover{
+        .split-btn.u-button:hover,.icon-out:hover{
             background-color: #fff;
             border-color: #ff9800;
             color: #ff9800;
         }
     }
     &.danger {
-        &>.split-btn.u-button:hover,.icon-out:hover{
+        .split-btn.u-button:hover,.icon-out:hover{
             background-color: #fff;
             border-color: #f44336;
             color: #f44336;
         }
     }
     &.dark {
-        &>.split-btn.u-button:hover,.icon-out:hover{
+        .split-btn.u-button:hover,.icon-out:hover{
             background-color: #fff;
             border-color: #616161;
             color: #616161;

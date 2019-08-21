@@ -69,7 +69,7 @@ class CardTable extends Component {
     pasteRow = () => {
         this.pasteRowFoo();
     }
-    
+    //把增行、删行、复制行的方法作为参数，传递到父组件中来，为了让 CardTable 能够调用到 EditTable 中的方法。
     parentFoo = (addRow, delRow ,pasteRow) => {
         this.addRowFoo = addRow;
         this.delRowFoo = delRow;

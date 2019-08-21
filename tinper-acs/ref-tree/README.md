@@ -1,3 +1,7 @@
+<!--
+ * @Date: 2019-08-15 20:19:50
+ * @LastEditTime: 2019-08-15 20:39:04
+ -->
 # 参照树形 RefTree 
 
 
@@ -68,6 +72,7 @@ theme| `String` | -- | 让theme=''并且引入项目样式文件，实现参照�
 getRefTreeData|`function(value)` | --| 搜索的回调方法，value是搜索值| 否
 valueField |`string`|'refpk' |指定真实数据的键。树节点key也是取valueField指定值 | 否
 modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
+treeProps | `object`| {} | tree上其他属性，具体接收的参数参照bee-tree| 否
 onTreeSelecting|`function(selectedArray,selectedKeys)` | --| 树节点选中回调，selectedArray全部选中数据，selectedKeys选中选中数据的键| 否
 isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用函数getRefTreeData(value),true是前端搜索 | 否
 treeNodeDisabledKey | `String` | - | 树节点中disabled状态节点，传入代表treeData中表示不可选节点的键 | 否
@@ -91,6 +96,8 @@ disabled|`bool`| false |禁用整个input框 | 否
 onChange|`function(values, record)`|--| value改变、选中过滤数据和保存时数据回调。values是obj，格式{'refname':'','refpk':''},record是该条完整数据|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
+menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
+dropdownDisabled | `boolean` | false |下拉展示是否可以弹出，false为有，true为没有|否
 
 ## 注意事项
 

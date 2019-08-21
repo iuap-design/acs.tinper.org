@@ -129,6 +129,8 @@ var CardTable = function (_Component) {
 
     //调用editTable实例中的方法
 
+    //把增行、删行、复制行的方法作为参数，传递到父组件中来，为了让 CardTable 能够调用到 EditTable 中的方法。
+
     /**
      * 勾选表行时触发的回调
      * @param selectedList 已勾选的行数据集合

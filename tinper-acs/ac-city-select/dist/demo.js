@@ -80,7 +80,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(378);var Demo2 = __webpack_require__(379);var Demo3 = __webpack_require__(380);var Demo4 = __webpack_require__(381);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 地区级联", "code": "/**\n*\n* @title 地区级联\n* @description 中国地区级联\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport ACCitySelect from \"ac-city-select\";\n\nclass Demo1 extends Component {\n\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue:{ province:'北京',city:'北京',area:'东城区'},\n\t\t\tvalue:null\n\t\t}\n\t}\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\n\tbtnOnClick=()=>{\n\t\tthis.setState({\n\t\t\tvalue:{ province:'山西',city:'长治',area:'长治县'}\n\t\t})\n\t}\n\n\trender () {\n\t\tlet value = { province:'山西',city:'长治',area:'长治县'};\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={value}/>\n\t\t\t\t<Button shape=\"border\" onClick={this.btnOnClick} style={{marginTop:\"10px\"}}>代码设置数据</Button>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 中国地区级联" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 切换语言", "code": "/**\n*\n* @title 切换语言\n* @description 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo2 extends Component {\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='en_US' onChange={this.onChange}/>\n\t\t\t\t<div style={{'height':'20px'}}/>\n\t\t\t\t<CitySelect lang='zh_TW' onChange={this.onChange}/>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 设置不可用状态", "code": "/**\n*\n* @title 设置不可用状态\n* @description 设置属性disabled为布尔值，默认为false；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo3 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\tlet { disabled } = this.state\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' disabled={disabled} onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 设置省市联动部分城市不可选择", "code": "/**\n* @title 设置省市联动部分城市不可选择\n* @description 设置属性disabled为布尔值，默认为false；\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo4 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabledProvinceArr: ['天津', '河北'],\n\t\t\tdisabledCityArr: [\"天津\", \"长春\", \"四平\", \"大连\"],\n\t\t\tdisabledAreaObj: {\n\t\t\t\t\"鞍山\": [\"铁东区\", \"铁西区\", \"立山区\"],\n\t\t\t\t\"抚顺\": [\"新抚区\", \"东洲区\", \"望花区\", \"抚顺县\"],\n\t\t\t\t\"北京\": [\"崇文区\", \"宣武区\", \"朝阳区\"]\n\t\t\t}\n\t\t}\n\t}\n\n\trender() {\n\t\tlet { disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.state;\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect\n\t\t\t\t\tlang='zh_CN'\n\t\t\t\t\tdisabledProvinceArr={disabledProvinceArr}\n\t\t\t\t\tdisabledCityArr={disabledCityArr}\n\t\t\t\t\tdisabledAreaObj={disabledAreaObj}\n\t\t\t\t\tonChange={this.onChange}\n\t\t\t\t/>\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }];
+	var Demo1 = __webpack_require__(378);var Demo2 = __webpack_require__(379);var Demo3 = __webpack_require__(380);var Demo4 = __webpack_require__(381);var Demo5 = __webpack_require__(382);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 地区级联", "code": "/**\n*\n* @title 地区级联\n* @description 中国地区级联\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport ACCitySelect from \"ac-city-select\";\n\nclass Demo1 extends Component {\n\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue:{ province:'北京',city:'北京',area:'东城区'},\n\t\t\tvalue:{ province:'北京',city:'北京',area:'东城区'}\n\t\t}\n\t}\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\n\tbtnOnClick=()=>{\n\t\tthis.setState({\n\t\t\tvalue:{ province:'山西',city:'长治',area:'长治县'}\n\t\t})\n\t}\n\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={this.state.value}/>\n\t\t\t\t<Button shape=\"border\" onClick={this.btnOnClick} style={{marginTop:\"10px\"}}>代码设置数据</Button>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 中国地区级联" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 切换语言", "code": "/**\n*\n* @title 切换语言\n* @description 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo2 extends Component {\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='en_US' onChange={this.onChange}/>\n\t\t\t\t<div style={{'height':'20px'}}/>\n\t\t\t\t<CitySelect lang='zh_TW' onChange={this.onChange}/>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 设置不可用状态", "code": "/**\n*\n* @title 设置不可用状态\n* @description 设置属性disabled为布尔值，默认为false；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo3 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\tlet { disabled } = this.state\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' disabled={disabled} onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 设置省市联动部分城市不可选择", "code": "/**\n* @title 设置省市联动部分城市不可选择\n* @description 设置属性disabled为布尔值，默认为false；\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo4 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabledProvinceArr: ['天津', '河北'],\n\t\t\tdisabledCityArr: [\"天津\", \"长春\", \"四平\", \"大连\"],\n\t\t\tdisabledAreaObj: {\n\t\t\t\t\"鞍山\": [\"铁东区\", \"铁西区\", \"立山区\"],\n\t\t\t\t\"抚顺\": [\"新抚区\", \"东洲区\", \"望花区\", \"抚顺县\"],\n\t\t\t\t\"北京\": [\"崇文区\", \"宣武区\", \"朝阳区\"]\n\t\t\t}\n\t\t}\n\t}\n\n\trender() {\n\t\tlet { disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.state;\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect\n\t\t\t\t\tlang='zh_CN'\n\t\t\t\t\tdisabledProvinceArr={disabledProvinceArr}\n\t\t\t\t\tdisabledCityArr={disabledCityArr}\n\t\t\t\t\tdisabledAreaObj={disabledAreaObj}\n\t\t\t\t\tonChange={this.onChange}\n\t\t\t\t/>\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 设置城市选择可以清空；", "code": "/**\n*\n* @title 设置城市选择可以清空；\n* @description 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo5 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' allowClear={true}  onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -2291,10 +2291,12 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2014-present, Facebook, Inc.
+	 * Copyright 2014-2015, Facebook, Inc.
+	 * All rights reserved.
 	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 	
 	'use strict';
@@ -2306,33 +2308,9 @@
 	 * same logic and follow the same code paths.
 	 */
 	
-	var __DEV__ = process.env.NODE_ENV !== 'production';
-	
 	var warning = function() {};
 	
-	if (__DEV__) {
-	  var printWarning = function printWarning(format, args) {
-	    var len = arguments.length;
-	    args = new Array(len > 1 ? len - 1 : 0);
-	    for (var key = 1; key < len; key++) {
-	      args[key - 1] = arguments[key];
-	    }
-	    var argIndex = 0;
-	    var message = 'Warning: ' +
-	      format.replace(/%s/g, function() {
-	        return args[argIndex++];
-	      });
-	    if (typeof console !== 'undefined') {
-	      console.error(message);
-	    }
-	    try {
-	      // --- Welcome to debugging React ---
-	      // This error was thrown as a convenience so that you can use this stack
-	      // to find the callsite that caused this warning to fire.
-	      throw new Error(message);
-	    } catch (x) {}
-	  }
-	
+	if (process.env.NODE_ENV !== 'production') {
 	  warning = function(condition, format, args) {
 	    var len = arguments.length;
 	    args = new Array(len > 2 ? len - 2 : 0);
@@ -2341,12 +2319,32 @@
 	    }
 	    if (format === undefined) {
 	      throw new Error(
-	          '`warning(condition, format, ...args)` requires a warning ' +
-	          'message argument'
+	        '`warning(condition, format, ...args)` requires a warning ' +
+	        'message argument'
 	      );
 	    }
+	
+	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+	      throw new Error(
+	        'The warning format should be able to uniquely identify this ' +
+	        'warning. Please, use a more descriptive format than: ' + format
+	      );
+	    }
+	
 	    if (!condition) {
-	      printWarning.apply(null, [format].concat(args));
+	      var argIndex = 0;
+	      var message = 'Warning: ' +
+	        format.replace(/%s/g, function() {
+	          return args[argIndex++];
+	        });
+	      if (typeof console !== 'undefined') {
+	        console.error(message);
+	      }
+	      try {
+	        // This error was thrown as a convenience so that you can use this stack
+	        // to find the callsite that caused this warning to fire.
+	        throw new Error(message);
+	      } catch(x) {}
 	    }
 	  };
 	}
@@ -6212,7 +6210,7 @@
 	        var onClose = obj.onClose || noop;
 	        var position = obj.position || "top";
 	        var style = obj.style || {};
-	        var showIcon = obj.showIcon || true;
+	        var showIcon = obj.hasOwnProperty('showIcon') ? obj.showIcon : true;
 	        return notice(content, duration, color, onClose, position, style, obj.keyboard, obj.onEscapeKeyUp, showIcon);
 	    },
 	    config: function config(options) {
@@ -23776,7 +23774,7 @@
 	  var calledOnce = false;
 	
 	  var isNewArgEqualToLast = function isNewArgEqualToLast(newArg, index) {
-	    return isEqual(newArg, lastArgs[index], index);
+	    return isEqual(newArg, lastArgs[index]);
 	  };
 	
 	  var result = function result() {
@@ -24958,11 +24956,11 @@
 	
 	var _hoistNonReactStatics = _interopRequireDefault(__webpack_require__(212));
 	
-	var _invariant = _interopRequireDefault(__webpack_require__(216));
+	var _invariant = _interopRequireDefault(__webpack_require__(213));
 	
 	var _react = __webpack_require__(1);
 	
-	var _reactIs = __webpack_require__(213);
+	var _reactIs = __webpack_require__(214);
 	
 	var _Subscription = _interopRequireDefault(__webpack_require__(217));
 	
@@ -25287,7 +25285,7 @@
 
 /***/ }),
 /* 212 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
@@ -25295,15 +25293,12 @@
 	 * Copyright 2015, Yahoo! Inc.
 	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 	 */
-	var ReactIs = __webpack_require__(213);
 	var REACT_STATICS = {
 	    childContextTypes: true,
-	    contextType: true,
 	    contextTypes: true,
 	    defaultProps: true,
 	    displayName: true,
 	    getDefaultProps: true,
-	    getDerivedStateFromError: true,
 	    getDerivedStateFromProps: true,
 	    mixins: true,
 	    propTypes: true,
@@ -25320,43 +25315,15 @@
 	    arity: true
 	};
 	
-	var FORWARD_REF_STATICS = {
-	    '$$typeof': true,
-	    render: true,
-	    defaultProps: true,
-	    displayName: true,
-	    propTypes: true
-	};
-	
-	var MEMO_STATICS = {
-	    '$$typeof': true,
-	    compare: true,
-	    defaultProps: true,
-	    displayName: true,
-	    propTypes: true,
-	    type: true
-	};
-	
-	var TYPE_STATICS = {};
-	TYPE_STATICS[ReactIs.ForwardRef] = FORWARD_REF_STATICS;
-	
-	function getStatics(component) {
-	    if (ReactIs.isMemo(component)) {
-	        return MEMO_STATICS;
-	    }
-	    return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
-	}
-	
 	var defineProperty = Object.defineProperty;
 	var getOwnPropertyNames = Object.getOwnPropertyNames;
 	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 	var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 	var getPrototypeOf = Object.getPrototypeOf;
-	var objectPrototype = Object.prototype;
+	var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
 	
 	function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-	    if (typeof sourceComponent !== 'string') {
-	        // don't hoist over string (html) components
+	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
 	
 	        if (objectPrototype) {
 	            var inheritedComponent = getPrototypeOf(sourceComponent);
@@ -25371,15 +25338,11 @@
 	            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
 	        }
 	
-	        var targetStatics = getStatics(targetComponent);
-	        var sourceStatics = getStatics(sourceComponent);
-	
 	        for (var i = 0; i < keys.length; ++i) {
 	            var key = keys[i];
-	            if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
+	            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
 	                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-	                try {
-	                    // Avoid failures from read-only properties
+	                try { // Avoid failures from read-only properties
 	                    defineProperty(targetComponent, key, descriptor);
 	                } catch (e) {}
 	            }
@@ -25398,18 +25361,74 @@
 /* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
 	
-	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(214);
-	} else {
-	  module.exports = __webpack_require__(215);
-	}
+	'use strict';
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	      error.name = 'Invariant Violation';
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+	
+	module.exports = invariant;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	if (process.env.NODE_ENV === 'production') {
+	  module.exports = __webpack_require__(215);
+	} else {
+	  module.exports = __webpack_require__(216);
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 215 */
 /***/ (function(module, exports) {
 
 	/** @license React v16.8.6
@@ -25430,7 +25449,7 @@
 
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.8.6
@@ -25660,62 +25679,6 @@
 	exports.isSuspense = isSuspense;
 	  })();
 	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
-
-/***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
@@ -36905,15 +36868,17 @@
 	    disabled: _propTypes2['default'].bool, //设置组件是否被禁用；
 	    disabledProvinceArr: _propTypes2['default'].array, //设置禁用的省份
 	    disabledCityArr: _propTypes2['default'].array, //设置禁用的地级市
-	    disabledAreaObj: _propTypes2['default'].object //设置不可用的区域；
+	    disabledAreaObj: _propTypes2['default'].object, //设置不可用的区域；
+	    allowClear: _propTypes2['default'].bool //设置城市选择框是否可以被清除；
 	};
 	var defaultProps = {
 	    defaultValue: _provinceData.zh.defaultValue,
-	    value: null,
+	    value: _provinceData.zh.defaultValue,
 	    onChange: function onChange() {},
 	    provinceData: _provinceData.zh.provinceData,
 	    lang: 'zh_CN',
 	    disabled: false,
+	    allowClear: false,
 	    disabledProvinceArr: [],
 	    disabledCityArr: [],
 	    disabledAreaObj: null
@@ -36935,9 +36900,9 @@
 	            disabledAreaObj = props.disabledAreaObj,
 	            lang = props.lang;
 	
-	        if (props.lang == 'zh_TW') {
+	        if (props.lang === 'zh_TW') {
 	            provinceData = _provinceData.tw.provinceData;
-	        } else if (props.lang == 'en_US') {
+	        } else if (props.lang === 'en_US') {
 	            provinceData = _provinceData.en.provinceData;
 	        }
 	        _this.state = {
@@ -36963,10 +36928,10 @@
 	            disabledAreaObj = _props.disabledAreaObj;
 	
 	        var provinceData = this.state.provinceData;
-	        if (lang == 'zh_TW') {
+	        if (lang === 'zh_TW') {
 	            provinceData = _provinceData.tw.provinceData;
 	            _defaultValue = _provinceData.tw.defaultValue;
-	        } else if (lang == 'en_US') {
+	        } else if (lang === 'en_US') {
 	            provinceData = _provinceData.en.provinceData;
 	            _defaultValue = _provinceData.en.defaultValue;
 	        }
@@ -36998,17 +36963,41 @@
 	
 	    CitySelect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	        if (!nextProps.value) return;
+	        var _props$value = this.props.value,
+	            oldProvince = _props$value.province,
+	            oldCity = _props$value.city,
+	            oldArea = _props$value.area;
 	        var _nextProps$value = nextProps.value,
 	            province = _nextProps$value.province,
 	            city = _nextProps$value.city,
 	            area = _nextProps$value.area;
+	        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
+	        //     this.setState({
+	        //         province,
+	        //         secondCity: city,
+	        //         secondArea: area
+	        //     });
+	        //     this.handleProvinceChange(province, city, area);
+	        // }
 	
-	        this.setState({
-	            province: province,
-	            secondCity: city,
-	            secondArea: area
-	        });
-	        this.handleProvinceChange(province);
+	        if (province !== oldProvince) {
+	            this.setState({
+	                province: province
+	            });
+	            return this.handleProvinceChange(province, city, area);
+	        }
+	        if (city !== oldCity) {
+	            this.setState({
+	                secondCity: city
+	            });
+	            return this.handleCityChange(city);
+	        }
+	        if (area !== oldArea) {
+	            this.setState({
+	                secondArea: area
+	            });
+	            this.onSecondAreaChange(area);
+	        }
 	    };
 	
 	    /**
@@ -37029,10 +37018,13 @@
 	
 	
 	    CitySelect.prototype.render = function render() {
+	        var _this2 = this;
+	
 	        var _state = this.state,
 	            provinceData = _state.provinceData,
 	            cities = _state.cities,
 	            areas = _state.areas;
+	
 	
 	        var provinceOptions = provinceData.map(function (province, index) {
 	            if (province.disabled) {
@@ -37080,7 +37072,6 @@
 	                );
 	            }
 	        });
-	
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: (0, _classnames2['default'])("u-city-select", this.props.className) },
@@ -37090,7 +37081,10 @@
 	                    value: this.state.province,
 	                    className: 'province',
 	                    disabled: this.props.disabled,
-	                    onChange: this.handleProvinceChange },
+	                    allowClear: this.state.province && this.props.allowClear,
+	                    onChange: function onChange(value) {
+	                        return _this2.handleProvinceChange(value);
+	                    } },
 	                provinceOptions
 	            ),
 	            _react2['default'].createElement(
@@ -37098,8 +37092,11 @@
 	                {
 	                    value: this.state.secondCity,
 	                    disabled: this.props.disabled,
+	                    allowClear: this.state.secondCity && this.props.allowClear,
 	                    className: 'city',
-	                    onChange: this.handleCityChange },
+	                    onChange: function onChange(value) {
+	                        return _this2.handleCityChange(value);
+	                    } },
 	                cityOptions
 	            ),
 	            _react2['default'].createElement(
@@ -37107,8 +37104,11 @@
 	                {
 	                    value: this.state.secondArea,
 	                    className: 'area',
+	                    allowClear: this.state.secondArea && this.props.allowClear,
 	                    disabled: this.props.disabled,
-	                    onChange: this.onSecondAreaChange },
+	                    onChange: function onChange(value) {
+	                        return _this2.onSecondAreaChange(value);
+	                    } },
 	                areaOptions
 	            )
 	        );
@@ -37118,18 +37118,18 @@
 	}(_react.Component);
 	
 	var _initialiseProps = function _initialiseProps() {
-	    var _this2 = this;
+	    var _this3 = this;
 	
-	    this.buildInitDataArr = function (objoriginalArr, disabledCityArr, lang) {
-	        var newDataArr = JSON.parse(JSON.stringify(objoriginalArr));
+	    this.buildInitDataArr = function (originalArr, disabledCityArr, lang) {
+	        var newDataArr = JSON.parse(JSON.stringify(originalArr));
 	        disabledCityArr = JSON.parse(JSON.stringify(disabledCityArr));
 	        newDataArr.forEach(function (newDataArr, index, obj) {
 	            newDataArr.disabled = false;
 	            var provinceName = newDataArr.name;
 	            if (disabledCityArr.length > 0) {
 	                for (var i = 0; i < disabledCityArr.length; i++) {
-	                    if (lang == "en_US") {
-	                        if (provinceName.toLowerCase() == disabledCityArr[i].toLowerCase()) {
+	                    if (lang === "en_US") {
+	                        if (provinceName.toLowerCase() === disabledCityArr[i].toLowerCase()) {
 	                            newDataArr.disabled = true;
 	                        }
 	                    } else {
@@ -37152,7 +37152,7 @@
 	            if (disabledAreaObj != undefined && disabledAreaObj[cityName] != undefined) {
 	                var disabledAreaArr = disabledAreaObj[cityName];
 	                for (var j = 0; j < disabledAreaArr.length; j++) {
-	                    if (lang == "en_US") {
+	                    if (lang === "en_US") {
 	                        if (areaArr[i].toLowerCase() === disabledAreaArr[j].toLowerCase()) {
 	                            jsonItem.disabled = true;
 	                        }
@@ -37169,36 +37169,42 @@
 	    };
 	
 	    this.getIndex = function (type, name, provinceIndex) {
-	        var provinceData = _this2.state.provinceData;
-	        var provinceI = provinceIndex || _this2.state.provinceIndex;
+	        var provinceData = _this3.state.provinceData;
+	        var provinceI = provinceIndex || _this3.state.provinceIndex;
 	        provinceI = provinceI < 0 ? 0 : provinceI;
 	        switch (type) {
 	            case 'province':
 	                return (0, _lodash2['default'])(provinceData, function (province) {
 	                    return province.name === name;
 	                });
-	                break;
 	            case 'city':
 	                return (0, _lodash2['default'])(provinceData[provinceI].city, function (city) {
 	                    return city.name === name;
 	                });
-	                break;
 	        }
 	    };
 	
-	    this.handleProvinceChange = function (value) {
-	        var provinceData = _this2.state.provinceData;
-	        var _props2 = _this2.props,
-	            disabledCityArr = _props2.disabledCityArr,
-	            disabledAreaObj = _props2.disabledAreaObj,
-	            lang = _props2.lang;
+	    this.handleProvinceChange = function (value, cityValue, areaValue) {
+	        value = value ? value : '';
+	        var city = '',
+	            area = '',
+	            index = 0,
+	            citesInitArr = [],
+	            areasInitData = [];
+	        if (value !== '') {
+	            var provinceData = _this3.state.provinceData;
+	            var _props2 = _this3.props,
+	                disabledCityArr = _props2.disabledCityArr,
+	                disabledAreaObj = _props2.disabledAreaObj,
+	                lang = _props2.lang;
 	
-	        var index = _this2.getIndex('province', value);
-	        var citesInitArr = _this2.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
-	        var areasInitData = _this2.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-	        var city = citesInitArr[0].name;
-	        var area = areasInitData[0].name;
-	        _this2.setState({
+	            index = _this3.getIndex('province', value);
+	            citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
+	            areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
+	            city = cityValue ? cityValue : citesInitArr[0].name;
+	            area = areaValue ? areaValue : areasInitData[0].name;
+	        }
+	        _this3.setState({
 	            province: value,
 	            cities: citesInitArr,
 	            secondCity: city,
@@ -37206,38 +37212,51 @@
 	            areas: areasInitData,
 	            secondArea: area
 	        });
-	        _this2.onChange(value, city, area);
+	        _this3.onChange(value, city, area);
 	    };
 	
 	    this.handleCityChange = function (value) {
-	        var cities = _this2.state.cities;
-	        var _props3 = _this2.props,
+	        value = value ? value : '';
+	        var index = '',
+	            area = '',
+	            areasInitData = [];
+	        var _state2 = _this3.state,
+	            province = _state2.province,
+	            cities = _state2.cities;
+	        var _props3 = _this3.props,
 	            disabledAreaObj = _props3.disabledAreaObj,
 	            lang = _props3.lang;
 	
-	        var index = _this2.getIndex('city', value);
-	        var areasInitData = _this2.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-	        var area = areasInitData[0].name;
-	        _this2.setState({
+	        if (value !== '') {
+	            index = _this3.getIndex('city', value);
+	            areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
+	            area = areasInitData[0].name;
+	        }
+	        _this3.setState({
 	            secondCity: value,
 	            areas: areasInitData,
 	            secondArea: area,
 	            cityIndex: value
 	        });
-	        _this2.onChange(undefined, value, area);
+	        _this3.onChange(province, value, area);
 	    };
 	
 	    this.onSecondAreaChange = function (value) {
-	        _this2.setState({
+	        value = value ? value : '';
+	        var _state3 = _this3.state,
+	            province = _state3.province,
+	            secondCity = _state3.secondCity;
+	
+	        _this3.setState({
 	            secondArea: value
 	        });
-	        _this2.onChange(undefined, undefined, value);
+	        _this3.onChange(province, secondCity, value);
 	    };
 	
 	    this.onChange = function (province, city, area) {
-	        _this2.props.onChange({
-	            province: province || _this2.state.province,
-	            city: city || _this2.state.secondCity,
+	        _this3.props.onChange({
+	            province: province,
+	            city: city,
 	            area: area
 	        });
 	    };
@@ -55090,17 +55109,16 @@
 	
 			_this.state = {
 				defaultValue: { province: '北京', city: '北京', area: '东城区' },
-				value: null
+				value: { province: '北京', city: '北京', area: '东城区' }
 			};
 			return _this;
 		}
 	
 		Demo1.prototype.render = function render() {
-			var value = { province: '山西', city: '长治', area: '长治县' };
 			return _react2['default'].createElement(
 				'div',
 				null,
-				_react2['default'].createElement(_src2['default'], { ref: 'city', onChange: this.onChange, defaultValue: this.state.defaultValue, value: value }),
+				_react2['default'].createElement(_src2['default'], { ref: 'city', onChange: this.onChange, defaultValue: this.state.defaultValue, value: this.state.value }),
 				_react2['default'].createElement(
 					_beeButton2['default'],
 					{ shape: 'border', onClick: this.btnOnClick, style: { marginTop: "10px" } },
@@ -55332,6 +55350,74 @@
 	}(_react.Component);
 	
 	exports['default'] = Demo4;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _src = __webpack_require__(268);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @title 设置城市选择可以清空；
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @description 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	
+	
+	var Demo5 = function (_Component) {
+		_inherits(Demo5, _Component);
+	
+		function Demo5() {
+			_classCallCheck(this, Demo5);
+	
+			var _this = _possibleConstructorReturn(this, _Component.call(this));
+	
+			_this.onChange = function (obj) {
+				console.log(obj);
+			};
+	
+			_this.state = {
+				defaultValue: { province: '北京', city: '北京', area: '东城区' },
+				value: null,
+				disabled: true
+			};
+			return _this;
+		}
+	
+		Demo5.prototype.render = function render() {
+			return _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement(_src2['default'], { lang: 'zh_TW', allowClear: true, onChange: this.onChange })
+			);
+		};
+	
+		return Demo5;
+	}(_react.Component);
+	
+	exports['default'] = Demo5;
 	module.exports = exports['default'];
 
 /***/ })

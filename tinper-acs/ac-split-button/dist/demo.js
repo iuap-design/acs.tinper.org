@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基本示例不同大小", "code": "/**\n*\n* @title 基本示例不同大小\n* @description 不同大小的按钮\n*\n*/\nimport React, { Component } from 'react';\nimport  SplitButton, Menu, Button  from 'ac-split-button';\nconst { Item } = Menu;\n\nclass Demo1 extends Component {\n    render () {\n        const menuList= (\n            <Menu >\n              <Item key=\"1\">借款合同</Item>\n              <Item key=\"2\">抵/质押合同</Item>\n              <Item key=\"3\">担保合同</Item>\n              <Item key=\"4\">联保合同</Item>\n              <Item key=\"5\">合同审批</Item>\n              <Item key=\"6\">抵/质押合同跟踪</Item>\n            </Menu>\n        );\n        return (\n            <div>\n                    <SplitButton menuList={menuList}>按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='primary'>primary按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='success'>success按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='info'>info按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='warning'>warning按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='danger'>danger按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='dark'>dark按钮</SplitButton>\n            </div>\n        )\n    }\n}\n", "desc": " 不同大小的按钮" }];
+	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基本示例不同大小", "code": "/**\n*\n* @title 基本示例不同大小\n* @description 不同大小的按钮\n*\n*/\nimport React, { Component } from 'react';\nimport  SplitButton, Menu, Button  from 'ac-split-button';\nconst { Item } = Menu;\n\nclass Demo1 extends Component {\n    render () {\n        const menuList= (\n            <Menu >\n              <Item key=\"1\">借款合同</Item>\n              <Item key=\"2\">抵/质押合同</Item>\n              <Item key=\"3\">担保合同</Item>\n              <Item key=\"4\">联保合同</Item>\n              <Item key=\"5\">合同审批</Item>\n              <Item key=\"6\">抵/质押合同跟踪</Item>\n            </Menu>\n        );\n        return (\n            <div>\n                    <SplitButton menuList={menuList} onClick={()=>{console.log('click')}}>按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='primary'>primary按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='success'>success按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='info'>info按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='warning'>warning按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='danger'>danger按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='dark'>dark按钮</SplitButton>\n            </div>\n        )\n    }\n}\n", "desc": " 不同大小的按钮" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -34469,7 +34469,9 @@
 	            null,
 	            _react2['default'].createElement(
 	                _src2['default'],
-	                { menuList: menuList },
+	                { menuList: menuList, onClick: function onClick() {
+	                        console.log('click');
+	                    } },
 	                '\u6309\u94AE'
 	            ),
 	            _react2['default'].createElement(
@@ -34599,7 +34601,6 @@
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
 	        _this.onVisibleChange = function (show) {
-	            console.log(show);
 	            _this.setState({
 	                show: show
 	            });
@@ -34613,6 +34614,11 @@
 	            _this.setState({
 	                show: !_this.state.show
 	            });
+	        };
+	
+	        _this.onBtnClick = function (e) {
+	            e.stopPropagation();
+	            _this.props.onClick && _this.props.onClick(e);
 	        };
 	
 	        _this.state = {
@@ -34646,18 +34652,12 @@
 	            colors = _props.colors,
 	            _props$size = _props.size,
 	            size = _props$size === undefined ? '' : _props$size,
-	            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size']);
+	            onClick = _props.onClick,
+	            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick']);
 	
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: 'ac-split-button ' + colors + ' ' + size },
-	            _react2['default'].createElement(
-	                _beeButton2['default'],
-	                _extends({}, other, { ref: function ref(btn) {
-	                        return _this2.btn = btn;
-	                    }, colors: colors, bordered: true, size: size, className: 'split-btn' }),
-	                children
-	            ),
 	            _react2['default'].createElement(
 	                _beeDropdown2['default'],
 	                {
@@ -34665,20 +34665,33 @@
 	                    overlay: this.getMenuElement(),
 	                    animation: 'slide-up',
 	                    onVisibleChange: this.onVisibleChange,
-	                    onClick: onListIconClick
+	                    onClick: onListIconClick,
+	                    overlayClassName: 'ac-split-button-dropdown'
 	                },
 	                _react2['default'].createElement(
 	                    'span',
-	                    { className: 'icon-out',
-	                        style: {
-	                            'height': this.state.height
-	                        }
-	                    },
-	                    _react2['default'].createElement(_beeIcon2['default'], {
-	                        type: 'uf-anglearrowdown',
-	                        className: (0, _classnames2['default'])({ 'show': this.state.show })
-	
-	                    })
+	                    null,
+	                    _react2['default'].createElement(
+	                        _beeButton2['default'],
+	                        _extends({}, other, {
+	                            onClick: this.onBtnClick,
+	                            ref: function ref(btn) {
+	                                return _this2.btn = btn;
+	                            }, colors: colors, bordered: true, size: size, className: 'split-btn' }),
+	                        children
+	                    ),
+	                    _react2['default'].createElement(
+	                        'span',
+	                        { className: 'icon-out',
+	                            style: {
+	                                'height': this.state.height
+	                            }
+	                        },
+	                        _react2['default'].createElement(_beeIcon2['default'], {
+	                            type: 'uf-anglearrowdown',
+	                            className: (0, _classnames2['default'])({ 'show': this.state.show })
+	                        })
+	                    )
 	                )
 	            )
 	        );

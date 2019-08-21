@@ -337,16 +337,8 @@ const tabLists = [{
     name: '详细信息',
     items: [], 
 }];
-
-//获取表格数据时返回的回调
-function getTableRows(data){
-    console.log('保存数据',data);
-}
   
 class Demo2 extends Component {
-    handleClick = () => {
-        this.body.getTableRows();
-    }
     render () {
         const tableHead = [{
             bordered:true,
@@ -377,10 +369,7 @@ class Demo2 extends Component {
                 hideSwitch= {() => false} //表格
                 tableHead={tableHead}
                 isEdit={true}
-                onRef={(ref) => { this.body = ref; }} //获取EditTable组件实例
-                getTableRows={getTableRows}
                 />
-                <button onClick={this.handleClick} style={{marginTop:'30px'}}>aaa</button>
             </div>
             
         )

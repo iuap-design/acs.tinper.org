@@ -1,4 +1,3 @@
-/* eslint-disable no-return-assign */
 /**
  *
  * @title 多表头合并单元

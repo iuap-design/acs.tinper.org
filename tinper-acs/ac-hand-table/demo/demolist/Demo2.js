@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /**
  *
  * @title 表格常用方法
@@ -249,6 +248,10 @@ class Demo2 extends Component {
     this.child.onExportCSV();
   };
 
+  onSelectData=(param)=>{
+
+  }
+
 
   render() {
     const { handData, changeRowNum } = this.state;
@@ -267,7 +270,6 @@ class Demo2 extends Component {
           <Button colors="primary" style={btn_style} onClick={this.getDelRowData} size="sm">获取删除行</Button>
           <Button colors="primary" style={btn_style} onClick={this.getFormatData} size="sm">格式化数据 </Button>
           <Button colors="primary" style={btn_style} onClick={this.onDownCsv} size="sm">导出csv </Button>
-
           <Button colors="primary" style={btn_style} onClick={this.getSelectData} size="sm">逐行选中数据</Button>
           <Button colors="primary" style={btn_style} onClick={this.onDelRowSelect} size="sm">删除选中行数据</Button>
         </div>
@@ -294,6 +296,7 @@ class Demo2 extends Component {
           // multiSelect={false} // 关闭多选框
           width="100%"
           height="150px"
+          onSelectData={this.onSelectData}
         />
 
 

@@ -217,6 +217,9 @@ class Demo2 extends Component {
             }]
           })
           }
+          // disabled  //新增属性
+          // menuIcon={<span className={`uf uf-search`}> </span>} //新增属性
+          // paginationProps={{showJump:false}} //新增属性
         />
         <Button colors="primary" onClick={
           ()=>{

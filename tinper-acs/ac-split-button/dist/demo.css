@@ -18,34 +18,37 @@
   .ac-split-button .uf-anglearrowdown.show {
     transform: rotateX(180deg);
     display: inline-block; }
-  .ac-split-button > .split-btn.u-button {
+  .ac-split-button .split-btn.u-button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     color: #212121;
     border: 1px solid #a5adba; }
-    .ac-split-button > .split-btn.u-button:hover {
-      background-color: #fff; }
-  .ac-split-button.primary > .split-btn.u-button:hover, .ac-split-button.primary .icon-out:hover {
+  .ac-split-button-dropdown .u-dropdown-menu > .u-dropdown-menu-item-selected {
+    color: #000;
+    background: none; }
+    .ac-split-button-dropdown .u-dropdown-menu > .u-dropdown-menu-item-selected:hover {
+      background: #ebecf0; }
+  .ac-split-button.primary .split-btn.u-button:hover, .ac-split-button.primary .icon-out:hover {
     background-color: #fff;
     border-color: #f53c32;
     color: #f53c32; }
-  .ac-split-button.success > .split-btn.u-button:hover, .ac-split-button.success .icon-out:hover {
+  .ac-split-button.success .split-btn.u-button:hover, .ac-split-button.success .icon-out:hover {
     background-color: #fff;
     border-color: #4caf50;
     color: #4caf50; }
-  .ac-split-button.info > .split-btn.u-button:hover, .ac-split-button.info .icon-out:hover {
+  .ac-split-button.info .split-btn.u-button:hover, .ac-split-button.info .icon-out:hover {
     background-color: #fff;
     border-color: #00bcd4;
     color: #00bcd4; }
-  .ac-split-button.warning > .split-btn.u-button:hover, .ac-split-button.warning .icon-out:hover {
+  .ac-split-button.warning .split-btn.u-button:hover, .ac-split-button.warning .icon-out:hover {
     background-color: #fff;
     border-color: #ff9800;
     color: #ff9800; }
-  .ac-split-button.danger > .split-btn.u-button:hover, .ac-split-button.danger .icon-out:hover {
+  .ac-split-button.danger .split-btn.u-button:hover, .ac-split-button.danger .icon-out:hover {
     background-color: #fff;
     border-color: #f44336;
     color: #f44336; }
-  .ac-split-button.dark > .split-btn.u-button:hover, .ac-split-button.dark .icon-out:hover {
+  .ac-split-button.dark .split-btn.u-button:hover, .ac-split-button.dark .icon-out:hover {
     background-color: #fff;
     border-color: #616161;
     color: #616161; }

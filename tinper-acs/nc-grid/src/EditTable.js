@@ -73,23 +73,24 @@ class EditTable extends Component {
             table: { ...this.state.table, rows: data } 
         });
     }
-    //为了回传Table的行数据
     componentDidMount(){
         let {onRef,parentFoo} = this.props;
-        onRef && onRef(this);
+        //为了回传Table的行数据
+        onRef && onRef(this);  
+        //把增行、删行、复制行的方法作为参数，传递到父组件中去，为了让 CardTable 能够调用到 EditTable 中的方法。
         parentFoo && parentFoo(this.addRow, this.delRowByRowId ,this.pasteRow);
     }
 
-    componentWillReceiveProps(nextProps){
-        let {data: oldData} = this.props;
-        let {data: newData} = nextProps;
-        let {table} = this.state;
-        if(newData !== oldData && newData.length !== oldData.length){
-            this.setState({
-                table: Object.assign(...table, {rows: newData})
-            })
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     let {data: oldData} = this.props;
+    //     let {data: newData} = nextProps;
+    //     let {table} = this.state;
+    //     if(newData !== oldData && newData.length !== oldData.length){
+    //         this.setState({
+    //             table: Object.assign(...table, {rows: newData})
+    //         })
+    //     }
+    // }
 
     //获取表格数据时触发的回调函数
     getTableRows = () => {

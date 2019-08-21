@@ -28,7 +28,6 @@ class SplitButton extends Component {
         })
     }
     onVisibleChange=(show)=>{
-        console.log(show)
         this.setState({
             show
         })
@@ -48,33 +47,41 @@ class SplitButton extends Component {
             show:!this.state.show
         })
     }
+    onBtnClick=(e)=>{
+        e.stopPropagation();
+        this.props.onClick&&this.props.onClick(e);
+    }
     render(){
-        let { children,menuList,onListIconClick,colors,size='',...other } = this.props;
+        let { children,menuList,onListIconClick,colors,size='',onClick,...other } = this.props;
         
         return(
             <div className={'ac-split-button '+colors+' '+size}>
-                <Button {...other} ref={btn=>this.btn=btn} colors={colors} bordered size={size} className='split-btn'>
-                    {children}
-                </Button>
                <Dropdown
                     trigger={['click']}
                     overlay={this.getMenuElement()}
                     animation="slide-up"
                     onVisibleChange={this.onVisibleChange}
                     onClick={onListIconClick}
+                    overlayClassName='ac-split-button-dropdown'
                     >
-                    <span className='icon-out'
-                        style={{
-                            'height':this.state.height
-                        }}
-                    >
-                        <Icon 
-                            type='uf-anglearrowdown' 
-                            className={classnames({'show':this.state.show})}
-                            
-                        />
-                    </span>
-                    
+                        <span>
+                            <Button 
+                            {...other} 
+                            onClick={this.onBtnClick}
+                            ref={btn=>this.btn=btn} colors={colors} bordered size={size} className='split-btn'>
+                                {children}
+                            </Button>
+                            <span className='icon-out'
+                                style={{
+                                    'height':this.state.height
+                                }}
+                            >
+                                <Icon 
+                                    type='uf-anglearrowdown' 
+                                    className={classnames({'show':this.state.show})}
+                                />
+                            </span>
+                        </span>
                 </Dropdown>
             </div> 
         )

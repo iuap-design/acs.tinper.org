@@ -1,3 +1,7 @@
+<!--
+ * @Date: 2019-04-04 16:39:50
+ * @LastEditTime: 2019-08-15 20:41:43
+ -->
 # 树表参照 RefTreeTable
 
 
@@ -117,6 +121,8 @@ disabled|`bool`| false |禁用整个input框 | 否
 onChange|`function(values, record)`|--| value改变、选中过滤数据和保存时数据回调。values是obj，格式{'refname':'','refpk':''},record是该条完整数据|否
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
+menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
+dropdownDisabled | `boolean` | false |下拉展示是否可以弹出，false为有，true为没有|否
 
 ## 注意事项
 #### 参数解析

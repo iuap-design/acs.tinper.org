@@ -233,7 +233,7 @@ class RefMultipleTableBase extends Component {
       showModal, lang = 'zh_CN', valueField='refpk', emptyBut = false, buttons, fliterFormInputs = [],
       showLoading,tableData, pageCount, currPageIndex, 
       columnsData, totalElements,theme='ref-red',searchPanelLocale,
-      mustPaginationShow=false,tableProps={},modalProps={},searchPlaceholder='搜索'} = this.props;
+      mustPaginationShow=false,tableProps={},modalProps={},searchPlaceholder='搜索',paginationProps={}} = this.props;
     let temp = JSON.stringify(tableData)
     let _newTableData = JSON.parse(temp);
     let {checkedArray,checkedMap} = this;
@@ -327,6 +327,7 @@ class RefMultipleTableBase extends Component {
                 onDataNumSelect={_this.props.dataNumSelect}
                 onSelect={_this.props.handlePagination}
                 locale={paginationLocale(lang)}
+                {...paginationProps}
               />
               )
             }

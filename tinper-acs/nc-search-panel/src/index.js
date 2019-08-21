@@ -1,11 +1,11 @@
-import NcSearchPanel from './NcSearchPanel';
+import AcSearchPanel from './AcSearchPanel';
 import FormItem from './FormItem';
 import Sample from './Sample';
 import Complex from './Complex';
 
 
-NcSearchPanel.Sample = Sample;
-NcSearchPanel.Complex = Complex;
-NcSearchPanel.FormItem = FormItem;
+AcSearchPanel.Sample = Sample;
+AcSearchPanel.Complex = Complex;
+AcSearchPanel.FormItem = FormItem;
 
-export default NcSearchPanel;
+export default AcSearchPanel;
