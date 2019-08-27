@@ -102,5 +102,8 @@
     },
     "ref-combobox": {
         "name": "下拉参照"
+    },
+    "mdf-refer": {
+        "name": "mdf参照"
     }
 }

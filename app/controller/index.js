@@ -95,7 +95,7 @@ module.exports = {
       if (!flag) { //非标准组件
 
         isStander = false;
-        filePath = path.join(__dirname, `../../tinper-acs/${component}/README.md`);
+        filePath = path.join(__dirname, `../../tinper-acs/${component}/README.md`); 
         data = await fs.readFileSync(filePath, 'utf-8');
         let haveGhpage = await fs.pathExistsSync(path.join(__dirname, `../../tinper-acs/${component}/ghpages/index.html`));
         if (haveGhpage) { //有github.io
