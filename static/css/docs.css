@@ -298,7 +298,7 @@ select::-ms-expand {
     padding: 0
 }
 .docs .doc-content .changelog .u-timeline-item:last-of-type .u-timeline-item-tail{
-    display: none;
+    /* display: none; */
 }
 .docs .doc-content .changelog{
     margin-top: 40px;

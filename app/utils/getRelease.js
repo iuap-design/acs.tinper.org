@@ -6,6 +6,7 @@ let componentsSource = require('../../static/componentsSource.json');
 let components = require('../../static/components.json');
 let sidebar = require('../../static/sidebar.json');
 const latestVersion = require('latest-version');
+const newComReg = /- (.*)@/g;
 
 
 const auth = {
@@ -72,3 +73,56 @@ let getLatestVersion = async () => {
 };
 
 getLatestVersion()
+
+
+gh.list(auth, 'tinper-acs', 'tinper-acs', (err,list)=>{
+    if (err) {
+        console.log(`❌❌ 读取release失败！${component} `)
+        console.log(err);
+    } else {
+        let changesArray = [];
+        let menus = {};   
+        let latestVersion = list[0].tag_name; 
+        list.forEach(item => {
+            let change = {
+                published_at: moment(item.published_at).format('YYYY-MM-DD'),
+                html_url: item.html_url,
+                tag_name: item.tag_name,
+                // body: item.body.replace(/- /g,'').replace(/##/g,''),
+                body: marked(item.body.replace(/@/g,' @').replace(/##/g,'').replace(/`/g,'')),
+            };
+            changesArray.push(change);
+            menus[item.tag_name] = {};
+        });
+        
+        sidebar['更新日志'].changeLog = changesArray;
+        sidebar['更新日志'].menus = menus;
+        sidebar['更新日志'].version = latestVersion;
+        
+        fs.writeJson('./static/sidebar.json', sidebar)
+            .then(() => {
+                console.log(`😀json文件写入成功! 写入了 更新日志 的 changelog`);
+            })
+            .catch(err => {
+                console.log(`❌json文件写入失败! 更新日志 出错 的 changelog`);
+                console.error(err)
+            })
+
+        //写入new.json
+
+        let latestRelease = list[0].body;
+        let newAry=latestRelease.match(newComReg);
+        let newJsonAry = []
+        newAry.forEach(item=>{
+            newJsonAry.push(item.replace('- ','').replace('@',''))
+        })
+        fs.writeJson('./static/new.json', newJsonAry)
+            .then(() => {
+                console.log('😀✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ ✌️ new.json文件写入成功!')
+            })
+            .catch(err => {
+                console.log('😀new.json文件写入失败!')
+                console.error(err)
+            })
+    }
+})

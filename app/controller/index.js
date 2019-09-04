@@ -138,7 +138,13 @@ module.exports = {
       "<a class='title-tag title-version' href='"+pack_data.homepage+"' target='_blank'>v"+pack_data.version+"</a>" +
       "</div>"
     );
-    } else {
+    }else if (component == 'changelog') {
+      rightMenus = docsMenus[component].menus;
+      changeLog = sidebar['更新日志'].changeLog;
+      filePath = path.join(__dirname, `../../docs/${component}.md`);
+      data = await fs.readFileSync(filePath, 'utf-8');
+    }
+     else {
       filePath = path.join(__dirname, `../../docs/${component}.md`);
       rightMenus = docsMenus[component].menus;
       data = await fs.readFileSync(filePath, 'utf-8');
