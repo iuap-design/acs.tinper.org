@@ -251,7 +251,7 @@
                 "version": "1.0.0",
                 "component": "ac-hand-table"
             },
-            "复杂 AcGrids": {
+            "复杂表格 AcGrids": {
                 "version": "1.0.0",
                 "component": "ac-grids"
             }
