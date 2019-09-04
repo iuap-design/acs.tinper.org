@@ -1,0 +1,29 @@
+.ac-split-area{
+    &-left{
+        user-select: none;
+        height: 22px;
+        cursor: pointer;
+        display: flex;
+        font-size: 14px;
+        &-text{
+            width: auto;
+            margin-right: 10px;
+        }
+        &-line{
+            flex-grow: 1;
+            &-inner{
+                border-bottom: 1px dashed #d9d9d9;
+                width: 100%;
+                display: inline-block;
+                position: relative;
+                top: -5px;
+            }
+        }
+    }
+    &-ctn{
+        height: 0;
+    }
+    &-ctn.open{
+        height: auto;
+    }
+}

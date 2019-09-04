@@ -46,7 +46,7 @@ class Demo extends Component {
                 <Clipboard action="copy" text={code}/>
             </div>
             <pre className="pre-js">
-                <code className="hljs javascript">{ code.replace('../../src/index',COMPONENT).replace('../../src',COMPONENT) }</code>
+                <code className="hljs javascript">{ code.replace('../../src/index.less',COMPONENT+'/lib/index.css').replace('../../src/index.js',COMPONENT).replace('../../src/index',COMPONENT).replace('../../src',COMPONENT)}</code>
             </pre >
             {!!scss_code ?<div className='component-code-copy copy-css'> SCSS代码 
                 <Clipboard action="copy" text={scss_code}/>

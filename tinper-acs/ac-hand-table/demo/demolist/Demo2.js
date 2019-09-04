@@ -21,7 +21,7 @@ const data = [
   {
     id: 1,
     name: '张三',
-    // gender: '1',
+    gender: '1',
     date: '2018-07-02',
     money: 10000,
     custom: '自定义',
@@ -248,10 +248,6 @@ class Demo2 extends Component {
     this.child.onExportCSV();
   };
 
-  onSelectData=(param)=>{
-
-  }
-
 
   render() {
     const { handData, changeRowNum } = this.state;
@@ -275,7 +271,6 @@ class Demo2 extends Component {
         </div>
 
 
-
         <AcHandTable
           id="example2" // 组件id
           onRef={(ref) => { // 设置ref属性 调用子组件方法
@@ -295,8 +290,7 @@ class Demo2 extends Component {
           // mergeCells // 右键菜单是否开启单元格合并
           // multiSelect={false} // 关闭多选框
           width="100%"
-          height="150px"
-          onSelectData={this.onSelectData}
+          height="auto"
         />
 
 

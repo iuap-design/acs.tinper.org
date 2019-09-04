@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基本示例不同大小", "code": "/**\n*\n* @title 基本示例不同大小\n* @description 不同大小的按钮\n*\n*/\nimport React, { Component } from 'react';\nimport  SplitButton, Menu, Button  from 'ac-split-button';\nconst { Item } = Menu;\n\nclass Demo1 extends Component {\n    render () {\n        const menuList= (\n            <Menu >\n              <Item key=\"1\">借款合同</Item>\n              <Item key=\"2\">抵/质押合同</Item>\n              <Item key=\"3\">担保合同</Item>\n              <Item key=\"4\">联保合同</Item>\n              <Item key=\"5\">合同审批</Item>\n              <Item key=\"6\">抵/质押合同跟踪</Item>\n            </Menu>\n        );\n        return (\n            <div>\n                    <SplitButton menuList={menuList} onClick={()=>{console.log('click')}}>按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='primary'>primary按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='success'>success按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='info'>info按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='warning'>warning按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='danger'>danger按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='dark'>dark按钮</SplitButton>\n            </div>\n        )\n    }\n}\n", "desc": " 不同大小的按钮" }];
+	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基本示例不同大小", "code": "/**\n*\n* @title 基本示例不同大小\n* @description 不同大小的按钮\n*\n*/\nimport React, { Component } from 'react';\nimport { Menu, Button } from 'tinper-bee';\nimport SplitButton from 'ac-split-button';\nconst { Item } = Menu;\n\nclass Demo1 extends Component {\n    render () {\n        const menuList= (\n            <Menu >\n              <Item key=\"1\">借款合同</Item>\n              <Item key=\"2\">抵/质押合同</Item>\n              <Item key=\"3\">担保合同</Item>\n              <Item key=\"4\">联保合同</Item>\n              <Item key=\"5\">合同审批</Item>\n              <Item key=\"6\">抵/质押合同跟踪</Item>\n            </Menu>\n        );\n        return (\n            <div>\n                    <SplitButton menuList={menuList} onClick={()=>{console.log('click')}}>按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='primary'>primary按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='success'>success按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='info'>info按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='warning'>warning按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='danger'>danger按钮</SplitButton>\n                    <SplitButton menuList={menuList} colors='dark'>dark按钮</SplitButton>\n            </div>\n        )\n    }\n}\nexport default Demo1", "desc": " 不同大小的按钮" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -34586,9 +34586,11 @@
 	
 	var propTypes = {
 	    onListIconClick: _propTypes2['default'].func,
-	    menuList: _propTypes2['default'].node.isRequired
+	    menuList: _propTypes2['default'].node.isRequired,
+	    disabled: _propTypes2['default'].bool
 	};
 	var defaultProps = {
+	    disabled: false,
 	    onListIconClick: function onListIconClick() {}
 	};
 	
@@ -34653,7 +34655,8 @@
 	            _props$size = _props.size,
 	            size = _props$size === undefined ? '' : _props$size,
 	            onClick = _props.onClick,
-	            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick']);
+	            disabled = _props.disabled,
+	            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick', 'disabled']);
 	
 	        return _react2['default'].createElement(
 	            'div',
@@ -34662,9 +34665,9 @@
 	                _beeDropdown2['default'],
 	                {
 	                    trigger: ['click'],
-	                    overlay: this.getMenuElement(),
+	                    overlay: disabled ? [] : this.getMenuElement(),
 	                    animation: 'slide-up',
-	                    onVisibleChange: this.onVisibleChange,
+	                    onVisibleChange: disabled ? function () {} : this.onVisibleChange,
 	                    onClick: onListIconClick,
 	                    overlayClassName: 'ac-split-button-dropdown'
 	                },
@@ -34674,6 +34677,7 @@
 	                    _react2['default'].createElement(
 	                        _beeButton2['default'],
 	                        _extends({}, other, {
+	                            disabled: disabled,
 	                            onClick: this.onBtnClick,
 	                            ref: function ref(btn) {
 	                                return _this2.btn = btn;
@@ -34682,7 +34686,7 @@
 	                    ),
 	                    _react2['default'].createElement(
 	                        'span',
-	                        { className: 'icon-out',
+	                        { className: 'icon-out', disabled: disabled,
 	                            style: {
 	                                'height': this.state.height
 	                            }

@@ -2,6 +2,18 @@
     "ac-button": {
         "name": "按钮"
     },
+    "ac-btns": {
+        "name": "项目按钮"
+    },
+    "ac-grids": {
+        "name": "复杂表格"
+    },
+    "ac-split-area": {
+        "name": "区域分割"
+    },
+    "ac-tips": {
+        "name": "消息提示"
+    },
     "ac-barcode": {
         "name": "条形码组件"
     },
@@ -44,25 +56,19 @@
     "ac-split-button": {
         "name": "分割下拉按钮"
     },
-    "nc-header": {
+    "ac-header": {
         "name": "页头信息"
     },
-    "nc-search-panel": {
+    "ac-search-cn": {
         "name": "查询面板"
     },
     "ac-form-layout": {
         "name": "表单布局"
     },
-    "nc-grid": {
-        "name": "复杂表格"
-    },
 
 
     "ac-editor-sany":{
         "name":"富文本编辑器sany版本"
-    },
-    "ac-hand-table":{
-        "name":"Hand表格"
     },
     "ac-multi-tabs":{
       "name":"多页签组件"  

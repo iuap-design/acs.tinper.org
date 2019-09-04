@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import {Button} from 'tinper-bee';
 import AcMultiTabs from '../../src/index';
 
-let index = 0;
+let index = 1;
 class Demo1 extends Component {
     constructor(props){
         super(props);
@@ -18,7 +18,12 @@ class Demo1 extends Component {
                 id: 0,
                 router: 'home',
                 title: "home"
-            }]
+            },{
+                id: 1,
+                router: '/detail',
+                title: "详情页"
+            }],
+            activeKey: 1
         }
     }
 
@@ -36,19 +41,25 @@ class Demo1 extends Component {
         });
     }
 
-    handleChange = (v) => {
-        console.log(v)
+    /**
+     * 点击页签和删除页签时触发
+     * @param newMenus 新的页签数组
+     * @param target 操作的节点信息
+     */
+    handleChange = (newMenus, target) => {
+        console.log('新的页签数组： ', newMenus)
+        console.log('操作的节点信息： ', target)
         this.setState({
-            menus : v
+            menus : newMenus
         })
     }
     
     render () {
-        const { menus } = this.state;
+        const { activeKey, menus } = this.state;
         return (
             <div className="demoPadding">
                 <Button colors="primary" onClick={this.add} style={{margin: '8px'}}>增加</Button>
-                <AcMultiTabs menus={menus} onChange={this.handleChange}/>
+                <AcMultiTabs activeKey={activeKey} menus={menus} onChange={this.handleChange}/>
             </div>
         )
     }

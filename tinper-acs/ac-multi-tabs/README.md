@@ -20,8 +20,9 @@ import 'ac-multi-tabs/dist/index.css';
 
 参数 | 类型 | 默认值 | 是否必填 | 说明
 --------- | ---- | ------|----------- | -----------------
+activeKey | `String | Number` | | 否 | 设置当前激活的页签的key值
 menus | `Array` | | 是 | 显示的页签数组
-onChange | `Func` | | 否 | 页签数组发生改变时触发
+onChange | `Function(newMenus, target)` | | 否 | 页签数组发生改变时触发
 
 
 

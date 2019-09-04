@@ -1,7 +1,7 @@
 /**
  *
  * @title excel 解析
- * @description excel 本地解析成json，没有必要上传excel 文件
+ * @description excel 本地解析成json，没有必要上传excel 文件, 表格禁用编辑切换
  *
  */
 
@@ -39,14 +39,14 @@ const data = [
     id: 3,
     name: '张小贝',
     level: 20,
-    gender: '1',
+    gender: '0',
     time: '09:20:30',
   },
   {
     id: 4,
     name: '张小贝',
     level: 20,
-    gender: '1',
+    gender: '0',
     time: '09:20:30',
   },
 ];
@@ -60,6 +60,14 @@ class Demo5 extends Component {
     };
   }
 
+  componentDidMount() {
+
+    this.child.updateSettings({
+      cells: this.setCell,
+    });
+
+  }
+
 
   columns = [
     {
@@ -69,7 +77,6 @@ class Demo5 extends Component {
     {
       data: 'level',
       type: 'numeric', // 数字类型
-      readOnly: true, // 只读
     },
     {
       data: 'gender',
@@ -88,7 +95,12 @@ class Demo5 extends Component {
           key: '0',
         },
       ],
-      dropdownMenu: true
+      dropdownMenu: true,
+      onChange: () => {
+        this.child.updateSettings({
+          cells: this.setCell,
+        });
+      }
     },
     {
       data: 'time',
@@ -136,6 +148,19 @@ class Demo5 extends Component {
   };
 
 
+  setCell = (row, column) => {
+    const data = this.child.getSourceData();
+    const { gender } = data[row];
+    const cellProperties = {};
+    // 设置满足条件
+    if (gender === '男' && column === 1) {
+      cellProperties.editor = false;
+      cellProperties.readOnly = true;
+    }
+    return cellProperties;
+  };
+
+
   render() {
     const { handData } = this.state;
     // excel 列名hash 对照
@@ -165,45 +190,38 @@ class Demo5 extends Component {
         </div>
 
 
+        <AcHandTable
+          id="example5" // 组件id
+          onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
+          colHeaders={['姓名', '等级', '性别', '时间']} // 表格表头
+          data={handData} // 表体数据
+          columns={this.columns} // 列属性设置
+          colWidths={[50, 100, 100, 120, null]}
+          columnHeaderHeight={30}
+          manualRowMove // 行移动
+          fillHandle={{
+            autoInsertRow: false,
+            direction: 'vertical',
+          }}
+          csvConfig={{
+            filename: '导出',
+            columnHeaders: true,
+          }}
 
-          <AcHandTable
-            id="example5" // 组件id
-            onRef={ref => this.child = ref} // 设置ref属性 调用子组件方法
-            colHeaders={['姓名', '等级', '性别', '时间']} // 表格表头
-            data={handData} // 表体数据
-            columns={this.columns} // 列属性设置
-            colWidths={[50, 100, 100, 120, null]}
-            columnHeaderHeight={30}
-            manualRowMove // 行移动
-            fillHandle={{
-              autoInsertRow: false,
-              direction: 'vertical',
-            }}
-            csvConfig={{
-              filename: '导出',
-              columnHeaders: true,
-            }}
 
-            cells={(row, column) => { // 禁止修改
-              const cellProperties = {};
-              if (row === 1) {
-                cellProperties.editor = false;
-                cellProperties.readOnly = true;
-              }
-              return cellProperties;
-            }}
+          // rowStyle={(rowIndex, column) => { // 自定义 禁止修改样式
+          //   let bgColor = '#fff';
+          //   if (rowIndex === 1 && column === 1) {
+          //     bgColor = '#DFE1E6';
+          //   }
+          //   return { 'background-color': bgColor };
+          // }}
 
-            rowStyle={(rowIndex) => { // 禁止修改样式
-              let bgColor = '#fff';
-              if (rowIndex === 1) {
-                bgColor = '#DFE1E6';
-              }
-              return { 'background-color': bgColor };
-            }}
+          width="100%"
+          height="auto"
+          readOnlyCellClassName='is-readOnly'
 
-            width="100%"
-            height="130px"
-          />
+        />
 
       </div>
 

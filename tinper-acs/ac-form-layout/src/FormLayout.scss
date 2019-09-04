@@ -7,10 +7,18 @@
         padding: 0;
         margin-bottom: 8px;
 
+        input,
+        .u-select .u-select-selection,
+        .u-input-number {
+            border-color: #d5d6d9;
+        }
+
         .u-label {
             display: inline-block;
             width: 140px;
             text-align: right;
+            font-size: 13px;
+            color: #111111;
         }
 
         .u-label+* {
@@ -18,15 +26,20 @@
             display: inline-block;
             height: 32px;
         }
-        .container-refer{//mdf参照
-            .ant-search-input-wrapper{
+
+        .container-refer {
+
+            //mdf参照
+            .ant-search-input-wrapper {
                 vertical-align: middle;
                 height: 32px;
-                .ant-input{
-                    border: 1px solid #a5adba;
+
+                .ant-input {
+                    border: 1px solid #d5d6d9;
                 }
             }
         }
+
         &.error {
 
             .u-form-control,
@@ -39,9 +52,12 @@
             .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
                 color: #f53c32;
             }
-            .container-refer{//mdf参照
-                .ant-search-input-wrapper{
-                    .ant-input{
+
+            .container-refer {
+
+                //mdf参照
+                .ant-search-input-wrapper {
+                    .ant-input {
                         border-color: #f53c32;
                     }
                 }
@@ -91,7 +107,8 @@
             text-overflow: ellipsis;
             height: 30px;
             pointer-events: none;
-            &-text{
+
+            &-text {
                 padding: 5px 10px;
                 border-radius: 4px;
                 background: #fff;
@@ -108,8 +125,36 @@
             content: " ";
             left: calc(50% - 5px);
             transform: rotate(45deg);
-            border-right: 1px solid #a5adba;
-            border-bottom: 1px solid #a5adba;
+            border-right: 1px solid #d5d6d9;
+            border-bottom: 1px solid #d5d6d9;
+        }
+
+
+        //禁用状态
+        .u-form-control[disabled] {
+            background: #f3f3f3;
+            border-color: #e0e0e0;
+            color: #2B344B !important;
+        }
+
+        .u-select-disabled {
+            .u-select-selection {
+                background: #f3f3f3;
+                border-color: #e0e0e0;
+                color: #2B344B;
+            }
+
+        }
+
+        input::-webkit-input-placeholder {
+            color: #cccccc !important;
+            font-size: 13px;
+        }
+
+        .u-select-selection-placeholder,
+        .u-select-search-field-placeholder {
+            color: #cccccc;
+            font-size: 13px;
         }
     }
 
@@ -120,13 +165,6 @@
         right: 2px;
     }
 
-    // &-error-msg.inverse.u-tooltip{
-    //     .tooltip-inner{
-    //         color: #f53c32;
-    //         border: none!important;
-    //         box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3);
-    //     }
-    // }
     &.disabled {
         pointer-events: none;
 
@@ -149,15 +187,25 @@
         .u-input-group-btn {
             display: none;
         }
-        .container-refer{//mdf参照
-            .ant-search-input-wrapper{
-                .ant-input{
+
+        .container-refer {
+
+            //mdf参照
+            .ant-search-input-wrapper {
+                .ant-input {
                     border: none;
                     background: none;
                 }
-                .ant-input-suffix{
+
+                .ant-input-suffix {
                     display: none;
                 }
+            }
+        }
+        .u-input-number{
+            border: none;
+            .u-input-group-addon{
+                display: none;
             }
         }
     }

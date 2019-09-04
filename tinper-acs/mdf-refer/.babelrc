@@ -1,24 +1,30 @@
 {
 	"presets": [
-		[
-			"env",
-			{
-				"loose": true
-			}
-		],
+		"env",
+		"react",
 		"stage-1",
-		"react"
 	],
 	"plugins": [
+		// [
+		// 	"transform-runtime",
+		// 	{
+		// 		"helpers": false,
+		// 		"polyfill": true,
+		// 		"regenerator": true
+		// 	}
+		// ],
+		// "transform-decorators-legacy",
 		[
-			"transform-runtime",
+			"module-resolver",
 			{
-				"helpers": false,
-				"polyfill": true,
-				"regenerator": true
+			  "alias": {
+				"static": "./static",
+				"src/common": "./src@common",
+				"business": "./src@business",
+				"SvgIcon": "./node_modules/@mdf/metaui-web/lib/components/common/SvgIcon.js"
+			  }
 			}
 		],
-		"transform-decorators-legacy",
-		"react-hot-loader/babel"
+		// "react-hot-loader/babel"
 	]
 }

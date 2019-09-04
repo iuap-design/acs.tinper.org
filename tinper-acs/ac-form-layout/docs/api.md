@@ -1,5 +1,6 @@
 # 表单布局 FormLayout
 
+项目中需要引入`tinper-bee`的样式文件
 
  ## 何时使用
 
@@ -17,12 +18,20 @@ const { FormItem, FormRow } = FormLayout;
 
  ## API
 
+### FormLayout
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|FormLayout.disabled|表单内容是否可编辑|bool|-|
-|FormItem.lable|label标签内容|string|-|
-|FormItem.required|是否必填|bool|-|
-|FormItem.errorMsg|错误信息，没有不传|node|-|
+|disabled|表单内容是否可编辑|bool|-|
+
+### FormItem
+
+|参数|说明|类型|默认值|
+|:---|:-----|:----|:------|
+|lable|label标签内容|string|-|
+|required|是否必填|bool|-|
+|errorMsg|错误信息，没有不传|node|-|
+
 
 
 

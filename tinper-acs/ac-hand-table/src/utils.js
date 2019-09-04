@@ -308,3 +308,20 @@ export function getBetweenNum(starNum, endNum, num = 1) {
   }
   return result;
 }
+
+
+// 对象排序
+export function compareObj(propertyName, sortOrder) {
+
+  return function (object1, object2) {
+    const value1 = object1[propertyName] || '';
+    const value2 = object2[propertyName] || '';
+    if (value2 < value1) {
+      return sortOrder === 'asc' ? -1 : 1;
+    } else if (value2 > value1) {
+      return sortOrder === 'asc' ? 1 : -1;
+    } else {
+      return 0;
+    }
+  };
+}

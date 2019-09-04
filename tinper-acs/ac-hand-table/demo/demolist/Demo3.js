@@ -1032,7 +1032,13 @@ class Demo3 extends Component {
       validator: (value, callback) => { // 必输项
         callback(!!value);
       },
+      onClick: (rowData, rowNum, value) => {
+        this.setState({ rowData });
+      },
       refSource: (value, type, callback) => {
+
+        const { rowData } = this.state;
+        console.log('value, type', value, type, rowData);
         const data = [
           {
             id: '1',
@@ -1061,7 +1067,7 @@ class Demo3 extends Component {
         const { refname, code } = refData;
         rowData.autocomplete = refname;
         rowData.yyy = code;
-        console.log("refData",refData); // 如果为空对象表示没有选中
+        console.log('refData', refData); // 如果为空对象表示没有选中
         this.child.onUpdateRowData(rowNum, rowData);
       },
 
@@ -1194,19 +1200,19 @@ class Demo3 extends Component {
         </div>
 
 
-          <AcHandTable
-            id="example3" // 组件id
-            onRef={(ref) => { // 设置ref属性 调用子组件方法
-              this.child = ref;
-            }}
-            colHeaders={['编码', '下拉', '表格参照', '树参照', '树表参照', '树穿梭']} // 表格表头
-            data={handData} // 表体数据
-            columns={this.columns} // 列属性设置
-            colWidths={[null, 100, 100, 100, 100, 100, 100, null]}
-            rowKey="id" // 数组对象中唯一id 默认值为'id'
-            width="100%"
-            height="106px"
-          />
+        <AcHandTable
+          id="example3" // 组件id
+          onRef={(ref) => { // 设置ref属性 调用子组件方法
+            this.child = ref;
+          }}
+          colHeaders={['编码', '下拉', '表格参照', '树参照', '树表参照', '树穿梭']} // 表格表头
+          data={handData} // 表体数据
+          columns={this.columns} // 列属性设置
+          colWidths={[null, 100, 100, 100, 100, 100, 100, null]}
+          rowKey="id" // 数组对象中唯一id 默认值为'id'
+          width="100%"
+          height="106px"
+        />
 
       </div>
     );

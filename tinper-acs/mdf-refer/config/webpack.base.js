@@ -16,16 +16,12 @@ module.exports = {
       containers: path.resolve(__dirname, "src/containers/")
     }
   },
+  // externals: [
+  //   /^src\//
+  // ],
   module: {
     rules: [
-      // {
-      //   enforce: 'pre',
-      //   test: /.(js|jsx)$/,
-      //   loader: 'eslint-loader',
-      //   exclude: [
-      //     path.resolve(__dirname, '../node_modules')
-      //   ]
-      // },
+
       {
         test: /.jsx$/,
         loader: 'babel-loader'
@@ -37,7 +33,25 @@ module.exports = {
           path.join(__dirname, '../node_modules')
         ]
       },
-      
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   loader: 'babel-loader',
+      //   include: [
+      //     path.resolve('src/'),
+      //     path.resolve('demolist'),
+      //     path.resolve('node_modules/@mdf'),
+      //   ],
+      //   query: {
+      //     plugins: [
+      //       ["import", { "style": "css", "libraryName": "antd" }]
+      //     ],
+      //     cacheDirectory: true
+      //   }
+      // },
+      {
+        test: /\.(map)$/,
+        loader: 'ignore-map-loader'
+      },
       {
         test: /\.(png|jpg|jpeg|gif)(\?.+)?$/,
         exclude: /favicon\.png$/,

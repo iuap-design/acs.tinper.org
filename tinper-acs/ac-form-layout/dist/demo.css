@@ -4,13 +4,25 @@
 .ac-form-layout-item {
   padding: 0;
   margin-bottom: 8px; }
+  .ac-form-layout-item input,
+  .ac-form-layout-item .u-select .u-select-selection,
+  .ac-form-layout-item .u-input-number {
+    border-color: #d5d6d9; }
   .ac-form-layout-item .u-label {
     display: inline-block;
     width: 140px;
-    text-align: right; }
+    text-align: right;
+    font-size: 13px;
+    color: #111111; }
   .ac-form-layout-item .u-label + * {
     width: calc(100% - 140px);
-    display: inline-block; }
+    display: inline-block;
+    height: 32px; }
+  .ac-form-layout-item .container-refer .ant-search-input-wrapper {
+    vertical-align: middle;
+    height: 32px; }
+    .ac-form-layout-item .container-refer .ant-search-input-wrapper .ant-input {
+      border: 1px solid #d5d6d9; }
   .ac-form-layout-item.error .u-form-control,
   .ac-form-layout-item.error .u-input-number,
   .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn {
@@ -18,6 +30,8 @@
   .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus,
   .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
     color: #f53c32; }
+  .ac-form-layout-item.error .container-refer .ant-search-input-wrapper .ant-input {
+    border-color: #f53c32; }
   .ac-form-layout-item .datepicker-input-group .u-form-control {
     float: unset; }
   .ac-form-layout-item .ref-input-wrap {
@@ -61,8 +75,23 @@
     content: " ";
     left: calc(50% - 5px);
     transform: rotate(45deg);
-    border-right: 1px solid #a5adba;
-    border-bottom: 1px solid #a5adba; }
+    border-right: 1px solid #d5d6d9;
+    border-bottom: 1px solid #d5d6d9; }
+  .ac-form-layout-item .u-form-control[disabled] {
+    background: #f3f3f3;
+    border-color: #e0e0e0;
+    color: #2B344B !important; }
+  .ac-form-layout-item .u-select-disabled .u-select-selection {
+    background: #f3f3f3;
+    border-color: #e0e0e0;
+    color: #2B344B; }
+  .ac-form-layout-item input::-webkit-input-placeholder {
+    color: #cccccc !important;
+    font-size: 13px; }
+  .ac-form-layout-item .u-select-selection-placeholder,
+  .ac-form-layout-item .u-select-search-field-placeholder {
+    color: #cccccc;
+    font-size: 13px; }
 
 .ac-form-layout-mast {
   position: relative;
@@ -86,5 +115,14 @@
   .ac-form-layout.disabled .rc-tree-select-menu-icon,
   .ac-form-layout.disabled .u-input-group-btn {
     display: none; }
+  .ac-form-layout.disabled .container-refer .ant-search-input-wrapper .ant-input {
+    border: none;
+    background: none; }
+  .ac-form-layout.disabled .container-refer .ant-search-input-wrapper .ant-input-suffix {
+    display: none; }
+  .ac-form-layout.disabled .u-input-number {
+    border: none; }
+    .ac-form-layout.disabled .u-input-number .u-input-group-addon {
+      display: none; }
 
 /*# sourceMappingURL=demo.css.map */

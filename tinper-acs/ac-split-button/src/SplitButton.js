@@ -8,9 +8,11 @@ import classnames  from 'classnames'
 
 const propTypes = {
     onListIconClick:PropTypes.func,
-    menuList:PropTypes.node.isRequired
+    menuList:PropTypes.node.isRequired,
+    disabled:PropTypes.bool
 };
 const defaultProps = {
+    disabled:false,
     onListIconClick:()=>{}
 };
 
@@ -52,26 +54,27 @@ class SplitButton extends Component {
         this.props.onClick&&this.props.onClick(e);
     }
     render(){
-        let { children,menuList,onListIconClick,colors,size='',onClick,...other } = this.props;
+        let { children,menuList,onListIconClick,colors,size='',onClick,disabled,...other } = this.props;
         
         return(
             <div className={'ac-split-button '+colors+' '+size}>
                <Dropdown
                     trigger={['click']}
-                    overlay={this.getMenuElement()}
+                    overlay={disabled?[]:this.getMenuElement()}
                     animation="slide-up"
-                    onVisibleChange={this.onVisibleChange}
+                    onVisibleChange={disabled?()=>{}:this.onVisibleChange}
                     onClick={onListIconClick}
                     overlayClassName='ac-split-button-dropdown'
                     >
                         <span>
                             <Button 
                             {...other} 
+                            disabled={disabled}
                             onClick={this.onBtnClick}
                             ref={btn=>this.btn=btn} colors={colors} bordered size={size} className='split-btn'>
                                 {children}
                             </Button>
-                            <span className='icon-out'
+                            <span className='icon-out' disabled={disabled}
                                 style={{
                                     'height':this.state.height
                                 }}

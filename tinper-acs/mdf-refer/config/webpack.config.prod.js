@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Date: 2019-08-14 12:29:24
+ * @LastEditTime: 2019-08-14 19:59:46
+ */
 
 
 
@@ -19,7 +25,9 @@ module.exports = webpackMerge(baseConfig, {
       filename: 'index.js',
       path: path.join(__dirname, '../dist'),
       publicPath: '/',
-      libraryTarget: 'commonjs2'
+      libraryTarget: 'commonjs2',
+      // library:'MdfRefer',
+      // libraryTarget: 'umd',
   },
   module: {
     rules: [
@@ -59,7 +67,21 @@ module.exports = webpackMerge(baseConfig, {
           },
           "less-loader"
         ]
-      }
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: [
+          /node_modules\/(?!(@mdf)\/)/,
+          /node_modules\/@mdf\/[^/]+\/node_modules\//
+        ],
+        query: {
+          plugins: [
+            ["import", { "style": "css", "libraryName": "antd" }]
+          ],
+          cacheDirectory: true
+        }
+      },
     ]
   },
   optimization: {

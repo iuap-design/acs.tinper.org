@@ -48,9 +48,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var propTypes = {
     onListIconClick: _propTypes2["default"].func,
-    menuList: _propTypes2["default"].node.isRequired
+    menuList: _propTypes2["default"].node.isRequired,
+    disabled: _propTypes2["default"].bool
 };
 var defaultProps = {
+    disabled: false,
     onListIconClick: function onListIconClick() {}
 };
 
@@ -115,7 +117,8 @@ var SplitButton = function (_Component) {
             _props$size = _props.size,
             size = _props$size === undefined ? '' : _props$size,
             onClick = _props.onClick,
-            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick']);
+            disabled = _props.disabled,
+            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick', 'disabled']);
 
         return _react2["default"].createElement(
             'div',
@@ -124,9 +127,9 @@ var SplitButton = function (_Component) {
                 _beeDropdown2["default"],
                 {
                     trigger: ['click'],
-                    overlay: this.getMenuElement(),
+                    overlay: disabled ? [] : this.getMenuElement(),
                     animation: 'slide-up',
-                    onVisibleChange: this.onVisibleChange,
+                    onVisibleChange: disabled ? function () {} : this.onVisibleChange,
                     onClick: onListIconClick,
                     overlayClassName: 'ac-split-button-dropdown'
                 },
@@ -136,6 +139,7 @@ var SplitButton = function (_Component) {
                     _react2["default"].createElement(
                         _beeButton2["default"],
                         _extends({}, other, {
+                            disabled: disabled,
                             onClick: this.onBtnClick,
                             ref: function ref(btn) {
                                 return _this2.btn = btn;
@@ -144,7 +148,7 @@ var SplitButton = function (_Component) {
                     ),
                     _react2["default"].createElement(
                         'span',
-                        { className: 'icon-out',
+                        { className: 'icon-out', disabled: disabled,
                             style: {
                                 'height': this.state.height
                             }

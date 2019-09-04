@@ -13,10 +13,12 @@
         "ac-hotkey-button",
         "ac-search-tabs",
         "ac-split-button",
-        "nc-header",
-        "nc-search-panel",
-        "nc-grid",
-        "ac-form-layout"
+        "ac-header",
+        "ac-form-layout",
+        "ac-btns",
+        "ac-tips",
+        "ac-split-area",
+        "ac-grids"
     ],
     "others":[
         "ac-hand-table",

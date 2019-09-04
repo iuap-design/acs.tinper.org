@@ -15,7 +15,6 @@ const defaultProps = {
 class Tab extends Component {
     constructor(props) {
         super(props);
-        var self = this;
         var value = typeof sessionStorage['tabNotice']=='undefined'?true:sessionStorage['tabNotice'];
 
         let initialMenus = [];
@@ -27,7 +26,7 @@ class Tab extends Component {
             tabNotice:JSON.parse(value),
             moreMenuList:[],
             tabsMore: false, //是否显示更多
-            current: '', //当前选中的key
+            current: props.activeKey || '', //当前选中的key
             menus: initialMenus || [], //显示的多页签
             tabNum:0, //多页签数量
         };
@@ -39,22 +38,32 @@ class Tab extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.menus !== this.props.menus){
+        const { menus, activeKey } = this.props;
+        if(nextProps.menus !== menus){
             this.setState({
                 menus: nextProps.menus
             })
         }
+        if(nextProps.activeKey !== activeKey){
+            this.setState({
+                activeKey: nextProps.activeKey
+            })
+        }
     }
-
-    setCurrent (id) {
-        // debugger
+    
+    /**
+     * 设置激活页签
+     * @param id 点击的页签的 id
+     * @param tab 点击的页签的信息
+     * @param type 0 为点击普通页签，1 为点击更多列表里的页签
+     */
+    setCurrent (id, tab) {
         let morelist = this.state.moreMenuList;
         let menuProp = this.props.menus;
-        let list = [];
-        let obj={};
+        const { onChange } = this.props;
         let moreFlag = false;
+        let obj = {};
         if(morelist.length > 0) {
-          // return;
           for (var i = 0; i < morelist.length; i++) {
             if(morelist[i].id === id) {
                 moreFlag = true;
@@ -77,19 +86,13 @@ class Tab extends Component {
           current: id,
           menus: menuProp
         })
-        // console.log('123',this.props.menus);
-        // actions.app.updateState({
-        //     current: id,
-        //     showNotice:0,
-        //     reload:0,
-        //     // menus: menuProp
-        // })
+        onChange && onChange(menuProp, tab);
         sessionStorage['current'] = JSON.stringify({
             current:id
         });
     }
 
-    del (id) {
+    del (id, tab) {
         const {menus,current} = this.state;
         const { onChange } = this.props;
         var menuCloned = JSON.parse(JSON.stringify(menus));
@@ -111,32 +114,6 @@ class Tab extends Component {
             data.current=menuCloned[num].id;
             data.router=menuCloned[num].router;
         }
-        // var match = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
-
-        // var ifr = document.getElementById(id);
-        //TODO 跨域try catch
-        // if(ifr.src.match(match)!=null){
-        //     if(ifr.src.match(location.host)!=null){
-        //         try {
-        //             if(ifr.contentWindow.confirmClose&&typeof ifr.contentWindow.confirmClose=='function'){
-        //                 ifr.contentWindow.confirmClose(id,data);
-        //                 return false;
-        //             }
-        //         }
-        //         catch(err) {
-
-        //         }
-        //     }
-        // }
-        // else {
-        //     try{
-        //         var frameWin = ifr.contentWindow;
-        //         ifr.src = 'about:blank';
-        //         frameWin.document.write('');
-        //         frameWin.document.clear();
-        //         CollectGarbage();
-        //     }catch(e){};
-        // }
 
         data.tabNum = menuCloned.length;
 
@@ -148,7 +125,7 @@ class Tab extends Component {
             menus: data.menus,
             tabNum: data.tabNum
         })
-        onChange && onChange(data.menus);
+        onChange && onChange(data.menus, tab);
         return menuCloned;
     }
 
@@ -214,7 +191,7 @@ class Tab extends Component {
                     <ul className="tabs-list">
                         {
                             menus.map(function (item,index) {
-                                var delIcon = index==0?'':(<Icon type="uf-close-c" onClick={self.del.bind(this,item.id)} key={item.router}></Icon>)
+                                var delIcon = index==0?'':(<Icon type="uf-close-c" onClick={self.del.bind(this,item.id, item)} key={item.router}></Icon>)
 
                                 var homeIcon = index==0?<Icon type="uf-home"></Icon>:item.title;
                                 var ishome = index==0? "home-item" : "";
@@ -227,7 +204,7 @@ class Tab extends Component {
 
                                 } else {
                                   liDom = <li key={item.id} className={`${selected} ${ishome}`}>
-                                      <a onClick={self.setCurrent.bind(this,item.id)} href="javascript:;" title={item.title}>
+                                      <a onClick={self.setCurrent.bind(this,item.id, item, 0)} href="javascript:;" title={item.title}>
                                           {homeIcon}
                                       </a>
                                       {delIcon}
@@ -243,7 +220,7 @@ class Tab extends Component {
                           {
                             moremenu.map(function(item1,index1){
                               return (
-                                <li key={item1.id}><a onClick={self.setCurrent.bind(this,item1.id)} href="javascript:;" title={item1.title}>
+                                <li key={item1.id}><a onClick={self.setCurrent.bind(this, item1.id, item1, 1)} href="javascript:;" title={item1.title}>
                                     {item1.title}
                                 </a></li>
                               )

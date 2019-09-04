@@ -1,5 +1,5 @@
 
-# 组件名称 mdfrefer
+# 参照组件 mdfRefer 
 
 ## 何时使用
 
@@ -17,10 +17,10 @@ let model = new cb.models.ReferModel({
     multiple:true,
     displayname:'name',
     valueField:'id',
-    value:'ybt01__智能公司',
+    text:'ybt01__智能公司',
 });
 
-1. 其次添加方法
+2. 可以添加方法
 
 let config = {};
 config.modelconfig ={
@@ -36,7 +36,7 @@ cb.utils.initSupport('refer',this.model,config)
 <MdfRefer modelName={'refer'} model={this.model} config={config} ></MdfRefer>
 
 
-再配合bee-form组件使用时候建议使用第二种
+如果配合bee-form组件使用时候建议使用第二种
 
 ```
 
@@ -85,7 +85,6 @@ _get_data| 获取new cb.models.ReferModel传入的所有参数和上面提到的
 _set_data |  改变_get_data中所有可获取的字段的值 | `function` | - 
 _del_data | 删除_get_data中所有可获取的字段的某个字段 | `function` | - 
 
-后续新增方法updateListenerState
 ## 注意事项
 
 暂无
