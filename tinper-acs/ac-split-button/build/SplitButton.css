@@ -4,7 +4,6 @@
     display: inline-block;
     border: 1px solid #a5adba;
     position: relative;
-    bottom: 1px;
     border-left: none;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -24,7 +23,8 @@
     border-bottom-right-radius: 0;
     color: #212121;
     border: 1px solid #a5adba;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    font-size: 13px; }
   .ac-split-button-dropdown .u-dropdown-menu > .u-dropdown-menu-item-selected {
     color: #000;
     background: none; }

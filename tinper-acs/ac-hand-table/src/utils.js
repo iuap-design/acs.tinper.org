@@ -269,7 +269,7 @@ export function array2Obj(array, keyArray) {
 
 
 // 根据数组合成对象
-export function arrayFindObj(array, key = 'name', value) {
+export function arrayFindObj(array = [], key = 'name', value) {
   let result = null;
   for (const item of array) {
     if (item[key] === value) {
@@ -316,12 +316,25 @@ export function compareObj(propertyName, sortOrder) {
   return function (object1, object2) {
     const value1 = object1[propertyName] || '';
     const value2 = object2[propertyName] || '';
-    if (value2 < value1) {
-      return sortOrder === 'asc' ? -1 : 1;
-    } else if (value2 > value1) {
-      return sortOrder === 'asc' ? 1 : -1;
+
+    // 升序
+    if (sortOrder === 'asc') {
+      if (value1 < value2) {
+        return -1;
+      } else if (value1 > value2) {
+        return 1;
+      } else {
+        return 0;
+      }
     } else {
-      return 0;
+      if (value1 < value2) {
+        return 1;
+      } else if (value1 > value2) {
+        return -1;
+      } else {
+        return 0;
+      }
     }
+
   };
 }

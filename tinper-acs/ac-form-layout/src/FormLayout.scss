@@ -13,6 +13,9 @@
             border-color: #d5d6d9;
         }
 
+        .u-select-selection--single .u-select-selection-selected-value{
+            padding-left: 12px;
+        }
         .u-label {
             display: inline-block;
             width: 140px;
@@ -25,6 +28,7 @@
             width: calc(100% - 140px);
             display: inline-block;
             height: 32px;
+            font-size: 13px;
         }
 
         .container-refer {
@@ -168,6 +172,15 @@
     &.disabled {
         pointer-events: none;
 
+        .ac-form-layout-mast{
+            display: none;
+        }
+        .u-label:after{
+            content: " :"
+        }
+        .ac-form-layout-item-error-msg{
+            display: none;
+        }
         .rc-tree-select-selection,
         .rc-tree-select-selection:hover,
         .u-form-control {
@@ -180,6 +193,13 @@
         .u-select .u-select-selection {
             background: none;
             border: none;
+            &.u-select-selection--multiple{
+                .u-select-selection-choice{
+                    background: none;
+                    color: #111111;
+                    padding: 0;
+                }
+            }
         }
 
         .u-select-arrow,
@@ -189,24 +209,47 @@
         }
 
         .container-refer {
-
             //mdf参照
             .ant-search-input-wrapper {
                 .ant-input {
                     border: none;
                     background: none;
+                    pointer-events: none;
                 }
 
                 .ant-input-suffix {
                     display: none;
                 }
             }
+            .refer-wrapper{
+                pointer-events: none;
+                .refer-wrapper-content{
+                    border: none;
+                    background: none;
+                    >ul{
+                        background: none;
+                        .selected-item{
+                            span{
+                                border: none;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            .refer-canzhao-wrapper{
+                display: none;
+            }
+
         }
         .u-input-number{
             border: none;
             .u-input-group-addon{
                 display: none;
             }
+        }
+        .ac-split-area{
+            pointer-events: auto;
         }
     }
 }

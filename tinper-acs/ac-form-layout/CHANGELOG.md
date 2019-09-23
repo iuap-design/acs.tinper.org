@@ -1,3 +1,33 @@
+<a name="0.0.19"></a>
+## [0.0.19](https://github.com/tinper-bee/ac-form-layout/compare/v0.0.18...v0.0.19) (2019-09-23)
+
+
+
+<a name="0.0.18"></a>
+## [0.0.18](https://github.com/tinper-bee/ac-form-layout/compare/v0.0.17...v0.0.18) (2019-09-19)
+
+
+### Features
+
+* **ac-form-layut:** 适配参照 ([dc77470](https://github.com/tinper-bee/ac-form-layout/commit/dc77470))
+
+
+
+<a name="0.0.17"></a>
+## [0.0.17](https://github.com/tinper-bee/ac-form-layout/compare/v0.0.16...v0.0.17) (2019-09-10)
+
+
+
+<a name="0.0.16"></a>
+## [0.0.16](https://github.com/tinper-bee/ac-form-layout/compare/v0.0.15...v0.0.16) (2019-09-06)
+
+
+### Features
+
+* **ac-form-layout:** disabled状态隐藏错误提示 ([a057108](https://github.com/tinper-bee/ac-form-layout/commit/a057108))
+
+
+
 <a name="0.0.15"></a>
 ## [0.0.15](https://github.com/tinper-bee/ac-form-layout/compare/v0.0.14...v0.0.15) (2019-08-28)
 

@@ -33,7 +33,7 @@ class RenderColumn extends Component {
     getValue=(text)=>{
         let { type,filedProps } = this.props;
         let { options=[],defaultValue } = filedProps;
-        let value = defaultValue?defaultValue:'';
+        let value = defaultValue!=undefined?defaultValue:'';
         if(type&&type=='select'){
             options.forEach(item => {
                 if(item.value==text){
@@ -140,7 +140,7 @@ class RenderColumn extends Component {
                     </div>);
                 break;
                 case 'select':
-                    value = value?value:defaultValue;
+                    value = value?value:filedProps.defaultValue;
                     return (<div>
                             {
                                 disabled?

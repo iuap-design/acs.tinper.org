@@ -241,7 +241,7 @@ class RefTreeBaseUI extends Component {
         searchValue
       })
     }else{
-      this.props.getRefTreeData(searchValue);
+      this.props.getRefTreeData(searchValue.trim());
     }
 	};
 
@@ -296,6 +296,7 @@ class RefTreeBaseUI extends Component {
       isLocalSearch,
       treeNodeDisabledKey,
       treeProps={},
+      footerBtnDom='',
     } = this.props;
     const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
@@ -348,7 +349,7 @@ class RefTreeBaseUI extends Component {
             }
           </Modal.Body>
           <Modal.Footer className={'ref-core-modal-footer'}>
-            <RefCoreButton language={lang} onClickBtn={this.onClickBtn} buttons={buttons} emptyBut={emptyBut} />
+            <RefCoreButton language={lang} onClickBtn={this.onClickBtn} buttons={buttons} emptyBut={emptyBut} footerBtnDom={footerBtnDom}/>
           </Modal.Footer>
       </Modal>
     );

@@ -5,6 +5,7 @@ import { Panel } from 'bee-panel';
 import Drawer from 'bee-drawer';
 import Clipboard from 'bee-clipboard'; 
 import './demo.scss';
+import '../src/index.less';
 
 
 import Demo1 from "./demolist/Demo1";import Demo2 from "./demolist/Demo2";import Demo3 from "./demolist/Demo3";import Demo4 from "./demolist/Demo4";import Demo5 from "./demolist/Demo5";

@@ -170,12 +170,12 @@ let btns = {
     },
     enable: {
         onClick: () => {
-            console.log('clear')
+            console.log('enable')
         }
     },
     disabled: {
         onClick: () => {
-            console.log('clear')
+            console.log('disabled')
         }
     },
 }

@@ -20,11 +20,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 */
 // import 'babel-polyfill'
 
-// import Refer from '@mdf/metaui-web/lib/components/basic/refer';
-
-
-// import './styles/default/filtercontainer.jsx'
-
 
 var _react = require('react');
 
@@ -50,9 +45,13 @@ var _filter = require('@mdf/metaui-web/lib/components/filter');
 
 var _filter2 = _interopRequireDefault(_filter);
 
-var _refer = require('@mdf/metaui-web-ncc/lib/components/basic/refer');
+var _refer = require('@mdf/metaui-web/lib/components/basic/refer');
 
 var _refer2 = _interopRequireDefault(_refer);
+
+var _refer3 = require('@mdf/metaui-web-ncc/lib/components/basic/refer');
+
+var _refer4 = _interopRequireDefault(_refer3);
 
 var _listrefer = require('@mdf/metaui-web/lib/components/basic/listrefer');
 
@@ -66,8 +65,6 @@ var _filterscheme = require('@mdf/metaui-web/lib/redux/filterscheme');
 
 var _filterscheme2 = _interopRequireDefault(_filterscheme);
 
-require('./index.less');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -75,6 +72,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import './styles/default/filtercontainer.jsx'
+// import './index.less';
 
 var store = (0, _redux.createStore)((0, _redux.combineReducers)({
   filterscheme: _filterscheme2.default
@@ -117,7 +117,7 @@ _cube2.default.utils.initSupport = function (modelName, model, config) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(_refer2.default, _extends({ model: model }, config.modelconfig))
+          _react2.default.createElement(_refer4.default, _extends({ model: model }, config.modelconfig))
         )
       );
       break;
@@ -226,7 +226,7 @@ var MdfRefer = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'container-refer ' + (wrapClassName ? wrapClassName : '') },
-          _react2.default.createElement(_refer2.default, _extends({ model: model }, config.modelconfig, {
+          _react2.default.createElement(_refer4.default, _extends({ model: model }, config.modelconfig, {
             afterOkClick: this.afterOkClickMdfRefer
           }))
         )

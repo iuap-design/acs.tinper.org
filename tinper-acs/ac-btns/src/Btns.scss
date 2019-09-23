@@ -9,18 +9,20 @@ $primaryColor : #e14c46;
     span.ac-btns-item{
         margin-right: 6px;
         color: #0073e1;
+        font-size: 13px;
         &[disabled]{
             color: #dfe1e6;
         }
     }
     button.ac-btns-item.u-button{
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+        font-size: 13px;
         &:last-child{
             margin-right: 0;
         }
         &.ac-btns-write{
             box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
-            border-color: #a5adba;
+            border-color: #d0d0d0;
             color: #111;
             background-color: #fff;
             &:hover{
@@ -75,7 +77,7 @@ $primaryColor : #e14c46;
         &.u-button[disabled],&.u-button[disabled]:hover{
             background: #fff;
             color: #dfe1e6;
-            border-color: #a5adba;
+            border-color: #d0d0d0;
             box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
         }
         

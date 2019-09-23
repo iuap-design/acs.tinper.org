@@ -51,6 +51,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Item = _beeMenus2["default"].Item;
 
 var propTypes = {
+    onClick: _propTypes2["default"].func, //点击按钮回调
     addToBtns: _propTypes2["default"].object, //所有的按钮，支持扩展
     powerBtns: _propTypes2["default"].array, // 按钮权限 code数组
     btns: _propTypes2["default"].object, // 按钮对象数组
@@ -65,7 +66,8 @@ var defaultProps = {
     type: 'button',
     maxSize: 2,
     forcePowerBtns: ['cancel', 'search', 'clear'], //取消、查询、清空不受权限管理控制
-    localeCookie: 'locale'
+    localeCookie: 'locale',
+    onClick: function onClick() {}
 };
 
 var getCookie = function getCookie(name) {
@@ -90,6 +92,13 @@ var Btns = function (_Component) {
         _classCallCheck(this, Btns);
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+        _this.onHandleClick = function (e, code) {
+            var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+            _this.props.onClick(e, code);
+            func(e);
+        };
 
         _this.renderBtns = function () {
             var _this$props = _this.props,
@@ -167,6 +176,12 @@ var Btns = function (_Component) {
             if (itemProps) {
                 if (itemProps.className) clss += ' ' + itemProps.className;
                 if (itemProps.name) name = itemProps.name;
+                if (itemProps.onClick) {
+                    var func = itemProps.onClick;
+                    itemProps.onClick = function (e) {
+                        _this.onHandleClick(e, key, func);
+                    };
+                }
             }
             if (getCookie(_this.props.localeCookie) == 'zh_TW') name = name_zh_TW;
             if (getCookie(_this.props.localeCookie) == 'en_US') name = name_en_US;

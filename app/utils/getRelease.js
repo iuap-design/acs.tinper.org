@@ -10,8 +10,8 @@ const newComReg = /- (.*)@/g;
 
 
 const auth = {
-    token: '',
-    user: 'liushaozhen'
+    token: '233ec435adad16d165d607db744edf89514c095b',
+    user: 'yangchch'
 }
 
 /**

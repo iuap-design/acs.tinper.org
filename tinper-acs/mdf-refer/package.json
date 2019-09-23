@@ -1,6 +1,6 @@
 {
   "name": "@yonyou/mdf-refer",
-  "version": "0.0.4-beta.3",
+  "version": "0.0.5",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -117,12 +117,12 @@
     "prop-types": "^15.6.0"
   },
   "dependencies": {
-    "@mdf/cube": "^1.0.0",
-    "@mdf/metaui-web": "^1.0.0",
-    "@mdf/metaui-web-ncc": "^1.0.0",
-    "@mdf/middlewares-auth": "^1.0.0",
+    "@mdf/cube": "^2.0.0",
+    "@mdf/metaui-web": "^2.0.0",
+    "@mdf/metaui-web-ncc": "^2.0.0",
+    "@mdf/middlewares-auth": "^2.0.0",
     "@mdf/middlewares-log4js": "^1.0.0",
-    "@mdf/plugin-meta": "^1.0.0",
+    "@mdf/plugin-meta": "^2.0.0",
     "@mdf/theme": "^1.0.0",
     "SvgIcon": "^1.0.0"
   }

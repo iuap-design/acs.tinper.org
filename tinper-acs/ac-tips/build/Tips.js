@@ -39,11 +39,11 @@ var defaultProps = {
     duration: 5000
 };
 
-var Toast = function (_Component) {
-    _inherits(Toast, _Component);
+var Tips = function (_Component) {
+    _inherits(Tips, _Component);
 
-    function Toast(props) {
-        _classCallCheck(this, Toast);
+    function Tips(props) {
+        _classCallCheck(this, Tips);
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
@@ -72,9 +72,7 @@ var Toast = function (_Component) {
         return _this;
     }
 
-    Toast.prototype.componentDidMount = function componentDidMount() {
-        var _this2 = this;
-
+    Tips.prototype.componentDidMount = function componentDidMount() {
         var _props = this.props,
             duration = _props.duration,
             destory = _props.destory,
@@ -83,19 +81,19 @@ var Toast = function (_Component) {
 
         if (duration) {
             this.timer && clearTimeout(this.timer);
-            if (type == 'success' || type == 'warning') {
-                this.timer = setTimeout(function () {
-                    destory(id);
-                }, duration);
-            } else {
-                this.timer = setTimeout(function () {
-                    _this2.hide();
-                }, duration);
-            }
+            // if(type=='success'||type=='warning'){
+            //     this.timer=setTimeout(()=>{
+            //         destory(id);
+            //     },duration)
+            // }else{
+            //     this.timer=setTimeout(()=>{
+            //         this.hide()
+            //     },duration)
+            // }
         }
     };
 
-    Toast.prototype.render = function render() {
+    Tips.prototype.render = function render() {
         var IconTypes = {
             warning: 'uf-exc-c',
             error: 'uf-close-c',
@@ -128,13 +126,13 @@ var Toast = function (_Component) {
         );
     };
 
-    return Toast;
+    return Tips;
 }(_react.Component);
 
 ;
 
-Toast.propTypes = propTypes;
-Toast.defaultProps = defaultProps;
+Tips.propTypes = propTypes;
+Tips.defaultProps = defaultProps;
 
-exports["default"] = Toast;
+exports["default"] = Tips;
 module.exports = exports['default'];

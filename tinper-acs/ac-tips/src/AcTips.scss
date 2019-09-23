@@ -10,12 +10,19 @@
     transition: all .3s;
     z-index: 9;
     .ac-tips{
+        display: flex;
         &-inner{
-            min-width: 100px;
+            min-width: 112px;
             display: inline-block;
-            text-align: center;
+            text-align: left;
             padding-right: 10px;
             font-size: 13px;
+            max-width: 480px;
+            white-space: normal;
+            word-break: break-all;
+            max-height: 270px;
+            overflow-y: auto;
+            line-height: unset;
         }
         &-close{
             cursor: pointer;

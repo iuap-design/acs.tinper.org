@@ -74,7 +74,7 @@ class EditGrid extends Component {
                         item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
                     }
                 }
-                if(item.defaultValue)defaultValueKeyValue[item.dataIndex]=item.defaultValue;
+                if(item.filedProps&&(item.filedProps.defaultValue!=undefined))defaultValueKeyValue[item.dataIndex]=item.filedProps.defaultValue;
                 item.render=(text,record,index)=>{
                     return <RenderColumn
                                 valueField={item.valueField}

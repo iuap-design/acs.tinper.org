@@ -4,10 +4,17 @@
         height: 22px;
         cursor: pointer;
         display: flex;
-        font-size: 14px;
+        
         &-text{
             width: auto;
             margin-right: 10px;
+            font-size: 12px;
+            color: #8b8d90;
+            .uf{
+                color: #8b8d90;
+                font-size: 12px;
+                padding-right: 2px;
+            }
         }
         &-line{
             flex-grow: 1;

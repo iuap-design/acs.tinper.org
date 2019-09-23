@@ -18,10 +18,10 @@
 			"module-resolver",
 			{
 			  "alias": {
-				"static": "./static",
-				"src/common": "./src@common",
-				"business": "./src@business",
-				"SvgIcon": "./node_modules/@mdf/metaui-web/lib/components/common/SvgIcon.js"
+				// "static": "./static",
+				// "src/common": "./src@common",
+				// "business": "./src@business",
+				// "SvgIcon": "./node_modules/@mdf/metaui-web/lib/components/common/SvgIcon.js"
 			  }
 			}
 		],

@@ -1061,15 +1061,23 @@ class Demo3 extends Component {
       },
       refConfig: {
         refValue: 'selectValue', // 下拉显示值
-        rowKey: ['autocomplete', 'yyy'],
+        rowKey: ['autocomplete', 'refCode'],
       },
       refOnChange: (refData, rowData, rowNum) => { // 下拉选中数据回调
         const { refname, code } = refData;
-        rowData.autocomplete = refname;
-        rowData.yyy = code;
-        console.log('refData', refData); // 如果为空对象表示没有选中
+
+        if (refname) {
+          rowData.autocomplete = refname;
+          rowData.refCode = code;
+        } else {
+          // 删除
+          delete rowData.refCode;
+          // 清空
+          // rowData.refCode="";
+        }
         this.child.onUpdateRowData(rowNum, rowData);
       },
+
 
     },
 
@@ -1186,6 +1194,8 @@ class Demo3 extends Component {
   };
 
 
+
+
   render() {
     const { handData } = this.state;
     console.log(this.columns);
@@ -1211,7 +1221,17 @@ class Demo3 extends Component {
           colWidths={[null, 100, 100, 100, 100, 100, 100, null]}
           rowKey="id" // 数组对象中唯一id 默认值为'id'
           width="100%"
-          height="106px"
+          height="auto"
+          rowStyle={(rowIndex, column, prop, value,rowData) => { // 自定义 禁止修改样式
+            // console.log("rowData",rowData)
+            // const data = this.child.getSourceData();
+            // console.log("rowData",data[rowIndex]);
+            let bgColor = '#fff';
+            if (rowIndex === 1 && column === 1) {
+              bgColor = '#DFE1E6';
+            }
+            return { 'background-color': bgColor };
+          }}
         />
 
       </div>

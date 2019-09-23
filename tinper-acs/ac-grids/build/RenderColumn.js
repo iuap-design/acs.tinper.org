@@ -78,7 +78,7 @@ var RenderColumn = function (_Component) {
                 options = _filedProps$options === undefined ? [] : _filedProps$options,
                 defaultValue = filedProps.defaultValue;
 
-            var value = defaultValue ? defaultValue : '';
+            var value = defaultValue != undefined ? defaultValue : '';
             if (type && type == 'select') {
                 options.forEach(function (item) {
                     if (item.value == text) {
@@ -212,7 +212,7 @@ var RenderColumn = function (_Component) {
                         );
                         break;
                     case 'select':
-                        value = value ? value : defaultValue;
+                        value = value ? value : filedProps.defaultValue;
                         return _react2["default"].createElement(
                             'div',
                             null,
