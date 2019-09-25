@@ -147,7 +147,7 @@
     display: flex;
     justify-content: space-between;
     padding-top: 9px;
-    padding-left: 0px;
+    padding-left: 12px;
 
     .u-select {
         width: 85px;
@@ -203,6 +203,10 @@
         background: #fff;
         width: 100%;
         z-index: 2;
+        overflow: auto;
+        .u-checkbox .u-checkbox-label:before{
+            top: -10px
+        }
     }
 
 

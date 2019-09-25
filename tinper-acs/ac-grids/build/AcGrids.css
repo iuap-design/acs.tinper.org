@@ -8670,7 +8670,7 @@ ul {
   display: flex;
   justify-content: space-between;
   padding-top: 9px;
-  padding-left: 0px; }
+  padding-left: 12px; }
   .ac-grids-wrapper-pages .u-select {
     width: 85px; }
     .ac-grids-wrapper-pages .u-select .u-select-selection {
@@ -8711,7 +8711,10 @@ ul {
   height: 100%;
   background: #fff;
   width: 100%;
-  z-index: 2; }
+  z-index: 2;
+  overflow: auto; }
+  .ac-edit-grid.max .u-checkbox .u-checkbox-label:before {
+    top: -10px; }
 
 .ac-edit-grid-panel {
   display: flex;

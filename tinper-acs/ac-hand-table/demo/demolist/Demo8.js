@@ -58,6 +58,7 @@ class Demo8 extends Component {
     };
   }
 
+
   // 获取第一个表头，也就是月份
   getNestedHeaders = () => {
     const { startDate } = this.getStartEndDate();
@@ -256,10 +257,12 @@ class Demo8 extends Component {
     };
   };
 
+
   column = [
     {
       data: 'title',
       type: 'text',
+      textTooltip: true,
     },
     {
       type: 'date',
@@ -301,16 +304,68 @@ class Demo8 extends Component {
   ];
 
 
+  // 表格添加行
+  onInsertRowData = () => {
+    const rowDefaultData =
+      {
+        id: '4',
+        title: '工程拆分',
+        planStartDate: '2019-01-01',
+        planEndDate: '2019-01-14',
+        actualStarDate: '2019-01-05',
+        actualEndDate: '2019-01-15',
+      };
+    // this.child.onInsertRowData(); // 默认从第一行添加
+    const { handData } = this.state;
+    handData.push(rowDefaultData);
+    this.setState({ handData, });
+    // 强制更新数据
+    this.mainTable.updateSettings({
+      data: handData,
+    });
+  };
+
+
+  // 删除选中
+  onDelRowSelect = () => {
+    // const { rowList, indexList } =
+
+    this.mainTable.onDelRowSelect();
+    // 强制更新
+    let { handData } = this.state;
+    this.setState({ handData });
+
+  };
+
+  // 获取验证数据
+  getData = () => {
+    this.mainTable.getData((data) => {
+      console.log('data', data);
+    });
+  };
+
+
   render() {
 
     const { handData } = this.state;
 
     return (
       <div className="demoPadding">
+
+        <div style={{ marginBottom: '15px' }}>
+          <Button colors="primary" className='btn-style' onClick={this.onInsertRowData}
+                  size="sm"> 增行 </Button>
+          <Button colors="primary" className='btn-style' onClick={this.onDelRowSelect}
+                  size="sm">删除</Button>
+          <Button colors="primary" className='btn-style' onClick={this.getData}
+                  size="sm">格式化数据 </Button>
+        </div>
+
+
         <div className={'gantta-content'}>
           <AcHandTable
             id="example8" // 组件id
-            onRef={(ref) => this.ssschild = ref} // 设置ref属性 调用子组件方法
+            onRef={(ref) => this.mainTable = ref} // 设置ref属性 调用子组件方法
             data={handData} // 表体数据
             columns={this.column} // 列属性设置
             colWidths={100}
@@ -327,35 +382,38 @@ class Demo8 extends Component {
             dropdownMenu={false}
             multiColumnSorting={false} // 去掉排序
             columnHeaderHeight={77} //表头高
+            afterRowMove={(rows, target, newArray) => { //行移动事件
+              this.setState({ handData: newArray });
+            }}
+
           />
 
-
           {handData &&
-            <AcHandTable
-              id="columnsGantta" // 组件id
-              onRef={ref => this.childGantta = ref} // 设置ref属性 调用子组件方法
+          <AcHandTable
+            id="columnsGantta" // 组件id
+            onRef={ref => this.childGantta = ref} // 设置ref属性 调用子组件方法
 
-              colHeaders={this.getColHeaders()} // 表格表头
-              data={this.getGanttaData()} // 表体数据
-              columns={this.getColumns()} // 列属性设置
-              colWidths={25}
-              manualRowMove // 行移动
-              fillHandle={{
-                autoInsertRow: false, // 去掉自动加行
-                direction: 'vertical',
-              }}
-              width={'800px'}
-              // width={this.getDayNum() * 25}
-              height="auto"
-              headerTooltips
-              nestedHeaders={this.getNestedHeaders()} // 设置多表头
-              contextMenu={false}  // 去掉菜单
-              dropdownMenu={false} // 去掉下拉
-              multiSelect={false}  // 去掉多选
-              multiColumnSorting={false} // 去掉排序
-              manualColumnResize={false} // 去掉 Resize
-              stretchH={'none'} // 最后一行禁止拉伸
-            />
+            colHeaders={this.getColHeaders()} // 表格表头
+            data={this.getGanttaData()} // 表体数据
+            columns={this.getColumns()} // 列属性设置
+            colWidths={25}
+            manualRowMove // 行移动
+            fillHandle={{
+              autoInsertRow: false, // 去掉自动加行
+              direction: 'vertical',
+            }}
+            width={'800px'}
+            // width={this.getDayNum() * 25}
+            height="auto"
+            headerTooltips
+            nestedHeaders={this.getNestedHeaders()} // 设置多表头
+            contextMenu={false}  // 去掉菜单
+            dropdownMenu={false} // 去掉下拉
+            multiSelect={false}  // 去掉多选
+            multiColumnSorting={false} // 去掉排序
+            manualColumnResize={false} // 去掉 Resize
+            stretchH={'none'} // 最后一行禁止拉伸
+          />
           }
         </div>
 

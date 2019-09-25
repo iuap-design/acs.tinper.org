@@ -380,6 +380,19 @@ class AcHandTable extends React.Component {
 
       },
 
+      // 行移动事件
+      afterRowMove(rows, target) {
+        const { data } = _this.state;
+        const checkArray = data.filter((ele, index) => rows.includes(index));
+        const filterArray = data.filter((ele, index) => !rows.includes(index));
+        const startArray = filterArray.slice(0, target); // 开始时间
+        const endArray = filterArray.slice(target, filterArray.length); //  结束时间
+        const newArray = [...startArray, ...checkArray, ...endArray];
+        _this.setState({ data: newArray });
+        _this.props.afterRowMove(rows, target, newArray);
+      },
+
+
       // 选中行
       afterSelection(startRow, startCol, endRow, endCol, preventScrolling, selectionLayerLevel, event) {
         let { selectRowDataNum } = _this.state;
@@ -914,7 +927,7 @@ class AcHandTable extends React.Component {
   };
 
   render() {
-    const { id, dropdownMenu, fixedShadow ,spanClass,spanStyle} = this.props;
+    const { id, dropdownMenu, fixedShadow, spanClass, spanStyle } = this.props;
     const { refConfig } = this.state;
 
     let tableClass = dropdownMenu !== false ? 'hand-table-drop-down-menu' : '';

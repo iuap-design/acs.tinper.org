@@ -84,10 +84,12 @@ class Demo extends Component {
     }, // 对象文本类型
     {
       data: 'name.lastName',
+      className: 'htMiddle htCenter', // 样式名
     },
     {
       data: 'price',
       type: 'numeric', // 数字类型
+
     },
     {
       data: 'number',
