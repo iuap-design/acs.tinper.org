@@ -62,9 +62,9 @@ class Demo5 extends Component {
 
   componentDidMount() {
 
-    this.child.updateSettings({
-      cells: this.setCell,
-    });
+    // this.child.updateSettings({
+    //   cells: this.setCell,
+    // });
 
   }
 
@@ -96,11 +96,11 @@ class Demo5 extends Component {
         },
       ],
       dropdownMenu: true,
-      onChange: () => {
-        this.child.updateSettings({
-          cells: this.setCell,
-        });
-      }
+      // onChange: () => {
+      //   this.child.updateSettings({
+      //     cells: this.setCell,
+      //   });
+      // }
     },
     {
       data: 'time',
@@ -156,6 +156,7 @@ class Demo5 extends Component {
     if (gender === '男' && column === 1) {
       cellProperties.editor = false;
       cellProperties.readOnly = true;
+      cellProperties.className = 'headClass';
     }
     return cellProperties;
   };
@@ -207,15 +208,6 @@ class Demo5 extends Component {
             filename: '导出',
             columnHeaders: true,
           }}
-
-
-          // rowStyle={(rowIndex, column) => { // 自定义 禁止修改样式
-          //   let bgColor = '#fff';
-          //   if (rowIndex === 1 && column === 1) {
-          //     bgColor = '#DFE1E6';
-          //   }
-          //   return { 'background-color': bgColor };
-          // }}
 
           width="100%"
           height="auto"

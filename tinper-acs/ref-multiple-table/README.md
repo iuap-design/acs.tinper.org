@@ -107,6 +107,7 @@ onChange|`function(values, record)`|--| value改变、选中过滤数据和保�
 canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按钮时是否打开modal<br>适用于级联情况下当选择不全时的处理| 否 
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
 menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
+footerBtnDom | `dom` | <span></span> | 自定义footer的按钮dom | 否
 
 ## 注意事项
 

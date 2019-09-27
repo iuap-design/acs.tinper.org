@@ -13,6 +13,7 @@ const Item = Menus.Item;
 
 
 const propTypes = {
+    onClick:PropTypes.func,//点击按钮回调
     addToBtns:PropTypes.object,//所有的按钮，支持扩展
     powerBtns:PropTypes.array,// 按钮权限 code数组
     btns:PropTypes.object,// 按钮对象数组
@@ -27,7 +28,8 @@ const defaultProps = {
     type:'button',
     maxSize:2,
     forcePowerBtns:['cancel','search','clear'],//取消、查询、清空不受权限管理控制
-    localeCookie:'locale'
+    localeCookie:'locale',
+    onClick:()=>{}
 };
 
 const getCookie = (name) => {
@@ -52,6 +54,12 @@ class Btns extends Component {
         this.state={
             allBtns:Object.assign(BtnsJSON,this.props.addToBtns)
         }
+    }
+
+
+    onHandleClick = (e,code,func=()=>{})=>{
+        this.props.onClick(e,code)
+        func(e)
     }
 
     componentWillReceiveProps(nextProps){
@@ -119,7 +127,11 @@ class Btns extends Component {
         let clss = 'ac-btns-item '+className;
         if(itemProps){
             if(itemProps.className)clss+=' '+itemProps.className;
-            if(itemProps.name)name=itemProps.name
+            if(itemProps.name)name=itemProps.name;
+            if(itemProps.onClick){
+                let func = itemProps.onClick;
+                itemProps.onClick= (e)=>{this.onHandleClick(e,key,func)};
+            }
         }
         if(getCookie(this.props.localeCookie)=='zh_TW')name=name_zh_TW;
         if(getCookie(this.props.localeCookie)=='en_US')name=name_en_US;

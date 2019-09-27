@@ -214,7 +214,6 @@ class Demo7 extends Component {
           readOnly={true}
           readOnlyCellClassName='is-readOnly'
         />
-
       </div>
 
     );

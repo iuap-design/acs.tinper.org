@@ -61,8 +61,8 @@ const data = [
 ];
 
 const btn_style = {
-  "marginBottom": "10px"
-}
+  'marginBottom': '10px'
+};
 
 
 class Demo2 extends Component {
@@ -151,7 +151,7 @@ class Demo2 extends Component {
   ];
 
   // 设置行样式
-  setStyle = (rowIndex, colIndex, prop, value) => {
+  setStyle = (rowIndex, colIndex, prop, value, rowData) => {
     let style = { 'background-color': '#fff' };
     if (rowIndex % 2 === 0) {
       style = { 'background-color': '#3fc8c1' };
@@ -242,6 +242,11 @@ class Demo2 extends Component {
     console.log('onDelRowSelect', onDelRowSelect);
   };
 
+  // 删除行
+  onDelRowNum = () => {
+    this.child.onDelRowNum([0, 1]);
+  };
+
 
   // 导出csv
   onDownCsv = () => {
@@ -256,18 +261,32 @@ class Demo2 extends Component {
       <div className="demoPadding">
 
         <div style={{ marginBottom: '15px' }}>
-          <Button colors="primary" style={btn_style} onClick={this.onInsertRowData} size="sm"> 增行 </Button>
-          <Button colors="primary" style={btn_style} onClick={this.onUpdateRowData} size="sm">修改行</Button>
-          <Button colors="danger" style={btn_style} onClick={this.onDelRowCheck} size="sm">删除选中行</Button>
-          <Button colors="primary" style={btn_style} onClick={this.getData} size="sm"> 获取验证数据</Button>
-          <Button colors="primary" style={btn_style} onClick={this.getCheckData} size="sm"> 获取选中行 </Button>
-          <Button colors="primary" style={btn_style} onClick={this.getUpdateData} size="sm">获取修改行 </Button>
-          <Button colors="primary" style={btn_style} onClick={this.getAddRowData} size="sm">获取新增加行</Button>
-          <Button colors="primary" style={btn_style} onClick={this.getDelRowData} size="sm">获取删除行</Button>
-          <Button colors="primary" style={btn_style} onClick={this.getFormatData} size="sm">格式化数据 </Button>
-          <Button colors="primary" style={btn_style} onClick={this.onDownCsv} size="sm">导出csv </Button>
-          <Button colors="primary" style={btn_style} onClick={this.getSelectData} size="sm">逐行选中数据</Button>
-          <Button colors="primary" style={btn_style} onClick={this.onDelRowSelect} size="sm">删除选中行数据</Button>
+          <Button colors="primary" style={btn_style} onClick={this.onInsertRowData}
+                  size="sm"> 增行 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.onUpdateRowData}
+                  size="sm">修改行</Button>
+          <Button colors="danger" style={btn_style} onClick={this.onDelRowCheck}
+                  size="sm">删除选中行</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getData}
+                  size="sm"> 获取验证数据</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getCheckData}
+                  size="sm"> 获取选中行 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.getUpdateData}
+                  size="sm">获取修改行 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.getAddRowData}
+                  size="sm">获取新增加行</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getDelRowData}
+                  size="sm">获取删除行</Button>
+          <Button colors="primary" style={btn_style} onClick={this.getFormatData}
+                  size="sm">格式化数据 </Button>
+          <Button colors="primary" style={btn_style} onClick={this.onDownCsv}
+                  size="sm">导出csv </Button>
+          <Button colors="primary" style={btn_style} onClick={this.getSelectData}
+                  size="sm">逐行选中数据</Button>
+          <Button colors="primary" style={btn_style} onClick={this.onDelRowSelect}
+                  size="sm">删除选中行数据</Button>
+          <Button colors="primary" style={btn_style} onClick={this.onDelRowNum}
+                  size="sm">删除指定行</Button>
         </div>
 
 

@@ -46,7 +46,7 @@ class Tab extends Component {
         }
         if(nextProps.activeKey !== activeKey){
             this.setState({
-                activeKey: nextProps.activeKey
+                current: nextProps.activeKey
             })
         }
     }

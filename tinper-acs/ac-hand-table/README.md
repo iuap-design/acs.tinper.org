@@ -88,6 +88,7 @@ import 'ac-hand-table/dist/index.css';
 |:--|:---|:--|:--|
 |data|列的键,支持'date.xx'|string|-|
 |type|数据类型 `text` `numeric` `date` `time` `checkbox`  `select` `dropdown` `autocomplete` `password` `refMultipleTable` `refTreeWithInput` `refTreeTableWithInput` `refTreeTransferWithInput`|string|true|
+|className|样式名|string|-|
 |readOnly|是否数据仅可读|boolean|false|
 |readOnlyCellClassName|自定义只读表格样式|string|-|
 |textTooltip|表格内容超出表格的宽出现 ...|boolean|true|

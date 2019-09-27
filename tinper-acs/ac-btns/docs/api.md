@@ -19,6 +19,7 @@
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
+|onClick|点击事件回调|func|-|
 |btns|按钮对象数组，详见demo3，支持按钮及code已全部列出|Object|-|
 |powerBtns|按钮权限数组，包含所有可用按钮的code，不使用按钮权限可不传|array|-|
 |forcePowerBtns|不受按钮权限控制的code数组|array|-|

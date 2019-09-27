@@ -15,7 +15,7 @@ const defaultProps = {
     duration:5000
 };
 
-class Toast extends Component {
+class Tips extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -72,15 +72,16 @@ class Toast extends Component {
                 }
                 {
                     hide?'':<span className={`${clsfix}-close`} onClick={()=>{destory(id)}}>
-                            关闭
-                        </span>
+                                关闭
+                            </span>
+                    
                 }
             </div>
         )
     }
 };
 
-Toast.propTypes = propTypes;
-Toast.defaultProps = defaultProps;
+Tips.propTypes = propTypes;
+Tips.defaultProps = defaultProps;
 
-export default Toast;
+export default Tips;

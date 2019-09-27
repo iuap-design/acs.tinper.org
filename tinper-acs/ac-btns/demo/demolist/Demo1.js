@@ -46,6 +46,11 @@ let btns = {
             console.log('export')
         }
     },
+    import: {
+        onClick: () => {
+            console.log('import')
+        }
+    },
     save: {
         onClick: () => {
             console.log('save')
@@ -71,6 +76,11 @@ let btns = {
             console.log('pbmsubmit')
         }
     },
+    appoint: {
+        onClick: () => {
+            console.log('appoint')
+        }
+    },
     pbmcancle: {
         onClick: () => {
             console.log('pbmcancle')
@@ -94,6 +104,11 @@ let btns = {
     upload: {
         onClick: () => {
             console.log('upload')
+        }
+    },
+    reupload: {
+        onClick: () => {
+            console.log('reupload')
         }
     },
     addRow: {

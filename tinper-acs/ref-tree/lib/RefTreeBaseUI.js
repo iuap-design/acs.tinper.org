@@ -345,7 +345,9 @@ var RefTreeBaseUI = function (_Component) {
         isLocalSearch = _props3.isLocalSearch,
         treeNodeDisabledKey = _props3.treeNodeDisabledKey,
         _props3$treeProps = _props3.treeProps,
-        treeProps = _props3$treeProps === undefined ? {} : _props3$treeProps;
+        treeProps = _props3$treeProps === undefined ? {} : _props3$treeProps,
+        _props3$footerBtnDom = _props3.footerBtnDom,
+        footerBtnDom = _props3$footerBtnDom === undefined ? '' : _props3$footerBtnDom;
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
         searchValue = _state.searchValue;
@@ -412,7 +414,7 @@ var RefTreeBaseUI = function (_Component) {
       _react2["default"].createElement(
         _beeModal2["default"].Footer,
         { className: 'ref-core-modal-footer' },
-        _react2["default"].createElement(_RefCoreButton2["default"], { language: lang, onClickBtn: this.onClickBtn, buttons: buttons, emptyBut: emptyBut })
+        _react2["default"].createElement(_RefCoreButton2["default"], { language: lang, onClickBtn: this.onClickBtn, buttons: buttons, emptyBut: emptyBut, footerBtnDom: footerBtnDom })
       )
     );
   };
@@ -445,7 +447,7 @@ var _initialiseProps = function _initialiseProps() {
         searchValue: searchValue
       });
     } else {
-      _this6.props.getRefTreeData(searchValue);
+      _this6.props.getRefTreeData(searchValue.trim());
     }
   };
 

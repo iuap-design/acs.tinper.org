@@ -385,7 +385,8 @@ var RefMultipleTableBase = function (_Component) {
         _props$searchPlacehol = _props.searchPlaceholder,
         searchPlaceholder = _props$searchPlacehol === undefined ? '搜索' : _props$searchPlacehol,
         _props$paginationProp = _props.paginationProps,
-        paginationProps = _props$paginationProp === undefined ? {} : _props$paginationProp;
+        paginationProps = _props$paginationProp === undefined ? {} : _props$paginationProp,
+        footerBtnDom = _props.footerBtnDom;
 
     var temp = (0, _stringify2["default"])(tableData);
     var _newTableData = JSON.parse(temp);
@@ -498,7 +499,8 @@ var RefMultipleTableBase = function (_Component) {
           language: lang,
           buttons: buttons,
           emptyBut: emptyBut,
-          onClickBtn: _this.onClickBtn
+          onClickBtn: _this.onClickBtn,
+          footerBtnDom: footerBtnDom
         })
       )
     );

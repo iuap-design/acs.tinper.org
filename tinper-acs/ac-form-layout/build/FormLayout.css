@@ -8,6 +8,8 @@
   .ac-form-layout-item .u-select .u-select-selection,
   .ac-form-layout-item .u-input-number {
     border-color: #d5d6d9; }
+  .ac-form-layout-item .u-select-selection--single .u-select-selection-selected-value {
+    padding-left: 12px; }
   .ac-form-layout-item .u-label {
     display: inline-block;
     width: 140px;
@@ -17,7 +19,8 @@
   .ac-form-layout-item .u-label + * {
     width: calc(100% - 140px);
     display: inline-block;
-    height: 32px; }
+    height: 32px;
+    font-size: 13px; }
   .ac-form-layout-item .container-refer .ant-search-input-wrapper {
     vertical-align: middle;
     height: 32px; }
@@ -101,6 +104,12 @@
 
 .ac-form-layout.disabled {
   pointer-events: none; }
+  .ac-form-layout.disabled .ac-form-layout-mast {
+    display: none; }
+  .ac-form-layout.disabled .u-label:after {
+    content: " :"; }
+  .ac-form-layout.disabled .ac-form-layout-item-error-msg {
+    display: none; }
   .ac-form-layout.disabled .rc-tree-select-selection,
   .ac-form-layout.disabled .rc-tree-select-selection:hover,
   .ac-form-layout.disabled .u-form-control {
@@ -111,16 +120,34 @@
   .ac-form-layout.disabled .u-select .u-select-selection {
     background: none;
     border: none; }
+    .ac-form-layout.disabled .u-select .u-select-selection.u-select-selection--multiple .u-select-selection-choice {
+      background: none;
+      color: #111111;
+      padding: 0; }
   .ac-form-layout.disabled .u-select-arrow,
   .ac-form-layout.disabled .rc-tree-select-menu-icon,
   .ac-form-layout.disabled .u-input-group-btn {
     display: none; }
   .ac-form-layout.disabled .container-refer .ant-search-input-wrapper .ant-input {
     border: none;
-    background: none; }
+    background: none;
+    pointer-events: none; }
   .ac-form-layout.disabled .container-refer .ant-search-input-wrapper .ant-input-suffix {
+    display: none; }
+  .ac-form-layout.disabled .container-refer .refer-wrapper {
+    pointer-events: none; }
+    .ac-form-layout.disabled .container-refer .refer-wrapper .refer-wrapper-content {
+      border: none;
+      background: none; }
+      .ac-form-layout.disabled .container-refer .refer-wrapper .refer-wrapper-content > ul {
+        background: none; }
+        .ac-form-layout.disabled .container-refer .refer-wrapper .refer-wrapper-content > ul .selected-item span {
+          border: none; }
+  .ac-form-layout.disabled .container-refer .refer-canzhao-wrapper {
     display: none; }
   .ac-form-layout.disabled .u-input-number {
     border: none; }
     .ac-form-layout.disabled .u-input-number .u-input-group-addon {
       display: none; }
+  .ac-form-layout.disabled .ac-split-area {
+    pointer-events: auto; }

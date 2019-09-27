@@ -110,10 +110,11 @@ class RefTreeBaseUI extends Component {
       let newCheckedKeys = this.state.checkedKeys
       let key = event.node.props.attr[valueField];
       let currentNode = event.node.props.attr;
+      
       if (!checkStrictly) {
         //下面涉及到checkStricly=false/true，涉及删除会多个删除，新增会新增多个
         if (event.checked) {
-          //新增操作
+          //新增操作，checkNodes会平铺所有的，没问题
           event.checkedNodes.forEach(item => {
             let curKey = item.props.attr[valueField];
             if (newCheckedKeys.indexOf(curKey) < 0) {
@@ -122,25 +123,35 @@ class RefTreeBaseUI extends Component {
             }
           });
         } else {
-          if(!event.node.props.attr.children || event.node.props.attr.children.length === 0){
-              //删除子节点操作，涉及删除会多个删除
-              allProcessCheckedArray = allProcessCheckedArray.filter(item => {
-                return item[valueField] !== key
-              });
-              if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
-              //下面是多个时候
-              event.halfCheckedKeys.forEach(parentKeys => {
+          //删除操作，父节点，删除当前，并且删除children；叶子节点，只删除当前就好
+          allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+            return item[valueField] !== key
+          });
+          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+          if(event.node.props.attr.children && event.node.props.attr.children.length){
+              //删除父节点，涉及遍历children节点，这里暂时不添加
+              let allKeys = [];
+              function loop(data){
+                data.forEach(item=>{
+                  allKeys.push(item[valueField]);
+                  if(item.children && item.children.length){
+                    loop(item.children);
+                  }
+                })
+              }
+              loop(event.node.props.attr.children);
+              allKeys.forEach(key=>{
                 allProcessCheckedArray = allProcessCheckedArray.filter(item => {
-                  return item[valueField] !== parentKeys
+                  return item[valueField] !== key
                 });
-                if (newCheckedKeys.indexOf(parentKeys) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(parentKeys), 1);
+                if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
               })
-          }else{
-            //删除父节点，涉及遍历children节点，这里暂时不添加
-            return false;
           }
         }
+
+        
       } else {
+        //这里是checkStrictly为true的时候，增删都是一个
         if (event.checked) {
           //新增操作
           allProcessCheckedArray.push(currentNode);
@@ -156,6 +167,7 @@ class RefTreeBaseUI extends Component {
 
         }
       }
+      console.log('最终的checkedkeys',newCheckedKeys)
       this.setState({
         selectedArray: allProcessCheckedArray,
         checkedKeys: newCheckedKeys,
@@ -241,7 +253,7 @@ class RefTreeBaseUI extends Component {
         searchValue
       })
     }else{
-      this.props.getRefTreeData(searchValue);
+      this.props.getRefTreeData(searchValue.trim());
     }
 	};
 
@@ -296,6 +308,7 @@ class RefTreeBaseUI extends Component {
       isLocalSearch,
       treeNodeDisabledKey,
       treeProps={},
+      footerBtnDom='',
     } = this.props;
     const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
@@ -348,7 +361,7 @@ class RefTreeBaseUI extends Component {
             }
           </Modal.Body>
           <Modal.Footer className={'ref-core-modal-footer'}>
-            <RefCoreButton language={lang} onClickBtn={this.onClickBtn} buttons={buttons} emptyBut={emptyBut} />
+            <RefCoreButton language={lang} onClickBtn={this.onClickBtn} buttons={buttons} emptyBut={emptyBut} footerBtnDom={footerBtnDom}/>
           </Modal.Footer>
       </Modal>
     );

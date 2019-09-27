@@ -119,7 +119,7 @@ var EditGrid = function (_Component) {
                             );
                         }
                     }
-                    if (item.defaultValue) defaultValueKeyValue[item.dataIndex] = item.defaultValue;
+                    if (item.filedProps && item.filedProps.defaultValue != undefined) defaultValueKeyValue[item.dataIndex] = item.filedProps.defaultValue;
                     item.render = function (text, record, index) {
                         return _react2["default"].createElement(_RenderColumn2["default"], {
                             valueField: item.valueField,
