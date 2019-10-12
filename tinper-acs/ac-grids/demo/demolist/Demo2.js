@@ -14,7 +14,7 @@ const column = [
     dataIndex: "orderCode",
     key: "orderCode",
     width: 150,
-    type:'input',
+    renderType:'input',
     required:true,
     validate:true,
     disabled:true,
@@ -28,7 +28,7 @@ const column = [
     key: "money",
     width: 160,
     textAlign:'right',
-    type:'inputNumber',
+    renderType:'inputNumber',
     required:true,
     validate:true,
     filedProps:{
@@ -41,7 +41,7 @@ const column = [
     dataIndex: "type_name",
     key: "type_name",
     width: 100,
-    type:'select',
+    renderType:'select',
     required:true,
     validate:true,
     filedProps:{
@@ -64,7 +64,7 @@ const column = [
     dataIndex: "purchasing",
     key: "purchasing",
     width: 150,
-    type:'input',
+    renderType:'input',
   },
   {
     title: "采购组",

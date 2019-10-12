@@ -109,7 +109,7 @@ var EditGrid = function (_Component) {
             }
             columns.forEach(function (item) {
                 item.oldRender = item.render;
-                if (item.type || item.customizeRender) {
+                if (item.renderType || item.customizeRender) {
                     if (!disabled) {
                         if (item.required) {
                             item.title = _react2["default"].createElement(
@@ -125,7 +125,7 @@ var EditGrid = function (_Component) {
                             valueField: item.valueField,
                             config: item.config,
                             textAlign: item.textAlign,
-                            type: item.type,
+                            renderType: item.renderType,
                             index: index,
                             dataIndex: item.dataIndex,
                             value: text,

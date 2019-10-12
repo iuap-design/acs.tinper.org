@@ -57,8 +57,8 @@ class Btns extends Component {
     }
 
 
-    onHandleClick = (e,code,func=()=>{})=>{
-        this.props.onClick(e,code)
+    onHandleClick = (e,item,func=()=>{})=>{
+        this.props.onClick(e,item)
         func(e)
     }
 
@@ -125,16 +125,18 @@ class Btns extends Component {
         let itemProps = this.props.btns[key];
         let { colors,className,name_zh_CN:name,name_zh_TW,name_en_US} = this.state.allBtns[key];
         let clss = 'ac-btns-item '+className;
+        if(getCookie(this.props.localeCookie)=='zh_TW')name=name_zh_TW;
+        if(getCookie(this.props.localeCookie)=='en_US')name=name_en_US;
         if(itemProps){
             if(itemProps.className)clss+=' '+itemProps.className;
             if(itemProps.name)name=itemProps.name;
             if(itemProps.onClick){
                 let func = itemProps.onClick;
-                itemProps.onClick= (e)=>{this.onHandleClick(e,key,func)};
+                itemProps.onClick= (e)=>{this.onHandleClick(e,{
+                    code:key,name:name
+                },func)};
             }
         }
-        if(getCookie(this.props.localeCookie)=='zh_TW')name=name_zh_TW;
-        if(getCookie(this.props.localeCookie)=='en_US')name=name_en_US;
         if(this.state.allBtns[key]){
             if(itemProps&&itemProps.node){
                 return itemProps.node

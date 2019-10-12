@@ -6096,6 +6096,21 @@ ul {
         width: 2px; }
     .u-table tr td.u-table-multiSelect-column.u-table-row-has-expandIcon:not(.u-table-row-fixed-columns-in-body) .u-checkbox {
       margin: 0; }
+  .u-table tr td.u-table-inline-icon {
+    position: relative;
+    padding-right: 24px; }
+    .u-table tr td.u-table-inline-icon span.u-table-inline-op-icon {
+      position: absolute;
+      right: 0; }
+      .u-table tr td.u-table-inline-icon span.u-table-inline-op-icon .uf {
+        display: block;
+        vertical-align: top; }
+    .u-table tr td.u-table-inline-icon span.u-table-inline-op-icon-hover {
+      visibility: hidden; }
+  .u-table tr.u-table-row-hover td.u-table-inline-icon span.u-table-inline-op-icon-hover {
+    visibility: visible; }
+  .u-table .u-table-inline-op-icon-hidden {
+    visibility: hidden; }
   .u-table tr.tr-row-hover {
     background: rgb(235, 236, 240); }
   .u-table th,
@@ -6740,6 +6755,13 @@ ul {
 .u-editable-table-tp .tooltip-inner {
   border-color: #F44336 !important; }
 
+.u-dropdown ul.u-table-inline-op-dropdowm li.u-dropdown-menu-item {
+  padding: 0 20px 0 10px;
+  height: 30px;
+  line-height: 30px; }
+  .u-dropdown ul.u-table-inline-op-dropdowm li.u-dropdown-menu-item i.uf {
+    font-size: 12px; }
+
 /* FormGroup */
 /*  Navlayout  */
 .u-radio-group {
@@ -7232,6 +7254,8 @@ ul {
         background: #F3F3F3; }
       .ac-grids .u-table .u-table-tbody tr.u-table-row.selected, .ac-grids .u-table .u-table-tbody tr.u-table-row.ref-multiple-table-row-selected {
         background: #E4E4E4; }
+      .ac-grids .u-table .u-table-tbody tr.sumrow {
+        background: #FEFBF3; }
       .ac-grids .u-table .u-table-tbody tr td {
         padding: 0;
         padding-left: 12px;
@@ -7267,7 +7291,7 @@ ul {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding-top: 9px;
-  padding-left: 0px; }
+  padding-left: 12px; }
   .ac-grids-wrapper-pages .u-select {
     width: 85px; }
     .ac-grids-wrapper-pages .u-select .u-select-selection {
@@ -7308,7 +7332,10 @@ ul {
   height: 100%;
   background: #fff;
   width: 100%;
-  z-index: 2; }
+  z-index: 2;
+  overflow: auto; }
+  .ac-edit-grid.max .u-checkbox .u-checkbox-label:before {
+    top: -10px; }
 
 .ac-edit-grid-panel {
   display: -ms-flexbox;
@@ -7325,17 +7352,18 @@ ul {
   .ac-edit-grid-panel-btns button.u-button.u-button[disabled]:hover {
     background: #fff;
     color: #dfe1e6;
-    border-color: #a5adba;
+    border-color: #d0d0d0;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
   .ac-edit-grid-panel-btns .u-button:hover {
-    background-color: #ffffff;
+    background-color: white;
     border-color: #e14c46;
     color: #e14c46; }
   .ac-edit-grid-panel.close {
     margin-left: 8px;
     margin-right: 8px;
     border: 1px solid #D0D0D0;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 3px; }
 
 .ac-edit-grid .copy-to-here {
   cursor: pointer;

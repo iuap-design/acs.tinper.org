@@ -79,7 +79,8 @@ class Demo2 extends Component {
       data: 'name',
       type: 'text',
       validator: (value, callback) => {
-        callback(!!value);
+        console.log("valuevalue",!!value)
+        callback(true);
       },
       allowInvalid: true,
       strict: true,
@@ -131,8 +132,12 @@ class Demo2 extends Component {
       type: 'numeric', // 资薪
       allowInvalid: false,
       numericFormat: {
-        pattern: '$0,0.00',
-        culture: 'en-US' // this is the default culture, set up for USD
+        // pattern: '0,0.00',
+        // culture:'ja-JP',
+        pattern: '0,0.00 $',
+        culture: 'de-DE' // use this for EUR (German),
+        // pattern: '$0,0.00',
+        // culture: 'en-US' // this is the default culture, set up for USD
       },
     },
     // {

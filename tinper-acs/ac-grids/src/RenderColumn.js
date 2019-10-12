@@ -31,10 +31,10 @@ class RenderColumn extends Component {
     
 
     getValue=(text)=>{
-        let { type,filedProps } = this.props;
+        let { renderType,filedProps } = this.props;
         let { options=[],defaultValue } = filedProps;
         let value = defaultValue!=undefined?defaultValue:'';
-        if(type&&type=='select'){
+        if(renderType&&renderType=='select'){
             options.forEach(item => {
                 if(item.value==text){
                     value = item.key
@@ -56,7 +56,7 @@ class RenderColumn extends Component {
      * @returns JSX
      */
     renderComp = () => {
-        let { type, value,index,dataIndex,
+        let { renderType, value,index,dataIndex,
             textAlign, validate, disabled, 
             options,required,pattern,patternMessage,
             customizeRender,valueField,
@@ -70,7 +70,7 @@ class RenderColumn extends Component {
                     disabled?
                     <ToolTip overlay={value} inverse placement={placement}>
                         <span className='ac-grid-cell'>{value}</span>
-                    </ToolTip>:<RenderCell type='refer' text = {value} textAlign={textAlign}>
+                    </ToolTip>:<RenderCell renderType='refer' text = {value} textAlign={textAlign}>
                     {
                         React.cloneElement(customizeRender,{
                             valueField:valueField,
@@ -87,7 +87,7 @@ class RenderColumn extends Component {
                 }
             </div>)
         }else{
-            switch (type) {
+            switch (renderType) {
                 case 'inputNumber':
                     return (<div>
                             {

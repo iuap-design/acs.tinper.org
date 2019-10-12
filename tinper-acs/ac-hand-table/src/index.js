@@ -378,6 +378,12 @@ class AcHandTable extends React.Component {
           _this.setState({ data: _this.cacheData });
         }
 
+        // 排序事件
+        const { afterColumnSort } = _this.props;
+        if (afterColumnSort) {
+          afterColumnSort(column, orders);
+        }
+
       },
 
       // 行移动事件
@@ -389,7 +395,12 @@ class AcHandTable extends React.Component {
         const endArray = filterArray.slice(target, filterArray.length); //  结束时间
         const newArray = [...startArray, ...checkArray, ...endArray];
         _this.setState({ data: newArray });
-        _this.props.afterRowMove(rows, target, newArray);
+
+        // 行移动事件
+        const { afterRowMove } = _this.props;
+        if (afterRowMove) {
+          afterRowMove(rows, target, newArray);
+        }
       },
 
 
@@ -405,6 +416,11 @@ class AcHandTable extends React.Component {
         }
         _this.setState({ selectRowDataNum });
 
+        // 选中行回调
+        const { afterSelection } = _this.props;
+        if (afterSelection) {
+          afterSelection(startRow, startCol, endRow, endCol);
+        }
       },
 
 

@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var Demo2 = __webpack_require__(657);var Demo3 = __webpack_require__(658);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基础示例", "code": "/**\n * @title 基础示例\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids'\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right'\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"2343\",\n    supplierName: \"xxx\",\n    type_name: \"123\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    _checked: true,\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    _disabled: true,\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    let paginationObj = {\n      maxButtons:999,\n      items:15,//一页显示多少条\n      activePage:2,\n      onSelect:(value)=>{console.log('切换到第几页：'+value)},\n      onDataNumSelect:(value)=>{console.log(\"每页多少条：\"+value)},//改变页码回调\n    }\n    return (\n        <AcGrids\n          columns={column}\n          data={dataList}\n          getSelectedDataFunc={this.getSelectedDataFunc}\n          paginationObj={paginationObj}\n          multiSelect={false}\n          ref='grid'\n        /> \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\n * @title CardTable\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    type:'input',\n    required:true,\n    validate:true,\n    disabled:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    textAlign:'left'\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    type:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'123',\n      precision:2\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    type:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'1',\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150,\n    type:'input',\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"采购组\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  setdisabled=()=>{\n    this.setState({\n      disabled:true\n    })\n  }\n\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <EditGrid\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditGrid 不可用状态", "code": "/**\n * @title EditGrid 不可用状态\n * @description disabled\n *\n */\nimport React, { Component } from \"react\";\nimport { Button } from 'tinper-bee';\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    type:'input',\n    required:true,\n    validate:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    filedProps:{\n      maxLength:'9'\n    }\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    type:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      precision:0\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    type:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  click=()=>{\n    this.setState({\n      disabled:!this.state.disabled\n    })\n  }\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>\n            {this.state.disabled?'设置可编辑':'设置不可编辑'}\n          </Button>\n          <EditGrid\n          showIndex={false}\n          disabled={this.state.disabled}\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " disabled" }];
+	var Demo1 = __webpack_require__(268);var Demo2 = __webpack_require__(657);var Demo3 = __webpack_require__(658);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基础示例", "code": "/**\n * @title 基础示例\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids'\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right'\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"2343\",\n    supplierName: \"xxx\",\n    type_name: \"123\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    _checked: true,\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    _disabled: true,\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    let paginationObj = {\n      maxButtons:999,\n      items:15,//一页显示多少条\n      activePage:2,\n      onSelect:(value)=>{console.log('切换到第几页：'+value)},\n      onDataNumSelect:(value)=>{console.log(\"每页多少条：\"+value)},//改变页码回调\n    }\n    return (\n        <AcGrids\n          columns={column}\n          data={dataList}\n          getSelectedDataFunc={this.getSelectedDataFunc}\n          paginationObj={paginationObj}\n          multiSelect={false}\n          ref='grid'\n        /> \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\n * @title CardTable\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    renderType:'input',\n    required:true,\n    validate:true,\n    disabled:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    textAlign:'left'\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    renderType:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'123',\n      precision:2\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    renderType:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'1',\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150,\n    renderType:'input',\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"采购组\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  setdisabled=()=>{\n    this.setState({\n      disabled:true\n    })\n  }\n\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <EditGrid\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditGrid 不可用状态", "code": "/**\n * @title EditGrid 不可用状态\n * @description disabled\n *\n */\nimport React, { Component } from \"react\";\nimport { Button } from 'tinper-bee';\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    renderType:'input',\n    required:true,\n    validate:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    filedProps:{\n      maxLength:'9'\n    }\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    renderType:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      precision:0\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    renderType:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  click=()=>{\n    this.setState({\n      disabled:!this.state.disabled\n    })\n  }\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>\n            {this.state.disabled?'设置可编辑':'设置不可编辑'}\n          </Button>\n          <EditGrid\n          showIndex={false}\n          disabled={this.state.disabled}\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " disabled" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -23787,7 +23787,7 @@
 	  var calledOnce = false;
 	
 	  var isNewArgEqualToLast = function isNewArgEqualToLast(newArg, index) {
-	    return isEqual(newArg, lastArgs[index]);
+	    return isEqual(newArg, lastArgs[index], index);
 	  };
 	
 	  var result = function result() {
@@ -24755,29 +24755,53 @@
 /* 204 */
 /***/ (function(module, exports) {
 
+	function _getRequireWildcardCache() {
+	  if (typeof WeakMap !== "function") return null;
+	  var cache = new WeakMap();
+	
+	  _getRequireWildcardCache = function _getRequireWildcardCache() {
+	    return cache;
+	  };
+	
+	  return cache;
+	}
+	
 	function _interopRequireWildcard(obj) {
 	  if (obj && obj.__esModule) {
 	    return obj;
-	  } else {
-	    var newObj = {};
+	  }
 	
-	    if (obj != null) {
-	      for (var key in obj) {
-	        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-	          var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {};
+	  var cache = _getRequireWildcardCache();
 	
-	          if (desc.get || desc.set) {
-	            Object.defineProperty(newObj, key, desc);
-	          } else {
-	            newObj[key] = obj[key];
-	          }
+	  if (cache && cache.has(obj)) {
+	    return cache.get(obj);
+	  }
+	
+	  var newObj = {};
+	
+	  if (obj != null) {
+	    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+	
+	    for (var key in obj) {
+	      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+	        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+	
+	        if (desc && (desc.get || desc.set)) {
+	          Object.defineProperty(newObj, key, desc);
+	        } else {
+	          newObj[key] = obj[key];
 	        }
 	      }
 	    }
-	
-	    newObj["default"] = obj;
-	    return newObj;
 	  }
+	
+	  newObj["default"] = obj;
+	
+	  if (cache) {
+	    cache.set(obj, newObj);
+	  }
+	
+	  return newObj;
 	}
 	
 	module.exports = _interopRequireWildcard;
@@ -36147,7 +36171,7 @@
 	      keyboard = props.keyboard,
 	      centered = props.centered,
 	      getContainer = props.getContainer,
-	      maskStyle = props.maskStyle,
+	      backdropStyle = props.backdropStyle,
 	      okButtonProps = props.okButtonProps,
 	      cancelButtonProps = props.cancelButtonProps,
 	      _props$iconType = props.iconType,
@@ -36165,7 +36189,7 @@
 	  var style = props.style || {};
 	  var backdrop = props.backdrop === undefined ? true : props.backdrop;
 	  // 默认为 false，保持旧版默认行为
-	  var maskClosable = props.maskClosable === undefined ? false : props.maskClosable;
+	  var backdropClosable = props.backdropClosable === undefined ? true : props.backdropClosable;
 	  // const runtimeLocale = getConfirmLocale();
 	  var okText = props.okText || (okCancel ? "确定" : "知道了");
 	  var cancelText = props.cancelText || "取消";
@@ -36197,7 +36221,11 @@
 	      className: classString,
 	      show: show,
 	      onHide: close,
-	      backdrop: backdrop },
+	      backdrop: backdrop,
+	      backdropClosable: backdropClosable,
+	      centered: centered,
+	      keyboard: keyboard,
+	      backdropStyle: backdropStyle },
 	    _react2["default"].createElement(
 	      _Modal2["default"].Header,
 	      null,
@@ -49193,10 +49221,8 @@
 	      var value1 = arr[index1];
 	      arr.splice(index1, 1);
 	      if (index1 < index2) {
-	        console.log('向下拖');
 	        arr.splice(index2, 0, value1);
 	      } else {
-	        console.log('向上拖');
 	        arr.splice(index2 + 1, 0, value1);
 	      }
 	
@@ -49270,7 +49296,8 @@
 	      currentHoverKey: null,
 	      scrollPosition: 'left',
 	      fixedColumnsHeadRowsHeight: [],
-	      fixedColumnsBodyRowsHeight: []
+	      fixedColumnsBodyRowsHeight: [],
+	      fixedColumnsExpandedRowsHeight: {} //扩展行的高度
 	    };
 	
 	    _this.onExpandedRowsChange = _this.onExpandedRowsChange.bind(_this);
@@ -49690,10 +49717,10 @@
 	    } else if (fixed === 'right') {
 	      colCount = this.columnManager.rightLeafColumns().length;
 	    } else {
-	      // colCount = this.columnManager.leafColumns().length;
 	      colCount = this.columnManager.centerColumns().length; //计算非固定列的个数，fix: 嵌套表格场景，右侧列断开的问题
 	    }
 	
+	    var expandedRowHeight = this.state.fixedColumnsExpandedRowsHeight[key] || 'auto';
 	    function contentContainer() {
 	      if (content && content.props && content.props.style) {
 	        return _react2["default"].createElement('div', { style: { height: content.props.style.height } });
@@ -49733,7 +49760,8 @@
 	      dragborderKey: this.props.dragborderKey,
 	      rowDraggAble: this.props.rowDraggAble,
 	      onDragRow: this.onDragRow,
-	      onDragRowStart: this.onDragRowStart
+	      onDragRowStart: this.onDragRowStart,
+	      height: expandedRowHeight
 	    });
 	  };
 	
@@ -50298,6 +50326,7 @@
 	        bodyDisplayInRow = _props8.bodyDisplayInRow;
 	
 	    var headRows = this.headTable ? this.headTable.querySelectorAll('thead') : this.bodyTable.querySelectorAll('thead');
+	    var expandedRows = this.bodyTable.querySelectorAll('.' + clsPrefix + '-expanded-row') || [];
 	    var bodyRows = this.bodyTable.querySelectorAll('.' + clsPrefix + '-row') || [];
 	    var leftBodyRows = this.refs.fixedColumnsBodyLeft && this.refs.fixedColumnsBodyLeft.querySelectorAll('.' + clsPrefix + '-row') || [];
 	    var rightBodyRows = this.refs.fixedColumnsBodyRight && this.refs.fixedColumnsBodyRight.querySelectorAll('.' + clsPrefix + '-row') || [];
@@ -50330,13 +50359,19 @@
 	        }
 	      }
 	    });
-	
-	    if ((0, _shallowequal2["default"])(this.state.fixedColumnsHeadRowsHeight, fixedColumnsHeadRowsHeight) && (0, _shallowequal2["default"])(this.state.fixedColumnsBodyRowsHeight, fixedColumnsBodyRowsHeight)) {
+	    var fixedColumnsExpandedRowsHeight = {};
+	    expandedRows.length > 0 && expandedRows.forEach(function (row) {
+	      var parentRowKey = row && row.previousSibling && row.previousSibling.getAttribute("data-row-key"),
+	          height = row && row.getBoundingClientRect().height || 'auto';
+	      fixedColumnsExpandedRowsHeight[parentRowKey] = height;
+	    });
+	    if ((0, _shallowequal2["default"])(this.state.fixedColumnsHeadRowsHeight, fixedColumnsHeadRowsHeight) && (0, _shallowequal2["default"])(this.state.fixedColumnsBodyRowsHeight, fixedColumnsBodyRowsHeight) && (0, _shallowequal2["default"])(this.state.fixedColumnsExpandedRowsHeight, fixedColumnsExpandedRowsHeight)) {
 	      return;
 	    }
 	    this.setState({
 	      fixedColumnsHeadRowsHeight: fixedColumnsHeadRowsHeight,
-	      fixedColumnsBodyRowsHeight: fixedColumnsBodyRowsHeight
+	      fixedColumnsBodyRowsHeight: fixedColumnsBodyRowsHeight,
+	      fixedColumnsExpandedRowsHeight: fixedColumnsExpandedRowsHeight
 	    });
 	  };
 	
@@ -50587,6 +50622,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(1);
 	
@@ -51211,7 +51248,7 @@
 	        lazyEndIndex: lazyEndIndex
 	      }));
 	    }
-	    var style = { height: height };
+	    var style = _extends({ height: height }, record ? record.style : undefined);
 	    if (!visible) {
 	      style.display = 'none';
 	    }
@@ -52131,6 +52168,14 @@
 	
 	var _utils = __webpack_require__(387);
 	
+	var _beeDropdown = __webpack_require__(375);
+	
+	var _beeDropdown2 = _interopRequireDefault(_beeDropdown);
+	
+	var _beeMenus = __webpack_require__(283);
+	
+	var _beeMenus2 = _interopRequireDefault(_beeMenus);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -52140,6 +52185,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var Item = _beeMenus2["default"].Item;
 	
 	var propTypes = {
 	  record: _propTypes2["default"].object,
@@ -52275,8 +52322,84 @@
 	      return moment(data).format(format || 'YYYY-MM-DD');
 	    };
 	
+	    _this.renderSelect = function (data) {
+	      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	
+	      if (config.options) {
+	        data = config.options[data] || config.defaultShow;
+	      }
+	      return data;
+	    };
+	
+	    _this.renderColumnMenu = function (colMenu, text, record, index) {
+	      if (!colMenu) return null;
+	      var menu = colMenu.menu,
+	          _colMenu$trigger = colMenu.trigger,
+	          trigger = _colMenu$trigger === undefined ? 'hover' : _colMenu$trigger,
+	          _colMenu$className = colMenu.className,
+	          className = _colMenu$className === undefined ? '' : _colMenu$className,
+	          _colMenu$icon = colMenu.icon,
+	          icon = _colMenu$icon === undefined ? _react2["default"].createElement('i', { className: 'uf uf-3dot-h' }) : _colMenu$icon,
+	          _colMenu$iconSize = colMenu.iconSize,
+	          iconSize = _colMenu$iconSize === undefined ? 21 : _colMenu$iconSize;
+	
+	      var items = [];
+	      items = menu.map(function (item) {
+	        return _react2["default"].createElement(
+	          Item,
+	          { key: item.key, onClick: function onClick() {
+	              _this.onClickColMenu(item.callback, text, record, index);
+	            } },
+	          item.icon,
+	          item.text
+	        );
+	      });
+	      if (items.length === 0) return null;
+	      className += ' u-table-inline-op-dropdowm';
+	      var menus = _react2["default"].createElement(
+	        _beeMenus2["default"],
+	        { className: className },
+	        items
+	      );
+	      var top = 'calc(50% - ' + iconSize / 2 + 'px)';
+	      var visibility = _this.state.showDropdowm ? 'visible' : '';
+	      var iconClassName = 'u-table-inline-op-icon u-table-inline-op-icon-hover';
+	      return _react2["default"].createElement(
+	        _beeDropdown2["default"],
+	        {
+	          trigger: [trigger],
+	          overlay: menus,
+	          animation: 'slide-up',
+	          onVisibleChange: _this.changeShowDropdowm
+	        },
+	        _react2["default"].createElement(
+	          'span',
+	          { className: iconClassName, style: { fontSize: iconSize, top: top, visibility: visibility } },
+	          icon
+	        )
+	      );
+	    };
+	
+	    _this.changeShowDropdowm = function (val) {
+	      _this.setState({
+	        showDropdowm: val
+	      });
+	    };
+	
+	    _this.onClickColMenu = function (callback, text, record, index) {
+	      if (callback) {
+	        callback(text, record, index);
+	      }
+	      _this.setState({
+	        showDropdowm: false
+	      });
+	    };
+	
 	    _this.isInvalidRenderCellText = _this.isInvalidRenderCellText.bind(_this);
 	    _this.handleClick = _this.handleClick.bind(_this);
+	    _this.state = {
+	      showDropdowm: false
+	    };
 	    return _this;
 	  }
 	
@@ -52303,7 +52426,19 @@
 	  // 渲染整数/货币类型
 	
 	
-	  // 渲染时间类型
+	  // 渲染时间类型-l
+	
+	
+	  // 渲染下拉类型，主要为编辑表格铺垫
+	
+	
+	  // 渲染行内菜单
+	
+	
+	  // 下拉按钮状态改变，点击后保持图标常驻
+	
+	
+	  // 菜单点击事件
 	
 	
 	  TableCell.prototype.render = function render() {
@@ -52346,6 +52481,7 @@
 	      }
 	    }
 	
+	    var colMenu = this.renderColumnMenu(column.cellMenu, text, record, index);
 	    // 根据 fieldType 来渲染数据
 	    if (!render) {
 	      switch (column.fieldType) {
@@ -52388,6 +52524,11 @@
 	            text = this.renderDate(text, column.dateConfig);
 	            break;
 	          }
+	        case 'select':
+	          {
+	            text = this.renderSelect(text, column.selectConfig);
+	            break;
+	          }
 	        default:
 	          {
 	            break;
@@ -52426,6 +52567,9 @@
 	    if (expandIcon && expandIcon.props.expandable) {
 	      className = className + (' ' + clsPrefix + '-has-expandIcon');
 	    }
+	    if (colMenu) {
+	      className += ' u-table-inline-icon';
+	    }
 	    return _react2["default"].createElement(
 	      'td',
 	      {
@@ -52434,11 +52578,12 @@
 	        className: className,
 	        onClick: this.handleClick,
 	        title: title,
-	        style: { color: fontColor, backgroundColor: bgColor }
+	        style: _extends({ color: fontColor, backgroundColor: bgColor }, column.style)
 	      },
 	      indentText,
 	      expandIcon,
-	      text
+	      text,
+	      colMenu
 	    );
 	  };
 	
@@ -53682,7 +53827,7 @@
 	    // }
 	    if (!_this3.props.onDrop) return;
 	    // this.props.onDrop(event,target);
-	    _this3.props.onDrop(event, { dragSource: _this3.currentObj, dragTarg: colum });
+	    _this3.props.onDrop(event, { dragSource: _this3.currentObj, dragTarg: e.column });
 	  };
 	
 	  this.onDragEnter = function (e) {
@@ -84008,6 +84153,10 @@
 	      }
 	    };
 	
+	    _this.saveNode = function (node) {
+	      _this.node = node;
+	    };
+	
 	    return _this;
 	  }
 	
@@ -84016,11 +84165,23 @@
 	    this.callRef();
 	  };
 	
-	  MenuItem.prototype.componentDidUpdate = function componentDidUpdate() {
-	    if (this.props.active) {
-	      (0, _domScrollIntoView2['default'])(_reactDom2['default'].findDOMNode(this), _reactDom2['default'].findDOMNode(this.props.parentMenu), {
-	        onlyScrollIfNeeded: true
-	      });
+	  MenuItem.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
+	    var _props = this.props,
+	        active = _props.active,
+	        parentMenu = _props.parentMenu,
+	        eventKey = _props.eventKey;
+	    // 在 parentMenu 上层保存滚动状态，避免重复的 MenuItem key 导致滚动跳动
+	    // https://github.com/ant-design/ant-design/issues/16181
+	
+	    if (!prevProps.active && active && !parentMenu && !parentMenu['scrolled-' + eventKey]) {
+	      if (this.node) {
+	        (0, _domScrollIntoView2['default'])(this.node, _reactDom2['default'].findDOMNode(parentMenu), {
+	          onlyScrollIfNeeded: true
+	        });
+	        parentMenu['scrolled-' + eventKey] = true;
+	      }
+	    } else if (parentMenu && parentMenu['scrolled-' + eventKey]) {
+	      delete parentMenu['scrolled-' + eventKey];
 	    }
 	    this.callRef();
 	  };
@@ -84100,9 +84261,7 @@
 	    }
 	    return _react2['default'].createElement(
 	      'li',
-	      (0, _extends3['default'])({}, props, attrs, mouseEvent, {
-	        style: style
-	      }),
+	      (0, _extends3['default'])({}, props, attrs, mouseEvent, { style: style, ref: this.saveNode }),
 	      props.children,
 	      icon
 	    );
@@ -86436,11 +86595,14 @@
 	      columns = dragHandleColumn.concat(columns);
 	    }
 	    columns = this.addOrderColumn(columns, showRowNum);
-	
+	    columns = this.deleteColumnNotShow(columns);
 	    this.columns = columns || this.normalize(elements);
 	
 	    this.originWidth = originWidth;
 	  }
+	
+	  // delete the column which does not show
+	
 	
 	  // 向数据列中添加一列:序号
 	
@@ -86619,6 +86781,7 @@
 	
 	  ColumnManager.prototype.reset = function reset(columns, elements, showRowNum) {
 	    columns = this.addOrderColumn(columns, showRowNum);
+	    columns = this.deleteColumnNotShow(columns);
 	    this.columns = columns || this.normalize(elements);
 	    this._cached = {};
 	  };
@@ -86721,6 +86884,17 @@
 	
 	var _initialiseProps = function _initialiseProps() {
 	  this._cached = {};
+	
+	  this.deleteColumnNotShow = function (columns) {
+	    var len = columns.length;
+	    for (var i = 0; i < len; i++) {
+	      if (columns && columns[i] && columns[i].isShow === false) {
+	        columns.splice(i, 1);
+	        i--;
+	      }
+	    }
+	    return columns;
+	  };
 	
 	  this.addOrderColumn = function (columns, showRowNum) {
 	    if (!showRowNum) {
@@ -87509,6 +87683,7 @@
 	    };
 	
 	    this.onRowClick = function (record, index, event) {
+	      if (record._disabled) return;
 	      var _props2 = _this2.props,
 	          autoCheckedByClickRows = _props2.autoCheckedByClickRows,
 	          onRowClick = _props2.onRowClick;
@@ -94046,7 +94221,7 @@
 	            }
 	            columns.forEach(function (item) {
 	                item.oldRender = item.render;
-	                if (item.type || item.customizeRender) {
+	                if (item.renderType || item.customizeRender) {
 	                    if (!disabled) {
 	                        if (item.required) {
 	                            item.title = _react2["default"].createElement(
@@ -94062,7 +94237,7 @@
 	                            valueField: item.valueField,
 	                            config: item.config,
 	                            textAlign: item.textAlign,
-	                            type: item.type,
+	                            renderType: item.renderType,
 	                            index: index,
 	                            dataIndex: item.dataIndex,
 	                            value: text,
@@ -94558,14 +94733,14 @@
 	
 	        _this.getValue = function (text) {
 	            var _this$props = _this.props,
-	                type = _this$props.type,
+	                renderType = _this$props.renderType,
 	                filedProps = _this$props.filedProps;
 	            var _filedProps$options = filedProps.options,
 	                options = _filedProps$options === undefined ? [] : _filedProps$options,
 	                defaultValue = filedProps.defaultValue;
 	
 	            var value = defaultValue != undefined ? defaultValue : '';
-	            if (type && type == 'select') {
+	            if (renderType && renderType == 'select') {
 	                options.forEach(function (item) {
 	                    if (item.value == text) {
 	                        value = item.key;
@@ -94584,7 +94759,7 @@
 	
 	        _this.renderComp = function () {
 	            var _this$props2 = _this.props,
-	                type = _this$props2.type,
+	                renderType = _this$props2.renderType,
 	                value = _this$props2.value,
 	                index = _this$props2.index,
 	                dataIndex = _this$props2.dataIndex,
@@ -94616,7 +94791,7 @@
 	                        )
 	                    ) : _react2['default'].createElement(
 	                        _RenderCell2['default'],
-	                        { type: 'refer', text: value, textAlign: textAlign },
+	                        { renderType: 'refer', text: value, textAlign: textAlign },
 	                        _react2['default'].cloneElement(customizeRender, _extends({
 	                            valueField: valueField,
 	                            textAlign: textAlign,
@@ -94631,7 +94806,7 @@
 	                    )
 	                );
 	            } else {
-	                switch (type) {
+	                switch (renderType) {
 	                    case 'inputNumber':
 	                        return _react2['default'].createElement(
 	                            'div',
@@ -99433,7 +99608,7 @@
 	  dataIndex: "orderCode",
 	  key: "orderCode",
 	  width: 150,
-	  type: 'input',
+	  renderType: 'input',
 	  required: true,
 	  validate: true,
 	  disabled: true,
@@ -99446,7 +99621,7 @@
 	  key: "money",
 	  width: 160,
 	  textAlign: 'right',
-	  type: 'inputNumber',
+	  renderType: 'inputNumber',
 	  required: true,
 	  validate: true,
 	  filedProps: {
@@ -99458,7 +99633,7 @@
 	  dataIndex: "type_name",
 	  key: "type_name",
 	  width: 100,
-	  type: 'select',
+	  renderType: 'select',
 	  required: true,
 	  validate: true,
 	  filedProps: {
@@ -99476,7 +99651,7 @@
 	  dataIndex: "purchasing",
 	  key: "purchasing",
 	  width: 150,
-	  type: 'input'
+	  renderType: 'input'
 	}, {
 	  title: "采购组",
 	  dataIndex: "purchasingGroup",
@@ -99662,7 +99837,7 @@
 	  dataIndex: "orderCode",
 	  key: "orderCode",
 	  width: 150,
-	  type: 'input',
+	  renderType: 'input',
 	  required: true,
 	  validate: true,
 	  pattern: /^2$/,
@@ -99676,7 +99851,7 @@
 	  key: "money",
 	  width: 160,
 	  textAlign: 'right',
-	  type: 'inputNumber',
+	  renderType: 'inputNumber',
 	  required: true,
 	  validate: true,
 	  filedProps: {
@@ -99687,7 +99862,7 @@
 	  dataIndex: "type_name",
 	  key: "type_name",
 	  width: 100,
-	  type: 'select',
+	  renderType: 'select',
 	  required: true,
 	  validate: true,
 	  filedProps: {

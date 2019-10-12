@@ -72,14 +72,14 @@ var RenderColumn = function (_Component) {
 
         _this.getValue = function (text) {
             var _this$props = _this.props,
-                type = _this$props.type,
+                renderType = _this$props.renderType,
                 filedProps = _this$props.filedProps;
             var _filedProps$options = filedProps.options,
                 options = _filedProps$options === undefined ? [] : _filedProps$options,
                 defaultValue = filedProps.defaultValue;
 
             var value = defaultValue != undefined ? defaultValue : '';
-            if (type && type == 'select') {
+            if (renderType && renderType == 'select') {
                 options.forEach(function (item) {
                     if (item.value == text) {
                         value = item.key;
@@ -98,7 +98,7 @@ var RenderColumn = function (_Component) {
 
         _this.renderComp = function () {
             var _this$props2 = _this.props,
-                type = _this$props2.type,
+                renderType = _this$props2.renderType,
                 value = _this$props2.value,
                 index = _this$props2.index,
                 dataIndex = _this$props2.dataIndex,
@@ -130,7 +130,7 @@ var RenderColumn = function (_Component) {
                         )
                     ) : _react2["default"].createElement(
                         _RenderCell2["default"],
-                        { type: 'refer', text: value, textAlign: textAlign },
+                        { renderType: 'refer', text: value, textAlign: textAlign },
                         _react2["default"].cloneElement(customizeRender, _extends({
                             valueField: valueField,
                             textAlign: textAlign,
@@ -145,7 +145,7 @@ var RenderColumn = function (_Component) {
                     )
                 );
             } else {
-                switch (type) {
+                switch (renderType) {
                     case 'inputNumber':
                         return _react2["default"].createElement(
                             'div',

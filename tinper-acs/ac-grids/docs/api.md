@@ -52,7 +52,7 @@ const EditGrid = AcGrids.EditGrid;
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|type|表单类型|目前支持 `input/inputNumber/select/datepicker/year`，正在继续完善，不写则不render成表单|-|
+|renderType|表单类型|目前支持 `input/inputNumber/select/datepicker/year`，正在继续完善，不写则不render成表单|-|
 |customizeRender|自定义render表单元素，此组件封装要遵循的规则较多，目前已封装`ac-grids-refer-field` mdf-refer参照使用的render，[组件参考地址](https://github.com/tinper-acs/ac-grids-refer-field)，文档持续完善|node|-|
 |validate|是否校验|bool|-|
 |required|是否必填|bool|-|

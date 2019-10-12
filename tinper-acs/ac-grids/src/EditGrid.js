@@ -68,7 +68,7 @@ class EditGrid extends Component {
         }
         columns.forEach(item => {
             item.oldRender = item.render;
-            if(item.type||item.customizeRender){
+            if(item.renderType||item.customizeRender){
                 if(!disabled){
                     if(item.required){
                         item.title=<span className={`${this.props.clsfix}-column-title-required`}>{item.title}</span>
@@ -80,7 +80,7 @@ class EditGrid extends Component {
                                 valueField={item.valueField}
                                 config={item.config}
                                 textAlign={item.textAlign}
-                                type={item.type}
+                                renderType={item.renderType}
                                 index={index}
                                 dataIndex={item.dataIndex}
                                 value={text}

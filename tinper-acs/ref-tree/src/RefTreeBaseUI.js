@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { refValParse } from './utils';
+// import { refValParse,deepTraversal } from './utils';
 import RefCoreError from 'ref-core/lib/refs/RefCoreError';
 import RefCoreTree from 'ref-core/lib/refs/RefCoreTree';
 import RefCoreSearch from 'ref-core/lib/refs/RefCoreSearch';
@@ -69,16 +69,58 @@ class RefTreeBaseUI extends Component {
       showLoading: showLoading,
       searchValue:'',//20190527新增搜索
     };
+    this.flatTreeData = new Map();
+    this.currentParentChildrenArr = new Set();
   }
  
   componentWillReceiveProps(nextProps) {
     //重新渲染数据获取selectedArray,因为取消操作重置了selectedArray，需要初始化
+    if(!shallowEqual(nextProps.treeData,this.props.treeData) && !nextProps.checkStrictly){
+      //非严格模式需要平铺数据
+      this.flatTreeData = new Map();
+      this.deepTraversal(nextProps.treeData,null,nextProps.valueField)
+    }
+    
     if(nextProps.showModal)this.initComponent(nextProps);
     
   }
 
+  deepTraversal = (treeData,parentKey=null,valueField) => {
+    let dataCopy = [].concat(treeData);
+    if(Array.isArray(dataCopy)){
+      for (let i=0, l=dataCopy.length; i<l; i++) {
+            let { refname, children,...props} = dataCopy[i];
+            let key = dataCopy[i][valueField];
+            let dataCopyI = new Object(),
+            isLeaf = children ? false : true;
+            dataCopyI = Object.assign(dataCopyI,{
+              key,
+              refname,
+              parentKey : parentKey || null,
+              isLeaf
+          },props);
+        this.flatTreeData.set(key,dataCopyI); // 取每项数据放入一个新数组
+        if (Array.isArray(children) && children.length > 0){
+          // 若存在children则递归调用，把数据拼接到新数组中，并且删除该children
+          this.deepTraversal(children, key,valueField);
+        }
+      }
+    }
+  }
+
+  getParentKeys = (key) =>{
+    let data = this.flatTreeData.get(key);
+    if(data.parentKey){
+      this.currentParentChildrenArr.add(data.parentKey);//加入当前节点的父节点
+      let parentData = this.flatTreeData.get(data.parentKey) 
+      if(parentData){
+        this.getParentKeys(data.parentKey);//去找父节点的父级
+      }
+    }
+  }
+  
   initComponent = (props) => {
-    let {matchData=[],value,valueField} = props;
+    let {matchData=[],value,valueField,checkStrictly} = props;
     this.setState({
       searchValue:'',//清空搜索
       selectedArray: matchData,
@@ -104,7 +146,6 @@ class RefTreeBaseUI extends Component {
       });
     } else {
       //多选
-      //多选
       let { valueField, checkStrictly } = this.props;
       let allProcessCheckedArray = [].concat(this.state.selectedArray);
       let newCheckedKeys = this.state.checkedKeys
@@ -124,31 +165,29 @@ class RefTreeBaseUI extends Component {
           });
         } else {
           //删除操作，父节点，删除当前，并且删除children；叶子节点，只删除当前就好
-          allProcessCheckedArray = allProcessCheckedArray.filter(item => {
-            return item[valueField] !== key
-          });
-          if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+          //往上找父节点删除
+          this.currentParentChildrenArr = new Set();
+          this.currentParentChildrenArr.add(key);//节点本身
+          this.getParentKeys(key);
+          //往下找子节点删除
           if(event.node.props.attr.children && event.node.props.attr.children.length){
-              //删除父节点，涉及遍历children节点，这里暂时不添加
-              let allKeys = [];
-              function loop(data){
+              function loop(data,arr){
                 data.forEach(item=>{
-                  allKeys.push(item[valueField]);
+                  arr.add(item[valueField])
                   if(item.children && item.children.length){
-                    loop(item.children);
+                    loop(item.children,arr);
                   }
                 })
               }
-              loop(event.node.props.attr.children);
-              allKeys.forEach(key=>{
-                allProcessCheckedArray = allProcessCheckedArray.filter(item => {
-                  return item[valueField] !== key
-                });
-                if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
-              })
+              loop(event.node.props.attr.children,this.currentParentChildrenArr);
           }
+          this.currentParentChildrenArr.forEach(key=>{
+            allProcessCheckedArray = allProcessCheckedArray.filter(item => {
+              return item[valueField] !== key
+            });
+            if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
+          })
         }
-
         
       } else {
         //这里是checkStrictly为true的时候，增删都是一个
@@ -167,7 +206,6 @@ class RefTreeBaseUI extends Component {
 
         }
       }
-      console.log('最终的checkedkeys',newCheckedKeys)
       this.setState({
         selectedArray: allProcessCheckedArray,
         checkedKeys: newCheckedKeys,

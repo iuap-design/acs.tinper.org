@@ -58,6 +58,14 @@ exports["default"] = {
         'hotkey': '',
         'className': 'ac-btns-import'
     },
+    'template': { //导入模板下载
+        'colors': 'write',
+        'name_zh_CN': '导入模板下载',
+        'name_zh_TW': '導入模板下載',
+        'name_en_US': 'Import template download',
+        'hotkey': '',
+        'className': 'ac-btns-template'
+    },
     'save': { //保存
         'colors': 'primary',
         'name_zh_CN': '保存',

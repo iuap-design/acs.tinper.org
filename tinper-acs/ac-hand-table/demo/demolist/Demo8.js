@@ -359,6 +359,7 @@ class Demo8 extends Component {
                   size="sm">删除</Button>
           <Button colors="primary" className='btn-style' onClick={this.getData}
                   size="sm">格式化数据 </Button>
+
         </div>
 
 
@@ -384,6 +385,9 @@ class Demo8 extends Component {
             columnHeaderHeight={77} //表头高
             afterRowMove={(rows, target, newArray) => { //行移动事件
               this.setState({ handData: newArray });
+            }}
+            afterSelection={(startRow, startCol, endRow, endCol) => { //行移动事件
+              console.log('startRow, startCol, endRow, endCol', startRow, startCol, endRow, endCol);
             }}
 
           />

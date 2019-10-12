@@ -61,6 +61,11 @@ let btns = {
             console.log('cancel')
         }
     },
+    template: {
+        onClick: () => {
+            console.log('template')
+        }
+    },
     update: {
         onClick: () => {
             console.log('update')

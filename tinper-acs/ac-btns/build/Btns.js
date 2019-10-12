@@ -93,10 +93,10 @@ var Btns = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-        _this.onHandleClick = function (e, code) {
+        _this.onHandleClick = function (e, item) {
             var func = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
 
-            _this.props.onClick(e, code);
+            _this.props.onClick(e, item);
             func(e);
         };
 
@@ -173,18 +173,20 @@ var Btns = function (_Component) {
                 name_en_US = _this$state$allBtns$k.name_en_US;
 
             var clss = 'ac-btns-item ' + className;
+            if (getCookie(_this.props.localeCookie) == 'zh_TW') name = name_zh_TW;
+            if (getCookie(_this.props.localeCookie) == 'en_US') name = name_en_US;
             if (itemProps) {
                 if (itemProps.className) clss += ' ' + itemProps.className;
                 if (itemProps.name) name = itemProps.name;
                 if (itemProps.onClick) {
                     var func = itemProps.onClick;
                     itemProps.onClick = function (e) {
-                        _this.onHandleClick(e, key, func);
+                        _this.onHandleClick(e, {
+                            code: key, name: name
+                        }, func);
                     };
                 }
             }
-            if (getCookie(_this.props.localeCookie) == 'zh_TW') name = name_zh_TW;
-            if (getCookie(_this.props.localeCookie) == 'en_US') name = name_en_US;
             if (_this.state.allBtns[key]) {
                 if (itemProps && itemProps.node) {
                     return itemProps.node;

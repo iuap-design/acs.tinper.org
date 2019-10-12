@@ -68,14 +68,14 @@ class AcAttachment extends Component{
             action: props.uploadUrl,
             selectedFiles: [],
             tableList: [],
-            btnUpload: this.fGetBtnByType('upload',false),
-            btnDownload: this.fGetBtnByType('download',true),
-            btnDelete: this.fGetBtnByType('delete',true)
+            btnUpload: this.fGetBtnByType('upload',false,props.disabled),
+            btnDownload: this.fGetBtnByType('download',true,props.disabled),
+            btnDelete: this.fGetBtnByType('delete',true,props.disabled)
         }
         this.selectedFiles = [];
         this.fileTypeIcons = ['css','doc','html','javascript','jpg','pdf','png','ppt','xls','xlsx','xml'];
         bindAll(this,['fGetTableColumns','fLoadFileList','fDeleteFile','fUploadSuccess','fUploadDelete','fGetTableList','fGetUploadData',
-                      'fDownload','fDelete','onSelectData','fConClick','beforeUpload','fValidateFileType','fSetSelectedFiles']);
+                      'fDownload','fDelete','onSelectData','fConClick','beforeUpload','fValidateFileType','fSetSelectedFiles','fGetBtnByType']);
     }
     get uploadUrl(){
         return `${this.props.baseUrl}${this.props.uploadUrl}?t=${new Date().getTime()}`;
@@ -99,6 +99,21 @@ class AcAttachment extends Component{
         //单据Id变化刷新文件列表
         if(nextProps.recordId && nextProps.recordId != this.props.recordId){
             this.fLoadFileList(nextProps);
+        }
+        //disabled变化更新按钮
+        if(nextProps.disabled != this.props.disabled){
+            this.setState({
+                disabled: nextProps.disabled
+            },() => {
+                let btnUpload = this.fGetBtnByType('upload',nextProps.disabled,nextProps.disabled);
+                let btnDownload = this.fGetBtnByType('download',nextProps.disabled,nextProps.disabled);
+                let btnDelete = this.fGetBtnByType('delete',nextProps.disabled,nextProps.disabled);
+                this.setState({
+                    btnUpload: btnUpload,
+                    btnDownload: btnDownload,
+                    btnDelete: btnDelete
+                });
+            });
         }
     }
 	componentDidMount(){
@@ -228,9 +243,10 @@ class AcAttachment extends Component{
         let battchEnable = selectedFiles && selectedFiles.length > 0;
         let btnDisabled = !battchEnable;
         //获取按钮
-        let btnUpload = this.fGetBtnByType('upload',btnDisabled);
-        let btnDownload = this.fGetBtnByType('download',btnDisabled);
-        let btnDelete = this.fGetBtnByType('delete',btnDisabled);
+        let outDisabled = this.props.disabled;
+        let btnUpload = this.fGetBtnByType('upload',btnDisabled,outDisabled);
+        let btnDownload = this.fGetBtnByType('download',btnDisabled,outDisabled);
+        let btnDelete = this.fGetBtnByType('delete',btnDisabled,outDisabled);
         this.setState({
             btnUpload: btnUpload,
             btnDownload: btnDownload,
@@ -336,7 +352,7 @@ class AcAttachment extends Component{
         }
         return btn;
     }
-    fGetBtnByType(type,disabled){
+    fGetBtnByType(type,disabled,outDisabled){
         let btn = this.fGetBtnByProp(type);
         if(!btn){
             let map = {
@@ -359,7 +375,7 @@ class AcAttachment extends Component{
             btn = map[type];
         }
         //外部禁用，则全部按钮禁用 
-        if(this.props.disabled){
+        if(outDisabled){
             btn = React.cloneElement(btn,{disabled:true});
         }
         //外部不禁用，则有选择记录时候控制删除和下载按钮的disabled
