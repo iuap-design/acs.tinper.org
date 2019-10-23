@@ -204,7 +204,7 @@ class RefMultipleTableBaseUI extends Component {
 	 */
 	onRowDoubleClick = (record) => {
 		if(this.props.multiple) return;
-		let { valueField = "refpk" } = this.props;
+		let { valueField = "refpk",onSave } = this.props;
 		record._checked = true;
 		this.checkedArray = [record];
 		this.checkedMap = {};
@@ -213,6 +213,8 @@ class RefMultipleTableBaseUI extends Component {
 			checkedArray: this.checkedArray,
 		})
 		this.onChange(this.checkedArray);
+		onSave && onSave(this.checkedArray)
+
 	}
 	/**
 	 * 单击行选择该行数据，只在单选状态生效

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Modal} from 'tinper-bee';
+import Modal from 'bee-modal';
 import Loading from 'bee-loading';
 import RefCoreButton from 'ref-core/lib/refs/RefCoreButton.js';
 import RefMultipleTableBaseUI from './RefMultipleTableBaseUI';
@@ -89,7 +89,7 @@ class RefTreeTableBaseUI extends Component {
 		const { className,showModal, searchable, backdrop, title, showLine, 
 			multiple, menuTitle, tableTitle, valueField,value,
 			lang,buttons,checkStrictly=true,defaultExpandAll,nodeDisplay,
-		    lazyModal,onLoadData} = this.props;
+		    lazyModal,onLoadData,onSave} = this.props;
 		let {showLoading , treeData,onTreeChange,onTreeSearch,matchData} = this.props;
 		let {
 			columnsData,
@@ -139,6 +139,7 @@ class RefTreeTableBaseUI extends Component {
 			value,
 			tableProps,
 			mustPaginationShow,
+			onSave
 		})
 		return (
 			<Modal

@@ -10,8 +10,8 @@ const newComReg = /- (.*)@/g;
 
 
 const auth = {
-    token: '8baa90df185eb410e572eb54fdc377d10e564a5c',
-    user: 'yangchch6'
+    token: '8f8b3ae2f90d334f8af23b335fa9245f627c0a3a',
+    user: 'liushaozhen'
 }
 
 /**
@@ -111,7 +111,7 @@ gh.list(auth, 'tinper-acs', 'tinper-acs', (err,list)=>{
         //写入new.json
 
         let latestRelease = list[0].body;
-        let newAry=latestRelease.match(newComReg);
+        let newAry=latestRelease.match(newComReg)||[];
         let newJsonAry = []
         newAry.forEach(item=>{
             newJsonAry.push(item.replace('- ','').replace('@',''))

@@ -118,7 +118,8 @@ var SplitButton = function (_Component) {
             size = _props$size === undefined ? '' : _props$size,
             onClick = _props.onClick,
             disabled = _props.disabled,
-            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick', 'disabled']);
+            className = _props.className,
+            other = _objectWithoutProperties(_props, ['children', 'menuList', 'onListIconClick', 'colors', 'size', 'onClick', 'disabled', 'className']);
 
         return _react2["default"].createElement(
             'div',
@@ -143,7 +144,9 @@ var SplitButton = function (_Component) {
                             onClick: this.onBtnClick,
                             ref: function ref(btn) {
                                 return _this2.btn = btn;
-                            }, colors: colors, bordered: true, size: size, className: 'split-btn' }),
+                            },
+                            colors: colors, bordered: true, size: size,
+                            className: className ? 'split-btn ' + className : 'split-btn' }),
                         children
                     ),
                     _react2["default"].createElement(

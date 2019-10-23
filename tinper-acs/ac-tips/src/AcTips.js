@@ -1,6 +1,7 @@
-import Tips from './Tips';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import uuid from 'uuid';
+import Tips from './Tips';
 
 let AcTips = {
     toastList:[],

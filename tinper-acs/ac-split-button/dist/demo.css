@@ -2,7 +2,7 @@
   display: inline-block; }
   .ac-split-button .icon-out {
     display: inline-block;
-    border: 1px solid #a5adba;
+    border: 1px solid #d0d0d0;
     position: relative;
     border-left: none;
     border-top-right-radius: 3px;
@@ -22,7 +22,7 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     color: #212121;
-    border: 1px solid #a5adba;
+    border: 1px solid #d0d0d0;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
     font-size: 13px; }
   .ac-split-button-dropdown .u-dropdown-menu > .u-dropdown-menu-item-selected {
@@ -75,7 +75,7 @@
   .ac-split-button .icon-out[disabled], .ac-split-button .icon-out[disabled]:hover {
     background: #fff;
     color: #dfe1e6;
-    border-color: #a5adba;
+    border-color: #d0d0d0;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
 
 .ac-split-button {

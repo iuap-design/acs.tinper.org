@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _Tips = require('./Tips');
+var _react = require('react');
 
-var _Tips2 = _interopRequireDefault(_Tips);
+var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
@@ -17,6 +17,10 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 var _uuid = require('uuid');
 
 var _uuid2 = _interopRequireDefault(_uuid);
+
+var _Tips = require('./Tips');
+
+var _Tips2 = _interopRequireDefault(_Tips);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -54,7 +58,7 @@ var AcTips = {
         toast.style.top = AcTips.toastList.length * 50 + top + 'px';
         if (zIndex) toast.style['z-index'] = zIndex;
         document.body.appendChild(toast);
-        _reactDom2["default"].render(React.createElement(_Tips2["default"], _extends({}, options, { destory: AcTips.destory, id: id })), toast);
+        _reactDom2["default"].render(_react2["default"].createElement(_Tips2["default"], _extends({}, options, { destory: AcTips.destory, id: id })), toast);
         setTimeout(function () {
             toast.style.right = '5px';
         }, 0);

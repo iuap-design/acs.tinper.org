@@ -1,7 +1,7 @@
 /**
  *
  * @title 基础示例1
- * @description RefMultipleTableBaseUI, `multiple=fasle`单选、`miniSearch`简单搜索。注意单选展示radio需要手动封装
+ * @description RefMultipleTableBaseUI, `multiple=false`单选、`miniSearch`简单搜索。注意单选展示radio需要手动封装
  *
  */
 import React, { Component } from 'react';

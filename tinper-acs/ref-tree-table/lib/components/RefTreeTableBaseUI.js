@@ -24,7 +24,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _tinperBee = require('tinper-bee');
+var _beeModal = require('bee-modal');
+
+var _beeModal2 = _interopRequireDefault(_beeModal);
 
 var _beeLoading = require('bee-loading');
 
@@ -160,7 +162,8 @@ var RefTreeTableBaseUI = function (_Component) {
 		    defaultExpandAll = _props.defaultExpandAll,
 		    nodeDisplay = _props.nodeDisplay,
 		    lazyModal = _props.lazyModal,
-		    onLoadData = _props.onLoadData;
+		    onLoadData = _props.onLoadData,
+		    onSave = _props.onSave;
 		var _props2 = this.props,
 		    showLoading = _props2.showLoading,
 		    treeData = _props2.treeData,
@@ -218,10 +221,11 @@ var RefTreeTableBaseUI = function (_Component) {
 			matchData: matchData,
 			value: value,
 			tableProps: tableProps,
-			mustPaginationShow: mustPaginationShow
+			mustPaginationShow: mustPaginationShow,
+			onSave: onSave
 		});
 		return _react2["default"].createElement(
-			_tinperBee.Modal,
+			_beeModal2["default"],
 			_extends({
 				show: showModal, className: theme + '  ' + className + ' ref-core ref-core-modal ref-tree-table',
 				backdrop: backdrop,
@@ -230,16 +234,16 @@ var RefTreeTableBaseUI = function (_Component) {
 				autoFocus: false
 			}, modalProps),
 			_react2["default"].createElement(
-				_tinperBee.Modal.Header,
+				_beeModal2["default"].Header,
 				{ closeButton: true },
 				_react2["default"].createElement(
-					_tinperBee.Modal.Title,
+					_beeModal2["default"].Title,
 					null,
 					title
 				)
 			),
 			_react2["default"].createElement(
-				_tinperBee.Modal.Body,
+				_beeModal2["default"].Body,
 				{ ref: function ref(_ref) {
 						return _this3.modalRef = _ref;
 					} },
@@ -274,7 +278,7 @@ var RefTreeTableBaseUI = function (_Component) {
 				)
 			),
 			_react2["default"].createElement(
-				_tinperBee.Modal.Footer,
+				_beeModal2["default"].Footer,
 				{ className: 'ref-core-modal-footer ' },
 				_react2["default"].createElement(_RefCoreButton2["default"], {
 					language: lang,

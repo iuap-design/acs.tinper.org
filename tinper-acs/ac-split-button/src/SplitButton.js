@@ -54,7 +54,7 @@ class SplitButton extends Component {
         this.props.onClick&&this.props.onClick(e);
     }
     render(){
-        let { children,menuList,onListIconClick,colors,size='',onClick,disabled,...other } = this.props;
+        let { children,menuList,onListIconClick,colors,size='',onClick,disabled,className,...other } = this.props;
         
         return(
             <div className={'ac-split-button '+colors+' '+size}>
@@ -71,7 +71,9 @@ class SplitButton extends Component {
                             {...other} 
                             disabled={disabled}
                             onClick={this.onBtnClick}
-                            ref={btn=>this.btn=btn} colors={colors} bordered size={size} className='split-btn'>
+                            ref={btn=>this.btn=btn} 
+                            colors={colors} bordered size={size} 
+                            className={className?'split-btn '+className:'split-btn'}>
                                 {children}
                             </Button>
                             <span className='icon-out' disabled={disabled}

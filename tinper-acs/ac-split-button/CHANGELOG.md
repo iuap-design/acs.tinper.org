@@ -1,3 +1,13 @@
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/tinper-bee/ac-split-button/compare/v0.0.7...v0.0.8) (2019-10-18)
+
+
+### Features
+
+* **ac-split-button:** className ([3924f7d](https://github.com/tinper-bee/ac-split-button/commit/3924f7d))
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/tinper-bee/ac-split-button/compare/v0.0.6...v0.0.7) (2019-09-24)
 

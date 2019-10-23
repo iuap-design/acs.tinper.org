@@ -408,8 +408,10 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 
 	this.onRowDoubleClick = function (record) {
 		if (_this3.props.multiple) return;
-		var _props$valueField3 = _this3.props.valueField,
-		    valueField = _props$valueField3 === undefined ? "refpk" : _props$valueField3;
+		var _props2 = _this3.props,
+		    _props2$valueField = _props2.valueField,
+		    valueField = _props2$valueField === undefined ? "refpk" : _props2$valueField,
+		    onSave = _props2.onSave;
 
 		record._checked = true;
 		_this3.checkedArray = [record];
@@ -419,6 +421,7 @@ var RefMultipleTableBaseUI = (_temp = _class = function (_Component) {
 			checkedArray: _this3.checkedArray
 		});
 		_this3.onChange(_this3.checkedArray);
+		onSave && onSave(_this3.checkedArray);
 	};
 
 	this.onRowClick = function (record) {
