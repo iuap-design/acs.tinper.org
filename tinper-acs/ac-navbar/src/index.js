@@ -1,2 +1,2 @@
-import AcNavbar from './Navbar/Header.js';
-export default AcNavbar;
+import Navbar from './Navbar';
+export default Navbar;

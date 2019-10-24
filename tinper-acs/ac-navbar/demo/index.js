@@ -4,11 +4,10 @@ import { Con, Row, Col } from 'bee-layout';
 import { Panel } from 'bee-panel';
 import Drawer from 'bee-drawer';
 import Clipboard from 'bee-clipboard'; 
-import './demo.scss';
 
 
-import Demo1 from "./demolist/Demo1";
-var DemoArray = [{"example":<Demo1 />,"title":" 导航栏","code":"/**\n *\n * @title 导航栏\n * @description 基础示例\n *\n */\n\nimport React, { Component } from 'react';\nimport AcNavbar from '../../src/index';\nclass Demo1 extends Component {\n    render () {\n        return (\n            <div className=\"demoPadding\">\n                <AcNavbar showHeader={true}/>\n            </div>\n        )\n    }\n}\n\n\n","desc":" 基础示例"}]
+
+var Demo1 = require("./demolist/Demo1");var Demo2 = require("./demolist/Demo2");var DemoArray = [{"example":<Demo1 />,"title":" 导航栏","code":"/**\n *\n * @title 导航栏\n * @description 基础示例\n *\n */\n\nimport React, { Component } from 'react';\nimport AcNavbar from 'ac-navbar/index';\nclass Demo1 extends Component {\n\n    onSidebarClick = (showSidebar) => {\n        console.log('侧边栏显示状态：',showSidebar);\n    }\n\n    onInputSearch = (value) => {\n        console.log(value)\n    }\n\n    render () {\n        let searchInputProps = {\n            placeholder: '应用搜索'\n        }\n        return (\n            <div className=\"demoPadding\">\n                <AcNavbar \n                onSidebarClick={this.onSidebarClick} \n                onInputSearch={this.onInputSearch}\n                {...searchInputProps}\n                />\n            </div>\n        )\n    }\n}\n\nexport default Demo1;\n","desc":" 基础示例"},{"example":<Demo2 />,"title":" 控制导航栏显示和隐藏","code":"/**\r\n *\r\n * @title 控制导航栏显示和隐藏\r\n * @description 通过`showHeader`参数控制导航栏显示和隐藏\r\n *\r\n */\r\n\r\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\r\n\nimport AcNavbar from 'ac-navbar/index';\r\n\r\nclass Demo2 extends Component {\r\n    state={\r\n        showHeader:true \r\n    }\r\n    \r\n    handleClick = () => {\r\n        this.setState({\r\n            showHeader: !this.state.showHeader\r\n        })\r\n    }\r\n    render () {\r\n        let text = this.state.showHeader? '隐藏导航栏':'显示导航栏';\r\n        return (\r\n            <div className=\"demoPadding\">\r\n                <Button colors=\"primary\" onClick={this.handleClick} style={{margin:'8px'}}>{text}</Button>\r\n                <AcNavbar showHeader={this.state.showHeader}/>\r\n            </div>\r\n        )\r\n    }\r\n}\r\n\r\nexport default Demo2;\r\n","desc":" 通过`showHeader`参数控制导航栏显示和隐藏"}]
 
 
 class Demo extends Component {
@@ -48,7 +47,7 @@ class Demo extends Component {
                 <Clipboard action="copy" text={code}/>
             </div>
             <pre className="pre-js">
-                <code className="hljs javascript">{ code.replace('../../src/index',COMPONENT).replace('../../src',COMPONENT) }</code>
+                <code className="hljs javascript">{ code }</code>
             </pre >
             {!!scss_code ?<div className='component-code-copy copy-css'> SCSS代码 
                 <Clipboard action="copy" text={scss_code}/>
@@ -81,4 +80,4 @@ class DemoGroup extends Component {
     }
 }
 
-ReactDOM.render(<DemoGroup/>, document.getElementById('root'));
+ReactDOM.render(<DemoGroup/>, document.getElementById('tinperBeeDemo'));

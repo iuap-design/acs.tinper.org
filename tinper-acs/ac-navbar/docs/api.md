@@ -8,7 +8,7 @@
 
 ```
 import AcNavbar from 'ac-navbar';
-import 'ac-navbar/dist/ac-navbar.css';
+import 'ac-navbar/build/Navbar.css';
 
 ```
 
