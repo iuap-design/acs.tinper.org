@@ -6,37 +6,43 @@
 使用mdf逻辑的参照
 
 ## 如何使用
+安装
+```shell
+ynpm install @yonyou/smdf-refer --save
+```
+引入antd的样式
+
+```html
+<link href="http://iuap-design-cdn.oss-cn-beijing.aliyuncs.com/static/antd/antd.css" rel="stylesheet" type="text/css">
 
 ```
-import MdfRefer,{cb} from 'mdf-refer'
 
-1.首先创建model对象
+```javascript
 
-let model = new cb.models.ReferModel({
-    cRefType:'ucf-org-center.org_assets_tree_ref',
-    multiple:true,
-    displayname:'name',
-    valueField:'id',
-    text:'ybt01__智能公司',
+import 'mdf-refer/lib/index.less'
+import MdfRefer  from 'mdf-refer/lib/index.js'
+
+//1.首先创建model对象
+
+let model = new cb.models.MdfReferModel({
+  cRefType:'ucf-org-center.org_assets_tree_ref',
+  multiple:true,//指定多选
+  displayname:'name',
+  valueField:'id',
+  text:'ybt01__智能公司',//设置初始值
 });
 
-2. 可以添加方法
+//2. 可以添加方法
 
 let config = {};
 config.modelconfig ={
-    afterOkClick:this.afterOkClick
+  afterOkClick:this.afterOkClick
 }
 
-3.调用参照
+//3.调用参照
 
-cb.utils.initSupport('refer',this.model,config)
+<MdfRefer modelName={'refer'} model={model} config={config} >
 
-或者
-
-<MdfRefer modelName={'refer'} model={this.model} config={config} ></MdfRefer>
-
-
-如果配合bee-form组件使用时候建议使用第二种
 
 ```
 
@@ -61,29 +67,13 @@ cb.utils.initSupport('refer',this.model,config)
 ### model对象上的方法
 
 mdf-refer参照不同于其他参照组件，组件本身上不提供过多api，主要的操作方式在第一步创建的model对象上
+这里还有一堆可以使用的方法，是在model（如何使用-第一步定义的model）上挂载着很多的方法。mdf-refer参照不同于其他参照组件，组件本身上不提供过多api，主要的操作方式在第一步创建的model对象上。
+注意：mdf-refer定义的model是来在于cb.models.MdfReferModel，不同于mdf框架中cb.models.ReferModel。但是MdfReferModel继承cb.models.ReferModel，又支持个性方法定义和修改getTitleData、setTitleData的url等。
 
-|参数|说明|类型|默认值|
-|:--|:---:|:--:|---:|
-browse| 打开参照 | `function` | - 
-clear | 清空参照选中数据，model.clear(false);//清空 model.clear(true);//参照恢复到默认值
-getCondition |  获取 condition 字段值| `function` | - 
-getFilter |  获取 filter 字段值| `function` | - 
-getReturnFields | 获取bill2ReferKeyFieldMap 字段值 |  `function` | - 
-getSelectedNodes | 获取select 字段值 |   `function` | - 
-getTreeFilter | 获取 treeFilter 字段值| `function` | - 
-getValue | 获取 value 字段值 | `function` | - 
-modelType | 获取当前model类型  |`string` | - 
-setCondition | 设置 condition 字段| `function(data)` | - 
-setData | 设置 value 和 text 字段| `function(data)` | - 
-setFilter | 设置 filter 字段| `function(filter)` | - 
-setRefCode | 设置参照的refCode，删除缓存中的参照实体 | `function(newRefCode)` | - 
-setRefReturn| 设置 textField 字段  |`function(ret)` | - 
-setReturnFields | 设置bill2ReferKeyFieldMap 字段 |  `function(fields)` | - 
-setTreeFilter | 设置 treeFilter 字段| `function(filter)` | - 
-setValue| 设置参照的值，接收两个参数data,boolean。boolean为true表示会回调 events中的afterValueChange，false表示不调用回调函数直接setData。data可以是array或者string| `function([],true)` | - 
-_get_data| 获取new cb.models.ReferModel传入的所有参数和上面提到的字段 | `function` | - 
-_set_data |  改变_get_data中所有可获取的字段的值 | `function` | - 
-_del_data | 删除_get_data中所有可获取的字段的某个字段 | `function` | - 
+方法具体参考：
+ViewModel事件汇总：https://www.yuque.com/gpgy5k/ucf/wnageu
+BaseModel 基类：https://www.yuque.com/gpgy5k/ucf/oi56rx
+ContainerModel 基类https://www.yuque.com/gpgy5k/ucf/vgqofc
 
 ## 注意事项
 

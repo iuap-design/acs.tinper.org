@@ -207,6 +207,9 @@
         .u-checkbox .u-checkbox-label:before{
             top: -10px
         }
+        .u-checkbox .u-checkbox-label:after{
+            top: -10px
+        }
     }
 
 
@@ -359,35 +362,6 @@
             }
         }
 
-        //参照
-        .refer-out {
-            position: relative;
-            width: calc(100% - 4px);
-            height: 30px;
-            top: 0;
-            display: block;
-
-            .u-form-control {
-                position: absolute;
-                left: 0;
-                right: 0;
-                height: 30px;
-            }
-
-            .uf-symlist {
-                position: absolute;
-                right: 0;
-                height: 34px;
-                line-height: 30px;
-                color: #adb4bc;
-                cursor: pointer;
-                padding-right: 5px;
-                padding-left: 5px;
-                font-size: 20px;
-                top: -1px;
-                padding-top: 1px;
-            }
-        }
 
         //行编辑内的错误Tip
         .inline-edit-tooltip {

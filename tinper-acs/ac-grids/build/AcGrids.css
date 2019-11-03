@@ -8715,6 +8715,8 @@ ul {
   overflow: auto; }
   .ac-edit-grid.max .u-checkbox .u-checkbox-label:before {
     top: -10px; }
+  .ac-edit-grid.max .u-checkbox .u-checkbox-label:after {
+    top: -10px; }
 
 .ac-edit-grid-panel {
   display: flex;
@@ -8817,30 +8819,6 @@ ul {
     position: absolute;
     top: 2px;
     left: 2px; }
-
-.ac-edit-grid .u-table tr td .refer-out {
-  position: relative;
-  width: calc(100% - 4px);
-  height: 30px;
-  top: 0;
-  display: block; }
-  .ac-edit-grid .u-table tr td .refer-out .u-form-control {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 30px; }
-  .ac-edit-grid .u-table tr td .refer-out .uf-symlist {
-    position: absolute;
-    right: 0;
-    height: 34px;
-    line-height: 30px;
-    color: #adb4bc;
-    cursor: pointer;
-    padding-right: 5px;
-    padding-left: 5px;
-    font-size: 20px;
-    top: -1px;
-    padding-top: 1px; }
 
 .ac-edit-grid .u-table tr td .inline-edit-tooltip {
   line-height: 1 !important; }
