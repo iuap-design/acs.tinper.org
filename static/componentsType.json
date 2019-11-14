@@ -18,7 +18,8 @@
         "ac-btns",
         "ac-tips",
         "ac-split-area",
-        "ac-grids"
+        "ac-grids",
+        "ac-file-list"
     ],
     "others":[
         "ac-hand-table",

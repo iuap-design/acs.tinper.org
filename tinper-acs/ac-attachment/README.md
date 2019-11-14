@@ -53,7 +53,10 @@ onFileTypeOver | `file`，当前上传的文件对象 | 文件类型超出限制
 onFileSizeOver | `file`，当前上传的文件对象 | 文件大小超出限制回调
 onFileNumOver | `file`，当前上传的文件对象 | 文件数量超出限制回调
 onDelete | `attach` | 参数attach为附件组件实例，调用attach.fDelete()，可以调起接口删除附件
-
+onUploadSuccess | `data`，上传成功返回值 | 上传成功回调
+onUploadError | `data`，上传出错返回值 | 上传出错回调 
+onUploadDelete | `data`，上传删除返回值 | 上传删除回调 
+onDeleteFile | `data`，删除文件返回值 | 删除文件回调 
 
 ## 注意事项
 

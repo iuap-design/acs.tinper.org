@@ -1,6 +1,6 @@
 {
   "name": "ac-attachment",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -96,6 +96,7 @@
     "bee-checkbox": "^1.2.6",
     "bee-icon": "^1.0.11",
     "bee-message": "^1.0.12",
+    "bee-popconfirm": "^2.0.0",
     "bee-table": "^2.0.19",
     "classnames": "^2.2.6",
     "react-cookies": "^0.1.0",

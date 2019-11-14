@@ -65,6 +65,9 @@
     "ac-form-layout": {
         "name": "表单布局"
     },
+    "ac-file-list":{
+        "name":"附件列表"
+    },
 
 
     "ac-editor-sany":{
