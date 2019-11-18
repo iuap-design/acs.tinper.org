@@ -64,6 +64,8 @@ const EditGrid = AcGrids.EditGrid;
 
 #### filedProps
 
+|参数|说明|类型|默认值|
+|:---|:-----|:----|:------|
 |defaultValue|新增时默认值|string|-|
 |maxLength|最大长度，type=`input`时生效|string|-|
 |options|type=`select` 时的下拉内容|bool|-|
