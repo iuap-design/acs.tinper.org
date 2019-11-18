@@ -383,3 +383,7 @@ select::-ms-expand {
         margin-right:0;
     }
 }
+
+.docs .component-demo{
+    overflow: auto;
+}
