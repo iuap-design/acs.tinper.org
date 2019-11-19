@@ -1,0 +1,7 @@
+.ac-hotkey-tooltip.inverse .tooltip-inner {
+  font-weight: bold;
+  border: none !important;
+  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3); }
+
+.ac-hotkey-tooltip.in {
+  margin-top: 2px; }

@@ -1,0 +1,54 @@
+.ac-tips-out {
+  box-shadow: 0px 3px 12px 0px #4a515d40;
+  position: fixed;
+  min-width: 36px;
+  background: #fff;
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0 15px;
+  right: -100%;
+  transition: all .3s;
+  z-index: 9; }
+  .ac-tips-out .ac-tips {
+    display: -ms-flexbox;
+    display: flex; }
+    .ac-tips-out .ac-tips-inner {
+      min-width: 112px;
+      display: inline-block;
+      text-align: left;
+      padding-right: 10px;
+      font-size: 13px;
+      max-width: 480px;
+      white-space: normal;
+      word-break: break-all;
+      max-height: 270px;
+      overflow-y: auto;
+      line-height: unset; }
+    .ac-tips-out .ac-tips-close {
+      cursor: pointer;
+      color: #0073e1;
+      font-size: 13px; }
+      .ac-tips-out .ac-tips-close:hover {
+        color: #f44336; }
+  .ac-tips-out.in {
+    right: 0; }
+  .ac-tips-out.success {
+    color: #4caf50;
+    border: 1px solid #4caf50; }
+    .ac-tips-out.success .ac-tips-close:hover {
+      color: #4caf50; }
+  .ac-tips-out.error {
+    color: #f44336;
+    border: 1px solid #f44336; }
+    .ac-tips-out.error .ac-tips-close:hover {
+      color: #f44336; }
+  .ac-tips-out.warning {
+    color: #ff9800;
+    border: 1px solid #ff9800; }
+    .ac-tips-out.warning .ac-tips-close:hover {
+      color: #ff9800; }
+
+.u-button {
+  margin-right: 20px; }
+
+/*# sourceMappingURL=demo.css.map */

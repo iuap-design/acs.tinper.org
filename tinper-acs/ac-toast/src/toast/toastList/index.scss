@@ -1,0 +1,44 @@
+.t-mask{
+    position: fixed;
+    background: rgba(0,0,0,.6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+$fadeTime: 300ms;
+.fade-enter{
+    opacity: 0;
+}
+.fade-enter-active{
+    opacity: 1;
+    transition: all $fadeTime ease-out;
+    -webkit-transition: all $fadeTime ease-out;
+}
+.fade-exit{
+    opacity: 1;
+}
+.fade-exit-active{
+    opacity: 0;
+    transition: all $fadeTime ease-out;
+    -webkit-transition: all $fadeTime ease-out;
+}
+
+$slideTime: 300ms;
+.slide-left-enter{
+    left: -200px;
+}
+.slide-left-enter-active{
+    left: 0;
+    transition: left $slideTime ease-out;
+    -webkit-transition: left $slideTime ease-out;
+}
+.slide-left-exit{
+    left: 0;
+}
+.slide-left-exit-active{
+    left: -200px;
+    transition: left $slideTime ease-out;
+    -webkit-transition: left $slideTime ease-out;
+}

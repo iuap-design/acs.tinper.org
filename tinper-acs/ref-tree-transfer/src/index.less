@@ -1,0 +1,109 @@
+
+@import './leftTree.less';
+@import './transfer.less';
+@import './theme-red.less';
+.ref-red,.ref-blue{
+//  自定义样式
+ .ref-core-search .u-input-group-btn{
+	line-height: 32px;
+	color: #757575;
+ }
+ &.ref-tree-transfer{
+	.u-checkbox{
+		margin-right: 0;
+	}
+ }
+.modalTitleStyle{
+	display:inline-block;
+	height:60px;
+	width:400px;
+	overflow-x: hidden;
+	white-space: nowrap;
+	box-sizing:border-box;
+	padding-left: 20px;
+	padding-top: 20px;
+	line-height: 20px;
+	font-size: 16px;
+	color:#424242 100%;
+  }
+  .rightSearchStyle { position: absolute;
+	right: 13%;
+	width: 30%;
+	top: 0;}
+  .closeBtnStyle{
+	cursor: pointer;
+	color:#54698D;
+	width:20px;
+	height:20px;
+	font-size: 9px;
+	display:inline-block;
+	float: right;
+	vertical-align: top;
+	margin-right:20px;
+	margin-top:20px;
+  }
+  &.ref-tree-transfer .u-modal-content .u-modal-body{
+		padding-top: 0;
+		text-align: left;
+}
+  .ref-tree-transfer{
+	
+	  &-tree{
+		  display:inline-block;
+		  vertical-align: top;
+		  width: 220px;
+		  // height: 525px;
+		  max-height: 525px;
+		  box-sizing: border-box;
+		  text-align: left;
+		  &-title{
+			  padding-left:20px;
+			  white-space: nowrap;
+			  width: 100%;
+			  box-sizing: border-box;
+			  line-height: 35px;
+			  font-size: 14px;
+			  overflow: hidden;
+			  height: 35px;
+			  background-color: rgba(236, 239, 241, 1);
+			  margin-top:15px;
+		  }
+		  & .ref-core-search{
+			  margin-top: 15px;
+		  }
+	  }
+  
+	  &-right{
+		  margin-left: 15px;
+		  display: inline-block;
+		  vertical-align: top;
+		  width: calc(100% - 235px);
+		  max-height: 525px;
+		  box-sizing: border-box;
+		  text-align: left;
+		  overflow: auto;
+		  &-search { 
+			  position: absolute;
+			  right: 13%;
+			  width: 30%;
+			  top: 0;
+		  }
+		  &-title{
+			  white-space: nowrap;
+			  width: 100%;
+			  overflow: hidden;
+			  height: 35px;
+			  padding-left:20px;
+			  box-sizing: border-box;
+			  line-height: 35px;
+			  font-size: 14px;
+			  overflow: hidden;
+			  background-color: rgba(236, 239, 241, 1);
+			  position: relative;
+			  margin-top:15px;
+		  }
+	  }
+	  
+  }
+
+}

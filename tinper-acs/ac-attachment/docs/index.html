@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>按钮 AcButton</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+  </head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3"><ul class="nav nav-list">
+    <li class="sidebar-header-1"><a href="#按钮-acbutton">按钮 AcButton</a></li>
+    <li class="sidebar-header-2"><a href="#何时使用">何时使用</a></li>
+    <li class="sidebar-header-2"><a href="#如何使用">如何使用</a></li>
+    <li class="sidebar-header-2"><a href="#代码演示">代码演示</a></li>
+    <li class="sidebar-header-2"><a href="#api">API</a></li>
+    <li class="sidebar-header-3"><a href="#参数">参数</a></li>
+    <li class="sidebar-header-3"><a href="#事件">事件</a></li>
+    <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
+    <li class="sidebar-header-2"><a href="#文件列表刷新">文件列表刷新</a></li>
+    <li class="sidebar-header-3"><a href="#自定义弹框删除文件">自定义弹框删除文件</a></li>
+    <li class="sidebar-header-2"><a href="#更新日志">更新日志</a></li>
+</ul>
+      </div>
+      <div class="span9 main"><h1 id="按钮-acbutton">按钮 AcButton</h1>
+<h2 id="何时使用">何时使用</h2>
+<p>代替原生按钮</p>
+<h2 id="如何使用">如何使用</h2>
+<pre class="hljs"><code><span class="hljs-built_in">npm</span> install ac-attachment -S
+
+<span class="hljs-keyword">import</span> AcAttachment <span class="hljs-keyword">from</span> <span class="hljs-string">'ac-attachment'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">'ac-attachment/dist/ac-attachment.css'</span>;
+</code></pre><h2 id="代码演示">代码演示</h2>
+<h2 id="api">API</h2>
+<h3 id="参数">参数</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>默认值</th>
+<th>是否必填</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>recordId</td>
+<td><code>string</code></td>
+<td></td>
+<td>是</td>
+<td>单据相关的唯一标示，一般包含单据ID，如果有多个附件的时候由业务自己制定规则 </td>
+</tr>
+<tr>
+<td>groupname</td>
+<td><code>string</code></td>
+<td></td>
+<td>是</td>
+<td>分组名</td>
+</tr>
+<tr>
+<td>permission</td>
+<td><code>string</code></td>
+<td></td>
+<td>否</td>
+<td>Oss权限(read，private，full),read是可读=公有，private=私有，当这个参数不传的时候会默认private</td>
+</tr>
+<tr>
+<td>tenant</td>
+<td><code>string</code></td>
+<td></td>
+<td>否</td>
+<td>附件查询使用，租户id，不写会自动从系统获取</td>
+</tr>
+<tr>
+<td>url</td>
+<td><code>string</code></td>
+<td></td>
+<td>否</td>
+<td>里传true或false。为true，则返回附件的连接地址存到数据库中；如果isencrypt设置为true，url不能设置为true否则不能上传，提示：对于加密文件不能返回url，返回了也无法访问</td>
+</tr>
+<tr>
+<td>isencrypt</td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>否</td>
+<td>是否加密，默认false不加密</td>
+</tr>
+<tr>
+<td>baseUrl</td>
+<td><code>string</code></td>
+<td></td>
+<td>否</td>
+<td>应用平台的地址(IP地址或域名)</td>
+</tr>
+<tr>
+<td>uploadUrl</td>
+<td><code>string</code></td>
+<td><code>/iuap-saas-filesystem-service/file/upload</code></td>
+<td>否</td>
+<td>应用平台上传附件的地址</td>
+</tr>
+<tr>
+<td>queryUrl</td>
+<td><code>string</code></td>
+<td><code>/iuap-saas-filesystem-service/file/query</code></td>
+<td>否</td>
+<td>应用平台查询附件的地址</td>
+</tr>
+<tr>
+<td>deleteUrl</td>
+<td><code>string</code></td>
+<td><code>/iuap-saas-filesystem-service/file/delete</code></td>
+<td>否</td>
+<td>应用平台删除单个附件的地址</td>
+</tr>
+<tr>
+<td>downloadUrl</td>
+<td><code>string</code></td>
+<td><code>/iuap-saas-filesystem-service/file/download</code></td>
+<td>否</td>
+<td>应用平台下载附件的地址</td>
+</tr>
+<tr>
+<td>batchDeleteUrl</td>
+<td><code>string</code></td>
+<td><code>/iuap-saas-filesystem-service/file/batchDeleteByIds</code></td>
+<td>否</td>
+<td>应用平台批量删除附件地址</td>
+</tr>
+<tr>
+<td>fileType</td>
+<td><code>string</code></td>
+<td></td>
+<td>否</td>
+<td>允许上传的文件类型, 使用MIME类型限制文件类型。例如：txt文档类型为text/plain, png图片类型为image/png。可以使用*通配符，image/*代表所有图片类型。多个文件类型使用逗号隔开，例如：&#39;image/*, text/plain&#39;。详见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/type">File Type</a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types">MIME类型</a></td>
+</tr>
+<tr>
+<td>fileMaxSize</td>
+<td><code>number</code></td>
+<td><code>10</code></td>
+<td>否</td>
+<td>单个上传文件的大小上限，默认是10M，单位是M</td>
+</tr>
+<tr>
+<td>fileNum</td>
+<td><code>number</code></td>
+<td><code>999</code></td>
+<td>否</td>
+<td>上传文件的总数量限制</td>
+</tr>
+<tr>
+<td>multiple</td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>否</td>
+<td>是否支持一次多个文件上传，在文件选择框中，按shift或ctrl键，同时选择多个文件，点击确定即可</td>
+</tr>
+<tr>
+<td>disabled</td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>否</td>
+<td>上传，下载，删除按钮是否禁用</td>
+</tr>
+<tr>
+<td>className</td>
+<td><code>string</code></td>
+<td></td>
+<td>否</td>
+<td>附件容器的自定义class</td>
+</tr>
+<tr>
+<td>checkDuplicate</td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>否</td>
+<td>文件上传是否检测文件名重复 </td>
+</tr>
+<tr>
+<td>locale</td>
+<td><code>string</code></td>
+<td><code>zh</code></td>
+<td>否</td>
+<td>组件语言类型，默认是简体中文，目前支持英文(en或en_US)，简体中文(zh_CN)，繁体中文(zh_TW)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="事件">事件</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onFileTypeOver</td>
+<td><code>file</code>，当前上传的文件对象</td>
+<td>文件类型超出限制回调</td>
+</tr>
+<tr>
+<td>onFileSizeOver</td>
+<td><code>file</code>，当前上传的文件对象</td>
+<td>文件大小超出限制回调</td>
+</tr>
+<tr>
+<td>onFileNumOver</td>
+<td><code>file</code>，当前上传的文件对象</td>
+<td>文件数量超出限制回调</td>
+</tr>
+<tr>
+<td>onDelete</td>
+<td><code>attach</code></td>
+<td>参数attach为附件组件实例，调用attach.fDelete()，可以调起接口删除附件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="注意事项">注意事项</h2>
+<h2 id="文件列表刷新">文件列表刷新</h2>
+<p>组件在recordId发生变化，会自动刷新文件列表，也可以手动刷新文件列表，用法如下：</p>
+<pre class="hljs"><code>&lt;AcAttachment ref={(c) =&gt; {<span class="hljs-keyword">this</span>.attach = c.attach}} recordId=<span class="hljs-string">''</span> groupname=<span class="hljs-string">''</span> /&gt;
+
+<span class="hljs-comment">//手动刷新文件列表</span>
+<span class="hljs-keyword">this</span>.attach.fLoadFileList();</code></pre><h3 id="自定义弹框删除文件">自定义弹框删除文件</h3>
+<pre class="hljs"><code>&lt;AcAttachment ref={(c) =&gt; {<span class="hljs-keyword">this</span>.attach = c.attach}} recordId=<span class="hljs-string">''</span> groupname=<span class="hljs-string">''</span> /&gt;
+
+<span class="hljs-comment">//手动删除文件</span>
+<span class="hljs-keyword">this</span>.attach.fDelete();</code></pre><pre class="hljs"><code><span class="hljs-comment">//自定义弹出框删除文件</span>
+&lt;AcAttachment recordId=<span class="hljs-string">''</span> groupname=<span class="hljs-string">''</span> 
+    onDelete={(attach) =&gt; {
+        <span class="hljs-keyword">if</span>(confirm(<span class="hljs-string">'确定删除记录吗？'</span>)){
+            attach.fDelete();
+        }
+    }}
+/&gt;</code></pre><h2 id="更新日志">更新日志</h2>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

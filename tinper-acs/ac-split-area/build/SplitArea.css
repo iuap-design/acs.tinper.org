@@ -1,0 +1,28 @@
+.ac-split-area-left {
+  user-select: none;
+  height: 22px;
+  cursor: pointer;
+  display: flex; }
+  .ac-split-area-left-text {
+    width: auto;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #8b8d90; }
+    .ac-split-area-left-text .uf {
+      color: #8b8d90;
+      font-size: 12px;
+      padding-right: 2px; }
+  .ac-split-area-left-line {
+    flex-grow: 1; }
+    .ac-split-area-left-line-inner {
+      border-bottom: 1px dashed #d9d9d9;
+      width: 100%;
+      display: inline-block;
+      position: relative;
+      top: -5px; }
+
+.ac-split-area-ctn {
+  height: 0; }
+
+.ac-split-area-ctn.open {
+  height: auto; }

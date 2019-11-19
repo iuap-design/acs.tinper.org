@@ -1,0 +1,51 @@
+
+.pop-show {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+
+
+  .cancelIcon{
+    width: 25px !important;
+    float: right;
+    margin-right: 20px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+
+
+  .pop-content {
+    max-height: 500px;
+    overflow-y: auto;
+    min-height: 400px;
+  }
+  .pop-body {
+    margin: 100px auto 100px auto;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    border: 1px solid rgba(0, 0, 0, .2);
+    background-color: #fff;
+    width: 350px;
+    .pop-title {
+      width: 100%;
+      height: 51px;
+      border-bottom: 1px solid #e5e5e5;
+      line-height: 51px;
+      .pop-title-content {
+        font-size: 20px;
+        color: #333;
+        font-weight: 500;
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.pop-hidden {
+  display: none;
+}

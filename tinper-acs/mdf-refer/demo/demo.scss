@@ -1,0 +1,22 @@
+@import "./atom-one-dark.css";
+.demoPadding,.demo{
+    label{
+        font-size: 12px;
+        padding: 10px 0;
+        display: inline-block;
+    }
+    button{
+        margin: 10px 10px 0 0;
+    }
+    .divider{
+        margin: 6px 0;
+        height: 1px;
+        overflow: hidden;
+        background-color: #e0e0e0;
+    }
+}
+span.error{
+    display: block;
+    color: red;
+    font-size: 12px;
+}

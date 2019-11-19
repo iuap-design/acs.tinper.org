@@ -1,0 +1,220 @@
+
+
+.ref-walsin-modal{
+    &.ref-core .u-table{
+        padding: 0;
+    }
+    .u-modal-body .selectedItemSum{
+        color:#004898;
+    }
+    .u-checkbox.is-checked .u-checkbox-label:before{
+        box-shadow: inset 0 0 0 10px #004898;
+        border-color: #004898;
+    }
+    .u-checkbox.u-checkbox-indeterminate .u-checkbox-label:before {
+        box-shadow: inset 0 0 0 10px #004898;
+        border-color: #004898;
+    }
+	& .u-modal-body{
+		min-height: 419px;
+	}
+	.ref-core-button{
+		& .u-button{
+			background-color: #004898;
+			color: #fff;
+			height: 30px;
+			line-height: 1;
+            font-size: 14px;
+            &.u-button-primary {
+             
+                border: 1px #004898 solid;
+            }
+			&:first-child{
+				margin-right: 10px;
+			}
+			&:hover{
+				background-color: #0052CC;
+            }
+        }
+        &-hide{
+            display: none;
+        }
+	}
+	
+	& .u-modal-footer{
+		text-align: left;
+	}
+}
+
+.ref-walsin-modal{
+    &-pagination-hide{
+        display: none !important;
+    }
+    & .ref-core-error{
+        padding: 0px;
+    }
+    & .u-table-tbody {
+        //表体背景色
+        background-color: #FFF;
+    }
+
+    &-row-selected{
+        background: rgb(227,242,253);
+    }
+   
+      
+    .u-pagination {
+        margin-left: 16px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0 5px 5px 16px !important;
+        .u-select-open .u-select-selection {
+            border-color: #004898;
+        }
+
+        .u-pagination-total,.page_jump_value {  
+            height: 32px ;
+            line-height: 32px ;
+        }
+
+        .page_jump>span{
+            line-height: 32px;
+        }
+            
+        .page_jump_btn {
+            border-color: #004898;
+            height: 32px ;
+            line-height: 32px;
+            background: #004898;
+            color: #fff;
+            padding: 0px 8px;
+            margin-top: 0px;
+            &:focus,
+            &:hover,
+            &:active {
+                background: #0052cc;
+                color: #fff;
+            }
+        }
+        .u-pagination-list {
+            li:nth-child(1),
+            li:nth-child(2),
+            li:nth-last-child(1),
+            li:nth-last-child(2) {
+                a {
+                    
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                    span {
+                        font-size: 24px;
+                        display: block;
+                        margin-top: -2px;
+                    }
+                }
+            }
+            li{
+                a{
+                    padding: 0px 11px;
+                    line-height: 32px;
+                    height: 32px;
+                    box-sizing: border-box;
+                }
+            }
+        }
+        .data_per_select >span{
+            line-height: 32px;
+        }
+        .data_per_select .u-select {
+            width: 60px;
+            height: 32px;
+            .u-select-selection {
+                height: 32px;
+                .u-select-selection-rendered {
+                    line-height: 32px;
+                }
+            }
+        }
+    }
+
+    
+    .u-pagination-list>.active>a,
+    .u-pagination-list>.active>span,
+    .u-pagination-list>.active>a:hover,
+    .u-pagination-list>.active>span:hover,
+    .u-pagination-list>.active>a:focus,
+    .u-pagination-list>.active>span:focus {
+        background: #004898;
+        border-color: #004898;
+    }
+
+        //分页媒体查询
+        @media (max-width: 1024px){
+        .u-pagination{
+            .u-pagination-list{
+                flex-shrink: 0;
+                margin-right: 2px;
+                li a{
+                    padding: 0px 6px;
+                }
+            }
+            .u-pagination-total {
+                margin:0px;
+            }
+            .data_per_select {
+                min-width: 45px;
+                .u-select{
+                    width: 48px !important;
+                }
+                
+            }
+            .page_jump{
+                margin-left: 0px;
+                margin-right: 0px;
+                
+
+            }
+            .page_jump_value{
+                width: 30px;
+            }
+            .page_jump_btn{
+                min-width:10px;
+            }
+        }
+    }
+    .u-checkbox.is-checked .u-checkbox-label:after,
+    .u-checkbox.u-checkbox-indeterminate .u-checkbox-label:after,
+    & .u-checkbox input[type=checkbox]:focus + .u-checkbox-label:before{
+        color: #fff;
+        border-color: #004898;
+    }
+    &.ref-red .ref-core-button-empty{
+        color: #004898!important;
+    }
+    .u-select-focused .u-select-selection,
+    .u-select-selection:focus,
+    .u-select-selection:active{
+        border-color: #004898;
+    }
+    .u-table th,
+    .u-table td {
+        padding: 10px 8px;
+    }
+    .u-table th{
+        word-break: keep-all;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .u-table tr.filterable th {
+        padding: 0px 2px;
+        height: 39px;
+    }
+    .u-table-row.u-table-row-level-0 td {
+        height: 32px !important;
+        padding: 0 8px;
+    }
+    .u-table-filter-column-filter-icon {
+        right: 15px;
+    }
+}

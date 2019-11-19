@@ -1,0 +1,102 @@
+
+.ref-multiple-table{
+    //主题-红色
+    &.ref-red{
+        .selectedItemSum{
+            color:#f53c32;
+            font-size: 12px;
+        }
+        .ref-core-button-empty{
+            color:#f53c32!important;
+        }
+        .ref-multiple-table-row-selected{
+            background-color: #FFF7E7;
+        }
+        .u-table tr:hover{
+            background: #EBECF0;
+        }
+    }
+    // 主题-蓝色
+    &.ref-blue{
+        .selectedItemSum{
+            color:#1e88e5;
+        }
+        .ref-core-button-empty{
+            color:#1e88e5;
+        }
+        .u-table tr:hover{
+            background: #EBECF0;
+        }
+        .ref-multiple-table-row-selected{
+            background-color: #DEEBFF;
+        }
+    }
+    &-pagination-hide{
+        display: none !important;
+    }
+    & .ref-core-error{
+        padding: 0px;
+    }
+    & .u-table-tbody {
+        //表体背景色
+        background-color: #FFF;
+    }
+
+    &-row-selected{
+        background: rgb(227,242,253);
+    }
+    &-radio{
+        box-sizing: border-box;
+        background-color: #FFF;
+        display: inline-block;
+        border-radius: 9px;
+        height: 18px;
+        width: 18px;
+        vertical-align: middle;
+        text-align: center;
+        user-select: none;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid #7A869A;
+        &:after{
+            box-sizing: border-box;
+            content: '';
+            display: inline-block;
+            background-color: #FFF;
+            display: inline-block;
+            height: 8px;
+            width: 8px;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            vertical-align: bottom;
+        }
+        &-on{
+            background-color: #108ee9;
+            border-color:#108ee9;
+        }
+    }
+    &-tab{
+        // height: 40px;
+        margin-bottom: 10px;
+        &-search-hide{
+            display: none !important;
+        }
+        & .u-input-group{
+            // width: 310px;
+            display: inline-block;
+            vertical-align: middle;
+            float: left;
+        }
+        
+    }
+    .u-pagination {
+        display: inline-block;
+        padding-top: 10px;
+        &:after{
+            content: ' ';
+            display: block;
+            overflow: hidden;
+            clear: both;
+        }
+    }
+}

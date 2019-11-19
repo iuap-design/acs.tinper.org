@@ -1,0 +1,120 @@
+// @import './components/ComboItem/index.less';
+// @import './components/Pagination/index.less';
+// @import './components/SliderPanel/index.less';
+.ref-combobox.ref-red,
+.ref-combobox.ref-blue{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    &::after{
+        content: '';
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+    .u-input-group .u-form-control{
+        box-sizing: border-box;
+    }
+    // .u-input-group-btn{
+    //    line-height: 30px;
+    // }
+    .u-input-group-btn.clearAll span.uf{
+        right:20px;
+        
+    }
+    .u-input-group-btn span.uf{
+        position: absolute;
+        top: 0;
+        right: 0; 
+    }
+    &-pagination{
+        font-size: 12px;
+        height: 56px;
+        white-space: nowrap;
+        // position: relative;
+        & > div[class=u-pagination]{
+            position: relative;
+            display: inline-block;
+            margin: 0px;
+            font-size: 12px;
+            top: 10px;
+            .u-pagination-list {
+                float: none;
+                margin: 0px;
+                & > li[class=active]{
+                    & > a{
+                        background-color: #004898;
+                        border-color: #004898;
+                    }
+                } 
+                & span[aria-label=More]{
+                    color: #004898;
+                    font-weight: 700;
+                }
+            }
+        }
+        &:after{
+            content: " "; 
+            display: block; 
+            height: 0; 
+            clear: both; 
+            visibility: hidden;  
+        }
+        &-total{
+            display: inline-block;
+            position: absolute;
+            padding-left: 10px;
+            line-height: 56px;
+            &>span{
+                margin-left: 10px;
+            }
+        }
+    }
+    &-data-empty{
+        text-align: center;
+        padding: 10px 0px;
+        font-size: 12px;
+        color: #848484;
+    }
+    .ref-input-wrap-filter-panel{
+        box-sizing: border-box;
+        background: white;
+        min-height: 32px;
+        z-index: 10;
+        overflow: auto;
+        border: 1px #ccc solid;
+        box-shadow: 0px 1px 2px #bebebe;
+        color: #424242;
+        cursor: pointer;
+        border-top: none;
+        position: absolute;
+        max-height: 300px
+    }
+    .ref-filter-item{
+        font-size: 13px;
+        color: #424242;
+        height: 32px;
+        line-height: 32px;
+        padding: 0px 12px;
+        cursor: pointer;
+        transition: background .3s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+       
+    }
+    .ref-filter-item:hover{
+        background: #BBDEFB;
+        cursor: pointer;
+    }
+    .ref-filter-empty{
+        text-align: center;
+        padding: 10px 0px;
+        font-size: 12px;
+        color: #848484;
+    }
+}
+.ref-combobox-dropdown{
+    z-index:1702;//比bee-modal的1700大
+}

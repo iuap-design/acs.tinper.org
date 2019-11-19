@@ -1,0 +1,43 @@
+.ac-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: #fff;
+  height: 46px;
+  line-height: 46px; }
+  .ac-header-title {
+    font-size: 16px;
+    height: 32px;
+    line-height: 32px;
+    font-weight: bold; }
+  .ac-header-icon {
+    line-height: 0;
+    margin-right: 8px; }
+    .ac-header-icon img {
+      display: inline-block;
+      height: 24px;
+      width: 24px;
+      margin-bottom: 4px; }
+    .ac-header-icon .uf::before {
+      display: inline-block;
+      width: 24px;
+      font-size: 24px;
+      position: relative;
+      top: 4px; }
+  .ac-header-back {
+    cursor: pointer;
+    border-radius: 50%;
+    height: 26px;
+    display: inline-block;
+    line-height: 26px;
+    margin-right: 4px; }
+    .ac-header-back:hover {
+      background-color: #e8e8e8; }
+  .ac-header-btns .u-button-group {
+    margin-left: 6px; }
+  .ac-header-btns .u-button {
+    margin-left: 6px; }
+
+/*# sourceMappingURL=demo.css.map */

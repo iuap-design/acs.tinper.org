@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>下拉参照 RefCombobox</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/bootstrap-responsive.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+  </head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span3"><ul class="nav nav-list">
+    <li class="sidebar-header-1"><a href="#下拉参照-refcombobox">下拉参照 RefCombobox</a></li>
+    <li class="sidebar-header-2"><a href="#何时使用">何时使用</a></li>
+    <li class="sidebar-header-2"><a href="#如何使用">如何使用</a></li>
+    <li class="sidebar-header-2"><a href="#代码演示">代码演示</a></li>
+    <li class="sidebar-header-2"><a href="#分类">分类</a></li>
+    <li class="sidebar-header-2"><a href="#api">API</a></li>
+    <li class="sidebar-header-3"><a href="#refcomboboxbaseui">RefComboBoxBaseUI</a></li>
+    <li class="sidebar-header-2"><a href="#combostore-增量-api">ComboStore 增量 API</a></li>
+    <li class="sidebar-header-2"><a href="#comboitem-增量-api">ComboItem 增量 API</a></li>
+    <li class="sidebar-header-2"><a href="#注意事项">注意事项</a></li>
+    <li class="sidebar-header-2"><a href="#更新日志">更新日志</a></li>
+</ul>
+      </div>
+      <div class="span9 main"><h1 id="下拉参照-refcombobox">下拉参照 RefCombobox</h1>
+<h2 id="何时使用">何时使用</h2>
+<p>下拉参照</p>
+<h2 id="如何使用">如何使用</h2>
+<pre class="hljs"><code>$ ynpm install ref-combobox --save
+
+引入
+
+import RefComboBoxBaseUI, {ComboStore,ComboItem} from <span class="hljs-string">'ref-combobox'</span>;
+
+样式
+
+import <span class="hljs-string">'ref-combobox/lib/index.css'</span>;
+</code></pre><h2 id="代码演示">代码演示</h2>
+<h2 id="分类">分类</h2>
+<p>RefComboBoxBaseUI</p>
+<pre class="hljs"><code>带有输入框，下拉选择参照。默认，需要配合使用下面两个</code></pre><p>ComboStore</p>
+<pre class="hljs"><code>可走缓存数据的下拉。</code></pre><p>ComboItem</p>
+<pre class="hljs"><code>下拉的单条数据</code></pre><h2 id="api">API</h2>
+<h3 id="refcomboboxbaseui">RefComboBoxBaseUI</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+<th>必选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>className</td>
+<td><code>string</code></td>
+<td>空</td>
+<td>参照class样式，作用于整个参照的样式，默认为空。 &#39;ref-walsin-modal&#39;特殊样式</td>
+<td>否</td>
+</tr>
+<tr>
+<td>style</td>
+<td><code>object</code></td>
+<td>{}</td>
+<td>参照style样式，作用域整个参照最外层</td>
+<td>否</td>
+</tr>
+<tr>
+<td>displayField</td>
+<td><code>string 或 function</code></td>
+<td>&#39;{refname}&#39;</td>
+<td>记录中显示的值。<br/>当为字符串时则会根据<code>{}</code>包裹的增则匹配替换。<br/>如：<code>&#39;人员姓名：{refname}，编号：{refcode}&#39;</code><br/>当为函数时则需自定义返回内容，参数为迭代已选择的记录。<br/>如：<br/>displayField: (record)=&gt;  ${record.refname}-${record.refname}</td>
+<td>否</td>
+</tr>
+<tr>
+<td>valueField</td>
+<td><code>string</code></td>
+<td>&#39;refcode&#39;</td>
+<td>待提交的 value 的键。</td>
+<td>否</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>string</code></td>
+<td>&#39;&#39;</td>
+<td>输入框展示的值</td>
+<td>否</td>
+</tr>
+<tr>
+<td>onClickItemInner</td>
+<td><code>function(record)</code></td>
+<td>--</td>
+<td>下拉选中，返回缓存的数据对应的完整</td>
+<td>否</td>
+</tr>
+<tr>
+<td>sliderWidth</td>
+<td><code>number</code>或者<code>String</code></td>
+<td>&#39;auto&#39;</td>
+<td>下拉菜单的宽度</td>
+<td>否</td>
+</tr>
+<tr>
+<td>comboboxStoreData</td>
+<td><code>array</code></td>
+<td>[]</td>
+<td>下拉参照要展示dom集合，搭配<ComboItem>使用</td>
+<td>否</td>
+</tr>
+<tr>
+<td>storeData</td>
+<td><code>array</code></td>
+<td>[]</td>
+<td>下拉参照数据集合，不传入storeData会导致onClickItemInner不能返回对应的完整数据</td>
+<td>否</td>
+</tr>
+<tr>
+<td>onChangeFormControl</td>
+<td><code>function(value)</code></td>
+<td>-</td>
+<td>输入框输入值回调，value是输入内容</td>
+<td>否</td>
+</tr>
+<tr>
+<td>onPopupVisibleChange</td>
+<td><code>function(popupVisible,sliderSearchVal)</code></td>
+<td>-</td>
+<td>下拉面板状态改变时回调函数</td>
+<td>否</td>
+</tr>
+<tr>
+<td>onSelect</td>
+<td><code>function(currentIndex)</code></td>
+<td>-</td>
+<td>翻页回调，返回当前页面</td>
+<td>否</td>
+</tr>
+<tr>
+<td>pageCount</td>
+<td><code>number</code></td>
+<td>1</td>
+<td>总页数</td>
+<td>否</td>
+</tr>
+<tr>
+<td>currPageIndex</td>
+<td><code>number</code></td>
+<td>0</td>
+<td>当前页码</td>
+<td>否</td>
+</tr>
+<tr>
+<td>loading</td>
+<td><code>boolean</code></td>
+<td>false</td>
+<td>是否展示加载</td>
+<td>否</td>
+</tr>
+<tr>
+<td>totalElements</td>
+<td><code>number</code></td>
+<td>0</td>
+<td>总条数</td>
+<td>否</td>
+</tr>
+<tr>
+<td>theme</td>
+<td><code>String</code></td>
+<td>&#39;ref-red&#39;</td>
+<td>参照主题，现在就两种选择&#39;ref-red&#39;或者&#39;ref-blue&#39;</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<h2 id="combostore-增量-api">ComboStore 增量 API</h2>
+<blockquote>
+<p><span style="color: red; font-size: 15px;">注意:以下参数为 <code>&lt;ComboStore/&gt;</code>独有。对其他两个类型的引用无效。</span></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+<th>必选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>topPagination</td>
+<td><code>bool</code></td>
+<td>false</td>
+</tr>
+<tr>
+<td>lang</td>
+<td><code>String</code></td>
+<td>&#39;zh_CN&#39;</td>
+<td>分页多语</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<h2 id="comboitem-增量-api">ComboItem 增量 API</h2>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+<th>必选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>active</td>
+<td><code>bool</code></td>
+<td>false</td>
+<td>该条数据是否是选中</td>
+<td>否</td>
+</tr>
+<tr>
+<td>text</td>
+<td><code>String</code></td>
+<td>&#39;&#39;</td>
+<td>该条展示数据</td>
+<td>否</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>String</code></td>
+<td>&#39;&#39;</td>
+<td>data-value,自定义属性</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<h2 id="注意事项">注意事项</h2>
+<h2 id="更新日志">更新日志</h2>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

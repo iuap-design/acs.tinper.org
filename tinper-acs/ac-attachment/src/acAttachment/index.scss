@@ -1,0 +1,83 @@
+.ac-attachmentc{
+    .u-checkbox {
+        top: -5px;
+    }
+    .uf-cloud-down{
+        font-size: 23px;
+        color: #52678A;
+    }
+    .attach-del{
+        margin-left: 10px;
+    }
+}
+.upload-btn{
+    margin-left:10px !important;
+    background: #004898 !important;
+    color: #fff !important;
+    padding: 0 8px !important;
+    height: 26px !important;
+    line-height: 26px !important;
+    font-size: 14px !important;
+    border-radius: 3px !important;
+    min-width: 72px !important;
+    border: none !important;
+    i{
+        padding: 0;
+        line-height: 26px !important;
+        overflow: hidden;
+        float: left;
+        font-size: 14px !important;
+    }
+    i:before{
+        margin-right: 8px !important;
+    }
+}
+.upload-btn:first-child{margin-left:0;}
+.upload-table{
+    margin-top:10px;
+    // th{padding: 10px 8px !important;}
+    td{
+        height: 32px !important;
+        padding: 0 8px;
+    }
+}
+
+.upload-filetype{
+    display: inline-block;
+    width:30px;
+    height:30px;
+    vertical-align: -4px;
+}
+.upload-filetype-css{
+    background-image:url('./icon/css.svg');
+}
+.upload-filetype-doc{
+    background-image:url('./icon/doc.svg');
+}
+.upload-filetype-html{
+    background-image:url('./icon/html.svg');
+}
+.upload-filetype-javascript{
+    background-image:url('./icon/javascript.svg');
+}
+.upload-filetype-jpg{
+    background-image:url('./icon/jpg.svg');
+}
+.upload-filetype-pdf{
+    background-image:url('./icon/pdf.svg');
+}
+.upload-filetype-png{
+    background-image:url('./icon/png.svg');
+}
+.upload-filetype-ppt{
+    background-image:url('./icon/ppt.svg');
+}
+.upload-filetype-xls{
+    background-image:url('./icon/xls.svg');
+}
+.upload-filetype-xlsx{
+    background-image:url('./icon/xls.svg');
+}
+.upload-filetype-xml{
+    background-image:url('./icon/xml.svg');
+}
