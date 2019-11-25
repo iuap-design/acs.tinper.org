@@ -29,7 +29,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var defaultProps = {
     headerScroll: false,
     bordered: false,
-    data: []
+    data: [],
+    columnFilterAble: false
 };
 
 var Grid = function (_Component) {
@@ -53,13 +54,14 @@ var Grid = function (_Component) {
         var _props = this.props,
             paginationObj = _props.paginationObj,
             data = _props.data,
-            otherProps = _objectWithoutProperties(_props, ["paginationObj", "data"]);
+            columnFilterAble = _props.columnFilterAble,
+            otherProps = _objectWithoutProperties(_props, ["paginationObj", "data", "columnFilterAble"]);
 
         return _react2["default"].createElement(_beeComplexGrid2["default"], _extends({}, otherProps, {
             className: "ac-grids",
             data: data,
             paginationObj: "none",
-            columnFilterAble: false,
+            columnFilterAble: columnFilterAble,
             ref: function ref(_ref) {
                 return _this2.grid = _ref;
             },

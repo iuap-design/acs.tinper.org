@@ -230,7 +230,16 @@ class Demo2 extends Component {
           loadTableData={this.loadTableData}
 
           filterUrl={'https://mock.yonyoucloud.com/mock/1264/pap_basedoc/common-ref/blobRefTreeGrid'}
-
+          checkedTreeArray={[{
+            code: "wlgs",
+          id: "44228a37-e97c-4347-8667-3aead5d1261b",
+          name: "网络公司",
+          nodeDisabled: true,
+          pid: "45a6400c-f80a-47be-9cfc-91d9581f32f4",
+          refcode: "wlgs",
+          refname: "网络公司",
+          refpk: "44228a37-e97c-4347-8667-3aead5d1261b"
+          }]}
           {...getFieldProps('treeTable2', {
             initialValue: value,
             rules: [{

@@ -79,7 +79,6 @@ isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用
 参数 | 类型 |默认值| 说明 | 必选
 ---|---|--- | --- | ---
 searchable |`bool`|false |是否显示搜索框，弹出层是否带有搜索框，true 显示，false 不显示。 | 否
-~~checkStrictly~~ |~~`bool`~~|~~true~~|~~checkable状态下节点选择完全受控（父子节点选中状态不再关联）, false 关联选择，true 不关联~~| 否
 nodeDisplay |<code>string 或 function</code>| `{refname}` |节点渲染时可匹配的内容，这里为了提供根据数据渲染节点图标使用 | 否
 lazyModal | `bool`|false | 树参照是异步加载，回调onLoadData | 否
 defaultExpandAll |`bool`| true| 展开所有节点，true 展开，false 不展开。前提lazyModal是false，懒加载下该属性不起效。| 否
@@ -90,6 +89,7 @@ treeData | `Array` | [] | 左树数据 | 否
 onTreeChange | `function(checkedArray)` |()=>{} |选择树节点的回调，返回选中的树节点| 否 
 onTreeSearch| `function(searchVal)` |()=>{} |左树上的搜索回调| 否 
 onLoadData|  `function(treeNode)` | --| 懒加载传个树的回调方法。与lazyModal配合使用，lazyModal=true才会回调该函数| 否
+checkedTreeArray | `array` | [] |  左树默认选中的节点，每项至少包含valueField指定字段，比如valueFiled='refpk',checedTreeArray=[{refpk:'yonyou'},...]| 否
 
 右表
 
@@ -123,6 +123,8 @@ canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按�
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
 menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
 dropdownDisabled | `boolean` | false |下拉展示是否可以弹出，false为有，true为没有|否
+treeNodeDisabledKey | `String` | - | 树节点中disabled状态节点，传入代表treeData中表示不可选节点的键 | 否
+treeNodeDisabledFunc |`function(node)`| 返回当前节点信息，return false，表示可选；return true，表示该节点不可选| 否 
 
 ## 注意事项
 #### 参数解析

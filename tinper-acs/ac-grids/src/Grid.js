@@ -4,7 +4,8 @@ import BeeGrid,{GridToolBar}  from "bee-complex-grid";
 const defaultProps = {
     headerScroll: false,
     bordered: false,
-    data: []
+    data: [],
+    columnFilterAble:false
 };
 
 class Grid extends Component {
@@ -15,14 +16,14 @@ class Grid extends Component {
         this.grid.exportExcel();
     }
     render() {
-        const { paginationObj, data,  ...otherProps } = this.props;
+        const { paginationObj, data, columnFilterAble, ...otherProps } = this.props;
         return (
             <BeeGrid
                 {...otherProps}
                 className="ac-grids"
                 data={data}
                 paginationObj='none'  
-                columnFilterAble={false}
+                columnFilterAble={columnFilterAble}
                 ref={ref=>this.grid=ref}
                 syncHover={true}
             />

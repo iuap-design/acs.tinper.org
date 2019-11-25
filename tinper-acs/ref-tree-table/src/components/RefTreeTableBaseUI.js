@@ -50,10 +50,13 @@ const defaultProps = {
 	isLocalSearch:false,
 };
 
-
+function  noop() {
+	
+}
 class RefTreeTableBaseUI extends Component {
 	constructor(props) {
 		super(props);
+		this.checkedTreeArray = props.checkedTreeArray || [];
 	}
 	componentWillReceiveProps(nextProps){
 	}
@@ -84,6 +87,12 @@ class RefTreeTableBaseUI extends Component {
 	handleBtnCancel = () => {
 		this.props.onCancel()
 	}
+	onTreeChangeFromBaseUI = (checkedTreeArray) =>{
+		let { onTreeChange } = this.props;
+		this.checkedTreeArray = checkedTreeArray;
+		onTreeChange(checkedTreeArray);
+	}
+
 	render() {
 		const _this = this;
 		const { className,showModal, searchable, backdrop, title, showLine, 
@@ -102,6 +111,8 @@ class RefTreeTableBaseUI extends Component {
 			modalProps={},
 			tableProps={},
 			mustPaginationShow=false,
+			treeNodeDisabledKey,
+			treeNodeDisabledFunc = noop,
 			isLocalSearch,
 		} = this.props;
 		let treeProps = Object.assign({},{
@@ -116,11 +127,14 @@ class RefTreeTableBaseUI extends Component {
 			nodeDisplay,
 			defaultExpandAll,
 			treeData,
-			onTreeChange,
+			onTreeChangeFromBaseUI:this.onTreeChangeFromBaseUI,
 			onTreeSearch,
 			lazyModal,
 			onLoadData,
-			isLocalSearch
+			isLocalSearch,
+			checkedTreeArray:this.checkedTreeArray,
+			treeNodeDisabledKey,
+			treeNodeDisabledFunc,
 		});
 		let tablePropsAll = Object.assign({},{
 			className,

@@ -16,8 +16,6 @@ var _create2 = _interopRequireDefault(_create);
 
 var _extends = _assign2["default"] || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _class, _temp, _initialiseProps;
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -60,6 +58,7 @@ var propTypes = {
   defaultExpandAll: _propTypes2["default"].bool, // 数默认展开
   checkStrictly: _propTypes2["default"].bool,
   checkedArray: _propTypes2["default"].array, //  指定已选择数据id
+  checkedTreeArray: _propTypes2["default"].array, //  指定已选树择数据id
   treeData: _propTypes2["default"].array, //  指定已选择数据id
   lazyModal: _propTypes2["default"].bool,
   onCancel: _propTypes2["default"].func,
@@ -67,7 +66,7 @@ var propTypes = {
   lang: _propTypes2["default"].string,
   //重命名属性
   searchable: _propTypes2["default"].bool, //  是否应用搜索 默认 false,
-  onTreeChange: _propTypes2["default"].func, //树操作的时候节点选中返回
+  onTreeChangeFromBaseUI: _propTypes2["default"].func, //树操作的时候节点选中返回
   onTreeSearch: _propTypes2["default"].func //搜索
 };
 var defaultProps = {
@@ -78,16 +77,17 @@ var defaultProps = {
   defaultExpandAll: true, // 数默认展开
   checkStrictly: false,
   checkedArray: [], //  指定已选择数据id
+  checkedTreeArray: [],
   treeData: [],
   lazyModal: false,
   onCancel: noop,
   onSave: noop,
   lang: 'zh_CN',
-  onTreeChange: function onTreeChange() {},
+  onTreeChangeFromBaseUI: function onTreeChangeFromBaseUI() {},
   onTreeSearch: function onTreeSearch() {}
 };
 
-var RefTreeBaseUI = (_temp = _class = function (_Component) {
+var RefTreeBaseUI = function (_Component) {
   _inherits(RefTreeBaseUI, _Component);
 
   function RefTreeBaseUI(props) {
@@ -95,20 +95,34 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
-    _initialiseProps.call(_this);
+    _this.onSearchChange = function (value) {
+      if (_this.props.isLocalSearch) {
+        _this.setState({
+          searchValue: value
+        });
+      } else {
+        _this.props.onTreeSearch(value);
+      }
+    };
 
-    var checkedArray = props.checkedArray,
+    _this.onSelectNode = function (checkedArray) {
+      var onTreeChangeFromBaseUI = _this.props.onTreeChangeFromBaseUI;
+
+      onTreeChangeFromBaseUI(checkedArray);
+    };
+
+    var checkedTreeArray = props.checkedTreeArray,
         multiple = props.multiple,
         checkStrictly = props.checkStrictly,
         defaultExpandAll = props.defaultExpandAll,
         valueField = props.valueField;
 
     _this.state = {
-      selectedArray: checkedArray || [], //  记录保存的选择项
+      selectedArray: checkedTreeArray || [], //  记录保存的选择项
       defaultExpandAll: defaultExpandAll,
       multiple: multiple,
       checkStrictly: checkStrictly,
-      checkedKeys: checkedArray.map(function (item) {
+      checkedKeys: checkedTreeArray.map(function (item) {
         return item[valueField];
       }),
       onSaveCheckItems: [],
@@ -244,7 +258,8 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
         defaultExpandAll = _props2.defaultExpandAll,
         _props2$nodeDisplay = _props2.nodeDisplay,
         nodeDisplay = _props2$nodeDisplay === undefined ? "{refname}" : _props2$nodeDisplay,
-        nodeKeysFunc = _props2.nodeKeysFunc,
+        treeNodeDisabledKey = _props2.treeNodeDisabledKey,
+        treeNodeDisabledFunc = _props2.treeNodeDisabledFunc,
         isLocalSearch = _props2.isLocalSearch;
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
@@ -280,31 +295,15 @@ var RefTreeBaseUI = (_temp = _class = function (_Component) {
         checkStrictly: checkStrictly,
         showLine: showLine,
         loadData: lazyModal ? this.props.onLoadData : null,
-        searchValue: isLocalSearch ? searchValue : null
+        searchValue: isLocalSearch ? searchValue : null,
+        treeNodeDisabledFunc: treeNodeDisabledFunc,
+        treeNodeDisabledKey: treeNodeDisabledKey
       }) : _react2["default"].createElement(_RefCoreError2["default"], { show: !Boolean(this.treeData.length), language: lang })
     );
   };
 
   return RefTreeBaseUI;
-}(_react.Component), _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
-
-  this.onSearchChange = function (value) {
-    if (_this4.props.isLocalSearch) {
-      _this4.setState({
-        searchValue: value
-      });
-    } else {
-      _this4.props.onTreeSearch(value);
-    }
-  };
-
-  this.onSelectNode = function (checkedArray) {
-    var onTreeChange = _this4.props.onTreeChange;
-
-    onTreeChange(checkedArray);
-  };
-}, _temp);
+}(_react.Component);
 
 RefTreeBaseUI.propTypes = propTypes;
 RefTreeBaseUI.defaultProps = defaultProps;

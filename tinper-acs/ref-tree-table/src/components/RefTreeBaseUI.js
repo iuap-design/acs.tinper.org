@@ -14,6 +14,7 @@ const propTypes = {
   defaultExpandAll: PropTypes.bool,  // 数默认展开
   checkStrictly: PropTypes.bool,
   checkedArray: PropTypes.array, //  指定已选择数据id
+  checkedTreeArray: PropTypes.array, //  指定已选树择数据id
   treeData: PropTypes.array, //  指定已选择数据id
   lazyModal: PropTypes.bool,
   onCancel: PropTypes.func,
@@ -21,7 +22,7 @@ const propTypes = {
   lang: PropTypes.string,
   //重命名属性
   searchable: PropTypes.bool, //  是否应用搜索 默认 false,
-  onTreeChange: PropTypes.func,//树操作的时候节点选中返回
+  onTreeChangeFromBaseUI: PropTypes.func,//树操作的时候节点选中返回
   onTreeSearch:PropTypes.func, //搜索
 };
 const defaultProps = {
@@ -32,26 +33,27 @@ const defaultProps = {
   defaultExpandAll: true,  // 数默认展开
   checkStrictly: false,
   checkedArray: [], //  指定已选择数据id
+  checkedTreeArray:[],
   treeData:[],
   lazyModal: false,
   onCancel: noop,
   onSave: noop,
   lang: 'zh_CN',
-  onTreeChange: ()=>{},
+  onTreeChangeFromBaseUI: ()=>{},
   onTreeSearch: () =>{},
 }
 
 class RefTreeBaseUI extends Component {
   constructor(props) {
     super(props);
-    const { checkedArray, multiple, checkStrictly, 
+    const { checkedTreeArray, multiple, checkStrictly, 
       defaultExpandAll, valueField } = props;
     this.state = {
-      selectedArray: checkedArray || [], //  记录保存的选择项
+      selectedArray: checkedTreeArray || [], //  记录保存的选择项
       defaultExpandAll,
       multiple,
       checkStrictly,
-      checkedKeys: checkedArray.map(item => {
+      checkedKeys: checkedTreeArray.map(item => {
         return item[valueField];
       }),
       onSaveCheckItems: [],
@@ -82,8 +84,8 @@ class RefTreeBaseUI extends Component {
   };
 
   onSelectNode = (checkedArray) => {
-    let { onTreeChange } = this.props;
-    onTreeChange(checkedArray)
+    let { onTreeChangeFromBaseUI } = this.props;
+    onTreeChangeFromBaseUI(checkedArray)
   }
   
   onCheck(selectedKeys, event) {
@@ -189,7 +191,8 @@ class RefTreeBaseUI extends Component {
       lang,
       defaultExpandAll,
       nodeDisplay = "{refname}",
-      nodeKeysFunc,
+      treeNodeDisabledKey,
+      treeNodeDisabledFunc,
       isLocalSearch,//从RefTreeTableBaseUI传入
     } = this.props;
     const { checkedKeys,  checkStrictly,searchValue} = this.state;
@@ -224,6 +227,8 @@ class RefTreeBaseUI extends Component {
                 showLine={showLine}
                 loadData={lazyModal ? this.props.onLoadData:null}
                 searchValue={isLocalSearch?searchValue:null}
+                treeNodeDisabledFunc={treeNodeDisabledFunc}
+                treeNodeDisabledKey={treeNodeDisabledKey}
               /> :
               <RefCoreError show={!Boolean(this.treeData.length)} language={lang} />
           }

@@ -94,6 +94,8 @@ var defaultProps = {
 	isLocalSearch: false
 };
 
+function noop() {}
+
 var RefTreeTableBaseUI = function (_Component) {
 	_inherits(RefTreeTableBaseUI, _Component);
 
@@ -132,6 +134,14 @@ var RefTreeTableBaseUI = function (_Component) {
 			_this2.props.onCancel();
 		};
 
+		_this2.onTreeChangeFromBaseUI = function (checkedTreeArray) {
+			var onTreeChange = _this2.props.onTreeChange;
+
+			_this2.checkedTreeArray = checkedTreeArray;
+			onTreeChange(checkedTreeArray);
+		};
+
+		_this2.checkedTreeArray = props.checkedTreeArray || [];
 		return _this2;
 	}
 
@@ -185,6 +195,9 @@ var RefTreeTableBaseUI = function (_Component) {
 		    tableProps = _props3$tableProps === undefined ? {} : _props3$tableProps,
 		    _props3$mustPaginatio = _props3.mustPaginationShow,
 		    mustPaginationShow = _props3$mustPaginatio === undefined ? false : _props3$mustPaginatio,
+		    treeNodeDisabledKey = _props3.treeNodeDisabledKey,
+		    _props3$treeNodeDisab = _props3.treeNodeDisabledFunc,
+		    treeNodeDisabledFunc = _props3$treeNodeDisab === undefined ? noop : _props3$treeNodeDisab,
 		    isLocalSearch = _props3.isLocalSearch;
 
 		var treeProps = (0, _assign2["default"])({}, {
@@ -199,11 +212,14 @@ var RefTreeTableBaseUI = function (_Component) {
 			nodeDisplay: nodeDisplay,
 			defaultExpandAll: defaultExpandAll,
 			treeData: treeData,
-			onTreeChange: onTreeChange,
+			onTreeChangeFromBaseUI: this.onTreeChangeFromBaseUI,
 			onTreeSearch: onTreeSearch,
 			lazyModal: lazyModal,
 			onLoadData: onLoadData,
-			isLocalSearch: isLocalSearch
+			isLocalSearch: isLocalSearch,
+			checkedTreeArray: this.checkedTreeArray,
+			treeNodeDisabledKey: treeNodeDisabledKey,
+			treeNodeDisabledFunc: treeNodeDisabledFunc
 		});
 		var tablePropsAll = (0, _assign2["default"])({}, {
 			className: className,
