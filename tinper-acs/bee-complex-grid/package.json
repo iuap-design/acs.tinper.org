@@ -1,6 +1,6 @@
 {
  "name": "bee-complex-grid",
- "version": "2.0.27",
+ "version": "2.0.28",
  "description": "Complex Grid for React, AdvancedDataGrid ",
  "keywords": [
   "react",
@@ -37,6 +37,7 @@
   "changelog": "bee-tools run changelog"
  },
  "dependencies": {
+  "async-validator": "^3.2.2",
   "bee-checkbox": "^2.0.3",
   "bee-dropdown": "^2.0.2",
   "bee-form-control": "^2.0.1",
@@ -49,10 +50,12 @@
   "bee-popover": "^2.0.0",
   "bee-radio": "^2.0.14",
   "bee-table": "^2.2.4",
-  "bee-tabs": "^2.0.6",
+  "bee-tooltip": "^2.1.4",
   "blob.js": "^1.0.1",
   "classnames": "^2.2.6",
   "file-saver": "^1.3.3",
+  "lodash.clonedeep": "^4.5.0",
+  "lodash.isequal": "^4.5.0",
   "script-loader": "0.7.2",
   "tinper-bee-core": "latest",
   "xlsx": "^0.11.17"
