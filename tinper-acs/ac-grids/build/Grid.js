@@ -65,7 +65,8 @@ var Grid = function (_Component) {
             ref: function ref(_ref) {
                 return _this2.grid = _ref;
             },
-            syncHover: true
+            syncHover: true,
+            headerHeight: 35
         }));
     };
 

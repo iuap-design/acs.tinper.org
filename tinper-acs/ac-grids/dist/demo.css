@@ -1017,6 +1017,8 @@
     outline: 0; }
   .u-form-control::-ms-clear, .u-form-control ::-ms-reveal {
     display: none; }
+  .u-form-control-prefix-suffix {
+    padding: 0 30px; }
 
 .u-form-control[disabled] {
   background: #F7F9FB;
@@ -1069,6 +1071,20 @@
     line-height: 0;
     right: 7px;
     color: rgba(0, 0, 0, 0.65); }
+  .u-form-control-affix-wrapper .u-form-control-simple-prefix, .u-form-control-affix-wrapper .u-form-control-simple-suffix {
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    z-index: 2;
+    line-height: 0;
+    color: rgba(0, 0, 0, 0.65);
+    width: 30px;
+    text-align: center;
+    font-size: 12px; }
+  .u-form-control-affix-wrapper .u-form-control-simple-prefix {
+    left: 0; }
+  .u-form-control-affix-wrapper .u-form-control-simple-suffix {
+    right: 0; }
 
 .u-form-control-close .uf-close-c {
   opacity: 0;
@@ -1119,6 +1135,9 @@
     border-color: rgb(245, 60, 50); }
   .u-checkbox.is-checked.u-checkbox-inverse .u-checkbox-label:after {
     color: #fff; }
+  .u-checkbox.is-checked.disabled.u-checkbox-inverse .u-checkbox-label:before {
+    box-shadow: inset 0 0 0 10px #c1c7d0;
+    border-color: #c1c7d0; }
   .u-checkbox .u-checkbox-label {
     cursor: pointer;
     display: inline-block;
@@ -1174,6 +1193,10 @@
 
 .u-checkbox.u-checkbox-indeterminate.u-checkbox-inverse .u-checkbox-label:after {
   color: #fff; }
+
+.u-checkbox.u-checkbox-indeterminate.disabled.u-checkbox-inverse .u-checkbox-label:before {
+  box-shadow: inset 0 0 0 10px #c1c7d0;
+  border-color: #c1c7d0; }
 
 .u-checkbox.u-checkbox-success.is-checked .u-checkbox-label:before {
   box-shadow: inset 0 0 0 10px #fff;
@@ -1505,7 +1528,6 @@ ul {
   .u-select .u-select-selection {
     outline: none;
     -webkit-user-select: none;
-    -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     box-sizing: border-box;
@@ -1779,8 +1801,7 @@ ul {
     content: "\e602"; }
 
 .u-select-open .u-select-arrow {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -ms-transform: rotate(180deg); }
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)"; }
 
 .u-select-open .u-select-arrow:before {
   transform: rotate(180deg); }
@@ -1824,7 +1845,9 @@ ul {
   outline: none;
   overflow: hidden;
   font-size: 12px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  animation: none;
+  -webkit-animation: none; }
   .u-select-dropdown.slide-up-enter.slide-up-enter-active.u-select-dropdown-placement-bottomLeft, .u-select-dropdown.slide-up-appear.slide-up-appear-active.u-select-dropdown-placement-bottomLeft {
     animation-name: uSlideUpIn; }
   .u-select-dropdown.slide-up-enter.slide-up-enter-active.u-select-dropdown-placement-topLeft, .u-select-dropdown.slide-up-appear.slide-up-appear-active.u-select-dropdown-placement-topLeft {
@@ -3529,7 +3552,6 @@ ul {
   .u-select .u-select-selection {
     outline: none;
     -webkit-user-select: none;
-    -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     box-sizing: border-box;
@@ -3803,8 +3825,7 @@ ul {
     content: "\e602"; }
 
 .u-select-open .u-select-arrow {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -ms-transform: rotate(180deg); }
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)"; }
 
 .u-select-open .u-select-arrow:before {
   transform: rotate(180deg); }
@@ -3848,7 +3869,9 @@ ul {
   outline: none;
   overflow: hidden;
   font-size: 12px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  animation: none;
+  -webkit-animation: none; }
   .u-select-dropdown.slide-up-enter.slide-up-enter-active.u-select-dropdown-placement-bottomLeft, .u-select-dropdown.slide-up-appear.slide-up-appear-active.u-select-dropdown-placement-bottomLeft {
     animation-name: uSlideUpIn; }
   .u-select-dropdown.slide-up-enter.slide-up-enter-active.u-select-dropdown-placement-topLeft, .u-select-dropdown.slide-up-appear.slide-up-appear-active.u-select-dropdown-placement-topLeft {
@@ -6071,8 +6094,6 @@ ul {
       display: inline-block; }
   .u-table thead tr:last-child {
     border-bottom: 1px solid #C1C7D0; }
-  .u-table thead tr > th:last-child {
-    border-right: none; }
   .u-table tr:hover td .uf-eye {
     visibility: visible !important; }
   .u-table tr tr a {
@@ -6233,7 +6254,6 @@ ul {
     text-align: center;
     line-height: 14px;
     -webkit-user-select: none;
-    -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
     .u-table-row-expand-icon.uf, .u-table-expanded-row-expand-icon.uf {
@@ -6319,7 +6339,6 @@ ul {
     background: rgb(241, 242, 245);
     color: rgb(33, 33, 33);
     background-clip: padding-box;
-    -moz-user-select: -moz-none;
     -webkit-user-select: none;
     /*
         Introduced in IE 10. 
@@ -6387,9 +6406,10 @@ ul {
       z-index: 1; }
       .u-table-thead-th-drag-gap .online {
         height: 100%;
-        width: 1px;
-        background: transparent;
+        width: 4px;
         margin: 0 auto; }
+      .u-table-thead-th-drag-gap .online:hover {
+        background: #000000; }
       .u-table-thead-th-drag-gap .online-hover {
         background: #000000; }
     .u-table-thead-th-drag-gap:hover {
@@ -6791,7 +6811,6 @@ ul {
   touch-action: manipulation;
   cursor: pointer;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   background-image: none;
@@ -6993,7 +7012,7 @@ ul {
 .u-grid th.u-table-expand-icon-th {
   width: 43px; }
 
-.u-grid th .drop-menu .uf:not(.custom-icon) {
+.u-grid th .drop-menu > .uf {
   font-size: 12px;
   visibility: hidden;
   color: #505F79;
@@ -7105,6 +7124,61 @@ ul {
 
 #filter_column_popover.u-popover {
   z-index: 1701; }
+
+.u-table .u-table-multiSelect-column {
+  min-width: 49px; }
+
+.u-edit-grid .u-table tr td .triangle-flag {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .u-edit-grid .u-table tr td .triangle-flag .triangle-redline {
+    width: 2px;
+    height: 20px;
+    border-left: 2px solid #ff0000;
+    display: inline-block;
+    margin-right: 2px; }
+  .u-edit-grid .u-table tr td .triangle-flag .triangle-element {
+    width: 100%;
+    height: 30px;
+    text-align: left; }
+  .u-edit-grid .u-table tr td .triangle-flag .triangle-icon {
+    color: #ff0000;
+    padding-left: 3px;
+    cursor: pointer; }
+    .u-edit-grid .u-table tr td .triangle-flag .triangle-icon .uf {
+      padding: 0; }
+  .u-edit-grid .u-table tr td .triangle-flag .triangle_border_nw {
+    width: 0;
+    height: 0;
+    border-width: 0 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #f44336;
+    position: absolute;
+    top: 0px;
+    left: 0px; }
+  .u-edit-grid .u-table tr td .triangle-flag .triangle_border_nw_number {
+    width: 0;
+    height: 0;
+    border-width: 0 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #f44336;
+    position: absolute;
+    top: 2px;
+    left: 2px; }
+
+.u-edit-grid .u-table .u-table-tbody tr td .u-edit-grid-cell {
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; }
 
 .ac-btns .ac-btns-item {
   margin-right: 6px;
@@ -7233,7 +7307,6 @@ ul {
       text-align: left;
       background: #eceff5;
       padding: 0;
-      height: 35px;
       padding-left: 12px;
       font-size: 13px; }
       .ac-grids .u-table .u-table-header tr th .u-table-thead-th-drag-gap .online {
@@ -7335,6 +7408,8 @@ ul {
   z-index: 2;
   overflow: auto; }
   .ac-edit-grid.max .u-checkbox .u-checkbox-label:before {
+    top: -10px; }
+  .ac-edit-grid.max .u-checkbox .u-checkbox-label:after {
     top: -10px; }
 
 .ac-edit-grid-panel {
@@ -7444,30 +7519,6 @@ ul {
     top: 2px;
     left: 2px; }
 
-.ac-edit-grid .u-table tr td .refer-out {
-  position: relative;
-  width: calc(100% - 4px);
-  height: 30px;
-  top: 0;
-  display: block; }
-  .ac-edit-grid .u-table tr td .refer-out .u-form-control {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 30px; }
-  .ac-edit-grid .u-table tr td .refer-out .uf-symlist {
-    position: absolute;
-    right: 0;
-    height: 34px;
-    line-height: 30px;
-    color: #adb4bc;
-    cursor: pointer;
-    padding-right: 5px;
-    padding-left: 5px;
-    font-size: 20px;
-    top: -1px;
-    padding-top: 1px; }
-
 .ac-edit-grid .u-table tr td .inline-edit-tooltip {
   line-height: 1 !important; }
   .ac-edit-grid .u-table tr td .inline-edit-tooltip div.tooltip-inner {
@@ -7501,7 +7552,6 @@ ul {
     background: #ddd; }
   .ac-edit-grid .u-table tr td .ac-input-number-handler-up-inner, .ac-edit-grid .u-table tr td .ac-input-number-handler-down-inner {
     color: #666666;
-    -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     -webkit-user-select: none; }

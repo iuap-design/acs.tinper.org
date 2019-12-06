@@ -19,6 +19,7 @@ const propTypes = {
     getListNow:PropTypes.bool,//是否在willmonument时获得文件列表
     url:PropTypes.object,//地址
     uploadProps:PropTypes.object,//附件上传参数
+    powerBtns:PropTypes.array,//可用按钮集合
 };
 
 const defaultProps = {
@@ -32,7 +33,8 @@ const defaultProps = {
         "delete": `https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}`,//下载 cooperation/rest/v1/file/5d639caaa957bd001936cec9  此处id为附件id
         "info":`https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}/info/ `,//文件信息
     },
-    uploadProps:{}
+    uploadProps:{},
+    powerBtns:['upload','reupload','download','delete']
 };
 
 class FileList extends Component {
@@ -121,17 +123,19 @@ class FileList extends Component {
                     },this.props.uploadProps);
                     return <div className="opt-btns">
                         <Btns
+                            powerBtns={this.props.powerBtns}
                             type='line'
                             btns={{
                                 reupload: {
                                     node:<Upload {...uploadP}>
-                                            <Btns type='line' btns={{ reupload:{} }}/>
+                                            <Btns powerBtns={this.props.powerBtns} type='line' btns={{ reupload:{} }}/>
                                         </Upload>
                                 },
                                 delete: {
                                     onClick: ()=>{this.deleteError(record.uid)}
                                 },
                             }}
+                            powerBtns={props.powerBtns}
                         />
                     </div>
                 }else if(record.uploadStatus=='uploading'){
@@ -148,6 +152,7 @@ class FileList extends Component {
                                     onClick: this.deleteConfirm
                                 },
                             }}
+                            powerBtns={props.powerBtns}
                         />
                     </div>
                 }
@@ -266,11 +271,11 @@ class FileList extends Component {
                 withCredentials:true
             },this.props.uploadProps);
             return <div className="opt-btns">
-                <Btns
+                <Btns  powerBtns={this.props.powerBtns}
                     btns={{
                         reupload: {
                             node:<Upload {...uploadP}>
-                                    <Btns type='line' btns={{ reupload:{} }}/>
+                                    <Btns type='line' powerBtns={this.props.powerBtns} btns={{ reupload:{} }}/>
                                 </Upload>
                         },
                         delete: {
@@ -284,6 +289,7 @@ class FileList extends Component {
         }else{
             return <div className="opt-btns">
                 <Btns
+                    powerBtns={this.props.powerBtns}
                     type='line'
                     btns={{
                         download: {
@@ -433,10 +439,11 @@ class FileList extends Component {
                     <div className={`${clsfix}-btns`}>
                         {
                             disabled?'':<Btns
+                            powerBtns={this.props.powerBtns}
                             btns={{
                                 upload:{
                                     node:<Upload {...uploadP}>
-                                            <Btns btns={{ upload:{} }}/>
+                                            <Btns powerBtns={this.props.powerBtns} btns={{ upload:{} }}/>
                                         </Upload>
                                 },
                             }}
@@ -477,7 +484,7 @@ class FileList extends Component {
                             </Modal.Body>
 
                             <Modal.Footer className="pop_footer">
-                                <Btns
+                                <Btns powerBtns={this.props.powerBtns}
                                     btns={{
                                         confirm:{
                                             onClick:this.delete

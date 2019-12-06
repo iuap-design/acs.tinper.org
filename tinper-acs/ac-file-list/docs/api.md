@@ -24,6 +24,7 @@ import 'ac-file-list/build/FileList.css';
 |getListNow|组件渲染时，是否立即请求附件列表接口。例如：单据详情编辑时需要立即请求，新增时不需要|bool|false|
 |url|列表、上传、删除、详情(查询下载地址)接口地址|object|默认值往下看url配置|
 |uploadProps|上传参数，参考 [bee-upload API](http://bee.tinper.org/tinper-bee/bee-upload)|object|{}|
+|powerBtns|可用按钮集合，有以下可选 upload(上传)、reupload(重新上传)、download(下载)、delete(删除)|['upload','reupload','download','delete']|
 
 
 ### url配置
@@ -32,7 +33,6 @@ import 'ac-file-list/build/FileList.css';
     {// {id} 替换为 props.id
         "list":  `https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/caep/{id}/files`,//文件列表
         "upload": `https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/caep/{id}/`,//上传
-        "delete": `https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}`,//下载 cooperation/rest/v1/file/5d639caaa957bd001936cec9  此处id为附件id
         "info":`https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}/info/ `,//文件信息
     }
 ```

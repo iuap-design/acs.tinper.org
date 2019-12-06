@@ -26,6 +26,7 @@ class Grid extends Component {
                 columnFilterAble={columnFilterAble}
                 ref={ref=>this.grid=ref}
                 syncHover={true}
+                headerHeight={35}
             />
         );
     }

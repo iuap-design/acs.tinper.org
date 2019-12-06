@@ -13,7 +13,8 @@ class Demo1 extends Component {
                 <div>
                     <FileList id="5d9d738eede08100180575d5" uploadProps={{
                         accept:"image/*"
-                    }}/>
+                    }}
+                    />
                 </div>
             )   
     }

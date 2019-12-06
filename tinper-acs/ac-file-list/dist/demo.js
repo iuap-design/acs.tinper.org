@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 这是标题", "code": "/**\n*\n* @title 这是标题\n* @description 这是描述\n*\n*/\nimport React, { Component } from 'react';\nimport FileList from 'ac-file-list';\n\nclass Demo1 extends Component {\n    render () {\n        return (\n                <div>\n                    <FileList id=\"5d9d738eede08100180575d5\" uploadProps={{\n                        accept:\"image/*\"\n                    }}/>\n                </div>\n            )   \n    }\n}\nexport default Demo1", "desc": " 这是描述" }];
+	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 这是标题", "code": "/**\n*\n* @title 这是标题\n* @description 这是描述\n*\n*/\nimport React, { Component } from 'react';\nimport FileList from 'ac-file-list';\n\nclass Demo1 extends Component {\n    render () {\n        return (\n                <div>\n                    <FileList id=\"5d9d738eede08100180575d5\" uploadProps={{\n                        accept:\"image/*\"\n                    }}\n                    powerBtns={['upload','reupload']}\n                    />\n                </div>\n            )   \n    }\n}\nexport default Demo1", "desc": " 这是描述" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -36955,7 +36955,9 @@
 	            null,
 	            _react2['default'].createElement(_src2['default'], { id: '5d9d738eede08100180575d5', uploadProps: {
 	                    accept: "image/*"
-	                } })
+	                },
+	                powerBtns: ['upload', 'reupload']
+	            })
 	        );
 	    };
 	
@@ -37042,6 +37044,8 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -37054,7 +37058,8 @@
 	    disabled: _propTypes2['default'].bool,
 	    getListNow: _propTypes2['default'].bool, //是否在willmonument时获得文件列表
 	    url: _propTypes2['default'].object, //地址
-	    uploadProps: _propTypes2['default'].object //附件上传参数
+	    uploadProps: _propTypes2['default'].object, //附件上传参数
+	    powerBtns: _propTypes2['default'].array
 	};
 	
 	var defaultProps = {
@@ -37068,7 +37073,8 @@
 	        "delete": 'https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}', //下载 cooperation/rest/v1/file/5d639caaa957bd001936cec9  此处id为附件id
 	        "info": 'https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}/info/ ' //文件信息
 	    },
-	    uploadProps: {}
+	    uploadProps: {},
+	    powerBtns: ['upload', 'reupload', 'download', 'delete']
 	};
 	
 	var FileList = function (_Component) {
@@ -37176,13 +37182,13 @@
 	                return _react2['default'].createElement(
 	                    'div',
 	                    { className: 'opt-btns' },
-	                    _react2['default'].createElement(_acBtns2['default'], {
+	                    _react2['default'].createElement(_acBtns2['default'], { powerBtns: _this.props.powerBtns,
 	                        btns: {
 	                            reupload: {
 	                                node: _react2['default'].createElement(
 	                                    _beeUpload2['default'],
 	                                    uploadP,
-	                                    _react2['default'].createElement(_acBtns2['default'], { type: 'line', btns: { reupload: {} } })
+	                                    _react2['default'].createElement(_acBtns2['default'], { type: 'line', powerBtns: _this.props.powerBtns, btns: { reupload: {} } })
 	                                )
 	                            },
 	                            'delete': {
@@ -37200,6 +37206,7 @@
 	                    'div',
 	                    { className: 'opt-btns' },
 	                    _react2['default'].createElement(_acBtns2['default'], {
+	                        powerBtns: _this.props.powerBtns,
 	                        type: 'line',
 	                        btns: {
 	                            download: {
@@ -37407,14 +37414,15 @@
 	                    return _react2['default'].createElement(
 	                        'div',
 	                        { className: 'opt-btns' },
-	                        _react2['default'].createElement(_acBtns2['default'], {
+	                        _react2['default'].createElement(_acBtns2['default'], _defineProperty({
+	                            powerBtns: _this.props.powerBtns,
 	                            type: 'line',
 	                            btns: {
 	                                reupload: {
 	                                    node: _react2['default'].createElement(
 	                                        _beeUpload2['default'],
 	                                        uploadP,
-	                                        _react2['default'].createElement(_acBtns2['default'], { type: 'line', btns: { reupload: {} } })
+	                                        _react2['default'].createElement(_acBtns2['default'], { powerBtns: _this.props.powerBtns, type: 'line', btns: { reupload: {} } })
 	                                    )
 	                                },
 	                                'delete': {
@@ -37423,7 +37431,7 @@
 	                                    }
 	                                }
 	                            }
-	                        })
+	                        }, 'powerBtns', props.powerBtns))
 	                    );
 	                } else if (record.uploadStatus == 'uploading') {
 	                    return _react2['default'].createElement('div', { className: 'opt-btns' });
@@ -37440,7 +37448,8 @@
 	                                'delete': {
 	                                    onClick: _this.deleteConfirm
 	                                }
-	                            }
+	                            },
+	                            powerBtns: props.powerBtns
 	                        })
 	                    );
 	                }
@@ -37531,12 +37540,13 @@
 	                    'div',
 	                    { className: clsfix + '-btns' },
 	                    disabled ? '' : _react2['default'].createElement(_acBtns2['default'], {
+	                        powerBtns: this.props.powerBtns,
 	                        btns: {
 	                            upload: {
 	                                node: _react2['default'].createElement(
 	                                    _beeUpload2['default'],
 	                                    uploadP,
-	                                    _react2['default'].createElement(_acBtns2['default'], { btns: { upload: {} } })
+	                                    _react2['default'].createElement(_acBtns2['default'], { powerBtns: this.props.powerBtns, btns: { upload: {} } })
 	                                )
 	                            }
 	                        }
@@ -37596,7 +37606,7 @@
 	                    _react2['default'].createElement(
 	                        _beeModal2['default'].Footer,
 	                        { className: 'pop_footer' },
-	                        _react2['default'].createElement(_acBtns2['default'], {
+	                        _react2['default'].createElement(_acBtns2['default'], { powerBtns: this.props.powerBtns,
 	                            btns: {
 	                                confirm: {
 	                                    onClick: this['delete']
@@ -89774,7 +89784,7 @@
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
 	 * The buffer module from node.js, for the browser.
 	 *
-	 * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+	 * @author   Feross Aboukhadijeh <http://feross.org>
 	 * @license  MIT
 	 */
 	/* eslint-disable no-proto */
