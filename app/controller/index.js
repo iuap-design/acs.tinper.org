@@ -41,18 +41,29 @@ marked.setOptions({
 
 
 /**
- * 获得文档的导航菜单
+ * 获得文档的导航菜单，支持三级标题
  */
 
 let docsMenus = {};
 Object.keys(sidebar).forEach(item => {
   let doc = sidebar[item];
   if (doc.children) {
-    let child = doc.children[""];
-    if (child) {
-      Object.keys(child).forEach(ch => {
-        docsMenus[child[ch].component] = {};
-        docsMenus[child[ch].component].menus = child[ch].menus;
+    let firstChild = doc.children;
+    if (firstChild) {
+      Object.keys(firstChild).forEach(item => {
+        let secondChild = firstChild[item];
+        if(!secondChild.version && secondChild.component){
+          docsMenus[secondChild.component] = {};
+          docsMenus[secondChild.component].menus = secondChild.menus;
+        }else if(secondChild){
+          Object.keys(secondChild).forEach(item => {
+            let thirdChild = secondChild[item];
+            if(!thirdChild.version && thirdChild.component){
+              docsMenus[thirdChild.component] = {};
+              docsMenus[thirdChild.component].menus = thirdChild.menus;
+            }
+          })
+        }
       })
     }
   } else {
@@ -150,8 +161,8 @@ module.exports = {
       data = await fs.readFileSync(filePath, 'utf-8');
     }
 
-   
 
+    
     data = marked(data);
 
     data = data

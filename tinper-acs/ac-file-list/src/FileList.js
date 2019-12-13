@@ -34,7 +34,7 @@ const defaultProps = {
         "info":`https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}/info/ `,//文件信息
     },
     uploadProps:{},
-    powerBtns:['upload','reupload','download','delete']
+    powerBtns:['upload','reupload','download','delete','confirm','cancel']
 };
 
 class FileList extends Component {

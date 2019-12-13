@@ -8,15 +8,32 @@
                             <%= key %>
                         </span>
                         <% for (heard in child) { var acs = child[heard]; %>
-                            <% if (acs.component==active) { %>
-                                <div class="menu-item-com active" id="<%= acs.component %>">
-                                    <a href="./<%= acs.component %>" title="<%= heard %>"><%= heard %></a>
-                                </div>
-                            <% } else { %>
-                                <div class="menu-item-com" id="<%= acs.component %>">
-                                    <a href="./<%= acs.component %>" title="<%= heard %>"><%= heard %></a>
-                                </div>
-                            <% } %>
+                            <div class="menu-item-heard">
+                                <% if(acs.version || acs.component) {%>
+                                    <% if (acs.component==active) { %>
+                                        <div class="menu-item-com active" id="<%= acs.component %>">
+                                            <a href="./<%= acs.component %>" title="<%= heard %>"><%= heard %></a>
+                                        </div>
+                                    <% } else { %>
+                                        <div class="menu-item-com" id="<%= acs.component %>">
+                                            <a href="./<%= acs.component %>" title="<%= heard %>"><%= heard %></a>
+                                        </div>
+                                    <% } %>
+                                <% } else { %>
+                                    <%= heard %>
+                                    <% for (com in acs) { var acChild = acs[com]%>
+                                        <% if(acChild.component == active) {%>
+                                            <div class="menu-item-com active" id="<%= acChild.component %>">
+                                                <a href="./<%= acChild.component %>" title="<%= com %>"><%= com %></a>
+                                            </div>
+                                        <% } else { %>
+                                            <div class="menu-item-com" id="<%= acChild.component %>">
+                                                <a href="./<%= acChild.component %>" title="<%= com %>"><%= com %></a>
+                                            </div>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
                         <% } %>
                     </div>
                 <% } else { %>

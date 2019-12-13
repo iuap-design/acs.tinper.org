@@ -1,3 +1,13 @@
+<a name="0.1.6"></a>
+## [0.1.6](https://github.com/tinper-bee/ac-file-list/compare/v0.1.5...v0.1.6) (2019-12-11)
+
+
+### Bug Fixes
+
+* **ac-file-list:** 确定取消按钮不显示bug ([9825232](https://github.com/tinper-bee/ac-file-list/commit/9825232))
+
+
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/tinper-bee/ac-file-list/compare/v0.1.4...v0.1.5) (2019-12-04)
 

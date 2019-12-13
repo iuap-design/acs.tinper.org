@@ -75,7 +75,6 @@ modalProps | `object`| {} | modal上其他属性，具体接收的参数参照be
 treeProps | `object`| {} | tree上其他属性，具体接收的参数参照bee-tree| 否
 onTreeSelecting|`function(selectedArray,selectedKeys)` | --| 树节点选中回调，selectedArray全部选中数据，selectedKeys选中选中数据的键| 否
 isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用函数getRefTreeData(value),true是前端搜索 | 否
-treeNodeDisabledKey | `String` | - | 树节点中disabled状态节点，传入代表treeData中表示不可选节点的键 | 否
 footerBtnDom | `dom` | <span></span> | 自定义footer的按钮dom | 否
 
 
@@ -100,6 +99,8 @@ canClickGoOn|`function()`| ()=>{return true}|当点击文本框右侧弹出按�
 canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录入时是否可以录入<br>适用于级联情况下当选择不全时的处理| 否 
 menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
 dropdownDisabled | `boolean` | false |下拉展示是否可以弹出，false为有，true为没有|否
+treeNodeDisabledKey | `String` | - | 树节点中disabled状态节点，传入代表treeData中表示不可选节点的键 | 否
+treeNodeDisabledFunc |`function(node)`| 返回当前节点信息，return false，表示可选；return true，表示该节点不可选| 否 
 
 ## 注意事项
 

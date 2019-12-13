@@ -73,36 +73,151 @@
             }
         ]
     },
-    "常用": {
+    "Iuap 5.0": {
         "children": {
-            "按钮 AcButton": {
-                "version": "0.0.2",
-                "component": "ac-button"
+            "按钮": {
+                "基础按钮 AcBtns": {
+                    "version": "0.0.2",
+                    "component": "ac-btns"
+                }, 
+                "快捷键按钮 HotkeyButton": {
+                    "version": "0.0.1",
+                    "component": "ac-hotkey-button"
+                },
+                "分割下拉按钮 SplitButton": {
+                    "version": "0.0.1",
+                    "component": "ac-split-button"
+                }
             },
-            "项目按钮 AcBtns": {
-                "version": "0.0.2",
-                "component": "ac-btns"
+            "查询区": {
+                "查询面板 AcSearchCN": {
+                    "version": "0.0.1",
+                    "component": "ac-search-cn"
+                },
+                "条件搜索 AcComplexSearchPanel": {
+                    "version": "0.0.1",
+                    "component": "ac-complex-search-panel"
+                }
             },
-            "快捷键按钮 HotkeyButton": {
-                "version": "0.0.1",
-                "component": "ac-hotkey-button"
+            "表格": {
+                "复杂表格 BeeComplexGrid": {
+                    "version": "1.0.0",
+                    "component": "bee-complex-grid"
+                },
+                "复杂表格 AcGrids": {
+                    "version": "1.0.0",
+                    "component": "ac-grids"
+                }
             },
-            "分割下拉按钮 SplitButton": {
-                "version": "0.0.1",
-                "component": "ac-split-button"
+            "表单布局": {
+                "表单布局 FormLayout": {
+                    "version": "0.0.3",
+                    "component": "ac-form-layout"
+                }
             },
-            "查询页签 SearchTabs": {
-                "version": "0.0.1",
-                "component": "ac-search-tabs"
+            "参照通用 UI 版本": {
+                "树参照 RefTree": {
+                    "version": "0.0.1",
+                    "component": "ref-tree"
+                },
+                "表参照 RefMultipleTable": {
+                    "version": "0.0.1",
+                    "component": "ref-multiple-table"
+                },
+                "树表参照 RefTreeTable": {
+                    "version": "0.0.1",
+                    "component": "ref-tree-table"
+                },
+                "树穿梭参照 RefTreeTransfer": {
+                    "version": "0.0.1",
+                    "component": "ref-tree-transfer"
+                },
+                "下拉参照 RefCombobox": {
+                    "version": "0.0.1",
+                    "component": "ref-combobox"
+                }
             },
-            "消息 AcToast": {
-                "version": "0.0.9",
-                "component": "ac-toast"
+            "5.0 参照": {
+                "参照ref-mdd(iuap 5.0版本)": {
+                    "component": "ref-mdd",
+                    "menus": {
+                        "关键特性": {},
+                        "如何使用": {
+                            "children": [
+                                "组件方式调用",
+                                "引入UMD规范的通用CDN文件"
+                            ]
+                        },
+                        "使用示例": {},
+                        "API": {},
+                        "整体流程": {},
+                        "数据交互格式说明": {},
+                        "参与开发": {
+                            "children": [
+                                "基于 lerna 的开发和调试"
+                            ]
+                        }
+                    }
+                },
+                "参照mdf-refer(mdf版本)": {
+                    "component": "mdf-refer",
+                    "menus": {
+                        "关键特性": {},
+                        "如何使用": {},
+                        "使用示例": {},
+                        "API": {},
+                        "整体流程": {},
+                        "数据交互格式说明": {},
+                        "参与开发": {
+                            "children": [
+                                "基于mdf的开发和调试"
+                            ]
+                        }
+                    }
+                }
             },
-            "消息提示 AcTips": {
-                "version": "0.0.9",
-                "component": "ac-tips"
+            "附件上传": {
+                "附件列表 AcFileList": {
+                    "version": "0.1.4",
+                    "component": "ac-file-list"
+                }
             },
+            "页签": {
+                "查询页签 SearchTabs": {
+                    "version": "0.0.1",
+                    "component": "ac-search-tabs"
+                } 
+            },
+            "反馈": {
+                "消息提示 AcTips": {
+                    "version": "0.0.9",
+                    "component": "ac-tips"
+                }
+            },
+            "国际化": {
+                "多语言输入 AcInputLocale": {
+                    "version": "0.0.2",
+                    "component": "ac-input-locale"
+                },
+                "手机号国际化 AcMobileLocale": {
+                    "version": "0.0.1",
+                    "component": "ac-mobile-locale"
+                }
+            },
+            "其他": {
+                "分割区域 AcSplitArea": {
+                    "version": "0.0.1",
+                    "component": "ac-split-area"
+                },
+                "富文本编辑 AcEditor": {
+                    "version": "1.0.0",
+                    "component": "ac-editor"
+                }
+            }
+        }
+    },
+    "Iuap 3.5.6": {
+        "children": {
             "城市选择 AcCitySelect": {
                 "version": "0.0.1",
                 "component": "ac-city-select"
@@ -115,151 +230,66 @@
                 "version": "0.0.1",
                 "component": "ac-navbar"
             },
-            "分割区域 AcSplitArea": {
-                "version": "0.0.1",
-                "component": "ac-split-area"
-            },
-            "表单布局 FormLayout": {
-                "version": "0.0.3",
-                "component": "ac-form-layout"
-            }
-        }
-    },
-    "参照通用 UI 版本": {
-        "children": {
-            "树参照 RefTree": {
-                "version": "0.0.1",
-                "component": "ref-tree"
-            },
-            "表参照 RefMultipleTable": {
-                "version": "0.0.1",
-                "component": "ref-multiple-table"
-            },
-            "树表参照 RefTreeTable": {
-                "version": "0.0.1",
-                "component": "ref-tree-table"
-            },
-            "树穿梭参照 RefTreeTransfer": {
-                "version": "0.0.1",
-                "component": "ref-tree-transfer"
-            },
-            "下拉参照 RefCombobox": {
-                "version": "0.0.1",
-                "component": "ref-combobox"
-            }
-        }
-    },
-    "参照pap-refer(iuap 3.5.6版本)": {
-        "component": "pap-refer",
-        "menus": {
-            "第一章 基础概念": {
-                "children": [
-                    "1.1 背景",
-                    "1.2 名词解释"
-                ]
-            },
-            "第二章 技术架构": {
-                "children": [
-                    "2.1 架构设计",
-                    "2.2 实现说明",
-                    "2.3 参照模型"
-                ]
-            },
-            "第三章 功能介绍": {
-                "children": [
-                    "3.1 参照类型说明",
-                    "3.2 特性说明",
-                    "3.3 开发描述说明"
-                ]
-            },
-            "第四章 开发示例": {
-                "children": [
-                    "4.1 开发流程",
-                    "4.2 示例地址",
-                    "4.3 示例项目",
-                    "4.4 示例内容"
-                ]
-            },
-            "第五章 典型业务场景介绍": {
-                "children": [
-                    "5.1 参照选择值将多余信息带入输入框",
-                    "5.2 参照级联",
-                    "5.3 懒加载",
-                    "5.4 数据权限",
-                    "5.5 多语"
-                ]
-            },
-            "第六章 开放接口规范": {
-                "children": [
-                    "6.1 后端接口说明",
-                    "6.2 前端接口说明"
-                ]
-            }
-        }
-    },
-    "参照ref-mdd(iuap 5.0版本)": {
-        "component": "ref-mdd",
-        "menus": {
-            "关键特性": {},
-            "如何使用": {
-                "children": [
-                    "组件方式调用",
-                    "引入UMD规范的通用CDN文件"
-                ]
-            },
-            "使用示例": {},
-            "API": {},
-            "整体流程": {},
-            "数据交互格式说明": {},
-            "参与开发": {
-                "children": [
-                    "基于 lerna 的开发和调试"
-                ]
-            }
-        }
-    },
-    "参照mdf-refer(mdf版本)": {
-        "component": "mdf-refer",
-        "menus": {
-            "关键特性": {},
-            "如何使用": {},
-            "使用示例": {},
-            "API": {},
-            "整体流程": {},
-            "数据交互格式说明": {},
-            "参与开发": {
-                "children": [
-                    "基于mdf的开发和调试"
-                ]
-            }
-        }
-    },
-    "国际化": {
-        "children": {
-            "多语言输入 AcInputLocale": {
-                "version": "0.0.2",
-                "component": "ac-input-locale"
-            },
-            "手机号国际化 AcMobileLocale": {
-                "version": "0.0.1",
-                "component": "ac-mobile-locale"
-            }
-        }
-    },
-    "单据": {
-        "children": {
             "查询面板 AcSearchPanel": {
                 "version": "0.0.1",
                 "component": "ac-search-panel"
             },
-            "查询面板 AcSearchCN": {
-                "version": "0.0.1",
-                "component": "ac-search-cn"
+            "参照pap-refer(iuap 3.5.6版本)": {
+                "component": "pap-refer",
+                "menus": {
+                    "第一章 基础概念": {
+                        "children": [
+                            "1.1 背景",
+                            "1.2 名词解释"
+                        ]
+                    },
+                    "第二章 技术架构": {
+                        "children": [
+                            "2.1 架构设计",
+                            "2.2 实现说明",
+                            "2.3 参照模型"
+                        ]
+                    },
+                    "第三章 功能介绍": {
+                        "children": [
+                            "3.1 参照类型说明",
+                            "3.2 特性说明",
+                            "3.3 开发描述说明"
+                        ]
+                    },
+                    "第四章 开发示例": {
+                        "children": [
+                            "4.1 开发流程",
+                            "4.2 示例地址",
+                            "4.3 示例项目",
+                            "4.4 示例内容"
+                        ]
+                    },
+                    "第五章 典型业务场景介绍": {
+                        "children": [
+                            "5.1 参照选择值将多余信息带入输入框",
+                            "5.2 参照级联",
+                            "5.3 懒加载",
+                            "5.4 数据权限",
+                            "5.5 多语"
+                        ]
+                    },
+                    "第六章 开放接口规范": {
+                        "children": [
+                            "6.1 后端接口说明",
+                            "6.2 前端接口说明"
+                        ]
+                    }
+                }
             },
-            "条件搜索 AcComplexSearchPanel": {
-                "version": "0.0.1",
-                "component": "ac-complex-search-panel"
-            },
+            "BPM流程审批": {
+                "version": "0.2.9",
+                "component": "yyuap-bpm"
+            }
+        }
+    },
+    "通用业务组件": {
+        "children": {
             "上传列表 AcAttachment": {
                 "version": "0.2.3",
                 "component": "ac-attachment"
@@ -268,54 +298,22 @@
                 "version": "0.0.20",
                 "component": "ac-upload"
             },
-            "附件列表 AcFileList": {
-                "version": "0.1.4",
-                "component": "ac-file-list"
-            }
-        }
-    },
-    "流程审批": {
-        "children": {
-            "BPM流程(3.5.6版本)": {
-                "version": "0.2.9",
-                "component": "yyuap-bpm"
-            }
-        }
-    },
-    "编辑器": {
-        "children": {
-            "富文本编辑 AcEditor": {
-                "version": "1.0.0",
-                "component": "ac-editor"
-            },
-            "富文本编辑sany版本 AcEditorSany": {
-                "version": "1.0.0",
-                "component": "ac-editor-sany"
-            }
-        }
-    },
-    "表格": {
-        "children": {
             "电子表格 AcSpreadsheet": {
                 "version": "1.0.0",
                 "component": "ac-spreadsheet"
-            },
-            "复杂表格 BeeComplexGrid": {
-                "version": "1.0.0",
-                "component": "bee-complex-grid"
             },
             "Hand表格 AcHandTable": {
                 "version": "1.0.0",
                 "component": "ac-hand-table"
             },
-            "复杂表格 AcGrids": {
+            "消息 AcToast": {
+                "version": "0.0.9",
+                "component": "ac-toast"
+            },
+            "富文本编辑sany版本 AcEditorSany": {
                 "version": "1.0.0",
-                "component": "ac-grids"
-            }
-        }
-    },
-    "图形化": {
-        "children": {
+                "component": "ac-editor-sany"
+            },
             "温度计/液位计 AcThermometer": {
                 "version": "0.0.1",
                 "component": "ac-thermometer"

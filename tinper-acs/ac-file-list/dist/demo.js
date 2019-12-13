@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 这是标题", "code": "/**\n*\n* @title 这是标题\n* @description 这是描述\n*\n*/\nimport React, { Component } from 'react';\nimport FileList from 'ac-file-list';\n\nclass Demo1 extends Component {\n    render () {\n        return (\n                <div>\n                    <FileList id=\"5d9d738eede08100180575d5\" uploadProps={{\n                        accept:\"image/*\"\n                    }}\n                    powerBtns={['upload','reupload']}\n                    />\n                </div>\n            )   \n    }\n}\nexport default Demo1", "desc": " 这是描述" }];
+	var Demo1 = __webpack_require__(268);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 这是标题", "code": "/**\n*\n* @title 这是标题\n* @description 这是描述\n*\n*/\nimport React, { Component } from 'react';\nimport FileList from 'ac-file-list';\n\nclass Demo1 extends Component {\n    render () {\n        return (\n                <div>\n                    <FileList id=\"5d9d738eede08100180575d5\" uploadProps={{\n                        accept:\"image/*\"\n                    }}\n                    />\n                </div>\n            )   \n    }\n}\nexport default Demo1", "desc": " 这是描述" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -36955,8 +36955,7 @@
 	            null,
 	            _react2['default'].createElement(_src2['default'], { id: '5d9d738eede08100180575d5', uploadProps: {
 	                    accept: "image/*"
-	                },
-	                powerBtns: ['upload', 'reupload']
+	                }
 	            })
 	        );
 	    };
@@ -37059,7 +37058,7 @@
 	    getListNow: _propTypes2['default'].bool, //是否在willmonument时获得文件列表
 	    url: _propTypes2['default'].object, //地址
 	    uploadProps: _propTypes2['default'].object, //附件上传参数
-	    powerBtns: _propTypes2['default'].array
+	    powerBtns: _propTypes2['default'].array //可用按钮集合
 	};
 	
 	var defaultProps = {
@@ -37074,7 +37073,7 @@
 	        "info": 'https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}/info/ ' //文件信息
 	    },
 	    uploadProps: {},
-	    powerBtns: ['upload', 'reupload', 'download', 'delete']
+	    powerBtns: ['upload', 'reupload', 'download', 'delete', 'confirm', 'cancel']
 	};
 	
 	var FileList = function (_Component) {
