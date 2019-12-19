@@ -68,6 +68,15 @@
     "ac-file-list":{
         "name":"附件列表"
     },
+    "ac-approval-board":{
+        "name":"流程面板"
+    },
+    "ac-approval-submit":{
+        "name":"流程提交"
+    },
+    "ac-print":{
+        "name":"打印"
+    },
 
 
     "ac-editor-sany":{

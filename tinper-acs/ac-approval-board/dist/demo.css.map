@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/ApprovalBoard.scss"],"names":[],"mappings":"AAAA;EAEQ,WAAU,EACb","file":"demo.css","sourcesContent":[".flow-comp-wrapper{\n    .flow-comp-cover{\n        z-index: 1;\n    }\n}"],"sourceRoot":"/source/"}
