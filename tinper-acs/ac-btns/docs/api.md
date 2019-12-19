@@ -35,7 +35,7 @@
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|colors|按钮样式，参考(bee-button不同颜色的按钮)[http://bee.tinper.org/tinper-bee/bee-button#%E4%B8%8D%E5%90%8C%E9%A2%9C%E8%89%B2%E7%9A%84%E6%8C%89%E9%92%AE]|string|-|
+|colors|按钮样式，参考[bee-button不同颜色的按钮](http://bee.tinper.org/tinper-bee/bee-button#%E4%B8%8D%E5%90%8C%E9%A2%9C%E8%89%B2%E7%9A%84%E6%8C%89%E9%92%AE)|string|-|
 |name_zh_CN|中文简体内容|string|-|
 |name_zh_TW|中文繁体内容|string|-|
 |name_en_US|英文内容|string|-|
