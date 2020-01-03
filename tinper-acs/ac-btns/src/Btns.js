@@ -27,7 +27,7 @@ const defaultProps = {
     btns:{},
     type:'button',
     maxSize:2,
-    forcePowerBtns:['cancel','search','clear'],//取消、查询、清空不受权限管理控制
+    forcePowerBtns:['cancel','search','clear','empty'],//取消、查询、清空、置空不受权限管理控制
     localeCookie:'locale',
     onClick:()=>{}
 };
@@ -151,6 +151,10 @@ class Btns extends Component {
                             return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`} title={name}>
                                         <Icon type='uf-clean'/>
                                     </Button>
+                        case 'empty':
+                            return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`} title={name}>
+                                        <Icon type='uf-qingkong'/>
+                                    </Button>
                         case 'max':
                             return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`} title={name}>
                                         <Icon type='uf-maxmize'/>
@@ -187,6 +191,10 @@ class Btns extends Component {
                         case 'clear':
                             return <span key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>
                                         <Icon type='uf-clean'/>
+                                    </span>
+                        case 'empty':
+                            return <span key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>
+                                        <Icon type="uf-qingkong" />
                                     </span>
                         case 'max':
                             return <span key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>

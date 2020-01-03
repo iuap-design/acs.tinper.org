@@ -40,6 +40,7 @@ import 'bee-complex-grid/build/Grid.css';
 |canSum |是否开启合计功能|boolean	|false|
 
 ### EditGrid 编辑表格
+
 |参数|说明|类型|默认值|版本|
 |:---|:-----|:----|:------|:----|
 |onChange|数据改变、选中时的回调|function|-| bee-complex-grid@2.0.28 新增 |
@@ -69,12 +70,15 @@ import 'bee-complex-grid/build/Grid.css';
 |filedProps|传给`field`的属性，`field` 这里代表渲染出来的表单组件。例如：`type:"input"`，则 FormControl 即为 `field` ，具体的 API 说明参考下表|string|-|
 
 ### Column.filedProps 
+
 使用  `<EditGrid /> ` 有效 ：
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |defaultValue|新增时默认值|string|-|
+|disabled|字段是否禁止输入|bool|-|
 |maxLength|最大长度，type=`input`时生效|string|-|
+|placeholder|输入框的提示信息，type=`input`时生效|string|-|
 |options|type=`select` 时的下拉内容|bool|-|
 |precision|小数点后保留几位小数，type=`inputNumber`生效|number|-|
 |max|最大值，type=`inputNumber`生效|number|-|
@@ -82,6 +86,7 @@ import 'bee-complex-grid/build/Grid.css';
 |step|步进值，type=`inputNumber`生效|number|-|
 
 ### GridToolbar 操作栏
+
 |参数|说明|类型|默认值|
 |:--|:---|:--|:---| 
 |toolBtns|按钮组,数组元素中单个按钮属性可以参考[button](http://bee.tinper.org/tinper-bee/bee-button)当按钮属性中含有children属性，会自动解析成dropdown按钮。|array	|[]|
@@ -97,5 +102,7 @@ import 'bee-complex-grid/build/Grid.css';
 ```
 
 ## 注意事项
+
+ - `EditGrid` 在使用 `renderType` 时，不支持自定义行列合并
 
 ## 更新日志

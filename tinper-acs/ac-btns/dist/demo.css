@@ -35,7 +35,7 @@
     min-width: 48px;
     padding: 4px 5px;
     background-color: #e14c46; }
-  .ac-btns button.ac-btns-item.u-button.ac-btns-clear {
+  .ac-btns button.ac-btns-item.u-button.ac-btns-clear, .ac-btns button.ac-btns-item.u-button.ac-btns-empty {
     min-width: auto;
     color: #111;
     padding: 4px 0;

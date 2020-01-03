@@ -67,7 +67,9 @@ const EditGrid = AcGrids.EditGrid;
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |defaultValue|新增时默认值|string|-|
+|disabled|字段是否禁止输入|bool|-|
 |maxLength|最大长度，type=`input`时生效|string|-|
+|placeholder|输入框的提示信息，type=`input`时生效|string|-|
 |options|type=`select` 时的下拉内容|bool|-|
 |precision|小数点后保留几位小数，type=`inputNumber`生效|number|-|
 |max|最大值，type=`inputNumber`生效|number|-|
@@ -78,6 +80,7 @@ const EditGrid = AcGrids.EditGrid;
 
  ## 注意事项
 
- `field`这里代表 render出来的表单元素。例如：`type:'input'`，则 `formcontrol` 即为`field`
+ - `field`这里代表 render出来的表单元素。例如：`type:'input'`，则 `formcontrol` 即为`field`
+ - `EditGrid` 在使用 `renderType` 时，不支持自定义行列合并
 
  ## 更新日志

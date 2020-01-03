@@ -1,6 +1,6 @@
 /**
  * @title 高级表格(单选)应用
- * @description 单选、分页、过滤功能、交换。设置 `multiSelect = {{ type:"radio" }}`，即可使用表格单选功能。
+ * @description 设置 multiSelect = {{ type:"radio" }} 即可使用 Grid 表格单选功能。
  *
  */
 import React, { Component } from "react";
@@ -103,7 +103,6 @@ const dataList = [
   },
   {
     index: 1,
-    _checked: true,
     orderCode: "222",
     supplierName: "22xxx",
     type_name: "1223",
@@ -121,7 +120,6 @@ const dataList = [
     index: 2,
     orderCode: "222",
     supplierName: "22xxx",
-    _disabled: true,
     type_name: "1223",
     purchasing: "内行2",
     purchasingGroup: "3223",
@@ -154,25 +152,24 @@ class Demo7 extends Component {
   constructor(props) {
     super(props);
   }
-  //临时加个判断
-  shouldComponentUpdate(){
-    if(this.props.className =='u-panel-title'){
-      return false;
-    }
-  }
-  getSelectedDataFunc = data => {
-    console.log("data", data);
+  getSelectedDataFunc = (record,index) => {
+    console.log("record", record, "index",index);
   };
-
-  selectedRow = (record, index) => {};
   /**
-   * 请求页面数据
+   * 切换页码的回调
+   * @param {Number} pageIndex 跳转指定页数
    */
-  freshata=()=>{
-
+  freshData = (pageIndex) => {
+    console.log('跳转至第 ', pageIndex, ' 页');
   }
-  onDataNumSelect=()=>{
-    console.log('选择每页多少条的回调函数');
+
+  /**
+   * 选择每页多少条的回调函数
+   * @param {*} index 跳转指定页数
+   * @param {*} value 设置每页显示多少条数据
+   */
+  onDataNumSelect=(index, value)=>{
+    console.log('index：',index, ' value：',value);
   }
   render() {
     let paginationObj = {

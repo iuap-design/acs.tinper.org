@@ -312,7 +312,7 @@
         .triangle-flag {
             position: relative;
             display: flex;
-            justify-content: center;
+            justify-content: left;
             align-items: center;
 
             .triangle-redline {
@@ -324,7 +324,7 @@
             }
 
             .triangle-element {
-                width: 100%;
+                width: calc(100% - 30px);
                 height: 30px;
                 text-align: left;
             }

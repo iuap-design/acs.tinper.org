@@ -31,6 +31,7 @@ class EditGrid extends Component {
             defaultValueKeyValue: {},//带默认值的key，value键值对
         }
         this.selectDataId = 1;
+        this.errors = {};
     }
 
     componentWillMount () {
@@ -53,6 +54,24 @@ class EditGrid extends Component {
         }
     }
 
+    onValidate=(errors,filed,fileds,index)=>{
+        let current = this.errors[index]||{};
+        if(errors){
+            current[filed] = errors[0].message;
+        }else{
+           delete current[filed];
+        }
+        this.errors[index] = current;
+        console.log(this.errors)
+    }
+    validate = ()=>{
+        if(Object.keys(this.errors).length){
+            return this.errors;
+        }else{
+            return null;
+        }
+    }
+    
     setDataColumn = (disabled, col, da) => {
         let columns = cloneDeep(col);
         let defaultValueKeyValue = {};
@@ -81,18 +100,24 @@ class EditGrid extends Component {
                         patternMessage={item.patternMessage}
                         disabled={disabled ? true : item.disabled}
                         customizeRender={item.customizeRender}
+                        onValidate={this.onValidate}
                         filedProps={item.filedProps}
                     />
                 }
             } else {
-                item.render = (text, record, index) => {
-                    let value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-                    let placement = 'left';
-                    if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-                    return <Tooltip overlay={value} inverse placement={placement}>
-                        <span className='ac-grid-cell'>{value}</span>
-                    </Tooltip>
+                if(typeof item.oldRender == 'function'&&((item.oldRender.toString().indexOf('colSpan')!=-1)||(item.oldRender.toString().indexOf('rowSpan')!=-1))){
+                    item.render = item.oldRender
+                }else{
+                    item.render = (text, record, index) => {
+                        let value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+                        let placement = 'left';
+                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+                        return <Tooltip overlay={value} inverse placement={placement}>
+                            <span className='ac-grid-cell'>{value}</span>
+                        </Tooltip>
+                    }
                 }
+                
             }
         });
         this.setState({

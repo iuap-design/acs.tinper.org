@@ -113,13 +113,13 @@ class TextField extends Component {
                     error: false
                 });
             }
-            onValidate && onValidate(field, fields, index);
+            onValidate && onValidate(errors,field, fields, index);
         });
     }
     render() {
         let { value, error, flag } = this.state;
 
-        let { className, message, required, onBlur, pattern,patternMessage,maxLength } = this.props;
+        let { className, message, required, onBlur, pattern,patternMessage,maxLength,placeholder,disabled } = this.props;
 
         return (
             <FieldWrap
@@ -134,6 +134,8 @@ class TextField extends Component {
                     onChange={this.handlerChange}
                     onBlur={onBlur}
                     maxLength={maxLength}
+                    placeholder={placeholder}
+                    disabled={disabled}
                 />
             </FieldWrap>
         );

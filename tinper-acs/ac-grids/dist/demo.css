@@ -7480,8 +7480,8 @@ ul {
   position: relative;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: center;
-  justify-content: center;
+  -ms-flex-pack: left;
+  justify-content: left;
   -ms-flex-align: center;
   align-items: center; }
   .ac-edit-grid .u-table tr td .triangle-flag .triangle-redline {
@@ -7491,7 +7491,7 @@ ul {
     display: inline-block;
     margin-right: 2px; }
   .ac-edit-grid .u-table tr td .triangle-flag .triangle-element {
-    width: 100%;
+    width: calc(100% - 30px);
     height: 30px;
     text-align: left; }
   .ac-edit-grid .u-table tr td .triangle-flag .triangle-icon {

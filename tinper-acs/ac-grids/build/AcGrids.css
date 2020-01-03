@@ -8860,7 +8860,7 @@ ul {
 .ac-edit-grid .u-table tr td .triangle-flag {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center; }
   .ac-edit-grid .u-table tr td .triangle-flag .triangle-redline {
     width: 2px;
@@ -8869,7 +8869,7 @@ ul {
     display: inline-block;
     margin-right: 2px; }
   .ac-edit-grid .u-table tr td .triangle-flag .triangle-element {
-    width: 100%;
+    width: calc(100% - 30px);
     height: 30px;
     text-align: left; }
   .ac-edit-grid .u-table tr td .triangle-flag .triangle-icon {

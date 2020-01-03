@@ -1,3 +1,13 @@
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/tinper-bee/ac-file-list/compare/v0.1.6...v0.1.7) (2019-12-20)
+
+
+### Features
+
+* **ac-file-list:** 锁死版本 ([63bff80](https://github.com/tinper-bee/ac-file-list/commit/63bff80))
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/tinper-bee/ac-file-list/compare/v0.1.5...v0.1.6) (2019-12-11)
 

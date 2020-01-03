@@ -138,7 +138,7 @@ var YearField = function (_Component) {
                         error: false
                     });
                 }
-                onValidate && onValidate(field, fields, index);
+                onValidate && onValidate(errors, field, fields, index);
             });
         };
 
@@ -185,7 +185,8 @@ var YearField = function (_Component) {
         var _props = this.props,
             className = _props.className,
             message = _props.message,
-            required = _props.required;
+            required = _props.required,
+            disabled = _props.disabled;
 
 
         return _react2["default"].createElement(
@@ -202,7 +203,8 @@ var YearField = function (_Component) {
                 onChange: this.handlerChange,
                 format: 'YYYY',
                 locale: _zh_CN2["default"],
-                placeholder: "选择年"
+                placeholder: "选择年",
+                disabled: disabled
             })
         );
     };

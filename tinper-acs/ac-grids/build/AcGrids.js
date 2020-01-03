@@ -109,29 +109,33 @@ var AcGrids = function (_Component) {
             }
             columns.forEach(function (item) {
                 item.oldRender = item.render;
-                item.render = function (text, record, index) {
-                    if (showTooltip) {
-                        var placement = 'left';
-                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-                        return _react2["default"].createElement(
-                            _beeTooltip2["default"],
-                            { overlay: value, inverse: true, placement: placement },
-                            _react2["default"].createElement(
+                if (typeof item.oldRender == 'function' && (item.oldRender.toString().indexOf('colSpan') != -1 || item.oldRender.toString().indexOf('rowSpan') != -1)) {
+                    item.render = item.oldRender;
+                } else {
+                    item.render = function (text, record, index) {
+                        if (showTooltip) {
+                            var placement = 'left';
+                            if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+                            var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+                            return _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { overlay: value, inverse: true, placement: placement },
+                                _react2["default"].createElement(
+                                    "span",
+                                    null,
+                                    value
+                                )
+                            );
+                        } else {
+                            var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+                            return _react2["default"].createElement(
                                 "span",
-                                null,
-                                value
-                            )
-                        );
-                    } else {
-                        var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-                        return _react2["default"].createElement(
-                            "span",
-                            { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
-                            _value
-                        );
-                    }
-                };
+                                { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
+                                _value
+                            );
+                        }
+                    };
+                }
             });
             _this.setState({
                 columns: columns

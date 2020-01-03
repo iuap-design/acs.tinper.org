@@ -30,6 +30,11 @@ let btns = {
             console.log('clear')
         }
     },
+    empty: {
+        onClick: () => {
+            console.log('empty')
+        }
+    },
     export: {
         onClick: () => {
             console.log('export')

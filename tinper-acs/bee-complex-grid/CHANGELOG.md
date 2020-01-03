@@ -1,3 +1,43 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/tinper-bee/bee-complex-grid/compare/v2.1.1...v2.1.2) (2019-12-30)
+
+
+
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/tinper-bee/bee-complex-grid/compare/v2.1.0...v2.1.1) (2019-12-26)
+
+
+### Features
+
+* **bee-complex-grid:** 编辑表格校验错误失去焦点保留输入框 ([afb9e1c](https://github.com/tinper-bee/bee-complex-grid/commit/afb9e1c))
+
+
+
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.30...v2.1.0) (2019-12-25)
+
+
+
+<a name="2.0.30"></a>
+## [2.0.30](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.29...v2.0.30) (2019-12-25)
+
+
+### Features
+
+* **bee-complex-grid:** 自定义行列合并 ([10d56cc](https://github.com/tinper-bee/bee-complex-grid/commit/10d56cc))
+
+
+
+<a name="2.0.29"></a>
+## [2.0.29](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.28...v2.0.29) (2019-12-24)
+
+
+### Features
+
+* **bee-complex-grid:** 编辑表格加表格校验方法 ([c54a1cb](https://github.com/tinper-bee/bee-complex-grid/commit/c54a1cb))
+
+
+
 <a name="2.0.28"></a>
 ## [2.0.28](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.27...v2.0.28) (2019-11-19)
 
@@ -12,14 +52,14 @@
 ## [2.0.26](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.24...v2.0.26) (2019-10-30)
 
 
+
+<a name="2.0.24"></a>
+## [2.0.24](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.23...v2.0.24) (2019-08-23)
+
+
 ### Features
 
 * **bee-complex-grid:** export 修改 ([93b554c](https://github.com/tinper-bee/bee-complex-grid/commit/93b554c))
-
-
-
-<a name="2.0.24"></a>
-## [2.0.24](https://github.com/tinper-bee/bee-complex-grid/compare/v2.0.23...v2.0.24) (2019-08-20)
 
 
 

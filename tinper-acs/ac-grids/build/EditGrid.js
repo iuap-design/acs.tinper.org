@@ -96,6 +96,24 @@ var EditGrid = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this.onValidate = function (errors, filed, fileds, index) {
+            var current = _this.errors[index] || {};
+            if (errors) {
+                current[filed] = errors[0].message;
+            } else {
+                delete current[filed];
+            }
+            _this.errors[index] = current;
+        };
+
+        _this.validate = function () {
+            if (Object.keys(_this.errors).length) {
+                return _this.errors;
+            } else {
+                return null;
+            }
+        };
+
         _this.setDataColumn = function (disabled, col, da) {
             var columns = (0, _lodash4["default"])(col);
             var defaultValueKeyValue = {};
@@ -136,34 +154,30 @@ var EditGrid = function (_Component) {
                             pattern: item.pattern,
                             patternMessage: item.patternMessage,
                             disabled: disabled ? true : item.disabled,
-                            customizeRender: item.customizeRender
-                            // cRefType={item.cRefType}
-                            // displayname={item.displayname}
-                            // iconStyle={item.iconStyle}
-                            // max={item.max}
-                            // min={item.min}
-                            // step={item.step} 
-                            // precision={item.precision}
-                            // maxLength={item.maxLength}
-                            // defaultValue={item.defaultValue}
-                            , filedProps: item.filedProps
+                            customizeRender: item.customizeRender,
+                            onValidate: _this.onValidate,
+                            filedProps: item.filedProps
                         });
                     };
                 } else {
-                    item.render = function (text, record, index) {
-                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-                        var placement = 'left';
-                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-                        return _react2["default"].createElement(
-                            _beeTooltip2["default"],
-                            { overlay: value, inverse: true, placement: placement },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "ac-grid-cell" },
-                                value
-                            )
-                        );
-                    };
+                    if (typeof item.oldRender == 'function' && (item.oldRender.toString().indexOf('colSpan') != -1 || item.oldRender.toString().indexOf('rowSpan') != -1)) {
+                        item.render = item.oldRender;
+                    } else {
+                        item.render = function (text, record, index) {
+                            var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+                            var placement = 'left';
+                            if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+                            return _react2["default"].createElement(
+                                _beeTooltip2["default"],
+                                { overlay: value, inverse: true, placement: placement },
+                                _react2["default"].createElement(
+                                    "span",
+                                    { className: "ac-grid-cell" },
+                                    value
+                                )
+                            );
+                        };
+                    }
                 }
             });
             _this.setState({
@@ -476,6 +490,7 @@ var EditGrid = function (_Component) {
             defaultValueKeyValue: {} //带默认值的key，value键值对
         };
         _this.selectDataId = 1;
+        _this.errors = {};
         return _this;
     }
 

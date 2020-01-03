@@ -7,7 +7,8 @@ class RenderCell extends Component {
         super(props)
         this.state={
             visible:true,
-            enter:false
+            enter:false,
+            hasError:false
         }
     }
 
@@ -36,7 +37,7 @@ class RenderCell extends Component {
         })
     }
     renderSpan=()=>{
-        if(this.state.visible){
+        if(this.state.visible&&(!this.state.hasError)){
             let textAlign = this.props.textAlign;
             let placement = 'left';
             if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
@@ -49,10 +50,12 @@ class RenderCell extends Component {
             )
         }else{
             return React.cloneElement(this.props.children,{
+                ref:field=>this.field=field,
                 onBlur:()=>{
                     this.setState({
                         visible:true,
-                        enter:false
+                        enter:false,
+                        hasError:this.field.state.error
                     })
                 }
             })

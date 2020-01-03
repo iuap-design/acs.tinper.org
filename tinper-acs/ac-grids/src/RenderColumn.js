@@ -60,7 +60,7 @@ class RenderColumn extends Component {
             textAlign, validate, disabled, 
             options,required,pattern,patternMessage,
             customizeRender,valueField,
-            defaultValue,filedProps
+            defaultValue,filedProps,onValidate
         } = this.props;
         let placement = 'left';
         if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
@@ -79,6 +79,8 @@ class RenderColumn extends Component {
                             validate:validate,
                             required:required,
                             value:value,
+                            onValidate:onValidate,
+                            index:index,
                             onChange:(field, v)=>{this.props.onChange(index,dataIndex,v)},
                             ...filedProps
                         })
@@ -105,11 +107,8 @@ class RenderColumn extends Component {
                                         pattern={pattern}
                                         patternMessage={patternMessage}
                                         onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
-                                        // iconStyle={iconStyle}
-                                        // max={max}
-                                        // min={min}
-                                        // step={step} 
-                                        // precision={precision}
+                                        onValidate={onValidate}
+                                        index={index}
                                         {...filedProps}
                                         />
                                 </RenderCell>
@@ -133,6 +132,8 @@ class RenderColumn extends Component {
                                     pattern={pattern}
                                     patternMessage={patternMessage}
                                     onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                    onValidate={onValidate}
+                                    index={index}
                                     {...filedProps}
                                 />
                             </RenderCell>
@@ -156,6 +157,8 @@ class RenderColumn extends Component {
                                         required={required} 
                                         value={value} 
                                         onChange={(field, v)=>{this.onChange(index,dataIndex,v)}} 
+                                        onValidate={onValidate}
+                                        index={index}
                                         {...filedProps}
                                         />
                                 </RenderCell>
@@ -180,6 +183,8 @@ class RenderColumn extends Component {
                                     pattern={pattern}
                                     patternMessage={patternMessage}
                                     onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                    onValidate={onValidate}
+                                    index={index}
                                     {...filedProps}
                                 />
                             </RenderCell>
@@ -203,6 +208,8 @@ class RenderColumn extends Component {
                                     pattern={pattern}
                                     patternMessage={patternMessage}
                                     onChange={(field, v)=>{this.props.onChange(index,dataIndex,v)}}
+                                    onValidate={onValidate}
+                                    index={index}
                                     {...filedProps}
                                 />
                             </RenderCell>

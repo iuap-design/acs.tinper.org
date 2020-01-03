@@ -1,6 +1,6 @@
 /**
- * @title 高级表格的基础应用(基本示例2)
- * @description 全选、分页、过滤功能、交换
+ * @title 高级表格的基础应用(基本示例1)
+ * @description 多选、合计、分页、列拖拽、列过滤
  *
  */
 import React, { Component } from "react";
@@ -153,18 +153,17 @@ const dataList = [
 class Demo1 extends Component {
   constructor(props) {
     super(props);
-  }
-  //临时加个判断
-  shouldComponentUpdate(){
-    if(this.props.className =='u-panel-title'){
-      return false;
+    this.state = {
+      data: dataList
     }
   }
-  getSelectedDataFunc = data => {
-    console.log("data", data);
-  };
 
-  selectedRow = (record, index) => {};
+  getSelectedDataFunc = (selectedList,record,index,newData) => {
+    console.log("data", newData);
+    this.setState({
+      data: newData
+    })
+  };
 
   /**
    * 切换页码的回调
@@ -196,7 +195,7 @@ class Demo1 extends Component {
       <Grid
         className="demo"
         columns={column}
-        data={dataList}
+        data={this.state.data}
         getSelectedDataFunc={this.getSelectedDataFunc}
         paginationObj={paginationObj}
         canSum={true}

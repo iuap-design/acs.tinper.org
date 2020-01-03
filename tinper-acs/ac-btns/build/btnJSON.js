@@ -42,6 +42,14 @@ exports["default"] = {
         'hotkey': 'ctrl+r',
         'className': 'ac-btns-clear'
     },
+    'empty': { //置空
+        'colors': 'write',
+        'name_zh_CN': '清空',
+        'name_zh_TW': '清空',
+        'name_en_US': 'Clear',
+        'hotkey': 'ctrl+r',
+        'className': 'ac-btns-empty'
+    },
     'export': { //导出
         'colors': 'write',
         'name_zh_CN': '导出',

@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(269);var Demo2 = __webpack_require__(675);var Demo3 = __webpack_require__(676);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基础示例", "code": "/**\n * @title 基础示例\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids'\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right'\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"2343\",\n    supplierName: \"xxx\",\n    type_name: \"123\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    _checked: true,\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    _disabled: true,\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    let paginationObj = {\n      maxButtons:999,\n      items:15,//一页显示多少条\n      activePage:2,\n      onSelect:(value)=>{console.log('切换到第几页：'+value)},\n      onDataNumSelect:(value)=>{console.log(\"每页多少条：\"+value)},//改变页码回调\n    }\n    return (\n        <AcGrids\n          columns={column}\n          data={dataList}\n          getSelectedDataFunc={this.getSelectedDataFunc}\n          paginationObj={paginationObj}\n          multiSelect={false}\n          ref='grid'\n        /> \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\n * @title CardTable\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    renderType:'input',\n    required:true,\n    validate:true,\n    disabled:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    textAlign:'left'\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    renderType:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'123',\n      precision:2\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    renderType:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'1',\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150,\n    renderType:'input',\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"采购组\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  setdisabled=()=>{\n    this.setState({\n      disabled:true\n    })\n  }\n\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <EditGrid\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditGrid 不可用状态", "code": "/**\n * @title EditGrid 不可用状态\n * @description disabled\n *\n */\nimport React, { Component } from \"react\";\nimport { Button } from 'tinper-bee';\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    renderType:'input',\n    required:true,\n    validate:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    filedProps:{\n      maxLength:'9'\n    }\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    renderType:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      precision:0\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    renderType:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  click=()=>{\n    this.setState({\n      disabled:!this.state.disabled\n    })\n  }\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>\n            {this.state.disabled?'设置可编辑':'设置不可编辑'}\n          </Button>\n          <EditGrid\n          showIndex={false}\n          disabled={this.state.disabled}\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " disabled" }];
+	var Demo1 = __webpack_require__(269);var Demo2 = __webpack_require__(675);var Demo3 = __webpack_require__(676);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基础示例", "code": "/**\n * @title 基础示例\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids'\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right'\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"2343\",\n    supplierName: \"xxx\",\n    type_name: \"123\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    _checked: true,\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    _disabled: true,\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"222\",\n    supplierName: \"22xxx\",\n    type_name: \"1223\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n  }\n\n  render() {\n    let paginationObj = {\n      maxButtons:999,\n      items:15,//一页显示多少条\n      activePage:2,\n      onSelect:(value)=>{console.log('切换到第几页：'+value)},\n      onDataNumSelect:(value)=>{console.log(\"每页多少条：\"+value)},//改变页码回调\n    }\n    return (\n        <AcGrids\n          columns={column}\n          data={dataList}\n          getSelectedDataFunc={this.getSelectedDataFunc}\n          paginationObj={paginationObj}\n          multiSelect={false}\n          ref='grid'\n        /> \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo2, null), "title": " CardTable", "code": "/**\n * @title CardTable\n * @description 全选、分页、过滤功能、交换\n *\n */\nimport React, { Component } from \"react\";\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    renderType:'input',\n    required:true,\n    validate:true,\n    disabled:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    textAlign:'left'\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    renderType:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'123',\n      precision:2\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    renderType:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      defaultValue:'1',\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150,\n    renderType:'input',\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"采购组\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  setdisabled=()=>{\n    this.setState({\n      disabled:true\n    })\n  }\n\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <EditGrid\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " 全选、分页、过滤功能、交换" }, { "example": _react2['default'].createElement(Demo3, null), "title": " EditGrid 不可用状态", "code": "/**\n * @title EditGrid 不可用状态\n * @description disabled\n *\n */\nimport React, { Component } from \"react\";\nimport { Button } from 'tinper-bee';\nimport AcGrids from 'ac-grids';\n\nconst EditGrid = AcGrids.EditGrid;\n\nconst column = [\n  {\n    title: \"订单编号\",\n    dataIndex: \"orderCode\",\n    key: \"orderCode\",\n    width: 150,\n    renderType:'input',\n    required:true,\n    validate:true,\n    pattern:/^2$/,\n    patternMessage:'格式错误',\n    filedProps:{\n      maxLength:'9'\n    }\n  },\n  {\n    title: \"金额\",\n    dataIndex: \"money\",\n    key: \"money\",\n    width: 160,\n    textAlign:'right',\n    renderType:'inputNumber',\n    required:true,\n    validate:true,\n    filedProps:{\n      precision:0\n    }\n  },\n  {\n    title: \"类型\",\n    dataIndex: \"type_name\",\n    key: \"type_name\",\n    width: 100,\n    renderType:'select',\n    required:true,\n    validate:true,\n    filedProps:{\n      options:[\n        {\n          key:'类型1',value:'1'\n        },\n        {\n          key:'类型2',value:'2'\n        },\n        {\n          key:'类型3',value:'3'\n        },\n      ]\n    }\n  },\n  {\n    title: \"采购组织\",\n    dataIndex: \"purchasing\",\n    key: \"purchasing\",\n    width: 150\n  },\n  {\n    title: \"采购组\",\n    dataIndex: \"purchasingGroup\",\n    key: \"purchasingGroup\",\n    width: 300\n  },\n  {\n    title: \"凭证日期\",\n    dataIndex: \"voucherDate\",\n    key: \"voucherDate\",\n    width: 150\n  },\n  {\n    title: \"审批状态\",\n    dataIndex: \"approvalState_name\",\n    key: \"approvalState_name\",\n    width: 150\n  },\n  {\n    title: \"确认状态\",\n    dataIndex: \"confirmState_name\",\n    key: \"confirmState_name\",\n    width: 500\n  },\n  {\n    title: \"关闭状态\",\n    dataIndex: \"closeState_name\",\n    key: \"closeState_name\",\n    width: 150\n  }\n];\nconst dataList = [\n  {\n    orderCode: \"11\",\n    supplierName: \"xxx\",\n    type_name: \"1\",\n    purchasing: \"内行\",\n    purchasingGroup: \"323\",\n    voucherDate: \"kkkk\",\n    approvalState_name: \"vvvv\",\n    confirmState_name: \"aaaa\",\n    closeState_name: \"vnnnnn\",\n    money:'1232.56',\n    d: \"操作\",\n    key: \"1\"\n  },\n  {\n    orderCode: \"22\",\n    supplierName: \"22xxx\",\n    type_name: \"2\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'2341232.56',\n    d: \"2操作\",\n    key: \"2\"\n  },\n  {\n    orderCode: \"33\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'122368732.56',\n    d: \"3操作\",\n    key: \"3\"\n  },\n  {\n    orderCode: \"44\",\n    supplierName: \"22xxx\",\n    type_name: \"3\",\n    purchasing: \"内行2\",\n    purchasingGroup: \"3223\",\n    voucherDate: \"222kk\",\n    approvalState_name: \"22vvvv\",\n    confirmState_name: \"2aaaa\",\n    closeState_name: \"2vnnnnn\",\n    money:'18765232.56',\n    d: \"4操作\",\n    key: \"4\"\n  }\n];\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state={\n      disabled:false\n    }\n  }\n\n  onChange=(data)=>{\n    console.log('table的数据如下')\n    console.log(data)\n  }\n  onDel=(data)=>{\n    console.log('删除的数据如下')\n    console.log(data)\n  }\n  click=()=>{\n    this.setState({\n      disabled:!this.state.disabled\n    })\n  }\n  // {\n  //   0:{\n  //     key1:'errorMessage1',\n  //     key2:'errorMessage',\n  //   },\n  //   1:{\n  //     key1:'errorMessage'\n  //   },\n  // }\n  onValidate=()=>{\n    let errors = this.editGrid.validate();\n\n    if(errors){\n      console.log('有错误，错误信息如下');\n      let errorMessage = '';\n      Object.keys(errors).forEach(item=>{\n        let current = errors[item];\n        Object.keys(current).forEach(it=>{\n          errorMessage+=`第${Number(item)+1}行的${it}校验失败，错误原因是：${current[it]};`\n        })\n      })\n      console.log(errorMessage)\n    }else{\n      console.log('没有错误')\n    }\n  }\n  render() {\n    let paginationObj = {\n      items:10,\n      // total:20,//总共多少条、\n      freshData:this.freshData,//点击下一页刷新的数据\n      onDataNumSelect:this.onDataNumSelect, //每页大小改变触发的事件\n      showJump:false,\n      noBorder:true\n    }\n    return (\n      <div className='ac-grid-demo'>\n          <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>\n            {this.state.disabled?'设置可编辑':'设置不可编辑'}\n          </Button>\n          <Button onClick={this.onValidate} style={{'marginBottom':'20px','marginLeft':'20px'}} colors='primary'>点我校验</Button>\n          <EditGrid\n          showIndex={false}\n          disabled={this.state.disabled}\n          defaultOpen={true}\n          columns={column}\n          data={dataList}\n          paginationObj={paginationObj}\n          multiSelect={true}\n          onChange={this.onChange}\n          showPagination={false}\n          onDel={this.onDel}\n          ref ={editGrid => this.editGrid = editGrid } \n        />\n      </div>\n      \n    );\n  }\n}\n\n\nexport default Demo1;", "desc": " disabled" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -37275,29 +37275,33 @@
 	            }
 	            columns.forEach(function (item) {
 	                item.oldRender = item.render;
-	                item.render = function (text, record, index) {
-	                    if (showTooltip) {
-	                        var placement = 'left';
-	                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-	                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-	                        return _react2["default"].createElement(
-	                            _beeTooltip2["default"],
-	                            { overlay: value, inverse: true, placement: placement },
-	                            _react2["default"].createElement(
+	                if (typeof item.oldRender == 'function' && (item.oldRender.toString().indexOf('colSpan') != -1 || item.oldRender.toString().indexOf('rowSpan') != -1)) {
+	                    item.render = item.oldRender;
+	                } else {
+	                    item.render = function (text, record, index) {
+	                        if (showTooltip) {
+	                            var placement = 'left';
+	                            if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+	                            var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+	                            return _react2["default"].createElement(
+	                                _beeTooltip2["default"],
+	                                { overlay: value, inverse: true, placement: placement },
+	                                _react2["default"].createElement(
+	                                    "span",
+	                                    null,
+	                                    value
+	                                )
+	                            );
+	                        } else {
+	                            var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+	                            return _react2["default"].createElement(
 	                                "span",
-	                                null,
-	                                value
-	                            )
-	                        );
-	                    } else {
-	                        var _value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-	                        return _react2["default"].createElement(
-	                            "span",
-	                            { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
-	                            _value
-	                        );
-	                    }
-	                };
+	                                { className: "ac-grid-cell", title: typeof _value == 'string' || typeof _value == 'number' ? _value : '' },
+	                                _value
+	                            );
+	                        }
+	                    };
+	                }
 	            });
 	            _this.setState({
 	                columns: columns
@@ -98827,6 +98831,24 @@
 	
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
+	        _this.onValidate = function (errors, filed, fileds, index) {
+	            var current = _this.errors[index] || {};
+	            if (errors) {
+	                current[filed] = errors[0].message;
+	            } else {
+	                delete current[filed];
+	            }
+	            _this.errors[index] = current;
+	        };
+	
+	        _this.validate = function () {
+	            if (Object.keys(_this.errors).length) {
+	                return _this.errors;
+	            } else {
+	                return null;
+	            }
+	        };
+	
 	        _this.setDataColumn = function (disabled, col, da) {
 	            var columns = (0, _lodash4["default"])(col);
 	            var defaultValueKeyValue = {};
@@ -98867,34 +98889,30 @@
 	                            pattern: item.pattern,
 	                            patternMessage: item.patternMessage,
 	                            disabled: disabled ? true : item.disabled,
-	                            customizeRender: item.customizeRender
-	                            // cRefType={item.cRefType}
-	                            // displayname={item.displayname}
-	                            // iconStyle={item.iconStyle}
-	                            // max={item.max}
-	                            // min={item.min}
-	                            // step={item.step} 
-	                            // precision={item.precision}
-	                            // maxLength={item.maxLength}
-	                            // defaultValue={item.defaultValue}
-	                            , filedProps: item.filedProps
+	                            customizeRender: item.customizeRender,
+	                            onValidate: _this.onValidate,
+	                            filedProps: item.filedProps
 	                        });
 	                    };
 	                } else {
-	                    item.render = function (text, record, index) {
-	                        var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
-	                        var placement = 'left';
-	                        if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
-	                        return _react2["default"].createElement(
-	                            _beeTooltip2["default"],
-	                            { overlay: value, inverse: true, placement: placement },
-	                            _react2["default"].createElement(
-	                                "span",
-	                                { className: "ac-grid-cell" },
-	                                value
-	                            )
-	                        );
-	                    };
+	                    if (typeof item.oldRender == 'function' && (item.oldRender.toString().indexOf('colSpan') != -1 || item.oldRender.toString().indexOf('rowSpan') != -1)) {
+	                        item.render = item.oldRender;
+	                    } else {
+	                        item.render = function (text, record, index) {
+	                            var value = typeof item.oldRender == 'function' ? item.oldRender(text, record, index) : text;
+	                            var placement = 'left';
+	                            if (item.textAlign) placement = item.textAlign == 'center' ? 'bottom' : item.textAlign;
+	                            return _react2["default"].createElement(
+	                                _beeTooltip2["default"],
+	                                { overlay: value, inverse: true, placement: placement },
+	                                _react2["default"].createElement(
+	                                    "span",
+	                                    { className: "ac-grid-cell" },
+	                                    value
+	                                )
+	                            );
+	                        };
+	                    }
 	                }
 	            });
 	            _this.setState({
@@ -99207,6 +99225,7 @@
 	            defaultValueKeyValue: {} //带默认值的key，value键值对
 	        };
 	        _this.selectDataId = 1;
+	        _this.errors = {};
 	        return _this;
 	    }
 	
@@ -99392,7 +99411,8 @@
 	                customizeRender = _this$props2.customizeRender,
 	                valueField = _this$props2.valueField,
 	                defaultValue = _this$props2.defaultValue,
-	                filedProps = _this$props2.filedProps;
+	                filedProps = _this$props2.filedProps,
+	                onValidate = _this$props2.onValidate;
 	
 	            var placement = 'left';
 	            if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
@@ -99418,6 +99438,8 @@
 	                            validate: validate,
 	                            required: required,
 	                            value: value,
+	                            onValidate: onValidate,
+	                            index: index,
 	                            onChange: function onChange(field, v) {
 	                                _this.props.onChange(index, dataIndex, v);
 	                            }
@@ -99451,12 +99473,9 @@
 	                                    patternMessage: patternMessage,
 	                                    onChange: function onChange(field, v) {
 	                                        _this.props.onChange(index, dataIndex, v);
-	                                    }
-	                                    // iconStyle={iconStyle}
-	                                    // max={max}
-	                                    // min={min}
-	                                    // step={step} 
-	                                    // precision={precision}
+	                                    },
+	                                    onValidate: onValidate,
+	                                    index: index
 	                                }, filedProps))
 	                            )
 	                        );
@@ -99486,7 +99505,9 @@
 	                                    patternMessage: patternMessage,
 	                                    onChange: function onChange(field, v) {
 	                                        _this.props.onChange(index, dataIndex, v);
-	                                    }
+	                                    },
+	                                    onValidate: onValidate,
+	                                    index: index
 	                                }, filedProps))
 	                            )
 	                        );
@@ -99516,7 +99537,9 @@
 	                                    value: value,
 	                                    onChange: function onChange(field, v) {
 	                                        _this.onChange(index, dataIndex, v);
-	                                    }
+	                                    },
+	                                    onValidate: onValidate,
+	                                    index: index
 	                                }, filedProps))
 	                            )
 	                        );
@@ -99546,7 +99569,9 @@
 	                                    patternMessage: patternMessage,
 	                                    onChange: function onChange(field, v) {
 	                                        _this.props.onChange(index, dataIndex, v);
-	                                    }
+	                                    },
+	                                    onValidate: onValidate,
+	                                    index: index
 	                                }, filedProps))
 	                            )
 	                        );
@@ -99576,7 +99601,9 @@
 	                                    patternMessage: patternMessage,
 	                                    onChange: function onChange(field, v) {
 	                                        _this.props.onChange(index, dataIndex, v);
-	                                    }
+	                                    },
+	                                    onValidate: onValidate,
+	                                    index: index
 	                                }, filedProps))
 	                            )
 	                        );
@@ -99749,7 +99776,7 @@
 	                        error: false
 	                    });
 	                }
-	                onValidate && onValidate(field, fields, index);
+	                onValidate && onValidate(errors, field, fields, index);
 	            });
 	        };
 	
@@ -99799,7 +99826,9 @@
 	            onBlur = _props.onBlur,
 	            pattern = _props.pattern,
 	            patternMessage = _props.patternMessage,
-	            maxLength = _props.maxLength;
+	            maxLength = _props.maxLength,
+	            placeholder = _props.placeholder,
+	            disabled = _props.disabled;
 	
 	
 	        return _react2['default'].createElement(
@@ -99815,7 +99844,9 @@
 	                value: value,
 	                onChange: this.handlerChange,
 	                onBlur: onBlur,
-	                maxLength: maxLength
+	                maxLength: maxLength,
+	                placeholder: placeholder,
+	                disabled: disabled
 	            })
 	        );
 	    };
@@ -100092,7 +100123,7 @@
 	                        error: false
 	                    });
 	                }
-	                onValidate && onValidate(field, fields, index);
+	                onValidate && onValidate(errors, field, fields, index);
 	            });
 	        };
 	
@@ -100156,7 +100187,8 @@
 	            min = _props.min,
 	            step = _props.step,
 	            precision = _props.precision,
-	            onBlur = _props.onBlur;
+	            onBlur = _props.onBlur,
+	            disabled = _props.disabled;
 	
 	
 	        return _react2['default'].createElement(
@@ -100178,7 +100210,8 @@
 	                min: min,
 	                precision: precision,
 	                onBlur: onBlur,
-	                autoFocus: true
+	                autoFocus: true,
+	                disabled: disabled
 	            })
 	        );
 	    };
@@ -101468,7 +101501,7 @@
 	                        error: false
 	                    });
 	                }
-	                onValidate && onValidate(field, fields, index);
+	                onValidate && onValidate(errors, field, fields, index);
 	            });
 	        };
 	
@@ -101516,7 +101549,8 @@
 	            message = _props.message,
 	            required = _props.required,
 	            data = _props.data,
-	            onBlur = _props.onBlur;
+	            onBlur = _props.onBlur,
+	            disabled = _props.disabled;
 	
 	
 	        return _react2['default'].createElement(
@@ -101532,7 +101566,8 @@
 	                value: value,
 	                onChange: this.handlerChange,
 	                data: data,
-	                onBlur: onBlur
+	                onBlur: onBlur,
+	                disabled: disabled
 	            })
 	        );
 	    };
@@ -101686,7 +101721,7 @@
 	                        error: false
 	                    });
 	                }
-	                onValidate && onValidate(field, fields, index);
+	                onValidate && onValidate(errors, field, fields, index);
 	            });
 	        };
 	
@@ -101735,7 +101770,8 @@
 	            className = _props.className,
 	            message = _props.message,
 	            required = _props.required,
-	            disabledDate = _props.disabledDate;
+	            disabledDate = _props.disabledDate,
+	            disabled = _props.disabled;
 	
 	
 	        return _react2['default'].createElement(
@@ -101753,7 +101789,8 @@
 	                format: 'YYYY-MM-DD',
 	                locale: _zh_CN2['default'],
 	                placeholder: "选择年",
-	                disabledDate: disabledDate
+	                disabledDate: disabledDate,
+	                disabled: disabled
 	            })
 	        );
 	    };
@@ -101910,7 +101947,7 @@
 	                        error: false
 	                    });
 	                }
-	                onValidate && onValidate(field, fields, index);
+	                onValidate && onValidate(errors, field, fields, index);
 	            });
 	        };
 	
@@ -101957,7 +101994,8 @@
 	        var _props = this.props,
 	            className = _props.className,
 	            message = _props.message,
-	            required = _props.required;
+	            required = _props.required,
+	            disabled = _props.disabled;
 	
 	
 	        return _react2['default'].createElement(
@@ -101974,7 +102012,8 @@
 	                onChange: this.handlerChange,
 	                format: 'YYYY',
 	                locale: _zh_CN2['default'],
-	                placeholder: "选择年"
+	                placeholder: "选择年",
+	                disabled: disabled
 	            })
 	        );
 	    };
@@ -102049,7 +102088,7 @@
 	        };
 	
 	        _this.renderSpan = function () {
-	            if (_this.state.visible) {
+	            if (_this.state.visible && !_this.state.hasError) {
 	                var textAlign = _this.props.textAlign;
 	                var placement = 'left';
 	                if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
@@ -102066,10 +102105,14 @@
 	                );
 	            } else {
 	                return _react2['default'].cloneElement(_this.props.children, {
+	                    ref: function ref(field) {
+	                        return _this.field = field;
+	                    },
 	                    onBlur: function onBlur() {
 	                        _this.setState({
 	                            visible: true,
-	                            enter: false
+	                            enter: false,
+	                            hasError: _this.field.state.error
 	                        });
 	                    }
 	                });
@@ -102078,7 +102121,8 @@
 	
 	        _this.state = {
 	            visible: true,
-	            enter: false
+	            enter: false,
+	            hasError: false
 	        };
 	        return _this;
 	    }
@@ -103282,13 +103326,43 @@
 	      });
 	    };
 	
+	    _this.onValidate = function () {
+	      var errors = _this.editGrid.validate();
+	
+	      if (errors) {
+	        console.log('有错误，错误信息如下');
+	        var errorMessage = '';
+	        Object.keys(errors).forEach(function (item) {
+	          var current = errors[item];
+	          Object.keys(current).forEach(function (it) {
+	            errorMessage += '\u7B2C' + (Number(item) + 1) + '\u884C\u7684' + it + '\u6821\u9A8C\u5931\u8D25\uFF0C\u9519\u8BEF\u539F\u56E0\u662F\uFF1A' + current[it] + ';';
+	          });
+	        });
+	        console.log(errorMessage);
+	      } else {
+	        console.log('没有错误');
+	      }
+	    };
+	
 	    _this.state = {
 	      disabled: false
 	    };
 	    return _this;
 	  }
+	  // {
+	  //   0:{
+	  //     key1:'errorMessage1',
+	  //     key2:'errorMessage',
+	  //   },
+	  //   1:{
+	  //     key1:'errorMessage'
+	  //   },
+	  // }
+	
 	
 	  Demo1.prototype.render = function render() {
+	    var _this2 = this;
+	
 	    var paginationObj = {
 	      items: 10,
 	      // total:20,//总共多少条、
@@ -103305,6 +103379,11 @@
 	        { onClick: this.click, style: { 'marginBottom': '20px' }, colors: 'primary' },
 	        this.state.disabled ? '设置可编辑' : '设置不可编辑'
 	      ),
+	      _react2['default'].createElement(
+	        _beeButton2['default'],
+	        { onClick: this.onValidate, style: { 'marginBottom': '20px', 'marginLeft': '20px' }, colors: 'primary' },
+	        '\u70B9\u6211\u6821\u9A8C'
+	      ),
 	      _react2['default'].createElement(EditGrid, {
 	        showIndex: false,
 	        disabled: this.state.disabled,
@@ -103315,7 +103394,10 @@
 	        multiSelect: true,
 	        onChange: this.onChange,
 	        showPagination: false,
-	        onDel: this.onDel
+	        onDel: this.onDel,
+	        ref: function ref(editGrid) {
+	          return _this2.editGrid = editGrid;
+	        }
 	      })
 	    );
 	  };

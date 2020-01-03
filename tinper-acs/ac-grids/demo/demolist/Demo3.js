@@ -5,7 +5,7 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
-import Button from 'bee-button'
+import Button from 'bee-button';
 
 const EditGrid = AcGrids.EditGrid;
 
@@ -176,6 +176,32 @@ class Demo1 extends Component {
       disabled:!this.state.disabled
     })
   }
+  // {
+  //   0:{
+  //     key1:'errorMessage1',
+  //     key2:'errorMessage',
+  //   },
+  //   1:{
+  //     key1:'errorMessage'
+  //   },
+  // }
+  onValidate=()=>{
+    let errors = this.editGrid.validate();
+
+    if(errors){
+      console.log('有错误，错误信息如下');
+      let errorMessage = '';
+      Object.keys(errors).forEach(item=>{
+        let current = errors[item];
+        Object.keys(current).forEach(it=>{
+          errorMessage+=`第${Number(item)+1}行的${it}校验失败，错误原因是：${current[it]};`
+        })
+      })
+      console.log(errorMessage)
+    }else{
+      console.log('没有错误')
+    }
+  }
   render() {
     let paginationObj = {
       items:10,
@@ -190,6 +216,7 @@ class Demo1 extends Component {
           <Button onClick={this.click} style={{'marginBottom':'20px'}} colors='primary'>
             {this.state.disabled?'设置可编辑':'设置不可编辑'}
           </Button>
+          <Button onClick={this.onValidate} style={{'marginBottom':'20px','marginLeft':'20px'}} colors='primary'>点我校验</Button>
           <EditGrid
           showIndex={false}
           disabled={this.state.disabled}
@@ -201,6 +228,7 @@ class Demo1 extends Component {
           onChange={this.onChange}
           showPagination={false}
           onDel={this.onDel}
+          ref ={editGrid => this.editGrid = editGrid } 
         />
       </div>
       

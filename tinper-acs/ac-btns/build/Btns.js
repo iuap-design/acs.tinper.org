@@ -65,7 +65,7 @@ var defaultProps = {
     btns: {},
     type: 'button',
     maxSize: 2,
-    forcePowerBtns: ['cancel', 'search', 'clear'], //取消、查询、清空不受权限管理控制
+    forcePowerBtns: ['cancel', 'search', 'clear', 'empty'], //取消、查询、清空、置空不受权限管理控制
     localeCookie: 'locale',
     onClick: function onClick() {}
 };
@@ -205,6 +205,12 @@ var Btns = function (_Component) {
                                     _extends({ key: key }, itemProps, { colors: colors, className: 'ac-btns-write ' + clss, title: name }),
                                     _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-clean' })
                                 );
+                            case 'empty':
+                                return _react2["default"].createElement(
+                                    _beeButton2["default"],
+                                    _extends({ key: key }, itemProps, { colors: colors, className: 'ac-btns-write ' + clss, title: name }),
+                                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-qingkong' })
+                                );
                             case 'max':
                                 return _react2["default"].createElement(
                                     _beeButton2["default"],
@@ -261,6 +267,12 @@ var Btns = function (_Component) {
                                     'span',
                                     _extends({ key: key }, itemProps, { colors: colors, className: 'ac-btns-write ' + clss }),
                                     _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-clean' })
+                                );
+                            case 'empty':
+                                return _react2["default"].createElement(
+                                    'span',
+                                    _extends({ key: key }, itemProps, { colors: colors, className: 'ac-btns-write ' + clss }),
+                                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-qingkong' })
                                 );
                             case 'max':
                                 return _react2["default"].createElement(

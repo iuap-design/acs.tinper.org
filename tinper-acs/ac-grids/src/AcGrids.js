@@ -69,23 +69,26 @@ class AcGrids extends Component {
         }
         columns.forEach(item => {
             item.oldRender = item.render;
-            item.render=(text,record,index)=>{
-                if(showTooltip){
-                    let placement = 'left';
-                    if(item.textAlign)placement=item.textAlign=='center'?'bottom':item.textAlign;
-                    let value = typeof item.oldRender =='function'?item.oldRender(text,record,index):text
-                    return <Tooltip overlay={value} inverse placement={placement}>
-                                <span>
+            if(typeof item.oldRender == 'function'&&((item.oldRender.toString().indexOf('colSpan')!=-1)||(item.oldRender.toString().indexOf('rowSpan')!=-1))){
+                item.render = item.oldRender
+            }else{
+                item.render=(text,record,index)=>{
+                    if(showTooltip){
+                        let placement = 'left';
+                        if(item.textAlign)placement=item.textAlign=='center'?'bottom':item.textAlign;
+                        let value = typeof item.oldRender =='function'?item.oldRender(text,record,index):text
+                        return <Tooltip overlay={value} inverse placement={placement}>
+                                    <span>
+                                        {value}
+                                    </span>
+                                </Tooltip>
+                    }else{
+                        let value = typeof item.oldRender =='function'?item.oldRender(text,record,index):text;
+                        return <span className='ac-grid-cell' title={typeof value =='string'||typeof value == 'number'?value:''}>
                                     {value}
                                 </span>
-                            </Tooltip>
-                }else{
-                    let value = typeof item.oldRender =='function'?item.oldRender(text,record,index):text;
-                    return <span className='ac-grid-cell' title={typeof value =='string'||typeof value == 'number'?value:''}>
-                                {value}
-                            </span>
+                    }
                 }
-                
             }
         });
         this.setState({

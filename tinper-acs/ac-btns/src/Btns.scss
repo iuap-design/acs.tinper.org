@@ -46,7 +46,7 @@ $primaryColor : #e14c46;
             padding: 4px 5px;
             background-color: $primaryColor;
         }
-        &.ac-btns-clear{
+        &.ac-btns-clear, &.ac-btns-empty{
             min-width: auto;
             // border-color: #d0d0d0;
             color: #111;

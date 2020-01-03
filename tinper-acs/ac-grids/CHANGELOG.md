@@ -1,3 +1,43 @@
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/tinper-bee/ac-grids/compare/v0.2.8...v0.2.9) (2020-01-02)
+
+
+
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/tinper-bee/ac-grids/compare/v0.2.7...v0.2.8) (2019-12-26)
+
+
+### Features
+
+* **ac-grids:** 编辑表格校验错误失去焦点保留输入框 ([ed246a4](https://github.com/tinper-bee/ac-grids/commit/ed246a4))
+
+
+
+<a name="0.2.7"></a>
+## [0.2.7](https://github.com/tinper-bee/ac-grids/compare/v0.2.6...v0.2.7) (2019-12-25)
+
+
+### Features
+
+* **ac-grids:** 支持自定义行列合并 ([b3a75de](https://github.com/tinper-bee/ac-grids/commit/b3a75de))
+
+
+
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/tinper-bee/ac-grids/compare/v0.2.5...v0.2.6) (2019-12-24)
+
+
+
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/tinper-bee/ac-grids/compare/v0.2.4...v0.2.5) (2019-12-24)
+
+
+### Features
+
+* **ac-grids:** 表格校验 ([853ab75](https://github.com/tinper-bee/ac-grids/commit/853ab75))
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/tinper-bee/ac-grids/compare/v0.2.3...v0.2.4) (2019-11-28)
 
