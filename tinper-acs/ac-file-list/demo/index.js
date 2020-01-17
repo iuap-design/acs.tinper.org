@@ -7,7 +7,7 @@ import Clipboard from 'bee-clipboard';
 
 
 
-var Demo1 = require("./demolist/Demo1");var DemoArray = [{"example":<Demo1 />,"title":" 这是标题","code":"/**\n*\n* @title 这是标题\n* @description 这是描述\n*\n*/\nimport React, { Component } from 'react';\nimport FileList from 'ac-file-list';\n\nclass Demo1 extends Component {\n    render () {\n        return (\n                <div>\n                    <FileList id=\"5d9d738eede08100180575d5\" uploadProps={{\n                        accept:\"image/*\"\n                    }}\n                    />\n                </div>\n            )   \n    }\n}\nexport default Demo1","desc":" 这是描述"}]
+var Demo1 = require("./demolist/Demo1");var DemoArray = [{"example":<Demo1 />,"title":" 这是标题","code":"/**\n*\n* @title 这是标题\n* @description 这是描述\n*\n*/\nimport React, { Component } from 'react';\nimport FileList from 'ac-file-list';\n\nclass Demo1 extends Component {\n    render () {\n        return (\n                <div>\n                    <FileList id=\"5d9d738eede08100180575d5\" uploadProps={{\n                        accept:\"image/*\"\n                    }}\n                    callback={(a,b,c,d)=>{console.log(a,b,c,d)}}\n                    />\n                </div>\n            )   \n    }\n}\nexport default Demo1","desc":" 这是描述"}]
 
 
 class Demo extends Component {

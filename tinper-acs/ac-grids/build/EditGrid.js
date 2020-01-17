@@ -14,9 +14,9 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Grid = require("./Grid");
+var _AcGrids = require("./AcGrids");
 
-var _Grid2 = _interopRequireDefault(_Grid);
+var _AcGrids2 = _interopRequireDefault(_AcGrids);
 
 var _RenderColumn = require("./RenderColumn");
 
@@ -85,7 +85,8 @@ var defaultProps = {
     onOpenChange: function onOpenChange() {},
     onDel: function onDel() {},
     showIndex: true,
-    excludeKeys: []
+    excludeKeys: [],
+    getSelectedDataFunc: function getSelectedDataFunc() {}
 };
 
 var EditGrid = function (_Component) {
@@ -117,14 +118,6 @@ var EditGrid = function (_Component) {
         _this.setDataColumn = function (disabled, col, da) {
             var columns = (0, _lodash4["default"])(col);
             var defaultValueKeyValue = {};
-            if (_this.props.showIndex) {
-                columns.unshift({
-                    title: "序号",
-                    dataIndex: "index",
-                    key: "index",
-                    width: 100
-                });
-            }
             columns.forEach(function (item) {
                 item.oldRender = item.render;
                 if (item.renderType || item.customizeRender) {
@@ -206,7 +199,7 @@ var EditGrid = function (_Component) {
             _this.props.onChange(data);
         };
 
-        _this.getSelectedDataFunc = function (selectData) {
+        _this.getSelectedDataFunc = function (selectData, record, index, newData) {
             var data = _this.resetChecked(_this.state.data);
             var selectDataIds = [];
             selectData.forEach(function (item) {
@@ -222,6 +215,7 @@ var EditGrid = function (_Component) {
                 data: data
             });
             _this.props.onChange(data);
+            _this.props.getSelectedDataFunc(selectData, record, index, newData);
         };
 
         _this.resetChecked = function (dataValue) {
@@ -464,7 +458,7 @@ var EditGrid = function (_Component) {
                 _react2["default"].createElement(
                     "div",
                     { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
-                    _react2["default"].createElement(_Grid2["default"], _extends({}, otherProps, {
+                    _react2["default"].createElement(_AcGrids2["default"], _extends({}, otherProps, {
                         noReplaceColumns: true,
                         columns: columns,
                         data: data,

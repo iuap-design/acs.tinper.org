@@ -14,6 +14,7 @@ class Demo1 extends Component {
                     <FileList id="5d9d738eede08100180575d5" uploadProps={{
                         accept:"image/*"
                     }}
+                    callback={(a,b,c,d)=>{console.log(a,b,c,d)}}
                     />
                 </div>
             )   

@@ -98749,9 +98749,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Grid = __webpack_require__(272);
+	var _AcGrids = __webpack_require__(271);
 	
-	var _Grid2 = _interopRequireDefault(_Grid);
+	var _AcGrids2 = _interopRequireDefault(_AcGrids);
 	
 	var _RenderColumn = __webpack_require__(658);
 	
@@ -98820,7 +98820,8 @@
 	    onOpenChange: function onOpenChange() {},
 	    onDel: function onDel() {},
 	    showIndex: true,
-	    excludeKeys: []
+	    excludeKeys: [],
+	    getSelectedDataFunc: function getSelectedDataFunc() {}
 	};
 	
 	var EditGrid = function (_Component) {
@@ -98852,14 +98853,6 @@
 	        _this.setDataColumn = function (disabled, col, da) {
 	            var columns = (0, _lodash4["default"])(col);
 	            var defaultValueKeyValue = {};
-	            if (_this.props.showIndex) {
-	                columns.unshift({
-	                    title: "序号",
-	                    dataIndex: "index",
-	                    key: "index",
-	                    width: 100
-	                });
-	            }
 	            columns.forEach(function (item) {
 	                item.oldRender = item.render;
 	                if (item.renderType || item.customizeRender) {
@@ -98941,7 +98934,7 @@
 	            _this.props.onChange(data);
 	        };
 	
-	        _this.getSelectedDataFunc = function (selectData) {
+	        _this.getSelectedDataFunc = function (selectData, record, index, newData) {
 	            var data = _this.resetChecked(_this.state.data);
 	            var selectDataIds = [];
 	            selectData.forEach(function (item) {
@@ -98957,6 +98950,7 @@
 	                data: data
 	            });
 	            _this.props.onChange(data);
+	            _this.props.getSelectedDataFunc(selectData, record, index, newData);
 	        };
 	
 	        _this.resetChecked = function (dataValue) {
@@ -99199,7 +99193,7 @@
 	                _react2["default"].createElement(
 	                    "div",
 	                    { className: clsfix + "-inner " + (open ? 'show' : 'hide') + " " + (isMax ? 'max' : '') },
-	                    _react2["default"].createElement(_Grid2["default"], _extends({}, otherProps, {
+	                    _react2["default"].createElement(_AcGrids2["default"], _extends({}, otherProps, {
 	                        noReplaceColumns: true,
 	                        columns: columns,
 	                        data: data,

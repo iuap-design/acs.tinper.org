@@ -1,6 +1,6 @@
 {
  "name": "ac-file-list",
- "version": "0.1.7",
+ "version": "0.2.1",
  "description": "FileList ui component for react",
  "keywords": [
   "react",

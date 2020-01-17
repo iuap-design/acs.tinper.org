@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import AcGird from "./Grid";
+import AcGird from "./AcGrids";
 import RenderColumn from './RenderColumn';
 import isequal from 'lodash.isequal';
 import cloneDeep from 'lodash.clonedeep';
@@ -32,7 +32,8 @@ const defaultProps = {
     onOpenChange:()=>{},
     onDel:()=>{},
     showIndex:true,
-    excludeKeys:[]
+    excludeKeys:[],
+    getSelectedDataFunc:()=>{},
 };
 
 class EditGrid extends Component {
@@ -76,14 +77,6 @@ class EditGrid extends Component {
     setDataColumn=(disabled,col,da)=>{
         let columns = cloneDeep(col);
         let defaultValueKeyValue = {};
-        if(this.props.showIndex){
-            columns.unshift({
-                title: "序号",
-                dataIndex: "index",
-                key: "index",
-                width: 100,
-              })
-        }
         columns.forEach(item => {
             item.oldRender = item.render;
             if(item.renderType||item.customizeRender){
@@ -159,7 +152,7 @@ class EditGrid extends Component {
     }
 
     //选中数据的回调
-    getSelectedDataFunc=(selectData)=>{
+    getSelectedDataFunc=(selectData, record, index, newData)=>{
         let data = this.resetChecked(this.state.data)
         let selectDataIds = []
         selectData.forEach((item)=>{
@@ -175,6 +168,7 @@ class EditGrid extends Component {
             data
         })
         this.props.onChange(data);
+        this.props.getSelectedDataFunc(selectData, record, index, newData);
     }
 
     resetChecked=(dataValue)=>{

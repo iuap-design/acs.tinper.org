@@ -1,3 +1,18 @@
+<a name="0.2.11"></a>
+## [0.2.11](https://github.com/tinper-bee/ac-grids/compare/v0.2.10...v0.2.11) (2020-01-16)
+
+
+
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/tinper-bee/ac-grids/compare/v0.2.9...v0.2.10) (2020-01-16)
+
+
+### Bug Fixes
+
+* EditGrid 设置 showPagination={true}没有效果 ([95a50dc](https://github.com/tinper-bee/ac-grids/commit/95a50dc))
+
+
+
 <a name="0.2.9"></a>
 ## [0.2.9](https://github.com/tinper-bee/ac-grids/compare/v0.2.8...v0.2.9) (2020-01-02)
 

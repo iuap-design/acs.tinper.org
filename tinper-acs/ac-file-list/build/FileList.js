@@ -48,6 +48,10 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _utils = require('./utils.js');
 
+var _i18n = require('./i18n.js');
+
+var _i18n2 = _interopRequireDefault(_i18n);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -67,7 +71,8 @@ var propTypes = {
     getListNow: _propTypes2["default"].bool, //是否在willmonument时获得文件列表
     url: _propTypes2["default"].object, //地址
     uploadProps: _propTypes2["default"].object, //附件上传参数
-    powerBtns: _propTypes2["default"].array //可用按钮集合
+    powerBtns: _propTypes2["default"].array, //可用按钮集合
+    callback: _propTypes2["default"].func //回调 第一个参数：成功(success)/失败(error)； 第二个参数：list 获得文件列表；delete 删除； upload 上传。 第三个参数：成功信息/错误信息。 第四个参数：null/error对象
 };
 
 var defaultProps = {
@@ -82,7 +87,9 @@ var defaultProps = {
         "info": 'https://ezone-u8c-daily.yyuap.com/cooperation/rest/v1/file/{id}/info/ ' //文件信息
     },
     uploadProps: {},
-    powerBtns: ['upload', 'reupload', 'download', 'delete', 'confirm', 'cancel']
+    powerBtns: ['upload', 'reupload', 'download', 'delete', 'confirm', 'cancel'],
+    localeCookie: 'locale',
+    callback: function callback() {}
 };
 
 var FileList = function (_Component) {
@@ -118,10 +125,13 @@ var FileList = function (_Component) {
                                 pageNo: params.pageNo
                             });
                         }
+                        _this.props.callback('success', 'list', _this.localObj['listSuccess']);
+                    } else {
+                        _this.props.callback('error', 'list', _this.localObj['listError'], res);
                     }
                 })["catch"](function (error) {
+                    _this.props.callback('error', 'list', _this.localObj['interfaceError'], error);
                     console.error(error);
-                    console.error(error.message || 'Get File Error');
                 });
             }
         };
@@ -190,13 +200,14 @@ var FileList = function (_Component) {
                 return _react2["default"].createElement(
                     'div',
                     { className: 'opt-btns' },
-                    _react2["default"].createElement(_acBtns2["default"], { powerBtns: _this.props.powerBtns,
+                    _react2["default"].createElement(_acBtns2["default"], { localeCookie: _this.props.localeCookie,
+                        powerBtns: _this.props.powerBtns,
                         btns: {
                             reupload: {
                                 node: _react2["default"].createElement(
                                     _beeUpload2["default"],
                                     uploadP,
-                                    _react2["default"].createElement(_acBtns2["default"], { type: 'line', powerBtns: _this.props.powerBtns, btns: { reupload: {} } })
+                                    _react2["default"].createElement(_acBtns2["default"], { localeCookie: _this.props.localeCookie, type: 'line', powerBtns: _this.props.powerBtns, btns: { reupload: {} } })
                                 )
                             },
                             "delete": {
@@ -213,7 +224,7 @@ var FileList = function (_Component) {
                 return _react2["default"].createElement(
                     'div',
                     { className: 'opt-btns' },
-                    _react2["default"].createElement(_acBtns2["default"], {
+                    _react2["default"].createElement(_acBtns2["default"], { localeCookie: _this.props.localeCookie,
                         powerBtns: _this.props.powerBtns,
                         type: 'line',
                         btns: {
@@ -248,16 +259,20 @@ var FileList = function (_Component) {
                 withCredentials: true
             }).then(function (res) {
                 if (res.status == 200) {
-                    console.log('删除成功');
+                    _this.props.callback('success', 'delete', _this.localObj['delSuccess']);
+                    console.log(_this.localObj['delSuccess']);
                     _this.getList();
                     _this.setState({
                         show: false
                     });
+                } else {
+                    _this.props.callback('error', 'delete', _this.localObj['delError'], res);
                 }
             })["catch"](function (error) {
                 _this.setState({
                     show: false
                 });
+                _this.props.callback('error', 'delete', _this.localObj['delError'], error);
                 console.error(error);
             });
         };
@@ -270,15 +285,19 @@ var FileList = function (_Component) {
             }).then(function (res) {
                 if (res.status == 200) {
                     window.open(res.data.filePath);
+                    _this.props.callback('success', 'download', _this.localObj['downloadSuccess']);
+                    console.log(_this.localObj['downloadSuccess']);
+                } else {
+                    _this.props.callback('error', 'download', _this.localObj['downloadError'], res);
                 }
             })["catch"](function (error) {
+                _this.props.callback('error', 'download', _this.localObj['interfaceError'], error);
                 console.error(error);
             });
         };
 
         _this.fileChange = function (info) {
             var data = (0, _cloneDeep2["default"])(_this.state.data);
-
             if (info.file.status !== 'uploading') {}
             if (info.file.status === 'done') {
                 var id = info.file.response.data[0].id;
@@ -291,13 +310,17 @@ var FileList = function (_Component) {
                 _this.setState({
                     data: data
                 });
-                console.log('upload Success');
+                _this.props.callback('success', 'upload', _this.localObj['uploadSuccess']);
+                console.log(_this.localObj['uploadSuccess']);
             }
-            if (info.file.status === 'error') {
-                console.error(info.file.name + ' file upload failed.');
+            if (info.file.status === 'removed') {
+                var msg = info.file.response.displayMessage[(0, _utils.getCookie)(_this.props.localeCookie)] || info.file.response.displayMessage['zh_CN'];
+                console.error(info.file.name + ' ' + _this.localObj['uploadError']);
+                _this.props.callback('error', 'upload', _this.localObj['uploadError'], info.file.response);
                 data.forEach(function (item) {
                     if (item.uid == info.file.uid) {
                         item.uploadStatus = 'error';
+                        item.errorMsg = msg;
                     }
                 });
                 _this.setState({
@@ -341,8 +364,9 @@ var FileList = function (_Component) {
             id: props.id,
             open: true
         };
+        _this.localObj = _i18n2["default"][(0, _utils.getCookie)(props.localeCookie)] || _i18n2["default"]['zh_CN'];
         _this.columns = [{
-            title: "附件名称",
+            title: _this.localObj.fileName,
             dataIndex: "fileName",
             key: "fileName",
             className: "rowClassName",
@@ -351,17 +375,17 @@ var FileList = function (_Component) {
                 return (0, _utils.getFileNames)(text, record.fileExtension);
             }
         }, {
-            title: "文件类型",
+            title: _this.localObj.fileExtension,
             dataIndex: "fileExtension",
             key: "fileExtension",
             width: 100
         }, {
-            title: "文件大小",
+            title: _this.localObj.fileSize,
             dataIndex: "fileSizeText",
             key: "fileSizeText",
             width: 100
         }, {
-            title: "上传人",
+            title: _this.localObj.createrUser,
             dataIndex: "userName",
             key: "userName",
             width: 200,
@@ -377,7 +401,7 @@ var FileList = function (_Component) {
                 }
             }
         }, {
-            title: "上传时间",
+            title: _this.localObj.createrTime,
             dataIndex: "ctime",
             key: "ctime",
             width: 200,
@@ -388,15 +412,17 @@ var FileList = function (_Component) {
                         { className: 'upload-status uploading' },
                         ' ',
                         _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-loadingstate' }),
-                        ' \u6B63\u5728\u4E0A\u4F20 '
+                        ' ',
+                        _this.localObj.uploading,
+                        ' '
                     );
                 } else if (record.uploadStatus == 'error') {
                     return _react2["default"].createElement(
                         'span',
-                        { className: 'upload-status error' },
+                        { className: 'upload-status error', title: record.errorMsg || _this.localObj.uploadError },
                         ' ',
                         _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-exc-c' }),
-                        '\u6587\u4EF6\u4E0A\u4F20\u9519\u8BEF'
+                        record.errorMsg || _this.localObj.uploadError
                     );
                 } else if (record.uploadStatus == 'done') {
                     return (0, _utils.dateFormate)(new Date(), 'yyyy-MM-dd hh:mm');
@@ -405,7 +431,7 @@ var FileList = function (_Component) {
                 }
             }
         }, {
-            title: "操作",
+            title: _this.localObj.operation,
             dataIndex: "e",
             key: "e",
             width: 200,
@@ -422,7 +448,7 @@ var FileList = function (_Component) {
                     return _react2["default"].createElement(
                         'div',
                         { className: 'opt-btns' },
-                        _react2["default"].createElement(_acBtns2["default"], _defineProperty({
+                        _react2["default"].createElement(_acBtns2["default"], _defineProperty({ localeCookie: _this.props.localeCookie,
                             powerBtns: _this.props.powerBtns,
                             type: 'line',
                             btns: {
@@ -430,7 +456,10 @@ var FileList = function (_Component) {
                                     node: _react2["default"].createElement(
                                         _beeUpload2["default"],
                                         uploadP,
-                                        _react2["default"].createElement(_acBtns2["default"], { powerBtns: _this.props.powerBtns, type: 'line', btns: { reupload: {} } })
+                                        _react2["default"].createElement(_acBtns2["default"], { localeCookie: _this.props.localeCookie,
+                                            powerBtns: _this.props.powerBtns,
+                                            type: 'line',
+                                            btns: { reupload: {} } })
                                     )
                                 },
                                 "delete": {
@@ -447,7 +476,7 @@ var FileList = function (_Component) {
                     return _react2["default"].createElement(
                         'div',
                         { className: 'opt-btns' },
-                        _react2["default"].createElement(_acBtns2["default"], {
+                        _react2["default"].createElement(_acBtns2["default"], { localeCookie: props.localeCookie,
                             type: 'line',
                             btns: {
                                 download: {
@@ -541,20 +570,20 @@ var FileList = function (_Component) {
                     _react2["default"].createElement(
                         'span',
                         null,
-                        '\u9644\u4EF6'
+                        this.localObj.file
                     )
                 ),
                 _react2["default"].createElement(
                     'div',
                     { className: clsfix + '-btns' },
-                    disabled ? '' : _react2["default"].createElement(_acBtns2["default"], {
+                    disabled ? '' : _react2["default"].createElement(_acBtns2["default"], { localeCookie: this.props.localeCookie,
                         powerBtns: this.props.powerBtns,
                         btns: {
                             upload: {
                                 node: _react2["default"].createElement(
                                     _beeUpload2["default"],
                                     uploadP,
-                                    _react2["default"].createElement(_acBtns2["default"], { powerBtns: this.props.powerBtns, btns: { upload: {} } })
+                                    _react2["default"].createElement(_acBtns2["default"], { localeCookie: this.props.localeCookie, powerBtns: this.props.powerBtns, btns: { upload: {} } })
                                 )
                             }
                         }
@@ -589,7 +618,7 @@ var FileList = function (_Component) {
                         _react2["default"].createElement(
                             _beeModal2["default"].Title,
                             null,
-                            '\u5220\u9664'
+                            this.localObj["delete"]
                         )
                     ),
                     _react2["default"].createElement(
@@ -602,19 +631,20 @@ var FileList = function (_Component) {
                                 'span',
                                 { 'class': 'keyword' },
                                 _react2["default"].createElement('i', { 'class': 'uf uf-exc-c-2 ' }),
-                                '\u5220\u9664'
+                                this.localObj["delete"]
                             ),
                             _react2["default"].createElement(
                                 'span',
                                 { className: 'pop_dialog-ctn' },
-                                '\u786E\u8BA4\u8981\u5220\u9664\u5417\uFF1F'
+                                this.localObj.delSure
                             )
                         )
                     ),
                     _react2["default"].createElement(
                         _beeModal2["default"].Footer,
                         { className: 'pop_footer' },
-                        _react2["default"].createElement(_acBtns2["default"], { powerBtns: this.props.powerBtns,
+                        _react2["default"].createElement(_acBtns2["default"], { localeCookie: this.props.localeCookie,
+                            powerBtns: this.props.powerBtns,
                             btns: {
                                 confirm: {
                                     onClick: this["delete"]

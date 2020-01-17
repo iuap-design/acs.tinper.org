@@ -1,3 +1,48 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/tinper-bee/ac-file-list/compare/v0.2.0...v0.2.1) (2020-01-17)
+
+
+### Bug Fixes
+
+* **ac-file-list:** delError ([a6abdcb](https://github.com/tinper-bee/ac-file-list/commit/a6abdcb))
+
+
+
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/tinper-bee/ac-file-list/compare/v0.1.10...v0.2.0) (2020-01-16)
+
+
+
+<a name="0.1.10"></a>
+## [0.1.10](https://github.com/tinper-bee/ac-file-list/compare/v0.1.9...v0.1.10) (2020-01-16)
+
+
+### Features
+
+* **ac-file-list:** 删除成功失败提示 ([bced6df](https://github.com/tinper-bee/ac-file-list/commit/bced6df))
+
+
+
+<a name="0.1.9"></a>
+## [0.1.9](https://github.com/tinper-bee/ac-file-list/compare/v0.1.8...v0.1.9) (2020-01-15)
+
+
+### Features
+
+* **ac-file-list:** title ([711ac24](https://github.com/tinper-bee/ac-file-list/commit/711ac24))
+
+
+
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/tinper-bee/ac-file-list/compare/v0.1.7...v0.1.8) (2020-01-15)
+
+
+### Features
+
+* **ac-file-list:** 错误提示+多语 ([0865bbd](https://github.com/tinper-bee/ac-file-list/commit/0865bbd))
+
+
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/tinper-bee/ac-file-list/compare/v0.1.6...v0.1.7) (2019-12-20)
 
