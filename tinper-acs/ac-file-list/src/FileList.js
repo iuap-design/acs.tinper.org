@@ -12,6 +12,7 @@ import { getSize, getFileNames,dateFormate,getCookie } from './utils.js';
 import i18n from './i18n.js';
 
 const propTypes = {
+    canUnfold:PropTypes.bool,//是否可以展开收起
     id:PropTypes.string.isRequired,
     clsfix:PropTypes.string,
     disabled:PropTypes.bool,
@@ -36,7 +37,8 @@ const defaultProps = {
     uploadProps:{},
     powerBtns:['upload','reupload','download','delete','confirm','cancel'],
     localeCookie:'locale',
-    callback:()=>{}
+    callback:()=>{},
+    canUnfold:true
 };
 
 class FileList extends Component {
@@ -115,53 +117,56 @@ class FileList extends Component {
             key: "e",
             width: 200,
             render:(text,record,index)=>{
-                if(record.uploadStatus=='error'){
-                    const uploadP = Object.assign({
-                        name: 'files',
-                        action:this.props.url.upload.replace('{id}',this.props.id),
-                        onChange:this.fileChange,
-                        multiple:true,
-                        beforeUpload:this.reUpload,
-                        withCredentials:true
-                    },this.props.uploadProps);
-                    return <div className="opt-btns">
-                        <Btns localeCookie={this.props.localeCookie}
-                            powerBtns={this.props.powerBtns}
-                            type='line'
-                            btns={{
-                                reupload: {
-                                    node:<Upload {...uploadP}>
-                                            <Btns localeCookie={this.props.localeCookie} 
-                                                powerBtns={this.props.powerBtns} 
-                                                type='line' 
-                                                btns={{ reupload:{} }}/>
-                                        </Upload>
-                                },
-                                delete: {
-                                    onClick: ()=>{this.deleteError(record.uid)}
-                                },
-                            }}
-                            powerBtns={props.powerBtns}
-                        />
-                    </div>
-                }else if(record.uploadStatus=='uploading'){
-                    return <div className="opt-btns"></div>
-                }else{
-                    return <div className="opt-btns">
-                        <Btns localeCookie={props.localeCookie}
-                            type='line'
-                            btns={{
-                                download: {
-                                    onClick: this.download
-                                },
-                                delete: {
-                                    onClick: this.deleteConfirm
-                                },
-                            }}
-                            powerBtns={props.powerBtns}
-                        />
-                    </div>
+                if(!this.props.disabled){
+                    if(record.uploadStatus=='error'){
+                        const uploadP = Object.assign({
+                            name: 'files',
+                            action:this.props.url.upload.replace('{id}',this.props.id),
+                            onChange:this.fileChange,
+                            multiple:true,
+                            beforeUpload:this.reUpload,
+                            withCredentials:true
+                        },this.props.uploadProps);
+                        return <div className="opt-btns">
+                            <Btns localeCookie={this.props.localeCookie}
+                                powerBtns={this.props.powerBtns}
+                                type='line'
+                                btns={{
+                                    reupload: {
+                                        node:<Upload {...uploadP}>
+                                                <Btns localeCookie={this.props.localeCookie} 
+                                                    powerBtns={this.props.powerBtns} 
+                                                    type='line' 
+                                                    btns={{ reupload:{} }}/>
+                                            </Upload>
+                                    },
+                                    delete: {
+                                        onClick: ()=>{this.deleteError(record.uid)}
+                                    },
+                                }}
+                                powerBtns={props.powerBtns}
+                            />
+                        </div>
+                    }else if(record.uploadStatus=='uploading'){
+                        return <div className="opt-btns"></div>
+                    }else{
+                        return <div className="opt-btns">
+                            <Btns localeCookie={props.localeCookie}
+                                type='line'
+                                btns={{
+                                    download: {
+                                        onClick: this.download
+                                    },
+                                    delete: {
+                                        onClick: this.deleteConfirm
+                                    },
+                                }}
+                                powerBtns={props.powerBtns}
+                            />
+                        </div>
+                    }
                 }
+                
             }
         }];
     }
@@ -206,12 +211,12 @@ class FileList extends Component {
                             pageNo:params.pageNo
                         })
                     }
-                    this.props.callback('success','list',this.localObj['listSuccess']);
+                    this.props.callback('success','list',res);
                 }else{
-                    this.props.callback('error','list',this.localObj['listError'],res);
+                    this.props.callback('error','list',res);
                 }
             }).catch(error=>{
-                this.props.callback('error','list',this.localObj['interfaceError'],error);
+                this.props.callback('error','list',error);
                 console.error(error)
             })
         }
@@ -267,54 +272,7 @@ class FileList extends Component {
         })
     }
 
-    /**下载删除按钮 */
-    hoverContent=()=>{
-        let hoverData = this.state.hoverData;
-        if(hoverData.uploadStatus=='error'){
-            const uploadP = Object.assign({
-                name: 'files',
-                action: this.props.url.upload.replace('{id}',this.props.id),
-                onChange:this.fileChange,
-                multiple:true,
-                beforeUpload:this.reUpload,
-                withCredentials:true
-            },this.props.uploadProps);
-            return <div className="opt-btns">
-                <Btns localeCookie={this.props.localeCookie}
-                    powerBtns={this.props.powerBtns}
-                    btns={{
-                        reupload: {
-                            node:<Upload {...uploadP}>
-                                    <Btns localeCookie={this.props.localeCookie} type='line' powerBtns={this.props.powerBtns} btns={{ reupload:{} }}/>
-                                </Upload>
-                        },
-                        delete: {
-                            onClick: ()=>{this.deleteError(hoverData.uid)}
-                        },
-                    }}
-                />
-            </div>
-        }else if(hoverData.uploadStatus=='uploading'){
-            return <div className="opt-btns"></div>
-        }else{
-            return <div className="opt-btns">
-                <Btns localeCookie={this.props.localeCookie}
-                    powerBtns={this.props.powerBtns}
-                    type='line'
-                    btns={{
-                        download: {
-                            onClick: this.download
-                        },
-                        delete: {
-                            onClick: this.deleteConfirm
-                        },
-                    }}
-                />
-            </div>
-        }
-        
-    }
-
+ 
     deleteConfirm=()=>{
         this.setState({
             show:true
@@ -334,20 +292,20 @@ class FileList extends Component {
             withCredentials:true
         }).then((res)=>{
             if(res.status==200){
-                this.props.callback('success','delete',this.localObj['delSuccess']);
+                this.props.callback('success','delete',res);
                 console.log(this.localObj['delSuccess']);
                 this.getList()
                 this.setState({
                     show:false
                 })
             }else{
-                this.props.callback('error','delete',this.localObj['delError'],res);
+                this.props.callback('error','delete',res);
             }
         }).catch(error=>{
             this.setState({
                 show:false
             })
-            this.props.callback('error','delete',this.localObj['delError'],error);
+            this.props.callback('error','delete',error);
             console.error(error);
         })
     }
@@ -359,13 +317,13 @@ class FileList extends Component {
         }).then((res)=>{
             if(res.status==200){
                 window.open(res.data.filePath)
-                this.props.callback('success','download',this.localObj['downloadSuccess']);
+                this.props.callback('success','download',res);
                 console.log(this.localObj['downloadSuccess']);
             }else{
-                this.props.callback('error','download',this.localObj['downloadError'],res);
+                this.props.callback('error','download',res);
             }
         }).catch(error=>{
-            this.props.callback('error','download',this.localObj['interfaceError'],error);
+            this.props.callback('error','download',error);
             console.error(error)
         })
     }
@@ -398,13 +356,13 @@ class FileList extends Component {
             this.setState({
                 data
             })
-            this.props.callback('success','upload',this.localObj['uploadSuccess']);
+            this.props.callback('success','upload',info.file.response);
             console.log(this.localObj['uploadSuccess'])
         }  
         if (info.file.status === 'removed') {
             let msg = info.file.response.displayMessage[getCookie(this.props.localeCookie)]||info.file.response.displayMessage['zh_CN']
             console.error(`${info.file.name} ${this.localObj['uploadError']}`);
-            this.props.callback('error','upload',this.localObj['uploadError'],info.file.response);
+            this.props.callback('error','upload',info.file.response);
             data.forEach(item=>{
                 if(item.uid==info.file.uid){
                     item.uploadStatus='error';
@@ -441,7 +399,7 @@ class FileList extends Component {
     }
 
     render(){
-        let { clsfix,id,disabled,uploadProps } = this.props;
+        let { clsfix,id,disabled,uploadProps,canUnfold } = this.props;
         let { data,open } = this.state;
         const uploadP =Object.assign({
             withCredentials:true,
@@ -454,10 +412,12 @@ class FileList extends Component {
         return(
             <div className={clsfix}>
                 <div  className={open?`${clsfix}-header`:`${clsfix}-header close`}>
-                    <div className={`${clsfix}-text`} onClick={this.changeOpenStatus}>
-                        <Icon type={open?'uf-triangle-down':'uf-triangle-right'}></Icon>
-                        <span>{this.localObj.file}</span>
-                    </div>
+                    {
+                        canUnfold?<div className={`${clsfix}-text`} onClick={this.changeOpenStatus}>
+                            <Icon type={open?'uf-triangle-down':'uf-triangle-right'}></Icon>
+                            <span>{this.localObj.file}</span>
+                        </div>:''
+                    }
                     <div className={`${clsfix}-btns`}>
                         {
                             disabled?'':<Btns localeCookie={this.props.localeCookie}

@@ -1,13 +1,12 @@
 $primaryColor : #e14c46;
-
+$secondary : #eceff1;
 
 .ac-btns{
     .ac-btns-item{
-        margin-right: 6px;
+        margin-right: 8px;
         cursor: pointer;
     }
     span.ac-btns-item{
-        margin-right: 6px;
         color: #0073e1;
         font-size: 13px;
         &[disabled]{
@@ -17,6 +16,11 @@ $primaryColor : #e14c46;
     button.ac-btns-item.u-button{
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
         font-size: 13px;
+        min-width: 60px;
+        min-height: 30px;
+        padding: 0 10px;
+        min-height: 28px;
+        line-height: 28px;
         &:last-child{
             margin-right: 0;
         }
@@ -34,46 +38,62 @@ $primaryColor : #e14c46;
         &.u-button-primary{
             background-color: $primaryColor;
             color: #fff;
-            border: 1px solid #f53c32;
+            border: 1px solid $primaryColor;
             box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
             &:hover{
                 background-color: #d7332c;
                 color: #fff;
             }
         }
-        &.ac-btns-search{
-            min-width: 48px;
-            padding: 4px 5px;
-            background-color: $primaryColor;
+        &.u-button-secondary{
+            background-color: $secondary;
+            color: #212121;
+            border: 1px solid $secondary;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+            &:hover{
+                border: 1px solid #dfe1e6;
+                background-color: #dfe1e6;
+                color: #212121;
+            }
         }
-        &.ac-btns-clear, &.ac-btns-empty{
-            min-width: auto;
-            // border-color: #d0d0d0;
+        &.ac-btns-search,&.ac-btns-clear, &.ac-btns-empty,
+        &.ac-btns-first,&.ac-btns-previous,&.ac-btns-next,&.ac-btns-last,
+        &.ac-btns-max,&.ac-btns-min{
+            min-width: 30px;
+            padding: 0;
+            line-height: 28px;
             color: #111;
-            padding: 4px 0;
             background-color: #fff;
+            height: 30px;
+        }
+        &.ac-btns-search{
+            background-color: $primaryColor;
+            color:#fff;
+            min-width: 52px;
+            position: relative;
+            top: 1px;
+        }
+        &.ac-btns-empty,&.ac-btns-clear,&.ac-btns-search{
+            .uf{
+                font-size: 18px;
+            }
         }
         &.ac-btns-max{
             padding: 3px;
             min-width: auto;
             .uf {
-                font-size: 19px;
+                position: relative;
+                bottom: 2px;
             }
         }
         &.ac-btns-min{
             padding: 3px;
             min-width: auto;
             .uf {
-                font-size: 19px;
+                position: relative;
+                bottom: 2px;
             }
         }
-        &.ac-btns-first,&.ac-btns-previous,&.ac-btns-next,&.ac-btns-last{
-            padding: 3px;
-            min-width: auto;
-            height: 32px;
-        }
-        
-
         &.u-button[disabled],&.u-button[disabled]:hover{
             background: #fff;
             color: #dfe1e6;
@@ -81,6 +101,17 @@ $primaryColor : #e14c46;
             box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
         }
         
+    }
+    //type='icon'
+    .icon{
+        &.ac-btns-add,
+        &.ac-btns-update,
+        &.ac-btns-delete{
+            color: $primaryColor;
+            .uf{
+                padding: 0;
+            }
+        }
     }
     
 }
@@ -129,5 +160,13 @@ $primaryColor : #e14c46;
     }
     .u-dropdown-menu>.u-dropdown-menu-item-selected:hover{
         background-color: #ebecf0;
+    }
+    //type='icon'
+    .icon{
+        &.ac-btns-add,
+        &.ac-btns-update,
+        &.ac-btns-delete{
+            color: $primaryColor;
+        }
     }
 }

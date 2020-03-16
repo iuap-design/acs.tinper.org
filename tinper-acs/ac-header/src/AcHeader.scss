@@ -1,7 +1,7 @@
 .ac-header{
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 16px;
     background: #fff;
     height: 46px;
     line-height: 46px;
@@ -35,16 +35,29 @@
         display: inline-block;
         line-height: 26px;
         margin-right: 4px;
+        min-width: 26px;
         &:hover{
             background-color: #e8e8e8;
         }
     }
     &-btns{
+        .ac-btns .ac-btns-item{
+            margin-left: 8px!important;
+            margin-right: 0!important;
+        }
         .u-button-group{
-            margin-left: 6px;
+            margin-left: 8px;
+            .u-button+.u-button,
+            .u-button+.u-button-group,
+            .u-button-group+.u-button,
+            .u-button-group+.v-group{
+                margin-left: -1px;
+            }
+            .ac-btns .ac-btns-item{
+                margin-left: 0!important;
+                margin-right: 0!important;
+            }
         }
-        .u-button{
-            margin-left: 6px;
-        }
+        
     }
 }

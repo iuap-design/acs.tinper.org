@@ -72,7 +72,7 @@ mustPaginationShow | `bool` | false | true必须展示分页、false，当pageCo
 tableProps | `object`| {} | table上其他属性，具体接收的参数参照bee-table| 否
 modalProps | `object`| {} | modal上其他属性，具体接收的参数参照bee-modal| 否
 isLocalSearch |`bool`| false |树的搜索是否是前端搜索，false是调用函数getRefTreeData(value),true是前端搜索 | 否
-
+footerBtnDom | `dom` | '' | 自定义footer的按钮dom | 否
 
 左树
 
@@ -125,7 +125,7 @@ menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参�
 dropdownDisabled | `boolean` | false |下拉展示是否可以弹出，false为有，true为没有|否
 treeNodeDisabledKey | `String` | - | 树节点中disabled状态节点，传入代表treeData中表示不可选节点的键 | 否
 treeNodeDisabledFunc |`function(node)`| 返回当前节点信息，return false，表示可选；return true，表示该节点不可选| 否 
-
+footerBtnDom | `dom` | '' | 自定义footer的按钮dom | 否
 ## 注意事项
 #### 参数解析
 

@@ -114,6 +114,7 @@ class RefTreeTableBaseUI extends Component {
 			treeNodeDisabledKey,
 			treeNodeDisabledFunc = noop,
 			isLocalSearch,
+			footerBtnDom='',
 		} = this.props;
 		let treeProps = Object.assign({},{
 			className,
@@ -201,6 +202,7 @@ class RefTreeTableBaseUI extends Component {
 						onClickBtn={_this.onClickBtn}
 						buttons={buttons} 
 						emptyBut={false}
+						footerBtnDom={footerBtnDom}
 					/>
 				</Modal.Footer>
 			</Modal>

@@ -11,7 +11,12 @@
 
 .ac-btns button.ac-btns-item.u-button {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-  font-size: 13px; }
+  font-size: 13px;
+  min-width: 60px;
+  min-height: 30px;
+  padding: 0 10px;
+  min-height: 28px;
+  line-height: 28px; }
   .ac-btns button.ac-btns-item.u-button:last-child {
     margin-right: 0; }
   .ac-btns button.ac-btns-item.u-button.ac-btns-write {
@@ -31,15 +36,16 @@
     .ac-btns button.ac-btns-item.u-button.u-button-primary:hover {
       background-color: #d7332c;
       color: #fff; }
-  .ac-btns button.ac-btns-item.u-button.ac-btns-search {
-    min-width: 48px;
-    padding: 4px 5px;
-    background-color: #e14c46; }
-  .ac-btns button.ac-btns-item.u-button.ac-btns-clear {
-    min-width: auto;
+  .ac-btns button.ac-btns-item.u-button.ac-btns-search, .ac-btns button.ac-btns-item.u-button.ac-btns-clear, .ac-btns button.ac-btns-item.u-button.ac-btns-empty, .ac-btns button.ac-btns-item.u-button.ac-btns-first, .ac-btns button.ac-btns-item.u-button.ac-btns-previous, .ac-btns button.ac-btns-item.u-button.ac-btns-next, .ac-btns button.ac-btns-item.u-button.ac-btns-last, .ac-btns button.ac-btns-item.u-button.ac-btns-max, .ac-btns button.ac-btns-item.u-button.ac-btns-min {
+    min-width: 30px;
+    padding: 0;
+    line-height: 28px;
     color: #111;
-    padding: 4px 0;
-    background-color: #fff; }
+    background-color: #fff;
+    height: 30px; }
+  .ac-btns button.ac-btns-item.u-button.ac-btns-search {
+    background-color: #e14c46;
+    color: #fff; }
   .ac-btns button.ac-btns-item.u-button.ac-btns-max {
     padding: 3px;
     min-width: auto; }
@@ -50,10 +56,6 @@
     min-width: auto; }
     .ac-btns button.ac-btns-item.u-button.ac-btns-min .uf {
       font-size: 19px; }
-  .ac-btns button.ac-btns-item.u-button.ac-btns-first, .ac-btns button.ac-btns-item.u-button.ac-btns-previous, .ac-btns button.ac-btns-item.u-button.ac-btns-next, .ac-btns button.ac-btns-item.u-button.ac-btns-last {
-    padding: 3px;
-    min-width: auto;
-    height: 32px; }
   .ac-btns button.ac-btns-item.u-button.u-button[disabled], .ac-btns button.ac-btns-item.u-button.u-button[disabled]:hover {
     background: #fff;
     color: #dfe1e6;
@@ -113,8 +115,8 @@
 .ac-upload-list-header {
   height: 40px;
   background: #fff;
-  padding-left: 12px;
-  padding-right: 20px;
+  padding-left: 16px;
+  padding-right: 16px;
   line-height: 40px; }
   .ac-upload-list-header > div {
     display: inline-block; }
@@ -127,9 +129,11 @@
     .ac-upload-list-header.close .ac-upload-list-btns {
       display: none; }
 
-.ac-upload-list-text span {
-  font-weight: bold;
-  font-size: 13px; }
+.ac-upload-list-text {
+  cursor: pointer; }
+  .ac-upload-list-text span {
+    font-weight: bold;
+    font-size: 13px; }
 
 .ac-upload-list-btns {
   float: right; }

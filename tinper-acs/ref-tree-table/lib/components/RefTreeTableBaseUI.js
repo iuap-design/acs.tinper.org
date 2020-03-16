@@ -198,7 +198,9 @@ var RefTreeTableBaseUI = function (_Component) {
 		    treeNodeDisabledKey = _props3.treeNodeDisabledKey,
 		    _props3$treeNodeDisab = _props3.treeNodeDisabledFunc,
 		    treeNodeDisabledFunc = _props3$treeNodeDisab === undefined ? noop : _props3$treeNodeDisab,
-		    isLocalSearch = _props3.isLocalSearch;
+		    isLocalSearch = _props3.isLocalSearch,
+		    _props3$footerBtnDom = _props3.footerBtnDom,
+		    footerBtnDom = _props3$footerBtnDom === undefined ? '' : _props3$footerBtnDom;
 
 		var treeProps = (0, _assign2["default"])({}, {
 			className: className,
@@ -300,7 +302,8 @@ var RefTreeTableBaseUI = function (_Component) {
 					language: lang,
 					onClickBtn: _this.onClickBtn,
 					buttons: buttons,
-					emptyBut: false
+					emptyBut: false,
+					footerBtnDom: footerBtnDom
 				})
 			)
 		);

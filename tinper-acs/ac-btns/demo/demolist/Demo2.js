@@ -1,7 +1,7 @@
 /**
  *
  * @title 不使用 Button 按钮
- * @description type='line'  使用与表格行内操作列
+ * @description type='line' or type='icon'  两种展示形式
  *
  */
 import React, { Component } from 'react';
@@ -185,6 +185,23 @@ let btns = {
     },
 }
 
+let btns2 = {
+    add: {
+        onClick: () => {
+            console.log('add')
+        },
+    },
+    update: {
+        onClick: () => {
+            console.log('update')
+        }
+    },
+    delete: {
+        onClick: () => {
+            console.log('delete')
+        }
+    },
+}
 class Demo1 extends Component {
 
     render() {
@@ -192,7 +209,9 @@ class Demo1 extends Component {
             <div className='demo2-title'> 超过3个换更多按钮 </div>
             <Btns type='line' btns = {btns} />
             <div className='demo2-title'>全部展示</div>
-            <Btns type='line' btns = {btnsAll} maxSize={99  }/>
+            <Btns type='line' btns = {btnsAll} maxSize={99} />
+            <div className='demo2-title'>图标类型</div>
+            <Btns type='icon' btns = {btns2} maxSize={99}/>
         </div>
     }
 }

@@ -80,7 +80,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(378);var Demo2 = __webpack_require__(379);var Demo3 = __webpack_require__(380);var Demo4 = __webpack_require__(381);var Demo5 = __webpack_require__(382);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 地区级联", "code": "/**\n*\n* @title 地区级联\n* @description 中国地区级联\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport ACCitySelect from \"ac-city-select\";\n\nclass Demo1 extends Component {\n\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue:{ province:'北京',city:'北京',area:'东城区'},\n\t\t\tvalue:{ province:'北京',city:'北京',area:'东城区'}\n\t\t}\n\t}\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\n\tbtnOnClick=()=>{\n\t\tthis.setState({\n\t\t\tvalue:{ province:'山西',city:'长治',area:'长治县'}\n\t\t})\n\t}\n\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={this.state.value}/>\n\t\t\t\t<Button shape=\"border\" onClick={this.btnOnClick} style={{marginTop:\"10px\"}}>代码设置数据</Button>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 中国地区级联" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 切换语言", "code": "/**\n*\n* @title 切换语言\n* @description 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo2 extends Component {\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='en_US' onChange={this.onChange}/>\n\t\t\t\t<div style={{'height':'20px'}}/>\n\t\t\t\t<CitySelect lang='zh_TW' onChange={this.onChange}/>\n\t\t\t</div>\n\t)}\n}\n", "desc": " 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 设置不可用状态", "code": "/**\n*\n* @title 设置不可用状态\n* @description 设置属性disabled为布尔值，默认为false；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo3 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\tlet { disabled } = this.state\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' disabled={disabled} onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 设置省市联动部分城市不可选择", "code": "/**\n* @title 设置省市联动部分城市不可选择\n* @description 设置属性disabled为布尔值，默认为false；\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo4 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabledProvinceArr: ['天津', '河北'],\n\t\t\tdisabledCityArr: [\"天津\", \"长春\", \"四平\", \"大连\"],\n\t\t\tdisabledAreaObj: {\n\t\t\t\t\"鞍山\": [\"铁东区\", \"铁西区\", \"立山区\"],\n\t\t\t\t\"抚顺\": [\"新抚区\", \"东洲区\", \"望花区\", \"抚顺县\"],\n\t\t\t\t\"北京\": [\"崇文区\", \"宣武区\", \"朝阳区\"]\n\t\t\t}\n\t\t}\n\t}\n\n\trender() {\n\t\tlet { disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.state;\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect\n\t\t\t\t\tlang='zh_CN'\n\t\t\t\t\tdisabledProvinceArr={disabledProvinceArr}\n\t\t\t\t\tdisabledCityArr={disabledCityArr}\n\t\t\t\t\tdisabledAreaObj={disabledAreaObj}\n\t\t\t\t\tonChange={this.onChange}\n\t\t\t\t/>\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 设置城市选择可以清空；", "code": "/**\n*\n* @title 设置城市选择可以清空；\n* @description 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；\n*\n*/\nimport React, { Component } from 'react';\nimport {  } from 'tinper-bee';\nimport CitySelect from \"ac-city-select\";\n\nclass Demo5 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' allowClear={true}  onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\n", "desc": " 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；" }];
+	var Demo1 = __webpack_require__(379);var Demo2 = __webpack_require__(380);var Demo3 = __webpack_require__(381);var Demo4 = __webpack_require__(382);var Demo5 = __webpack_require__(383);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 地区级联", "code": "/**\n*\n* @title 地区级联\n* @description 中国地区级联\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport ACCitySelect from 'ac-city-select';\n\nclass Demo1 extends Component {\n\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue:{ province:'北京',city:'北京',area:'东城区'},\n\t\t\tvalue:{ province:'北京',city:'北京',area:'东城区'}\n\t\t}\n\t}\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\n\tbtnOnClick=()=>{\n\t\tthis.setState({\n\t\t\tvalue:{ province:'山西',city:'长治',area:'长治县'}\n\t\t})\n\t}\n\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ACCitySelect ref='city' onChange={this.onChange} defaultValue={this.state.defaultValue} value={this.state.value}/>\n\t\t\t\t<Button shape=\"border\" onClick={this.btnOnClick} style={{marginTop:\"10px\"}}>代码设置数据</Button>\n\t\t\t</div>\n\t)}\n}\nexport default Demo1;", "desc": " 中国地区级联" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 切换语言", "code": "/**\n*\n* @title 切换语言\n* @description 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文\n*\n*/\n\nimport React, { Component } from 'react';\nimport { Button  } from 'tinper-bee';\nimport CitySelect from 'ac-city-select';\n\nclass Demo2 extends Component {\n\n\tonChange=(obj)=>{\n\t\tconsole.log(obj)\n\t}\n\trender () {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='en_US' onChange={this.onChange}/>\n\t\t\t\t<div style={{'height':'20px'}}/>\n\t\t\t\t<CitySelect lang='zh_TW' onChange={this.onChange}/>\n\t\t\t</div>\n\t)}\n}\nexport default Demo2;", "desc": " 目前支持三种语言  zh_CN 中文简体(默认)、zh_TW 中文繁体、en_US 英文" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 设置不可用状态", "code": "/**\n*\n* @title 设置不可用状态\n* @description 设置属性disabled为布尔值，默认为false；\n*\n*/\nimport React, { Component } from 'react';\nimport CitySelect from 'ac-city-select';\n\nclass Demo3 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\tlet { disabled } = this.state\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' disabled={disabled} onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\nexport default Demo3;", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 设置省市联动部分城市不可选择", "code": "/**\n* @title 设置省市联动部分城市不可选择\n* @description 设置属性disabled为布尔值，默认为false；\n*/\nimport React, { Component } from 'react';\nimport CitySelect from 'ac-city-select';\n\nclass Demo4 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabledProvinceArr: ['天津', '河北'],\n\t\t\tdisabledCityArr: [\"天津\", \"长春\", \"四平\", \"大连\"],\n\t\t\tdisabledAreaObj: {\n\t\t\t\t\"鞍山\": [\"铁东区\", \"铁西区\", \"立山区\"],\n\t\t\t\t\"抚顺\": [\"新抚区\", \"东洲区\", \"望花区\", \"抚顺县\"],\n\t\t\t\t\"北京\": [\"崇文区\", \"宣武区\", \"朝阳区\"]\n\t\t\t}\n\t\t}\n\t}\n\n\trender() {\n\t\tlet { disabledProvinceArr, disabledCityArr, disabledAreaObj } = this.state;\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect\n\t\t\t\t\tlang='zh_CN'\n\t\t\t\t\tdisabledProvinceArr={disabledProvinceArr}\n\t\t\t\t\tdisabledCityArr={disabledCityArr}\n\t\t\t\t\tdisabledAreaObj={disabledAreaObj}\n\t\t\t\t\tonChange={this.onChange}\n\t\t\t\t/>\n\t\t\t</div>\n\t\t)\n\t}\n}\nexport default Demo4;", "desc": " 设置属性disabled为布尔值，默认为false；" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 设置城市选择可以清空；", "code": "/**\n*\n* @title 设置城市选择可以清空；\n* @description 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；\n*\n*/\nimport React, { Component } from 'react';\nimport CitySelect from 'ac-city-select';\n\nclass Demo5 extends Component {\n\tconstructor() {\n\t\tsuper();\n\t\tthis.state = {\n\t\t\tdefaultValue: { province: '北京', city: '北京', area: '东城区' },\n\t\t\tvalue: null,\n\t\t\tdisabled: true\n\t\t}\n\t}\n\tonChange = (obj) => {\n\t\tconsole.log(obj);\n\t}\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<CitySelect lang='zh_TW' allowClear={true}  onChange={this.onChange} />\n\t\t\t</div>\n\t\t)\n\t}\n}\nexport default Demo5;", "desc": " 设置属性allowClear为布尔值，默认为false，设置allowClear: true时城市可以被清空；" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -6138,7 +6138,7 @@
 	    });
 	}
 	
-	function notice(content, duration_arg, type, onClose, position, style, keyboard, onEscapeKeyUp, showIcon) {
+	function notice(content, duration_arg, type, onClose, position, style, keyboard, onEscapeKeyUp, showIcon, icon, props) {
 	    if (positionType.findIndex(function (item) {
 	        return item === position;
 	    }) < 0) {
@@ -6166,7 +6166,7 @@
 	    var positionStyle = JSON.stringify(messageStyle_copy) == "{}" ? positionObj[position].messageStyle : messageStyle_copy;
 	    defaultStyle = _extends({}, positionStyle, style);
 	    getMessageInstance(position, function (instance) {
-	        instance.notice({
+	        instance.notice(_extends({}, props, {
 	            key: key,
 	            duration: duration,
 	            color: type,
@@ -6177,7 +6177,7 @@
 	                showIcon ? _react2["default"].createElement(
 	                    'div',
 	                    { className: clsPrefix + '-notice-description-icon' },
-	                    _react2["default"].createElement('i', { className: (0, _classnames2["default"])(iconType) })
+	                    icon ? _react2["default"].createElement('i', { className: (0, _classnames2["default"])('' + icon) }) : _react2["default"].createElement('i', { className: (0, _classnames2["default"])(iconType) })
 	                ) : null,
 	                _react2["default"].createElement(
 	                    'div',
@@ -6186,7 +6186,7 @@
 	                )
 	            ),
 	            onClose: onClose
-	        });
+	        }));
 	    }, keyboard, onEscapeKeyUp);
 	    return function () {
 	        var target = key++;
@@ -6211,7 +6211,8 @@
 	        var position = obj.position || "top";
 	        var style = obj.style || {};
 	        var showIcon = obj.hasOwnProperty('showIcon') ? obj.showIcon : true;
-	        return notice(content, duration, color, onClose, position, style, obj.keyboard, obj.onEscapeKeyUp, showIcon);
+	        var icon = obj.hasOwnProperty('icon') ? obj.icon : false;
+	        return notice(content, duration, color, onClose, position, style, obj.keyboard, obj.onEscapeKeyUp, showIcon, icon, obj);
 	    },
 	    config: function config(options) {
 	        if (options.top !== undefined) {
@@ -7326,6 +7327,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -7347,6 +7350,8 @@
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7420,7 +7425,12 @@
 	        style = _props.style,
 	        children = _props.children,
 	        color = _props.color,
-	        title = _props.title;
+	        title = _props.title,
+	        content = _props.content,
+	        onEnd = _props.onEnd,
+	        onClose = _props.onClose,
+	        duration = _props.duration,
+	        others = _objectWithoutProperties(_props, ['closable', 'clsPrefix', 'className', 'style', 'children', 'color', 'title', 'content', 'onEnd', 'onClose', 'duration']);
 	
 	    var componentClass = clsPrefix + '-notice';
 	    var classes = (_classes = {}, _defineProperty(_classes, '' + componentClass, 1), _defineProperty(_classes, componentClass + '-closable', closable), _defineProperty(_classes, className, !!className), _classes);
@@ -7429,7 +7439,7 @@
 	    }
 	    return _react2["default"].createElement(
 	      'div',
-	      { className: (0, _classnames2["default"])(classes), style: style, onClick: this.close },
+	      _extends({ className: (0, _classnames2["default"])(classes), style: style, onClick: this.close }, others),
 	      _react2["default"].createElement(
 	        'div',
 	        { className: componentClass + '-content' },
@@ -36841,11 +36851,11 @@
 	
 	var _beeSelect2 = _interopRequireDefault(_beeSelect);
 	
-	var _lodash = __webpack_require__(373);
+	var _lodash = __webpack_require__(374);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _provinceData = __webpack_require__(374);
+	var _provinceData = __webpack_require__(375);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -37199,10 +37209,12 @@
 	                lang = _props2.lang;
 	
 	            index = _this3.getIndex('province', value);
-	            citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
-	            areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-	            city = cityValue ? cityValue : citesInitArr[0].name;
-	            area = areaValue ? areaValue : areasInitData[0].name;
+	            if (index > -1) {
+	                citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
+	                areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
+	                city = cityValue ? cityValue : citesInitArr[0].name;
+	                area = areaValue ? areaValue : areasInitData[0].name;
+	            }
 	        }
 	        _this3.setState({
 	            province: value,
@@ -37229,8 +37241,10 @@
 	
 	        if (value !== '') {
 	            index = _this3.getIndex('city', value);
-	            areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-	            area = areasInitData[0].name;
+	            if (index > -1) {
+	                areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
+	                area = areasInitData[0].name;
+	            }
 	        }
 	        _this3.setState({
 	            secondCity: value,
@@ -37285,9 +37299,9 @@
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _PropTypes = __webpack_require__(371);
+	var _PropTypes = __webpack_require__(372);
 	
-	var _OptGroup = __webpack_require__(372);
+	var _OptGroup = __webpack_require__(373);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -37326,7 +37340,7 @@
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _OptGroup = __webpack_require__(372);
+	var _OptGroup = __webpack_require__(373);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -37531,13 +37545,17 @@
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _util = __webpack_require__(362);
+	var _omit = __webpack_require__(362);
 	
-	var _SelectTrigger = __webpack_require__(363);
+	var _omit2 = _interopRequireDefault(_omit);
+	
+	var _util = __webpack_require__(363);
+	
+	var _SelectTrigger = __webpack_require__(364);
 	
 	var _SelectTrigger2 = _interopRequireDefault(_SelectTrigger);
 	
-	var _PropTypes = __webpack_require__(371);
+	var _PropTypes = __webpack_require__(372);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -37717,6 +37735,7 @@
 	    var realOpen = this.getRealOpenState();
 	    var options = this._options || [];
 	    var dataOrAriaAttributeProps = {};
+	    var customProps = _extends({}, (0, _omit2["default"])(props, ['transitionName', 'choiceTransitionName', 'optionLabelProp', 'notFoundContent', 'clsPrefix', 'prefixCls', 'placeholder', 'dropdownStyle', 'dropdownMenuStyle', 'optionFilterProp', 'showAction', 'tokenSeparators', 'showSearch', 'allowClear', 'enterKeyDown', 'defaultOpen', 'labelInValue', 'defaultActiveFirstOption', 'onSearch', 'onDeselect', 'onInputKeyDown', 'showArrow', 'dropdownMatchSelectWidth', 'autoClearSearchValue', 'searchPlaceholder', 'scrollToEnd', 'filterOption', 'backfill', 'tags', 'combobox', 'supportWrite', 'onChange', 'onFocus', 'onBlur', 'onSelect', 'onSearch', 'onDeselect', 'onInputKeyDown', 'onKeyDown']));
 	    for (var key in props) {
 	      if (Object.prototype.hasOwnProperty.call(props, key) && (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-' || key === 'role')) {
 	        dataOrAriaAttributeProps[key] = props[key];
@@ -37769,7 +37788,7 @@
 	      },
 	      _react2["default"].createElement(
 	        'div',
-	        {
+	        _extends({}, customProps, {
 	          id: props.id,
 	          style: props.style,
 	          ref: this.saveRootRef,
@@ -37780,7 +37799,7 @@
 	          onMouseDown: this.markMouseDown,
 	          onMouseUp: this.markMouseLeave,
 	          onMouseOut: this.markMouseLeave
-	        },
+	        }),
 	        _react2["default"].createElement(
 	          'div',
 	          _extends({
@@ -48021,6 +48040,34 @@
 /* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends2 = __webpack_require__(275);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function omit(obj, fields) {
+	  var shallowCopy = (0, _extends3["default"])({}, obj);
+	  for (var i = 0; i < fields.length; i++) {
+	    var key = fields[i];
+	    delete shallowCopy[key];
+	  }
+	  return shallowCopy;
+	}
+	
+	exports["default"] = omit;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 363 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -48233,7 +48280,7 @@
 	}
 
 /***/ }),
-/* 363 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48244,7 +48291,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _trigger = __webpack_require__(364);
+	var _trigger = __webpack_require__(365);
 	
 	var _trigger2 = _interopRequireDefault(_trigger);
 	
@@ -48264,9 +48311,9 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _util = __webpack_require__(362);
+	var _util = __webpack_require__(363);
 	
-	var _DropdownMenu = __webpack_require__(370);
+	var _DropdownMenu = __webpack_require__(371);
 	
 	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 	
@@ -48487,15 +48534,15 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 364 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(365);
+	module.exports = __webpack_require__(366);
 
 /***/ }),
-/* 365 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48524,11 +48571,11 @@
 	
 	var _tinperBeeCore = __webpack_require__(27);
 	
-	var _Popup = __webpack_require__(366);
+	var _Popup = __webpack_require__(367);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
-	var _utils = __webpack_require__(369);
+	var _utils = __webpack_require__(370);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -49131,7 +49178,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 366 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49162,11 +49209,11 @@
 	
 	var _beeAnimate2 = _interopRequireDefault(_beeAnimate);
 	
-	var _PopupInner = __webpack_require__(367);
+	var _PopupInner = __webpack_require__(368);
 	
 	var _PopupInner2 = _interopRequireDefault(_PopupInner);
 	
-	var _LazyRenderBox = __webpack_require__(368);
+	var _LazyRenderBox = __webpack_require__(369);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -49411,7 +49458,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 367 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49430,7 +49477,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _LazyRenderBox = __webpack_require__(368);
+	var _LazyRenderBox = __webpack_require__(369);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -49498,7 +49545,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 368 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49577,7 +49624,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 369 */
+/* 370 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -49612,7 +49659,7 @@
 	}
 
 /***/ }),
-/* 370 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49647,7 +49694,7 @@
 	
 	var _raf2 = _interopRequireDefault(_raf);
 	
-	var _util = __webpack_require__(362);
+	var _util = __webpack_require__(363);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -49858,7 +49905,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 371 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49945,7 +49992,7 @@
 	};
 
 /***/ }),
-/* 372 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49985,7 +50032,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 373 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -52386,7 +52433,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(193)(module)))
 
 /***/ }),
-/* 374 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -52396,15 +52443,15 @@
 	});
 	exports.en = exports.tw = exports.zh = undefined;
 	
-	var _citys = __webpack_require__(375);
+	var _citys = __webpack_require__(376);
 	
 	var _citys2 = _interopRequireDefault(_citys);
 	
-	var _citysTw = __webpack_require__(376);
+	var _citysTw = __webpack_require__(377);
 	
 	var _citysTw2 = _interopRequireDefault(_citysTw);
 	
-	var _citysEn = __webpack_require__(377);
+	var _citysEn = __webpack_require__(378);
 	
 	var _citysEn2 = _interopRequireDefault(_citysEn);
 	
@@ -52426,7 +52473,7 @@
 	};
 
 /***/ }),
-/* 375 */
+/* 376 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -53701,7 +53748,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 376 */
+/* 377 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -54976,7 +55023,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 377 */
+/* 378 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -55053,7 +55100,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 378 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55134,7 +55181,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 379 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55204,7 +55251,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 380 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55274,7 +55321,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 381 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -55353,7 +55400,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 382 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

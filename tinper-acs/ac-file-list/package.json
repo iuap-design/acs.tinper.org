@@ -1,6 +1,6 @@
 {
  "name": "ac-file-list",
- "version": "0.2.1",
+ "version": "0.2.6",
  "description": "FileList ui component for react",
  "keywords": [
   "react",
@@ -15,7 +15,7 @@
  },
  "homepage": "https://github.com/tinper-acs/ac-file-list.git",
  "author": "Yonyou FED",
- "repository": "http://github.com/tinper-bee/ac-file-list",
+ "repository": "http://github.com/tinper-acs/ac-file-list",
  "bugs": "https://github.com/tinper-acs/ac-file-list.git/issues",
  "license": "MIT",
  "main": "./build/index.js",
@@ -37,16 +37,16 @@
   "changelog": "bee-tools run changelog"
  },
  "dependencies": {
-  "ac-btns": "0.1.2",
-  "axios": "0.19.0",
+  "ac-btns": "latest",
+  "axios": "^0.19.0",
   "babel-runtime": "6.23.0",
-  "bee-icon": "1.0.11",
-  "bee-modal": "2.1.2",
-  "bee-progress-bar": "2.0.1",
-  "bee-table": "2.2.12",
-  "bee-upload": "2.0.5",
-  "classnames": "2.2.5",
-  "clone-deep": "4.0.1"
+  "bee-icon": "^1.0.11",
+  "bee-modal": "^2.1.2",
+  "bee-progress-bar": "^2.0.1",
+  "bee-table": "^2.2.12",
+  "bee-upload": "^2.0.5",
+  "classnames": "^2.2.5",
+  "clone-deep": "^4.0.1"
  },
  "devDependencies": {
   "chai": "^3.5.0",

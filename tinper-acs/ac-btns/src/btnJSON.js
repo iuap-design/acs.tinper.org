@@ -1,262 +1,203 @@
 export default {
-    'add':{ //新增
-        'colors':'primary',
-        'name_zh_CN':'新增',
-        'name_zh_TW':'新增',
-        'name_en_US':'New',
-        'hotkey':'alt+n',
-        'className':'ac-btns-add'
+    "add": {
+        "colors": "primary",
+        "hotkey": "alt+n",
+        "className": "ac-btns-add",
+        "name": "新增"
     },
-    'confirm':{ //确认
-        'colors':'primary',
-        'name_zh_CN':'确认',
-        'name_zh_TW':'確認',
-        'name_en_US':'Confirm',
-        'className':'ac-btns-confirm'
+    "confirm": {
+        "colors": "primary",
+        "className": "ac-btns-confirm",
+        "name": "确认"
     },
-    'detail':{ //详情
-        'colors':'write',
-        'name_zh_CN':'详情',
-        'name_zh_TW':'詳情',
-        'name_en_US':'Details',
-        'className':'ac-btns-detail'
+    "detail": {
+        "colors": "write",
+        "className": "ac-btns-detail",
+        "name": "详情"
     },
-    'search':{//查询
-        'colors':'primary',
-        'name_zh_CN':'查询',
-        'name_zh_TW':'查詢',
-        'name_en_US':'Search',
-        'hotkey':'ctrl+enter',
-        'className':'ac-btns-search'
+    "search": {
+        "colors": "primary",
+        "hotkey": "ctrl+enter",
+        "className": "ac-btns-search",
+        "name": "查询"
     },
-    'clear':{//清空
-        'colors':'write',
-        'name_zh_CN':'清空',
-        'name_zh_TW':'清空',
-        'name_en_US':'Clear',
-        'hotkey':'ctrl+r',
-        'className':'ac-btns-clear'
+    "clear": {
+        "colors": "write",
+        "hotkey": "ctrl+r",
+        "className": "ac-btns-clear",
+        "name": "清空"
     },
-    'empty':{//置空
-        'colors':'write',
-        'name_zh_CN':'清空',
-        'name_zh_TW':'清空',
-        'name_en_US':'Clear',
-        'hotkey':'ctrl+r',
-        'className':'ac-btns-empty'
+    "empty": {
+        "colors": "write",
+        "hotkey": "ctrl+r",
+        "className": "ac-btns-empty",
+        "name": "清空"
     },
-    'export':{//导出
-        'colors':'write',
-        'name_zh_CN':'导出',
-        'name_zh_TW':'導出',
-        'name_en_US':'Export',
-        'hotkey':'',
-        'className':'ac-btns-export'
+    "export": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-export",
+        "name": "导出"
     },
-    'import':{//导入
-        'colors':'write',
-        'name_zh_CN':'导入',
-        'name_zh_TW':'導入',
-        'name_en_US':'Import',
-        'hotkey':'',
-        'className':'ac-btns-import'
+    "import": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-import",
+        "name": "导入"
     },
-    'template':{//导入模板下载
-        'colors':'write',
-        'name_zh_CN':'导入模板下载',
-        'name_zh_TW':'導入模板下載',
-        'name_en_US':'Import template download',
-        'hotkey':'',
-        'className':'ac-btns-template'
+    "template": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-template",
+        "name": "导入模板下载"
     },
-    'save':{//保存
-        'colors':'primary',
-        'name_zh_CN':'保存',
-        'name_zh_TW':'保存',
-        'name_en_US':'Save',
-        'hotkey':'',
-        'className':'ac-btns-save'
+    "save": {
+        "colors": "primary",
+        "hotkey": "",
+        "className": "ac-btns-save",
+        "name": "保存"
     },
-    'cancel':{//取消
-        'colors':'write',
-        'name_zh_CN':'取消',
-        'name_zh_TW':'取消',
-        'name_en_US':'Cancel',
-        'hotkey':'',
-        'className':'ac-btns-cancel'
+    "cancel": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-cancel",
+        "name": "取消"
     },
-    'update':{//修改
-        'colors':'write',
-        'name_zh_CN':'修改',
-        'name_zh_TW':'修改',
-        'name_en_US':'Modify',
-        'hotkey':'',
-        'className':'ac-btns-update'
+    "update": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-update",
+        "name": "修改"
     },
-    'delete':{//删除
-        'colors':'write',
-        'name_zh_CN':'删除',
-        'name_zh_TW':'刪除',
-        'name_en_US':'Delete',
-        'hotkey':'',
-        'className':'ac-btns-delete'
+    "delete": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-delete",
+        "name": "删除"
     },
-    'pbmsubmit':{//提交
-        'colors':'write',
-        'name_zh_CN':'提交',
-        'name_zh_TW':'提交',
-        'name_en_US':'Submit',
-        'hotkey':'',
-        'className':'ac-btns-pbmsubmit'
+    "pbmsubmit": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-pbmsubmit",
+        "name": "提交"
     },
-    'pbmcancle':{//撤回
-        'colors':'write',
-        'name_zh_CN':'撤回',
-        'name_zh_TW':'撤回',
-        'name_en_US':'Recall',
-        'hotkey':'',
-        'className':'ac-btns-pbmcancle'
+    "pbmcancle": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-pbmcancle",
+        "name": "撤回"
     },
-    'pbmapprove':{//审批
-        'colors':'write',
-        'name_zh_CN':'审批',
-        'name_zh_TW':'審批',
-        'name_en_US':'Approval',
-        'hotkey':'',
-        'className':'ac-btns-pbmapprove'
+    "pbmapprove": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-pbmapprove",
+        "name": "审批"
     },
-    'appoint': { //指派
-        'colors': 'write',
-        'name_zh_CN': '指派',
-        'name_zh_TW': '指派',
-        'name_en_US': 'Appoint',
-        'hotkey': '',
-        'className': 'ac-btns-appoint'
+    "appoint": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-appoint",
+        "name": "指派"
     },
-    'printpreview':{//打印预览
-        'colors':'write',
-        'name_zh_CN':'打印预览',
-        'name_zh_TW':'打印預覽',
-        'name_en_US':'Print Preview',
-        'className':'ac-btns-printpreview'
+    "send": {
+        "colors": "write",
+        "hotkey": "",
+        "className": "ac-btns-send",
+        "name": "发送"
     },
-    'printdesign':{//打印设计
-        'colors':'write',
-        'name_zh_CN':'打印设计',
-        'name_zh_TW':'打印設計',
-        'name_en_US':'Print Design',
-        'className':'ac-btns-printdesign'
+    "printpreview": {
+        "colors": "write",
+        "className": "ac-btns-printpreview",
+        "name": "打印预览"
     },
-    'upload':{//上传
-        'colors':'primary',
-        'name_zh_CN':'上传',
-        'name_zh_TW':'上傳',
-        'name_en_US':'Upload',
-        'className':'ac-btns-upload'
+    "printdesign": {
+        "colors": "write",
+        "className": "ac-btns-printdesign",
+        "name": "打印设计"
     },
-    'reupload':{//重新上传
-        'colors':'primary',
-        'name_zh_CN':'重新上传',
-        'name_zh_TW':'重新上傳',
-        'name_en_US':'Re-upload',
-        'className':'ac-btns-reupload'
+    "upload": {
+        "colors": "primary",
+        "className": "ac-btns-upload",
+        "name": "上传"
     },
-    'download':{//下载
-        'colors':'write',
-        'name_zh_CN':'下载',
-        'name_zh_TW':'下載',
-        'name_en_US':'Download',
-        'className':'ac-btns-download'
+    "reupload": {
+        "colors": "primary",
+        "className": "ac-btns-reupload",
+        "name": "重新上传"
     },
-    'addRow':{//增行
-        'colors':'write',
-        'name_zh_CN':'增行',
-        'name_zh_TW':'增行',
-        'name_en_US':'New',
-        'className':'ac-btns-addRow'
+    "download": {
+        "colors": "write",
+        "className": "ac-btns-download",
+        "name": "下载"
     },
-    'delRow':{//删行
-        'colors':'write',
-        'name_zh_CN':'删行',
-        'name_zh_TW':'刪行',
-        'name_en_US':'Delete',
-        'className':'ac-btns-delRow'
+    "addRow": {
+        "colors": "write",
+        "className": "ac-btns-addRow",
+        "name": "增行"
     },
-    'copyRow':{//复制行
-        'colors':'write',
-        'name_zh_CN':'复制行',
-        'name_zh_TW':'複製行',
-        'name_en_US':'Duplicate rows',
-        'className':'ac-btns-copyRow'
+    "delRow": {
+        "colors": "write",
+        "className": "ac-btns-delRow",
+        "name": "删行"
     },
-    'max':{//最大化
-        'colors':'write',
-        'name_zh_CN':'最大化',
-        'name_zh_TW':'最大化',
-        'name_en_US':'Maximize',
-        'className':'ac-btns-max'
+    "copyRow": {
+        "colors": "write",
+        "className": "ac-btns-copyRow",
+        "name": "复制行"
     },
-    'min':{//最小化
-        'colors':'write',
-        'name_zh_CN':'min',
-        'name_zh_TW':'最小化',
-        'name_en_US':'Minimize',
-        'className':'ac-btns-min'
+    "max": {
+        "colors": "write",
+        "className": "ac-btns-max",
+        "name": "最大化"
     },
-    'copyToEnd':{//粘贴至末行
-        'colors':'write',
-        'name_zh_CN':'粘贴至末行',
-        'name_zh_TW':'粘貼至末行',
-        'name_en_US':'Paste to end line',
-        'className':'ac-btns-copyToEnd'
+    "min": {
+        "colors": "write",
+        "className": "ac-btns-min",
+        "name": "min"
     },
-    'organizationChat':{//机构图
-        'colors':'write',
-        'name_zh_CN':'机构图',
-        'name_zh_TW':'機構圖',
-        'name_en_US':'Organization Chat',
-        'className':'ac-btns-organizationChat'
+    "copyToEnd": {
+        "colors": "write",
+        "className": "ac-btns-copyToEnd",
+        "name": "粘贴至末行"
     },
-    'enable':{//启用
-        'colors':'write',
-        'name_zh_CN':'启用',
-        'name_zh_TW':'啟用',
-        'name_en_US':'Enable',
-        'className':'ac-btns-enable'
+    "copyToHere": {
+        "colors": "write",
+        "className": "ac-btns-copyToHere",
+        "name": "粘贴至此处"
     },
-    'disabled':{//停用
-        'colors':'write',
-        'name_zh_CN':'停用',
-        'name_zh_TW':'停用',
-        'name_en_US':'Disabled',
-        'className':'ac-btns-disabled'
+    "organizationChat": {
+        "colors": "write",
+        "className": "ac-btns-organizationChat",
+        "name": "机构图"
     },
-    'next':{//下一条
-        'colors':'write',
-        'name_zh_CN':'下一条',
-        'name_zh_TW':'下一條',
-        'name_en_US':'Next',
-        'className':'ac-btns-next'
+    "enable": {
+        "colors": "write",
+        "className": "ac-btns-enable",
+        "name": "启用"
     },
-    'previous':{//上一条
-        'colors':'write',
-        'name_zh_CN':'上一条',
-        'name_zh_TW':'上一條',
-        'name_en_US':'Previous',
-        'className':'ac-btns-previous'
+    "disabled": {
+        "colors": "write",
+        "className": "ac-btns-disabled",
+        "name": "停用"
     },
-    'first':{//第一条
-        'colors':'write',
-        'name_zh_CN':'第一条',
-        'name_zh_TW':'第一條',
-        'name_en_US':'First',
-        'className':'ac-btns-first'
+    "next": {
+        "colors": "write",
+        "className": "ac-btns-next",
+        "name": "下一条"
     },
-    'last':{//最后一条
-        'colors':'write',
-        'name_zh_CN':'最后一条',
-        'name_zh_TW':'最後一條',
-        'name_en_US':'Last',
-        'className':'ac-btns-last'
+    "previous": {
+        "colors": "write",
+        "className": "ac-btns-previous",
+        "name": "上一条"
     },
+    "first": {
+        "colors": "write",
+        "className": "ac-btns-first",
+        "name": "第一条"
+    },
+    "last": {
+        "colors": "write",
+        "className": "ac-btns-last",
+        "name": "最后一条"
+    }
 }

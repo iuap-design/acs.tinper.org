@@ -6,15 +6,35 @@
     &-item {
         padding: 0;
         margin-bottom: 8px;
-
+        .u-form-control{
+            padding: 0 8px;
+        }
         input,
         .u-select .u-select-selection,
-        .u-input-number {
+        .u-input-number,.u-input-number.u-input-group>span:first-child,.u-input-number.u-input-group>span:last-child {
             border-color: #d5d6d9;
+        }
+        input.u-form-control:hover,.u-select-enabled .u-select-selection:hover,.u-input-number:hover{
+            border-color: #8cc6ff;
+        }
+        input.u-form-control:active,.u-select .u-select-selection:active,.u-input-number:active,
+        input.u-form-control:focus,.u-select .u-select-selection:focus,.u-input-number:focus{
+            border-color: #007ace;
+        }
+        .u-select .u-select-arrow,.datepicker-container .u-input-group-btn,.datepicker-input-group .u-input-group-btn,
+        .u-input-number.u-input-group > span:first-child,.u-input-number.u-input-group > span:last-child,
+        .u-input-group.simple .u-input-group-btn{
+            color: #adb4bc;
+        }
+        .u-select .u-select-arrow,.u-input-group.simple .u-input-group-btn{
+            right: 8px;
+        }
+        .u-select-selection-placeholder, .u-select-search-field-placeholder{
+            left: 8px;
         }
 
         .u-select-selection--single .u-select-selection-selected-value{
-            padding-left: 12px;
+            padding-left: 8px;
         }
         .u-label {
             display: inline-block;
@@ -29,6 +49,9 @@
             display: inline-block;
             height: 32px;
             font-size: 13px;
+        }
+        .ncc-refer-container .refer-wrapper .refer-wrapper-content{
+            height: 32px;
         }
 
         .container-refer {
@@ -48,7 +71,9 @@
 
             .u-form-control,
             .u-input-number,
-            .u-input-number.u-input-group.simple .u-input-group-btn {
+            .u-input-number.u-input-group.simple .u-input-group-btn,
+            .u-select .u-select-selection,
+            .ncc-refer-container .refer-wrapper .refer-wrapper-content {
                 border-color: #f53c32;
             }
 
@@ -57,15 +82,6 @@
                 color: #f53c32;
             }
 
-            .container-refer {
-
-                //mdf参照
-                .ant-search-input-wrapper {
-                    .ant-input {
-                        border-color: #f53c32;
-                    }
-                }
-            }
         }
 
         .datepicker-input-group .u-form-control {
@@ -117,6 +133,8 @@
                 border-radius: 4px;
                 background: #fff;
                 box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3);
+                top: 5px;
+                position: relative;
             }
         }
 
@@ -131,6 +149,7 @@
             transform: rotate(45deg);
             border-right: 1px solid #d5d6d9;
             border-bottom: 1px solid #d5d6d9;
+            bottom: 0;
         }
 
 
@@ -253,3 +272,48 @@
         }
     }
 }
+.ac-form-layout-row > div {
+    padding: 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+//参照样式
+// .referModal{
+//     .fixedDataTableRowLayout_rowWrapper,
+//     .fixedDataTableRowLayout_main,
+//     .fixedDataTableCellGroupLayout_cellGroupWrapper,
+//     .fixedDataTableCellGroupLayout_cellGroup,
+//     .fixedDataTableCellLayout_main,
+//     .fixedDataTableCellLayout_columnResizerContainer,
+//     .fixedDataTableCellLayout_columnResizerKnob,
+//     .fixedDataTableCellLayout_wrap1{
+//         height: 35px!important;
+//     }
+// }
+//参照样式
+// .ncc-refer-model.ant-modal.referModal{
+//     .columnSetting{
+//         background: #eceff5;
+//         .SettingBtn,.SettingBtn:hover{
+//             background: #eceff5;
+//         }
+//     }
+//     .pagination-new .ant-pagination.mini{
+//         text-align: center;
+//     }
+//     .ant-modal-footer{
+//         padding: 7px 20px;
+//         .refer-footer-btns-container{
+//             button.ant-btn-primary{
+//                 border: 1px solid #e14c46;
+//             }
+//             .refer-modal-footer-cancle-btn{
+//                 margin-left: 8px;
+//             }
+//         }
+       
+//     }
+// }

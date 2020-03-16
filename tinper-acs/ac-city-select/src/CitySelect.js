@@ -206,10 +206,12 @@ class CitySelect extends Component {
             let { provinceData } = this.state;
             let { disabledCityArr, disabledAreaObj, lang } = this.props;
             index = this.getIndex('province', value);
-            citesInitArr = this.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
-            areasInitData = this.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-            city = cityValue ? cityValue : citesInitArr[0].name;
-            area = areaValue ? areaValue : areasInitData[0].name;
+            if(index > -1){
+                citesInitArr = this.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
+                areasInitData = this.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
+                city = cityValue ? cityValue : citesInitArr[0].name;
+                area = areaValue ? areaValue : areasInitData[0].name;
+            }
         }
         this.setState({
             province: value,
@@ -230,8 +232,10 @@ class CitySelect extends Component {
         let { disabledAreaObj, lang } = this.props;
         if(value !== ''){
             index = this.getIndex('city', value);
-            areasInitData = this.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-            area = areasInitData[0].name;
+            if(index > -1){
+                areasInitData = this.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
+                area = areasInitData[0].name;
+            }
         }
         this.setState({
             secondCity: value,

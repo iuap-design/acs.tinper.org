@@ -378,10 +378,12 @@ var _initialiseProps = function _initialiseProps() {
                 lang = _props2.lang;
 
             index = _this3.getIndex('province', value);
-            citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
-            areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
-            city = cityValue ? cityValue : citesInitArr[0].name;
-            area = areaValue ? areaValue : areasInitData[0].name;
+            if (index > -1) {
+                citesInitArr = _this3.buildInitDataArr(provinceData[index].city, disabledCityArr, lang);
+                areasInitData = _this3.buildAreaInitData(citesInitArr[0].area, citesInitArr[0].name, disabledAreaObj, lang);
+                city = cityValue ? cityValue : citesInitArr[0].name;
+                area = areaValue ? areaValue : areasInitData[0].name;
+            }
         }
         _this3.setState({
             province: value,
@@ -408,8 +410,10 @@ var _initialiseProps = function _initialiseProps() {
 
         if (value !== '') {
             index = _this3.getIndex('city', value);
-            areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-            area = areasInitData[0].name;
+            if (index > -1) {
+                areasInitData = _this3.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
+                area = areasInitData[0].name;
+            }
         }
         _this3.setState({
             secondCity: value,

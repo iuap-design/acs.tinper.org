@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(269);var Demo2 = __webpack_require__(377);var Demo3 = __webpack_require__(378);var Demo4 = __webpack_require__(379);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基本使用", "code": "/**\n *\n * @title 基本使用\n * @description 基本使用\n *\n */\nimport React, { Component } from 'react';\nimport { ButtonGroup, Button } from 'tinper-bee';\nimport Btns from 'ac-btns'\n\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    confirm: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    search:{\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    detail:{\n        onClick: () => {\n            console.log('detail')\n        }\n    },\n    cancel:{\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    import: {\n        onClick: () => {\n            console.log('import')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    template: {\n        onClick: () => {\n            console.log('template')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    appoint: {\n        onClick: () => {\n            console.log('appoint')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    reupload: {\n        onClick: () => {\n            console.log('reupload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n    min: {\n        onClick: () => {\n            console.log('min')\n        }\n    },\n    organizationChat:{\n        onClick: () => {\n            console.log('organizationChat')\n        }\n    },\n    download:{\n        onClick: () => {\n            console.log('download')\n        }\n    },\n    enable:{\n        onClick: () => {\n            console.log('enable')\n        }\n    },\n    disabled:{\n        onClick: () => {\n            console.log('disabled')\n        }\n    },\n    \n}\nclass Demo1 extends Component {\n\n    render() {\n        return (\n            <div>\n                <div>\n                    <Btns btns = {btns} />\n                </div>\n                <ButtonGroup>\n                    <Btns\n                        btns={{\n                            first:{\n                                onClick: () => {\n                                    console.log('first')\n                                }\n                            },\n                            previous:{\n                                onClick: () => {\n                                    console.log('previous')\n                                }\n                            },\n                            next:{\n                                onClick: () => {\n                                    console.log('next')\n                                }\n                            },\n                            last:{\n                                onClick: () => {\n                                    console.log('last')\n                                }\n                            }\n                        }}\n                    />\n                </ButtonGroup>\n            </div>\n            \n        )\n        \n    }\n}\nexport default Demo1", "desc": " 基本使用" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 不使用 Button 按钮", "code": "/**\n *\n * @title 不使用 Button 按钮\n * @description type='line'  使用与表格行内操作列\n *\n */\nimport React, { Component } from 'react';\nimport Btns from 'ac-btns'\n\n\nlet btnsAll = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    confirm: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    search:{\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    detail:{\n        onClick: () => {\n            console.log('detail')\n        }\n    },\n    cancel:{\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n    min: {\n        onClick: () => {\n            console.log('min')\n        }\n    },\n    organizationChat:{\n        onClick: () => {\n            console.log('organizationChat')\n        }\n    },\n    download:{\n        onClick: () => {\n            console.log('download')\n        }\n    },\n    enable:{\n        onClick: () => {\n            console.log('enable')\n        }\n    },\n    disabled:{\n        onClick: () => {\n            console.log('disabled')\n        }\n    },\n    download:{\n        onClick: () => {\n            console.log('download')\n        }\n    },\n    \n}\n\nlet btns = {\n    update: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    detail:{\n        onClick: () => {\n            console.log('detail')\n        }\n    },\n    enable: {\n        onClick: () => {\n            console.log('enable')\n        }\n    },\n    disabled: {\n        onClick: () => {\n            console.log('disabled')\n        }\n    },\n}\n\nclass Demo1 extends Component {\n\n    render() {\n        return <div className='demo2'>\n            <div className='demo2-title'> 超过3个换更多按钮 </div>\n            <Btns type='line' btns = {btns} />\n            <div className='demo2-title'>全部展示</div>\n            <Btns type='line' btns = {btnsAll} maxSize={99  }/>\n        </div>\n    }\n}\nexport default Demo1", "desc": " type='line'  使用与表格行内操作列", "scss_code": ".demo2{\n    &-title{\n        margin-top: 10px;\n        margin-bottom: 10px;\n    }\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 使用按钮权限", "code": "/**\n *\n * @title 使用按钮权限\n * @description 传入 powerBtns，最终显示按钮是 pwoerBtns和btn说的交集\n *\n */\nimport React, { Component } from 'react';\nimport Btns from 'ac-btns'\n\n\nlet powerBtns = ['add', 'search', 'clear', 'export', 'save', 'cancel',\n                'update', 'delete', 'pbmsubmit', 'pbmcancle', 'pbmapprove',\n                'printpreview']\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    search: {\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n}\n\nclass Demo1 extends Component {\n\n    render() {\n        return <div>\n            <Btns btns = {btns} powerBtns={powerBtns}/>\n            \n        </div>\n    }\n}\nexport default Demo1", "desc": " 传入 powerBtns，最终显示按钮是 pwoerBtns和btn说的交集" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 按钮扩展", "code": "/**\n *\n * @title 按钮扩展\n * @description 使用 addToBtns\n *\n */\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\nimport Btns from 'ac-btns'\n\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    search:{\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    cancel:{\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n    min: {\n        onClick: () => {\n            console.log('min')\n        }\n    },\n    example1: {\n        onClick: () => {\n            console.log('example1')\n        }\n    },\n    example2: {\n        onClick: () => {\n            console.log('example2')\n        }\n    },\n}\nclass Demo1 extends Component {\n\n    render() {\n        return <Btns btns = {btns} \n            addToBtns={\n                {\n                    'example1':{ \n                        'colors':'write',\n                        'name_zh_CN':'测试按钮1',\n                        'name_zh_TW':'測試按鈕1',\n                        'name_en_US':'Test Button1',\n                        'className':'ac-btns-example1'\n                    },\n                    'example2':{ \n                        'colors':'write',\n                        'name_zh_CN':'测试按钮2',\n                        'name_zh_TW':'測試按鈕2',\n                        'name_en_US':'Test Button2',\n                        'className':'ac-btns-example2'\n                    },\n                }\n            }\n        />\n    }\n}\nexport default Demo1", "desc": " 使用 addToBtns" }];
+	var Demo1 = __webpack_require__(269);var Demo2 = __webpack_require__(378);var Demo3 = __webpack_require__(379);var Demo4 = __webpack_require__(380);var Demo5 = __webpack_require__(381);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 基本使用", "code": "/**\n *\n * @title 基本使用\n * @description 基本使用\n *\n */\nimport React, { Component } from 'react';\nimport { ButtonGroup, Button } from 'tinper-bee';\nimport Btns from 'ac-btns'\n\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    confirm: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    search:{\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    detail:{\n        onClick: () => {\n            console.log('detail')\n        }\n    },\n    cancel:{\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    import: {\n        onClick: () => {\n            console.log('import')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    template: {\n        onClick: () => {\n            console.log('template')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    appoint: {\n        onClick: () => {\n            console.log('appoint')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    reupload: {\n        onClick: () => {\n            console.log('reupload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    copyToHere: {\n        onClick: () => {\n            console.log('copyToHere')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n    min: {\n        onClick: () => {\n            console.log('min')\n        }\n    },\n    organizationChat:{\n        onClick: () => {\n            console.log('organizationChat')\n        }\n    },\n    download:{\n        onClick: () => {\n            console.log('download')\n        }\n    },\n    enable:{\n        onClick: () => {\n            console.log('enable')\n        }\n    },\n    disabled:{\n        onClick: () => {\n            console.log('disabled')\n        }\n    },\n    \n}\nclass Demo1 extends Component {\n\n    render() {\n        return (\n            <div>\n                <div>\n                    <Btns btns = {btns} />\n                </div>\n                <ButtonGroup>\n                    <Btns\n                        btns={{\n                            first:{\n                                onClick: () => {\n                                    console.log('first')\n                                }\n                            },\n                            previous:{\n                                onClick: () => {\n                                    console.log('previous')\n                                }\n                            },\n                            next:{\n                                onClick: () => {\n                                    console.log('next')\n                                }\n                            },\n                            last:{\n                                onClick: () => {\n                                    console.log('last')\n                                }\n                            }\n                        }}\n                    />\n                </ButtonGroup>\n            </div>\n            \n        )\n        \n    }\n}\nexport default Demo1", "desc": " 基本使用" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 不使用 Button 按钮", "code": "/**\n *\n * @title 不使用 Button 按钮\n * @description type='line' or type='icon'  两种展示形式\n *\n */\nimport React, { Component } from 'react';\nimport Btns from 'ac-btns'\n\n\nlet btnsAll = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    confirm: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    search:{\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    detail:{\n        onClick: () => {\n            console.log('detail')\n        }\n    },\n    cancel:{\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n    min: {\n        onClick: () => {\n            console.log('min')\n        }\n    },\n    organizationChat:{\n        onClick: () => {\n            console.log('organizationChat')\n        }\n    },\n    download:{\n        onClick: () => {\n            console.log('download')\n        }\n    },\n    enable:{\n        onClick: () => {\n            console.log('enable')\n        }\n    },\n    disabled:{\n        onClick: () => {\n            console.log('disabled')\n        }\n    },\n    download:{\n        onClick: () => {\n            console.log('download')\n        }\n    },\n    \n}\n\nlet btns = {\n    update: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    detail:{\n        onClick: () => {\n            console.log('detail')\n        }\n    },\n    enable: {\n        onClick: () => {\n            console.log('enable')\n        }\n    },\n    disabled: {\n        onClick: () => {\n            console.log('disabled')\n        }\n    },\n}\n\nlet btns2 = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        },\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n}\nclass Demo1 extends Component {\n\n    render() {\n        return <div className='demo2'>\n            <div className='demo2-title'> 超过3个换更多按钮 </div>\n            <Btns type='line' btns = {btns} />\n            <div className='demo2-title'>全部展示</div>\n            <Btns type='line' btns = {btnsAll} maxSize={99} />\n            <div className='demo2-title'>图标类型</div>\n            <Btns type='icon' btns = {btns2} maxSize={99}/>\n        </div>\n    }\n}\nexport default Demo1", "desc": " type='line' or type='icon'  两种展示形式", "scss_code": ".demo2{\n    &-title{\n        margin-top: 10px;\n        margin-bottom: 10px;\n    }\n}" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 使用按钮权限", "code": "/**\n *\n * @title 使用按钮权限\n * @description 传入 powerBtns，最终显示按钮是 pwoerBtns和btn说的交集\n *\n */\nimport React, { Component } from 'react';\nimport Btns from 'ac-btns'\n\n\nlet powerBtns = ['add', 'search', 'clear', 'export', 'save', 'cancel',\n                'update', 'delete', 'pbmsubmit', 'pbmcancle', 'pbmapprove',\n                'printpreview']\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    search: {\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n}\n\nclass Demo1 extends Component {\n\n    render() {\n        return <div>\n            <Btns btns = {btns} powerBtns={powerBtns}/>\n            \n        </div>\n    }\n}\nexport default Demo1", "desc": " 传入 powerBtns，最终显示按钮是 pwoerBtns和btn说的交集" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 按钮扩展", "code": "/**\n *\n * @title 按钮扩展\n * @description 使用 addToBtns\n *\n */\nimport React, { Component } from 'react';\nimport Btns from 'ac-btns'\n\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    search:{\n        onClick: () => {\n            console.log('search')\n        }\n    },\n    cancel:{\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    clear: {\n        onClick: () => {\n            console.log('clear')\n        }\n    },\n    empty: {\n        onClick: () => {\n            console.log('empty')\n        }\n    },\n    export: {\n        onClick: () => {\n            console.log('export')\n        }\n    },\n    save: {\n        onClick: () => {\n            console.log('save')\n        }\n    },\n    cancel: {\n        onClick: () => {\n            console.log('cancel')\n        }\n    },\n    update: {\n        onClick: () => {\n            console.log('update')\n        }\n    },\n    delete: {\n        onClick: () => {\n            console.log('delete')\n        }\n    },\n    pbmsubmit: {\n        onClick: () => {\n            console.log('pbmsubmit')\n        }\n    },\n    pbmcancle: {\n        onClick: () => {\n            console.log('pbmcancle')\n        }\n    },\n    pbmapprove: {\n        onClick: () => {\n            console.log('pbmapprove')\n        }\n    },\n    printpreview: {\n        onClick: () => {\n            console.log('printpreview')\n        }\n    },\n    printdesign: {\n        onClick: () => {\n            console.log('printdesign')\n        }\n    },\n    upload: {\n        onClick: () => {\n            console.log('upload')\n        }\n    },\n    addRow: {\n        onClick: () => {\n            console.log('addRow')\n        }\n    },\n    delRow: {\n        onClick: () => {\n            console.log('delRow')\n        }\n    },\n    copyRow: {\n        onClick: () => {\n            console.log('copyRow')\n        }\n    },\n    copyToEnd: {\n        onClick: () => {\n            console.log('copyToEnd')\n        }\n    },\n    max: {\n        onClick: () => {\n            console.log('max')\n        }\n    },\n    min: {\n        onClick: () => {\n            console.log('min')\n        }\n    },\n    example1: {\n        onClick: () => {\n            console.log('example1')\n        }\n    },\n    example2: {\n        onClick: () => {\n            console.log('example2')\n        }\n    },\n}\nclass Demo1 extends Component {\n\n    render() {\n        return <Btns btns = {btns} \n            addToBtns={\n                {\n                    'example1':{ \n                        'colors':'write',\n                        'name':'测试按钮1',\n                        'className':'ac-btns-example1'\n                    },\n                    'example2':{ \n                        'colors':'write',\n                        'name':'测试按钮2',\n                        'className':'ac-btns-example2'\n                    },\n                }\n            }\n        />\n    }\n}\nexport default Demo1", "desc": " 使用 addToBtns" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 多语示例", "code": "/**\n *\n * @title 多语示例\n * @description 多语示例\n *\n */\nimport React, { Component } from 'react';\nimport Btns from 'ac-btns';\nimport en_US from 'ac-btns/build/locale/en_US';\n\n\nlet btns = {\n    add: {\n        onClick: () => {\n            console.log('add')\n        }\n    },\n    confirm: {\n        onClick: () => {\n            console.log('confirm')\n        }\n    },\n    \n    \n}\nclass Demo1 extends Component {\n\n    render() {\n        return (\n            <div>\n                <Btns btns = {btns} locale={en_US}/>\n            </div>\n            \n        )\n        \n    }\n}\nexport default Demo1", "desc": " 多语示例" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -7580,6 +7580,12 @@
 	
 	var deselectCurrent = __webpack_require__(70);
 	
+	var clipboardToIE11Formatting = {
+	  "text/plain": "Text",
+	  "text/html": "Url",
+	  "default": "Text"
+	}
+	
 	var defaultMessage = "Copy to clipboard: #{key}, Enter";
 	
 	function format(message) {
@@ -7624,8 +7630,20 @@
 	      e.stopPropagation();
 	      if (options.format) {
 	        e.preventDefault();
-	        e.clipboardData.clearData();
-	        e.clipboardData.setData(options.format, text);
+	        if (typeof e.clipboardData === "undefined") { // IE 11
+	          debug && console.warn("unable to use e.clipboardData");
+	          debug && console.warn("trying IE specific stuff");
+	          window.clipboardData.clearData();
+	          var format = clipboardToIE11Formatting[options.format] || clipboardToIE11Formatting["default"]
+	          window.clipboardData.setData(format, text);
+	        } else { // all other browsers
+	          e.clipboardData.clearData();
+	          e.clipboardData.setData(options.format, text);
+	        }
+	      }
+	      if (options.onCopy) {
+	        e.preventDefault();
+	        options.onCopy(e.clipboardData);
 	      }
 	    });
 	
@@ -7644,6 +7662,7 @@
 	    debug && console.warn("trying IE specific stuff");
 	    try {
 	      window.clipboardData.setData(options.format || "text", text);
+	      options.onCopy && options.onCopy(window.clipboardData);
 	      success = true;
 	    } catch (err) {
 	      debug && console.error("unable to copy using clipboardData: ", err);
@@ -37141,6 +37160,10 @@
 	    onClick: function onClick() {
 	        console.log('copyToEnd');
 	    }
+	}), _defineProperty(_btns, 'copyToHere', {
+	    onClick: function onClick() {
+	        console.log('copyToHere');
+	    }
 	}), _defineProperty(_btns, 'max', {
 	    onClick: function onClick() {
 	        console.log('max');
@@ -37453,9 +37476,15 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _zh_CN = __webpack_require__(377);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -37470,10 +37499,11 @@
 	    addToBtns: _propTypes2['default'].object, //所有的按钮，支持扩展
 	    powerBtns: _propTypes2['default'].array, // 按钮权限 code数组
 	    btns: _propTypes2['default'].object, // 按钮对象数组
-	    type: _propTypes2['default'].oneOfType(['button', 'line']),
+	    type: _propTypes2['default'].oneOfType(['button', 'line', 'icon']),
 	    maxSize: _propTypes2['default'].number,
 	    forcePowerBtns: _propTypes2['default'].array, //不受权限控制的按钮code数组
-	    localeCookie: _propTypes2['default'].string //当前语种的cookie key值
+	    iconTypes: _propTypes2['default'].object,
+	    locale: _propTypes2['default'].object
 	};
 	var defaultProps = {
 	    addToBtns: {},
@@ -37481,23 +37511,13 @@
 	    type: 'button',
 	    maxSize: 2,
 	    forcePowerBtns: ['cancel', 'search', 'clear', 'empty'], //取消、查询、清空、置空不受权限管理控制
-	    localeCookie: 'locale',
-	    onClick: function onClick() {}
-	};
-	
-	var getCookie = function getCookie(name) {
-	    var cookieValue = null;
-	    if (document.cookie && document.cookie != '') {
-	        var cookies = document.cookie.split(';');
-	        for (var i = 0; i < cookies.length; i++) {
-	            var cookie = cookies[i].trim();
-	            if (cookie.substring(0, name.length + 1) == name + '=') {
-	                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	                break;
-	            }
-	        }
-	    }
-	    return cookieValue;
+	    onClick: function onClick() {},
+	    iconTypes: { //默认code对应的图标
+	        add: 'uf-add-c-o',
+	        update: 'uf-pencil',
+	        'delete': 'uf-del'
+	    },
+	    locale: _zh_CN2['default']
 	};
 	
 	var Btns = function (_Component) {
@@ -37522,10 +37542,8 @@
 	                maxSize = _this$props.maxSize,
 	                powerBtns = _this$props.powerBtns,
 	                forcePowerBtns = _this$props.forcePowerBtns,
-	                localeCookie = _this$props.localeCookie;
+	                locale = _this$props.locale;
 	
-	            var more = '更多';
-	            if (getCookie(localeCookie) == 'en_US') more = 'more';
 	            var btnArray = [];
 	            if (powerBtns) {
 	                Object.keys(btns).map(function (item) {
@@ -37541,7 +37559,7 @@
 	                });
 	            }
 	
-	            if (type == 'line') {
+	            if (type == 'line' || type == 'icon') {
 	                if (btnArray.length > maxSize) {
 	                    var menusList = _react2['default'].createElement(
 	                        _beeMenus2['default'],
@@ -37564,7 +37582,7 @@
 	                        _react2['default'].createElement(
 	                            'span',
 	                            { className: 'ac-btns-item ac-btns-more' },
-	                            more
+	                            locale['_more']
 	                        )
 	                    );
 	                    btnArray.splice(maxSize, btnArray.length - maxSize + 1, drop);
@@ -37582,14 +37600,10 @@
 	            var itemProps = _this.props.btns[key];
 	            var _this$state$allBtns$k = _this.state.allBtns[key],
 	                colors = _this$state$allBtns$k.colors,
-	                className = _this$state$allBtns$k.className,
-	                name = _this$state$allBtns$k.name_zh_CN,
-	                name_zh_TW = _this$state$allBtns$k.name_zh_TW,
-	                name_en_US = _this$state$allBtns$k.name_en_US;
+	                className = _this$state$allBtns$k.className;
 	
+	            var name = _this.props.locale[key] || _btnJSON2['default'][key].name;
 	            var clss = 'ac-btns-item ' + className;
-	            if (getCookie(_this.props.localeCookie) == 'zh_TW') name = name_zh_TW;
-	            if (getCookie(_this.props.localeCookie) == 'en_US') name = name_en_US;
 	            if (itemProps) {
 	                if (itemProps.className) clss += ' ' + itemProps.className;
 	                if (itemProps.name) name = itemProps.name;
@@ -37669,7 +37683,7 @@
 	                                    name
 	                                );
 	                        }
-	                    } else {
+	                    } else if (_this.props.type == 'line') {
 	                        switch (key) {
 	                            case 'search':
 	                                return _react2['default'].createElement(
@@ -37702,6 +37716,16 @@
 	                                    name
 	                                );
 	                        }
+	                    } else if (_this.props.type == 'icon') {
+	                        var iconType = itemProps.iconType,
+	                            other = _objectWithoutProperties(itemProps, ['iconType']);
+	
+	                        iconType = iconType ? iconType : _this.props.iconTypes[key];
+	                        return _react2['default'].createElement(
+	                            'span',
+	                            _extends({ key: key }, other, { colors: colors, className: clss + ' icon', title: name }),
+	                            _react2['default'].createElement(_beeIcon2['default'], { type: iconType })
+	                        );
 	                    }
 	                }
 	            } else {
@@ -37747,274 +37771,215 @@
 /* 274 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports['default'] = {
-	    'add': { //新增
-	        'colors': 'primary',
-	        'name_zh_CN': '新增',
-	        'name_zh_TW': '新增',
-	        'name_en_US': 'New',
-	        'hotkey': 'alt+n',
-	        'className': 'ac-btns-add'
+	exports["default"] = {
+	    "add": {
+	        "colors": "primary",
+	        "hotkey": "alt+n",
+	        "className": "ac-btns-add",
+	        "name": "新增"
 	    },
-	    'confirm': { //确认
-	        'colors': 'primary',
-	        'name_zh_CN': '确认',
-	        'name_zh_TW': '確認',
-	        'name_en_US': 'Confirm',
-	        'className': 'ac-btns-confirm'
+	    "confirm": {
+	        "colors": "primary",
+	        "className": "ac-btns-confirm",
+	        "name": "确认"
 	    },
-	    'detail': { //详情
-	        'colors': 'write',
-	        'name_zh_CN': '详情',
-	        'name_zh_TW': '詳情',
-	        'name_en_US': 'Details',
-	        'className': 'ac-btns-detail'
+	    "detail": {
+	        "colors": "write",
+	        "className": "ac-btns-detail",
+	        "name": "详情"
 	    },
-	    'search': { //查询
-	        'colors': 'primary',
-	        'name_zh_CN': '查询',
-	        'name_zh_TW': '查詢',
-	        'name_en_US': 'Search',
-	        'hotkey': 'ctrl+enter',
-	        'className': 'ac-btns-search'
+	    "search": {
+	        "colors": "primary",
+	        "hotkey": "ctrl+enter",
+	        "className": "ac-btns-search",
+	        "name": "查询"
 	    },
-	    'clear': { //清空
-	        'colors': 'write',
-	        'name_zh_CN': '清空',
-	        'name_zh_TW': '清空',
-	        'name_en_US': 'Clear',
-	        'hotkey': 'ctrl+r',
-	        'className': 'ac-btns-clear'
+	    "clear": {
+	        "colors": "write",
+	        "hotkey": "ctrl+r",
+	        "className": "ac-btns-clear",
+	        "name": "清空"
 	    },
-	    'empty': { //置空
-	        'colors': 'write',
-	        'name_zh_CN': '清空',
-	        'name_zh_TW': '清空',
-	        'name_en_US': 'Clear',
-	        'hotkey': 'ctrl+r',
-	        'className': 'ac-btns-empty'
+	    "empty": {
+	        "colors": "write",
+	        "hotkey": "ctrl+r",
+	        "className": "ac-btns-empty",
+	        "name": "清空"
 	    },
-	    'export': { //导出
-	        'colors': 'write',
-	        'name_zh_CN': '导出',
-	        'name_zh_TW': '導出',
-	        'name_en_US': 'Export',
-	        'hotkey': '',
-	        'className': 'ac-btns-export'
+	    "export": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-export",
+	        "name": "导出"
 	    },
-	    'import': { //导入
-	        'colors': 'write',
-	        'name_zh_CN': '导入',
-	        'name_zh_TW': '導入',
-	        'name_en_US': 'Import',
-	        'hotkey': '',
-	        'className': 'ac-btns-import'
+	    "import": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-import",
+	        "name": "导入"
 	    },
-	    'template': { //导入模板下载
-	        'colors': 'write',
-	        'name_zh_CN': '导入模板下载',
-	        'name_zh_TW': '導入模板下載',
-	        'name_en_US': 'Import template download',
-	        'hotkey': '',
-	        'className': 'ac-btns-template'
+	    "template": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-template",
+	        "name": "导入模板下载"
 	    },
-	    'save': { //保存
-	        'colors': 'primary',
-	        'name_zh_CN': '保存',
-	        'name_zh_TW': '保存',
-	        'name_en_US': 'Save',
-	        'hotkey': '',
-	        'className': 'ac-btns-save'
+	    "save": {
+	        "colors": "primary",
+	        "hotkey": "",
+	        "className": "ac-btns-save",
+	        "name": "保存"
 	    },
-	    'cancel': { //取消
-	        'colors': 'write',
-	        'name_zh_CN': '取消',
-	        'name_zh_TW': '取消',
-	        'name_en_US': 'Cancel',
-	        'hotkey': '',
-	        'className': 'ac-btns-cancel'
+	    "cancel": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-cancel",
+	        "name": "取消"
 	    },
-	    'update': { //修改
-	        'colors': 'write',
-	        'name_zh_CN': '修改',
-	        'name_zh_TW': '修改',
-	        'name_en_US': 'Modify',
-	        'hotkey': '',
-	        'className': 'ac-btns-update'
+	    "update": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-update",
+	        "name": "修改"
 	    },
-	    'delete': { //删除
-	        'colors': 'write',
-	        'name_zh_CN': '删除',
-	        'name_zh_TW': '刪除',
-	        'name_en_US': 'Delete',
-	        'hotkey': '',
-	        'className': 'ac-btns-delete'
+	    "delete": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-delete",
+	        "name": "删除"
 	    },
-	    'pbmsubmit': { //提交
-	        'colors': 'write',
-	        'name_zh_CN': '提交',
-	        'name_zh_TW': '提交',
-	        'name_en_US': 'Submit',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmsubmit'
+	    "pbmsubmit": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmsubmit",
+	        "name": "提交"
 	    },
-	    'pbmcancle': { //撤回
-	        'colors': 'write',
-	        'name_zh_CN': '撤回',
-	        'name_zh_TW': '撤回',
-	        'name_en_US': 'Recall',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmcancle'
+	    "pbmcancle": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmcancle",
+	        "name": "撤回"
 	    },
-	    'pbmapprove': { //审批
-	        'colors': 'write',
-	        'name_zh_CN': '审批',
-	        'name_zh_TW': '審批',
-	        'name_en_US': 'Approval',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmapprove'
+	    "pbmapprove": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmapprove",
+	        "name": "审批"
 	    },
-	    'appoint': { //指派
-	        'colors': 'write',
-	        'name_zh_CN': '指派',
-	        'name_zh_TW': '指派',
-	        'name_en_US': 'Appoint',
-	        'hotkey': '',
-	        'className': 'ac-btns-appoint'
+	    "appoint": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-appoint",
+	        "name": "指派"
 	    },
-	    'printpreview': { //打印预览
-	        'colors': 'write',
-	        'name_zh_CN': '打印预览',
-	        'name_zh_TW': '打印預覽',
-	        'name_en_US': 'Print Preview',
-	        'className': 'ac-btns-printpreview'
+	    "send": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-send",
+	        "name": "发送"
 	    },
-	    'printdesign': { //打印设计
-	        'colors': 'write',
-	        'name_zh_CN': '打印设计',
-	        'name_zh_TW': '打印設計',
-	        'name_en_US': 'Print Design',
-	        'className': 'ac-btns-printdesign'
+	    "printpreview": {
+	        "colors": "write",
+	        "className": "ac-btns-printpreview",
+	        "name": "打印预览"
 	    },
-	    'upload': { //上传
-	        'colors': 'primary',
-	        'name_zh_CN': '上传',
-	        'name_zh_TW': '上傳',
-	        'name_en_US': 'Upload',
-	        'className': 'ac-btns-upload'
+	    "printdesign": {
+	        "colors": "write",
+	        "className": "ac-btns-printdesign",
+	        "name": "打印设计"
 	    },
-	    'reupload': { //重新上传
-	        'colors': 'primary',
-	        'name_zh_CN': '重新上传',
-	        'name_zh_TW': '重新上傳',
-	        'name_en_US': 'Re-upload',
-	        'className': 'ac-btns-reupload'
+	    "upload": {
+	        "colors": "primary",
+	        "className": "ac-btns-upload",
+	        "name": "上传"
 	    },
-	    'download': { //下载
-	        'colors': 'write',
-	        'name_zh_CN': '下载',
-	        'name_zh_TW': '下載',
-	        'name_en_US': 'Download',
-	        'className': 'ac-btns-download'
+	    "reupload": {
+	        "colors": "primary",
+	        "className": "ac-btns-reupload",
+	        "name": "重新上传"
 	    },
-	    'addRow': { //增行
-	        'colors': 'write',
-	        'name_zh_CN': '增行',
-	        'name_zh_TW': '增行',
-	        'name_en_US': 'New',
-	        'className': 'ac-btns-addRow'
+	    "download": {
+	        "colors": "write",
+	        "className": "ac-btns-download",
+	        "name": "下载"
 	    },
-	    'delRow': { //删行
-	        'colors': 'write',
-	        'name_zh_CN': '删行',
-	        'name_zh_TW': '刪行',
-	        'name_en_US': 'Delete',
-	        'className': 'ac-btns-delRow'
+	    "addRow": {
+	        "colors": "write",
+	        "className": "ac-btns-addRow",
+	        "name": "增行"
 	    },
-	    'copyRow': { //复制行
-	        'colors': 'write',
-	        'name_zh_CN': '复制行',
-	        'name_zh_TW': '複製行',
-	        'name_en_US': 'Duplicate rows',
-	        'className': 'ac-btns-copyRow'
+	    "delRow": {
+	        "colors": "write",
+	        "className": "ac-btns-delRow",
+	        "name": "删行"
 	    },
-	    'max': { //最大化
-	        'colors': 'write',
-	        'name_zh_CN': '最大化',
-	        'name_zh_TW': '最大化',
-	        'name_en_US': 'Maximize',
-	        'className': 'ac-btns-max'
+	    "copyRow": {
+	        "colors": "write",
+	        "className": "ac-btns-copyRow",
+	        "name": "复制行"
 	    },
-	    'min': { //最小化
-	        'colors': 'write',
-	        'name_zh_CN': 'min',
-	        'name_zh_TW': '最小化',
-	        'name_en_US': 'Minimize',
-	        'className': 'ac-btns-min'
+	    "max": {
+	        "colors": "write",
+	        "className": "ac-btns-max",
+	        "name": "最大化"
 	    },
-	    'copyToEnd': { //粘贴至末行
-	        'colors': 'write',
-	        'name_zh_CN': '粘贴至末行',
-	        'name_zh_TW': '粘貼至末行',
-	        'name_en_US': 'Paste to end line',
-	        'className': 'ac-btns-copyToEnd'
+	    "min": {
+	        "colors": "write",
+	        "className": "ac-btns-min",
+	        "name": "min"
 	    },
-	    'organizationChat': { //机构图
-	        'colors': 'write',
-	        'name_zh_CN': '机构图',
-	        'name_zh_TW': '機構圖',
-	        'name_en_US': 'Organization Chat',
-	        'className': 'ac-btns-organizationChat'
+	    "copyToEnd": {
+	        "colors": "write",
+	        "className": "ac-btns-copyToEnd",
+	        "name": "粘贴至末行"
 	    },
-	    'enable': { //启用
-	        'colors': 'write',
-	        'name_zh_CN': '启用',
-	        'name_zh_TW': '啟用',
-	        'name_en_US': 'Enable',
-	        'className': 'ac-btns-enable'
+	    "copyToHere": {
+	        "colors": "write",
+	        "className": "ac-btns-copyToHere",
+	        "name": "粘贴至此处"
 	    },
-	    'disabled': { //停用
-	        'colors': 'write',
-	        'name_zh_CN': '停用',
-	        'name_zh_TW': '停用',
-	        'name_en_US': 'Disabled',
-	        'className': 'ac-btns-disabled'
+	    "organizationChat": {
+	        "colors": "write",
+	        "className": "ac-btns-organizationChat",
+	        "name": "机构图"
 	    },
-	    'next': { //下一条
-	        'colors': 'write',
-	        'name_zh_CN': '下一条',
-	        'name_zh_TW': '下一條',
-	        'name_en_US': 'Next',
-	        'className': 'ac-btns-next'
+	    "enable": {
+	        "colors": "write",
+	        "className": "ac-btns-enable",
+	        "name": "启用"
 	    },
-	    'previous': { //上一条
-	        'colors': 'write',
-	        'name_zh_CN': '上一条',
-	        'name_zh_TW': '上一條',
-	        'name_en_US': 'Previous',
-	        'className': 'ac-btns-previous'
+	    "disabled": {
+	        "colors": "write",
+	        "className": "ac-btns-disabled",
+	        "name": "停用"
 	    },
-	    'first': { //第一条
-	        'colors': 'write',
-	        'name_zh_CN': '第一条',
-	        'name_zh_TW': '第一條',
-	        'name_en_US': 'First',
-	        'className': 'ac-btns-first'
+	    "next": {
+	        "colors": "write",
+	        "className": "ac-btns-next",
+	        "name": "下一条"
 	    },
-	    'last': { //最后一条
-	        'colors': 'write',
-	        'name_zh_CN': '最后一条',
-	        'name_zh_TW': '最後一條',
-	        'name_en_US': 'Last',
-	        'className': 'ac-btns-last'
+	    "previous": {
+	        "colors": "write",
+	        "className": "ac-btns-previous",
+	        "name": "上一条"
+	    },
+	    "first": {
+	        "colors": "write",
+	        "className": "ac-btns-first",
+	        "name": "第一条"
+	    },
+	    "last": {
+	        "colors": "write",
+	        "className": "ac-btns-last",
+	        "name": "最后一条"
 	    }
 	};
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 275 */
@@ -48479,6 +48444,58 @@
 
 /***/ }),
 /* 377 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports["default"] = {
+	    "_more": "更多",
+	
+	    "add": "新增",
+	    "confirm": "确认",
+	    "detail": "详情",
+	    "search": "查询",
+	    "clear": "清空",
+	    "empty": "清空",
+	    "export": "导出",
+	    "import": "导入",
+	    "template": "导入模板下载",
+	    "save": "保存",
+	    "cancel": "取消",
+	    "update": "修改",
+	    "delete": "删除",
+	    "pbmsubmit": "提交",
+	    "pbmcancle": "撤回",
+	    "pbmapprove": "审批",
+	    "appoint": "指派",
+	    "send": "发送",
+	    "printpreview": "打印预览",
+	    "printdesign": "打印设计",
+	    "upload": "上传",
+	    "reupload": "重新上传",
+	    "download": "下载",
+	    "addRow": "增行",
+	    "delRow": "删行",
+	    "copyRow": "复制行",
+	    "max": "最大化",
+	    "min": "min",
+	    "copyToEnd": "粘贴至末行",
+	    "copyToHere": "粘贴至此处",
+	    "organizationChat": "机构图",
+	    "enable": "启用",
+	    "disabled": "停用",
+	    "next": "下一条",
+	    "previous": "上一条",
+	    "first": "第一条",
+	    "last": "最后一条"
+	};
+	module.exports = exports["default"];
+
+/***/ }),
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48510,7 +48527,7 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /**
 	                                                                                                                                                                                                                   *
 	                                                                                                                                                                                                                   * @title 不使用 Button 按钮
-	                                                                                                                                                                                                                   * @description type='line'  使用与表格行内操作列
+	                                                                                                                                                                                                                   * @description type='line' or type='icon'  两种展示形式
 	                                                                                                                                                                                                                   *
 	                                                                                                                                                                                                                   */
 	
@@ -48671,6 +48688,24 @@
 	    }
 	};
 	
+	var btns2 = {
+	    add: {
+	        onClick: function onClick() {
+	            console.log('add');
+	        }
+	    },
+	    update: {
+	        onClick: function onClick() {
+	            console.log('update');
+	        }
+	    },
+	    'delete': {
+	        onClick: function onClick() {
+	            console.log('delete');
+	        }
+	    }
+	};
+	
 	var Demo1 = function (_Component) {
 	    _inherits(Demo1, _Component);
 	
@@ -48695,7 +48730,13 @@
 	                { className: 'demo2-title' },
 	                '\u5168\u90E8\u5C55\u793A'
 	            ),
-	            _react2['default'].createElement(_src2['default'], { type: 'line', btns: btnsAll, maxSize: 99 })
+	            _react2['default'].createElement(_src2['default'], { type: 'line', btns: btnsAll, maxSize: 99 }),
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'demo2-title' },
+	                '\u56FE\u6807\u7C7B\u578B'
+	            ),
+	            _react2['default'].createElement(_src2['default'], { type: 'icon', btns: btns2, maxSize: 99 })
 	        );
 	    };
 	
@@ -48706,7 +48747,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 378 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48868,7 +48909,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 379 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48882,10 +48923,6 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _beeButton = __webpack_require__(265);
-	
-	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
 	var _src = __webpack_require__(272);
 	
@@ -49029,16 +49066,12 @@
 	            addToBtns: {
 	                'example1': {
 	                    'colors': 'write',
-	                    'name_zh_CN': '测试按钮1',
-	                    'name_zh_TW': '測試按鈕1',
-	                    'name_en_US': 'Test Button1',
+	                    'name': '测试按钮1',
 	                    'className': 'ac-btns-example1'
 	                },
 	                'example2': {
 	                    'colors': 'write',
-	                    'name_zh_CN': '测试按钮2',
-	                    'name_zh_TW': '測試按鈕2',
-	                    'name_en_US': 'Test Button2',
+	                    'name': '测试按钮2',
 	                    'className': 'ac-btns-example2'
 	                }
 	            }
@@ -49050,6 +49083,133 @@
 	
 	exports['default'] = Demo1;
 	module.exports = exports['default'];
+
+/***/ }),
+/* 381 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _src = __webpack_require__(272);
+	
+	var _src2 = _interopRequireDefault(_src);
+	
+	var _en_US = __webpack_require__(382);
+	
+	var _en_US2 = _interopRequireDefault(_en_US);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 多语示例
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 多语示例
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	
+	var btns = {
+	    add: {
+	        onClick: function onClick() {
+	            console.log('add');
+	        }
+	    },
+	    confirm: {
+	        onClick: function onClick() {
+	            console.log('confirm');
+	        }
+	    }
+	
+	};
+	
+	var Demo1 = function (_Component) {
+	    _inherits(Demo1, _Component);
+	
+	    function Demo1() {
+	        _classCallCheck(this, Demo1);
+	
+	        return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+	    }
+	
+	    Demo1.prototype.render = function render() {
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(_src2['default'], { btns: btns, locale: _en_US2['default'] })
+	        );
+	    };
+	
+	    return Demo1;
+	}(_react.Component);
+	
+	exports['default'] = Demo1;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports["default"] = {
+	    "_more": "More",
+	
+	    "add": "New",
+	    "confirm": "Confirm",
+	    "detail": "Details",
+	    "search": "Search",
+	    "clear": "Clear",
+	    "empty": "Clear",
+	    "export": "Export",
+	    "import": "Import",
+	    "template": "Import template download",
+	    "save": "Save",
+	    "cancel": "Cancel",
+	    "update": "update",
+	    "delete": "Delete",
+	    "pbmsubmit": "Submit",
+	    "pbmcancle": "Recall",
+	    "pbmapprove": "Approval",
+	    "appoint": "Appoint",
+	    "send": "Send",
+	    "printpreview": "Print Preview",
+	    "printdesign": "Print Design",
+	    "upload": "Upload",
+	    "reupload": "Re-upload",
+	    "download": "Download",
+	    "addRow": "New",
+	    "delRow": "Delete",
+	    "copyRow": "Duplicate rows",
+	    "max": "Maximize",
+	    "min": "Minimize",
+	    "copyToEnd": "Paste to end line",
+	    "copyToHere": "Paste here",
+	    "organizationChat": "Organization Chat",
+	    "enable": "Enable",
+	    "disabled": "Disabled",
+	    "next": "Next",
+	    "previous": "Previous",
+	    "first": "First",
+	    "last": "Last"
+	};
+	module.exports = exports["default"];
 
 /***/ })
 /******/ ]);

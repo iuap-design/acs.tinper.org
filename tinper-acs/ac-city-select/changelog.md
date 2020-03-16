@@ -1,10 +1,10 @@
-<a name="0.0.5"></a>
-## [0.0.5](https://github.com/tinper-bee/ac-city-select/compare/v0.0.4...v0.0.5) (2019-08-15)
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/tinper-bee/ac-city-select/compare/v0.0.3...v0.0.6) (2020-01-18)
 
 
+### Bug Fixes
 
-<a name="0.0.4"></a>
-## [0.0.4](https://github.com/tinper-bee/ac-city-select/compare/v0.0.3...v0.0.4) (2019-08-09)
+* value与预置数据不同时报错的问题 ([b714fa7](https://github.com/tinper-bee/ac-city-select/commit/b714fa7))
 
 
 

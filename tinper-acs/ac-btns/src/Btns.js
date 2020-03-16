@@ -6,6 +6,7 @@ import Icon from 'bee-icon';
 import Dropdown from 'bee-dropdown';
 import Menus from 'bee-menus';
 import isequal from 'lodash.isequal';
+import locale from './locale/zh_CN'
 
 const Item = Menus.Item;
 
@@ -17,10 +18,11 @@ const propTypes = {
     addToBtns:PropTypes.object,//所有的按钮，支持扩展
     powerBtns:PropTypes.array,// 按钮权限 code数组
     btns:PropTypes.object,// 按钮对象数组
-    type:PropTypes.oneOfType(['button','line']),
+    type:PropTypes.oneOfType(['button','line','icon']),
     maxSize:PropTypes.number,
     forcePowerBtns:PropTypes.array,//不受权限控制的按钮code数组
-    localeCookie:PropTypes.string,//当前语种的cookie key值
+    iconTypes:PropTypes.object,
+    locale:PropTypes.object,
 };
 const defaultProps = {
     addToBtns:{},
@@ -28,25 +30,14 @@ const defaultProps = {
     type:'button',
     maxSize:2,
     forcePowerBtns:['cancel','search','clear','empty'],//取消、查询、清空、置空不受权限管理控制
-    localeCookie:'locale',
-    onClick:()=>{}
+    onClick:()=>{},
+    iconTypes:{//默认code对应的图标
+        add:'uf-add-c-o',
+        update:'uf-pencil',
+        delete:'uf-del'
+    },
+    locale:locale
 };
-
-const getCookie = (name) => {
-    let cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        let cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
 
 class Btns extends Component {
     constructor(props){
@@ -73,9 +64,7 @@ class Btns extends Component {
     }
 
     renderBtns=()=>{
-        let { btns, type, maxSize, powerBtns,forcePowerBtns,localeCookie } = this.props;
-        let more='更多'
-        if(getCookie(localeCookie)=='en_US')more='more';
+        let { btns, type, maxSize, powerBtns,forcePowerBtns,locale } = this.props;
         let btnArray = [];
         if(powerBtns){
             Object.keys(btns).map(item=>{
@@ -93,7 +82,7 @@ class Btns extends Component {
             })
         }
         
-        if(type=='line'){
+        if(type=='line'||type=='icon'){
             if(btnArray.length>maxSize){
                 let menusList = (<Menus>
                         {
@@ -107,7 +96,7 @@ class Btns extends Component {
                         trigger={['hover']}
                         overlay={menusList}
                         animation="slide-up">
-                        <span className='ac-btns-item ac-btns-more'>{more}</span>
+                        <span className='ac-btns-item ac-btns-more'>{locale['_more']}</span>
                     </Dropdown>)
                 btnArray.splice(maxSize,btnArray.length-maxSize+1,drop)
                 return btnArray;
@@ -123,10 +112,9 @@ class Btns extends Component {
     renderBtn=(key)=>{
         if(!this.props.btns.hasOwnProperty(key))return;
         let itemProps = this.props.btns[key];
-        let { colors,className,name_zh_CN:name,name_zh_TW,name_en_US} = this.state.allBtns[key];
+        let { colors,className } = this.state.allBtns[key];
+        let name = this.props.locale[key]||BtnsJSON[key].name;
         let clss = 'ac-btns-item '+className;
-        if(getCookie(this.props.localeCookie)=='zh_TW')name=name_zh_TW;
-        if(getCookie(this.props.localeCookie)=='en_US')name=name_en_US;
         if(itemProps){
             if(itemProps.className)clss+=' '+itemProps.className;
             if(itemProps.name)name=itemProps.name;
@@ -182,7 +170,7 @@ class Btns extends Component {
                         default:
                             return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>{name}</Button>
                     }
-                }else{
+                }else if(this.props.type=='line'){
                     switch(key){
                         case 'search':
                             return <span key={key} {...itemProps} colors={colors} className={clss}>
@@ -203,6 +191,12 @@ class Btns extends Component {
                         default:
                             return <span key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>{name}</span>
                     }
+                }else if(this.props.type=='icon'){
+                    let { iconType,...other } = itemProps
+                    iconType = iconType?iconType:this.props.iconTypes[key];
+                    return <span key={key} {...other} colors={colors} className={clss+' icon'} title={name}>
+                            <Icon type={iconType} />
+                        </span>
                 }
             }
             

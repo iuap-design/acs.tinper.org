@@ -1,3 +1,73 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/tinper-bee/ac-btns/compare/v0.3.0...v0.3.1) (2020-03-13)
+
+
+### Features
+
+* **ac-btns:** icon图标字体大小修改 ([1fc6f09](https://github.com/tinper-bee/ac-btns/commit/1fc6f09))
+
+
+
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/tinper-bee/ac-btns/compare/v0.2.6...v0.3.0) (2020-03-12)
+
+
+### Features
+
+* **ac-btns:** 多语功能调整 ([4a197cc](https://github.com/tinper-bee/ac-btns/commit/4a197cc))
+
+
+
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/tinper-bee/ac-btns/compare/v0.2.5...v0.2.6) (2020-03-04)
+
+
+### Features
+
+* **ac-btns:** 新增 type = icon 类型 ([f41746e](https://github.com/tinper-bee/ac-btns/commit/f41746e))
+
+
+
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/tinper-bee/ac-btns/compare/v0.2.4...v0.2.5) (2020-03-04)
+
+
+
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/tinper-bee/ac-btns/compare/v0.2.3...v0.2.4) (2020-03-03)
+
+
+### Features
+
+* **ac-btns:** 查询按钮等主按钮样式修改 ([93544dc](https://github.com/tinper-bee/ac-btns/commit/93544dc))
+
+
+
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/tinper-bee/ac-btns/compare/v0.2.2...v0.2.3) (2020-03-02)
+
+
+### Features
+
+* **ac-btns:** 新增 发送 粘贴至此处按钮 ([384b38f](https://github.com/tinper-bee/ac-btns/commit/384b38f))
+
+
+
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/tinper-bee/ac-btns/compare/v0.2.1...v0.2.2) (2020-02-25)
+
+
+
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/tinper-bee/ac-btns/compare/v0.2.0...v0.2.1) (2020-02-25)
+
+
+
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/tinper-bee/ac-btns/compare/v0.1.3...v0.2.0) (2020-02-24)
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/tinper-bee/ac-btns/compare/v0.1.2...v0.1.3) (2020-01-03)
 
@@ -201,12 +271,16 @@
 ### Features
 
 * **ac-btn:** 新增table按钮 ([484a827](https://github.com/tinper-bee/ac-btns/commit/484a827))
-* **ac-btns:** 支持table上的操作按钮 ([eca5131](https://github.com/tinper-bee/ac-btns/commit/eca5131))
 
 
 
 <a name="0.0.5"></a>
-## [0.0.5](https://github.com/tinper-bee/ac-btns/compare/v0.0.4...v0.0.5) (2019-08-17)
+## [0.0.5](https://github.com/tinper-bee/ac-btns/compare/v0.0.4...v0.0.5) (2019-08-19)
+
+
+### Features
+
+* **ac-btns:** 支持table上的操作按钮 ([eca5131](https://github.com/tinper-bee/ac-btns/commit/eca5131))
 
 
 

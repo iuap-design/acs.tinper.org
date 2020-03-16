@@ -3,7 +3,7 @@
   display: flex;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 16px;
   background: #fff;
   height: 46px;
   line-height: 46px; }
@@ -35,9 +35,14 @@
     margin-right: 4px; }
     .ac-header-back:hover {
       background-color: #e8e8e8; }
-  .ac-header-btns .u-button-group {
-    margin-left: 6px; }
   .ac-header-btns .u-button {
-    margin-left: 6px; }
+    margin-left: 8px !important; }
+  .ac-header-btns .u-button-group {
+    margin-left: 8px; }
+    .ac-header-btns .u-button-group .u-button + .u-button,
+    .ac-header-btns .u-button-group .u-button + .u-button-group,
+    .ac-header-btns .u-button-group .u-button-group + .u-button,
+    .ac-header-btns .u-button-group .u-button-group + .v-group {
+      margin-left: -1px; }
 
 /*# sourceMappingURL=demo.css.map */

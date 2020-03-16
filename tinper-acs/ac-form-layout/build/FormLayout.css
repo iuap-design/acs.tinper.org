@@ -4,12 +4,27 @@
 .ac-form-layout-item {
   padding: 0;
   margin-bottom: 8px; }
+  .ac-form-layout-item .u-form-control {
+    padding: 0 8px; }
   .ac-form-layout-item input,
   .ac-form-layout-item .u-select .u-select-selection,
-  .ac-form-layout-item .u-input-number {
+  .ac-form-layout-item .u-input-number, .ac-form-layout-item .u-input-number.u-input-group > span:first-child, .ac-form-layout-item .u-input-number.u-input-group > span:last-child {
     border-color: #d5d6d9; }
+  .ac-form-layout-item input.u-form-control:hover, .ac-form-layout-item .u-select-enabled .u-select-selection:hover, .ac-form-layout-item .u-input-number:hover {
+    border-color: #8cc6ff; }
+  .ac-form-layout-item input.u-form-control:active, .ac-form-layout-item .u-select .u-select-selection:active, .ac-form-layout-item .u-input-number:active,
+  .ac-form-layout-item input.u-form-control:focus, .ac-form-layout-item .u-select .u-select-selection:focus, .ac-form-layout-item .u-input-number:focus {
+    border-color: #007ace; }
+  .ac-form-layout-item .u-select .u-select-arrow, .ac-form-layout-item .datepicker-container .u-input-group-btn, .ac-form-layout-item .datepicker-input-group .u-input-group-btn,
+  .ac-form-layout-item .u-input-number.u-input-group > span:first-child, .ac-form-layout-item .u-input-number.u-input-group > span:last-child,
+  .ac-form-layout-item .u-input-group.simple .u-input-group-btn {
+    color: #adb4bc; }
+  .ac-form-layout-item .u-select .u-select-arrow, .ac-form-layout-item .u-input-group.simple .u-input-group-btn {
+    right: 8px; }
+  .ac-form-layout-item .u-select-selection-placeholder, .ac-form-layout-item .u-select-search-field-placeholder {
+    left: 8px; }
   .ac-form-layout-item .u-select-selection--single .u-select-selection-selected-value {
-    padding-left: 12px; }
+    padding-left: 8px; }
   .ac-form-layout-item .u-label {
     display: inline-block;
     width: 140px;
@@ -21,6 +36,8 @@
     display: inline-block;
     height: 32px;
     font-size: 13px; }
+  .ac-form-layout-item .ncc-refer-container .refer-wrapper .refer-wrapper-content {
+    height: 32px; }
   .ac-form-layout-item .container-refer .ant-search-input-wrapper {
     vertical-align: middle;
     height: 32px; }
@@ -28,13 +45,13 @@
       border: 1px solid #d5d6d9; }
   .ac-form-layout-item.error .u-form-control,
   .ac-form-layout-item.error .u-input-number,
-  .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn {
+  .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn,
+  .ac-form-layout-item.error .u-select .u-select-selection,
+  .ac-form-layout-item.error .ncc-refer-container .refer-wrapper .refer-wrapper-content {
     border-color: #f53c32; }
   .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .plus,
   .ac-form-layout-item.error .u-input-number.u-input-group.simple .u-input-group-btn .icon-group .reduce {
     color: #f53c32; }
-  .ac-form-layout-item.error .container-refer .ant-search-input-wrapper .ant-input {
-    border-color: #f53c32; }
   .ac-form-layout-item .datepicker-input-group .u-form-control {
     float: unset; }
   .ac-form-layout-item .ref-input-wrap {
@@ -68,7 +85,9 @@
       padding: 5px 10px;
       border-radius: 4px;
       background: #fff;
-      box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3); }
+      box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.3);
+      top: 5px;
+      position: relative; }
   .ac-form-layout-item-error-msg::after {
     position: absolute;
     display: block;
@@ -79,7 +98,8 @@
     left: calc(50% - 5px);
     transform: rotate(45deg);
     border-right: 1px solid #d5d6d9;
-    border-bottom: 1px solid #d5d6d9; }
+    border-bottom: 1px solid #d5d6d9;
+    bottom: 0; }
   .ac-form-layout-item .u-form-control[disabled] {
     background: #f3f3f3;
     border-color: #e0e0e0;
@@ -151,3 +171,10 @@
       display: none; }
   .ac-form-layout.disabled .ac-split-area {
     pointer-events: auto; }
+
+.ac-form-layout-row > div {
+  padding: 0 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; }

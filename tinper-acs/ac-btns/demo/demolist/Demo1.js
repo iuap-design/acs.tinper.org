@@ -141,6 +141,11 @@ let btns = {
             console.log('copyToEnd')
         }
     },
+    copyToHere: {
+        onClick: () => {
+            console.log('copyToHere')
+        }
+    },
     max: {
         onClick: () => {
             console.log('max')

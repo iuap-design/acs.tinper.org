@@ -191,7 +191,7 @@ class AcSearchPanel extends Component {
                                     search:{
                                         onClick:search,
                                     },
-                                    clear:{
+                                    empty:{
                                         onClick:reset,
                                     },
                                 }}

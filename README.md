@@ -14,9 +14,11 @@
 
 ## 新增组件步骤
 
+> `sidebar.json` 和 `componentsSource.json` 文件可以格式化后添加，方便添加。
+
 1、在 `sidebar.json` 文件中新增组件菜单
 
-2、在 `componentsSource.json` 文件中新增组件
+2、在 `componentsSource.json` 文件中新增组件。
 
 
 

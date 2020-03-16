@@ -5,7 +5,6 @@
  *
  */
 import React, { Component } from 'react';
-import Button from 'bee-button'
 import Btns from '../../src'
 
 
@@ -139,16 +138,12 @@ class Demo1 extends Component {
                 {
                     'example1':{ 
                         'colors':'write',
-                        'name_zh_CN':'测试按钮1',
-                        'name_zh_TW':'測試按鈕1',
-                        'name_en_US':'Test Button1',
+                        'name':'测试按钮1',
                         'className':'ac-btns-example1'
                     },
                     'example2':{ 
                         'colors':'write',
-                        'name_zh_CN':'测试按钮2',
-                        'name_zh_TW':'測試按鈕2',
-                        'name_en_US':'Test Button2',
+                        'name':'测试按钮2',
                         'className':'ac-btns-example2'
                     },
                 }

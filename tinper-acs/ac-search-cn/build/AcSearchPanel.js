@@ -290,7 +290,7 @@ var AcSearchPanel = function (_Component) {
                                     search: {
                                         onClick: search
                                     },
-                                    clear: {
+                                    empty: {
                                         onClick: reset
                                     }
                                 }

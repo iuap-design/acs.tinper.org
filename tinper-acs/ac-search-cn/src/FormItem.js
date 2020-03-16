@@ -51,7 +51,7 @@ class FormItem extends Component {
                 str = '';
                 delete toolTips[label];
             }
-        }else if(children.type.displayName=='InputNumberGroup'){//金额区间
+        }else if(children&&children.type&&children.type.displayName=='InputNumberGroup'){//金额区间
             if(value.length>0&&((value[0])||(value[1]))){
                 str = `${label[0]}: ${value[0]||''} , ${label[1]}: ${value[1]||''}`;
                 toolTips[label[0]]=value[0]||''
@@ -60,7 +60,7 @@ class FormItem extends Component {
                 delete toolTips[label[0]]
                 delete toolTips[label[1]]
             }
-        }else if(children.type.displayName=='acRangepicker'){//日期区间
+        }else if(children&&children.type&&children.type.displayName=='acRangepicker'){//日期区间
             let format = children.props.format;
             if(value.length>0){
                 str = `${label}: ${value[0].format(format)} ~ ${value[1].format(format)}`;

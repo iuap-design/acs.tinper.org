@@ -8,6 +8,9 @@
     "ac-grids": {
         "name": "复杂表格"
     },
+    "ac-gridcn": {
+        "name": "复杂表格全编辑"
+    },
     "ac-split-area": {
         "name": "区域分割"
     },
