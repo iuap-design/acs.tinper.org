@@ -16,10 +16,15 @@ var _FormRow = require('./FormRow');
 
 var _FormRow2 = _interopRequireDefault(_FormRow);
 
+var _FormItemSpan = require('./FormItemSpan');
+
+var _FormItemSpan2 = _interopRequireDefault(_FormItemSpan);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _FormLayout2["default"].FormRow = _FormRow2["default"];
 _FormLayout2["default"].FormItem = _FormItem2["default"];
+_FormLayout2["default"].FormItemSpan = _FormItemSpan2["default"];
 
 exports["default"] = _FormLayout2["default"];
 module.exports = exports['default'];

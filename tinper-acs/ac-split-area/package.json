@@ -1,13 +1,13 @@
 {
  "name": "ac-split-area",
- "version": "0.0.4",
+ "version": "0.0.5",
  "description": "SplitArea ui component for react",
  "keywords": [
   "react",
   "react-component",
   "ac-split-area",
   "iuap-design",
-  "tinper-bee",
+  "tinper-acs",
   "SplitArea"
  ],
  "engines": {
@@ -15,7 +15,7 @@
  },
  "homepage": "https://github.com/tinper-acs/ac-split-area.git",
  "author": "Yonyou FED",
- "repository": "http://github.com/tinper-bee/ac-split-area",
+ "repository": "http://github.com/tinper-acs/ac-split-area",
  "bugs": "https://github.com/tinper-acs/ac-split-area.git/issues",
  "license": "MIT",
  "main": "./build/index.js",
@@ -52,8 +52,7 @@
   "es5-shim": "~4.1.10",
   "react": "15.3.2",
   "react-addons-test-utils": "15.3.2",
-  "react-dom": "15.3.2",
-  "tinper-bee": "^2.1.5"
+  "react-dom": "15.3.2"
  },
  "peerDependencies": {
   "react": ">= 15.3.0",

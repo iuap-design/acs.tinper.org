@@ -30,29 +30,23 @@ class FormItem extends Component {
         if(children.length>1){
             React.Children.map(children,child=>{
                 errorMsg?ary.push(
-                    // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
                         <div className={`${clsfix}-item-out`} title={errorMsg}>
                             <span className={`${clsfix}-item-error-msg`}>
                                 <span className={`${clsfix}-item-error-msg-text`}>{errorMsg}</span>
                             </span>
                             {child}
                         </div>
-                    // </Tooltip>
                 ):ary.push(child)
-                // ary.push(child)
             })
         }else{
             errorMsg?ary.push(
-                // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
                     <div className={`${clsfix}-item-out`} title={errorMsg}>
                         <span className={`${clsfix}-item-error-msg`}>
                             <span className={`${clsfix}-item-error-msg-text`}>{errorMsg}</span>
                         </span>
                         {children}
                     </div>
-                // </Tooltip>
             ):ary.push(children)
-            // ary.push(children)
         }
         return ary;
     }

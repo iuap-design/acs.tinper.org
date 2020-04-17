@@ -1,3 +1,58 @@
+<a name="0.2.31"></a>
+## [0.2.31](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.30...v0.2.31) (2020-04-01)
+
+
+
+<a name="0.2.30"></a>
+## [0.2.30](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.29...v0.2.30) (2020-03-31)
+
+
+
+<a name="0.2.29"></a>
+## [0.2.29](https://github.com/tinper-bee/ac-gridcn/compare/v2.2.28...v0.2.29) (2020-03-26)
+
+
+### Features
+
+* **ac-gridcn:** 编辑态隐藏分页 ([a77f86e](https://github.com/tinper-bee/ac-gridcn/commit/a77f86e))
+
+
+
+<a name="2.2.28"></a>
+## [2.2.28](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.27...v2.2.28) (2020-03-25)
+
+
+### Bug Fixes
+
+* **ac-gridcn:** headerScroll true 样式错乱 ([c325e5f](https://github.com/tinper-bee/ac-gridcn/commit/c325e5f))
+
+
+
+<a name="0.2.27"></a>
+## [0.2.27](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.26...v0.2.27) (2020-03-23)
+
+
+
+<a name="0.2.26"></a>
+## [0.2.26](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.25...v0.2.26) (2020-03-23)
+
+
+
+<a name="0.2.25"></a>
+## [0.2.25](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.24...v0.2.25) (2020-03-23)
+
+
+### Bug Fixes
+
+* **ac-gridncn:** 导出bug ([195c148](https://github.com/tinper-bee/ac-gridcn/commit/195c148))
+
+
+
+<a name="0.2.24"></a>
+## [0.2.24](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.23...v0.2.24) (2020-03-19)
+
+
+
 <a name="0.2.23"></a>
 ## [0.2.23](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.22...v0.2.23) (2020-03-13)
 

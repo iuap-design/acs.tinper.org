@@ -73,7 +73,7 @@ var FieldWrap = function (_Component) {
             ) : null,
             flag ? _react2["default"].createElement(
                 "div",
-                { className: "triangle_border_nw", style: { "left": required ? "4px" : "0px" } },
+                { className: "triangle_border_nw" },
                 " "
             ) : null
         );

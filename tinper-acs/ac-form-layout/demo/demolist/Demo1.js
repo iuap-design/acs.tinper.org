@@ -16,7 +16,7 @@ const layout = {
     xs:12
 }
 
-const { FormItem, FormRow } = FormLayout;
+const { FormItem, FormRow,FormItemSpan } = FormLayout;
 
 const orderTypes=[
     {
@@ -135,10 +135,21 @@ class Demo1 extends Component {
                             <FormControl placeholder="请输入用户名"/>
                         </FormItem>
                         <FormItem label="姓名"  {...layout}>
-                            <FormControl placeholder="请输入用户名"/>
+                            <FormControl placeholder="请输入用户名" value="看这是啥"/>
                         </FormItem>
                         <FormItem label="姓名"  {...layout}>
+                            <FormControl placeholder="请输入用户名" value="看这是啥"/>
+                        </FormItem>
+                        <FormItem label="姓名" required={true} {...layout}>
                             <FormControl placeholder="请输入用户名"/>
+                        </FormItem>
+                    </FormRow>
+                    <FormRow>
+                        <FormItem label="姓名" required={true} {...layout}>
+                            <FormControl placeholder="请输入用户名" value="看这是啥"/>
+                        </FormItem>
+                        <FormItem label="固定" {...layout}>
+                            <FormItemSpan title="我比较特殊">我比较特殊</FormItemSpan>
                         </FormItem>
                         <FormItem label="姓名" required={true} {...layout}>
                             <FormControl placeholder="请输入用户名"/>

@@ -76,6 +76,8 @@ $secondary : #eceff1;
         &.ac-btns-empty,&.ac-btns-clear,&.ac-btns-search{
             .uf{
                 font-size: 18px;
+                position: relative;
+                top: 2px;
             }
         }
         &.ac-btns-max{

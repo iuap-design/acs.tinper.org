@@ -1,3 +1,43 @@
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.11...v0.1.12) (2020-04-03)
+
+
+
+<a name="0.1.11"></a>
+## [0.1.11](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.10...v0.1.11) (2020-04-03)
+
+
+### Features
+
+* **ac-form-layout:** 新增FormItemSpan纯展示文字组件 ([baa3e6d](https://github.com/tinper-bee/ac-form-layout/commit/baa3e6d))
+
+
+
+<a name="0.1.10"></a>
+## [0.1.10](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.9...v0.1.10) (2020-03-26)
+
+
+
+<a name="0.1.9"></a>
+## [0.1.9](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.8...v0.1.9) (2020-03-23)
+
+
+
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.7...v0.1.8) (2020-03-20)
+
+
+
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.6...v0.1.7) (2020-03-20)
+
+
+
+<a name="0.1.6"></a>
+## [0.1.6](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.5...v0.1.6) (2020-03-19)
+
+
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/tinper-bee/ac-form-layout/compare/v0.1.4...v0.1.5) (2020-03-13)
 

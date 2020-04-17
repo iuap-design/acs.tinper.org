@@ -21,6 +21,24 @@ class Demo2 extends Component {
                 width: 150
             },
             {
+                title: "员工编号",
+                dataIndex: "code",
+                key: "code",
+                width: 150
+            },
+            {
+                title: "员工编号",
+                dataIndex: "code",
+                key: "code",
+                width: 150
+            },
+            {
+                title: "员工编号",
+                dataIndex: "code",
+                key: "code",
+                width: 150
+            },
+            {
                 title: "员工姓名",
                 dataIndex: "name",
                 key: "name",
@@ -345,6 +363,8 @@ class Demo2 extends Component {
                     save={(selectList)=>{
                         console.log('保存，数据如下-----------',selectList)
                     }}
+                    headerScroll={true}
+                    title="我是标题"
                 />
             </div>
         )

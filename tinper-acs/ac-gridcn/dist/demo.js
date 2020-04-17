@@ -76,7 +76,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(270);var Demo2 = __webpack_require__(679);var Demo3 = __webpack_require__(680);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 普通表格基本示例", "code": "/**\n*\n* @title 普通表格基本示例\n* @description 普通表格基本示例\n*\n*/\nimport React, { Component } from 'react';\nimport data from './data';\nimport { Grid } from 'ac-gridcn/build/index';\n\nclass Demo1 extends Component {\n    constructor(props){\n        super(props);\n        this.column = [\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工姓名\",\n                dataIndex: \"name\",\n                key: \"name\",\n                width: 120,\n            },\n            {\n                title: \"员工性别\",\n                dataIndex: \"sexEnumValue\",\n                key: \"sexEnumValue\",\n                width: 120,\n                \n            },\n            {\n                title: \"工龄\",\n                dataIndex: \"serviceYears\",\n                key: \"serviceYears\",\n                width: 130,\n                \n            },\n            {\n                title: \"司龄\",\n                dataIndex: \"serviceYearsCompany\",\n                key: \"serviceYearsCompany\",\n                width: 130,\n            },\n            {\n                title: \"年份\",\n                dataIndex: \"year\",\n                key: \"year\",\n                width: 100,\n            },\n            {\n                title: \"月份\",\n                dataIndex: \"monthEnumValue\",\n                key: \"monthEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"补贴类别\",\n                dataIndex: \"allowanceTypeEnumValue\",\n                key: \"allowanceTypeEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"补贴标准\",\n                dataIndex: \"allowanceStandard\",\n                key: \"allowanceStandard\",\n                width: 120,\n            },\n            {\n                title: \"实际补贴\",\n                dataIndex: \"allowanceActual\",\n                key: \"allowanceActual\",\n                width: 120,\n            },\n            {\n                title: \"是否超标\",\n                dataIndex: \"exdeedsEnumValue\",\n                key: \"exdeedsEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"领取方式\",\n                dataIndex: \"pickTypeEnumValue\",\n                key: \"pickTypeEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"备注\",\n                dataIndex: \"remark\",\n                key: \"remark\",\n                width: 100,\n            }\n        ];\n        this.state={\n            activePage:1,\n            total:100,\n            items:10\n        }\n    }\n    /**\n     * 跳转指定页码\n     *\n     * @param {*} pageIndex\n     */\n    freshData = (pageIndex) => {\n        console.log('freshData')\n    }\n\n    /**\n     * 分页  跳转指定页数和设置一页数据条数\n     *\n     * @param {*} index\n     * @param {*} value\n     */\n    onDataNumSelect = (index, value) => {\n        console.log('onDataNumSelect')\n    }\n\n    /**\n     * type为0标识为pageIndex,为1标识pageSize\n     *\n     * @param {*} value\n     * @param {*} type\n     */\n    onPageSelect = (value, type) => {\n        console.log('onPageSelect')\n    }\n    getSelectedDataFunc=()=>{\n        console.log('getSelectedDataFunc')\n    }\n\n    getAllData=()=>{\n        console.log(this.grid.allData)\n    }\n    \n    changPag=()=>{\n        this.setState({\n            activePage:2,\n            total:50,\n            items:20\n        })\n    }\n    \n    render () {\n        let paginationObj = {\n            activePage: this.state.activePage,//当前页\n            total: this.state.total,//总条数\n            items: this.state.items,\n            freshData: this.freshData,//刷新数据\n            onDataNumSelect: this.onDataNumSelect,//选择记录行\n            // disabled: false//分页条禁用状态\n        }\n        return (\n            <div className='grid-parent'>\n                <Grid\n                    ref={(el) => this.grid = el}//ref用于调用内部方法\n                    data={data}//数据\n                    columns={this.column}//定义列\n                    paginationObj={paginationObj}//分页数据\n                    getSelectedDataFunc={this.getSelectedDataFunc}//选择数据后的回调\n                />\n            </div>\n        )\n    }\n}\nexport default Demo1", "desc": " 普通表格基本示例" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 编辑表格基本示例", "code": "/**\n*\n* @title 编辑表格基本示例\n* @description 编辑表格基本示例\n*\n*/\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\nimport data from './data';\nimport { EditGrid } from 'ac-gridcn/build/index'\nimport moment from 'moment';\n\nclass Demo2 extends Component {\n    constructor(props){\n        super(props);\n        this.column = [\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工姓名\",\n                dataIndex: \"name\",\n                key: \"name\",\n                width: 120,\n                renderType:'input',\n                required:true,\n                validate:true,\n                fieldProps:{\n                    defaultValue:'姓名'\n                },\n            },\n            {\n                title: \"员工性别\",\n                dataIndex: \"sex\",\n                key: \"sex\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                validate:true,\n                fieldProps:{\n                    allowClear:true,\n                    defaultValue:'1',\n                    data:[{\n                        key: \"请选择\",\n                        value: '',\n                    }, {\n                        key: \"男\",\n                        value: '1'\n                    }, {\n                        key: \"女\",\n                        value: '0'\n                    }]\n                },\n            },\n            {\n                title: \"工龄\",\n                dataIndex: \"serviceYears\",\n                key: \"serviceYears\",\n                width: 130,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    defaultValue:2\n                }\n            },\n            {\n                title: \"司龄\",\n                dataIndex: \"serviceYearsCompany\",\n                key: \"serviceYearsCompany\",\n                width: 130,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n            },\n            {\n                title: \"年份\",\n                dataIndex: \"year\",\n                key: \"year\",\n                width: 100,\n                renderType:'year',\n                required:true,\n                fieldProps:{\n                    defaultValue:'2018'\n                },\n                render:(text, record, index)=>{\n                    return moment(text).format('YYYY');\n                }\n            },\n            {\n                title: \"月份\",\n                dataIndex: \"month\",\n                key: \"month\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{//月份\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"一月\",\n                        value: 1\n                    }, {\n                        key: \"二月\",\n                        value: 2\n                    }, {\n                        key: \"三月\",\n                        value: 3\n                    }, {\n                        key: \"四月\",\n                        value: 4\n                    }, {\n                        key: \"五月\",\n                        value: 5\n                    }, {\n                        key: \"六月\",\n                        value: 6\n                    }, {\n                        key: \"七月\",\n                        value: 7\n                    }, {\n                        key: \"八月\",\n                        value: 8\n                    }, {\n                        key: \"九月\",\n                        value: 9\n                    }, {\n                        key: \"十月\",\n                        value: 10\n                    }, {\n                        key: \"十一月\",\n                        value: 11\n                    }, {\n                        key: \"十二月\",\n                        value: 12\n                    }]\n                },\n            },\n            {\n                title: \"补贴类别\",\n                dataIndex: \"allowanceType\",\n                key: \"allowanceType\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"电脑补助\",\n                        value: 1\n                    }, {\n                        key: \"住宿补助\",\n                        value: 2\n                    }, {\n                        key: \"交通补助\",\n                        value: 3\n                    }]\n                },\n            },\n            {\n                title: \"补贴标准\",\n                dataIndex: \"allowanceStandard\",\n                key: \"allowanceStandard\",\n                width: 120,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    max: 999999,\n                    min: 0,\n                    step: 1,\n                    precision: 2\n                },\n            },\n            {\n                title: \"实际补贴\",\n                dataIndex: \"allowanceActual\",\n                key: \"allowanceActual\",\n                width: 120,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    max: 999999,\n                    min: 0,\n                    step: 1,\n                    precision: 2\n                },\n            },\n            {\n                title: \"是否超标\",\n                dataIndex: \"exdeeds\",\n                key: \"exdeeds\",\n                width: 120,\n                required:true,\n                renderType:'select',\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"未超标\",\n                        value: 0\n                    }, {\n                        key: \"超标\",\n                        value: 1\n                    }]\n                },\n            },\n            {\n                title: \"领取方式\",\n                dataIndex: \"pickType\",\n                key: \"pickType\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"转账\",\n                        value: 1\n                    }, {\n                        key: \"现金\",\n                        value: 2\n                    }]\n                },\n            },\n            {\n                title: \"备注\",\n                dataIndex: \"remark\",\n                key: \"remark\",\n                width: 100,\n                renderType:'input',\n                required:false,\n            }\n        ];\n        this.state={\n            activePage:1,\n            total:100,\n            items:10\n        }\n    }\n    /**\n     * 跳转指定页码\n     *\n     * @param {*} pageIndex\n     */\n    freshData = (pageIndex) => {\n        console.log('freshData')\n    }\n\n    /**\n     * 分页  跳转指定页数和设置一页数据条数\n     *\n     * @param {*} index\n     * @param {*} value\n     */\n    onDataNumSelect = (index, value) => {\n        console.log('onDataNumSelect')\n    }\n\n    /**\n     * type为0标识为pageIndex,为1标识pageSize\n     *\n     * @param {*} value\n     * @param {*} type\n     */\n    onPageSelect = (value, type) => {\n        console.log('onPageSelect')\n    }\n\n    getAllData=()=>{\n        console.log(this.grid.allData)\n    }\n    getSelectData=()=>{\n        console.log(this.grid.selectList)\n    }\n    validate=()=>{\n        let error = this.grid.validate();\n        if(error){\n            alert('数据校验失败，错误信息见控制台');\n            console.log(error)\n        }else{\n            alert('数据校验成功')\n        }\n    }\n    validateSelect=()=>{\n        let error = this.grid.validateSelect();\n        if(error){\n            alert('数据校验失败，错误信息见控制台');\n            console.log(error)\n        }else{\n            alert('数据校验成功')\n        }\n    }\n    changPag=()=>{\n        this.setState({\n            activePage:2,\n            total:50,\n            items:20\n        })\n    }\n    \n    render () {\n        let paginationObj = {\n            activePage: this.state.activePage,//当前页\n            total: this.state.total,//总条数\n            items: this.state.items,\n            freshData: this.freshData,//刷新数据\n            onDataNumSelect: this.onDataNumSelect,//选择记录行\n            // disabled: false//分页条禁用状态\n        }\n        return (\n            <div className='grid-parent'>\n                <div style={{'marginBottom':'20px'}}>\n                    <Button onClick={this.changPag} colors=\"primary\" >改变分页</Button>\n                    <Button onClick={this.getAllData} colors=\"primary\" style={{'marginLeft':'20px'}} >获得所有数据</Button>\n                    <Button onClick={this.getSelectData} colors=\"primary\" style={{'marginLeft':'20px'}} >获得选中数据</Button>\n                    <Button onClick={this.validate} colors=\"primary\" style={{'marginLeft':'20px'}}>主动校验</Button>\n                    <Button onClick={this.validateSelect} colors=\"primary\" style={{'marginLeft':'20px'}}>主动校验选中数据</Button>\n                </div>\n                \n                <EditGrid\n                    ref={(el) => this.grid = el}//ref用于调用内部方法\n                    data={data}//数据\n                    columns={this.column}//定义列\n                    paginationObj={paginationObj}//分页数据\n                    excludeKeys={['id','ts','lastModified']}\n                    delRow={(selectList,newData)=>{\n                        console.log('删除，数据如下-----------',selectList)\n                        console.log('新的数据如下-----------',newData)\n                    }}\n                    save={(selectList)=>{\n                        console.log('保存，数据如下-----------',selectList)\n                    }}\n                />\n            </div>\n        )\n    }\n}\nexport default Demo2", "desc": " 编辑表格基本示例" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 编辑表格基本示例", "code": "/**\n*\n* @title 编辑表格基本示例\n* @description 编辑表格基本示例\n*\n*/\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\nimport data from './data';\nimport { EditGrid } from 'ac-gridcn/build/index'\nimport moment from 'moment';\n\nclass Demo2 extends Component {\n    constructor(props){\n        super(props);\n        this.column = [\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工姓名\",\n                dataIndex: \"name\",\n                key: \"name\",\n                width: 120,\n                renderType:'input',\n                required:true,\n                validate:true,\n                fieldProps:{\n                    defaultValue:'姓名'\n                },\n            },\n            {\n                title: \"员工性别\",\n                dataIndex: \"sex\",\n                key: \"sex\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                validate:true,\n                fieldProps:{\n                    allowClear:true,\n                    defaultValue:'1',\n                    data:[{\n                        key: \"请选择\",\n                        value: '',\n                    }, {\n                        key: \"男\",\n                        value: '1'\n                    }, {\n                        key: \"女\",\n                        value: '0'\n                    }]\n                },\n            },\n            {\n                title: \"工龄\",\n                dataIndex: \"serviceYears\",\n                key: \"serviceYears\",\n                width: 130,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    defaultValue:2\n                }\n            },\n            {\n                title: \"司龄\",\n                dataIndex: \"serviceYearsCompany\",\n                key: \"serviceYearsCompany\",\n                width: 130,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n            },\n            {\n                title: \"年份\",\n                dataIndex: \"year\",\n                key: \"year\",\n                width: 100,\n                renderType:'year',\n                required:true,\n                fieldProps:{\n                    defaultValue:'2018'\n                },\n                render:(text, record, index)=>{\n                    return moment(text).format('YYYY');\n                }\n            },\n            {\n                title: \"月份\",\n                dataIndex: \"month\",\n                key: \"month\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{//月份\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"一月\",\n                        value: 1\n                    }, {\n                        key: \"二月\",\n                        value: 2\n                    }, {\n                        key: \"三月\",\n                        value: 3\n                    }, {\n                        key: \"四月\",\n                        value: 4\n                    }, {\n                        key: \"五月\",\n                        value: 5\n                    }, {\n                        key: \"六月\",\n                        value: 6\n                    }, {\n                        key: \"七月\",\n                        value: 7\n                    }, {\n                        key: \"八月\",\n                        value: 8\n                    }, {\n                        key: \"九月\",\n                        value: 9\n                    }, {\n                        key: \"十月\",\n                        value: 10\n                    }, {\n                        key: \"十一月\",\n                        value: 11\n                    }, {\n                        key: \"十二月\",\n                        value: 12\n                    }]\n                },\n            },\n            {\n                title: \"补贴类别\",\n                dataIndex: \"allowanceType\",\n                key: \"allowanceType\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"电脑补助\",\n                        value: 1\n                    }, {\n                        key: \"住宿补助\",\n                        value: 2\n                    }, {\n                        key: \"交通补助\",\n                        value: 3\n                    }]\n                },\n            },\n            {\n                title: \"补贴标准\",\n                dataIndex: \"allowanceStandard\",\n                key: \"allowanceStandard\",\n                width: 120,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    max: 999999,\n                    min: 0,\n                    step: 1,\n                    precision: 2\n                },\n            },\n            {\n                title: \"实际补贴\",\n                dataIndex: \"allowanceActual\",\n                key: \"allowanceActual\",\n                width: 120,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    max: 999999,\n                    min: 0,\n                    step: 1,\n                    precision: 2\n                },\n            },\n            {\n                title: \"是否超标\",\n                dataIndex: \"exdeeds\",\n                key: \"exdeeds\",\n                width: 120,\n                required:true,\n                renderType:'select',\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"未超标\",\n                        value: 0\n                    }, {\n                        key: \"超标\",\n                        value: 1\n                    }]\n                },\n            },\n            {\n                title: \"领取方式\",\n                dataIndex: \"pickType\",\n                key: \"pickType\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"转账\",\n                        value: 1\n                    }, {\n                        key: \"现金\",\n                        value: 2\n                    }]\n                },\n            },\n            {\n                title: \"备注\",\n                dataIndex: \"remark\",\n                key: \"remark\",\n                width: 100,\n                renderType:'input',\n                required:false,\n            }\n        ];\n        this.state={\n            activePage:1,\n            total:100,\n            items:10\n        }\n    }\n    /**\n     * 跳转指定页码\n     *\n     * @param {*} pageIndex\n     */\n    freshData = (pageIndex) => {\n        console.log('freshData')\n    }\n\n    /**\n     * 分页  跳转指定页数和设置一页数据条数\n     *\n     * @param {*} index\n     * @param {*} value\n     */\n    onDataNumSelect = (index, value) => {\n        console.log('onDataNumSelect')\n    }\n\n    /**\n     * type为0标识为pageIndex,为1标识pageSize\n     *\n     * @param {*} value\n     * @param {*} type\n     */\n    onPageSelect = (value, type) => {\n        console.log('onPageSelect')\n    }\n    getSelectedDataFunc=()=>{\n        console.log('getSelectedDataFunc')\n    }\n\n    getAllData=()=>{\n        console.log(this.grid.allData)\n    }\n    validate=()=>{\n        let error = this.grid.validate();\n        if(error){\n            alert('数据校验失败，错误信息见控制台');\n            console.log(error)\n        }else{\n            alert('数据校验成功')\n        }\n    }\n    changPag=()=>{\n        this.setState({\n            activePage:2,\n            total:50,\n            items:20\n        })\n    }\n    \n    render () {\n        let paginationObj = {\n            activePage: this.state.activePage,//当前页\n            total: this.state.total,//总条数\n            items: this.state.items,\n            freshData: this.freshData,//刷新数据\n            onDataNumSelect: this.onDataNumSelect,//选择记录行\n            // disabled: false//分页条禁用状态\n        }\n        return (\n            <div className='grid-parent'>\n                <div style={{'marginBottom':'20px'}}>\n                    <Button onClick={this.changPag} colors=\"primary\" >改变分页</Button>\n                    <Button onClick={this.getAllData} colors=\"primary\" style={{'marginLeft':'20px'}} >获得所有数据</Button>\n                    <Button onClick={this.validate} colors=\"primary\" style={{'marginLeft':'20px'}}>主动校验</Button>\n                </div>\n                \n                <EditGrid\n                    ref={(el) => this.grid = el}//ref用于调用内部方法\n                    data={data}//数据\n                    columns={this.column}//定义列\n                    paginationObj={paginationObj}//分页数据\n                    getSelectedDataFunc={this.getSelectedDataFunc}//选择数据后的回调\n                    excludeKeys={['id','ts','lastModified']}\n                    delRow={(selectList,newData)=>{\n                        console.log('删除，数据如下-----------',selectList)\n                        console.log('新的数据如下-----------',newData)\n                    }}\n                    save={(selectList)=>{\n                        console.log('保存，数据如下-----------',selectList)\n                    }}\n                    title=\"我是标题\"\n                />\n            </div>\n        )\n    }\n}\nexport default Demo2", "desc": " 编辑表格基本示例" }];
+	var Demo1 = __webpack_require__(270);var Demo2 = __webpack_require__(680);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 普通表格基本示例", "code": "/**\n*\n* @title 普通表格基本示例\n* @description 普通表格基本示例\n*\n*/\nimport React, { Component } from 'react';\nimport data from './data';\nimport { Grid } from 'ac-gridcn/build/index';\n\nclass Demo1 extends Component {\n    constructor(props){\n        super(props);\n        this.column = [\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工姓名\",\n                dataIndex: \"name\",\n                key: \"name\",\n                width: 120,\n            },\n            {\n                title: \"员工性别\",\n                dataIndex: \"sexEnumValue\",\n                key: \"sexEnumValue\",\n                width: 120,\n                \n            },\n            {\n                title: \"工龄\",\n                dataIndex: \"serviceYears\",\n                key: \"serviceYears\",\n                width: 130,\n                \n            },\n            {\n                title: \"司龄\",\n                dataIndex: \"serviceYearsCompany\",\n                key: \"serviceYearsCompany\",\n                width: 130,\n            },\n            {\n                title: \"年份\",\n                dataIndex: \"year\",\n                key: \"year\",\n                width: 100,\n            },\n            {\n                title: \"月份\",\n                dataIndex: \"monthEnumValue\",\n                key: \"monthEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"补贴类别\",\n                dataIndex: \"allowanceTypeEnumValue\",\n                key: \"allowanceTypeEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"补贴标准\",\n                dataIndex: \"allowanceStandard\",\n                key: \"allowanceStandard\",\n                width: 120,\n            },\n            {\n                title: \"实际补贴\",\n                dataIndex: \"allowanceActual\",\n                key: \"allowanceActual\",\n                width: 120,\n            },\n            {\n                title: \"是否超标\",\n                dataIndex: \"exdeedsEnumValue\",\n                key: \"exdeedsEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"领取方式\",\n                dataIndex: \"pickTypeEnumValue\",\n                key: \"pickTypeEnumValue\",\n                width: 120,\n            },\n            {\n                title: \"备注\",\n                dataIndex: \"remark\",\n                key: \"remark\",\n                width: 100,\n            }\n        ];\n        this.state={\n            activePage:1,\n            total:100,\n            items:10\n        }\n    }\n    /**\n     * 跳转指定页码\n     *\n     * @param {*} pageIndex\n     */\n    freshData = (pageIndex) => {\n        console.log('freshData')\n    }\n\n    /**\n     * 分页  跳转指定页数和设置一页数据条数\n     *\n     * @param {*} index\n     * @param {*} value\n     */\n    onDataNumSelect = (index, value) => {\n        console.log('onDataNumSelect')\n    }\n\n    /**\n     * type为0标识为pageIndex,为1标识pageSize\n     *\n     * @param {*} value\n     * @param {*} type\n     */\n    onPageSelect = (value, type) => {\n        console.log('onPageSelect')\n    }\n    getSelectedDataFunc=()=>{\n        console.log('getSelectedDataFunc')\n    }\n\n    getAllData=()=>{\n        console.log(this.grid.allData)\n    }\n    \n    changPag=()=>{\n        this.setState({\n            activePage:2,\n            total:50,\n            items:20\n        })\n    }\n    \n    render () {\n        let paginationObj = {\n            activePage: this.state.activePage,//当前页\n            total: this.state.total,//总条数\n            items: this.state.items,\n            freshData: this.freshData,//刷新数据\n            onDataNumSelect: this.onDataNumSelect,//选择记录行\n            // disabled: false//分页条禁用状态\n        }\n        return (\n            <div className='grid-parent'>\n                <Grid\n                    ref={(el) => this.grid = el}//ref用于调用内部方法\n                    data={data}//数据\n                    columns={this.column}//定义列\n                    paginationObj={paginationObj}//分页数据\n                    getSelectedDataFunc={this.getSelectedDataFunc}//选择数据后的回调\n                />\n            </div>\n        )\n    }\n}\nexport default Demo1", "desc": " 普通表格基本示例" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 编辑表格基本示例", "code": "/**\n*\n* @title 编辑表格基本示例\n* @description 编辑表格基本示例\n*\n*/\nimport React, { Component } from 'react';\nimport { Button } from 'tinper-bee';\nimport data from './data';\nimport { EditGrid } from 'ac-gridcn/build/index'\nimport moment from 'moment';\n\nclass Demo2 extends Component {\n    constructor(props){\n        super(props);\n        this.column = [\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工编号\",\n                dataIndex: \"code\",\n                key: \"code\",\n                width: 150\n            },\n            {\n                title: \"员工姓名\",\n                dataIndex: \"name\",\n                key: \"name\",\n                width: 120,\n                renderType:'input',\n                required:true,\n                validate:true,\n                fieldProps:{\n                    defaultValue:'姓名'\n                },\n            },\n            {\n                title: \"员工性别\",\n                dataIndex: \"sex\",\n                key: \"sex\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                validate:true,\n                fieldProps:{\n                    allowClear:true,\n                    defaultValue:'1',\n                    data:[{\n                        key: \"请选择\",\n                        value: '',\n                    }, {\n                        key: \"男\",\n                        value: '1'\n                    }, {\n                        key: \"女\",\n                        value: '0'\n                    }]\n                },\n            },\n            {\n                title: \"工龄\",\n                dataIndex: \"serviceYears\",\n                key: \"serviceYears\",\n                width: 130,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    defaultValue:2\n                }\n            },\n            {\n                title: \"司龄\",\n                dataIndex: \"serviceYearsCompany\",\n                key: \"serviceYearsCompany\",\n                width: 130,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n            },\n            {\n                title: \"年份\",\n                dataIndex: \"year\",\n                key: \"year\",\n                width: 100,\n                renderType:'year',\n                required:true,\n                fieldProps:{\n                    defaultValue:'2018'\n                },\n                render:(text, record, index)=>{\n                    return moment(text).format('YYYY');\n                }\n            },\n            {\n                title: \"月份\",\n                dataIndex: \"month\",\n                key: \"month\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{//月份\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"一月\",\n                        value: 1\n                    }, {\n                        key: \"二月\",\n                        value: 2\n                    }, {\n                        key: \"三月\",\n                        value: 3\n                    }, {\n                        key: \"四月\",\n                        value: 4\n                    }, {\n                        key: \"五月\",\n                        value: 5\n                    }, {\n                        key: \"六月\",\n                        value: 6\n                    }, {\n                        key: \"七月\",\n                        value: 7\n                    }, {\n                        key: \"八月\",\n                        value: 8\n                    }, {\n                        key: \"九月\",\n                        value: 9\n                    }, {\n                        key: \"十月\",\n                        value: 10\n                    }, {\n                        key: \"十一月\",\n                        value: 11\n                    }, {\n                        key: \"十二月\",\n                        value: 12\n                    }]\n                },\n            },\n            {\n                title: \"补贴类别\",\n                dataIndex: \"allowanceType\",\n                key: \"allowanceType\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"电脑补助\",\n                        value: 1\n                    }, {\n                        key: \"住宿补助\",\n                        value: 2\n                    }, {\n                        key: \"交通补助\",\n                        value: 3\n                    }]\n                },\n            },\n            {\n                title: \"补贴标准\",\n                dataIndex: \"allowanceStandard\",\n                key: \"allowanceStandard\",\n                width: 120,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    max: 999999,\n                    min: 0,\n                    step: 1,\n                    precision: 2\n                },\n            },\n            {\n                title: \"实际补贴\",\n                dataIndex: \"allowanceActual\",\n                key: \"allowanceActual\",\n                width: 120,\n                className: 'column-number-right ', // 靠右对齐\n                renderType:'inputNumber',\n                required:true,\n                fieldProps:{\n                    max: 999999,\n                    min: 0,\n                    step: 1,\n                    precision: 2\n                },\n            },\n            {\n                title: \"是否超标\",\n                dataIndex: \"exdeeds\",\n                key: \"exdeeds\",\n                width: 120,\n                required:true,\n                renderType:'select',\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"未超标\",\n                        value: 0\n                    }, {\n                        key: \"超标\",\n                        value: 1\n                    }]\n                },\n            },\n            {\n                title: \"领取方式\",\n                dataIndex: \"pickType\",\n                key: \"pickType\",\n                width: 120,\n                renderType:'select',\n                required:true,\n                fieldProps:{\n                    data:[{\n                        key: \"请选择\",\n                        value: \"\",\n                        disabled: true\n                    }, {\n                        key: \"转账\",\n                        value: 1\n                    }, {\n                        key: \"现金\",\n                        value: 2\n                    }]\n                },\n            },\n            {\n                title: \"备注\",\n                dataIndex: \"remark\",\n                key: \"remark\",\n                width: 100,\n                renderType:'input',\n                required:false,\n            }\n        ];\n        this.state={\n            activePage:1,\n            total:100,\n            items:10\n        }\n    }\n    /**\n     * 跳转指定页码\n     *\n     * @param {*} pageIndex\n     */\n    freshData = (pageIndex) => {\n        console.log('freshData')\n    }\n\n    /**\n     * 分页  跳转指定页数和设置一页数据条数\n     *\n     * @param {*} index\n     * @param {*} value\n     */\n    onDataNumSelect = (index, value) => {\n        console.log('onDataNumSelect')\n    }\n\n    /**\n     * type为0标识为pageIndex,为1标识pageSize\n     *\n     * @param {*} value\n     * @param {*} type\n     */\n    onPageSelect = (value, type) => {\n        console.log('onPageSelect')\n    }\n\n    getAllData=()=>{\n        console.log(this.grid.allData)\n    }\n    getSelectData=()=>{\n        console.log(this.grid.selectList)\n    }\n    validate=()=>{\n        let error = this.grid.validate();\n        if(error){\n            alert('数据校验失败，错误信息见控制台');\n            console.log(error)\n        }else{\n            alert('数据校验成功')\n        }\n    }\n    validateSelect=()=>{\n        let error = this.grid.validateSelect();\n        if(error){\n            alert('数据校验失败，错误信息见控制台');\n            console.log(error)\n        }else{\n            alert('数据校验成功')\n        }\n    }\n    changPag=()=>{\n        this.setState({\n            activePage:2,\n            total:50,\n            items:20\n        })\n    }\n    \n    render () {\n        let paginationObj = {\n            activePage: this.state.activePage,//当前页\n            total: this.state.total,//总条数\n            items: this.state.items,\n            freshData: this.freshData,//刷新数据\n            onDataNumSelect: this.onDataNumSelect,//选择记录行\n            // disabled: false//分页条禁用状态\n        }\n        return (\n            <div className='grid-parent'>\n                <div style={{'marginBottom':'20px'}}>\n                    <Button onClick={this.changPag} colors=\"primary\" >改变分页</Button>\n                    <Button onClick={this.getAllData} colors=\"primary\" style={{'marginLeft':'20px'}} >获得所有数据</Button>\n                    <Button onClick={this.getSelectData} colors=\"primary\" style={{'marginLeft':'20px'}} >获得选中数据</Button>\n                    <Button onClick={this.validate} colors=\"primary\" style={{'marginLeft':'20px'}}>主动校验</Button>\n                    <Button onClick={this.validateSelect} colors=\"primary\" style={{'marginLeft':'20px'}}>主动校验选中数据</Button>\n                </div>\n                \n                <EditGrid\n                    ref={(el) => this.grid = el}//ref用于调用内部方法\n                    data={data}//数据\n                    columns={this.column}//定义列\n                    paginationObj={paginationObj}//分页数据\n                    excludeKeys={['id','ts','lastModified']}\n                    delRow={(selectList,newData)=>{\n                        console.log('删除，数据如下-----------',selectList)\n                        console.log('新的数据如下-----------',newData)\n                    }}\n                    save={(selectList)=>{\n                        console.log('保存，数据如下-----------',selectList)\n                    }}\n                    headerScroll={true}\n                    title=\"我是标题\"\n                />\n            </div>\n        )\n    }\n}\nexport default Demo2", "desc": " 编辑表格基本示例" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -2287,12 +2287,10 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2014-2015, Facebook, Inc.
-	 * All rights reserved.
+	 * Copyright (c) 2014-present, Facebook, Inc.
 	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
 	 */
 	
 	'use strict';
@@ -2304,9 +2302,33 @@
 	 * same logic and follow the same code paths.
 	 */
 	
+	var __DEV__ = process.env.NODE_ENV !== 'production';
+	
 	var warning = function() {};
 	
-	if (process.env.NODE_ENV !== 'production') {
+	if (__DEV__) {
+	  var printWarning = function printWarning(format, args) {
+	    var len = arguments.length;
+	    args = new Array(len > 1 ? len - 1 : 0);
+	    for (var key = 1; key < len; key++) {
+	      args[key - 1] = arguments[key];
+	    }
+	    var argIndex = 0;
+	    var message = 'Warning: ' +
+	      format.replace(/%s/g, function() {
+	        return args[argIndex++];
+	      });
+	    if (typeof console !== 'undefined') {
+	      console.error(message);
+	    }
+	    try {
+	      // --- Welcome to debugging React ---
+	      // This error was thrown as a convenience so that you can use this stack
+	      // to find the callsite that caused this warning to fire.
+	      throw new Error(message);
+	    } catch (x) {}
+	  }
+	
 	  warning = function(condition, format, args) {
 	    var len = arguments.length;
 	    args = new Array(len > 2 ? len - 2 : 0);
@@ -2315,32 +2337,12 @@
 	    }
 	    if (format === undefined) {
 	      throw new Error(
-	        '`warning(condition, format, ...args)` requires a warning ' +
-	        'message argument'
+	          '`warning(condition, format, ...args)` requires a warning ' +
+	          'message argument'
 	      );
 	    }
-	
-	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-	      throw new Error(
-	        'The warning format should be able to uniquely identify this ' +
-	        'warning. Please, use a more descriptive format than: ' + format
-	      );
-	    }
-	
 	    if (!condition) {
-	      var argIndex = 0;
-	      var message = 'Warning: ' +
-	        format.replace(/%s/g, function() {
-	          return args[argIndex++];
-	        });
-	      if (typeof console !== 'undefined') {
-	        console.error(message);
-	      }
-	      try {
-	        // This error was thrown as a convenience so that you can use this stack
-	        // to find the callsite that caused this warning to fire.
-	        throw new Error(message);
-	      } catch(x) {}
+	      printWarning.apply(null, [format].concat(args));
 	    }
 	  };
 	}
@@ -5339,7 +5341,7 @@
 	 * 获得元素的显示部分的区域
 	 */
 	
-	function getVisibleRectForElement(element) {
+	function getVisibleRectForElement(element, alwaysByViewport) {
 	  var visibleRect = {
 	    left: 0,
 	    right: Infinity,
@@ -5412,7 +5414,7 @@
 	    element.style.position = originalPosition;
 	  }
 	
-	  if (isAncestorFixed(element)) {
+	  if (alwaysByViewport || isAncestorFixed(element)) {
 	    // Clip by viewport's size.
 	    visibleRect.left = Math.max(visibleRect.left, scrollX);
 	    visibleRect.top = Math.max(visibleRect.top, scrollY);
@@ -5602,9 +5604,10 @@
 	  targetOffset = [].concat(targetOffset);
 	  overflow = overflow || {};
 	  var newOverflowCfg = {};
-	  var fail = 0; // 当前节点可以被放置的显示区域
+	  var fail = 0;
+	  var alwaysByViewport = !!(overflow && overflow.alwaysByViewport); // 当前节点可以被放置的显示区域
 	
-	  var visibleRect = getVisibleRectForElement(source); // 当前节点所占的区域, left/top/width/height
+	  var visibleRect = getVisibleRectForElement(source, alwaysByViewport); // 当前节点所占的区域, left/top/width/height
 	
 	  var elRegion = getRegion(source); // 将 offset 转换成数值，支持百分比
 	
@@ -5725,8 +5728,8 @@
 	 *   - 增加智能对齐，以及大小调整选项
 	 **/
 	
-	function isOutOfVisibleRect(target) {
-	  var visibleRect = getVisibleRectForElement(target);
+	function isOutOfVisibleRect(target, alwaysByViewport) {
+	  var visibleRect = getVisibleRectForElement(target, alwaysByViewport);
 	  var targetRegion = getRegion(target);
 	  return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
 	}
@@ -5734,7 +5737,7 @@
 	function alignElement(el, refNode, align) {
 	  var target = align.target || refNode;
 	  var refNodeRegion = getRegion(target);
-	  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
+	  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target, align.overflow && align.overflow.alwaysByViewport);
 	  return doAlign(el, refNodeRegion, align, isTargetNotOutOfVisible);
 	}
 	
@@ -14030,12 +14033,12 @@
 	    'close': '关闭',
 	
 	    'en-us': {
-	        'copy': 'copy',
-	        'cut': 'cut',
-	        'copyReady': 'copied',
-	        'cutReady': 'cut',
-	        'copyToClipboard': 'copy to clipboard',
-	        'close': 'close'
+	        'copy': 'Copy',
+	        'cut': 'Cut',
+	        'copyReady': 'Copied',
+	        'cutReady': 'Cut',
+	        'copyToClipboard': 'Copy to Clipboard',
+	        'close': 'Close'
 	    },
 	    'zh-tw': {
 	        'copy': '複製',
@@ -23856,7 +23859,7 @@
 	  var calledOnce = false;
 	
 	  var isNewArgEqualToLast = function isNewArgEqualToLast(newArg, index) {
-	    return isEqual(newArg, lastArgs[index]);
+	    return isEqual(newArg, lastArgs[index], index);
 	  };
 	
 	  var result = function result() {
@@ -25099,11 +25102,11 @@
 	
 	var _hoistNonReactStatics = _interopRequireDefault(__webpack_require__(213));
 	
-	var _invariant = _interopRequireDefault(__webpack_require__(214));
+	var _invariant = _interopRequireDefault(__webpack_require__(217));
 	
 	var _react = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _reactIs = __webpack_require__(215);
+	var _reactIs = __webpack_require__(214);
 	
 	var _Subscription = _interopRequireDefault(__webpack_require__(218));
 	
@@ -25439,73 +25442,108 @@
 
 /***/ }),
 /* 213 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var reactIs = __webpack_require__(214);
 	
 	/**
 	 * Copyright 2015, Yahoo! Inc.
 	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
 	 */
 	var REACT_STATICS = {
-	    childContextTypes: true,
-	    contextTypes: true,
-	    defaultProps: true,
-	    displayName: true,
-	    getDefaultProps: true,
-	    getDerivedStateFromProps: true,
-	    mixins: true,
-	    propTypes: true,
-	    type: true
+	  childContextTypes: true,
+	  contextType: true,
+	  contextTypes: true,
+	  defaultProps: true,
+	  displayName: true,
+	  getDefaultProps: true,
+	  getDerivedStateFromError: true,
+	  getDerivedStateFromProps: true,
+	  mixins: true,
+	  propTypes: true,
+	  type: true
 	};
-	
 	var KNOWN_STATICS = {
-	    name: true,
-	    length: true,
-	    prototype: true,
-	    caller: true,
-	    callee: true,
-	    arguments: true,
-	    arity: true
+	  name: true,
+	  length: true,
+	  prototype: true,
+	  caller: true,
+	  callee: true,
+	  arguments: true,
+	  arity: true
 	};
+	var FORWARD_REF_STATICS = {
+	  '$$typeof': true,
+	  render: true,
+	  defaultProps: true,
+	  displayName: true,
+	  propTypes: true
+	};
+	var MEMO_STATICS = {
+	  '$$typeof': true,
+	  compare: true,
+	  defaultProps: true,
+	  displayName: true,
+	  propTypes: true,
+	  type: true
+	};
+	var TYPE_STATICS = {};
+	TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
+	TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+	
+	function getStatics(component) {
+	  // React v16.11 and below
+	  if (reactIs.isMemo(component)) {
+	    return MEMO_STATICS;
+	  } // React v16.12 and above
+	
+	
+	  return TYPE_STATICS[component['$$typeof']] || REACT_STATICS;
+	}
 	
 	var defineProperty = Object.defineProperty;
 	var getOwnPropertyNames = Object.getOwnPropertyNames;
 	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 	var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
 	var getPrototypeOf = Object.getPrototypeOf;
-	var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
-	
+	var objectPrototype = Object.prototype;
 	function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+	  if (typeof sourceComponent !== 'string') {
+	    // don't hoist over string (html) components
+	    if (objectPrototype) {
+	      var inheritedComponent = getPrototypeOf(sourceComponent);
 	
-	        if (objectPrototype) {
-	            var inheritedComponent = getPrototypeOf(sourceComponent);
-	            if (inheritedComponent && inheritedComponent !== objectPrototype) {
-	                hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-	            }
-	        }
-	
-	        var keys = getOwnPropertyNames(sourceComponent);
-	
-	        if (getOwnPropertySymbols) {
-	            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-	        }
-	
-	        for (var i = 0; i < keys.length; ++i) {
-	            var key = keys[i];
-	            if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
-	                var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-	                try { // Avoid failures from read-only properties
-	                    defineProperty(targetComponent, key, descriptor);
-	                } catch (e) {}
-	            }
-	        }
-	
-	        return targetComponent;
+	      if (inheritedComponent && inheritedComponent !== objectPrototype) {
+	        hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+	      }
 	    }
 	
-	    return targetComponent;
+	    var keys = getOwnPropertyNames(sourceComponent);
+	
+	    if (getOwnPropertySymbols) {
+	      keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+	    }
+	
+	    var targetStatics = getStatics(targetComponent);
+	    var sourceStatics = getStatics(sourceComponent);
+	
+	    for (var i = 0; i < keys.length; ++i) {
+	      var key = keys[i];
+	
+	      if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
+	        var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+	
+	        try {
+	          // Avoid failures from read-only properties
+	          defineProperty(targetComponent, key, descriptor);
+	        } catch (e) {}
+	      }
+	    }
+	  }
+	
+	  return targetComponent;
 	}
 	
 	module.exports = hoistNonReactStatics;
@@ -25515,74 +25553,18 @@
 /* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
-
-/***/ }),
-/* 215 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	if (process.env.NODE_ENV === 'production') {
-	  module.exports = __webpack_require__(216);
+	  module.exports = __webpack_require__(215);
 	} else {
-	  module.exports = __webpack_require__(217);
+	  module.exports = __webpack_require__(216);
 	}
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 216 */
+/* 215 */
 /***/ (function(module, exports) {
 
 	/** @license React v16.13.0
@@ -25603,7 +25585,7 @@
 
 
 /***/ }),
-/* 217 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.13.0
@@ -25787,6 +25769,62 @@
 	exports.typeOf = typeOf;
 	  })();
 	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+	
+	'use strict';
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	      error.name = 'Invariant Violation';
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+	
+	module.exports = invariant;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
@@ -28005,2221 +28043,13 @@
 /* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	(function (global, factory) {
-		 true ? module.exports = factory(__webpack_require__(2), __webpack_require__(1)) :
-		typeof define === 'function' && define.amd ? define(['react-dom', 'react'], factory) :
-		(global.ReactDraggable = factory(global.ReactDOM,global.React));
-	}(this, (function (ReactDOM,React) { 'use strict';
-	
-		ReactDOM = ReactDOM && ReactDOM.hasOwnProperty('default') ? ReactDOM['default'] : ReactDOM;
-		React = React && React.hasOwnProperty('default') ? React['default'] : React;
-	
-		function createCommonjsModule(fn, module) {
-			return module = { exports: {} }, fn(module, module.exports), module.exports;
-		}
-	
-		/**
-		 * Copyright (c) 2013-present, Facebook, Inc.
-		 *
-		 * This source code is licensed under the MIT license found in the
-		 * LICENSE file in the root directory of this source tree.
-		 *
-		 * 
-		 */
-	
-		function makeEmptyFunction(arg) {
-		  return function () {
-		    return arg;
-		  };
-		}
-	
-		/**
-		 * This function accepts and discards inputs; it has no side effects. This is
-		 * primarily useful idiomatically for overridable function endpoints which
-		 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
-		 */
-		var emptyFunction = function emptyFunction() {};
-	
-		emptyFunction.thatReturns = makeEmptyFunction;
-		emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-		emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-		emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-		emptyFunction.thatReturnsThis = function () {
-		  return this;
-		};
-		emptyFunction.thatReturnsArgument = function (arg) {
-		  return arg;
-		};
-	
-		var emptyFunction_1 = emptyFunction;
-	
-		/**
-		 * Copyright (c) 2013-present, Facebook, Inc.
-		 *
-		 * This source code is licensed under the MIT license found in the
-		 * LICENSE file in the root directory of this source tree.
-		 *
-		 */
-	
-		/**
-		 * Use invariant() to assert state which your program assumes to be true.
-		 *
-		 * Provide sprintf-style format (only %s is supported) and arguments
-		 * to provide information about what broke and what you were
-		 * expecting.
-		 *
-		 * The invariant message will be stripped in production, but the invariant
-		 * will remain to ensure logic does not differ in production.
-		 */
-	
-		var validateFormat = function validateFormat(format) {};
-	
-		{
-		  validateFormat = function validateFormat(format) {
-		    if (format === undefined) {
-		      throw new Error('invariant requires an error message argument');
-		    }
-		  };
-		}
-	
-		function invariant(condition, format, a, b, c, d, e, f) {
-		  validateFormat(format);
-	
-		  if (!condition) {
-		    var error;
-		    if (format === undefined) {
-		      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-		    } else {
-		      var args = [a, b, c, d, e, f];
-		      var argIndex = 0;
-		      error = new Error(format.replace(/%s/g, function () {
-		        return args[argIndex++];
-		      }));
-		      error.name = 'Invariant Violation';
-		    }
-	
-		    error.framesToPop = 1; // we don't care about invariant's own frame
-		    throw error;
-		  }
-		}
-	
-		var invariant_1 = invariant;
-	
-		/**
-		 * Similar to invariant but only logs a warning if the condition is not met.
-		 * This can be used to log issues in development environments in critical
-		 * paths. Removing the logging code for production environments will keep the
-		 * same logic and follow the same code paths.
-		 */
-	
-		var warning = emptyFunction_1;
-	
-		{
-		  var printWarning = function printWarning(format) {
-		    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-		      args[_key - 1] = arguments[_key];
-		    }
-	
-		    var argIndex = 0;
-		    var message = 'Warning: ' + format.replace(/%s/g, function () {
-		      return args[argIndex++];
-		    });
-		    if (typeof console !== 'undefined') {
-		      console.error(message);
-		    }
-		    try {
-		      // --- Welcome to debugging React ---
-		      // This error was thrown as a convenience so that you can use this stack
-		      // to find the callsite that caused this warning to fire.
-		      throw new Error(message);
-		    } catch (x) {}
-		  };
-	
-		  warning = function warning(condition, format) {
-		    if (format === undefined) {
-		      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-		    }
-	
-		    if (format.indexOf('Failed Composite propType: ') === 0) {
-		      return; // Ignore CompositeComponent proptype check.
-		    }
-	
-		    if (!condition) {
-		      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-		        args[_key2 - 2] = arguments[_key2];
-		      }
-	
-		      printWarning.apply(undefined, [format].concat(args));
-		    }
-		  };
-		}
-	
-		var warning_1 = warning;
-	
-		/*
-		object-assign
-		(c) Sindre Sorhus
-		@license MIT
-		*/
-		/* eslint-disable no-unused-vars */
-		var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-		var hasOwnProperty = Object.prototype.hasOwnProperty;
-		var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-		function toObject(val) {
-			if (val === null || val === undefined) {
-				throw new TypeError('Object.assign cannot be called with null or undefined');
-			}
-	
-			return Object(val);
-		}
-	
-		function shouldUseNative() {
-			try {
-				if (!Object.assign) {
-					return false;
-				}
-	
-				// Detect buggy property enumeration order in older V8 versions.
-	
-				// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-				var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-				test1[5] = 'de';
-				if (Object.getOwnPropertyNames(test1)[0] === '5') {
-					return false;
-				}
-	
-				// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-				var test2 = {};
-				for (var i = 0; i < 10; i++) {
-					test2['_' + String.fromCharCode(i)] = i;
-				}
-				var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-					return test2[n];
-				});
-				if (order2.join('') !== '0123456789') {
-					return false;
-				}
-	
-				// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-				var test3 = {};
-				'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-					test3[letter] = letter;
-				});
-				if (Object.keys(Object.assign({}, test3)).join('') !==
-						'abcdefghijklmnopqrst') {
-					return false;
-				}
-	
-				return true;
-			} catch (err) {
-				// We don't expect any of the above to throw, but better to be safe.
-				return false;
-			}
-		}
-	
-		var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
-			var from;
-			var to = toObject(target);
-			var symbols;
-	
-			for (var s = 1; s < arguments.length; s++) {
-				from = Object(arguments[s]);
-	
-				for (var key in from) {
-					if (hasOwnProperty.call(from, key)) {
-						to[key] = from[key];
-					}
-				}
-	
-				if (getOwnPropertySymbols) {
-					symbols = getOwnPropertySymbols(from);
-					for (var i = 0; i < symbols.length; i++) {
-						if (propIsEnumerable.call(from, symbols[i])) {
-							to[symbols[i]] = from[symbols[i]];
-						}
-					}
-				}
-			}
-	
-			return to;
-		};
-	
-		/**
-		 * Copyright (c) 2013-present, Facebook, Inc.
-		 *
-		 * This source code is licensed under the MIT license found in the
-		 * LICENSE file in the root directory of this source tree.
-		 */
-	
-		var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-	
-		var ReactPropTypesSecret_1 = ReactPropTypesSecret;
-	
-		{
-		  var invariant$1 = invariant_1;
-		  var warning$1 = warning_1;
-		  var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
-		  var loggedTypeFailures = {};
-		}
-	
-		/**
-		 * Assert that the values match with the type specs.
-		 * Error messages are memorized and will only be shown once.
-		 *
-		 * @param {object} typeSpecs Map of name to a ReactPropType
-		 * @param {object} values Runtime values that need to be type-checked
-		 * @param {string} location e.g. "prop", "context", "child context"
-		 * @param {string} componentName Name of the component for error messages.
-		 * @param {?Function} getStack Returns the component stack.
-		 * @private
-		 */
-		function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-		  {
-		    for (var typeSpecName in typeSpecs) {
-		      if (typeSpecs.hasOwnProperty(typeSpecName)) {
-		        var error;
-		        // Prop type validation may throw. In case they do, we don't want to
-		        // fail the render phase where it didn't fail before. So we log it.
-		        // After these have been cleaned up, we'll let them throw.
-		        try {
-		          // This is intentionally an invariant that gets caught. It's the same
-		          // behavior as without this statement except with a better message.
-		          invariant$1(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
-		          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$1);
-		        } catch (ex) {
-		          error = ex;
-		        }
-		        warning$1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
-		        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-		          // Only monitor this failure once because there tends to be a lot of the
-		          // same error.
-		          loggedTypeFailures[error.message] = true;
-	
-		          var stack = getStack ? getStack() : '';
-	
-		          warning$1(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
-		        }
-		      }
-		    }
-		  }
-		}
-	
-		var checkPropTypes_1 = checkPropTypes;
-	
-		var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
-		  /* global Symbol */
-		  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-		  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-	
-		  /**
-		   * Returns the iterator method function contained on the iterable object.
-		   *
-		   * Be sure to invoke the function with the iterable as context:
-		   *
-		   *     var iteratorFn = getIteratorFn(myIterable);
-		   *     if (iteratorFn) {
-		   *       var iterator = iteratorFn.call(myIterable);
-		   *       ...
-		   *     }
-		   *
-		   * @param {?object} maybeIterable
-		   * @return {?function}
-		   */
-		  function getIteratorFn(maybeIterable) {
-		    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-		    if (typeof iteratorFn === 'function') {
-		      return iteratorFn;
-		    }
-		  }
-	
-		  /**
-		   * Collection of methods that allow declaration and validation of props that are
-		   * supplied to React components. Example usage:
-		   *
-		   *   var Props = require('ReactPropTypes');
-		   *   var MyArticle = React.createClass({
-		   *     propTypes: {
-		   *       // An optional string prop named "description".
-		   *       description: Props.string,
-		   *
-		   *       // A required enum prop named "category".
-		   *       category: Props.oneOf(['News','Photos']).isRequired,
-		   *
-		   *       // A prop named "dialog" that requires an instance of Dialog.
-		   *       dialog: Props.instanceOf(Dialog).isRequired
-		   *     },
-		   *     render: function() { ... }
-		   *   });
-		   *
-		   * A more formal specification of how these methods are used:
-		   *
-		   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-		   *   decl := ReactPropTypes.{type}(.isRequired)?
-		   *
-		   * Each and every declaration produces a function with the same signature. This
-		   * allows the creation of custom validation functions. For example:
-		   *
-		   *  var MyLink = React.createClass({
-		   *    propTypes: {
-		   *      // An optional string or URI prop named "href".
-		   *      href: function(props, propName, componentName) {
-		   *        var propValue = props[propName];
-		   *        if (propValue != null && typeof propValue !== 'string' &&
-		   *            !(propValue instanceof URI)) {
-		   *          return new Error(
-		   *            'Expected a string or an URI for ' + propName + ' in ' +
-		   *            componentName
-		   *          );
-		   *        }
-		   *      }
-		   *    },
-		   *    render: function() {...}
-		   *  });
-		   *
-		   * @internal
-		   */
-	
-		  var ANONYMOUS = '<<anonymous>>';
-	
-		  // Important!
-		  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-		  var ReactPropTypes = {
-		    array: createPrimitiveTypeChecker('array'),
-		    bool: createPrimitiveTypeChecker('boolean'),
-		    func: createPrimitiveTypeChecker('function'),
-		    number: createPrimitiveTypeChecker('number'),
-		    object: createPrimitiveTypeChecker('object'),
-		    string: createPrimitiveTypeChecker('string'),
-		    symbol: createPrimitiveTypeChecker('symbol'),
-	
-		    any: createAnyTypeChecker(),
-		    arrayOf: createArrayOfTypeChecker,
-		    element: createElementTypeChecker(),
-		    instanceOf: createInstanceTypeChecker,
-		    node: createNodeChecker(),
-		    objectOf: createObjectOfTypeChecker,
-		    oneOf: createEnumTypeChecker,
-		    oneOfType: createUnionTypeChecker,
-		    shape: createShapeTypeChecker,
-		    exact: createStrictShapeTypeChecker,
-		  };
-	
-		  /**
-		   * inlined Object.is polyfill to avoid requiring consumers ship their own
-		   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-		   */
-		  /*eslint-disable no-self-compare*/
-		  function is(x, y) {
-		    // SameValue algorithm
-		    if (x === y) {
-		      // Steps 1-5, 7-10
-		      // Steps 6.b-6.e: +0 != -0
-		      return x !== 0 || 1 / x === 1 / y;
-		    } else {
-		      // Step 6.a: NaN == NaN
-		      return x !== x && y !== y;
-		    }
-		  }
-		  /*eslint-enable no-self-compare*/
-	
-		  /**
-		   * We use an Error-like object for backward compatibility as people may call
-		   * PropTypes directly and inspect their output. However, we don't use real
-		   * Errors anymore. We don't inspect their stack anyway, and creating them
-		   * is prohibitively expensive if they are created too often, such as what
-		   * happens in oneOfType() for any type before the one that matched.
-		   */
-		  function PropTypeError(message) {
-		    this.message = message;
-		    this.stack = '';
-		  }
-		  // Make `instanceof Error` still work for returned errors.
-		  PropTypeError.prototype = Error.prototype;
-	
-		  function createChainableTypeChecker(validate) {
-		    {
-		      var manualPropTypeCallCache = {};
-		      var manualPropTypeWarningCount = 0;
-		    }
-		    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-		      componentName = componentName || ANONYMOUS;
-		      propFullName = propFullName || propName;
-	
-		      if (secret !== ReactPropTypesSecret_1) {
-		        if (throwOnDirectAccess) {
-		          // New behavior only for users of `prop-types` package
-		          invariant_1(
-		            false,
-		            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-		            'Use `PropTypes.checkPropTypes()` to call them. ' +
-		            'Read more at http://fb.me/use-check-prop-types'
-		          );
-		        } else if ("development" !== 'production' && typeof console !== 'undefined') {
-		          // Old behavior for people using React.PropTypes
-		          var cacheKey = componentName + ':' + propName;
-		          if (
-		            !manualPropTypeCallCache[cacheKey] &&
-		            // Avoid spamming the console because they are often not actionable except for lib authors
-		            manualPropTypeWarningCount < 3
-		          ) {
-		            warning_1(
-		              false,
-		              'You are manually calling a React.PropTypes validation ' +
-		              'function for the `%s` prop on `%s`. This is deprecated ' +
-		              'and will throw in the standalone `prop-types` package. ' +
-		              'You may be seeing this warning due to a third-party PropTypes ' +
-		              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
-		              propFullName,
-		              componentName
-		            );
-		            manualPropTypeCallCache[cacheKey] = true;
-		            manualPropTypeWarningCount++;
-		          }
-		        }
-		      }
-		      if (props[propName] == null) {
-		        if (isRequired) {
-		          if (props[propName] === null) {
-		            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-		          }
-		          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-		        }
-		        return null;
-		      } else {
-		        return validate(props, propName, componentName, location, propFullName);
-		      }
-		    }
-	
-		    var chainedCheckType = checkType.bind(null, false);
-		    chainedCheckType.isRequired = checkType.bind(null, true);
-	
-		    return chainedCheckType;
-		  }
-	
-		  function createPrimitiveTypeChecker(expectedType) {
-		    function validate(props, propName, componentName, location, propFullName, secret) {
-		      var propValue = props[propName];
-		      var propType = getPropType(propValue);
-		      if (propType !== expectedType) {
-		        // `propValue` being instance of, say, date/regexp, pass the 'object'
-		        // check, but we can offer a more precise error message here rather than
-		        // 'of type `object`'.
-		        var preciseType = getPreciseType(propValue);
-	
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createAnyTypeChecker() {
-		    return createChainableTypeChecker(emptyFunction_1.thatReturnsNull);
-		  }
-	
-		  function createArrayOfTypeChecker(typeChecker) {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      if (typeof typeChecker !== 'function') {
-		        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-		      }
-		      var propValue = props[propName];
-		      if (!Array.isArray(propValue)) {
-		        var propType = getPropType(propValue);
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-		      }
-		      for (var i = 0; i < propValue.length; i++) {
-		        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1);
-		        if (error instanceof Error) {
-		          return error;
-		        }
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createElementTypeChecker() {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      var propValue = props[propName];
-		      if (!isValidElement(propValue)) {
-		        var propType = getPropType(propValue);
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createInstanceTypeChecker(expectedClass) {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      if (!(props[propName] instanceof expectedClass)) {
-		        var expectedClassName = expectedClass.name || ANONYMOUS;
-		        var actualClassName = getClassName(props[propName]);
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createEnumTypeChecker(expectedValues) {
-		    if (!Array.isArray(expectedValues)) {
-		      warning_1(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
-		      return emptyFunction_1.thatReturnsNull;
-		    }
-	
-		    function validate(props, propName, componentName, location, propFullName) {
-		      var propValue = props[propName];
-		      for (var i = 0; i < expectedValues.length; i++) {
-		        if (is(propValue, expectedValues[i])) {
-		          return null;
-		        }
-		      }
-	
-		      var valuesString = JSON.stringify(expectedValues);
-		      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createObjectOfTypeChecker(typeChecker) {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      if (typeof typeChecker !== 'function') {
-		        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-		      }
-		      var propValue = props[propName];
-		      var propType = getPropType(propValue);
-		      if (propType !== 'object') {
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-		      }
-		      for (var key in propValue) {
-		        if (propValue.hasOwnProperty(key)) {
-		          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
-		          if (error instanceof Error) {
-		            return error;
-		          }
-		        }
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createUnionTypeChecker(arrayOfTypeCheckers) {
-		    if (!Array.isArray(arrayOfTypeCheckers)) {
-		      warning_1(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
-		      return emptyFunction_1.thatReturnsNull;
-		    }
-	
-		    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-		      var checker = arrayOfTypeCheckers[i];
-		      if (typeof checker !== 'function') {
-		        warning_1(
-		          false,
-		          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-		          'received %s at index %s.',
-		          getPostfixForTypeWarning(checker),
-		          i
-		        );
-		        return emptyFunction_1.thatReturnsNull;
-		      }
-		    }
-	
-		    function validate(props, propName, componentName, location, propFullName) {
-		      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-		        var checker = arrayOfTypeCheckers[i];
-		        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1) == null) {
-		          return null;
-		        }
-		      }
-	
-		      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createNodeChecker() {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      if (!isNode(props[propName])) {
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createShapeTypeChecker(shapeTypes) {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      var propValue = props[propName];
-		      var propType = getPropType(propValue);
-		      if (propType !== 'object') {
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-		      }
-		      for (var key in shapeTypes) {
-		        var checker = shapeTypes[key];
-		        if (!checker) {
-		          continue;
-		        }
-		        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
-		        if (error) {
-		          return error;
-		        }
-		      }
-		      return null;
-		    }
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function createStrictShapeTypeChecker(shapeTypes) {
-		    function validate(props, propName, componentName, location, propFullName) {
-		      var propValue = props[propName];
-		      var propType = getPropType(propValue);
-		      if (propType !== 'object') {
-		        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-		      }
-		      // We need to check all keys in case some are required but missing from
-		      // props.
-		      var allKeys = objectAssign({}, props[propName], shapeTypes);
-		      for (var key in allKeys) {
-		        var checker = shapeTypes[key];
-		        if (!checker) {
-		          return new PropTypeError(
-		            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
-		            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
-		            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
-		          );
-		        }
-		        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
-		        if (error) {
-		          return error;
-		        }
-		      }
-		      return null;
-		    }
-	
-		    return createChainableTypeChecker(validate);
-		  }
-	
-		  function isNode(propValue) {
-		    switch (typeof propValue) {
-		      case 'number':
-		      case 'string':
-		      case 'undefined':
-		        return true;
-		      case 'boolean':
-		        return !propValue;
-		      case 'object':
-		        if (Array.isArray(propValue)) {
-		          return propValue.every(isNode);
-		        }
-		        if (propValue === null || isValidElement(propValue)) {
-		          return true;
-		        }
-	
-		        var iteratorFn = getIteratorFn(propValue);
-		        if (iteratorFn) {
-		          var iterator = iteratorFn.call(propValue);
-		          var step;
-		          if (iteratorFn !== propValue.entries) {
-		            while (!(step = iterator.next()).done) {
-		              if (!isNode(step.value)) {
-		                return false;
-		              }
-		            }
-		          } else {
-		            // Iterator will provide entry [k,v] tuples rather than values.
-		            while (!(step = iterator.next()).done) {
-		              var entry = step.value;
-		              if (entry) {
-		                if (!isNode(entry[1])) {
-		                  return false;
-		                }
-		              }
-		            }
-		          }
-		        } else {
-		          return false;
-		        }
-	
-		        return true;
-		      default:
-		        return false;
-		    }
-		  }
-	
-		  function isSymbol(propType, propValue) {
-		    // Native Symbol.
-		    if (propType === 'symbol') {
-		      return true;
-		    }
-	
-		    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-		    if (propValue['@@toStringTag'] === 'Symbol') {
-		      return true;
-		    }
-	
-		    // Fallback for non-spec compliant Symbols which are polyfilled.
-		    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
-		      return true;
-		    }
-	
-		    return false;
-		  }
-	
-		  // Equivalent of `typeof` but with special handling for array and regexp.
-		  function getPropType(propValue) {
-		    var propType = typeof propValue;
-		    if (Array.isArray(propValue)) {
-		      return 'array';
-		    }
-		    if (propValue instanceof RegExp) {
-		      // Old webkits (at least until Android 4.0) return 'function' rather than
-		      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-		      // passes PropTypes.object.
-		      return 'object';
-		    }
-		    if (isSymbol(propType, propValue)) {
-		      return 'symbol';
-		    }
-		    return propType;
-		  }
-	
-		  // This handles more types than `getPropType`. Only used for error messages.
-		  // See `createPrimitiveTypeChecker`.
-		  function getPreciseType(propValue) {
-		    if (typeof propValue === 'undefined' || propValue === null) {
-		      return '' + propValue;
-		    }
-		    var propType = getPropType(propValue);
-		    if (propType === 'object') {
-		      if (propValue instanceof Date) {
-		        return 'date';
-		      } else if (propValue instanceof RegExp) {
-		        return 'regexp';
-		      }
-		    }
-		    return propType;
-		  }
-	
-		  // Returns a string that is postfixed to a warning about an invalid type.
-		  // For example, "undefined" or "of type array"
-		  function getPostfixForTypeWarning(value) {
-		    var type = getPreciseType(value);
-		    switch (type) {
-		      case 'array':
-		      case 'object':
-		        return 'an ' + type;
-		      case 'boolean':
-		      case 'date':
-		      case 'regexp':
-		        return 'a ' + type;
-		      default:
-		        return type;
-		    }
-		  }
-	
-		  // Returns class name of the object, if any.
-		  function getClassName(propValue) {
-		    if (!propValue.constructor || !propValue.constructor.name) {
-		      return ANONYMOUS;
-		    }
-		    return propValue.constructor.name;
-		  }
-	
-		  ReactPropTypes.checkPropTypes = checkPropTypes_1;
-		  ReactPropTypes.PropTypes = ReactPropTypes;
-	
-		  return ReactPropTypes;
-		};
-	
-		var propTypes = createCommonjsModule(function (module) {
-		/**
-		 * Copyright (c) 2013-present, Facebook, Inc.
-		 *
-		 * This source code is licensed under the MIT license found in the
-		 * LICENSE file in the root directory of this source tree.
-		 */
-	
-		{
-		  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-		    Symbol.for &&
-		    Symbol.for('react.element')) ||
-		    0xeac7;
-	
-		  var isValidElement = function(object) {
-		    return typeof object === 'object' &&
-		      object !== null &&
-		      object.$$typeof === REACT_ELEMENT_TYPE;
-		  };
-	
-		  // By explicitly using `prop-types` you are opting into new development behavior.
-		  // http://fb.me/prop-types-in-prod
-		  var throwOnDirectAccess = true;
-		  module.exports = factoryWithTypeCheckers(isValidElement, throwOnDirectAccess);
-		}
-		});
-	
-		var classnames = createCommonjsModule(function (module) {
-		/*!
-		  Copyright (c) 2016 Jed Watson.
-		  Licensed under the MIT License (MIT), see
-		  http://jedwatson.github.io/classnames
-		*/
-		/* global define */
-	
-		(function () {
-	
-			var hasOwn = {}.hasOwnProperty;
-	
-			function classNames () {
-				var classes = [];
-	
-				for (var i = 0; i < arguments.length; i++) {
-					var arg = arguments[i];
-					if (!arg) continue;
-	
-					var argType = typeof arg;
-	
-					if (argType === 'string' || argType === 'number') {
-						classes.push(arg);
-					} else if (Array.isArray(arg)) {
-						classes.push(classNames.apply(null, arg));
-					} else if (argType === 'object') {
-						for (var key in arg) {
-							if (hasOwn.call(arg, key) && arg[key]) {
-								classes.push(key);
-							}
-						}
-					}
-				}
-	
-				return classes.join(' ');
-			}
-	
-			if ('object' !== 'undefined' && module.exports) {
-				module.exports = classNames;
-			} else if (false) {
-				// register as 'classnames', consistent with npm package name
-				undefined('classnames', [], function () {
-					return classNames;
-				});
-			} else {
-				window.classNames = classNames;
-			}
-		}());
-		});
-	
-		// @credits https://gist.github.com/rogozhnikoff/a43cfed27c41e4e68cdc
-		function findInArray(array /*: Array<any> | TouchList*/, callback /*: Function*/) /*: any*/ {
-		  for (var i = 0, length = array.length; i < length; i++) {
-		    if (callback.apply(callback, [array[i], i, array])) return array[i];
-		  }
-		}
-	
-		function isFunction(func /*: any*/) /*: boolean*/ {
-		  return typeof func === 'function' || Object.prototype.toString.call(func) === '[object Function]';
-		}
-	
-		function isNum(num /*: any*/) /*: boolean*/ {
-		  return typeof num === 'number' && !isNaN(num);
-		}
-	
-		function int(a /*: string*/) /*: number*/ {
-		  return parseInt(a, 10);
-		}
-	
-		function dontSetMe(props /*: Object*/, propName /*: string*/, componentName /*: string*/) {
-		  if (props[propName]) {
-		    return new Error('Invalid prop ' + propName + ' passed to ' + componentName + ' - do not set this, set it on the child.');
-		  }
-		}
-	
-		var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
-		function getPrefix() /*: string*/ {
-		  var prop /*: string*/ = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'transform';
-	
-		  // Checking specifically for 'window.document' is for pseudo-browser server-side
-		  // environments that define 'window' as the global context.
-		  // E.g. React-rails (see https://github.com/reactjs/react-rails/pull/84)
-		  if (typeof window === 'undefined' || typeof window.document === 'undefined') return '';
-	
-		  var style = window.document.documentElement.style;
-	
-		  if (prop in style) return '';
-	
-		  for (var i = 0; i < prefixes.length; i++) {
-		    if (browserPrefixToKey(prop, prefixes[i]) in style) return prefixes[i];
-		  }
-	
-		  return '';
-		}
-	
-		function browserPrefixToKey(prop /*: string*/, prefix /*: string*/) /*: string*/ {
-		  return prefix ? '' + prefix + kebabToTitleCase(prop) : prop;
-		}
-	
-		function kebabToTitleCase(str /*: string*/) /*: string*/ {
-		  var out = '';
-		  var shouldCapitalize = true;
-		  for (var i = 0; i < str.length; i++) {
-		    if (shouldCapitalize) {
-		      out += str[i].toUpperCase();
-		      shouldCapitalize = false;
-		    } else if (str[i] === '-') {
-		      shouldCapitalize = true;
-		    } else {
-		      out += str[i];
-		    }
-		  }
-		  return out;
-		}
-	
-		// Default export is the prefix itself, like 'Moz', 'Webkit', etc
-		// Note that you may have to re-test for certain things; for instance, Chrome 50
-		// can handle unprefixed `transform`, but not unprefixed `user-select`
-		var browserPrefix = getPrefix();
-	
-		var classCallCheck = function (instance, Constructor) {
-		  if (!(instance instanceof Constructor)) {
-		    throw new TypeError("Cannot call a class as a function");
-		  }
-		};
-	
-		var createClass = function () {
-		  function defineProperties(target, props) {
-		    for (var i = 0; i < props.length; i++) {
-		      var descriptor = props[i];
-		      descriptor.enumerable = descriptor.enumerable || false;
-		      descriptor.configurable = true;
-		      if ("value" in descriptor) descriptor.writable = true;
-		      Object.defineProperty(target, descriptor.key, descriptor);
-		    }
-		  }
-	
-		  return function (Constructor, protoProps, staticProps) {
-		    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-		    if (staticProps) defineProperties(Constructor, staticProps);
-		    return Constructor;
-		  };
-		}();
-	
-		var defineProperty = function (obj, key, value) {
-		  if (key in obj) {
-		    Object.defineProperty(obj, key, {
-		      value: value,
-		      enumerable: true,
-		      configurable: true,
-		      writable: true
-		    });
-		  } else {
-		    obj[key] = value;
-		  }
-	
-		  return obj;
-		};
-	
-		var _extends = Object.assign || function (target) {
-		  for (var i = 1; i < arguments.length; i++) {
-		    var source = arguments[i];
-	
-		    for (var key in source) {
-		      if (Object.prototype.hasOwnProperty.call(source, key)) {
-		        target[key] = source[key];
-		      }
-		    }
-		  }
-	
-		  return target;
-		};
-	
-		var inherits = function (subClass, superClass) {
-		  if (typeof superClass !== "function" && superClass !== null) {
-		    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		  }
-	
-		  subClass.prototype = Object.create(superClass && superClass.prototype, {
-		    constructor: {
-		      value: subClass,
-		      enumerable: false,
-		      writable: true,
-		      configurable: true
-		    }
-		  });
-		  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-		};
-	
-		var possibleConstructorReturn = function (self, call) {
-		  if (!self) {
-		    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		  }
-	
-		  return call && (typeof call === "object" || typeof call === "function") ? call : self;
-		};
-	
-		var slicedToArray = function () {
-		  function sliceIterator(arr, i) {
-		    var _arr = [];
-		    var _n = true;
-		    var _d = false;
-		    var _e = undefined;
-	
-		    try {
-		      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-		        _arr.push(_s.value);
-	
-		        if (i && _arr.length === i) break;
-		      }
-		    } catch (err) {
-		      _d = true;
-		      _e = err;
-		    } finally {
-		      try {
-		        if (!_n && _i["return"]) _i["return"]();
-		      } finally {
-		        if (_d) throw _e;
-		      }
-		    }
-	
-		    return _arr;
-		  }
-	
-		  return function (arr, i) {
-		    if (Array.isArray(arr)) {
-		      return arr;
-		    } else if (Symbol.iterator in Object(arr)) {
-		      return sliceIterator(arr, i);
-		    } else {
-		      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-		    }
-		  };
-		}();
-	
-		/*:: import type {ControlPosition, PositionOffsetControlPosition, MouseTouchEvent} from './types';*/
-	
-	
-		var matchesSelectorFunc = '';
-		function matchesSelector(el /*: Node*/, selector /*: string*/) /*: boolean*/ {
-		  if (!matchesSelectorFunc) {
-		    matchesSelectorFunc = findInArray(['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'], function (method) {
-		      // $FlowIgnore: Doesn't think elements are indexable
-		      return isFunction(el[method]);
-		    });
-		  }
-	
-		  // Might not be found entirely (not an Element?) - in that case, bail
-		  // $FlowIgnore: Doesn't think elements are indexable
-		  if (!isFunction(el[matchesSelectorFunc])) return false;
-	
-		  // $FlowIgnore: Doesn't think elements are indexable
-		  return el[matchesSelectorFunc](selector);
-		}
-	
-		// Works up the tree to the draggable itself attempting to match selector.
-		function matchesSelectorAndParentsTo(el /*: Node*/, selector /*: string*/, baseNode /*: Node*/) /*: boolean*/ {
-		  var node = el;
-		  do {
-		    if (matchesSelector(node, selector)) return true;
-		    if (node === baseNode) return false;
-		    node = node.parentNode;
-		  } while (node);
-	
-		  return false;
-		}
-	
-		function addEvent(el /*: ?Node*/, event /*: string*/, handler /*: Function*/) /*: void*/ {
-		  if (!el) {
-		    return;
-		  }
-		  if (el.attachEvent) {
-		    el.attachEvent('on' + event, handler);
-		  } else if (el.addEventListener) {
-		    el.addEventListener(event, handler, true);
-		  } else {
-		    // $FlowIgnore: Doesn't think elements are indexable
-		    el['on' + event] = handler;
-		  }
-		}
-	
-		function removeEvent(el /*: ?Node*/, event /*: string*/, handler /*: Function*/) /*: void*/ {
-		  if (!el) {
-		    return;
-		  }
-		  if (el.detachEvent) {
-		    el.detachEvent('on' + event, handler);
-		  } else if (el.removeEventListener) {
-		    el.removeEventListener(event, handler, true);
-		  } else {
-		    // $FlowIgnore: Doesn't think elements are indexable
-		    el['on' + event] = null;
-		  }
-		}
-	
-		function outerHeight(node /*: HTMLElement*/) /*: number*/ {
-		  // This is deliberately excluding margin for our calculations, since we are using
-		  // offsetTop which is including margin. See getBoundPosition
-		  var height = node.clientHeight;
-		  var computedStyle = node.ownerDocument.defaultView.getComputedStyle(node);
-		  height += int(computedStyle.borderTopWidth);
-		  height += int(computedStyle.borderBottomWidth);
-		  return height;
-		}
-	
-		function outerWidth(node /*: HTMLElement*/) /*: number*/ {
-		  // This is deliberately excluding margin for our calculations, since we are using
-		  // offsetLeft which is including margin. See getBoundPosition
-		  var width = node.clientWidth;
-		  var computedStyle = node.ownerDocument.defaultView.getComputedStyle(node);
-		  width += int(computedStyle.borderLeftWidth);
-		  width += int(computedStyle.borderRightWidth);
-		  return width;
-		}
-		function innerHeight(node /*: HTMLElement*/) /*: number*/ {
-		  var height = node.clientHeight;
-		  var computedStyle = node.ownerDocument.defaultView.getComputedStyle(node);
-		  height -= int(computedStyle.paddingTop);
-		  height -= int(computedStyle.paddingBottom);
-		  return height;
-		}
-	
-		function innerWidth(node /*: HTMLElement*/) /*: number*/ {
-		  var width = node.clientWidth;
-		  var computedStyle = node.ownerDocument.defaultView.getComputedStyle(node);
-		  width -= int(computedStyle.paddingLeft);
-		  width -= int(computedStyle.paddingRight);
-		  return width;
-		}
-	
-		// Get from offsetParent
-		function offsetXYFromParent(evt /*: {clientX: number, clientY: number}*/, offsetParent /*: HTMLElement*/) /*: ControlPosition*/ {
-		  var isBody = offsetParent === offsetParent.ownerDocument.body;
-		  var offsetParentRect = isBody ? { left: 0, top: 0 } : offsetParent.getBoundingClientRect();
-	
-		  var x = evt.clientX + offsetParent.scrollLeft - offsetParentRect.left;
-		  var y = evt.clientY + offsetParent.scrollTop - offsetParentRect.top;
-	
-		  return { x: x, y: y };
-		}
-	
-		function createCSSTransform(controlPos /*: ControlPosition*/, positionOffset /*: PositionOffsetControlPosition*/) /*: Object*/ {
-		  var translation = getTranslation(controlPos, positionOffset, 'px');
-		  return defineProperty({}, browserPrefixToKey('transform', browserPrefix), translation);
-		}
-	
-		function createSVGTransform(controlPos /*: ControlPosition*/, positionOffset /*: PositionOffsetControlPosition*/) /*: string*/ {
-		  var translation = getTranslation(controlPos, positionOffset, '');
-		  return translation;
-		}
-		function getTranslation(_ref2, positionOffset /*: PositionOffsetControlPosition*/, unitSuffix /*: string*/) /*: string*/ {
-		  var x = _ref2.x,
-		      y = _ref2.y;
-	
-		  var translation = 'translate(' + x + unitSuffix + ',' + y + unitSuffix + ')';
-		  if (positionOffset) {
-		    var defaultX = '' + (typeof positionOffset.x === 'string' ? positionOffset.x : positionOffset.x + unitSuffix);
-		    var defaultY = '' + (typeof positionOffset.y === 'string' ? positionOffset.y : positionOffset.y + unitSuffix);
-		    translation = 'translate(' + defaultX + ', ' + defaultY + ')' + translation;
-		  }
-		  return translation;
-		}
-	
-		function getTouch(e /*: MouseTouchEvent*/, identifier /*: number*/) /*: ?{clientX: number, clientY: number}*/ {
-		  return e.targetTouches && findInArray(e.targetTouches, function (t) {
-		    return identifier === t.identifier;
-		  }) || e.changedTouches && findInArray(e.changedTouches, function (t) {
-		    return identifier === t.identifier;
-		  });
-		}
-	
-		function getTouchIdentifier(e /*: MouseTouchEvent*/) /*: ?number*/ {
-		  if (e.targetTouches && e.targetTouches[0]) return e.targetTouches[0].identifier;
-		  if (e.changedTouches && e.changedTouches[0]) return e.changedTouches[0].identifier;
-		}
-	
-		// User-select Hacks:
-		//
-		// Useful for preventing blue highlights all over everything when dragging.
-	
-		// Note we're passing `document` b/c we could be iframed
-		function addUserSelectStyles(doc /*: ?Document*/) {
-		  if (!doc) return;
-		  var styleEl = doc.getElementById('react-draggable-style-el');
-		  if (!styleEl) {
-		    styleEl = doc.createElement('style');
-		    styleEl.type = 'text/css';
-		    styleEl.id = 'react-draggable-style-el';
-		    styleEl.innerHTML = '.react-draggable-transparent-selection *::-moz-selection {all: inherit;}\n';
-		    styleEl.innerHTML += '.react-draggable-transparent-selection *::selection {all: inherit;}\n';
-		    doc.getElementsByTagName('head')[0].appendChild(styleEl);
-		  }
-		  if (doc.body) addClassName(doc.body, 'react-draggable-transparent-selection');
-		}
-	
-		function removeUserSelectStyles(doc /*: ?Document*/) {
-		  try {
-		    if (doc && doc.body) removeClassName(doc.body, 'react-draggable-transparent-selection');
-		    // $FlowIgnore: IE
-		    if (doc.selection) {
-		      // $FlowIgnore: IE
-		      doc.selection.empty();
-		    } else {
-		      window.getSelection().removeAllRanges(); // remove selection caused by scroll
-		    }
-		  } catch (e) {
-		    // probably IE
-		  }
-		}
-	
-		function styleHacks() /*: Object*/ {
-		  var childStyle /*: Object*/ = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	
-		  // Workaround IE pointer events; see #51
-		  // https://github.com/mzabriskie/react-draggable/issues/51#issuecomment-103488278
-		  return _extends({
-		    touchAction: 'none'
-		  }, childStyle);
-		}
-	
-		function addClassName(el /*: HTMLElement*/, className /*: string*/) {
-		  if (el.classList) {
-		    el.classList.add(className);
-		  } else {
-		    if (!el.className.match(new RegExp('(?:^|\\s)' + className + '(?!\\S)'))) {
-		      el.className += ' ' + className;
-		    }
-		  }
-		}
-	
-		function removeClassName(el /*: HTMLElement*/, className /*: string*/) {
-		  if (el.classList) {
-		    el.classList.remove(className);
-		  } else {
-		    el.className = el.className.replace(new RegExp('(?:^|\\s)' + className + '(?!\\S)', 'g'), '');
-		  }
-		}
-	
-		/*:: import type Draggable from '../Draggable';*/
-		/*:: import type {Bounds, ControlPosition, DraggableData, MouseTouchEvent} from './types';*/
-		/*:: import type DraggableCore from '../DraggableCore';*/
-	
-	
-		function getBoundPosition(draggable /*: Draggable*/, x /*: number*/, y /*: number*/) /*: [number, number]*/ {
-		  // If no bounds, short-circuit and move on
-		  if (!draggable.props.bounds) return [x, y];
-	
-		  // Clone new bounds
-		  var bounds = draggable.props.bounds;
-	
-		  bounds = typeof bounds === 'string' ? bounds : cloneBounds(bounds);
-		  var node = findDOMNode(draggable);
-	
-		  if (typeof bounds === 'string') {
-		    var ownerDocument = node.ownerDocument;
-	
-		    var ownerWindow = ownerDocument.defaultView;
-		    var boundNode = void 0;
-		    if (bounds === 'parent') {
-		      boundNode = node.parentNode;
-		    } else {
-		      boundNode = ownerDocument.querySelector(bounds);
-		    }
-		    if (!(boundNode instanceof ownerWindow.HTMLElement)) {
-		      throw new Error('Bounds selector "' + bounds + '" could not find an element.');
-		    }
-		    var nodeStyle = ownerWindow.getComputedStyle(node);
-		    var boundNodeStyle = ownerWindow.getComputedStyle(boundNode);
-		    // Compute bounds. This is a pain with padding and offsets but this gets it exactly right.
-		    bounds = {
-		      left: -node.offsetLeft + int(boundNodeStyle.paddingLeft) + int(nodeStyle.marginLeft),
-		      top: -node.offsetTop + int(boundNodeStyle.paddingTop) + int(nodeStyle.marginTop),
-		      right: innerWidth(boundNode) - outerWidth(node) - node.offsetLeft + int(boundNodeStyle.paddingRight) - int(nodeStyle.marginRight),
-		      bottom: innerHeight(boundNode) - outerHeight(node) - node.offsetTop + int(boundNodeStyle.paddingBottom) - int(nodeStyle.marginBottom)
-		    };
-		  }
-	
-		  // Keep x and y below right and bottom limits...
-		  if (isNum(bounds.right)) x = Math.min(x, bounds.right);
-		  if (isNum(bounds.bottom)) y = Math.min(y, bounds.bottom);
-	
-		  // But above left and top limits.
-		  if (isNum(bounds.left)) x = Math.max(x, bounds.left);
-		  if (isNum(bounds.top)) y = Math.max(y, bounds.top);
-	
-		  return [x, y];
-		}
-	
-		function snapToGrid(grid /*: [number, number]*/, pendingX /*: number*/, pendingY /*: number*/) /*: [number, number]*/ {
-		  var x = Math.round(pendingX / grid[0]) * grid[0];
-		  var y = Math.round(pendingY / grid[1]) * grid[1];
-		  return [x, y];
-		}
-	
-		function canDragX(draggable /*: Draggable*/) /*: boolean*/ {
-		  return draggable.props.axis === 'both' || draggable.props.axis === 'x';
-		}
-	
-		function canDragY(draggable /*: Draggable*/) /*: boolean*/ {
-		  return draggable.props.axis === 'both' || draggable.props.axis === 'y';
-		}
-	
-		// Get {x, y} positions from event.
-		function getControlPosition(e /*: MouseTouchEvent*/, touchIdentifier /*: ?number*/, draggableCore /*: DraggableCore*/) /*: ?ControlPosition*/ {
-		  var touchObj = typeof touchIdentifier === 'number' ? getTouch(e, touchIdentifier) : null;
-		  if (typeof touchIdentifier === 'number' && !touchObj) return null; // not the right touch
-		  var node = findDOMNode(draggableCore);
-		  // User can provide an offsetParent if desired.
-		  var offsetParent = draggableCore.props.offsetParent || node.offsetParent || node.ownerDocument.body;
-		  return offsetXYFromParent(touchObj || e, offsetParent);
-		}
-	
-		// Create an data object exposed by <DraggableCore>'s events
-		function createCoreData(draggable /*: DraggableCore*/, x /*: number*/, y /*: number*/) /*: DraggableData*/ {
-		  var state = draggable.state;
-		  var isStart = !isNum(state.lastX);
-		  var node = findDOMNode(draggable);
-	
-		  if (isStart) {
-		    // If this is our first move, use the x and y as last coords.
-		    return {
-		      node: node,
-		      deltaX: 0, deltaY: 0,
-		      lastX: x, lastY: y,
-		      x: x, y: y
-		    };
-		  } else {
-		    // Otherwise calculate proper values.
-		    return {
-		      node: node,
-		      deltaX: x - state.lastX, deltaY: y - state.lastY,
-		      lastX: state.lastX, lastY: state.lastY,
-		      x: x, y: y
-		    };
-		  }
-		}
-	
-		// Create an data exposed by <Draggable>'s events
-		function createDraggableData(draggable /*: Draggable*/, coreData /*: DraggableData*/) /*: DraggableData*/ {
-		  var scale = draggable.props.scale;
-		  return {
-		    node: coreData.node,
-		    x: draggable.state.x + coreData.deltaX / scale,
-		    y: draggable.state.y + coreData.deltaY / scale,
-		    deltaX: coreData.deltaX / scale,
-		    deltaY: coreData.deltaY / scale,
-		    lastX: draggable.state.x,
-		    lastY: draggable.state.y
-		  };
-		}
-	
-		// A lot faster than stringify/parse
-		function cloneBounds(bounds /*: Bounds*/) /*: Bounds*/ {
-		  return {
-		    left: bounds.left,
-		    top: bounds.top,
-		    right: bounds.right,
-		    bottom: bounds.bottom
-		  };
-		}
-	
-		function findDOMNode(draggable /*: Draggable | DraggableCore*/) /*: HTMLElement*/ {
-		  var node = ReactDOM.findDOMNode(draggable);
-		  if (!node) {
-		    throw new Error('<DraggableCore>: Unmounted during event!');
-		  }
-		  // $FlowIgnore we can't assert on HTMLElement due to tests... FIXME
-		  return node;
-		}
-	
-		/*eslint no-console:0*/
-		function log() {
-		}
-	
-		/*:: import type {EventHandler, MouseTouchEvent} from './utils/types';*/
-	
-	
-		// Simple abstraction for dragging events names.
-		/*:: import type {Element as ReactElement} from 'react';*/
-		var eventsFor = {
-		  touch: {
-		    start: 'touchstart',
-		    move: 'touchmove',
-		    stop: 'touchend'
-		  },
-		  mouse: {
-		    start: 'mousedown',
-		    move: 'mousemove',
-		    stop: 'mouseup'
-		  }
-		};
-	
-		// Default to mouse events.
-		var dragEventFor = eventsFor.mouse;
-	
-		/*:: type DraggableCoreState = {
-		  dragging: boolean,
-		  lastX: number,
-		  lastY: number,
-		  touchIdentifier: ?number
-		};*/
-		/*:: export type DraggableBounds = {
-		  left: number,
-		  right: number,
-		  top: number,
-		  bottom: number,
-		};*/
-		/*:: export type DraggableData = {
-		  node: HTMLElement,
-		  x: number, y: number,
-		  deltaX: number, deltaY: number,
-		  lastX: number, lastY: number,
-		};*/
-		/*:: export type DraggableEventHandler = (e: MouseEvent, data: DraggableData) => void;*/
-		/*:: export type ControlPosition = {x: number, y: number};*/
-		/*:: export type PositionOffsetControlPosition = {x: number|string, y: number|string};*/
-	
-	
-		//
-		// Define <DraggableCore>.
-		//
-		// <DraggableCore> is for advanced usage of <Draggable>. It maintains minimal internal state so it can
-		// work well with libraries that require more control over the element.
-		//
-	
-		/*:: export type DraggableCoreProps = {
-		  allowAnyClick: boolean,
-		  cancel: string,
-		  children: ReactElement<any>,
-		  disabled: boolean,
-		  enableUserSelectHack: boolean,
-		  offsetParent: HTMLElement,
-		  grid: [number, number],
-		  handle: string,
-		  onStart: DraggableEventHandler,
-		  onDrag: DraggableEventHandler,
-		  onStop: DraggableEventHandler,
-		  onMouseDown: (e: MouseEvent) => void,
-		};*/
-	
-		var DraggableCore = function (_React$Component) {
-		  inherits(DraggableCore, _React$Component);
-	
-		  function DraggableCore() {
-		    var _ref;
-	
-		    var _temp, _this, _ret;
-	
-		    classCallCheck(this, DraggableCore);
-	
-		    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-		      args[_key] = arguments[_key];
-		    }
-	
-		    return _ret = (_temp = (_this = possibleConstructorReturn(this, (_ref = DraggableCore.__proto__ || Object.getPrototypeOf(DraggableCore)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-		      dragging: false,
-		      // Used while dragging to determine deltas.
-		      lastX: NaN, lastY: NaN,
-		      touchIdentifier: null
-		    }, _this.handleDragStart = function (e) {
-		      // Make it possible to attach event handlers on top of this one.
-		      _this.props.onMouseDown(e);
-	
-		      // Only accept left-clicks.
-		      if (!_this.props.allowAnyClick && typeof e.button === 'number' && e.button !== 0) return false;
-	
-		      // Get nodes. Be sure to grab relative document (could be iframed)
-		      var thisNode = ReactDOM.findDOMNode(_this);
-		      if (!thisNode || !thisNode.ownerDocument || !thisNode.ownerDocument.body) {
-		        throw new Error('<DraggableCore> not mounted on DragStart!');
-		      }
-		      var ownerDocument = thisNode.ownerDocument;
-	
-		      // Short circuit if handle or cancel prop was provided and selector doesn't match.
-	
-		      if (_this.props.disabled || !(e.target instanceof ownerDocument.defaultView.Node) || _this.props.handle && !matchesSelectorAndParentsTo(e.target, _this.props.handle, thisNode) || _this.props.cancel && matchesSelectorAndParentsTo(e.target, _this.props.cancel, thisNode)) {
-		        return;
-		      }
-	
-		      // Set touch identifier in component state if this is a touch event. This allows us to
-		      // distinguish between individual touches on multitouch screens by identifying which
-		      // touchpoint was set to this element.
-		      var touchIdentifier = getTouchIdentifier(e);
-		      _this.setState({ touchIdentifier: touchIdentifier });
-	
-		      // Get the current drag point from the event. This is used as the offset.
-		      var position = getControlPosition(e, touchIdentifier, _this);
-		      if (position == null) return; // not possible but satisfies flow
-		      var x = position.x,
-		          y = position.y;
-	
-		      // Create an event object with all the data parents need to make a decision here.
-	
-		      var coreEvent = createCoreData(_this, x, y);
-	
-		      // Call event handler. If it returns explicit false, cancel.
-		      log('calling', _this.props.onStart);
-		      var shouldUpdate = _this.props.onStart(e, coreEvent);
-		      if (shouldUpdate === false) return;
-	
-		      // Add a style to the body to disable user-select. This prevents text from
-		      // being selected all over the page.
-		      if (_this.props.enableUserSelectHack) addUserSelectStyles(ownerDocument);
-	
-		      // Initiate dragging. Set the current x and y as offsets
-		      // so we know how much we've moved during the drag. This allows us
-		      // to drag elements around even if they have been moved, without issue.
-		      _this.setState({
-		        dragging: true,
-	
-		        lastX: x,
-		        lastY: y
-		      });
-	
-		      // Add events to the document directly so we catch when the user's mouse/touch moves outside of
-		      // this element. We use different events depending on whether or not we have detected that this
-		      // is a touch-capable device.
-		      addEvent(ownerDocument, dragEventFor.move, _this.handleDrag);
-		      addEvent(ownerDocument, dragEventFor.stop, _this.handleDragStop);
-		    }, _this.handleDrag = function (e) {
-	
-		      // Prevent scrolling on mobile devices, like ipad/iphone.
-		      if (e.type === 'touchmove') e.preventDefault();
-	
-		      // Get the current drag point from the event. This is used as the offset.
-		      var position = getControlPosition(e, _this.state.touchIdentifier, _this);
-		      if (position == null) return;
-		      var x = position.x,
-		          y = position.y;
-	
-		      // Snap to grid if prop has been provided
-	
-		      if (Array.isArray(_this.props.grid)) {
-		        var _deltaX = x - _this.state.lastX,
-		            _deltaY = y - _this.state.lastY;
-	
-		        var _snapToGrid = snapToGrid(_this.props.grid, _deltaX, _deltaY);
-	
-		        var _snapToGrid2 = slicedToArray(_snapToGrid, 2);
-	
-		        _deltaX = _snapToGrid2[0];
-		        _deltaY = _snapToGrid2[1];
-	
-		        if (!_deltaX && !_deltaY) return; // skip useless drag
-		        x = _this.state.lastX + _deltaX, y = _this.state.lastY + _deltaY;
-		      }
-	
-		      var coreEvent = createCoreData(_this, x, y);
-	
-		      // Call event handler. If it returns explicit false, trigger end.
-		      var shouldUpdate = _this.props.onDrag(e, coreEvent);
-		      if (shouldUpdate === false) {
-		        try {
-		          // $FlowIgnore
-		          _this.handleDragStop(new MouseEvent('mouseup'));
-		        } catch (err) {
-		          // Old browsers
-		          var event = ((document.createEvent('MouseEvents') /*: any*/) /*: MouseTouchEvent*/);
-		          // I see why this insanity was deprecated
-		          // $FlowIgnore
-		          event.initMouseEvent('mouseup', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-		          _this.handleDragStop(event);
-		        }
-		        return;
-		      }
-	
-		      _this.setState({
-		        lastX: x,
-		        lastY: y
-		      });
-		    }, _this.handleDragStop = function (e) {
-		      if (!_this.state.dragging) return;
-	
-		      var position = getControlPosition(e, _this.state.touchIdentifier, _this);
-		      if (position == null) return;
-		      var x = position.x,
-		          y = position.y;
-	
-		      var coreEvent = createCoreData(_this, x, y);
-	
-		      var thisNode = ReactDOM.findDOMNode(_this);
-		      if (thisNode) {
-		        // Remove user-select hack
-		        if (_this.props.enableUserSelectHack) removeUserSelectStyles(thisNode.ownerDocument);
-		      }
-	
-		      // Reset the el.
-		      _this.setState({
-		        dragging: false,
-		        lastX: NaN,
-		        lastY: NaN
-		      });
-	
-		      // Call event handler
-		      _this.props.onStop(e, coreEvent);
-	
-		      if (thisNode) {
-		        removeEvent(thisNode.ownerDocument, dragEventFor.move, _this.handleDrag);
-		        removeEvent(thisNode.ownerDocument, dragEventFor.stop, _this.handleDragStop);
-		      }
-		    }, _this.onMouseDown = function (e) {
-		      dragEventFor = eventsFor.mouse; // on touchscreen laptops we could switch back to mouse
-	
-		      return _this.handleDragStart(e);
-		    }, _this.onMouseUp = function (e) {
-		      dragEventFor = eventsFor.mouse;
-	
-		      return _this.handleDragStop(e);
-		    }, _this.onTouchStart = function (e) {
-		      // We're on a touch device now, so change the event handlers
-		      dragEventFor = eventsFor.touch;
-	
-		      return _this.handleDragStart(e);
-		    }, _this.onTouchEnd = function (e) {
-		      // We're on a touch device now, so change the event handlers
-		      dragEventFor = eventsFor.touch;
-	
-		      return _this.handleDragStop(e);
-		    }, _temp), possibleConstructorReturn(_this, _ret);
-		  }
-	
-		  createClass(DraggableCore, [{
-		    key: 'componentWillUnmount',
-		    value: function componentWillUnmount() {
-		      // Remove any leftover event handlers. Remove both touch and mouse handlers in case
-		      // some browser quirk caused a touch event to fire during a mouse move, or vice versa.
-		      var thisNode = ReactDOM.findDOMNode(this);
-		      if (thisNode) {
-		        var ownerDocument = thisNode.ownerDocument;
-	
-		        removeEvent(ownerDocument, eventsFor.mouse.move, this.handleDrag);
-		        removeEvent(ownerDocument, eventsFor.touch.move, this.handleDrag);
-		        removeEvent(ownerDocument, eventsFor.mouse.stop, this.handleDragStop);
-		        removeEvent(ownerDocument, eventsFor.touch.stop, this.handleDragStop);
-		        if (this.props.enableUserSelectHack) removeUserSelectStyles(ownerDocument);
-		      }
-		    }
-	
-		    // Same as onMouseDown (start drag), but now consider this a touch device.
-	
-		  }, {
-		    key: 'render',
-		    value: function render() {
-		      // Reuse the child provided
-		      // This makes it flexible to use whatever element is wanted (div, ul, etc)
-		      return React.cloneElement(React.Children.only(this.props.children), {
-		        style: styleHacks(this.props.children.props.style),
-	
-		        // Note: mouseMove handler is attached to document so it will still function
-		        // when the user drags quickly and leaves the bounds of the element.
-		        onMouseDown: this.onMouseDown,
-		        onTouchStart: this.onTouchStart,
-		        onMouseUp: this.onMouseUp,
-		        onTouchEnd: this.onTouchEnd
-		      });
-		    }
-		  }]);
-		  return DraggableCore;
-		}(React.Component);
-	
-		DraggableCore.displayName = 'DraggableCore';
-		DraggableCore.propTypes = {
-		  /**
-		   * `allowAnyClick` allows dragging using any mouse button.
-		   * By default, we only accept the left button.
-		   *
-		   * Defaults to `false`.
-		   */
-		  allowAnyClick: propTypes.bool,
-	
-		  /**
-		   * `disabled`, if true, stops the <Draggable> from dragging. All handlers,
-		   * with the exception of `onMouseDown`, will not fire.
-		   */
-		  disabled: propTypes.bool,
-	
-		  /**
-		   * By default, we add 'user-select:none' attributes to the document body
-		   * to prevent ugly text selection during drag. If this is causing problems
-		   * for your app, set this to `false`.
-		   */
-		  enableUserSelectHack: propTypes.bool,
-	
-		  /**
-		   * `offsetParent`, if set, uses the passed DOM node to compute drag offsets
-		   * instead of using the parent node.
-		   */
-		  offsetParent: function offsetParent(props /*: DraggableCoreProps*/, propName /*: $Keys<DraggableCoreProps>*/) {
-		    if (props[propName] && props[propName].nodeType !== 1) {
-		      throw new Error('Draggable\'s offsetParent must be a DOM Node.');
-		    }
-		  },
-	
-		  /**
-		   * `grid` specifies the x and y that dragging should snap to.
-		   */
-		  grid: propTypes.arrayOf(propTypes.number),
-	
-		  /**
-		   * `scale` specifies the scale of the area you are dragging inside of. It allows
-		   * the drag deltas to scale correctly with how far zoomed in/out you are.
-		   */
-		  scale: propTypes.number,
-	
-		  /**
-		   * `handle` specifies a selector to be used as the handle that initiates drag.
-		   *
-		   * Example:
-		   *
-		   * ```jsx
-		   *   let App = React.createClass({
-		   *       render: function () {
-		   *         return (
-		   *            <Draggable handle=".handle">
-		   *              <div>
-		   *                  <div className="handle">Click me to drag</div>
-		   *                  <div>This is some other content</div>
-		   *              </div>
-		   *           </Draggable>
-		   *         );
-		   *       }
-		   *   });
-		   * ```
-		   */
-		  handle: propTypes.string,
-	
-		  /**
-		   * `cancel` specifies a selector to be used to prevent drag initialization.
-		   *
-		   * Example:
-		   *
-		   * ```jsx
-		   *   let App = React.createClass({
-		   *       render: function () {
-		   *           return(
-		   *               <Draggable cancel=".cancel">
-		   *                   <div>
-		   *                     <div className="cancel">You can't drag from here</div>
-		   *                     <div>Dragging here works fine</div>
-		   *                   </div>
-		   *               </Draggable>
-		   *           );
-		   *       }
-		   *   });
-		   * ```
-		   */
-		  cancel: propTypes.string,
-	
-		  /**
-		   * Called when dragging starts.
-		   * If this function returns the boolean false, dragging will be canceled.
-		   */
-		  onStart: propTypes.func,
-	
-		  /**
-		   * Called while dragging.
-		   * If this function returns the boolean false, dragging will be canceled.
-		   */
-		  onDrag: propTypes.func,
-	
-		  /**
-		   * Called when dragging stops.
-		   * If this function returns the boolean false, the drag will remain active.
-		   */
-		  onStop: propTypes.func,
-	
-		  /**
-		   * A workaround option which can be passed if onMouseDown needs to be accessed,
-		   * since it'll always be blocked (as there is internal use of onMouseDown)
-		   */
-		  onMouseDown: propTypes.func,
-	
-		  /**
-		   * These properties should be defined on the child, not here.
-		   */
-		  className: dontSetMe,
-		  style: dontSetMe,
-		  transform: dontSetMe
-		};
-		DraggableCore.defaultProps = {
-		  allowAnyClick: false, // by default only accept left click
-		  cancel: null,
-		  disabled: false,
-		  enableUserSelectHack: true,
-		  offsetParent: null,
-		  handle: null,
-		  grid: null,
-		  transform: null,
-		  onStart: function onStart() {},
-		  onDrag: function onDrag() {},
-		  onStop: function onStop() {},
-		  onMouseDown: function onMouseDown() {}
-		};
-	
-		/*:: import type {DraggableEventHandler} from './utils/types';*/
-		/*:: import type {Element as ReactElement} from 'react';*/
-		/*:: type DraggableState = {
-		  dragging: boolean,
-		  dragged: boolean,
-		  x: number, y: number,
-		  slackX: number, slackY: number,
-		  isElementSVG: boolean
-		};*/
-	
-	
-		//
-		// Define <Draggable>
-		//
-	
-		/*:: export type DraggableProps = {
-		  ...$Exact<DraggableCoreProps>,
-		  axis: 'both' | 'x' | 'y' | 'none',
-		  bounds: DraggableBounds | string | false,
-		  defaultClassName: string,
-		  defaultClassNameDragging: string,
-		  defaultClassNameDragged: string,
-		  defaultPosition: ControlPosition,
-		  positionOffset: PositionOffsetControlPosition,
-		  position: ControlPosition,
-		  scale: number
-		};*/
-	
-		var Draggable = function (_React$Component) {
-		  inherits(Draggable, _React$Component);
-	
-		  function Draggable(props /*: DraggableProps*/) {
-		    classCallCheck(this, Draggable);
-	
-		    var _this = possibleConstructorReturn(this, (Draggable.__proto__ || Object.getPrototypeOf(Draggable)).call(this, props));
-	
-		    _this.onDragStart = function (e, coreData) {
-	
-		      // Short-circuit if user's callback killed it.
-		      var shouldStart = _this.props.onStart(e, createDraggableData(_this, coreData));
-		      // Kills start event on core as well, so move handlers are never bound.
-		      if (shouldStart === false) return false;
-	
-		      _this.setState({ dragging: true, dragged: true });
-		    };
-	
-		    _this.onDrag = function (e, coreData) {
-		      if (!_this.state.dragging) return false;
-	
-		      var uiData = createDraggableData(_this, coreData);
-	
-		      var newState /*: $Shape<DraggableState>*/ = {
-		        x: uiData.x,
-		        y: uiData.y
-		      };
-	
-		      // Keep within bounds.
-		      if (_this.props.bounds) {
-		        // Save original x and y.
-		        var _x = newState.x,
-		            _y = newState.y;
-	
-		        // Add slack to the values used to calculate bound position. This will ensure that if
-		        // we start removing slack, the element won't react to it right away until it's been
-		        // completely removed.
-	
-		        newState.x += _this.state.slackX;
-		        newState.y += _this.state.slackY;
-	
-		        // Get bound position. This will ceil/floor the x and y within the boundaries.
-	
-		        var _getBoundPosition = getBoundPosition(_this, newState.x, newState.y),
-		            _getBoundPosition2 = slicedToArray(_getBoundPosition, 2),
-		            newStateX = _getBoundPosition2[0],
-		            newStateY = _getBoundPosition2[1];
-	
-		        newState.x = newStateX;
-		        newState.y = newStateY;
-	
-		        // Recalculate slack by noting how much was shaved by the boundPosition handler.
-		        newState.slackX = _this.state.slackX + (_x - newState.x);
-		        newState.slackY = _this.state.slackY + (_y - newState.y);
-	
-		        // Update the event we fire to reflect what really happened after bounds took effect.
-		        uiData.x = newState.x;
-		        uiData.y = newState.y;
-		        uiData.deltaX = newState.x - _this.state.x;
-		        uiData.deltaY = newState.y - _this.state.y;
-		      }
-	
-		      // Short-circuit if user's callback killed it.
-		      var shouldUpdate = _this.props.onDrag(e, uiData);
-		      if (shouldUpdate === false) return false;
-	
-		      _this.setState(newState);
-		    };
-	
-		    _this.onDragStop = function (e, coreData) {
-		      if (!_this.state.dragging) return false;
-	
-		      // Short-circuit if user's callback killed it.
-		      var shouldStop = _this.props.onStop(e, createDraggableData(_this, coreData));
-		      if (shouldStop === false) return false;
-	
-		      var newState /*: $Shape<DraggableState>*/ = {
-		        dragging: false,
-		        slackX: 0,
-		        slackY: 0
-		      };
-	
-		      // If this is a controlled component, the result of this operation will be to
-		      // revert back to the old position. We expect a handler on `onDragStop`, at the least.
-		      var controlled = Boolean(_this.props.position);
-		      if (controlled) {
-		        var _this$props$position = _this.props.position,
-		            _x2 = _this$props$position.x,
-		            _y2 = _this$props$position.y;
-	
-		        newState.x = _x2;
-		        newState.y = _y2;
-		      }
-	
-		      _this.setState(newState);
-		    };
-	
-		    _this.state = {
-		      // Whether or not we are currently dragging.
-		      dragging: false,
-	
-		      // Whether or not we have been dragged before.
-		      dragged: false,
-	
-		      // Current transform x and y.
-		      x: props.position ? props.position.x : props.defaultPosition.x,
-		      y: props.position ? props.position.y : props.defaultPosition.y,
-	
-		      // Used for compensating for out-of-bounds drags
-		      slackX: 0, slackY: 0,
-	
-		      // Can only determine if SVG after mounting
-		      isElementSVG: false
-		    };
-	
-		    if (props.position && !(props.onDrag || props.onStop)) {
-		      // eslint-disable-next-line no-console
-		      console.warn('A `position` was applied to this <Draggable>, without drag handlers. This will make this ' + 'component effectively undraggable. Please attach `onDrag` or `onStop` handlers so you can adjust the ' + '`position` of this element.');
-		    }
-		    return _this;
-		  }
-	
-		  createClass(Draggable, [{
-		    key: 'componentDidMount',
-		    value: function componentDidMount() {
-		      // Check to see if the element passed is an instanceof SVGElement
-		      if (typeof window.SVGElement !== 'undefined' && ReactDOM.findDOMNode(this) instanceof window.SVGElement) {
-		        this.setState({ isElementSVG: true });
-		      }
-		    }
-		  }, {
-		    key: 'componentWillReceiveProps',
-		    value: function componentWillReceiveProps(nextProps /*: Object*/) {
-		      // Set x/y if position has changed
-		      if (nextProps.position && (!this.props.position || nextProps.position.x !== this.props.position.x || nextProps.position.y !== this.props.position.y)) {
-		        this.setState({ x: nextProps.position.x, y: nextProps.position.y });
-		      }
-		    }
-		  }, {
-		    key: 'componentWillUnmount',
-		    value: function componentWillUnmount() {
-		      this.setState({ dragging: false }); // prevents invariant if unmounted while dragging
-		    }
-		  }, {
-		    key: 'render',
-		    value: function render() /*: ReactElement<any>*/ {
-		      var _classNames;
-	
-		      var style = {},
-		          svgTransform = null;
-	
-		      // If this is controlled, we don't want to move it - unless it's dragging.
-		      var controlled = Boolean(this.props.position);
-		      var draggable = !controlled || this.state.dragging;
-	
-		      var position = this.props.position || this.props.defaultPosition;
-		      var transformOpts = {
-		        // Set left if horizontal drag is enabled
-		        x: canDragX(this) && draggable ? this.state.x : position.x,
-	
-		        // Set top if vertical drag is enabled
-		        y: canDragY(this) && draggable ? this.state.y : position.y
-		      };
-	
-		      // If this element was SVG, we use the `transform` attribute.
-		      if (this.state.isElementSVG) {
-		        svgTransform = createSVGTransform(transformOpts, this.props.positionOffset);
-		      } else {
-		        // Add a CSS transform to move the element around. This allows us to move the element around
-		        // without worrying about whether or not it is relatively or absolutely positioned.
-		        // If the item you are dragging already has a transform set, wrap it in a <span> so <Draggable>
-		        // has a clean slate.
-		        style = createCSSTransform(transformOpts, this.props.positionOffset);
-		      }
-	
-		      var _props = this.props,
-		          defaultClassName = _props.defaultClassName,
-		          defaultClassNameDragging = _props.defaultClassNameDragging,
-		          defaultClassNameDragged = _props.defaultClassNameDragged;
-	
-	
-		      var children = React.Children.only(this.props.children);
-	
-		      // Mark with class while dragging
-		      var className = classnames(children.props.className || '', defaultClassName, (_classNames = {}, defineProperty(_classNames, defaultClassNameDragging, this.state.dragging), defineProperty(_classNames, defaultClassNameDragged, this.state.dragged), _classNames));
-	
-		      // Reuse the child provided
-		      // This makes it flexible to use whatever element is wanted (div, ul, etc)
-		      return React.createElement(
-		        DraggableCore,
-		        _extends({}, this.props, { onStart: this.onDragStart, onDrag: this.onDrag, onStop: this.onDragStop }),
-		        React.cloneElement(children, {
-		          className: className,
-		          style: _extends({}, children.props.style, style),
-		          transform: svgTransform
-		        })
-		      );
-		    }
-		  }]);
-		  return Draggable;
-		}(React.Component);
-	
-		Draggable.displayName = 'Draggable';
-		Draggable.propTypes = _extends({}, DraggableCore.propTypes, {
-	
-		  /**
-		   * `axis` determines which axis the draggable can move.
-		   *
-		   *  Note that all callbacks will still return data as normal. This only
-		   *  controls flushing to the DOM.
-		   *
-		   * 'both' allows movement horizontally and vertically.
-		   * 'x' limits movement to horizontal axis.
-		   * 'y' limits movement to vertical axis.
-		   * 'none' limits all movement.
-		   *
-		   * Defaults to 'both'.
-		   */
-		  axis: propTypes.oneOf(['both', 'x', 'y', 'none']),
-	
-		  /**
-		   * `bounds` determines the range of movement available to the element.
-		   * Available values are:
-		   *
-		   * 'parent' restricts movement within the Draggable's parent node.
-		   *
-		   * Alternatively, pass an object with the following properties, all of which are optional:
-		   *
-		   * {left: LEFT_BOUND, right: RIGHT_BOUND, bottom: BOTTOM_BOUND, top: TOP_BOUND}
-		   *
-		   * All values are in px.
-		   *
-		   * Example:
-		   *
-		   * ```jsx
-		   *   let App = React.createClass({
-		   *       render: function () {
-		   *         return (
-		   *            <Draggable bounds={{right: 300, bottom: 300}}>
-		   *              <div>Content</div>
-		   *           </Draggable>
-		   *         );
-		   *       }
-		   *   });
-		   * ```
-		   */
-		  bounds: propTypes.oneOfType([propTypes.shape({
-		    left: propTypes.number,
-		    right: propTypes.number,
-		    top: propTypes.number,
-		    bottom: propTypes.number
-		  }), propTypes.string, propTypes.oneOf([false])]),
-	
-		  defaultClassName: propTypes.string,
-		  defaultClassNameDragging: propTypes.string,
-		  defaultClassNameDragged: propTypes.string,
-	
-		  /**
-		   * `defaultPosition` specifies the x and y that the dragged item should start at
-		   *
-		   * Example:
-		   *
-		   * ```jsx
-		   *      let App = React.createClass({
-		   *          render: function () {
-		   *              return (
-		   *                  <Draggable defaultPosition={{x: 25, y: 25}}>
-		   *                      <div>I start with transformX: 25px and transformY: 25px;</div>
-		   *                  </Draggable>
-		   *              );
-		   *          }
-		   *      });
-		   * ```
-		   */
-		  defaultPosition: propTypes.shape({
-		    x: propTypes.number,
-		    y: propTypes.number
-		  }),
-		  positionOffset: propTypes.shape({
-		    x: propTypes.oneOfType([propTypes.number, propTypes.string]),
-		    y: propTypes.oneOfType([propTypes.number, propTypes.string])
-		  }),
-	
-		  /**
-		   * `position`, if present, defines the current position of the element.
-		   *
-		   *  This is similar to how form elements in React work - if no `position` is supplied, the component
-		   *  is uncontrolled.
-		   *
-		   * Example:
-		   *
-		   * ```jsx
-		   *      let App = React.createClass({
-		   *          render: function () {
-		   *              return (
-		   *                  <Draggable position={{x: 25, y: 25}}>
-		   *                      <div>I start with transformX: 25px and transformY: 25px;</div>
-		   *                  </Draggable>
-		   *              );
-		   *          }
-		   *      });
-		   * ```
-		   */
-		  position: propTypes.shape({
-		    x: propTypes.number,
-		    y: propTypes.number
-		  }),
-	
-		  /**
-		   * These properties should be defined on the child, not here.
-		   */
-		  className: dontSetMe,
-		  style: dontSetMe,
-		  transform: dontSetMe
-		});
-		Draggable.defaultProps = _extends({}, DraggableCore.defaultProps, {
-		  axis: 'both',
-		  bounds: false,
-		  defaultClassName: 'react-draggable',
-		  defaultClassNameDragging: 'react-draggable-dragging',
-		  defaultClassNameDragged: 'react-draggable-dragged',
-		  defaultPosition: { x: 0, y: 0 },
-		  position: null,
-		  scale: 1
-		});
-	
-		// Previous versions of this lib exported <Draggable> as the root export. As to not break
-		// them, or TypeScript, we export *both* as the root and as 'default'.
-		// See https://github.com/mzabriskie/react-draggable/pull/254
-		// and https://github.com/mzabriskie/react-draggable/issues/266
-		Draggable.default = Draggable;
-		Draggable.DraggableCore = DraggableCore;
-	
-		return Draggable;
-	
-	})));
-	//# sourceMappingURL=react-draggable.js.map
-
+	!function(t,e){ true?module.exports=e(__webpack_require__(1),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["react","react-dom"],e):"object"==typeof exports?exports.ReactDraggable=e(require("react"),require("react-dom")):t.ReactDraggable=e(t.React,t.ReactDOM)}(window,function(t,e){return function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)n.d(r,o,function(e){return t[e]}.bind(null,o));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=4)}([function(t,e,n){t.exports=n(5)()},function(e,n){e.exports=t},function(t,n){t.exports=e},function(t,e,n){var r;
+	/*!
+	  Copyright (c) 2017 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/!function(){"use strict";var n={}.hasOwnProperty;function o(){for(var t=[],e=0;e<arguments.length;e++){var r=arguments[e];if(r){var a=typeof r;if("string"===a||"number"===a)t.push(r);else if(Array.isArray(r)&&r.length){var i=o.apply(null,r);i&&t.push(i)}else if("object"===a)for(var s in r)n.call(r,s)&&r[s]&&t.push(s)}}return t.join(" ")}t.exports?(o.default=o,t.exports=o):void 0===(r=function(){return o}.apply(e,[]))||(t.exports=r)}()},function(t,e,n){var r=n(7),o=r.default,a=r.DraggableCore;t.exports=o,t.exports.default=o,t.exports.DraggableCore=a},function(t,e,n){"use strict";var r=n(6);function o(){}function a(){}a.resetWarningCache=o,t.exports=function(){function t(t,e,n,o,a,i){if(i!==r){var s=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw s.name="Invariant Violation",s}}function e(){return t}t.isRequired=t;var n={array:t,bool:t,func:t,number:t,object:t,string:t,symbol:t,any:t,arrayOf:e,element:t,elementType:t,instanceOf:e,node:t,objectOf:e,oneOf:e,oneOfType:e,shape:e,exact:e,checkPropTypes:a,resetWarningCache:o};return n.PropTypes=n,n}},function(t,e,n){"use strict";t.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(t,e,n){"use strict";n.r(e);var r=n(1),o=n.n(r),a=n(0),i=n.n(a),s=n(2),u=n.n(s),c=n(3),l=n.n(c);function f(t,e){for(var n=0,r=t.length;n<r;n++)if(e.apply(e,[t[n],n,t]))return t[n]}function p(t){return"function"==typeof t||"[object Function]"===Object.prototype.toString.call(t)}function d(t){return"number"==typeof t&&!isNaN(t)}function g(t){return parseInt(t,10)}function y(t,e,n){if(t[e])return new Error("Invalid prop ".concat(e," passed to ").concat(n," - do not set this, set it on the child."))}var h=["Moz","Webkit","O","ms"];function b(t,e){return e?"".concat(e).concat(function(t){for(var e="",n=!0,r=0;r<t.length;r++)n?(e+=t[r].toUpperCase(),n=!1):"-"===t[r]?n=!0:e+=t[r];return e}(t)):t}var m=function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"transform";if("undefined"==typeof window||void 0===window.document)return"";var e=window.document.documentElement.style;if(t in e)return"";for(var n=0;n<h.length;n++)if(b(t,h[n])in e)return h[n];return""}();function v(t,e){var n=Object.keys(t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(t);e&&(r=r.filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable})),n.push.apply(n,r)}return n}function w(t,e,n){return e in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}var O="";function S(t,e){return O||(O=f(["matches","webkitMatchesSelector","mozMatchesSelector","msMatchesSelector","oMatchesSelector"],function(e){return p(t[e])})),!!p(t[O])&&t[O](e)}function D(t,e,n){var r=t;do{if(S(r,e))return!0;if(r===n)return!1;r=r.parentNode}while(r);return!1}function x(t,e,n){t&&(t.attachEvent?t.attachEvent("on"+e,n):t.addEventListener?t.addEventListener(e,n,!0):t["on"+e]=n)}function P(t,e,n){t&&(t.detachEvent?t.detachEvent("on"+e,n):t.removeEventListener?t.removeEventListener(e,n,!0):t["on"+e]=null)}function j(t){var e=t.clientHeight,n=t.ownerDocument.defaultView.getComputedStyle(t);return e+=g(n.borderTopWidth),e+=g(n.borderBottomWidth)}function E(t){var e=t.clientWidth,n=t.ownerDocument.defaultView.getComputedStyle(t);return e+=g(n.borderLeftWidth),e+=g(n.borderRightWidth)}function T(t){var e=t.clientHeight,n=t.ownerDocument.defaultView.getComputedStyle(t);return e-=g(n.paddingTop),e-=g(n.paddingBottom)}function N(t){var e=t.clientWidth,n=t.ownerDocument.defaultView.getComputedStyle(t);return e-=g(n.paddingLeft),e-=g(n.paddingRight)}function C(t,e,n){var r=t.x,o=t.y,a="translate(".concat(r).concat(n,",").concat(o).concat(n,")");if(e){var i="".concat("string"==typeof e.x?e.x:e.x+n),s="".concat("string"==typeof e.y?e.y:e.y+n);a="translate(".concat(i,", ").concat(s,")")+a}return a}function M(t){if(t){var e,n,r=t.getElementById("react-draggable-style-el");r||((r=t.createElement("style")).type="text/css",r.id="react-draggable-style-el",r.innerHTML=".react-draggable-transparent-selection *::-moz-selection {all: inherit;}\n",r.innerHTML+=".react-draggable-transparent-selection *::selection {all: inherit;}\n",t.getElementsByTagName("head")[0].appendChild(r)),t.body&&(e=t.body,n="react-draggable-transparent-selection",e.classList?e.classList.add(n):e.className.match(new RegExp("(?:^|\\s)".concat(n,"(?!\\S)")))||(e.className+=" ".concat(n)))}}function k(t){try{t&&t.body&&(e=t.body,n="react-draggable-transparent-selection",e.classList?e.classList.remove(n):e.className=e.className.replace(new RegExp("(?:^|\\s)".concat(n,"(?!\\S)"),"g"),"")),t.selection?t.selection.empty():window.getSelection().removeAllRanges()}catch(t){}var e,n}function _(){return function(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?v(n,!0).forEach(function(e){w(t,e,n[e])}):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):v(n).forEach(function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))})}return t}({touchAction:"none"},arguments.length>0&&void 0!==arguments[0]?arguments[0]:{})}function X(t){return"both"===t.props.axis||"x"===t.props.axis}function Y(t){return"both"===t.props.axis||"y"===t.props.axis}function L(t,e,n){var r="number"==typeof e?function(t,e){return t.targetTouches&&f(t.targetTouches,function(t){return e===t.identifier})||t.changedTouches&&f(t.changedTouches,function(t){return e===t.identifier})}(t,e):null;if("number"==typeof e&&!r)return null;var o=I(n);return function(t,e,n){var r=e===e.ownerDocument.body?{left:0,top:0}:e.getBoundingClientRect();return{x:(t.clientX+e.scrollLeft-r.left)/n,y:(t.clientY+e.scrollTop-r.top)/n}}(r||t,n.props.offsetParent||o.offsetParent||o.ownerDocument.body,n.props.scale)}function R(t,e,n){var r=t.state,o=!d(r.lastX),a=I(t);return o?{node:a,deltaX:0,deltaY:0,lastX:e,lastY:n,x:e,y:n}:{node:a,deltaX:e-r.lastX,deltaY:n-r.lastY,lastX:r.lastX,lastY:r.lastY,x:e,y:n}}function A(t,e){var n=t.props.scale;return{node:e.node,x:t.state.x+e.deltaX/n,y:t.state.y+e.deltaY/n,deltaX:e.deltaX/n,deltaY:e.deltaY/n,lastX:t.state.x,lastY:t.state.y}}function I(t){var e=u.a.findDOMNode(t);if(!e)throw new Error("<DraggableCore>: Unmounted during event!");return e}function U(t){return(U="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function V(t,e){return function(t){if(Array.isArray(t))return t}(t)||function(t,e){var n=[],r=!0,o=!1,a=void 0;try{for(var i,s=t[Symbol.iterator]();!(r=(i=s.next()).done)&&(n.push(i.value),!e||n.length!==e);r=!0);}catch(t){o=!0,a=t}finally{try{r||null==s.return||s.return()}finally{if(o)throw a}}return n}(t,e)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}()}function W(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}function B(t){return(B=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function H(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function q(t,e){return(q=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function G(t,e,n){return e in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}var z={touch:{start:"touchstart",move:"touchmove",stop:"touchend"},mouse:{start:"mousedown",move:"mousemove",stop:"mouseup"}},F=z.mouse,J=function(t){function e(){var t,n,r,o;!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,e);for(var a=arguments.length,i=new Array(a),s=0;s<a;s++)i[s]=arguments[s];return r=this,o=(t=B(e)).call.apply(t,[this].concat(i)),n=!o||"object"!==U(o)&&"function"!=typeof o?H(r):o,G(H(n),"state",{dragging:!1,lastX:NaN,lastY:NaN,touchIdentifier:null}),G(H(n),"handleDragStart",function(t){if(n.props.onMouseDown(t),!n.props.allowAnyClick&&"number"==typeof t.button&&0!==t.button)return!1;var e=u.a.findDOMNode(H(n));if(!e||!e.ownerDocument||!e.ownerDocument.body)throw new Error("<DraggableCore> not mounted on DragStart!");var r=e.ownerDocument;if(!(n.props.disabled||!(t.target instanceof r.defaultView.Node)||n.props.handle&&!D(t.target,n.props.handle,e)||n.props.cancel&&D(t.target,n.props.cancel,e))){var o=function(t){return t.targetTouches&&t.targetTouches[0]?t.targetTouches[0].identifier:t.changedTouches&&t.changedTouches[0]?t.changedTouches[0].identifier:void 0}(t);n.setState({touchIdentifier:o});var a=L(t,o,H(n));if(null!=a){var i=a.x,s=a.y,c=R(H(n),i,s);n.props.onStart,!1!==n.props.onStart(t,c)&&(n.props.enableUserSelectHack&&M(r),n.setState({dragging:!0,lastX:i,lastY:s}),x(r,F.move,n.handleDrag),x(r,F.stop,n.handleDragStop))}}}),G(H(n),"handleDrag",function(t){"touchmove"===t.type&&t.preventDefault();var e=L(t,n.state.touchIdentifier,H(n));if(null!=e){var r,o,a,i=e.x,s=e.y;if(Array.isArray(n.props.grid)){var u=i-n.state.lastX,c=s-n.state.lastY,l=V((r=n.props.grid,o=u,a=c,[Math.round(o/r[0])*r[0],Math.round(a/r[1])*r[1]]),2);if(u=l[0],c=l[1],!u&&!c)return;i=n.state.lastX+u,s=n.state.lastY+c}var f=R(H(n),i,s);if(!1!==n.props.onDrag(t,f))n.setState({lastX:i,lastY:s});else try{n.handleDragStop(new MouseEvent("mouseup"))}catch(t){var p=document.createEvent("MouseEvents");p.initMouseEvent("mouseup",!0,!0,window,0,0,0,0,0,!1,!1,!1,!1,0,null),n.handleDragStop(p)}}}),G(H(n),"handleDragStop",function(t){if(n.state.dragging){var e=L(t,n.state.touchIdentifier,H(n));if(null!=e){var r=e.x,o=e.y,a=R(H(n),r,o),i=u.a.findDOMNode(H(n));i&&n.props.enableUserSelectHack&&k(i.ownerDocument),n.setState({dragging:!1,lastX:NaN,lastY:NaN}),n.props.onStop(t,a),i&&(P(i.ownerDocument,F.move,n.handleDrag),P(i.ownerDocument,F.stop,n.handleDragStop))}}}),G(H(n),"onMouseDown",function(t){return F=z.mouse,n.handleDragStart(t)}),G(H(n),"onMouseUp",function(t){return F=z.mouse,n.handleDragStop(t)}),G(H(n),"onTouchStart",function(t){return F=z.touch,n.handleDragStart(t)}),G(H(n),"onTouchEnd",function(t){return F=z.touch,n.handleDragStop(t)}),n}var n,r,a;return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&q(t,e)}(e,o.a.Component),n=e,(r=[{key:"componentWillUnmount",value:function(){var t=u.a.findDOMNode(this);if(t){var e=t.ownerDocument;P(e,z.mouse.move,this.handleDrag),P(e,z.touch.move,this.handleDrag),P(e,z.mouse.stop,this.handleDragStop),P(e,z.touch.stop,this.handleDragStop),this.props.enableUserSelectHack&&k(e)}}},{key:"render",value:function(){return o.a.cloneElement(o.a.Children.only(this.props.children),{style:_(this.props.children.props.style),onMouseDown:this.onMouseDown,onTouchStart:this.onTouchStart,onMouseUp:this.onMouseUp,onTouchEnd:this.onTouchEnd})}}])&&W(n.prototype,r),a&&W(n,a),e}();function K(t){return(K="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function Q(){return(Q=Object.assign||function(t){for(var e=1;e<arguments.length;e++){var n=arguments[e];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(t[r]=n[r])}return t}).apply(this,arguments)}function Z(t,e){if(null==t)return{};var n,r,o=function(t,e){if(null==t)return{};var n,r,o={},a=Object.keys(t);for(r=0;r<a.length;r++)n=a[r],e.indexOf(n)>=0||(o[n]=t[n]);return o}(t,e);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(t);for(r=0;r<a.length;r++)n=a[r],e.indexOf(n)>=0||Object.prototype.propertyIsEnumerable.call(t,n)&&(o[n]=t[n])}return o}function $(t,e){return function(t){if(Array.isArray(t))return t}(t)||function(t,e){var n=[],r=!0,o=!1,a=void 0;try{for(var i,s=t[Symbol.iterator]();!(r=(i=s.next()).done)&&(n.push(i.value),!e||n.length!==e);r=!0);}catch(t){o=!0,a=t}finally{try{r||null==s.return||s.return()}finally{if(o)throw a}}return n}(t,e)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}()}function tt(t,e){var n=Object.keys(t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(t);e&&(r=r.filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable})),n.push.apply(n,r)}return n}function et(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?tt(n,!0).forEach(function(e){st(t,e,n[e])}):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):tt(n).forEach(function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))})}return t}function nt(t){return(nt=Object.setPrototypeOf?Object.getPrototypeOf:function(t){return t.__proto__||Object.getPrototypeOf(t)})(t)}function rt(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function ot(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}function at(t,e,n){return e&&ot(t.prototype,e),n&&ot(t,n),t}function it(t,e){return(it=Object.setPrototypeOf||function(t,e){return t.__proto__=e,t})(t,e)}function st(t,e,n){return e in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}G(J,"displayName","DraggableCore"),G(J,"propTypes",{allowAnyClick:i.a.bool,disabled:i.a.bool,enableUserSelectHack:i.a.bool,offsetParent:function(t,e){if(t[e]&&1!==t[e].nodeType)throw new Error("Draggable's offsetParent must be a DOM Node.")},grid:i.a.arrayOf(i.a.number),handle:i.a.string,cancel:i.a.string,onStart:i.a.func,onDrag:i.a.func,onStop:i.a.func,onMouseDown:i.a.func,scale:i.a.number,className:y,style:y,transform:y}),G(J,"defaultProps",{allowAnyClick:!1,cancel:null,disabled:!1,enableUserSelectHack:!0,offsetParent:null,handle:null,grid:null,transform:null,onStart:function(){},onDrag:function(){},onStop:function(){},onMouseDown:function(){},scale:1}),n.d(e,"default",function(){return ut}),n.d(e,"DraggableCore",function(){return J});var ut=function(t){function e(t){var n,r,o;return function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,e),r=this,o=nt(e).call(this,t),n=!o||"object"!==K(o)&&"function"!=typeof o?rt(r):o,st(rt(n),"onDragStart",function(t,e){if(!1===n.props.onStart(t,A(rt(n),e)))return!1;n.setState({dragging:!0,dragged:!0})}),st(rt(n),"onDrag",function(t,e){if(!n.state.dragging)return!1;var r=A(rt(n),e),o={x:r.x,y:r.y};if(n.props.bounds){var a=o.x,i=o.y;o.x+=n.state.slackX,o.y+=n.state.slackY;var s=$(function(t,e,n){if(!t.props.bounds)return[e,n];var r=t.props.bounds;r="string"==typeof r?r:function(t){return{left:t.left,top:t.top,right:t.right,bottom:t.bottom}}(r);var o=I(t);if("string"==typeof r){var a,i=o.ownerDocument,s=i.defaultView;if(!((a="parent"===r?o.parentNode:i.querySelector(r))instanceof s.HTMLElement))throw new Error('Bounds selector "'+r+'" could not find an element.');var u=s.getComputedStyle(o),c=s.getComputedStyle(a);r={left:-o.offsetLeft+g(c.paddingLeft)+g(u.marginLeft),top:-o.offsetTop+g(c.paddingTop)+g(u.marginTop),right:N(a)-E(o)-o.offsetLeft+g(c.paddingRight)-g(u.marginRight),bottom:T(a)-j(o)-o.offsetTop+g(c.paddingBottom)-g(u.marginBottom)}}return d(r.right)&&(e=Math.min(e,r.right)),d(r.bottom)&&(n=Math.min(n,r.bottom)),d(r.left)&&(e=Math.max(e,r.left)),d(r.top)&&(n=Math.max(n,r.top)),[e,n]}(rt(n),o.x,o.y),2),u=s[0],c=s[1];o.x=u,o.y=c,o.slackX=n.state.slackX+(a-o.x),o.slackY=n.state.slackY+(i-o.y),r.x=o.x,r.y=o.y,r.deltaX=o.x-n.state.x,r.deltaY=o.y-n.state.y}if(!1===n.props.onDrag(t,r))return!1;n.setState(o)}),st(rt(n),"onDragStop",function(t,e){if(!n.state.dragging)return!1;if(!1===n.props.onStop(t,A(rt(n),e)))return!1;var r={dragging:!1,slackX:0,slackY:0};if(Boolean(n.props.position)){var o=n.props.position,a=o.x,i=o.y;r.x=a,r.y=i}n.setState(r)}),n.state={dragging:!1,dragged:!1,x:t.position?t.position.x:t.defaultPosition.x,y:t.position?t.position.y:t.defaultPosition.y,prevPropsPosition:et({},t.position),slackX:0,slackY:0,isElementSVG:!1},!t.position||t.onDrag||t.onStop||console.warn("A `position` was applied to this <Draggable>, without drag handlers. This will make this component effectively undraggable. Please attach `onDrag` or `onStop` handlers so you can adjust the `position` of this element."),n}return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),e&&it(t,e)}(e,o.a.Component),at(e,null,[{key:"getDerivedStateFromProps",value:function(t,e){var n=t.position,r=e.prevPropsPosition;return!n||r&&n.x===r.x&&n.y===r.y?null:{x:n.x,y:n.y,prevPropsPosition:et({},n)}}}]),at(e,[{key:"componentDidMount",value:function(){void 0!==window.SVGElement&&u.a.findDOMNode(this)instanceof window.SVGElement&&this.setState({isElementSVG:!0})}},{key:"componentWillUnmount",value:function(){this.setState({dragging:!1})}},{key:"render",value:function(){var t,e=this.props,n=(e.axis,e.bounds,e.children),r=e.defaultPosition,a=e.defaultClassName,i=e.defaultClassNameDragging,s=e.defaultClassNameDragged,u=e.position,c=e.positionOffset,f=(e.scale,Z(e,["axis","bounds","children","defaultPosition","defaultClassName","defaultClassNameDragging","defaultClassNameDragged","position","positionOffset","scale"])),p={},d=null,g=!Boolean(u)||this.state.dragging,y=u||r,h={x:X(this)&&g?this.state.x:y.x,y:Y(this)&&g?this.state.y:y.y};this.state.isElementSVG?d=function(t,e){return C(t,e,"")}(h,c):p=function(t,e){var n=C(t,e,"px");return w({},b("transform",m),n)}(h,c);var v=l()(n.props.className||"",a,(st(t={},i,this.state.dragging),st(t,s,this.state.dragged),t));return o.a.createElement(J,Q({},f,{onStart:this.onDragStart,onDrag:this.onDrag,onStop:this.onDragStop}),o.a.cloneElement(o.a.Children.only(n),{className:v,style:et({},n.props.style,{},p),transform:d}))}}]),e}();st(ut,"displayName","Draggable"),st(ut,"propTypes",et({},J.propTypes,{axis:i.a.oneOf(["both","x","y","none"]),bounds:i.a.oneOfType([i.a.shape({left:i.a.number,right:i.a.number,top:i.a.number,bottom:i.a.number}),i.a.string,i.a.oneOf([!1])]),defaultClassName:i.a.string,defaultClassNameDragging:i.a.string,defaultClassNameDragged:i.a.string,defaultPosition:i.a.shape({x:i.a.number,y:i.a.number}),positionOffset:i.a.shape({x:i.a.oneOfType([i.a.number,i.a.string]),y:i.a.oneOfType([i.a.number,i.a.string])}),position:i.a.shape({x:i.a.number,y:i.a.number}),className:y,style:y,transform:y})),st(ut,"defaultProps",et({},J.defaultProps,{axis:"both",bounds:!1,defaultClassName:"react-draggable",defaultClassNameDragging:"react-draggable-dragging",defaultClassNameDragged:"react-draggable-dragged",defaultPosition:{x:0,y:0},position:null,scale:1}))}])});
+	//# sourceMappingURL=react-draggable.min.js.map
 
 /***/ }),
 /* 244 */
@@ -37690,7 +35520,7 @@
 	
 	var _Gridcn2 = _interopRequireDefault(_Gridcn);
 	
-	var _Grid = __webpack_require__(678);
+	var _Grid = __webpack_require__(679);
 	
 	var _Grid2 = _interopRequireDefault(_Grid);
 	
@@ -37726,7 +35556,7 @@
 	
 	var _acBtns2 = _interopRequireDefault(_acBtns);
 	
-	var _beeButtonGroup = __webpack_require__(661);
+	var _beeButtonGroup = __webpack_require__(662);
 	
 	var _beeButtonGroup2 = _interopRequireDefault(_beeButtonGroup);
 	
@@ -37746,27 +35576,27 @@
 	
 	var _lodash4 = _interopRequireDefault(_lodash3);
 	
-	var _TextField = __webpack_require__(663);
+	var _TextField = __webpack_require__(664);
 	
 	var _TextField2 = _interopRequireDefault(_TextField);
 	
-	var _SelectField = __webpack_require__(665);
+	var _SelectField = __webpack_require__(666);
 	
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 	
-	var _NumberField = __webpack_require__(666);
+	var _NumberField = __webpack_require__(667);
 	
 	var _NumberField2 = _interopRequireDefault(_NumberField);
 	
-	var _YearField = __webpack_require__(667);
+	var _YearField = __webpack_require__(668);
 	
 	var _YearField2 = _interopRequireDefault(_YearField);
 	
-	var _DateField = __webpack_require__(668);
+	var _DateField = __webpack_require__(669);
 	
 	var _DateField2 = _interopRequireDefault(_DateField);
 	
-	var _acTips = __webpack_require__(669);
+	var _acTips = __webpack_require__(670);
 	
 	var _acTips2 = _interopRequireDefault(_acTips);
 	
@@ -37774,7 +35604,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _defaultProps = __webpack_require__(677);
+	var _defaultProps = __webpack_require__(678);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -37979,11 +35809,7 @@
 	            };
 	            if (renderType) {
 	                if (item.required) {
-	                    item.title = _react2["default"].createElement(
-	                        "span",
-	                        { className: "ac-gridcn-required" },
-	                        item.title
-	                    );
+	                    item.className = "required";
 	                }
 	                if (fieldProps.defaultValue != undefined) {
 	                    defaultValueKeyValue[dataIndex] = fieldProps.defaultValue;
@@ -38017,7 +35843,7 @@
 	                            return record._edit ? _react2["default"].createElement(_NumberField2["default"], _extends({}, other, {
 	                                fieldProps: fieldProps,
 	                                index: index,
-	                                value: oldRender && oldRender(text, record, index),
+	                                value: value,
 	                                field: item.dataIndex,
 	                                onChange: _this2.onChange,
 	                                status: record._status,
@@ -38025,7 +35851,7 @@
 	                            })) : _react2["default"].createElement(
 	                                "div",
 	                                null,
-	                                oldRender && oldRender(text, record, index)
+	                                oldRender && oldRender(value, record, index)
 	                            );
 	                        };
 	                        break;
@@ -38661,7 +36487,6 @@
 	            hoverContent: _this2.hoverContent,
 	            getSelectedDataFunc: _this2.getSelectedDataFunc,
 	            onRowHover: _this2.onRowHover
-	
 	        });
 	        gridOptions = _extends(_defaultProps.gridDefalutProps, gridOptions);
 	        return _react2["default"].createElement(
@@ -38669,13 +36494,13 @@
 	            null,
 	            _react2["default"].createElement(
 	                "div",
-	                { className: clsfix + " " + (disabled ? 'disabled' : '') + " " + (isMax ? 'max' : '') + " " + (adding || allEditing || copying || pasting ? 'isEdit' : '') },
+	                { className: clsfix + " " + (disabled ? 'disabled' : '') + " " + (gridOptions.headerScroll ? 'header-scroll' : '') + " " + (isMax ? 'max' : '') + " " + (adding || allEditing || copying || pasting ? 'isEdit' : '') },
 	                typeof title == 'string' ? _react2["default"].createElement(
 	                    "div",
 	                    { className: clsfix + "-panel " + (open ? '' : 'close') },
 	                    _react2["default"].createElement(
 	                        "span",
-	                        { onClick: _this2.open, style: { 'cursor': 'pointer' } },
+	                        { onClick: _this2.open, className: clsfix + "-panel-header" },
 	                        _react2["default"].createElement(
 	                            "span",
 	                            { className: clsfix + "-panel-icon" },
@@ -51321,11 +49146,11 @@
 	      var record = data[i];
 	      var key = this.getRowKey(record, i);
 	      // 兼容 NCC 以前的业务逻辑，支持外部通过 record 中的 isleaf 字段，判断是否为叶子节点
-	      record['isLeaf'] = typeof record['isleaf'] === 'boolean' ? record['isleaf'] : record['isLeaf'];
-	      // isLeaf 字段是在 bigData 里添加的，只有层级树大数据场景需要该字段
-	      // isLeaf 有三种取值情况：true / false / null。（Table内部字段）
-	      var isLeaf = typeof record['isLeaf'] === 'boolean' ? record['isLeaf'] : null;
-	      var childrenColumn = isLeaf ? false : record[childrenColumnName];
+	      record['_isLeaf'] = typeof record['isleaf'] === 'boolean' ? record['isleaf'] : record['_isLeaf'];
+	      // _isLeaf 字段是在 bigData 里添加的，只有层级树大数据场景需要该字段
+	      // _isLeaf 有三种取值情况：true / false / null。（Table内部字段）
+	      var _isLeaf = typeof record['_isLeaf'] === 'boolean' ? record['_isLeaf'] : null;
+	      var childrenColumn = _isLeaf ? false : record[childrenColumnName];
 	      var isRowExpanded = this.isRowExpanded(record, i);
 	      var expandedRowContent = void 0;
 	      var expandedContentHeight = 0;
@@ -51390,7 +49215,7 @@
 	        visible: visible,
 	        expandRowByClick: expandRowByClick,
 	        onExpand: this.onExpanded,
-	        expandable: expandedRowRender || (childrenColumn && childrenColumn.length > 0 ? true : isLeaf === false),
+	        expandable: expandedRowRender || (childrenColumn && childrenColumn.length > 0 ? true : _isLeaf === false),
 	        expanded: isRowExpanded,
 	        clsPrefix: props.clsPrefix + '-row',
 	        childrenColumnName: childrenColumnName,
@@ -53159,13 +50984,13 @@
 	        var key = node.key,
 	            title = node.title,
 	            children = node.children,
-	            isLeaf = node.isLeaf,
-	            otherProps = _objectWithoutProperties(node, ['key', 'title', 'children', 'isLeaf']);
+	            _isLeaf = node._isLeaf,
+	            otherProps = _objectWithoutProperties(node, ['key', 'title', 'children', '_isLeaf']);
 	
 	        var obj = {
 	          key: key,
 	          title: title,
-	          isLeaf: isLeaf,
+	          _isLeaf: _isLeaf,
 	          children: []
 	        };
 	        tree.push(_extends(obj, _extends({}, otherProps)));
@@ -53185,7 +51010,7 @@
 	
 	      var obj = {
 	        key: item[attr.id],
-	        isLeaf: item[attr.isLeaf],
+	        _isLeaf: item[attr._isLeaf],
 	        children: []
 	      };
 	      tree.push(_extends(obj, _extends({}, otherProps)));
@@ -53211,7 +51036,7 @@
 	
 	            var _obj = {
 	              key: _item[attr.id],
-	              isLeaf: _item[attr.isLeaf],
+	              _isLeaf: _item[attr._isLeaf],
 	              children: []
 	            };
 	            treeArrs[_i].children.push(_extends(_obj, _extends({}, _otherProps)));
@@ -54069,19 +51894,22 @@
 	      className += ' u-table-inline-icon';
 	    }
 	    return _react2["default"].createElement(
-	      'td',
-	      {
-	        colSpan: colSpan,
-	        rowSpan: rowSpan,
-	        className: className,
-	        onClick: this.handleClick,
-	        title: title,
-	        style: _extends({ maxWidth: column.width, color: fontColor, backgroundColor: bgColor }, column.style)
-	      },
-	      indentText,
-	      expandIcon,
-	      text,
-	      colMenu
+	      _react.Fragment,
+	      null,
+	      colSpan == 0 ? null : _react2["default"].createElement(
+	        'td',
+	        {
+	          colSpan: colSpan,
+	          rowSpan: rowSpan,
+	          className: className,
+	          onClick: this.handleClick,
+	          title: title,
+	          style: _extends({ maxWidth: column.width, color: fontColor, backgroundColor: bgColor }, column.style) },
+	        indentText,
+	        expandIcon,
+	        text,
+	        colMenu
+	      )
 	    );
 	  };
 	
@@ -54418,20 +52246,20 @@
 	    "bool_true": "是",
 	    "bool_false": "否",
 	    'en-us': {
-	        'resetSettings': 'reset settings',
-	        'include': 'include',
-	        'exclusive': 'exclusive',
-	        'equal': 'equal',
-	        'unequal': 'unequal',
-	        'begin': 'begin',
-	        'end': 'end',
-	        'greater_than': 'greater than',
-	        'great_than_equal_to': 'great than equal to',
-	        'less_than': 'less than',
-	        'less_than_equal_to': 'less than equal to',
-	        'be_equal_to': 'be equal to',
-	        'not_equal_to': 'not equal to',
-	        "no_data": 'no data',
+	        'resetSettings': 'Reset',
+	        'include': 'Include',
+	        'exclusive': 'Not include',
+	        'equal': 'Equal to',
+	        'unequal': 'Not equal to',
+	        'begin': 'Begin with',
+	        'end': 'End with',
+	        'greater_than': 'Greater than',
+	        'great_than_equal_to': 'Greater than or equal to',
+	        'less_than': 'Less than',
+	        'less_than_equal_to': 'Less than or equal to',
+	        'be_equal_to': 'Equal to',
+	        'not_equal_to': 'Not equal to',
+	        "no_data": 'No data',
 	        "bool_true": "true",
 	        "bool_false": "false"
 	    },
@@ -54644,6 +52472,27 @@
 	    return _this;
 	  }
 	
+	  TableHeader.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    var _this2 = this;
+	
+	    // 表格column改变时，要重新绑定拖拽事件，否则拖拽不生效
+	    var oldCols = this.props.columnsChildrenList;
+	    var newCols = nextProps.columnsChildrenList;
+	
+	    if (this._thead) {
+	      if (newCols.length !== oldCols.length) {
+	        this.event = false;
+	        return;
+	      }
+	      oldCols.some(function (item, index) {
+	        if (newCols[index] && newCols[index].dataIndex !== item.dataIndex) {
+	          _this2.event = false;
+	          return true;
+	        }
+	      });
+	    }
+	  };
+	
 	  TableHeader.prototype.componentDidUpdate = function componentDidUpdate() {
 	    this.initTable();
 	    this.initEvent();
@@ -54657,7 +52506,7 @@
 	  };
 	
 	  TableHeader.prototype.componentWillUnmount = function componentWillUnmount() {
-	    var _this2 = this;
+	    var _this3 = this;
 	
 	    this.fixedTable = null;
 	    if (!this.table) return;
@@ -54668,7 +52517,7 @@
 	      this.removeDragBorderEvent();
 	    }
 	    this.doEventList(this.table.tr, function (tr) {
-	      _this2.eventListen([{ key: 'mousedown', fun: _this2.onTrMouseDown }], 'remove', tr);
+	      _this3.eventListen([{ key: 'mousedown', fun: _this3.onTrMouseDown }], 'remove', tr);
 	    });
 	    // this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'remove',this.table.tr[0]);
 	    this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], 'remove', document.body);
@@ -54725,7 +52574,7 @@
 	
 	
 	  TableHeader.prototype.initEvent = function initEvent() {
-	    var _this3 = this;
+	    var _this4 = this;
 	
 	    var _props = this.props,
 	        dragborder = _props.dragborder,
@@ -54748,7 +52597,7 @@
 	      if (this.table && this.table.tr) {
 	        // this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'',this.table.tr[0]);//body mouseup
 	        this.doEventList(this.table.tr, function (tr) {
-	          _this3.eventListen([{ key: 'mousedown', fun: _this3.onTrMouseDown }], '', tr); //body mouseup
+	          _this4.eventListen([{ key: 'mousedown', fun: _this4.onTrMouseDown }], '', tr); //body mouseup
 	        });
 	      }
 	      this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], '', document.body); //body mouseup
@@ -54767,12 +52616,12 @@
 	
 	
 	  TableHeader.prototype.dragBorderEventInit = function dragBorderEventInit() {
-	    var _this4 = this;
+	    var _this5 = this;
 	
 	    if (!this.props.dragborder) return;
 	    var events = [{ key: 'mouseup', fun: this.onTrMouseUp }, { key: 'mousemove', fun: this.onTrMouseMove }];
 	    this.doEventList(this.table.tr, function (tr) {
-	      _this4.eventListen(events, '', tr); //表示把事件添加到th元素上
+	      _this5.eventListen(events, '', tr); //表示把事件添加到th元素上
 	    });
 	    // this.eventListen(events,'',this.table.tr[0]);//表示把事件添加到th元素上
 	  };
@@ -54783,12 +52632,12 @@
 	
 	
 	  TableHeader.prototype.removeDragBorderEvent = function removeDragBorderEvent() {
-	    var _this5 = this;
+	    var _this6 = this;
 	
 	    var events = [{ key: 'mouseup', fun: this.onTrMouseUp }, { key: 'mousemove', fun: this.onTrMouseMove }];
 	    // this.eventListen(events,'remove',this.table.tr[0]);
 	    this.doEventList(this.table.tr, function (tr) {
-	      _this5.eventListen(events, 'remove', _this5.table.tr);
+	      _this6.eventListen(events, 'remove', _this6.table.tr);
 	    });
 	  };
 	
@@ -54968,7 +52817,7 @@
 	
 	
 	  TableHeader.prototype.render = function render() {
-	    var _this6 = this;
+	    var _this7 = this;
 	
 	    var _props2 = this.props,
 	        clsPrefix = _props2.clsPrefix,
@@ -54986,7 +52835,7 @@
 	    return _react2["default"].createElement(
 	      "thead",
 	      _extends({ className: clsPrefix + "-thead" }, attr, { "data-theader-fixed": "scroll", ref: function ref(_thead) {
-	          return _this6._thead = _thead;
+	          return _this7._thead = _thead;
 	        } }),
 	      rows.map(function (row, index) {
 	        var _rowLeng = row.length - 1;
@@ -55032,7 +52881,7 @@
 	
 	            // }
 	            if (filterable && index == rows.length - 1) {
-	              da.children = _this6.filterRenderType(da["filtertype"], da.dataindex, columIndex);
+	              da.children = _this7.filterRenderType(da["filtertype"], da.dataindex, columIndex);
 	              if (da.key === undefined) {
 	                keyTemp.key = keyTemp.key + '-filterable';
 	              }
@@ -55059,7 +52908,7 @@
 	                dragborder && lastObj && da.key != lastObj.key ? _react2["default"].createElement(
 	                  "div",
 	                  { ref: function ref(el) {
-	                      return _this6.gap = el;
+	                      return _this7.gap = el;
 	                    }, "data-line-key": da.key,
 	                    "data-line-index": columIndex, "data-th-width": da.width,
 	                    "data-type": "online", className: clsPrefix + "-thead-th-drag-gap" },
@@ -55089,7 +52938,7 @@
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
-	  var _this7 = this;
+	  var _this8 = this;
 	
 	  this.getOnLineObject = function (_element) {
 	    var type = _element.getAttribute('data-type'),
@@ -55109,23 +52958,23 @@
 	    _utils.Event.stopPropagation(e);
 	    var event = _utils.Event.getEvent(e),
 	        targetEvent = _utils.Event.getTarget(event);
-	    var _props3 = _this7.props,
+	    var _props3 = _this8.props,
 	        clsPrefix = _props3.clsPrefix,
 	        contentTable = _props3.contentTable,
 	        lastShowIndex = _props3.lastShowIndex,
 	        columnsChildrenList = _props3.columnsChildrenList;
 	    // let currentElement = this.getOnLineObject(targetEvent);
 	
-	    var currentElement = _this7.getTargetToType(targetEvent);
+	    var currentElement = _this8.getTargetToType(targetEvent);
 	    if (!currentElement) return;
 	    var type = currentElement.getAttribute('data-type');
-	    if (!_this7.props.dragborder && !_this7.props.draggable) return;
-	    if (type == 'online' && _this7.props.dragborder) {
+	    if (!_this8.props.dragborder && !_this8.props.draggable) return;
+	    if (type == 'online' && _this8.props.dragborder) {
 	      // if(!this.props.dragborder)return;
 	      targetEvent.setAttribute('draggable', false); //添加交换列效果
 	      var currentIndex = -1;
 	      var defaultWidth = currentElement.getAttribute("data-th-width");
-	      _this7.drag.option = "border"; //拖拽操作
+	      _this8.drag.option = "border"; //拖拽操作
 	      if (columnsChildrenList) {
 	        var columnKey = currentElement.getAttribute("data-line-key");
 	        if (columnKey) {
@@ -55138,27 +52987,27 @@
 	        console.log('Key must be set for column!');
 	        return;
 	      }
-	      var currentObj = _this7.table.cols[currentIndex];
-	      _this7.drag.currIndex = currentIndex;
-	      _this7.drag.oldLeft = event.x;
-	      _this7.drag.oldWidth = parseInt(currentObj.style.width);
-	      _this7.drag.minWidth = currentObj.style.minWidth != "" ? parseInt(currentObj.style.minWidth) : defaultWidth;
-	      _this7.drag.tableWidth = parseInt(_this7.table.table.style.width ? _this7.table.table.style.width : _this7.table.table.scrollWidth);
-	      if (!_this7.tableOldWidth) {
-	        _this7.tableOldWidth = _this7.drag.tableWidth; //this.getTableWidth();
+	      var currentObj = _this8.table.cols[currentIndex];
+	      _this8.drag.currIndex = currentIndex;
+	      _this8.drag.oldLeft = event.x;
+	      _this8.drag.oldWidth = parseInt(currentObj.style.width);
+	      _this8.drag.minWidth = currentObj.style.minWidth != "" ? parseInt(currentObj.style.minWidth) : defaultWidth;
+	      _this8.drag.tableWidth = parseInt(_this8.table.table.style.width ? _this8.table.table.style.width : _this8.table.table.scrollWidth);
+	      if (!_this8.tableOldWidth) {
+	        _this8.tableOldWidth = _this8.drag.tableWidth; //this.getTableWidth();
 	      }
-	      if (!_this7.lastColumWidth) {
-	        _this7.lastColumWidth = parseInt(_this7.table.cols[lastShowIndex].style.width);
+	      if (!_this8.lastColumWidth) {
+	        _this8.lastColumWidth = parseInt(_this8.table.cols[lastShowIndex].style.width);
 	      }
-	    } else if (type != 'online' && _this7.props.draggable) {
+	    } else if (type != 'online' && _this8.props.draggable) {
 	      // if (!this.props.draggable || targetEvent.nodeName.toUpperCase() != "TH") return;
-	      if (!_this7.props.draggable) return;
-	      var th = _this7.getTargetToType(targetEvent);
+	      if (!_this8.props.draggable) return;
+	      var th = _this8.getTargetToType(targetEvent);
 	      th.setAttribute('draggable', true); //添加交换列效果
-	      _this7.drag.option = 'dragAble';
-	      _this7.currentDome = th;
+	      _this8.drag.option = 'dragAble';
+	      _this8.currentDome = th;
 	      var _currentIndex = parseInt(th.getAttribute("data-line-index"));
-	      _this7.drag.currIndex = _currentIndex;
+	      _this8.drag.currIndex = _currentIndex;
 	    } else {
 	      // console.log("onTrMouseDown dragborder or draggable is all false !");
 	      return;
@@ -55168,8 +53017,8 @@
 	  this.getTableWidth = function () {
 	    var tableWidth = 0,
 	        offWidth = 0; //this.table.cols.length;
-	    for (var index = 0; index < _this7.table.cols.length; index++) {
-	      var da = _this7.table.cols[index];
+	    for (var index = 0; index < _this8.table.cols.length; index++) {
+	      var da = _this8.table.cols[index];
 	      tableWidth += parseInt(da.style.width);
 	    }
 	    return tableWidth - offWidth;
@@ -55178,7 +53027,7 @@
 	  this.getTargetToType = function (targetEvent) {
 	    var tag = targetEvent;
 	    if (targetEvent && !targetEvent.getAttribute("data-type")) {
-	      tag = _this7.getTargetToType(targetEvent.parentElement);
+	      tag = _this8.getTargetToType(targetEvent.parentElement);
 	    }
 	    return tag;
 	  };
@@ -55186,15 +53035,15 @@
 	  this.getTargetToTh = function (targetEvent) {
 	    var th = targetEvent;
 	    if (targetEvent.nodeName.toUpperCase() != "TH") {
-	      th = _this7.getThDome(targetEvent);
+	      th = _this8.getThDome(targetEvent);
 	    }
 	    // console.log(" getTargetToTh: ", th);
 	    return th;
 	  };
 	
 	  this.onTrMouseMove = function (e) {
-	    if (!_this7.props.dragborder && !_this7.props.draggable) return;
-	    var _props4 = _this7.props,
+	    if (!_this8.props.dragborder && !_this8.props.draggable) return;
+	    var _props4 = _this8.props,
 	        clsPrefix = _props4.clsPrefix,
 	        dragborder = _props4.dragborder,
 	        contentDomWidth = _props4.contentDomWidth,
@@ -55208,83 +53057,83 @@
 	
 	    _utils.Event.stopPropagation(e);
 	    var event = _utils.Event.getEvent(e);
-	    if (_this7.props.dragborder && _this7.drag.option == "border") {
+	    if (_this8.props.dragborder && _this8.drag.option == "border") {
 	      //移动改变宽度
-	      var currentCols = _this7.table.cols[_this7.drag.currIndex];
-	      var diff = event.x - _this7.drag.oldLeft;
-	      var newWidth = _this7.drag.oldWidth + diff;
-	      _this7.drag.newWidth = newWidth > 0 ? newWidth : _this7.minWidth;
-	      if (newWidth > _this7.minWidth) {
+	      var currentCols = _this8.table.cols[_this8.drag.currIndex];
+	      var diff = event.x - _this8.drag.oldLeft;
+	      var newWidth = _this8.drag.oldWidth + diff;
+	      _this8.drag.newWidth = newWidth > 0 ? newWidth : _this8.minWidth;
+	      if (newWidth > _this8.minWidth) {
 	        currentCols.style.width = newWidth + 'px';
 	        //hao 支持固定表头拖拽 修改表体的width
-	        if (_this7.fixedTable.cols) {
-	          _this7.fixedTable.cols[_this7.drag.currIndex].style.width = newWidth + "px";
+	        if (_this8.fixedTable.cols) {
+	          _this8.fixedTable.cols[_this8.drag.currIndex].style.width = newWidth + "px";
 	        }
 	
 	        var newDiff = parseInt(currentCols.style.minWidth) - parseInt(currentCols.style.width);
 	        if (newDiff > 0) {
 	          //缩小
-	          var lastWidth = _this7.lastColumWidth + newDiff;
-	          _this7.table.cols[lastShowIndex].style.width = lastWidth + "px"; //同步表头
-	          _this7.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px"; //同步表体
+	          var lastWidth = _this8.lastColumWidth + newDiff;
+	          _this8.table.cols[lastShowIndex].style.width = lastWidth + "px"; //同步表头
+	          _this8.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px"; //同步表体
 	        }
-	        var showScroll = contentDomWidth - (leftFixedWidth + rightFixedWidth) - (_this7.drag.tableWidth + diff) - scrollbarWidth;
+	        var showScroll = contentDomWidth - (leftFixedWidth + rightFixedWidth) - (_this8.drag.tableWidth + diff) - scrollbarWidth;
 	        //表头滚动条处理
 	        if (headerScroll) {
 	          if (showScroll < 0) {
 	            //小于 0 出现滚动条
 	            //找到固定列表格，设置表头的marginBottom值为scrollbarWidth;
-	            _this7.table.contentTableHeader.style.overflowX = 'scroll';
-	            _this7.optTableMargin(_this7.table.fixedLeftHeaderTable, scrollbarWidth);
-	            _this7.optTableMargin(_this7.table.fixedRighHeadertTable, scrollbarWidth);
+	            _this8.table.contentTableHeader.style.overflowX = 'scroll';
+	            _this8.optTableMargin(_this8.table.fixedLeftHeaderTable, scrollbarWidth);
+	            _this8.optTableMargin(_this8.table.fixedRighHeadertTable, scrollbarWidth);
 	          } else {
 	            //大于 0 不显示滚动条
-	            _this7.table.contentTableHeader.style.overflowX = 'hidden';
-	            _this7.optTableMargin(_this7.table.fixedLeftHeaderTable, 0);
-	            _this7.optTableMargin(_this7.table.fixedRighHeadertTable, 0);
+	            _this8.table.contentTableHeader.style.overflowX = 'hidden';
+	            _this8.optTableMargin(_this8.table.fixedLeftHeaderTable, 0);
+	            _this8.optTableMargin(_this8.table.fixedRighHeadertTable, 0);
 	          }
 	        } else {
 	          if (showScroll < 0) {
-	            _this7.table.tableBody.style.overflowX = 'auto';
-	            _this7.optTableMargin(_this7.table.fixedLeftBodyTable, '-' + scrollbarWidth);
-	            _this7.optTableMargin(_this7.table.fixedRightBodyTable, '-' + scrollbarWidth);
-	            _this7.optTableScroll(_this7.table.fixedLeftBodyTable, { x: 'scroll' });
-	            _this7.optTableScroll(_this7.table.fixedRightBodyTable, { x: 'scroll' });
+	            _this8.table.tableBody.style.overflowX = 'auto';
+	            _this8.optTableMargin(_this8.table.fixedLeftBodyTable, '-' + scrollbarWidth);
+	            _this8.optTableMargin(_this8.table.fixedRightBodyTable, '-' + scrollbarWidth);
+	            _this8.optTableScroll(_this8.table.fixedLeftBodyTable, { x: 'scroll' });
+	            _this8.optTableScroll(_this8.table.fixedRightBodyTable, { x: 'scroll' });
 	          } else {
-	            _this7.table.tableBody.style.overflowX = 'hidden';
-	            _this7.optTableMargin(_this7.table.fixedLeftBodyTable, 0);
-	            _this7.optTableMargin(_this7.table.fixedRightBodyTable, 0);
-	            _this7.optTableScroll(_this7.table.fixedLeftBodyTable, { x: 'auto' });
-	            _this7.optTableScroll(_this7.table.fixedRightBodyTable, { x: 'auto' });
+	            _this8.table.tableBody.style.overflowX = 'hidden';
+	            _this8.optTableMargin(_this8.table.fixedLeftBodyTable, 0);
+	            _this8.optTableMargin(_this8.table.fixedRightBodyTable, 0);
+	            _this8.optTableScroll(_this8.table.fixedLeftBodyTable, { x: 'auto' });
+	            _this8.optTableScroll(_this8.table.fixedRightBodyTable, { x: 'auto' });
 	          }
 	        }
 	      } else {
-	        _this7.drag.newWidth = _this7.minWidth;
+	        _this8.drag.newWidth = _this8.minWidth;
 	      }
 	    }
 	    // 增加拖拽列宽动作的回调函数
-	    _this7.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this7.drag.newWidth);
+	    _this8.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this8.drag.newWidth);
 	  };
 	
 	  this.onTrMouseUp = function (e) {
 	    var event = _utils.Event.getEvent(e);
-	    var width = _this7.drag.newWidth;
-	    var opt = _this7.drag.option;
-	    _this7.mouseClear();
+	    var width = _this8.drag.newWidth;
+	    var opt = _this8.drag.option;
+	    _this8.mouseClear();
 	    if (opt !== "border") return; // fix:点击表头会触发onDropBorder事件的问题
-	    _this7.props.onDropBorder && _this7.props.onDropBorder(event, width);
+	    _this8.props.onDropBorder && _this8.props.onDropBorder(event, width);
 	  };
 	
 	  this.clearThsDr = function () {
-	    var ths = _this7.table.ths;
+	    var ths = _this8.table.ths;
 	    for (var index = 0; index < ths.length; index++) {
 	      ths[index].setAttribute('draggable', false); //去掉交换列效果
 	    }
 	  };
 	
 	  this.bodyonLineMouseUp = function (events, type) {
-	    if (!_this7.drag || !_this7.drag.option) return;
-	    _this7.mouseClear();
+	    if (!_this8.drag || !_this8.drag.option) return;
+	    _this8.mouseClear();
 	  };
 	
 	  this.optTableMargin = function (table, scrollbarWidth) {
@@ -55307,31 +53156,31 @@
 	  };
 	
 	  this.onDragStart = function (e) {
-	    if (!_this7.props.draggable) return;
-	    if (_this7.drag && _this7.drag.option != 'dragAble') {
+	    if (!_this8.props.draggable) return;
+	    if (_this8.drag && _this8.drag.option != 'dragAble') {
 	      return;
 	    }
 	    var event = _utils.Event.getEvent(e),
 	
 	    // target = Event.getTarget(event);
-	    target = _this7.getTargetToTh(_utils.Event.getTarget(event));
+	    target = _this8.getTargetToTh(_utils.Event.getTarget(event));
 	    var currentIndex = parseInt(target.getAttribute("data-line-index"));
 	    var currentKey = target.getAttribute('data-line-key');
 	
 	    if (event.dataTransfer.setDragImage) {
 	      var crt = target.cloneNode(true);
 	      crt.style.backgroundColor = "#ebecf0";
-	      crt.style.width = _this7.table.cols[currentIndex].style.width; //拖动后再交换列的时候，阴影效果可同步
+	      crt.style.width = _this8.table.cols[currentIndex].style.width; //拖动后再交换列的时候，阴影效果可同步
 	      crt.style.height = "40px";
 	      // crt.style['line-height'] = "40px";
 	      // document.body.appendChild(crt);
-	      document.getElementById(_this7._table_none_cont_id).appendChild(crt);
+	      document.getElementById(_this8._table_none_cont_id).appendChild(crt);
 	      event.dataTransfer.setDragImage(crt, 0, 0);
 	    }
 	
 	    event.dataTransfer.effectAllowed = "move";
 	    event.dataTransfer.setData("Text", currentKey);
-	    _this7.currentObj = _this7.props.rows[0][currentIndex];
+	    _this8.currentObj = _this8.props.rows[0][currentIndex];
 	  };
 	
 	  this.onDragOver = function (e) {
@@ -55340,32 +53189,32 @@
 	  };
 	
 	  this.onDrop = function (e) {
-	    if (!_this7.props.draggable) return;
-	    var props = _this7.getCurrentEventData(_this7._dragCurrent);
+	    if (!_this8.props.draggable) return;
+	    var props = _this8.getCurrentEventData(_this8._dragCurrent);
 	    e.column = { props: props };
-	    if (_this7.drag && _this7.drag.option != 'dragAble') {
-	      _this7.props.onDrop(e);
+	    if (_this8.drag && _this8.drag.option != 'dragAble') {
+	      _this8.props.onDrop(e);
 	      return;
 	    }
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
-	    _this7.currentDome.setAttribute('draggable', false); //添加交换列效果
+	    _this8.currentDome.setAttribute('draggable', false); //添加交换列效果
 	    // let data = this.getCurrentEventData(this._dragCurrent);
 	    // if(!data){
 	    //   this.props.onDrop(e);
 	    //   return;
 	    // }
-	    if (!_this7.props.onDrop) return;
+	    if (!_this8.props.onDrop) return;
 	    // this.props.onDrop(event,target);
-	    _this7.props.onDrop(event, { dragSource: _this7.currentObj, dragTarg: e.column });
+	    _this8.props.onDrop(event, { dragSource: _this8.currentObj, dragTarg: e.column });
 	  };
 	
 	  this.onDragEnter = function (e) {
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
-	    _this7._dragCurrent = target;
+	    _this8._dragCurrent = target;
 	    var currentIndex = target.getAttribute("data-line-index");
-	    if (!currentIndex || parseInt(currentIndex) === _this7.drag.currIndex) return;
+	    if (!currentIndex || parseInt(currentIndex) === _this8.drag.currIndex) return;
 	    if (target.nodeName.toUpperCase() === "TH") {
 	      // target.style.border = "2px dashed rgba(5,0,0,0.25)";
 	      target.setAttribute("style", "border-right:2px dashed rgb(30, 136, 229)");
@@ -55376,22 +53225,22 @@
 	  this.onDragEnd = function (e) {
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
-	    _this7._dragCurrent.setAttribute("style", "");
+	    _this8._dragCurrent.setAttribute("style", "");
 	    // this._dragCurrent.style = "";
-	    document.getElementById(_this7._table_none_cont_id).innerHTML = "";
+	    document.getElementById(_this8._table_none_cont_id).innerHTML = "";
 	
-	    var data = _this7.getCurrentEventData(_this7._dragCurrent);
+	    var data = _this8.getCurrentEventData(_this8._dragCurrent);
 	    if (!data) return;
-	    if (!_this7.currentObj || _this7.currentObj.key == data.key) return;
-	    if (!_this7.props.onDragEnd) return;
-	    _this7.props.onDragEnd(event, { dragSource: _this7.currentObj, dragTarg: data });
+	    if (!_this8.currentObj || _this8.currentObj.key == data.key) return;
+	    if (!_this8.props.onDragEnd) return;
+	    _this8.props.onDragEnd(event, { dragSource: _this8.currentObj, dragTarg: data });
 	  };
 	
 	  this.onDragLeave = function (e) {
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
 	    var currentIndex = target.getAttribute("data-line-index");
-	    if (!currentIndex || parseInt(currentIndex) === _this7.drag.currIndex) return;
+	    if (!currentIndex || parseInt(currentIndex) === _this8.drag.currIndex) return;
 	    if (target.nodeName.toUpperCase() === "TH") {
 	      target.setAttribute("style", "");
 	      // this._dragCurrent.style = "";
@@ -55399,7 +53248,7 @@
 	  };
 	
 	  this.handlerFilterChange = function (key, value, condition) {
-	    var onFilterChange = _this7.props.onFilterChange;
+	    var onFilterChange = _this8.props.onFilterChange;
 	
 	    if (onFilterChange) {
 	      onFilterChange(key, value, condition);
@@ -55407,7 +53256,7 @@
 	  };
 	
 	  this.handlerFilterClear = function (field) {
-	    var onFilterClear = _this7.props.onFilterClear;
+	    var onFilterClear = _this8.props.onFilterClear;
 	
 	    if (onFilterClear) {
 	      onFilterClear(field);
@@ -55415,7 +53264,7 @@
 	  };
 	
 	  this.filterRenderType = function (type, dataIndex, index) {
-	    var _props5 = _this7.props,
+	    var _props5 = _this8.props,
 	        clsPrefix = _props5.clsPrefix,
 	        rows = _props5.rows,
 	        filterDelay = _props5.filterDelay,
@@ -55430,8 +53279,8 @@
 	          , clsPrefix: clsPrefix //css前缀
 	          , className: clsPrefix + " filter-text",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"] //是否显示下拉条件
 	          , filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55444,8 +53293,8 @@
 	          clsPrefix: clsPrefix,
 	          className: clsPrefix + " filter-text",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this7.handlerFilterChange) //输入框回调并且函数防抖动
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this8.handlerFilterChange) //输入框回调并且函数防抖动
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55479,8 +53328,8 @@
 	          data: selectDataSource,
 	          notFoundContent: "Loading" //没有数据显示的默认字
 	          , dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          onFocus: rows[1][index]["filterdropdownfocus"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
@@ -55495,8 +53344,53 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY-MM-DD",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
+	          , filterDropdown: rows[1][index]["filterdropdown"],
+	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	        });
+	      //日期 年
+	      case "dateyear":
+	        return _react2["default"].createElement(_FilterType2["default"], {
+	          locale: locale,
+	          rendertype: type,
+	          className: "filter-date",
+	          onClick: function onClick() {},
+	          format: rows[1][index]["format"] || "YYYY",
+	          dataIndex: dataIndex //字段
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
+	          , filterDropdown: rows[1][index]["filterdropdown"],
+	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	        });
+	      //日期 月
+	      case "datemonth":
+	        return _react2["default"].createElement(_FilterType2["default"], {
+	          locale: locale,
+	          rendertype: type,
+	          className: "filter-date",
+	          onClick: function onClick() {},
+	          format: rows[1][index]["format"] || "YYYY-MM",
+	          dataIndex: dataIndex //字段
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
+	          , filterDropdown: rows[1][index]["filterdropdown"],
+	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	        });
+	      //日期 周
+	      case "dateweek":
+	        return _react2["default"].createElement(_FilterType2["default"], {
+	          locale: locale,
+	          rendertype: type,
+	          className: "filter-date",
+	          onClick: function onClick() {},
+	          format: rows[1][index]["format"] || "YYYY-Wo",
+	          dataIndex: dataIndex //字段
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55510,8 +53404,8 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY-MM-DD",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55728,7 +53622,10 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var RangePicker = _beeDatepicker2["default"].RangePicker;
+	var RangePicker = _beeDatepicker2["default"].RangePicker,
+	    YearPicker = _beeDatepicker2["default"].YearPicker,
+	    MonthPicker = _beeDatepicker2["default"].MonthPicker,
+	    WeekPicker = _beeDatepicker2["default"].WeekPicker;
 	
 	
 	var propTypes = {
@@ -55967,6 +53864,75 @@
 	                            filterDropdownIncludeKeys: filterDropdownIncludeKeys
 	                        })
 	                    );
+	                case 'dateyear':
+	                    return _react2["default"].createElement(
+	                        'div',
+	                        { className: clsPrefix + ' filter-wrap' },
+	                        _react2["default"].createElement(YearPicker, _extends({}, _this.props, {
+	                            value: _this.state.value,
+	                            onChange: _this.changeDate,
+	                            open: _this.state.open,
+	                            format: format,
+	                            locale: _zh_CN2["default"]
+	                        })),
+	                        _react2["default"].createElement(_FilterDropDown2["default"], {
+	                            locale: locale,
+	                            dataIndex: dataIndex,
+	                            dataText: _this.state.value,
+	                            onSelectDropdown: _this.onSelectDropdown,
+	                            onClickClear: _this.clearFilter,
+	                            isShowCondition: filterDropdown,
+	                            isShowClear: _this.state.value,
+	                            filterDropdownType: filterDropdownType,
+	                            filterDropdownIncludeKeys: filterDropdownIncludeKeys
+	                        })
+	                    );
+	                case 'datemonth':
+	                    return _react2["default"].createElement(
+	                        'div',
+	                        { className: clsPrefix + ' filter-wrap' },
+	                        _react2["default"].createElement(MonthPicker, _extends({}, _this.props, {
+	                            value: _this.state.value,
+	                            onChange: _this.changeDate,
+	                            open: _this.state.open,
+	                            format: format,
+	                            locale: _zh_CN2["default"]
+	                        })),
+	                        _react2["default"].createElement(_FilterDropDown2["default"], {
+	                            locale: locale,
+	                            dataIndex: dataIndex,
+	                            dataText: _this.state.value,
+	                            onSelectDropdown: _this.onSelectDropdown,
+	                            onClickClear: _this.clearFilter,
+	                            isShowCondition: filterDropdown,
+	                            isShowClear: _this.state.value,
+	                            filterDropdownType: filterDropdownType,
+	                            filterDropdownIncludeKeys: filterDropdownIncludeKeys
+	                        })
+	                    );
+	                case 'dateweek':
+	                    return _react2["default"].createElement(
+	                        'div',
+	                        { className: clsPrefix + ' filter-wrap' },
+	                        _react2["default"].createElement(WeekPicker, _extends({}, _this.props, {
+	                            value: _this.state.value,
+	                            onChange: _this.changeDate,
+	                            open: _this.state.open,
+	                            format: format,
+	                            locale: _zh_CN2["default"]
+	                        })),
+	                        _react2["default"].createElement(_FilterDropDown2["default"], {
+	                            locale: locale,
+	                            dataIndex: dataIndex,
+	                            dataText: _this.state.value,
+	                            onSelectDropdown: _this.onSelectDropdown,
+	                            onClickClear: _this.clearFilter,
+	                            isShowCondition: filterDropdown,
+	                            isShowClear: _this.state.value,
+	                            filterDropdownType: filterDropdownType,
+	                            filterDropdownIncludeKeys: filterDropdownIncludeKeys
+	                        })
+	                    );
 	                case 'daterange':
 	                    return _react2["default"].createElement(
 	                        'div',
@@ -56075,7 +54041,7 @@
 	    /**
 	     * 根据不同的类型生成对应的组件类型包含一些参数的适应
 	     *
-	     * @param {*} rendertype 参数类型，包括['text','dropdown','date','daterange','number']
+	     * @param {*} rendertype 参数类型，包括['text','dropdown','date','dateyear','datemonth','dateweek',daterange','number']
 	     * @returns
 	     */
 	
@@ -76330,7 +74296,7 @@
 	    }
 	
 	    // 不合法直接退出
-	    var parsed = (0, _moment2["default"])(str, format, true);
+	    var parsed = (0, _moment2["default"])(str, format) || (0, _moment2["default"])(str);
 	    if (!parsed.isValid()) {
 	      _this2.setState({
 	        // invalid: true,
@@ -76381,7 +74347,7 @@
 	    }
 	
 	    // 不合法直接退出
-	    var parsed = (0, _moment2["default"])(str, format, true);
+	    var parsed = (0, _moment2["default"])(str, format) || (0, _moment2["default"])(str);
 	    if (!parsed.isValid()) {
 	      _this2.setState({
 	        invalid: true
@@ -76423,7 +74389,7 @@
 	        isRange = _props3.isRange;
 	
 	    var str = e.target.value;
-	    var parsed = (0, _moment2["default"])(str, format, true);
+	    var parsed = (0, _moment2["default"])(str, format) || (0, _moment2["default"])(str);
 	    if (e.keyCode === _tinperBeeCore.KeyCode.ENTER) {
 	      if (parsed.isValid() && onSelect) {
 	        isRange ? onSelect(parsed.clone()) : onSelect(value.clone()); //FIX https://github.com/iuap-design/tinper-bee/issues/183
@@ -77773,7 +75739,8 @@
 	  placement: _propTypes2["default"].any,
 	  value: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].array]),
 	  defaultValue: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].array]),
-	  align: _propTypes2["default"].object
+	  align: _propTypes2["default"].object,
+	  enterKeyDown: _propTypes2["default"].bool //enter 键是否打开日期面板
 	};
 	Picker.defaultProps = {
 	  prefixCls: 'rc-calendar-picker',
@@ -77782,7 +75749,8 @@
 	  placement: 'bottomLeft',
 	  defaultOpen: false,
 	  onChange: noop,
-	  onOpenChange: noop
+	  onOpenChange: noop,
+	  enterKeyDown: true
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
@@ -77812,8 +75780,10 @@
 	  };
 	
 	  this.onKeyDown = function (event) {
-	    if (!_this2.state.open && (event.keyCode === _KeyCode2["default"].DOWN || event.keyCode === _KeyCode2["default"].ENTER)) {
-	      _this2.open();
+	    var enterKeyDown = _this2.props.enterKeyDown;
+	
+	    if (event.keyCode === _KeyCode2["default"].DOWN || enterKeyDown && event.keyCode === _KeyCode2["default"].ENTER) {
+	      if (!_this2.state.open) _this2.open();
 	      event.preventDefault();
 	    }
 	    _this2.props.onKeyDown && _this2.props.onKeyDown(event);
@@ -88154,6 +86124,12 @@
 	    InputNumber.prototype.ComponentWillUnMount = function ComponentWillUnMount() {
 	        this.clear();
 	    };
+	
+	    /**
+	     *  @memberof InputNumber
+	     * type 是否要四舍五入(此参数无效,超长不让输入)
+	     */
+	
 	    /**
 	     * 设置增加减少按钮是否可用
 	     */
@@ -88222,9 +86198,7 @@
 	                _react2["default"].createElement(
 	                    _beeInputGroup2["default"].Addon,
 	                    {
-	                        onClick: function onClick() {
-	                            minusDisabled ? '' : _this2.handleBtnClick('down');
-	                        },
+	                        // onClick={()=>{minusDisabled?'':this.handleBtnClick('down')}}
 	                        className: (minusDisabled && 'disabled') + disabledCursor,
 	                        onMouseDown: this.handleReduceMouseDown,
 	                        onMouseLeave: this.clear,
@@ -88244,9 +86218,7 @@
 	                _react2["default"].createElement(
 	                    _beeInputGroup2["default"].Addon,
 	                    {
-	                        onClick: function onClick() {
-	                            plusDisabled ? '' : _this2.handleBtnClick('up');
-	                        },
+	                        // onClick={()=>{plusDisabled?'':this.handleBtnClick('up')}}
 	                        className: (plusDisabled && 'disabled') + disabledCursor,
 	                        onMouseDown: this.handlePlusMouseDown,
 	                        onMouseLeave: this.clear,
@@ -88278,9 +86250,7 @@
 	                        _react2["default"].createElement(
 	                            'span',
 	                            {
-	                                onClick: function onClick() {
-	                                    plusDisabled ? '' : _this2.handleBtnClick('up');
-	                                },
+	                                // onClick={()=>{plusDisabled?'':this.handleBtnClick('up')}}
 	                                onMouseDown: this.handlePlusMouseDown,
 	                                onMouseLeave: this.clear,
 	                                onMouseUp: this.clear,
@@ -88290,9 +86260,7 @@
 	                        _react2["default"].createElement(
 	                            'span',
 	                            {
-	                                onClick: function onClick() {
-	                                    minusDisabled ? '' : _this2.handleBtnClick('down');
-	                                },
+	                                // onClick={()=> minusDisabled?'':this.handleBtnClick('down')}
 	                                onMouseDown: this.handleReduceMouseDown,
 	                                onMouseLeave: this.clear,
 	                                onMouseUp: this.clear,
@@ -88408,6 +86376,21 @@
 	        };
 	    };
 	
+	    this.numToFixed = function (value, fixed, type) {
+	        value = String(value);
+	        if (!value && value !== "0") return value;
+	        if (!fixed && String(fixed) !== "0") return value;
+	        var preIndex = value.indexOf(".");
+	        if (value.indexOf(".") === -1) return value;
+	        preIndex++;
+	        var endIndex = preIndex + fixed;
+	        var precValue = value.substr(preIndex, endIndex) + "0000000000";
+	        if (type) {
+	            return Number(value).toFixed(fixed);
+	        }
+	        return value.split(".")[0] + "." + precValue.substr(0, fixed);
+	    };
+	
 	    this.handleChange = function (value) {
 	        var selectionStart = _this3.input.selectionStart == undefined ? _this3.input.input.selectionStart : _this3.input.selectionStart;
 	        _this3.selectionStart = selectionStart;
@@ -88427,12 +86410,12 @@
 	        // value = this.unThousands(value);
 	        if (minusRight) {
 	            if (value.match(/-/g) && value.match(/-/g).length > 1) return;
-	        } else {
-	            if (isNaN(value) && value !== '.' && value !== '-') return;
 	        }
+	        if (isNaN(value) && value !== '.' && value !== '-') return;
 	        if (value.indexOf(".") !== -1) {
 	            //小数最大值处理
 	            var prec = String(value.split(".")[1]).replace("-", "");
+	            if (_this3.props.precision === 0 && (prec === "" || prec != "")) return;
 	            if (_this3.props.precision && prec.length > _this3.props.precision) return;
 	            if (prec.length > 8) return;
 	        }
@@ -88491,7 +86474,8 @@
 	            max = _props4.max,
 	            min = _props4.min,
 	            displayCheckPrompt = _props4.displayCheckPrompt,
-	            minusRight = _props4.minusRight;
+	            minusRight = _props4.minusRight,
+	            round = _props4.round;
 	
 	        var local = (0, _tool.getComponentLocale)(_this3.props, _this3.context, 'InputNumber', function () {
 	            return _i18n2["default"];
@@ -88505,8 +86489,8 @@
 	            onBlur && onBlur(v, e);
 	            return;
 	        }
-	        // let value = this.unThousands(v);
-	        var value = v;
+	        // let value = this.unThousands(v); 
+	        var value = _this3.numToFixed(v, precision, round);
 	        if (minusRight) {
 	            if (value.indexOf('-') != -1) {
 	                //所有位置的负号转到前边
@@ -88603,8 +86587,11 @@
 	        _this3.setState({
 	            value: value,
 	            showValue: toThousands(value)
+	        }, function () {
+	            _this3.input.input.focus && _this3.input.input.focus();
 	        });
 	        toNumber ? onChange && onChange(Number(value)) : onChange && onChange(value);
+	        _this3.handleBtnClick('down', value);
 	        _this3.detailDisable(value);
 	    };
 	
@@ -88635,8 +86622,11 @@
 	        _this3.setState({
 	            value: value,
 	            showValue: toThousands(value)
+	        }, function () {
+	            _this3.input.input.focus && _this3.input.input.focus();
 	        });
 	        toNumber ? onChange && onChange(Number(value)) : onChange && onChange(value);
+	        _this3.handleBtnClick('up', value);
 	        _this3.detailDisable(value);
 	    };
 	
@@ -88665,11 +86655,15 @@
 	    };
 	
 	    this.separate = function (value) {
-	        value = value !== null && value.toString();
-	        if (value.indexOf('.') > -1) {
-	            return value.split('.')[1];
-	        } else {
+	        if (value == null || value == undefined) {
 	            return "";
+	        } else {
+	            value = value.toString();
+	            if (value.indexOf('.') > -1) {
+	                return value.split('.')[1];
+	            } else {
+	                return "";
+	            }
 	        }
 	    };
 	
@@ -88680,7 +86674,7 @@
 	    };
 	
 	    this.handlePlusMouseDown = function (e) {
-	        e.preventDefault();
+	        e.preventDefault && e.preventDefault();
 	        var _props8 = _this3.props,
 	            delay = _props8.delay,
 	            disabled = _props8.disabled;
@@ -88690,12 +86684,12 @@
 	        _this3.plus(value);
 	        _this3.clear();
 	        _this3.timer = setTimeout(function () {
-	            _this3.handlePlusMouseDown();
+	            _this3.handlePlusMouseDown(e);
 	        }, delay);
 	    };
 	
 	    this.handleReduceMouseDown = function (e) {
-	        e.preventDefault();
+	        e.preventDefault && e.preventDefault();
 	        var _props9 = _this3.props,
 	            delay = _props9.delay,
 	            disabled = _props9.disabled;
@@ -88705,7 +86699,7 @@
 	        _this3.minus(value);
 	        _this3.clear();
 	        _this3.timer = setTimeout(function () {
-	            _this3.handleReduceMouseDown();
+	            _this3.handleReduceMouseDown(e);
 	        }, delay);
 	    };
 	
@@ -88714,6 +86708,7 @@
 	        value = String(value);
 	        var precision = _this3.props.precision;
 	
+	        if (precision === 0) return value;
 	        if (precision == undefined || value.indexOf(".") !== -1 && String(value.split(".")[1]).length === precision) {
 	            return value;
 	        }
@@ -88723,11 +86718,17 @@
 	        before = before === "-" ? before : "";
 	        after = after === "-" ? after : "";
 	        value = value.replace("-", '');
+	        var precV = "000000000000";
+	        if (value.indexOf(".") === -1) {
+	            precV = precV.substr(0, precision);
+	            precV = precV ? "." + precV : precV;
+	            value = value + precV;
+	        }
 	        return before + Number(value).toFixed(precision) + after;
 	    };
 	
-	    this.handleBtnClick = function (type) {
-	        _this3.props.handleBtnClick(type, _this3.state.value);
+	    this.handleBtnClick = function (type, value) {
+	        _this3.props.handleBtnClick(type, value);
 	    };
 	};
 	
@@ -88752,8 +86753,8 @@
 	    'msgMax': '值不能大于最大值',
 	    'msgMin': '值不能小于最小值',
 	    'en-us': {
-	        'msgMax': 'value cannot be greater than the maximum',
-	        'msgMin': 'value cannot be less than minimum'
+	        'msgMax': 'Cannot be greater than the Max value',
+	        'msgMin': 'Cannot be less than the Min value'
 	    },
 	    'zh-tw': {
 	        'msgMax': '值不能大於最大值',
@@ -89271,6 +87272,9 @@
 	    filterDropdownType: 'string'
 	};
 	
+	FilterDropDown.contextTypes = {
+	    beeLocale: _propTypes2["default"].object
+	};
 	exports["default"] = FilterDropDown;
 	module.exports = exports['default'];
 
@@ -90856,6 +88860,8 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -90895,7 +88901,8 @@
 	        _initialiseProps.call(_this);
 	
 	        _this.state = {
-	            checked: 'checked' in props ? props.checked : props.defaultChecked
+	            checked: 'checked' in props ? props.checked : props.defaultChecked,
+	            focused: false
 	        };
 	        _this.doubleClickFlag = null;
 	        return _this;
@@ -90910,6 +88917,8 @@
 	    };
 	
 	    Checkbox.prototype.render = function render() {
+	        var _classes;
+	
 	        var _props = this.props,
 	            disabled = _props.disabled,
 	            inverse = _props.inverse,
@@ -90927,13 +88936,12 @@
 	
 	        var input = _react2["default"].createElement('input', _extends({}, others, {
 	            type: 'checkbox',
-	            disabled: this.props.disabled
+	            disabled: this.props.disabled,
+	            onFocus: this.handleFocus,
+	            onBlur: this.handleBlur
 	        }));
 	
-	        var classes = {
-	            'is-checked': this.state.checked,
-	            disabled: disabled
-	        };
+	        var classes = (_classes = {}, _defineProperty(_classes, clsPrefix + '-focused', this.state.focused), _defineProperty(_classes, 'is-checked', this.state.checked), _defineProperty(_classes, 'disabled', disabled), _classes);
 	
 	        if (inverse) {
 	            classes[clsPrefix + '-inverse'] = true;
@@ -91015,6 +89023,22 @@
 	
 	        clearTimeout(_this2.doubleClickFlag);
 	        onDoubleClick && onDoubleClick(_this2.state.checked, e);
+	    };
+	
+	    this.handleFocus = function (e) {
+	        if (e.target && e.target.type == 'checkbox') {
+	            _this2.setState({
+	                focused: true
+	            });
+	        }
+	    };
+	
+	    this.handleBlur = function (e) {
+	        if (e.target && e.target.type == 'checkbox') {
+	            _this2.setState({
+	                focused: false
+	            });
+	        }
 	    };
 	};
 	
@@ -91152,6 +89176,7 @@
 	            options = props.options;
 	
 	        var classes = clsPrefix;
+	        console.log('state.values: ', state.values);
 	        if (className) classes += ' ' + className;
 	        if (options && options.length > 0) {
 	            children = this.getOptions().map(function (option) {
@@ -92321,14 +90346,14 @@
 	              children = _dataCopy$i.children,
 	              props = _objectWithoutProperties(_dataCopy$i, ["key", "children"]),
 	              dataCopyI = new Object(),
-	              isLeaf = children && children.length > 0 ? false : true,
+	              _isLeaf = children && children.length > 0 ? false : true,
 	              isExpanded = parentKey === null || expandedKeysSet.has(parentKey) ? expandedKeysSet.has(key) : false;
 	
 	          dataCopyI = _extends(dataCopyI, {
 	            key: key,
 	            isExpanded: isExpanded,
 	            parentKey: parentKey,
-	            isLeaf: isLeaf,
+	            _isLeaf: _isLeaf,
 	            index: flatTreeData.length
 	          }, _extends({}, props));
 	
@@ -92350,7 +90375,7 @@
 	        id: 'key',
 	        parendId: 'parentKey',
 	        rootId: null,
-	        isLeaf: 'isLeaf'
+	        _isLeaf: '_isLeaf'
 	      };
 	      var treeData = (0, _utils.convertListToTree)(treeList, attr, _this4.flatTreeKeysMap);
 	
@@ -94474,11 +92499,12 @@
 	    'page': '页',
 	    'ok': '确认',
 	    'en-us': {
-	        'total': 'total',
-	        'items': 'items',
-	        'show': 'page',
-	        'goto': 'goto',
-	        'ok': 'ok'
+	        'total': 'Total ',
+	        'items': ' items',
+	        'show': 'Show ',
+	        'goto': 'Go to page ',
+	        'page': ' ',
+	        'ok': 'OK'
 	    },
 	    'zh-tw': {
 	        'total': '共',
@@ -94750,6 +92776,8 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94798,9 +92826,26 @@
 	
 	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
 	
+	    _this.handleFocus = function (e) {
+	      if (e.target && e.target.type == 'radio') {
+	        _this.setState({
+	          focused: true
+	        });
+	      }
+	    };
+	
+	    _this.handleBlur = function (e) {
+	      if (e.target && e.target.type == 'radio') {
+	        _this.setState({
+	          focused: false
+	        });
+	      }
+	    };
+	
 	    var initChecked = typeof props.checked !== 'undefined' ? props.checked : props.defaultChecked;
 	    _this.state = {
-	      checked: initChecked
+	      checked: initChecked,
+	      focused: false
 	    };
 	    _this.handleClick = _this.handleClick.bind(_this);
 	
@@ -94822,6 +92867,8 @@
 	  };
 	
 	  Radio.prototype.render = function render() {
+	    var _classes;
+	
 	    var state = this.state,
 	        props = this.props,
 	        context = this.context;
@@ -94863,10 +92910,7 @@
 	      optional.checked = this.props.value === selectedValue;
 	    }
 	
-	    var classes = {
-	      'is-checked': typeof optional.checked !== 'undefined' ? optional.checked : checked,
-	      disabled: disabled
-	    };
+	    var classes = (_classes = {}, _defineProperty(_classes, clsPrefix + '-focused', this.state.focused), _defineProperty(_classes, 'is-checked', typeof optional.checked !== 'undefined' ? optional.checked : checked), _defineProperty(_classes, 'disabled', disabled), _classes);
 	
 	    if (colors) {
 	      classes[clsPrefix + '-' + colors] = true;
@@ -94889,7 +92933,9 @@
 	      type: 'radio',
 	      name: name,
 	      disabled: this.props.disabled,
-	      tabIndex: tabIndex
+	      tabIndex: tabIndex,
+	      onFocus: this.handleFocus,
+	      onBlur: this.handleBlur
 	    }));
 	    return _react2["default"].createElement(
 	      'label',
@@ -94989,12 +93035,12 @@
 	    'openRowFilter': '打开行过滤',
 	    'closeRowFilter': '关闭行过滤',
 	    'en-us': {
-	        'fixTitle': 'fix',
-	        'noFixTitle': 'unfix',
-	        'hideTitle': 'hide',
-	        'rowFilter': 'rowFilter',
-	        'openRowFilter': 'openRowFilter',
-	        'closeRowFilter': 'closeRowFilter'
+	        'fixTitle': 'Lock',
+	        'noFixTitle': 'Unlock',
+	        'hideTitle': 'Hide',
+	        'rowFilter': 'Row Filter',
+	        'openRowFilter': 'Enable Row Filter',
+	        'closeRowFilter': 'Disable Row Filter'
 	    },
 	    'zh-TW': {
 	        'fixTitle': '鎖定',
@@ -97784,9 +95830,8 @@
 	
 	  return _extends.apply(this, arguments);
 	}
+	
 	/* eslint no-console:0 */
-	
-	
 	var formatRegExp = /%[sdj%]/g;
 	var warning = function warning() {}; // don't print warning message when in production env or node runtime
 	
@@ -97981,6 +96026,11 @@
 	        }) : resolve();
 	      }
 	    };
+	
+	    if (!objArrKeys.length) {
+	      callback(results);
+	      resolve();
+	    }
 	
 	    objArrKeys.forEach(function (key) {
 	      var arr = objArr[key];
@@ -98783,23 +96833,6 @@
 	}
 	var messages = newMessages();
 	
-	function _extends$1() {
-	  _extends$1 = Object.assign || function (target) {
-	    for (var i = 1; i < arguments.length; i++) {
-	      var source = arguments[i];
-	
-	      for (var key in source) {
-	        if (Object.prototype.hasOwnProperty.call(source, key)) {
-	          target[key] = source[key];
-	        }
-	      }
-	    }
-	
-	    return target;
-	  };
-	
-	  return _extends$1.apply(this, arguments);
-	}
 	/**
 	 *  Encapsulates a validation schema.
 	 *
@@ -98923,7 +96956,7 @@
 	
 	        if (typeof rule.transform === 'function') {
 	          if (source === source_) {
-	            source = _extends$1({}, source);
+	            source = _extends({}, source);
 	          }
 	
 	          value = source[z] = rule.transform(value);
@@ -98934,7 +96967,7 @@
 	            validator: rule
 	          };
 	        } else {
-	          rule = _extends$1({}, rule);
+	          rule = _extends({}, rule);
 	        }
 	
 	        rule.validator = _this.getValidationMethod(rule);
@@ -98963,7 +96996,7 @@
 	      rule.field = data.field;
 	
 	      function addFullfield(key, schema) {
-	        return _extends$1({}, schema, {
+	        return _extends({}, schema, {
 	          fullField: rule.fullField + "." + key
 	        });
 	      }
@@ -99022,7 +97055,7 @@
 	            }
 	          }
 	
-	          fieldsSchema = _extends$1({}, fieldsSchema, {}, data.rule.fields);
+	          fieldsSchema = _extends({}, fieldsSchema, {}, data.rule.fields);
 	
 	          for (var f in fieldsSchema) {
 	            if (fieldsSchema.hasOwnProperty(f)) {
@@ -100323,6 +98356,10 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _zh_CN = __webpack_require__(661);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -100345,8 +98382,8 @@
 	    type: _propTypes2["default"].oneOfType(['button', 'line', 'icon']),
 	    maxSize: _propTypes2["default"].number,
 	    forcePowerBtns: _propTypes2["default"].array, //不受权限控制的按钮code数组
-	    localeCookie: _propTypes2["default"].string, //当前语种的cookie key值
-	    iconTypes: _propTypes2["default"].object
+	    iconTypes: _propTypes2["default"].object,
+	    locale: _propTypes2["default"].object
 	};
 	var defaultProps = {
 	    addToBtns: {},
@@ -100354,28 +98391,13 @@
 	    type: 'button',
 	    maxSize: 2,
 	    forcePowerBtns: ['cancel', 'search', 'clear', 'empty'], //取消、查询、清空、置空不受权限管理控制
-	    localeCookie: 'locale',
 	    onClick: function onClick() {},
 	    iconTypes: { //默认code对应的图标
 	        add: 'uf-add-c-o',
 	        update: 'uf-pencil',
 	        "delete": 'uf-del'
-	    }
-	};
-	
-	var getCookie = function getCookie(name) {
-	    var cookieValue = null;
-	    if (document.cookie && document.cookie != '') {
-	        var cookies = document.cookie.split(';');
-	        for (var i = 0; i < cookies.length; i++) {
-	            var cookie = cookies[i].trim();
-	            if (cookie.substring(0, name.length + 1) == name + '=') {
-	                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	                break;
-	            }
-	        }
-	    }
-	    return cookieValue;
+	    },
+	    locale: _zh_CN2["default"]
 	};
 	
 	var Btns = function (_Component) {
@@ -100400,10 +98422,8 @@
 	                maxSize = _this$props.maxSize,
 	                powerBtns = _this$props.powerBtns,
 	                forcePowerBtns = _this$props.forcePowerBtns,
-	                localeCookie = _this$props.localeCookie;
+	                locale = _this$props.locale;
 	
-	            var more = '更多';
-	            if (getCookie(localeCookie) == 'en_US') more = 'more';
 	            var btnArray = [];
 	            if (powerBtns) {
 	                Object.keys(btns).map(function (item) {
@@ -100442,7 +98462,7 @@
 	                        _react2["default"].createElement(
 	                            'span',
 	                            { className: 'ac-btns-item ac-btns-more' },
-	                            more
+	                            locale['_more']
 	                        )
 	                    );
 	                    btnArray.splice(maxSize, btnArray.length - maxSize + 1, drop);
@@ -100460,14 +98480,10 @@
 	            var itemProps = _this.props.btns[key];
 	            var _this$state$allBtns$k = _this.state.allBtns[key],
 	                colors = _this$state$allBtns$k.colors,
-	                className = _this$state$allBtns$k.className,
-	                name = _this$state$allBtns$k.name_zh_CN,
-	                name_zh_TW = _this$state$allBtns$k.name_zh_TW,
-	                name_en_US = _this$state$allBtns$k.name_en_US;
+	                className = _this$state$allBtns$k.className;
 	
+	            var name = _this.props.locale[key] || _btnJSON2["default"][key].name;
 	            var clss = 'ac-btns-item ' + className;
-	            if (getCookie(_this.props.localeCookie) == 'zh_TW') name = name_zh_TW;
-	            if (getCookie(_this.props.localeCookie) == 'en_US') name = name_en_US;
 	            if (itemProps) {
 	                if (itemProps.className) clss += ' ' + itemProps.className;
 	                if (itemProps.name) name = itemProps.name;
@@ -100635,292 +98651,270 @@
 /* 660 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	exports["default"] = {
-	    'add': { //新增
-	        'colors': 'primary',
-	        'name_zh_CN': '新增',
-	        'name_zh_TW': '新增',
-	        'name_en_US': 'New',
-	        'hotkey': 'alt+n',
-	        'className': 'ac-btns-add'
+	    "add": {
+	        "colors": "primary",
+	        "hotkey": "alt+n",
+	        "className": "ac-btns-add",
+	        "name": "新增"
 	    },
-	    'confirm': { //确认
-	        'colors': 'primary',
-	        'name_zh_CN': '确认',
-	        'name_zh_TW': '確認',
-	        'name_en_US': 'Confirm',
-	        'className': 'ac-btns-confirm'
+	    "confirm": {
+	        "colors": "primary",
+	        "className": "ac-btns-confirm",
+	        "name": "确认"
 	    },
-	    'detail': { //详情
-	        'colors': 'write',
-	        'name_zh_CN': '详情',
-	        'name_zh_TW': '詳情',
-	        'name_en_US': 'Details',
-	        'className': 'ac-btns-detail'
+	    "detail": {
+	        "colors": "write",
+	        "className": "ac-btns-detail",
+	        "name": "详情"
 	    },
-	    'search': { //查询
-	        'colors': 'primary',
-	        'name_zh_CN': '查询',
-	        'name_zh_TW': '查詢',
-	        'name_en_US': 'Search',
-	        'hotkey': 'ctrl+enter',
-	        'className': 'ac-btns-search'
+	    "search": {
+	        "colors": "primary",
+	        "hotkey": "ctrl+enter",
+	        "className": "ac-btns-search",
+	        "name": "查询"
 	    },
-	    'clear': { //清空
-	        'colors': 'write',
-	        'name_zh_CN': '清空',
-	        'name_zh_TW': '清空',
-	        'name_en_US': 'Clear',
-	        'hotkey': 'ctrl+r',
-	        'className': 'ac-btns-clear'
+	    "clear": {
+	        "colors": "write",
+	        "hotkey": "ctrl+r",
+	        "className": "ac-btns-clear",
+	        "name": "清空"
 	    },
-	    'empty': { //置空
-	        'colors': 'write',
-	        'name_zh_CN': '清空',
-	        'name_zh_TW': '清空',
-	        'name_en_US': 'Clear',
-	        'hotkey': 'ctrl+r',
-	        'className': 'ac-btns-empty'
+	    "empty": {
+	        "colors": "write",
+	        "hotkey": "ctrl+r",
+	        "className": "ac-btns-empty",
+	        "name": "清空"
 	    },
-	    'export': { //导出
-	        'colors': 'write',
-	        'name_zh_CN': '导出',
-	        'name_zh_TW': '導出',
-	        'name_en_US': 'Export',
-	        'hotkey': '',
-	        'className': 'ac-btns-export'
+	    "export": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-export",
+	        "name": "导出"
 	    },
-	    'import': { //导入
-	        'colors': 'write',
-	        'name_zh_CN': '导入',
-	        'name_zh_TW': '導入',
-	        'name_en_US': 'Import',
-	        'hotkey': '',
-	        'className': 'ac-btns-import'
+	    "import": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-import",
+	        "name": "导入"
 	    },
-	    'template': { //导入模板下载
-	        'colors': 'write',
-	        'name_zh_CN': '导入模板下载',
-	        'name_zh_TW': '導入模板下載',
-	        'name_en_US': 'Import template download',
-	        'hotkey': '',
-	        'className': 'ac-btns-template'
+	    "template": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-template",
+	        "name": "导入模板下载"
 	    },
-	    'save': { //保存
-	        'colors': 'primary',
-	        'name_zh_CN': '保存',
-	        'name_zh_TW': '保存',
-	        'name_en_US': 'Save',
-	        'hotkey': '',
-	        'className': 'ac-btns-save'
+	    "save": {
+	        "colors": "primary",
+	        "hotkey": "",
+	        "className": "ac-btns-save",
+	        "name": "保存"
 	    },
-	    'cancel': { //取消
-	        'colors': 'write',
-	        'name_zh_CN': '取消',
-	        'name_zh_TW': '取消',
-	        'name_en_US': 'Cancel',
-	        'hotkey': '',
-	        'className': 'ac-btns-cancel'
+	    "cancel": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-cancel",
+	        "name": "取消"
 	    },
-	    'update': { //修改
-	        'colors': 'write',
-	        'name_zh_CN': '修改',
-	        'name_zh_TW': '修改',
-	        'name_en_US': 'update',
-	        'hotkey': '',
-	        'className': 'ac-btns-update'
+	    "update": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-update",
+	        "name": "修改"
 	    },
-	    'delete': { //删除
-	        'colors': 'write',
-	        'name_zh_CN': '删除',
-	        'name_zh_TW': '刪除',
-	        'name_en_US': 'Delete',
-	        'hotkey': '',
-	        'className': 'ac-btns-delete'
+	    "delete": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-delete",
+	        "name": "删除"
 	    },
-	    'pbmsubmit': { //提交
-	        'colors': 'write',
-	        'name_zh_CN': '提交',
-	        'name_zh_TW': '提交',
-	        'name_en_US': 'Submit',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmsubmit'
+	    "pbmsubmit": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmsubmit",
+	        "name": "提交"
 	    },
-	    'pbmcancle': { //撤回
-	        'colors': 'write',
-	        'name_zh_CN': '撤回',
-	        'name_zh_TW': '撤回',
-	        'name_en_US': 'Recall',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmcancle'
+	    "pbmcancle": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmcancle",
+	        "name": "撤回"
 	    },
-	    'pbmapprove': { //审批
-	        'colors': 'write',
-	        'name_zh_CN': '审批',
-	        'name_zh_TW': '審批',
-	        'name_en_US': 'Approval',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmapprove'
+	    "pbmapprove": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmapprove",
+	        "name": "审批"
 	    },
-	    'appoint': { //指派
-	        'colors': 'write',
-	        'name_zh_CN': '指派',
-	        'name_zh_TW': '指派',
-	        'name_en_US': 'Appoint',
-	        'hotkey': '',
-	        'className': 'ac-btns-appoint'
+	    "appoint": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-appoint",
+	        "name": "指派"
 	    },
-	    'send': { //发送
-	        'colors': 'write',
-	        'name_zh_CN': '发送',
-	        'name_zh_TW': '發送',
-	        'name_en_US': 'Send',
-	        'hotkey': '',
-	        'className': 'ac-btns-send'
+	    "send": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-send",
+	        "name": "发送"
 	    },
-	    'printpreview': { //打印预览
-	        'colors': 'write',
-	        'name_zh_CN': '打印预览',
-	        'name_zh_TW': '打印預覽',
-	        'name_en_US': 'Print Preview',
-	        'className': 'ac-btns-printpreview'
+	    "printpreview": {
+	        "colors": "write",
+	        "className": "ac-btns-printpreview",
+	        "name": "打印预览"
 	    },
-	    'printdesign': { //打印设计
-	        'colors': 'write',
-	        'name_zh_CN': '打印设计',
-	        'name_zh_TW': '打印設計',
-	        'name_en_US': 'Print Design',
-	        'className': 'ac-btns-printdesign'
+	    "printdesign": {
+	        "colors": "write",
+	        "className": "ac-btns-printdesign",
+	        "name": "打印设计"
 	    },
-	    'upload': { //上传
-	        'colors': 'primary',
-	        'name_zh_CN': '上传',
-	        'name_zh_TW': '上傳',
-	        'name_en_US': 'Upload',
-	        'className': 'ac-btns-upload'
+	    "upload": {
+	        "colors": "primary",
+	        "className": "ac-btns-upload",
+	        "name": "上传"
 	    },
-	    'reupload': { //重新上传
-	        'colors': 'primary',
-	        'name_zh_CN': '重新上传',
-	        'name_zh_TW': '重新上傳',
-	        'name_en_US': 'Re-upload',
-	        'className': 'ac-btns-reupload'
+	    "reupload": {
+	        "colors": "primary",
+	        "className": "ac-btns-reupload",
+	        "name": "重新上传"
 	    },
-	    'download': { //下载
-	        'colors': 'write',
-	        'name_zh_CN': '下载',
-	        'name_zh_TW': '下載',
-	        'name_en_US': 'Download',
-	        'className': 'ac-btns-download'
+	    "download": {
+	        "colors": "write",
+	        "className": "ac-btns-download",
+	        "name": "下载"
 	    },
-	    'addRow': { //增行
-	        'colors': 'write',
-	        'name_zh_CN': '增行',
-	        'name_zh_TW': '增行',
-	        'name_en_US': 'New',
-	        'className': 'ac-btns-addRow'
+	    "addRow": {
+	        "colors": "write",
+	        "className": "ac-btns-addRow",
+	        "name": "增行"
 	    },
-	    'delRow': { //删行
-	        'colors': 'write',
-	        'name_zh_CN': '删行',
-	        'name_zh_TW': '刪行',
-	        'name_en_US': 'Delete',
-	        'className': 'ac-btns-delRow'
+	    "delRow": {
+	        "colors": "write",
+	        "className": "ac-btns-delRow",
+	        "name": "删行"
 	    },
-	    'copyRow': { //复制行
-	        'colors': 'write',
-	        'name_zh_CN': '复制行',
-	        'name_zh_TW': '複製行',
-	        'name_en_US': 'Duplicate rows',
-	        'className': 'ac-btns-copyRow'
+	    "copyRow": {
+	        "colors": "write",
+	        "className": "ac-btns-copyRow",
+	        "name": "复制行"
 	    },
-	    'max': { //最大化
-	        'colors': 'write',
-	        'name_zh_CN': '最大化',
-	        'name_zh_TW': '最大化',
-	        'name_en_US': 'Maximize',
-	        'className': 'ac-btns-max'
+	    "max": {
+	        "colors": "write",
+	        "className": "ac-btns-max",
+	        "name": "最大化"
 	    },
-	    'min': { //最小化
-	        'colors': 'write',
-	        'name_zh_CN': 'min',
-	        'name_zh_TW': '最小化',
-	        'name_en_US': 'Minimize',
-	        'className': 'ac-btns-min'
+	    "min": {
+	        "colors": "write",
+	        "className": "ac-btns-min",
+	        "name": "min"
 	    },
-	    'copyToEnd': { //粘贴至末行
-	        'colors': 'write',
-	        'name_zh_CN': '粘贴至末行',
-	        'name_zh_TW': '粘貼至末行',
-	        'name_en_US': 'Paste to end line',
-	        'className': 'ac-btns-copyToEnd'
+	    "copyToEnd": {
+	        "colors": "write",
+	        "className": "ac-btns-copyToEnd",
+	        "name": "粘贴至末行"
 	    },
-	    'copyToHere': { //粘贴至此处
-	        'colors': 'write',
-	        'name_zh_CN': '粘贴至此处',
-	        'name_zh_TW': '粘貼至此處',
-	        'name_en_US': 'Paste here',
-	        'className': 'ac-btns-copyToHere'
+	    "copyToHere": {
+	        "colors": "write",
+	        "className": "ac-btns-copyToHere",
+	        "name": "粘贴至此处"
 	    },
-	    'organizationChat': { //机构图
-	        'colors': 'write',
-	        'name_zh_CN': '机构图',
-	        'name_zh_TW': '機構圖',
-	        'name_en_US': 'Organization Chat',
-	        'className': 'ac-btns-organizationChat'
+	    "organizationChat": {
+	        "colors": "write",
+	        "className": "ac-btns-organizationChat",
+	        "name": "机构图"
 	    },
-	    'enable': { //启用
-	        'colors': 'write',
-	        'name_zh_CN': '启用',
-	        'name_zh_TW': '啟用',
-	        'name_en_US': 'Enable',
-	        'className': 'ac-btns-enable'
+	    "enable": {
+	        "colors": "write",
+	        "className": "ac-btns-enable",
+	        "name": "启用"
 	    },
-	    'disabled': { //停用
-	        'colors': 'write',
-	        'name_zh_CN': '停用',
-	        'name_zh_TW': '停用',
-	        'name_en_US': 'Disabled',
-	        'className': 'ac-btns-disabled'
+	    "disabled": {
+	        "colors": "write",
+	        "className": "ac-btns-disabled",
+	        "name": "停用"
 	    },
-	    'next': { //下一条
-	        'colors': 'write',
-	        'name_zh_CN': '下一条',
-	        'name_zh_TW': '下一條',
-	        'name_en_US': 'Next',
-	        'className': 'ac-btns-next'
+	    "next": {
+	        "colors": "write",
+	        "className": "ac-btns-next",
+	        "name": "下一条"
 	    },
-	    'previous': { //上一条
-	        'colors': 'write',
-	        'name_zh_CN': '上一条',
-	        'name_zh_TW': '上一條',
-	        'name_en_US': 'Previous',
-	        'className': 'ac-btns-previous'
+	    "previous": {
+	        "colors": "write",
+	        "className": "ac-btns-previous",
+	        "name": "上一条"
 	    },
-	    'first': { //第一条
-	        'colors': 'write',
-	        'name_zh_CN': '第一条',
-	        'name_zh_TW': '第一條',
-	        'name_en_US': 'First',
-	        'className': 'ac-btns-first'
+	    "first": {
+	        "colors": "write",
+	        "className": "ac-btns-first",
+	        "name": "第一条"
 	    },
-	    'last': { //最后一条
-	        'colors': 'write',
-	        'name_zh_CN': '最后一条',
-	        'name_zh_TW': '最後一條',
-	        'name_en_US': 'Last',
-	        'className': 'ac-btns-last'
+	    "last": {
+	        "colors": "write",
+	        "className": "ac-btns-last",
+	        "name": "最后一条"
 	    }
 	};
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 661 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports["default"] = {
+	    "_more": "更多",
+	
+	    "add": "新增",
+	    "confirm": "确认",
+	    "detail": "详情",
+	    "search": "查询",
+	    "clear": "清空",
+	    "empty": "清空",
+	    "export": "导出",
+	    "import": "导入",
+	    "template": "导入模板下载",
+	    "save": "保存",
+	    "cancel": "取消",
+	    "update": "修改",
+	    "delete": "删除",
+	    "pbmsubmit": "提交",
+	    "pbmcancle": "撤回",
+	    "pbmapprove": "审批",
+	    "appoint": "指派",
+	    "send": "发送",
+	    "printpreview": "打印预览",
+	    "printdesign": "打印设计",
+	    "upload": "上传",
+	    "reupload": "重新上传",
+	    "download": "下载",
+	    "addRow": "增行",
+	    "delRow": "删行",
+	    "copyRow": "复制行",
+	    "max": "最大化",
+	    "min": "min",
+	    "copyToEnd": "粘贴至末行",
+	    "copyToHere": "粘贴至此处",
+	    "organizationChat": "机构图",
+	    "enable": "启用",
+	    "disabled": "停用",
+	    "next": "下一条",
+	    "previous": "上一条",
+	    "first": "第一条",
+	    "last": "最后一条"
+	};
+	module.exports = exports["default"];
+
+/***/ }),
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100929,7 +98923,7 @@
 	  value: true
 	});
 	
-	var _ButtonGroup = __webpack_require__(662);
+	var _ButtonGroup = __webpack_require__(663);
 	
 	var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 	
@@ -100939,7 +98933,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 662 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101088,7 +99082,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 663 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101119,7 +99113,7 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _FieldWrap = __webpack_require__(664);
+	var _FieldWrap = __webpack_require__(665);
 	
 	var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 	
@@ -101308,7 +99302,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 664 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -101386,7 +99380,7 @@
 	            ) : null,
 	            flag ? _react2["default"].createElement(
 	                "div",
-	                { className: "triangle_border_nw", style: { "left": required ? "4px" : "0px" } },
+	                { className: "triangle_border_nw" },
 	                " "
 	            ) : null
 	        );
@@ -101399,7 +99393,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 665 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101422,7 +99416,7 @@
 	
 	var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 	
-	var _FieldWrap = __webpack_require__(664);
+	var _FieldWrap = __webpack_require__(665);
 	
 	var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 	
@@ -101624,7 +99618,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 666 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101655,7 +99649,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _FieldWrap = __webpack_require__(664);
+	var _FieldWrap = __webpack_require__(665);
 	
 	var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 	
@@ -101895,7 +99889,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 667 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101922,7 +99916,7 @@
 	
 	var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 	
-	var _FieldWrap = __webpack_require__(664);
+	var _FieldWrap = __webpack_require__(665);
 	
 	var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 	
@@ -102133,7 +100127,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 668 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -102172,7 +100166,7 @@
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _FieldWrap = __webpack_require__(664);
+	var _FieldWrap = __webpack_require__(665);
 	
 	var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
 	
@@ -102268,7 +100262,7 @@
 	            var value = _this.state.value;
 	            //设置校验规则
 	
-	            var descriptor = _defineProperty({}, field, { type: "object", required: required });
+	            var descriptor = _defineProperty({}, field, { type: "any", required: required });
 	            if (pattern) {
 	                descriptor[field].push({
 	                    pattern: pattern, message: message
@@ -102371,7 +100365,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 669 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -102380,7 +100374,7 @@
 	  value: true
 	});
 	
-	var _AcTips = __webpack_require__(670);
+	var _AcTips = __webpack_require__(671);
 	
 	var _AcTips2 = _interopRequireDefault(_AcTips);
 	
@@ -102390,7 +100384,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 670 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -102409,11 +100403,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _uuid = __webpack_require__(671);
+	var _uuid = __webpack_require__(672);
 	
 	var _uuid2 = _interopRequireDefault(_uuid);
 	
-	var _Tips = __webpack_require__(676);
+	var _Tips = __webpack_require__(677);
 	
 	var _Tips2 = _interopRequireDefault(_Tips);
 	
@@ -102473,11 +100467,11 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 671 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var v1 = __webpack_require__(672);
-	var v4 = __webpack_require__(675);
+	var v1 = __webpack_require__(673);
+	var v4 = __webpack_require__(676);
 	
 	var uuid = v4;
 	uuid.v1 = v1;
@@ -102487,11 +100481,11 @@
 
 
 /***/ }),
-/* 672 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var rng = __webpack_require__(673);
-	var bytesToUuid = __webpack_require__(674);
+	var rng = __webpack_require__(674);
+	var bytesToUuid = __webpack_require__(675);
 	
 	// **`v1()` - Generate time-based UUID**
 	//
@@ -102602,7 +100596,7 @@
 
 
 /***/ }),
-/* 673 */
+/* 674 */
 /***/ (function(module, exports) {
 
 	// Unique ID creation requires a high quality random # generator.  In the
@@ -102642,7 +100636,7 @@
 
 
 /***/ }),
-/* 674 */
+/* 675 */
 /***/ (function(module, exports) {
 
 	/**
@@ -102674,11 +100668,11 @@
 
 
 /***/ }),
-/* 675 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var rng = __webpack_require__(673);
-	var bytesToUuid = __webpack_require__(674);
+	var rng = __webpack_require__(674);
+	var bytesToUuid = __webpack_require__(675);
 	
 	function v4(options, buf, offset) {
 	  var i = buf && offset || 0;
@@ -102709,7 +100703,7 @@
 
 
 /***/ }),
-/* 676 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -102854,7 +100848,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 677 */
+/* 678 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -102897,7 +100891,7 @@
 	};
 
 /***/ }),
-/* 678 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -102916,7 +100910,7 @@
 	
 	var _beeComplexGrid2 = _interopRequireDefault(_beeComplexGrid);
 	
-	var _defaultProps = __webpack_require__(677);
+	var _defaultProps = __webpack_require__(678);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -102961,7 +100955,8 @@
 	            paginationObj = _props.paginationObj,
 	            data = _props.data,
 	            exportData = _props.exportData,
-	            otherProps = _objectWithoutProperties(_props, ["paginationObj", "data", "exportData"]);
+	            headerScroll = _props.headerScroll,
+	            otherProps = _objectWithoutProperties(_props, ["paginationObj", "data", "exportData", "headerScroll"]);
 	
 	        var _paginationObj = 'none';
 	        if (paginationObj != 'none') {
@@ -102969,8 +100964,9 @@
 	        }
 	        return _react2["default"].createElement(
 	            "div",
-	            { className: "ac-gridcn" },
+	            { className: "ac-gridcn " + (headerScroll ? 'header-scroll' : '') },
 	            _react2["default"].createElement(_beeComplexGrid2["default"], _extends({}, otherProps, {
+	                headerScroll: headerScroll,
 	                data: data,
 	                paginationObj: _paginationObj,
 	                ref: function ref(_ref) {
@@ -102991,7 +100987,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 679 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -103091,6 +101087,21 @@
 	        };
 	
 	        _this.column = [{
+	            title: "员工编号",
+	            dataIndex: "code",
+	            key: "code",
+	            width: 150
+	        }, {
+	            title: "员工编号",
+	            dataIndex: "code",
+	            key: "code",
+	            width: 150
+	        }, {
+	            title: "员工编号",
+	            dataIndex: "code",
+	            key: "code",
+	            width: 150
+	        }, {
 	            title: "员工编号",
 	            dataIndex: "code",
 	            key: "code",
@@ -103396,405 +101407,8 @@
 	                },
 	                save: function save(selectList) {
 	                    console.log('保存，数据如下-----------', selectList);
-	                }
-	            })
-	        );
-	    };
-	
-	    return Demo2;
-	}(_react.Component);
-	
-	exports['default'] = Demo2;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 680 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _data = __webpack_require__(271);
-	
-	var _data2 = _interopRequireDefault(_data);
-	
-	var _index = __webpack_require__(272);
-	
-	var _moment = __webpack_require__(419);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _beeButton = __webpack_require__(265);
-	
-	var _beeButton2 = _interopRequireDefault(_beeButton);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @title 编辑表格基本示例
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * @description 编辑表格基本示例
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
-	
-	
-	var Demo2 = function (_Component) {
-	    _inherits(Demo2, _Component);
-	
-	    function Demo2(props) {
-	        _classCallCheck(this, Demo2);
-	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-	
-	        _this.freshData = function (pageIndex) {
-	            console.log('freshData');
-	        };
-	
-	        _this.onDataNumSelect = function (index, value) {
-	            console.log('onDataNumSelect');
-	        };
-	
-	        _this.onPageSelect = function (value, type) {
-	            console.log('onPageSelect');
-	        };
-	
-	        _this.getSelectedDataFunc = function () {
-	            console.log('getSelectedDataFunc');
-	        };
-	
-	        _this.getAllData = function () {
-	            console.log(_this.grid.allData);
-	        };
-	
-	        _this.validate = function () {
-	            var error = _this.grid.validate();
-	            if (error) {
-	                alert('数据校验失败，错误信息见控制台');
-	                console.log(error);
-	            } else {
-	                alert('数据校验成功');
-	            }
-	        };
-	
-	        _this.changPag = function () {
-	            _this.setState({
-	                activePage: 2,
-	                total: 50,
-	                items: 20
-	            });
-	        };
-	
-	        _this.column = [{
-	            title: "员工编号",
-	            dataIndex: "code",
-	            key: "code",
-	            width: 150
-	        }, {
-	            title: "员工姓名",
-	            dataIndex: "name",
-	            key: "name",
-	            width: 120,
-	            renderType: 'input',
-	            required: true,
-	            validate: true,
-	            fieldProps: {
-	                defaultValue: '姓名'
-	            }
-	        }, {
-	            title: "员工性别",
-	            dataIndex: "sex",
-	            key: "sex",
-	            width: 120,
-	            renderType: 'select',
-	            required: true,
-	            validate: true,
-	            fieldProps: {
-	                allowClear: true,
-	                defaultValue: '1',
-	                data: [{
-	                    key: "请选择",
-	                    value: ''
-	                }, {
-	                    key: "男",
-	                    value: '1'
-	                }, {
-	                    key: "女",
-	                    value: '0'
-	                }]
-	            }
-	        }, {
-	            title: "工龄",
-	            dataIndex: "serviceYears",
-	            key: "serviceYears",
-	            width: 130,
-	            className: 'column-number-right ', // 靠右对齐
-	            renderType: 'inputNumber',
-	            required: true,
-	            fieldProps: {
-	                defaultValue: 2
-	            }
-	        }, {
-	            title: "司龄",
-	            dataIndex: "serviceYearsCompany",
-	            key: "serviceYearsCompany",
-	            width: 130,
-	            className: 'column-number-right ', // 靠右对齐
-	            renderType: 'inputNumber',
-	            required: true
-	        }, {
-	            title: "年份",
-	            dataIndex: "year",
-	            key: "year",
-	            width: 100,
-	            renderType: 'year',
-	            required: true,
-	            fieldProps: {
-	                defaultValue: '2018'
-	            },
-	            render: function render(text, record, index) {
-	                return (0, _moment2['default'])(text).format('YYYY');
-	            }
-	        }, {
-	            title: "月份",
-	            dataIndex: "month",
-	            key: "month",
-	            width: 120,
-	            renderType: 'select',
-	            required: true,
-	            fieldProps: {
-	                data: [{ //月份
-	                    key: "请选择",
-	                    value: "",
-	                    disabled: true
-	                }, {
-	                    key: "一月",
-	                    value: 1
-	                }, {
-	                    key: "二月",
-	                    value: 2
-	                }, {
-	                    key: "三月",
-	                    value: 3
-	                }, {
-	                    key: "四月",
-	                    value: 4
-	                }, {
-	                    key: "五月",
-	                    value: 5
-	                }, {
-	                    key: "六月",
-	                    value: 6
-	                }, {
-	                    key: "七月",
-	                    value: 7
-	                }, {
-	                    key: "八月",
-	                    value: 8
-	                }, {
-	                    key: "九月",
-	                    value: 9
-	                }, {
-	                    key: "十月",
-	                    value: 10
-	                }, {
-	                    key: "十一月",
-	                    value: 11
-	                }, {
-	                    key: "十二月",
-	                    value: 12
-	                }]
-	            }
-	        }, {
-	            title: "补贴类别",
-	            dataIndex: "allowanceType",
-	            key: "allowanceType",
-	            width: 120,
-	            renderType: 'select',
-	            required: true,
-	            fieldProps: {
-	                data: [{
-	                    key: "请选择",
-	                    value: "",
-	                    disabled: true
-	                }, {
-	                    key: "电脑补助",
-	                    value: 1
-	                }, {
-	                    key: "住宿补助",
-	                    value: 2
-	                }, {
-	                    key: "交通补助",
-	                    value: 3
-	                }]
-	            }
-	        }, {
-	            title: "补贴标准",
-	            dataIndex: "allowanceStandard",
-	            key: "allowanceStandard",
-	            width: 120,
-	            className: 'column-number-right ', // 靠右对齐
-	            renderType: 'inputNumber',
-	            required: true,
-	            fieldProps: {
-	                max: 999999,
-	                min: 0,
-	                step: 1,
-	                precision: 2
-	            }
-	        }, {
-	            title: "实际补贴",
-	            dataIndex: "allowanceActual",
-	            key: "allowanceActual",
-	            width: 120,
-	            className: 'column-number-right ', // 靠右对齐
-	            renderType: 'inputNumber',
-	            required: true,
-	            fieldProps: {
-	                max: 999999,
-	                min: 0,
-	                step: 1,
-	                precision: 2
-	            }
-	        }, {
-	            title: "是否超标",
-	            dataIndex: "exdeeds",
-	            key: "exdeeds",
-	            width: 120,
-	            required: true,
-	            renderType: 'select',
-	            fieldProps: {
-	                data: [{
-	                    key: "请选择",
-	                    value: "",
-	                    disabled: true
-	                }, {
-	                    key: "未超标",
-	                    value: 0
-	                }, {
-	                    key: "超标",
-	                    value: 1
-	                }]
-	            }
-	        }, {
-	            title: "领取方式",
-	            dataIndex: "pickType",
-	            key: "pickType",
-	            width: 120,
-	            renderType: 'select',
-	            required: true,
-	            fieldProps: {
-	                data: [{
-	                    key: "请选择",
-	                    value: "",
-	                    disabled: true
-	                }, {
-	                    key: "转账",
-	                    value: 1
-	                }, {
-	                    key: "现金",
-	                    value: 2
-	                }]
-	            }
-	        }, {
-	            title: "备注",
-	            dataIndex: "remark",
-	            key: "remark",
-	            width: 100,
-	            renderType: 'input',
-	            required: false
-	        }];
-	        _this.state = {
-	            activePage: 1,
-	            total: 100,
-	            items: 10
-	        };
-	        return _this;
-	    }
-	    /**
-	     * 跳转指定页码
-	     *
-	     * @param {*} pageIndex
-	     */
-	
-	
-	    /**
-	     * 分页  跳转指定页数和设置一页数据条数
-	     *
-	     * @param {*} index
-	     * @param {*} value
-	     */
-	
-	
-	    /**
-	     * type为0标识为pageIndex,为1标识pageSize
-	     *
-	     * @param {*} value
-	     * @param {*} type
-	     */
-	
-	
-	    Demo2.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var paginationObj = {
-	            activePage: this.state.activePage, //当前页
-	            total: this.state.total, //总条数
-	            items: this.state.items,
-	            freshData: this.freshData, //刷新数据
-	            onDataNumSelect: this.onDataNumSelect //选择记录行
-	            // disabled: false//分页条禁用状态
-	        };
-	        return _react2['default'].createElement(
-	            'div',
-	            { className: 'grid-parent' },
-	            _react2['default'].createElement(
-	                'div',
-	                { style: { 'marginBottom': '20px' } },
-	                _react2['default'].createElement(
-	                    _beeButton2['default'],
-	                    { onClick: this.changPag, colors: 'primary' },
-	                    '\u6539\u53D8\u5206\u9875'
-	                ),
-	                _react2['default'].createElement(
-	                    _beeButton2['default'],
-	                    { onClick: this.getAllData, colors: 'primary', style: { 'marginLeft': '20px' } },
-	                    '\u83B7\u5F97\u6240\u6709\u6570\u636E'
-	                ),
-	                _react2['default'].createElement(
-	                    _beeButton2['default'],
-	                    { onClick: this.validate, colors: 'primary', style: { 'marginLeft': '20px' } },
-	                    '\u4E3B\u52A8\u6821\u9A8C'
-	                )
-	            ),
-	            _react2['default'].createElement(_index.EditGrid, {
-	                ref: function ref(el) {
-	                    return _this2.grid = el;
-	                } //ref用于调用内部方法
-	                , data: _data2['default'] //数据
-	                , columns: this.column //定义列
-	                , paginationObj: paginationObj //分页数据
-	                , getSelectedDataFunc: this.getSelectedDataFunc //选择数据后的回调
-	                , excludeKeys: ['id', 'ts', 'lastModified'],
-	                delRow: function delRow(selectList, newData) {
-	                    console.log('删除，数据如下-----------', selectList);
-	                    console.log('新的数据如下-----------', newData);
 	                },
-	                save: function save(selectList) {
-	                    console.log('保存，数据如下-----------', selectList);
-	                },
+	                headerScroll: true,
 	                title: '\u6211\u662F\u6807\u9898'
 	            })
 	        );

@@ -11,7 +11,7 @@
 import FormLayout from 'ac-form-layout';
 import 'ac-form-layout/build/FormLayout.css';
 
-const { FormItem, FormRow } = FormLayout;
+const { FormItem, FormRow,FormItemSpan } = FormLayout;
 ```
 
  ## 代码演示
@@ -31,6 +31,14 @@ const { FormItem, FormRow } = FormLayout;
 |lable|label标签内容|string|-|
 |required|是否必填|bool|-|
 |errorMsg|错误信息，没有不传|node|-|
+
+### FormItemSpan
+
+只显示文字
+
+|参数|说明|类型|默认值|
+|:---|:-----|:----|:------|
+|lable|label标签内容|string|-|
 
 
 

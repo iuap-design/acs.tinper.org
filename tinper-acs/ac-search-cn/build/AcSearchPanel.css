@@ -118,9 +118,10 @@
   color: #e14c46; }
 
 .ac-search-cn {
-  border-top: 1px solid #D0D0D0; }
+  border-bottom: 1px solid #D0D0D0; }
   .ac-search-cn-ctns-out {
     padding-left: 16px;
+    padding-right: 16px;
     background-color: #f3f3f3; }
   .ac-search-cn-ctns {
     display: flex;
@@ -128,7 +129,7 @@
     .ac-search-cn-ctns.close {
       display: none; }
   .ac-search-cn-ctn {
-    width: calc(100% - 100px);
+    width: calc(100% - 90px);
     display: inline-block; }
   .ac-search-cn-formitem {
     width: calc(100% / 5);
@@ -139,14 +140,17 @@
     vertical-align: bottom; }
     .ac-search-cn-formitem .u-form-control {
       padding: 0 8px; }
+    .ac-search-cn-formitem .u-select .u-select-selection-rendered {
+      margin-left: 0;
+      margin-right: 0; }
     .ac-search-cn-formitem input,
     .ac-search-cn-formitem .u-select .u-select-selection,
     .ac-search-cn-formitem .u-input-number, .ac-search-cn-formitem .u-input-number.u-input-group > span:first-child, .ac-search-cn-formitem .u-input-number.u-input-group > span:last-child {
       border-color: #d5d6d9; }
-    .ac-search-cn-formitem input.u-form-control:hover, .ac-search-cn-formitem .u-select-enabled .u-select-selection:hover, .ac-search-cn-formitem .u-input-number:hover {
+    .ac-search-cn-formitem .u-form-control:hover, .ac-search-cn-formitem .u-select-enabled .u-select-selection:hover, .ac-search-cn-formitem .u-input-number:hover {
       border-color: #8cc6ff; }
-    .ac-search-cn-formitem input.u-form-control:active, .ac-search-cn-formitem .u-select .u-select-selection:active, .ac-search-cn-formitem .u-input-number:active,
-    .ac-search-cn-formitem input.u-form-control:focus, .ac-search-cn-formitem .u-select .u-select-selection:focus, .ac-search-cn-formitem .u-input-number:focus {
+    .ac-search-cn-formitem .u-form-control:active, .ac-search-cn-formitem .u-select .u-select-selection:active, .ac-search-cn-formitem .u-input-number:active,
+    .ac-search-cn-formitem .u-form-control:focus, .ac-search-cn-formitem .u-select .u-select-selection:focus, .ac-search-cn-formitem .u-input-number:focus {
       border-color: #007ace; }
     .ac-search-cn-formitem .u-select .u-select-arrow, .ac-search-cn-formitem .datepicker-container .u-input-group-btn, .ac-search-cn-formitem .datepicker-input-group .u-input-group-btn,
     .ac-search-cn-formitem .u-input-number.u-input-group > span:first-child, .ac-search-cn-formitem .u-input-number.u-input-group > span:last-child,
@@ -228,7 +232,8 @@
       .ac-search-cn-formitem .container-refer input {
         font-size: 14px;
         color: #424242;
-        border: 1px solid #d5d6d9; }
+        border: 1px solid #d5d6d9;
+        padding: 0 7px; }
       .ac-search-cn-formitem .container-refer .ant-input-suffix {
         color: #d5d6d9; }
     .ac-search-cn-formitem .u-form-control[disabled] {
@@ -247,14 +252,14 @@
       color: #cccccc;
       font-size: 13px; }
   .ac-search-cn-btns {
-    width: 100px;
+    width: 90px;
     display: inline-block;
     height: 32px;
     display: flex;
     justify-content: flex-start;
     align-self: flex-end;
     margin-bottom: 8px;
-    margin-right: 3px; }
+    margin-right: 0; }
     .ac-search-cn-btns .u-button {
       padding: 0;
       min-width: auto; }

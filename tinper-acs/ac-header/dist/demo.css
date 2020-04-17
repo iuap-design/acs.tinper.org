@@ -6,7 +6,8 @@
   padding: 0 16px;
   background: #fff;
   height: 46px;
-  line-height: 46px; }
+  line-height: 46px;
+  border-bottom: 1px solid #d0d0d0; }
   .ac-header-title {
     font-size: 16px;
     height: 32px;
@@ -32,11 +33,13 @@
     height: 26px;
     display: inline-block;
     line-height: 26px;
-    margin-right: 4px; }
+    margin-right: 4px;
+    min-width: 26px; }
     .ac-header-back:hover {
       background-color: #e8e8e8; }
-  .ac-header-btns .u-button {
-    margin-left: 8px !important; }
+  .ac-header-btns .ac-btns .ac-btns-item {
+    margin-left: 8px !important;
+    margin-right: 0 !important; }
   .ac-header-btns .u-button-group {
     margin-left: 8px; }
     .ac-header-btns .u-button-group .u-button + .u-button,
@@ -44,5 +47,8 @@
     .ac-header-btns .u-button-group .u-button-group + .u-button,
     .ac-header-btns .u-button-group .u-button-group + .v-group {
       margin-left: -1px; }
+    .ac-header-btns .u-button-group .ac-btns .ac-btns-item {
+      margin-left: 0 !important;
+      margin-right: 0 !important; }
 
 /*# sourceMappingURL=demo.css.map */

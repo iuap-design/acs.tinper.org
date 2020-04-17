@@ -1,3 +1,38 @@
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/tinper-acs/ac-file-list/compare/v0.2.8...v0.2.9) (2020-04-03)
+
+
+
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/tinper-acs/ac-file-list/compare/v0.2.11...v0.2.8) (2020-04-03)
+
+
+
+<a name="0.2.11"></a>
+## [0.2.11](https://github.com/tinper-acs/ac-file-list/compare/v0.2.10...v0.2.11) (2020-04-03)
+
+
+
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/tinper-acs/ac-file-list/compare/v0.2.9...v0.2.10) (2020-04-03)
+
+
+
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/tinper-acs/ac-file-list/compare/v0.2.7...v0.2.9) (2020-04-03)
+
+
+### Bug Fixes
+
+* 获取日期时添加用户信息 ([0bda77e](https://github.com/tinper-acs/ac-file-list/commit/0bda77e))
+
+
+
+<a name="0.2.7"></a>
+## [0.2.7](https://github.com/tinper-acs/ac-file-list/compare/v0.2.6...v0.2.7) (2020-03-23)
+
+
+
 <a name="0.2.6"></a>
 ## [0.2.6](https://github.com/tinper-acs/ac-file-list/compare/v0.2.5...v0.2.6) (2020-03-13)
 

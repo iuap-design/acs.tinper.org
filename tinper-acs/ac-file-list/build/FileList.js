@@ -120,9 +120,13 @@ var FileList = function (_Component) {
                     withCredentials: true
                 }).then(function (res) {
                     if (res.status == 200) {
-                        if (res.data.data) {
+                        var data = res.data.data;
+                        if (data) {
+                            data.forEach(function (item) {
+                                return item.userName = decodeURIComponent((0, _utils.getCookie)('yonyou_uname'));
+                            });
                             _this.setState({
-                                data: res.data.data.reverse(),
+                                data: data.reverse(),
                                 pageSize: params.pageSize,
                                 pageNo: params.pageNo
                             });

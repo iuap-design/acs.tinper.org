@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from "react";
+import React, { Component } from "react";
 import BeeGrid, { GridToolBar } from "bee-complex-grid";
 import { gridDefalutProps,paginationDefaultProps } from './defaultProps'
 
@@ -17,14 +17,15 @@ class Grid extends Component{
         this.grid.exportExcel();
     }
     render(){
-        const { paginationObj, data,exportData, ...otherProps } = this.props;
+        const { paginationObj, data,exportData,headerScroll, ...otherProps } = this.props;
         let _paginationObj ='none';
         if(paginationObj!='none'){
             _paginationObj = {...paginationDefaultProps,...paginationObj}
         }
-        return <div className='ac-gridcn'>
+        return <div className={`ac-gridcn ${headerScroll?'header-scroll':''}`}>
             <BeeGrid 
-                {...otherProps}
+                    {...otherProps}
+                    headerScroll={headerScroll}
                     data={data}
                     paginationObj={_paginationObj}  
                     ref={ref=>this.grid=ref}

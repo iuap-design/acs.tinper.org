@@ -122,7 +122,7 @@ class Grid extends Component {
             if(!oldRender)oldRender=text=>text;
             if(renderType){
                 if(item.required){
-                item.title = <span className='ac-gridcn-required'>{item.title}</span>
+                    item.className="required"
                 }
                 if(fieldProps.defaultValue!=undefined){
                     defaultValueKeyValue[dataIndex]=fieldProps.defaultValue;
@@ -157,12 +157,12 @@ class Grid extends Component {
                                     {...other}
                                     fieldProps={fieldProps}
                                     index = {index}
-                                    value = {oldRender&&oldRender(text,record,index)}
+                                    value = {value}
                                     field = {item.dataIndex}
                                     onChange = {this.onChange}
                                     status = {record._status}
                                     onValidate={this.onValidate}
-                                />:<div>{oldRender&&oldRender(text,record,index)}</div>
+                                />:<div>{oldRender&&oldRender(value,record,index)}</div>
                             )
                         }
                     break;
@@ -787,15 +787,14 @@ class Grid extends Component {
             hoverContent:this.hoverContent,
             getSelectedDataFunc:this.getSelectedDataFunc,
             onRowHover:this.onRowHover,
-            
         }
         gridOptions = Object.assign(gridDefalutProps,gridOptions);
         return (
             <Fragment>
-                <div className={`${clsfix} ${disabled?'disabled':''} ${isMax?'max':''} ${adding||allEditing||copying||pasting?'isEdit':''}`}>
+                <div className={`${clsfix} ${disabled?'disabled':''} ${gridOptions.headerScroll?'header-scroll':''} ${isMax?'max':''} ${adding||allEditing||copying||pasting?'isEdit':''}`}>
                     {
                         typeof title=='string'?<div className={`${clsfix}-panel ${open?'':'close'}`}>
-                        <span onClick={this.open} style={{'cursor':'pointer'}}>
+                        <span onClick={this.open} className={`${clsfix}-panel-header`}>
                             <span className={`${clsfix}-panel-icon`}>
                                 {
                                     open?<Icon type='uf-triangle-down'/>:<Icon type='uf-triangle-right'/>

@@ -130,7 +130,7 @@ var DateField = function (_Component) {
             var value = _this.state.value;
             //设置校验规则
 
-            var descriptor = _defineProperty({}, field, { type: "object", required: required });
+            var descriptor = _defineProperty({}, field, { type: "any", required: required });
             if (pattern) {
                 descriptor[field].push({
                     pattern: pattern, message: message

@@ -134,9 +134,9 @@ class FileList extends Component {
                                 btns={{
                                     reupload: {
                                         node:<Upload {...uploadP}>
-                                                <Btns localeCookie={this.props.localeCookie} 
-                                                    powerBtns={this.props.powerBtns} 
-                                                    type='line' 
+                                                <Btns localeCookie={this.props.localeCookie}
+                                                    powerBtns={this.props.powerBtns}
+                                                    type='line'
                                                     btns={{ reupload:{} }}/>
                                             </Upload>
                                     },
@@ -166,7 +166,7 @@ class FileList extends Component {
                         </div>
                     }
                 }
-                
+
             }
         }];
     }
@@ -204,9 +204,11 @@ class FileList extends Component {
                 withCredentials:true
             }).then((res)=>{
                 if(res.status==200){
-                    if(res.data.data){
+                    const data=res.data.data;
+                    if(data){
+                        data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
                         this.setState({
-                            data:res.data.data.reverse(),
+                            data:data.reverse(),
                             pageSize:params.pageSize,
                             pageNo:params.pageNo
                         })
@@ -220,7 +222,7 @@ class FileList extends Component {
                 console.error(error)
             })
         }
-        
+
     }
 
     getSelectedDataFunc = (selectedList,record,index) => {
@@ -240,7 +242,7 @@ class FileList extends Component {
         this.setState({
             data,
             selectedList
-        })    
+        })
     };
     /**划过 */
     onRowHover = (index,record) => {
@@ -272,7 +274,7 @@ class FileList extends Component {
         })
     }
 
- 
+
     deleteConfirm=()=>{
         this.setState({
             show:true
@@ -283,7 +285,7 @@ class FileList extends Component {
             show:false
         })
     }
-    
+
     /**删除 */
     delete=()=>{
         let url = this.props.url.delete.replace('{id}',this.state.hoverData.id);
@@ -358,7 +360,7 @@ class FileList extends Component {
             })
             this.props.callback('success','upload',info.file.response);
             console.log(this.localObj['uploadSuccess'])
-        }  
+        }
         if (info.file.status === 'removed') {
             let msg = info.file.response.displayMessage[getCookie(this.props.localeCookie)]||info.file.response.displayMessage['zh_CN']
             console.error(`${info.file.name} ${this.localObj['uploadError']}`);
@@ -408,7 +410,7 @@ class FileList extends Component {
             onChange:this.fileChange,
             multiple:true,
             beforeUpload:this.beforeUpload
-        },uploadProps) 
+        },uploadProps)
         return(
             <div className={clsfix}>
                 <div  className={open?`${clsfix}-header`:`${clsfix}-header close`}>
@@ -431,13 +433,13 @@ class FileList extends Component {
                             }}
                         />
                         }
-                        
+
                     </div>
                 </div>
                 <div className={open?`${clsfix}-file-area`:`${clsfix}-file-area hide`}>
-                    <Table  
-                        columns={this.columns} 
-                        data={data} 
+                    <Table
+                        columns={this.columns}
+                        data={data}
                         rowKey={(record,index)=>index}
                         scroll = {{y:400}}
                         getSelectedDataFunc={this.getSelectedDataFunc}

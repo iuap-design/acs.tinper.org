@@ -146,6 +146,8 @@ $borderColor2:#d0d0d0;
                 .datepicker-input-group .u-form-control {
                     height: 26px;
                     font-size: 13px;
+                    padding-left: 8px;
+                    padding-right: 8px;
                 }
 
                 .u-select {
@@ -168,6 +170,43 @@ $borderColor2:#d0d0d0;
                     }
                 }
 
+                .u-input-number-out {
+                    height: 26px;
+            
+                    .u-input-number {
+                        height: 26px;
+            
+                        .u-form-control {
+                            height: 24px;
+                            padding-left: 8px;
+                            padding-right: 8px;
+                        }
+                        .u-input-group-btn {
+                            right: 0px !important;
+                            border-color: $borderColor !important;
+                            top: 0px !important;
+            
+                            .icon-group {
+                                height: 24px !important;
+                                overflow: hidden;
+            
+                                .plus,
+                                .reduce {
+                                    color: #adb4bc !important;
+                                }
+            
+                                .plus {
+                                    top: -2px;
+                                }
+            
+                                .reduce {
+                                    border-top: 1px solid #d5d6d9 !important;
+                                    top: -1px;
+                                }
+                            }
+                        }
+                    }
+                }
                 .ncc-refer-container>.ant-row {
                     height: 26px;
                 }
@@ -209,7 +248,6 @@ $borderColor2:#d0d0d0;
         width: 100%;
         z-index: 2;
         overflow: auto;
-
         .ac-gridcn-panel {
             padding-top: 10px;
         }
@@ -244,6 +282,9 @@ $borderColor2:#d0d0d0;
         .ac-btns-max,
         .ac-btns-min{
             margin-right: 0 !important;
+            .uf{
+                font-size: 16px!important;
+            }
         }
     }
 
@@ -274,7 +315,11 @@ $borderColor2:#d0d0d0;
         height: 50px;
         padding-left: 16px;
         padding-right: 16px;
+        &-header{
+            cursor: pointer;
+            line-height: 30px;
 
+        }
         &-btns {
 
             button.u-button.u-button[disabled],
@@ -381,6 +426,7 @@ $borderColor2:#d0d0d0;
                 height: 26px;
                 text-align: left;
                 font-size: 13px;
+                padding: 0 8px;
             }
 
             input,
@@ -413,6 +459,8 @@ $borderColor2:#d0d0d0;
             .datepicker-input-group .u-form-control {
                 height: 26px;
                 font-size: 13px;
+                padding-left: 8px;
+                padding-right: 8px;
             }
 
             .u-select {
@@ -420,9 +468,13 @@ $borderColor2:#d0d0d0;
 
                 .u-select-selection-rendered {
                     line-height: 26px;
+                    margin-left: 0;
+                    margin-right: 0;
 
                     .u-select-selection-selected-value {
                         font-size: 13px;
+                        padding-left: 8px;
+                        padding-right: 8px;
                     }
                 }
 
@@ -485,143 +537,6 @@ $borderColor2:#d0d0d0;
                 left: 2px;
             }
         }
-
-        .ac-input-number {
-            margin: 0;
-            padding: 0;
-            line-height: 26px;
-            font-size: 14px;
-            height: 26px;
-            display: inline-block;
-            vertical-align: middle;
-            border: 1px solid #D9D9D9;
-            border-radius: 4px;
-            transition: all .3s;
-            text-align: left;
-
-            &-focused {
-                border-color: #66afe9;
-            }
-
-            &-handler {
-                text-align: center;
-                line-height: 15px;
-                height: 15px;
-                overflow: hidden;
-                display: block;
-                -ms-touch-action: none;
-                touch-action: none;
-            }
-
-            &-handler-active {
-                background: #ddd;
-            }
-
-            &-handler-up-inner,
-            &-handler-down-inner {
-                color: #666666;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                -webkit-user-select: none;
-            }
-
-            &:hover {
-                border-color: #66afe9;
-            }
-
-            &:hover &-handler-up,
-            &:hover &-handler-wrap {
-                border-color: #66afe9;
-            }
-
-            &-disabled:hover {
-                border-color: #d9d9d9;
-            }
-
-            &-disabled:hover &-handler-up,
-            &-disabled:hover &-handler-wrap {
-                border-color: #d9d9d9;
-            }
-
-            &-input-wrap {
-                overflow: hidden;
-                height: 100%;
-            }
-
-            &-input {
-                width: 100%;
-                text-align: center;
-                outline: 0;
-                -moz-appearance: textfield;
-                line-height: 26px;
-                height: 100%;
-                transition: all 0.3s ease;
-                color: #666666;
-                border: 0;
-                border-radius: 4px;
-                padding: 0;
-                transition: all .3s;
-            }
-
-            &-handler-wrap {
-                float: right;
-                border-left: 1px solid #D9D9D9;
-                width: 20px;
-                height: 100%;
-                transition: all .3s;
-            }
-
-            &-handler-up {
-                border-bottom: 1px solid #D9D9D9;
-                padding-top: 1px;
-                transition: all .3s;
-            }
-
-            &-handler-up-inner,
-            &-handler-down-inner {
-                font-family: uf !important;
-            }
-
-            &-handler-up-inner:after {
-                content: "\e8d2";
-            }
-
-            &-handler-down {
-                transition: all .3s;
-            }
-
-            &-handler-down-inner:after {
-                content: "\e609";
-            }
-
-            &-handler-down-disabled,
-            &-handler-up-disabled {
-                opacity: 0.72;
-            }
-
-            &-handler-down-disabled:hover,
-            &-handler-up-disabled:hover {
-                color: #999;
-                border-color: #d9d9d9;
-            }
-
-            &-disabled &-input {
-                opacity: 0.72;
-                cursor: not-allowed;
-                background-color: #f3f3f3;
-            }
-
-            &-disabled &-handler {
-                opacity: 0.72;
-            }
-
-            &-disabled &-handler:hover {
-                color: #999;
-                border-color: #d9d9d9;
-            }
-        }
-
     }
 
     .u-pagination {
@@ -631,6 +546,13 @@ $borderColor2:#d0d0d0;
         padding-top: 9px;
         padding-left: 12px;
         background: #f6f6f6;
+        margin-bottom: 0px;
+        .u-pagination-gap>li>a{
+            margin: 0 4px;
+        }
+        .u-pagination-sm>li>a{
+            padding: 4px 8px;
+        }
         .u-select {
             width: 85px;
             .u-select-selection {
@@ -671,15 +593,31 @@ $borderColor2:#d0d0d0;
         }
     }
 }
-
-.ac-gridcn.isEdit .ac-gridcn-required::before{
-    content: "*";
-    color: $primaryColor;
-    position: relative;
-    top: 2px;
-    margin-right: 4px;
+.ac-gridcn.isEdit{
+    .u-table-thead th .required {
+        display: inline-block;
+        position: relative;
+        top: 2px;
+        margin-right: 4px;
+        color: $primaryColor;
+    }
 }
-
+.ac-gridcn.isEdit{
+    .u-table-thead th .required {
+        display: inline-block;
+        position: relative;
+        top: 2px;
+        margin-right: 4px;
+        color: $primaryColor;
+    }
+    &.header-scroll .ac-btns button.ac-btns-item.u-button.ac-btns-copyToHere{
+        top: 7px;
+    }
+    .u-pagination{
+        opacity: 0;
+        pointer-events: none;
+    }
+}
 .u-table-filter-column-pop-cont-item {
     &>span {
         margin: 0 !important;
@@ -748,6 +686,8 @@ $borderColor2:#d0d0d0;
 
             .u-form-control {
                 height: 24px;
+                padding-left: 8px;
+                padding-right: 8px;
             }
 
             .u-input-group-btn {

@@ -59,7 +59,8 @@ var Grid = function (_Component) {
             paginationObj = _props.paginationObj,
             data = _props.data,
             exportData = _props.exportData,
-            otherProps = _objectWithoutProperties(_props, ["paginationObj", "data", "exportData"]);
+            headerScroll = _props.headerScroll,
+            otherProps = _objectWithoutProperties(_props, ["paginationObj", "data", "exportData", "headerScroll"]);
 
         var _paginationObj = 'none';
         if (paginationObj != 'none') {
@@ -67,8 +68,9 @@ var Grid = function (_Component) {
         }
         return _react2["default"].createElement(
             "div",
-            { className: "ac-gridcn" },
+            { className: "ac-gridcn " + (headerScroll ? 'header-scroll' : '') },
             _react2["default"].createElement(_beeComplexGrid2["default"], _extends({}, otherProps, {
+                headerScroll: headerScroll,
                 data: data,
                 paginationObj: _paginationObj,
                 ref: function ref(_ref) {

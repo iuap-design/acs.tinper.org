@@ -1,9 +1,10 @@
 @import '../node_modules/ac-btns/src/Btns.scss';
 
 .ac-search-cn {
-    border-top: 1px solid #D0D0D0;
+    border-bottom: 1px solid #D0D0D0;
     &-ctns-out {
         padding-left: 16px;
+        padding-right: 16px;
         background-color: #f3f3f3;
     }
 
@@ -16,7 +17,7 @@
     }
 
     &-ctn {
-        width: calc(100% - 100px);
+        width: calc(100% - 90px);
         display: inline-block;
     }
 
@@ -30,18 +31,21 @@
         .u-form-control{
             padding: 0 8px;
         }
-
+        .u-select .u-select-selection-rendered{
+            margin-left: 0;
+            margin-right: 0;
+        }
         input,
         .u-select .u-select-selection,
         .u-input-number,.u-input-number.u-input-group>span:first-child,.u-input-number.u-input-group>span:last-child {
             border-color: #d5d6d9;
         }
         
-        input.u-form-control:hover,.u-select-enabled .u-select-selection:hover,.u-input-number:hover{
+        .u-form-control:hover,.u-select-enabled .u-select-selection:hover,.u-input-number:hover{
             border-color: #8cc6ff;
         }
-        input.u-form-control:active,.u-select .u-select-selection:active,.u-input-number:active,
-        input.u-form-control:focus,.u-select .u-select-selection:focus,.u-input-number:focus{
+        .u-form-control:active,.u-select .u-select-selection:active,.u-input-number:active,
+        .u-form-control:focus,.u-select .u-select-selection:focus,.u-input-number:focus{
             border-color: #007ace;
         }
         .u-select .u-select-arrow,.datepicker-container .u-input-group-btn,.datepicker-input-group .u-input-group-btn,
@@ -166,6 +170,7 @@
                 font-size: 14px;
                 color: #424242;
                 border: 1px solid #d5d6d9;
+                padding: 0 7px;
             }
 
             .ant-input-suffix {
@@ -201,14 +206,14 @@
     }
 
     &-btns {
-        width: 100px;
+        width: 90px;
         display: inline-block;
         height: 32px;
         display: flex;
         justify-content: flex-start;
         align-self: flex-end;
         margin-bottom: 8px;
-        margin-right: 3px;
+        margin-right: 0;
         .u-button {
             padding: 0;
             min-width: auto;

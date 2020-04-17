@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row } from 'bee-layout';
+import { Row } from 'bee-layout';
 
 const propTypes = {
     clsfix:PropTypes.string

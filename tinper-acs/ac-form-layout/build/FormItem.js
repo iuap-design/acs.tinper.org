@@ -71,9 +71,7 @@ var FormItem = function (_Component) {
             ));
             if (children.length > 1) {
                 _react2["default"].Children.map(children, function (child) {
-                    errorMsg ? ary.push(
-                    // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
-                    _react2["default"].createElement(
+                    errorMsg ? ary.push(_react2["default"].createElement(
                         'div',
                         { className: clsfix + '-item-out', title: errorMsg },
                         _react2["default"].createElement(
@@ -86,15 +84,10 @@ var FormItem = function (_Component) {
                             )
                         ),
                         child
-                    )
-                    // </Tooltip>
-                    ) : ary.push(child);
-                    // ary.push(child)
+                    )) : ary.push(child);
                 });
             } else {
-                errorMsg ? ary.push(
-                // <Tooltip inverse overlay={errorMsg} placement="top" className={`${clsfix}-error-msg`}>
-                _react2["default"].createElement(
+                errorMsg ? ary.push(_react2["default"].createElement(
                     'div',
                     { className: clsfix + '-item-out', title: errorMsg },
                     _react2["default"].createElement(
@@ -107,10 +100,7 @@ var FormItem = function (_Component) {
                         )
                     ),
                     children
-                )
-                // </Tooltip>
-                ) : ary.push(children);
-                // ary.push(children)
+                )) : ary.push(children);
             }
             return ary;
         };

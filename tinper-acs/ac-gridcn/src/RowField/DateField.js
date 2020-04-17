@@ -102,7 +102,7 @@ class DateField extends Component {
         let { value } = this.state;
         //设置校验规则
         let descriptor = {
-            [field]: { type: "object", required }
+            [field]: { type: "any", required },
         }
         if(pattern){
             descriptor[field].push({

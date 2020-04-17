@@ -273,11 +273,7 @@ var _initialiseProps = function _initialiseProps() {
             };
             if (renderType) {
                 if (item.required) {
-                    item.title = _react2["default"].createElement(
-                        "span",
-                        { className: "ac-gridcn-required" },
-                        item.title
-                    );
+                    item.className = "required";
                 }
                 if (fieldProps.defaultValue != undefined) {
                     defaultValueKeyValue[dataIndex] = fieldProps.defaultValue;
@@ -311,7 +307,7 @@ var _initialiseProps = function _initialiseProps() {
                             return record._edit ? _react2["default"].createElement(_NumberField2["default"], _extends({}, other, {
                                 fieldProps: fieldProps,
                                 index: index,
-                                value: oldRender && oldRender(text, record, index),
+                                value: value,
                                 field: item.dataIndex,
                                 onChange: _this2.onChange,
                                 status: record._status,
@@ -319,7 +315,7 @@ var _initialiseProps = function _initialiseProps() {
                             })) : _react2["default"].createElement(
                                 "div",
                                 null,
-                                oldRender && oldRender(text, record, index)
+                                oldRender && oldRender(value, record, index)
                             );
                         };
                         break;
@@ -955,7 +951,6 @@ var _initialiseProps = function _initialiseProps() {
             hoverContent: _this2.hoverContent,
             getSelectedDataFunc: _this2.getSelectedDataFunc,
             onRowHover: _this2.onRowHover
-
         });
         gridOptions = _extends(_defaultProps.gridDefalutProps, gridOptions);
         return _react2["default"].createElement(
@@ -963,13 +958,13 @@ var _initialiseProps = function _initialiseProps() {
             null,
             _react2["default"].createElement(
                 "div",
-                { className: clsfix + " " + (disabled ? 'disabled' : '') + " " + (isMax ? 'max' : '') + " " + (adding || allEditing || copying || pasting ? 'isEdit' : '') },
+                { className: clsfix + " " + (disabled ? 'disabled' : '') + " " + (gridOptions.headerScroll ? 'header-scroll' : '') + " " + (isMax ? 'max' : '') + " " + (adding || allEditing || copying || pasting ? 'isEdit' : '') },
                 typeof title == 'string' ? _react2["default"].createElement(
                     "div",
                     { className: clsfix + "-panel " + (open ? '' : 'close') },
                     _react2["default"].createElement(
                         "span",
-                        { onClick: _this2.open, style: { 'cursor': 'pointer' } },
+                        { onClick: _this2.open, className: clsfix + "-panel-header" },
                         _react2["default"].createElement(
                             "span",
                             { className: clsfix + "-panel-icon" },

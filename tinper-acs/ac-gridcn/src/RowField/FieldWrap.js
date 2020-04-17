@@ -27,7 +27,7 @@ class FieldWrap extends Component {
                 </div>
             ) : null}
             {flag ? (
-                <div className="triangle_border_nw" style={{ "left": required ? "4px" : "0px" }}> </div>
+                <div className="triangle_border_nw" > </div>
             ) : null}
         </div>);
     }
