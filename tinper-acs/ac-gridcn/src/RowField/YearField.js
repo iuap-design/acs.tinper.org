@@ -91,7 +91,7 @@ class YearField extends Component {
             this.validate();
         });
         //回调外部函数
-        onChange && onChange(field, moment(value).format('YYYY'), index);
+        onChange && onChange(field, value?moment(value).format('YYYY'):'', index);
     }
     /**
      * 校验
@@ -100,9 +100,13 @@ class YearField extends Component {
     validate = () => {
         let { required, field, index, onValidate } = this.props;
         let { value } = this.state;
+        let type = 'string';
+        if(value){
+            if(typeof value =='object')type='object';
+        }
         //设置校验规则
         let descriptor = {
-            [field]: { type: "any", required }
+            [field]: { type, required }
         }
         let validator = new schema(descriptor);
         validator.validate({ [field]: value }, (errors, fields) => {

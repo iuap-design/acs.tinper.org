@@ -62,7 +62,7 @@ class FormItem extends Component {
             }
         }else if(children&&children.type&&children.type.displayName=='acRangepicker'){//日期区间
             let format = children.props.format;
-            if(value.length>0){
+            if(value.length==2){
                 str = `${label}: ${value[0].format(format)} ~ ${value[1].format(format)}`;
                 toolTips[label]=`${value[0].format(format)} ~ ${value[1].format(format)}`;
             }else{

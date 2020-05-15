@@ -301,9 +301,6 @@ var _initialiseProps = function _initialiseProps() {
                     case 'inputNumber':
                         item.render = function (text, record, index) {
                             var value = text;
-                            if (fieldProps.precision && fieldProps.precision > 0) {
-                                value = typeof text === 'number' ? text.toFixed(fieldProps.precision) : "";
-                            }
                             return record._edit ? _react2["default"].createElement(_NumberField2["default"], _extends({}, other, {
                                 fieldProps: fieldProps,
                                 index: index,
@@ -378,10 +375,26 @@ var _initialiseProps = function _initialiseProps() {
                         item.render = function (text, record, index) {
                             var displayName = 'name';
                             if (fieldProps && fieldProps.displayName) name = fieldProps.displayName;
-                            var value = oldRender && oldRender(text, record, index);
-                            if (text && (typeof text === "undefined" ? "undefined" : _typeof(text)) == 'object' && !record._edit) {
-                                value = oldRender && oldRender(text[displayName], record, index);
+                            var value = null;
+                            if (record._edit) {
+                                if (typeof text == 'string') {
+                                    try {
+                                        value = JSON.parse(text);
+                                    } catch (error) {
+                                        value = text;
+                                    }
+                                } else if (Array.isArray(text)) {
+                                    value = text;
+                                } else if ((typeof text === "undefined" ? "undefined" : _typeof(text)) == 'object') {
+                                    value = text;
+                                }
+                            } else {
+                                text = oldRender && oldRender(text, record, index);
+                                if (text && (typeof text === "undefined" ? "undefined" : _typeof(text)) == 'object' && !record._edit) {
+                                    text = oldRender && oldRender(text[displayName], record, index);
+                                }
                             }
+
                             return record._edit ? _react2["default"].createElement(
                                 "span",
                                 null,
@@ -396,7 +409,7 @@ var _initialiseProps = function _initialiseProps() {
                             ) : _react2["default"].createElement(
                                 "div",
                                 null,
-                                value
+                                text
                             );
                         };
                         break;

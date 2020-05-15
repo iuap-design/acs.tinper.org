@@ -1,5 +1,15 @@
-<a name="0.2.9"></a>
-## [0.2.9](https://github.com/tinper-acs/ac-file-list/compare/v0.2.8...v0.2.9) (2020-04-03)
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/tinper-acs/ac-file-list/compare/v0.2.8...v0.2.10) (2020-05-13)
+
+
+### Bug Fixes
+
+* 返回的数据不实用本地租户 ([a615451](https://github.com/tinper-acs/ac-file-list/commit/a615451))
+
+
+### Features
+
+* **ac-file-list:** title属性 ([a753c12](https://github.com/tinper-acs/ac-file-list/commit/a753c12))
 
 
 

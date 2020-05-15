@@ -206,7 +206,7 @@ class FileList extends Component {
                 if(res.status==200){
                     const data=res.data.data;
                     if(data){
-                        data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
+                        //data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
                         this.setState({
                             data:data.reverse(),
                             pageSize:params.pageSize,
@@ -401,7 +401,7 @@ class FileList extends Component {
     }
 
     render(){
-        let { clsfix,id,disabled,uploadProps,canUnfold } = this.props;
+        let { clsfix,id,disabled,uploadProps,canUnfold,title } = this.props;
         let { data,open } = this.state;
         const uploadP =Object.assign({
             withCredentials:true,
@@ -417,7 +417,7 @@ class FileList extends Component {
                     {
                         canUnfold?<div className={`${clsfix}-text`} onClick={this.changeOpenStatus}>
                             <Icon type={open?'uf-triangle-down':'uf-triangle-right'}></Icon>
-                            <span>{this.localObj.file}</span>
+                            <span>{title?title:this.localObj.file}</span>
                         </div>:''
                     }
                     <div className={`${clsfix}-btns`}>

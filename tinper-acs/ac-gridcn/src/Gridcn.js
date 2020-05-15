@@ -149,9 +149,6 @@ class Grid extends Component {
                     case 'inputNumber':
                         item.render=(text,record,index)=>{
                             let value = text;
-                            if (fieldProps.precision && fieldProps.precision > 0) {
-                                value = (typeof text) === 'number' ? text.toFixed(fieldProps.precision) : ""
-                            } 
                             return (
                                 record._edit?<NumberField 
                                     {...other}
@@ -222,10 +219,26 @@ class Grid extends Component {
                         item.render=(text,record,index)=>{
                             let displayName = 'name';
                             if(fieldProps&&fieldProps.displayName)name=fieldProps.displayName;
-                            let value = oldRender&&oldRender(text,record,index);
-                            if(text&&(typeof text == 'object')&&(!record._edit)){
-                                value = oldRender&&oldRender(text[displayName],record,index);
+                            let value = null;
+                            if(record._edit){
+                                if(typeof text == 'string'){
+                                    try {
+                                        value = JSON.parse(text);
+                                    } catch (error) {
+                                        value = text
+                                    }
+                                }else if(Array.isArray(text)){
+                                    value = text
+                                }else if(typeof text == 'object'){
+                                    value = text
+                                }
+                            }else{
+                                text = oldRender&&oldRender(text,record,index);
+                                if(text&&(typeof text == 'object')&&(!record._edit)){
+                                    text = oldRender&&oldRender(text[displayName],record,index);
+                                }
                             }
+                            
                             return (
                                 record._edit?<span>
                                     {
@@ -240,7 +253,7 @@ class Grid extends Component {
                                             onValidate:this.onValidate
                                         })
                                     }
-                                </span>:<div>{value}</div>
+                                </span>:<div>{text}</div>
                             )
                         }
                     break;

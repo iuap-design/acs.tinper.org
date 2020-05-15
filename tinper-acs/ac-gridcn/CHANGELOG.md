@@ -1,3 +1,38 @@
+<a name="0.2.35"></a>
+## [0.2.35](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.34...v0.2.35) (2020-05-14)
+
+
+
+<a name="0.2.34"></a>
+## [0.2.34](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.33...v0.2.34) (2020-05-14)
+
+
+### Features
+
+* **ac-gridcn:** 多选回显 ([0c3a067](https://github.com/tinper-bee/ac-gridcn/commit/0c3a067))
+
+
+
+<a name="0.2.33"></a>
+## [0.2.33](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.32...v0.2.33) (2020-05-13)
+
+
+### Bug Fixes
+
+* **ac-gridcn:** yearPicker值为空时显示错误 ([de8f917](https://github.com/tinper-bee/ac-gridcn/commit/de8f917))
+
+
+
+<a name="0.2.32"></a>
+## [0.2.32](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.31...v0.2.32) (2020-04-29)
+
+
+### Bug Fixes
+
+* **ac-gridcn:** 数字输入框bug修复 ([c4c42b1](https://github.com/tinper-bee/ac-gridcn/commit/c4c42b1))
+
+
+
 <a name="0.2.31"></a>
 ## [0.2.31](https://github.com/tinper-bee/ac-gridcn/compare/v0.2.30...v0.2.31) (2020-04-01)
 

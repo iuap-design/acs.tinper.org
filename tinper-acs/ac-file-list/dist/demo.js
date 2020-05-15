@@ -5339,7 +5339,7 @@
 	 * 获得元素的显示部分的区域
 	 */
 	
-	function getVisibleRectForElement(element) {
+	function getVisibleRectForElement(element, alwaysByViewport) {
 	  var visibleRect = {
 	    left: 0,
 	    right: Infinity,
@@ -5412,7 +5412,7 @@
 	    element.style.position = originalPosition;
 	  }
 	
-	  if (isAncestorFixed(element)) {
+	  if (alwaysByViewport || isAncestorFixed(element)) {
 	    // Clip by viewport's size.
 	    visibleRect.left = Math.max(visibleRect.left, scrollX);
 	    visibleRect.top = Math.max(visibleRect.top, scrollY);
@@ -5602,9 +5602,10 @@
 	  targetOffset = [].concat(targetOffset);
 	  overflow = overflow || {};
 	  var newOverflowCfg = {};
-	  var fail = 0; // 当前节点可以被放置的显示区域
+	  var fail = 0;
+	  var alwaysByViewport = !!(overflow && overflow.alwaysByViewport); // 当前节点可以被放置的显示区域
 	
-	  var visibleRect = getVisibleRectForElement(source); // 当前节点所占的区域, left/top/width/height
+	  var visibleRect = getVisibleRectForElement(source, alwaysByViewport); // 当前节点所占的区域, left/top/width/height
 	
 	  var elRegion = getRegion(source); // 将 offset 转换成数值，支持百分比
 	
@@ -5725,8 +5726,8 @@
 	 *   - 增加智能对齐，以及大小调整选项
 	 **/
 	
-	function isOutOfVisibleRect(target) {
-	  var visibleRect = getVisibleRectForElement(target);
+	function isOutOfVisibleRect(target, alwaysByViewport) {
+	  var visibleRect = getVisibleRectForElement(target, alwaysByViewport);
 	  var targetRegion = getRegion(target);
 	  return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
 	}
@@ -5734,7 +5735,7 @@
 	function alignElement(el, refNode, align) {
 	  var target = align.target || refNode;
 	  var refNodeRegion = getRegion(target);
-	  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
+	  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target, align.overflow && align.overflow.alwaysByViewport);
 	  return doAlign(el, refNodeRegion, align, isTargetNotOutOfVisible);
 	}
 	
@@ -14030,12 +14031,12 @@
 	    'close': '关闭',
 	
 	    'en-us': {
-	        'copy': 'copy',
-	        'cut': 'cut',
-	        'copyReady': 'copied',
-	        'cutReady': 'cut',
-	        'copyToClipboard': 'copy to clipboard',
-	        'close': 'close'
+	        'copy': 'Copy',
+	        'cut': 'Cut',
+	        'copyReady': 'Copied',
+	        'cutReady': 'Cut',
+	        'copyToClipboard': 'Copy to Clipboard',
+	        'close': 'Close'
 	    },
 	    'zh-tw': {
 	        'copy': '複製',
@@ -23856,7 +23857,7 @@
 	  var calledOnce = false;
 	
 	  var isNewArgEqualToLast = function isNewArgEqualToLast(newArg, index) {
-	    return isEqual(newArg, lastArgs[index]);
+	    return isEqual(newArg, lastArgs[index], index);
 	  };
 	
 	  var result = function result() {
@@ -25585,7 +25586,7 @@
 /* 216 */
 /***/ (function(module, exports) {
 
-	/** @license React v16.13.0
+	/** @license React v16.13.1
 	 * react-is.production.min.js
 	 *
 	 * Copyright (c) Facebook, Inc. and its affiliates.
@@ -25606,7 +25607,7 @@
 /* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.13.0
+	/* WEBPACK VAR INJECTION */(function(process) {/** @license React v16.13.1
 	 * react-is.development.js
 	 *
 	 * Copyright (c) Facebook, Inc. and its affiliates.
@@ -36343,7 +36344,11 @@
 	        width: width,
 	        className: classString,
 	        show: show,
-	        onHide: close,
+	        onHide: function onHide() {
+	          close();onCancel ? onCancel() : function () {
+	            return;
+	          };
+	        },
 	        backdrop: backdrop,
 	        backdropClosable: backdropClosable,
 	        centered: centered,
@@ -36924,6 +36929,7 @@
 	            value: value
 	        };
 	        _this.input = {};
+	        _this.clickClearBtn = false;
 	        return _this;
 	    }
 	
@@ -36983,23 +36989,30 @@
 	    };
 	
 	    this.clearValue = function () {
-	        var onChange = _this2.props.onChange;
+	        var _props = _this2.props,
+	            onChange = _props.onChange,
+	            showClose = _props.showClose;
 	
 	        _this2.setState({
 	            showSearch: true,
 	            value: ""
 	        });
+	        if (_this2.e && _this2.e.target) _this2.e.target.value = "";
 	        if (onChange) {
-	            onChange("");
+	            onChange("", _this2.e);
+	        }
+	        if (showClose) {
+	            _this2.blurTime && clearTimeout(_this2.blurTime);
+	            _this2.blurTime = null;
 	        }
 	        _this2.input.focus();
 	    };
 	
 	    this.handleKeyDown = function (e) {
-	        var _props = _this2.props,
-	            onSearch = _props.onSearch,
-	            type = _props.type,
-	            onKeyDown = _props.onKeyDown;
+	        var _props2 = _this2.props,
+	            onSearch = _props2.onSearch,
+	            type = _props2.type,
+	            onKeyDown = _props2.onKeyDown;
 	
 	        if (e.keyCode === 13 && type === "search") {
 	            if (onSearch) {
@@ -37017,11 +37030,19 @@
 	
 	    this.handleBlur = function (e) {
 	        var value = _this2.state.value;
-	        var onBlur = _this2.props.onBlur;
+	        var _props3 = _this2.props,
+	            onBlur = _props3.onBlur,
+	            showClose = _props3.showClose;
 	
-	
+	        var _e = _extends({}, e);
+	        _this2.e = _e;
 	        if (onBlur) {
-	            onBlur(value, e);
+	            if (showClose && _this2.clickClearBtn) {
+	                _this2.clickClearBtn = false;
+	                onBlur(value, _e, true);
+	            } else {
+	                onBlur(value, _e);
+	            }
 	        }
 	    };
 	
@@ -37037,21 +37058,25 @@
 	        }
 	    };
 	
+	    this.onClearBtnMouseDown = function () {
+	        _this2.clickClearBtn = true;
+	    };
+	
 	    this.renderInput = function () {
-	        var _props2 = _this2.props,
-	            Component = _props2.componentClass,
-	            type = _props2.type,
-	            className = _props2.className,
-	            size = _props2.size,
-	            clsPrefix = _props2.clsPrefix,
-	            onChange = _props2.onChange,
-	            onSearch = _props2.onSearch,
-	            onBlur = _props2.onBlur,
-	            showClose = _props2.showClose,
-	            focusSelect = _props2.focusSelect,
-	            prefix = _props2.prefix,
-	            suffix = _props2.suffix,
-	            others = _objectWithoutProperties(_props2, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange', 'onSearch', 'onBlur', 'showClose', 'focusSelect', 'prefix', 'suffix']);
+	        var _props4 = _this2.props,
+	            Component = _props4.componentClass,
+	            type = _props4.type,
+	            className = _props4.className,
+	            size = _props4.size,
+	            clsPrefix = _props4.clsPrefix,
+	            onChange = _props4.onChange,
+	            onSearch = _props4.onSearch,
+	            onBlur = _props4.onBlur,
+	            showClose = _props4.showClose,
+	            focusSelect = _props4.focusSelect,
+	            prefix = _props4.prefix,
+	            suffix = _props4.suffix,
+	            others = _objectWithoutProperties(_props4, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange', 'onSearch', 'onBlur', 'showClose', 'focusSelect', 'prefix', 'suffix']);
 	        // input[type="file"] 不应该有类名 .form-control.
 	
 	
@@ -37089,10 +37114,10 @@
 	                    onFocus: _this2.handleFocus,
 	                    className: (0, _classnames2["default"])(classNames)
 	                })),
-	                showClose ? _react2["default"].createElement(
+	                showClose && value ? _react2["default"].createElement(
 	                    'div',
-	                    { className: clsPrefix + '-suffix' },
-	                    value ? _react2["default"].createElement(_beeIcon2["default"], { onClick: _this2.clearValue, type: 'uf-close-c' }) : ''
+	                    { className: clsPrefix + '-suffix has-close', onMouseDown: _this2.onClearBtnMouseDown, onClick: _this2.clearValue },
+	                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-close-c' })
 	                ) : '',
 	                suffix ? _react2["default"].createElement(
 	                    'span',
@@ -37116,16 +37141,16 @@
 	    };
 	
 	    this.renderSearch = function () {
-	        var _props3 = _this2.props,
-	            Component = _props3.componentClass,
-	            type = _props3.type,
-	            className = _props3.className,
-	            size = _props3.size,
-	            clsPrefix = _props3.clsPrefix,
-	            onChange = _props3.onChange,
-	            onSearch = _props3.onSearch,
-	            onBlur = _props3.onBlur,
-	            others = _objectWithoutProperties(_props3, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange', 'onSearch', 'onBlur']);
+	        var _props5 = _this2.props,
+	            Component = _props5.componentClass,
+	            type = _props5.type,
+	            className = _props5.className,
+	            size = _props5.size,
+	            clsPrefix = _props5.clsPrefix,
+	            onChange = _props5.onChange,
+	            onSearch = _props5.onSearch,
+	            onBlur = _props5.onBlur,
+	            others = _objectWithoutProperties(_props5, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange', 'onSearch', 'onBlur']);
 	        // input[type="file"] 不应该有类名 .form-control.
 	
 	
@@ -37295,17 +37320,17 @@
 	
 	var _acBtns2 = _interopRequireDefault(_acBtns);
 	
-	var _cloneDeep = __webpack_require__(623);
+	var _cloneDeep = __webpack_require__(624);
 	
 	var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
 	
-	var _axios = __webpack_require__(632);
+	var _axios = __webpack_require__(633);
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _utils = __webpack_require__(658);
+	var _utils = __webpack_require__(659);
 	
-	var _i18n = __webpack_require__(659);
+	var _i18n = __webpack_require__(660);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
@@ -37377,9 +37402,11 @@
 	                    withCredentials: true
 	                }).then(function (res) {
 	                    if (res.status == 200) {
-	                        if (res.data.data) {
+	                        var data = res.data.data;
+	                        if (data) {
+	                            //data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
 	                            _this.setState({
-	                                data: res.data.data.reverse(),
+	                                data: data.reverse(),
 	                                pageSize: params.pageSize,
 	                                pageNo: params.pageNo
 	                            });
@@ -37749,7 +37776,8 @@
 	            id = _props.id,
 	            disabled = _props.disabled,
 	            uploadProps = _props.uploadProps,
-	            canUnfold = _props.canUnfold;
+	            canUnfold = _props.canUnfold,
+	            title = _props.title;
 	        var _state = this.state,
 	            data = _state.data,
 	            open = _state.open;
@@ -37775,7 +37803,7 @@
 	                    _react2['default'].createElement(
 	                        'span',
 	                        null,
-	                        this.localObj.file
+	                        title ? title : this.localObj.file
 	                    )
 	                ) : '',
 	                _react2['default'].createElement(
@@ -40535,6 +40563,8 @@
 	  //特殊的渲染规则的key值
 	  rowKey: _propTypes2["default"].oneOfType([_propTypes2["default"].string, _propTypes2["default"].func]),
 	  rowClassName: _propTypes2["default"].func,
+	  //column的主键，和 column.key 作用相同
+	  columnKey: _propTypes2["default"].string,
 	  expandedRowClassName: _propTypes2["default"].func,
 	  childrenColumnName: _propTypes2["default"].string,
 	  onExpand: _propTypes2["default"].func,
@@ -40578,6 +40608,7 @@
 	  expandIconAsCell: false,
 	  defaultExpandAllRows: false,
 	  defaultExpandedRowKeys: [],
+	  columnKey: 'key',
 	  rowKey: 'key',
 	  rowClassName: function rowClassName() {
 	    return '';
@@ -41123,6 +41154,7 @@
 	
 	    var currentRow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 	    var rows = arguments[2];
+	    var columnKey = this.props.columnKey;
 	    var _state = this.state,
 	        _state$contentWidthDi = _state.contentWidthDiff,
 	        contentWidthDiff = _state$contentWidthDi === undefined ? 0 : _state$contentWidthDi,
@@ -41134,6 +41166,9 @@
 	    rows[currentRow] = rows[currentRow] || [];
 	
 	    columns.forEach(function (column, i) {
+	      if (!column.key) {
+	        column.key = column[columnKey];
+	      }
 	      if (column.rowSpan && rows.length < column.rowSpan) {
 	        while (rows.length < column.rowSpan) {
 	          rows.push([]);
@@ -41330,11 +41365,11 @@
 	      var record = data[i];
 	      var key = this.getRowKey(record, i);
 	      // 兼容 NCC 以前的业务逻辑，支持外部通过 record 中的 isleaf 字段，判断是否为叶子节点
-	      record['isLeaf'] = typeof record['isleaf'] === 'boolean' ? record['isleaf'] : record['isLeaf'];
-	      // isLeaf 字段是在 bigData 里添加的，只有层级树大数据场景需要该字段
-	      // isLeaf 有三种取值情况：true / false / null。（Table内部字段）
-	      var isLeaf = typeof record['isLeaf'] === 'boolean' ? record['isLeaf'] : null;
-	      var childrenColumn = isLeaf ? false : record[childrenColumnName];
+	      record['_isLeaf'] = typeof record['isleaf'] === 'boolean' ? record['isleaf'] : record['_isLeaf'];
+	      // _isLeaf 字段是在 bigData 里添加的，只有层级树大数据场景需要该字段
+	      // _isLeaf 有三种取值情况：true / false / null。（Table内部字段）
+	      var _isLeaf = typeof record['_isLeaf'] === 'boolean' ? record['_isLeaf'] : null;
+	      var childrenColumn = _isLeaf ? false : record[childrenColumnName];
 	      var isRowExpanded = this.isRowExpanded(record, i);
 	      var expandedRowContent = void 0;
 	      var expandedContentHeight = 0;
@@ -41399,7 +41434,7 @@
 	        visible: visible,
 	        expandRowByClick: expandRowByClick,
 	        onExpand: this.onExpanded,
-	        expandable: expandedRowRender || (childrenColumn && childrenColumn.length > 0 ? true : isLeaf === false),
+	        expandable: expandedRowRender || (childrenColumn && childrenColumn.length > 0 ? true : _isLeaf === false),
 	        expanded: isRowExpanded,
 	        clsPrefix: props.clsPrefix + '-row',
 	        childrenColumnName: childrenColumnName,
@@ -43168,13 +43203,13 @@
 	        var key = node.key,
 	            title = node.title,
 	            children = node.children,
-	            isLeaf = node.isLeaf,
-	            otherProps = _objectWithoutProperties(node, ['key', 'title', 'children', 'isLeaf']);
+	            _isLeaf = node._isLeaf,
+	            otherProps = _objectWithoutProperties(node, ['key', 'title', 'children', '_isLeaf']);
 	
 	        var obj = {
 	          key: key,
 	          title: title,
-	          isLeaf: isLeaf,
+	          _isLeaf: _isLeaf,
 	          children: []
 	        };
 	        tree.push(_extends(obj, _extends({}, otherProps)));
@@ -43194,7 +43229,7 @@
 	
 	      var obj = {
 	        key: item[attr.id],
-	        isLeaf: item[attr.isLeaf],
+	        _isLeaf: item[attr._isLeaf],
 	        children: []
 	      };
 	      tree.push(_extends(obj, _extends({}, otherProps)));
@@ -43220,7 +43255,7 @@
 	
 	            var _obj = {
 	              key: _item[attr.id],
-	              isLeaf: _item[attr.isLeaf],
+	              _isLeaf: _item[attr._isLeaf],
 	              children: []
 	            };
 	            treeArrs[_i].children.push(_extends(_obj, _extends({}, _otherProps)));
@@ -44077,6 +44112,7 @@
 	    if (colMenu) {
 	      className += ' u-table-inline-icon';
 	    }
+	    if (colSpan == 0) return null;
 	    return _react2["default"].createElement(
 	      'td',
 	      {
@@ -44085,8 +44121,7 @@
 	        className: className,
 	        onClick: this.handleClick,
 	        title: title,
-	        style: _extends({ maxWidth: column.width, color: fontColor, backgroundColor: bgColor }, column.style)
-	      },
+	        style: _extends({ maxWidth: column.width, color: fontColor, backgroundColor: bgColor }, column.style) },
 	      indentText,
 	      expandIcon,
 	      text,
@@ -44427,20 +44462,20 @@
 	    "bool_true": "是",
 	    "bool_false": "否",
 	    'en-us': {
-	        'resetSettings': 'reset settings',
-	        'include': 'include',
-	        'exclusive': 'exclusive',
-	        'equal': 'equal',
-	        'unequal': 'unequal',
-	        'begin': 'begin',
-	        'end': 'end',
-	        'greater_than': 'greater than',
-	        'great_than_equal_to': 'great than equal to',
-	        'less_than': 'less than',
-	        'less_than_equal_to': 'less than equal to',
-	        'be_equal_to': 'be equal to',
-	        'not_equal_to': 'not equal to',
-	        "no_data": 'no data',
+	        'resetSettings': 'Reset',
+	        'include': 'Include',
+	        'exclusive': 'Not include',
+	        'equal': 'Equal to',
+	        'unequal': 'Not equal to',
+	        'begin': 'Begin with',
+	        'end': 'End with',
+	        'greater_than': 'Greater than',
+	        'great_than_equal_to': 'Greater than or equal to',
+	        'less_than': 'Less than',
+	        'less_than_equal_to': 'Less than or equal to',
+	        'be_equal_to': 'Equal to',
+	        'not_equal_to': 'Not equal to',
+	        "no_data": 'No data',
 	        "bool_true": "true",
 	        "bool_false": "false"
 	    },
@@ -51182,9 +51217,13 @@
 	
 	function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 	
+	function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+	
 	function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 	
 	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+	
+	function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 	
 	function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 	
@@ -51192,14 +51231,12 @@
 	
 	function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 	
-	var ContainerRender =
-	/*#__PURE__*/
-	function (_React$Component) {
+	var ContainerRender = /*#__PURE__*/function (_React$Component) {
 	  _inherits(ContainerRender, _React$Component);
 	
-	  function ContainerRender() {
-	    var _getPrototypeOf2;
+	  var _super = _createSuper(ContainerRender);
 	
+	  function ContainerRender() {
 	    var _this;
 	
 	    _classCallCheck(this, ContainerRender);
@@ -51208,7 +51245,7 @@
 	      args[_key] = arguments[_key];
 	    }
 	
-	    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(ContainerRender)).call.apply(_getPrototypeOf2, [this].concat(args)));
+	    _this = _super.call.apply(_super, [this].concat(args));
 	
 	    _this.removeContainer = function () {
 	      if (_this.container) {
@@ -51322,9 +51359,13 @@
 	
 	function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 	
+	function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+	
 	function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 	
 	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+	
+	function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 	
 	function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 	
@@ -51332,15 +51373,15 @@
 	
 	function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 	
-	var Portal =
-	/*#__PURE__*/
-	function (_React$Component) {
+	var Portal = /*#__PURE__*/function (_React$Component) {
 	  _inherits(Portal, _React$Component);
+	
+	  var _super = _createSuper(Portal);
 	
 	  function Portal() {
 	    _classCallCheck(this, Portal);
 	
-	    return _possibleConstructorReturn(this, _getPrototypeOf(Portal).apply(this, arguments));
+	    return _super.apply(this, arguments);
 	  }
 	
 	  _createClass(Portal, [{
@@ -53552,15 +53593,25 @@
 /* 395 */
 /***/ (function(module, exports) {
 
-	// mutationobserver-shim v0.3.2 (github.com/megawac/MutationObserver.js)
+	// mutationobserver-shim v0.3.3 (github.com/megawac/MutationObserver.js)
 	// Authors: Graeme Yeates (github.com/megawac) 
-	window.MutationObserver=window.MutationObserver||function(w){function v(a){this.i=[];this.m=a}function I(a){(function c(){var d=a.takeRecords();d.length&&a.m(d,a);a.h=setTimeout(c,v._period)})()}function p(a){var b={type:null,target:null,addedNodes:[],removedNodes:[],previousSibling:null,nextSibling:null,attributeName:null,attributeNamespace:null,oldValue:null},c;for(c in a)b[c]!==w&&a[c]!==w&&(b[c]=a[c]);return b}function J(a,b){var c=C(a,b);return function(d){var f=d.length,n;b.a&&3===a.nodeType&&
-	a.nodeValue!==c.a&&d.push(new p({type:"characterData",target:a,oldValue:c.a}));b.b&&c.b&&A(d,a,c.b,b.f);if(b.c||b.g)n=K(d,a,c,b);if(n||d.length!==f)c=C(a,b)}}function L(a,b){return b.value}function M(a,b){return"style"!==b.name?b.value:a.style.cssText}function A(a,b,c,d){for(var f={},n=b.attributes,k,g,x=n.length;x--;)k=n[x],g=k.name,d&&d[g]===w||(D(b,k)!==c[g]&&a.push(p({type:"attributes",target:b,attributeName:g,oldValue:c[g],attributeNamespace:k.namespaceURI})),f[g]=!0);for(g in c)f[g]||a.push(p({target:b,
-	type:"attributes",attributeName:g,oldValue:c[g]}))}function K(a,b,c,d){function f(b,c,f,k,y){var g=b.length-1;y=-~((g-y)/2);for(var h,l,e;e=b.pop();)h=f[e.j],l=k[e.l],d.c&&y&&Math.abs(e.j-e.l)>=g&&(a.push(p({type:"childList",target:c,addedNodes:[h],removedNodes:[h],nextSibling:h.nextSibling,previousSibling:h.previousSibling})),y--),d.b&&l.b&&A(a,h,l.b,d.f),d.a&&3===h.nodeType&&h.nodeValue!==l.a&&a.push(p({type:"characterData",target:h,oldValue:l.a})),d.g&&n(h,l)}function n(b,c){for(var g=b.childNodes,
-	q=c.c,x=g.length,v=q?q.length:0,h,l,e,m,t,z=0,u=0,r=0;u<x||r<v;)m=g[u],t=(e=q[r])&&e.node,m===t?(d.b&&e.b&&A(a,m,e.b,d.f),d.a&&e.a!==w&&m.nodeValue!==e.a&&a.push(p({type:"characterData",target:m,oldValue:e.a})),l&&f(l,b,g,q,z),d.g&&(m.childNodes.length||e.c&&e.c.length)&&n(m,e),u++,r++):(k=!0,h||(h={},l=[]),m&&(h[e=E(m)]||(h[e]=!0,-1===(e=F(q,m,r,"node"))?d.c&&(a.push(p({type:"childList",target:b,addedNodes:[m],nextSibling:m.nextSibling,previousSibling:m.previousSibling})),z++):l.push({j:u,l:e})),
-	u++),t&&t!==g[u]&&(h[e=E(t)]||(h[e]=!0,-1===(e=F(g,t,u))?d.c&&(a.push(p({type:"childList",target:c.node,removedNodes:[t],nextSibling:q[r+1],previousSibling:q[r-1]})),z--):l.push({j:e,l:r})),r++));l&&f(l,b,g,q,z)}var k;n(b,c);return k}function C(a,b){var c=!0;return function f(a){var k={node:a};!b.a||3!==a.nodeType&&8!==a.nodeType?(b.b&&c&&1===a.nodeType&&(k.b=G(a.attributes,function(c,f){if(!b.f||b.f[f.name])c[f.name]=D(a,f);return c})),c&&(b.c||b.a||b.b&&b.g)&&(k.c=N(a.childNodes,f)),c=b.g):k.a=
-	a.nodeValue;return k}(a)}function E(a){try{return a.id||(a.mo_id=a.mo_id||H++)}catch(b){try{return a.nodeValue}catch(c){return H++}}}function N(a,b){for(var c=[],d=0;d<a.length;d++)c[d]=b(a[d],d,a);return c}function G(a,b){for(var c={},d=0;d<a.length;d++)c=b(c,a[d],d,a);return c}function F(a,b,c,d){for(;c<a.length;c++)if((d?a[c][d]:a[c])===b)return c;return-1}v._period=30;v.prototype={observe:function(a,b){for(var c={b:!!(b.attributes||b.attributeFilter||b.attributeOldValue),c:!!b.childList,g:!!b.subtree,
-	a:!(!b.characterData&&!b.characterDataOldValue)},d=this.i,f=0;f<d.length;f++)d[f].s===a&&d.splice(f,1);b.attributeFilter&&(c.f=G(b.attributeFilter,function(a,b){a[b]=!0;return a}));d.push({s:a,o:J(a,c)});this.h||I(this)},takeRecords:function(){for(var a=[],b=this.i,c=0;c<b.length;c++)b[c].o(a);return a},disconnect:function(){this.i=[];clearTimeout(this.h);this.h=null}};var B=document.createElement("i");B.style.top=0;var D=(B="null"!=B.attributes.style.value)?L:M,H=1;return v}(void 0);
+	/*
+	 Shim for MutationObserver interface
+	 Author: Graeme Yeates (github.com/megawac)
+	 Repository: https://github.com/megawac/MutationObserver.js
+	 License: WTFPL V2, 2004 (wtfpl.net).
+	 Though credit and staring the repo will make me feel pretty, you can modify and redistribute as you please.
+	 Attempts to follow spec (https://www.w3.org/TR/dom/#mutation-observers) as closely as possible for native javascript
+	 See https://github.com/WebKit/webkit/blob/master/Source/WebCore/dom/MutationObserver.cpp for current webkit source c++ implementation
+	*/
+	window.MutationObserver||(window.MutationObserver=function(y){function z(a){this.i=[];this.m=a}function K(a){(function c(){var d=a.takeRecords();d.length&&a.m(d,a);a.h=setTimeout(c,z._period)})()}function r(a){var b={type:null,target:null,addedNodes:[],removedNodes:[],previousSibling:null,nextSibling:null,attributeName:null,attributeNamespace:null,oldValue:null},c;for(c in a)b[c]!==y&&a[c]!==y&&(b[c]=a[c]);return b}function L(a,b){var c=E(a,b);return function(d){var f=d.length;b.a&&3===a.nodeType&&
+	a.nodeValue!==c.a&&d.push(new r({type:"characterData",target:a,oldValue:c.a}));b.b&&c.b&&C(d,a,c.b,b.f);if(b.c||b.g)var m=M(d,a,c,b);if(m||d.length!==f)c=E(a,b)}}function N(a,b){return b.value}function O(a,b){return"style"!==b.name?b.value:a.style.cssText}function C(a,b,c,d){for(var f={},m=b.attributes,k,g,p=m.length;p--;)k=m[p],g=k.name,d&&d[g]===y||(F(b,k)!==c[g]&&a.push(r({type:"attributes",target:b,attributeName:g,oldValue:c[g],attributeNamespace:k.namespaceURI})),f[g]=!0);for(g in c)f[g]||a.push(r({target:b,
+	type:"attributes",attributeName:g,oldValue:c[g]}))}function M(a,b,c,d){function f(g,p,t,q,x){var A=g.length-1;x=-~((A-x)/2);for(var h,l,e;e=g.pop();)h=t[e.j],l=q[e.l],d.c&&x&&Math.abs(e.j-e.l)>=A&&(a.push(r({type:"childList",target:p,addedNodes:[h],removedNodes:[h],nextSibling:h.nextSibling,previousSibling:h.previousSibling})),x--),d.b&&l.b&&C(a,h,l.b,d.f),d.a&&3===h.nodeType&&h.nodeValue!==l.a&&a.push(r({type:"characterData",target:h,oldValue:l.a})),d.g&&m(h,l)}function m(g,p){for(var t=g.childNodes,
+	q=p.c,x=t.length,A=q?q.length:0,h,l,e,n,v,B=0,w=0,u=0;w<x||u<A;)n=t[w],v=(e=q[u])&&e.node,n===v?(d.b&&e.b&&C(a,n,e.b,d.f),d.a&&e.a!==y&&n.nodeValue!==e.a&&a.push(r({type:"characterData",target:n,oldValue:e.a})),l&&f(l,g,t,q,B),d.g&&(n.childNodes.length||e.c&&e.c.length)&&m(n,e),w++,u++):(k=!0,h||(h={},l=[]),n&&(h[e=G(n)]||(h[e]=!0,-1===(e=H(q,n,u,"node"))?d.c&&(a.push(r({type:"childList",target:g,addedNodes:[n],nextSibling:n.nextSibling,previousSibling:n.previousSibling})),B++):l.push({j:w,l:e})),
+	w++),v&&v!==t[w]&&(h[e=G(v)]||(h[e]=!0,-1===(e=H(t,v,w))?d.c&&(a.push(r({type:"childList",target:p.node,removedNodes:[v],nextSibling:q[u+1],previousSibling:q[u-1]})),B--):l.push({j:e,l:u})),u++));l&&f(l,g,t,q,B)}var k;m(b,c);return k}function E(a,b){var c=!0;return function m(f){var k={node:f};!b.a||3!==f.nodeType&&8!==f.nodeType?(b.b&&c&&1===f.nodeType&&(k.b=I(f.attributes,function(g,p){if(!b.f||b.f[p.name])g[p.name]=F(f,p);return g},{})),c&&(b.c||b.a||b.b&&b.g)&&(k.c=P(f.childNodes,m)),c=b.g):k.a=
+	f.nodeValue;return k}(a)}function G(a){try{return a.id||(a.mo_id=a.mo_id||J++)}catch(b){try{return a.nodeValue}catch(c){return J++}}}function P(a,b){for(var c=[],d=0;d<a.length;d++)c[d]=b(a[d],d,a);return c}function I(a,b,c){for(var d=0;d<a.length;d++)c=b(c,a[d],d,a);return c}function H(a,b,c,d){for(;c<a.length;c++)if((d?a[c][d]:a[c])===b)return c;return-1}z._period=30;z.prototype={observe:function(a,b){for(var c={b:!!(b.attributes||b.attributeFilter||b.attributeOldValue),c:!!b.childList,g:!!b.subtree,
+	a:!(!b.characterData&&!b.characterDataOldValue)},d=this.i,f=0;f<d.length;f++)d[f].s===a&&d.splice(f,1);b.attributeFilter&&(c.f=I(b.attributeFilter,function(m,k){m[k]=!0;return m},{}));d.push({s:a,o:L(a,c)});this.h||K(this)},takeRecords:function(){for(var a=[],b=this.i,c=0;c<b.length;c++)b[c].o(a);return a},disconnect:function(){this.i=[];clearTimeout(this.h);this.h=null}};var D=document.createElement("i");D.style.top=0;var F=(D="null"!=D.attributes.style.value)?N:O,J=1;return z}(void 0));
+	//# sourceMappingURL=mutationobserver.map
 
 
 /***/ }),
@@ -55114,6 +55165,27 @@
 	    return _this;
 	  }
 	
+	  TableHeader.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    var _this2 = this;
+	
+	    // 表格column改变时，要重新绑定拖拽事件，否则拖拽不生效
+	    var oldCols = this.props.columnsChildrenList;
+	    var newCols = nextProps.columnsChildrenList;
+	
+	    if (this._thead) {
+	      if (newCols.length !== oldCols.length) {
+	        this.event = false;
+	        return;
+	      }
+	      oldCols.some(function (item, index) {
+	        if (newCols[index] && newCols[index].dataIndex !== item.dataIndex) {
+	          _this2.event = false;
+	          return true;
+	        }
+	      });
+	    }
+	  };
+	
 	  TableHeader.prototype.componentDidUpdate = function componentDidUpdate() {
 	    this.initTable();
 	    this.initEvent();
@@ -55127,7 +55199,7 @@
 	  };
 	
 	  TableHeader.prototype.componentWillUnmount = function componentWillUnmount() {
-	    var _this2 = this;
+	    var _this3 = this;
 	
 	    this.fixedTable = null;
 	    if (!this.table) return;
@@ -55138,7 +55210,7 @@
 	      this.removeDragBorderEvent();
 	    }
 	    this.doEventList(this.table.tr, function (tr) {
-	      _this2.eventListen([{ key: 'mousedown', fun: _this2.onTrMouseDown }], 'remove', tr);
+	      _this3.eventListen([{ key: 'mousedown', fun: _this3.onTrMouseDown }], 'remove', tr);
 	    });
 	    // this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'remove',this.table.tr[0]);
 	    this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], 'remove', document.body);
@@ -55195,7 +55267,7 @@
 	
 	
 	  TableHeader.prototype.initEvent = function initEvent() {
-	    var _this3 = this;
+	    var _this4 = this;
 	
 	    var _props = this.props,
 	        dragborder = _props.dragborder,
@@ -55218,7 +55290,7 @@
 	      if (this.table && this.table.tr) {
 	        // this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'',this.table.tr[0]);//body mouseup
 	        this.doEventList(this.table.tr, function (tr) {
-	          _this3.eventListen([{ key: 'mousedown', fun: _this3.onTrMouseDown }], '', tr); //body mouseup
+	          _this4.eventListen([{ key: 'mousedown', fun: _this4.onTrMouseDown }], '', tr); //body mouseup
 	        });
 	      }
 	      this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], '', document.body); //body mouseup
@@ -55237,12 +55309,12 @@
 	
 	
 	  TableHeader.prototype.dragBorderEventInit = function dragBorderEventInit() {
-	    var _this4 = this;
+	    var _this5 = this;
 	
 	    if (!this.props.dragborder) return;
 	    var events = [{ key: 'mouseup', fun: this.onTrMouseUp }, { key: 'mousemove', fun: this.onTrMouseMove }];
 	    this.doEventList(this.table.tr, function (tr) {
-	      _this4.eventListen(events, '', tr); //表示把事件添加到th元素上
+	      _this5.eventListen(events, '', tr); //表示把事件添加到th元素上
 	    });
 	    // this.eventListen(events,'',this.table.tr[0]);//表示把事件添加到th元素上
 	  };
@@ -55253,12 +55325,12 @@
 	
 	
 	  TableHeader.prototype.removeDragBorderEvent = function removeDragBorderEvent() {
-	    var _this5 = this;
+	    var _this6 = this;
 	
 	    var events = [{ key: 'mouseup', fun: this.onTrMouseUp }, { key: 'mousemove', fun: this.onTrMouseMove }];
 	    // this.eventListen(events,'remove',this.table.tr[0]);
 	    this.doEventList(this.table.tr, function (tr) {
-	      _this5.eventListen(events, 'remove', _this5.table.tr);
+	      _this6.eventListen(events, 'remove', _this6.table.tr);
 	    });
 	  };
 	
@@ -55438,7 +55510,7 @@
 	
 	
 	  TableHeader.prototype.render = function render() {
-	    var _this6 = this;
+	    var _this7 = this;
 	
 	    var _props2 = this.props,
 	        clsPrefix = _props2.clsPrefix,
@@ -55456,7 +55528,7 @@
 	    return _react2["default"].createElement(
 	      "thead",
 	      _extends({ className: clsPrefix + "-thead" }, attr, { "data-theader-fixed": "scroll", ref: function ref(_thead) {
-	          return _this6._thead = _thead;
+	          return _this7._thead = _thead;
 	        } }),
 	      rows.map(function (row, index) {
 	        var _rowLeng = row.length - 1;
@@ -55502,7 +55574,7 @@
 	
 	            // }
 	            if (filterable && index == rows.length - 1) {
-	              da.children = _this6.filterRenderType(da["filtertype"], da.dataindex, columIndex);
+	              da.children = _this7.filterRenderType(da["filtertype"], da.dataindex, columIndex);
 	              if (da.key === undefined) {
 	                keyTemp.key = keyTemp.key + '-filterable';
 	              }
@@ -55529,7 +55601,7 @@
 	                dragborder && lastObj && da.key != lastObj.key ? _react2["default"].createElement(
 	                  "div",
 	                  { ref: function ref(el) {
-	                      return _this6.gap = el;
+	                      return _this7.gap = el;
 	                    }, "data-line-key": da.key,
 	                    "data-line-index": columIndex, "data-th-width": da.width,
 	                    "data-type": "online", className: clsPrefix + "-thead-th-drag-gap" },
@@ -55559,7 +55631,7 @@
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
-	  var _this7 = this;
+	  var _this8 = this;
 	
 	  this.getOnLineObject = function (_element) {
 	    var type = _element.getAttribute('data-type'),
@@ -55579,23 +55651,23 @@
 	    _utils.Event.stopPropagation(e);
 	    var event = _utils.Event.getEvent(e),
 	        targetEvent = _utils.Event.getTarget(event);
-	    var _props3 = _this7.props,
+	    var _props3 = _this8.props,
 	        clsPrefix = _props3.clsPrefix,
 	        contentTable = _props3.contentTable,
 	        lastShowIndex = _props3.lastShowIndex,
 	        columnsChildrenList = _props3.columnsChildrenList;
 	    // let currentElement = this.getOnLineObject(targetEvent);
 	
-	    var currentElement = _this7.getTargetToType(targetEvent);
+	    var currentElement = _this8.getTargetToType(targetEvent);
 	    if (!currentElement) return;
 	    var type = currentElement.getAttribute('data-type');
-	    if (!_this7.props.dragborder && !_this7.props.draggable) return;
-	    if (type == 'online' && _this7.props.dragborder) {
+	    if (!_this8.props.dragborder && !_this8.props.draggable) return;
+	    if (type == 'online' && _this8.props.dragborder) {
 	      // if(!this.props.dragborder)return;
 	      targetEvent.setAttribute('draggable', false); //添加交换列效果
 	      var currentIndex = -1;
 	      var defaultWidth = currentElement.getAttribute("data-th-width");
-	      _this7.drag.option = "border"; //拖拽操作
+	      _this8.drag.option = "border"; //拖拽操作
 	      if (columnsChildrenList) {
 	        var columnKey = currentElement.getAttribute("data-line-key");
 	        if (columnKey) {
@@ -55608,27 +55680,27 @@
 	        console.log('Key must be set for column!');
 	        return;
 	      }
-	      var currentObj = _this7.table.cols[currentIndex];
-	      _this7.drag.currIndex = currentIndex;
-	      _this7.drag.oldLeft = event.x;
-	      _this7.drag.oldWidth = parseInt(currentObj.style.width);
-	      _this7.drag.minWidth = currentObj.style.minWidth != "" ? parseInt(currentObj.style.minWidth) : defaultWidth;
-	      _this7.drag.tableWidth = parseInt(_this7.table.table.style.width ? _this7.table.table.style.width : _this7.table.table.scrollWidth);
-	      if (!_this7.tableOldWidth) {
-	        _this7.tableOldWidth = _this7.drag.tableWidth; //this.getTableWidth();
+	      var currentObj = _this8.table.cols[currentIndex];
+	      _this8.drag.currIndex = currentIndex;
+	      _this8.drag.oldLeft = event.x;
+	      _this8.drag.oldWidth = parseInt(currentObj.style.width);
+	      _this8.drag.minWidth = currentObj.style.minWidth != "" ? parseInt(currentObj.style.minWidth) : defaultWidth;
+	      _this8.drag.tableWidth = parseInt(_this8.table.table.style.width ? _this8.table.table.style.width : _this8.table.table.scrollWidth);
+	      if (!_this8.tableOldWidth) {
+	        _this8.tableOldWidth = _this8.drag.tableWidth; //this.getTableWidth();
 	      }
-	      if (!_this7.lastColumWidth) {
-	        _this7.lastColumWidth = parseInt(_this7.table.cols[lastShowIndex].style.width);
+	      if (!_this8.lastColumWidth) {
+	        _this8.lastColumWidth = parseInt(_this8.table.cols[lastShowIndex].style.width);
 	      }
-	    } else if (type != 'online' && _this7.props.draggable) {
+	    } else if (type != 'online' && _this8.props.draggable) {
 	      // if (!this.props.draggable || targetEvent.nodeName.toUpperCase() != "TH") return;
-	      if (!_this7.props.draggable) return;
-	      var th = _this7.getTargetToType(targetEvent);
+	      if (!_this8.props.draggable) return;
+	      var th = _this8.getTargetToType(targetEvent);
 	      th.setAttribute('draggable', true); //添加交换列效果
-	      _this7.drag.option = 'dragAble';
-	      _this7.currentDome = th;
+	      _this8.drag.option = 'dragAble';
+	      _this8.currentDome = th;
 	      var _currentIndex = parseInt(th.getAttribute("data-line-index"));
-	      _this7.drag.currIndex = _currentIndex;
+	      _this8.drag.currIndex = _currentIndex;
 	    } else {
 	      // console.log("onTrMouseDown dragborder or draggable is all false !");
 	      return;
@@ -55638,8 +55710,8 @@
 	  this.getTableWidth = function () {
 	    var tableWidth = 0,
 	        offWidth = 0; //this.table.cols.length;
-	    for (var index = 0; index < _this7.table.cols.length; index++) {
-	      var da = _this7.table.cols[index];
+	    for (var index = 0; index < _this8.table.cols.length; index++) {
+	      var da = _this8.table.cols[index];
 	      tableWidth += parseInt(da.style.width);
 	    }
 	    return tableWidth - offWidth;
@@ -55648,7 +55720,7 @@
 	  this.getTargetToType = function (targetEvent) {
 	    var tag = targetEvent;
 	    if (targetEvent && !targetEvent.getAttribute("data-type")) {
-	      tag = _this7.getTargetToType(targetEvent.parentElement);
+	      tag = _this8.getTargetToType(targetEvent.parentElement);
 	    }
 	    return tag;
 	  };
@@ -55656,15 +55728,15 @@
 	  this.getTargetToTh = function (targetEvent) {
 	    var th = targetEvent;
 	    if (targetEvent.nodeName.toUpperCase() != "TH") {
-	      th = _this7.getThDome(targetEvent);
+	      th = _this8.getThDome(targetEvent);
 	    }
 	    // console.log(" getTargetToTh: ", th);
 	    return th;
 	  };
 	
 	  this.onTrMouseMove = function (e) {
-	    if (!_this7.props.dragborder && !_this7.props.draggable) return;
-	    var _props4 = _this7.props,
+	    if (!_this8.props.dragborder && !_this8.props.draggable) return;
+	    var _props4 = _this8.props,
 	        clsPrefix = _props4.clsPrefix,
 	        dragborder = _props4.dragborder,
 	        contentDomWidth = _props4.contentDomWidth,
@@ -55678,83 +55750,83 @@
 	
 	    _utils.Event.stopPropagation(e);
 	    var event = _utils.Event.getEvent(e);
-	    if (_this7.props.dragborder && _this7.drag.option == "border") {
+	    if (_this8.props.dragborder && _this8.drag.option == "border") {
 	      //移动改变宽度
-	      var currentCols = _this7.table.cols[_this7.drag.currIndex];
-	      var diff = event.x - _this7.drag.oldLeft;
-	      var newWidth = _this7.drag.oldWidth + diff;
-	      _this7.drag.newWidth = newWidth > 0 ? newWidth : _this7.minWidth;
-	      if (newWidth > _this7.minWidth) {
+	      var currentCols = _this8.table.cols[_this8.drag.currIndex];
+	      var diff = event.x - _this8.drag.oldLeft;
+	      var newWidth = _this8.drag.oldWidth + diff;
+	      _this8.drag.newWidth = newWidth > 0 ? newWidth : _this8.minWidth;
+	      if (newWidth > _this8.minWidth) {
 	        currentCols.style.width = newWidth + 'px';
 	        //hao 支持固定表头拖拽 修改表体的width
-	        if (_this7.fixedTable.cols) {
-	          _this7.fixedTable.cols[_this7.drag.currIndex].style.width = newWidth + "px";
+	        if (_this8.fixedTable.cols) {
+	          _this8.fixedTable.cols[_this8.drag.currIndex].style.width = newWidth + "px";
 	        }
 	
 	        var newDiff = parseInt(currentCols.style.minWidth) - parseInt(currentCols.style.width);
 	        if (newDiff > 0) {
 	          //缩小
-	          var lastWidth = _this7.lastColumWidth + newDiff;
-	          _this7.table.cols[lastShowIndex].style.width = lastWidth + "px"; //同步表头
-	          _this7.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px"; //同步表体
+	          var lastWidth = _this8.lastColumWidth + newDiff;
+	          _this8.table.cols[lastShowIndex].style.width = lastWidth + "px"; //同步表头
+	          _this8.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px"; //同步表体
 	        }
-	        var showScroll = contentDomWidth - (leftFixedWidth + rightFixedWidth) - (_this7.drag.tableWidth + diff) - scrollbarWidth;
+	        var showScroll = contentDomWidth - (leftFixedWidth + rightFixedWidth) - (_this8.drag.tableWidth + diff) - scrollbarWidth;
 	        //表头滚动条处理
 	        if (headerScroll) {
 	          if (showScroll < 0) {
 	            //小于 0 出现滚动条
 	            //找到固定列表格，设置表头的marginBottom值为scrollbarWidth;
-	            _this7.table.contentTableHeader.style.overflowX = 'scroll';
-	            _this7.optTableMargin(_this7.table.fixedLeftHeaderTable, scrollbarWidth);
-	            _this7.optTableMargin(_this7.table.fixedRighHeadertTable, scrollbarWidth);
+	            _this8.table.contentTableHeader.style.overflowX = 'scroll';
+	            _this8.optTableMargin(_this8.table.fixedLeftHeaderTable, scrollbarWidth);
+	            _this8.optTableMargin(_this8.table.fixedRighHeadertTable, scrollbarWidth);
 	          } else {
 	            //大于 0 不显示滚动条
-	            _this7.table.contentTableHeader.style.overflowX = 'hidden';
-	            _this7.optTableMargin(_this7.table.fixedLeftHeaderTable, 0);
-	            _this7.optTableMargin(_this7.table.fixedRighHeadertTable, 0);
+	            _this8.table.contentTableHeader.style.overflowX = 'hidden';
+	            _this8.optTableMargin(_this8.table.fixedLeftHeaderTable, 0);
+	            _this8.optTableMargin(_this8.table.fixedRighHeadertTable, 0);
 	          }
 	        } else {
 	          if (showScroll < 0) {
-	            _this7.table.tableBody.style.overflowX = 'auto';
-	            _this7.optTableMargin(_this7.table.fixedLeftBodyTable, '-' + scrollbarWidth);
-	            _this7.optTableMargin(_this7.table.fixedRightBodyTable, '-' + scrollbarWidth);
-	            _this7.optTableScroll(_this7.table.fixedLeftBodyTable, { x: 'scroll' });
-	            _this7.optTableScroll(_this7.table.fixedRightBodyTable, { x: 'scroll' });
+	            _this8.table.tableBody.style.overflowX = 'auto';
+	            _this8.optTableMargin(_this8.table.fixedLeftBodyTable, '-' + scrollbarWidth);
+	            _this8.optTableMargin(_this8.table.fixedRightBodyTable, '-' + scrollbarWidth);
+	            _this8.optTableScroll(_this8.table.fixedLeftBodyTable, { x: 'scroll' });
+	            _this8.optTableScroll(_this8.table.fixedRightBodyTable, { x: 'scroll' });
 	          } else {
-	            _this7.table.tableBody.style.overflowX = 'hidden';
-	            _this7.optTableMargin(_this7.table.fixedLeftBodyTable, 0);
-	            _this7.optTableMargin(_this7.table.fixedRightBodyTable, 0);
-	            _this7.optTableScroll(_this7.table.fixedLeftBodyTable, { x: 'auto' });
-	            _this7.optTableScroll(_this7.table.fixedRightBodyTable, { x: 'auto' });
+	            _this8.table.tableBody.style.overflowX = 'hidden';
+	            _this8.optTableMargin(_this8.table.fixedLeftBodyTable, 0);
+	            _this8.optTableMargin(_this8.table.fixedRightBodyTable, 0);
+	            _this8.optTableScroll(_this8.table.fixedLeftBodyTable, { x: 'auto' });
+	            _this8.optTableScroll(_this8.table.fixedRightBodyTable, { x: 'auto' });
 	          }
 	        }
 	      } else {
-	        _this7.drag.newWidth = _this7.minWidth;
+	        _this8.drag.newWidth = _this8.minWidth;
 	      }
 	    }
 	    // 增加拖拽列宽动作的回调函数
-	    _this7.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this7.drag.newWidth);
+	    _this8.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this8.drag.newWidth);
 	  };
 	
 	  this.onTrMouseUp = function (e) {
 	    var event = _utils.Event.getEvent(e);
-	    var width = _this7.drag.newWidth;
-	    var opt = _this7.drag.option;
-	    _this7.mouseClear();
+	    var width = _this8.drag.newWidth;
+	    var opt = _this8.drag.option;
+	    _this8.mouseClear();
 	    if (opt !== "border") return; // fix:点击表头会触发onDropBorder事件的问题
-	    _this7.props.onDropBorder && _this7.props.onDropBorder(event, width);
+	    _this8.props.onDropBorder && _this8.props.onDropBorder(event, width);
 	  };
 	
 	  this.clearThsDr = function () {
-	    var ths = _this7.table.ths;
+	    var ths = _this8.table.ths;
 	    for (var index = 0; index < ths.length; index++) {
 	      ths[index].setAttribute('draggable', false); //去掉交换列效果
 	    }
 	  };
 	
 	  this.bodyonLineMouseUp = function (events, type) {
-	    if (!_this7.drag || !_this7.drag.option) return;
-	    _this7.mouseClear();
+	    if (!_this8.drag || !_this8.drag.option) return;
+	    _this8.mouseClear();
 	  };
 	
 	  this.optTableMargin = function (table, scrollbarWidth) {
@@ -55777,31 +55849,31 @@
 	  };
 	
 	  this.onDragStart = function (e) {
-	    if (!_this7.props.draggable) return;
-	    if (_this7.drag && _this7.drag.option != 'dragAble') {
+	    if (!_this8.props.draggable) return;
+	    if (_this8.drag && _this8.drag.option != 'dragAble') {
 	      return;
 	    }
 	    var event = _utils.Event.getEvent(e),
 	
 	    // target = Event.getTarget(event);
-	    target = _this7.getTargetToTh(_utils.Event.getTarget(event));
+	    target = _this8.getTargetToTh(_utils.Event.getTarget(event));
 	    var currentIndex = parseInt(target.getAttribute("data-line-index"));
 	    var currentKey = target.getAttribute('data-line-key');
 	
 	    if (event.dataTransfer.setDragImage) {
 	      var crt = target.cloneNode(true);
 	      crt.style.backgroundColor = "#ebecf0";
-	      crt.style.width = _this7.table.cols[currentIndex].style.width; //拖动后再交换列的时候，阴影效果可同步
+	      crt.style.width = _this8.table.cols[currentIndex].style.width; //拖动后再交换列的时候，阴影效果可同步
 	      crt.style.height = "40px";
 	      // crt.style['line-height'] = "40px";
 	      // document.body.appendChild(crt);
-	      document.getElementById(_this7._table_none_cont_id).appendChild(crt);
+	      document.getElementById(_this8._table_none_cont_id).appendChild(crt);
 	      event.dataTransfer.setDragImage(crt, 0, 0);
 	    }
 	
 	    event.dataTransfer.effectAllowed = "move";
 	    event.dataTransfer.setData("Text", currentKey);
-	    _this7.currentObj = _this7.props.rows[0][currentIndex];
+	    _this8.currentObj = _this8.props.rows[0][currentIndex];
 	  };
 	
 	  this.onDragOver = function (e) {
@@ -55810,32 +55882,32 @@
 	  };
 	
 	  this.onDrop = function (e) {
-	    if (!_this7.props.draggable) return;
-	    var props = _this7.getCurrentEventData(_this7._dragCurrent);
+	    if (!_this8.props.draggable) return;
+	    var props = _this8.getCurrentEventData(_this8._dragCurrent);
 	    e.column = { props: props };
-	    if (_this7.drag && _this7.drag.option != 'dragAble') {
-	      _this7.props.onDrop(e);
+	    if (_this8.drag && _this8.drag.option != 'dragAble') {
+	      _this8.props.onDrop(e);
 	      return;
 	    }
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
-	    _this7.currentDome.setAttribute('draggable', false); //添加交换列效果
+	    _this8.currentDome.setAttribute('draggable', false); //添加交换列效果
 	    // let data = this.getCurrentEventData(this._dragCurrent);
 	    // if(!data){
 	    //   this.props.onDrop(e);
 	    //   return;
 	    // }
-	    if (!_this7.props.onDrop) return;
+	    if (!_this8.props.onDrop) return;
 	    // this.props.onDrop(event,target);
-	    _this7.props.onDrop(event, { dragSource: _this7.currentObj, dragTarg: e.column });
+	    _this8.props.onDrop(event, { dragSource: _this8.currentObj, dragTarg: e.column });
 	  };
 	
 	  this.onDragEnter = function (e) {
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
-	    _this7._dragCurrent = target;
+	    _this8._dragCurrent = target;
 	    var currentIndex = target.getAttribute("data-line-index");
-	    if (!currentIndex || parseInt(currentIndex) === _this7.drag.currIndex) return;
+	    if (!currentIndex || parseInt(currentIndex) === _this8.drag.currIndex) return;
 	    if (target.nodeName.toUpperCase() === "TH") {
 	      // target.style.border = "2px dashed rgba(5,0,0,0.25)";
 	      target.setAttribute("style", "border-right:2px dashed rgb(30, 136, 229)");
@@ -55846,22 +55918,22 @@
 	  this.onDragEnd = function (e) {
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
-	    _this7._dragCurrent.setAttribute("style", "");
+	    _this8._dragCurrent.setAttribute("style", "");
 	    // this._dragCurrent.style = "";
-	    document.getElementById(_this7._table_none_cont_id).innerHTML = "";
+	    document.getElementById(_this8._table_none_cont_id).innerHTML = "";
 	
-	    var data = _this7.getCurrentEventData(_this7._dragCurrent);
+	    var data = _this8.getCurrentEventData(_this8._dragCurrent);
 	    if (!data) return;
-	    if (!_this7.currentObj || _this7.currentObj.key == data.key) return;
-	    if (!_this7.props.onDragEnd) return;
-	    _this7.props.onDragEnd(event, { dragSource: _this7.currentObj, dragTarg: data });
+	    if (!_this8.currentObj || _this8.currentObj.key == data.key) return;
+	    if (!_this8.props.onDragEnd) return;
+	    _this8.props.onDragEnd(event, { dragSource: _this8.currentObj, dragTarg: data });
 	  };
 	
 	  this.onDragLeave = function (e) {
 	    var event = _utils.Event.getEvent(e),
 	        target = _utils.Event.getTarget(event);
 	    var currentIndex = target.getAttribute("data-line-index");
-	    if (!currentIndex || parseInt(currentIndex) === _this7.drag.currIndex) return;
+	    if (!currentIndex || parseInt(currentIndex) === _this8.drag.currIndex) return;
 	    if (target.nodeName.toUpperCase() === "TH") {
 	      target.setAttribute("style", "");
 	      // this._dragCurrent.style = "";
@@ -55869,7 +55941,7 @@
 	  };
 	
 	  this.handlerFilterChange = function (key, value, condition) {
-	    var onFilterChange = _this7.props.onFilterChange;
+	    var onFilterChange = _this8.props.onFilterChange;
 	
 	    if (onFilterChange) {
 	      onFilterChange(key, value, condition);
@@ -55877,7 +55949,7 @@
 	  };
 	
 	  this.handlerFilterClear = function (field) {
-	    var onFilterClear = _this7.props.onFilterClear;
+	    var onFilterClear = _this8.props.onFilterClear;
 	
 	    if (onFilterClear) {
 	      onFilterClear(field);
@@ -55885,7 +55957,7 @@
 	  };
 	
 	  this.filterRenderType = function (type, dataIndex, index) {
-	    var _props5 = _this7.props,
+	    var _props5 = _this8.props,
 	        clsPrefix = _props5.clsPrefix,
 	        rows = _props5.rows,
 	        filterDelay = _props5.filterDelay,
@@ -55900,8 +55972,8 @@
 	          , clsPrefix: clsPrefix //css前缀
 	          , className: clsPrefix + " filter-text",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"] //是否显示下拉条件
 	          , filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55914,8 +55986,8 @@
 	          clsPrefix: clsPrefix,
 	          className: clsPrefix + " filter-text",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this7.handlerFilterChange) //输入框回调并且函数防抖动
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this8.handlerFilterChange) //输入框回调并且函数防抖动
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55949,8 +56021,8 @@
 	          data: selectDataSource,
 	          notFoundContent: "Loading" //没有数据显示的默认字
 	          , dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          onFocus: rows[1][index]["filterdropdownfocus"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
@@ -55965,8 +56037,8 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY-MM-DD",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55980,8 +56052,8 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -55995,8 +56067,8 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY-MM",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -56010,8 +56082,8 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY-Wo",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -56025,8 +56097,8 @@
 	          onClick: function onClick() {},
 	          format: rows[1][index]["format"] || "YYYY-MM-DD",
 	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
+	          , onFilterChange: _this8.handlerFilterChange //输入框回调
+	          , onFilterClear: _this8.handlerFilterClear //清除回调
 	          , filterDropdown: rows[1][index]["filterdropdown"],
 	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
 	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
@@ -56906,7 +56978,7 @@
 	    if (props.keyboardInput) {
 	      keyboardInputProps.readOnly = false;
 	      keyboardInputProps.onChange = this.inputChange;
-	      keyboardInputProps.value = state.inputValue.format && state.inputValue.isValid() ? state.inputValue.format(props.format) : state.inputValue;
+	      keyboardInputProps.value = state.inputValue.format && state.inputValue.isValid() && this.props.validatorFunc(state.inputValue) ? state.inputValue.format(props.format) : state.inputValue;
 	    } else {
 	      keyboardInputProps.readOnly = true;
 	      keyboardInputProps.value = value && this.getValue(value) || "";
@@ -57010,7 +57082,9 @@
 	  };
 	
 	  this.inputFocus = function () {
-	    var format = _this3.props.format;
+	    var _props = _this3.props,
+	        format = _props.format,
+	        validatorFunc = _props.validatorFunc;
 	
 	    var input = document.querySelector('.rc-calendar-input');
 	    if (input) {
@@ -57032,7 +57106,7 @@
 	          _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
 	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
 	          var parsed = (0, _moment2["default"])(input.value, format, true);
-	          if (parsed.isValid()) {
+	          if (parsed.isValid() && validatorFunc(input.value)) {
 	            _this3.setState({
 	              open: false
 	            });
@@ -57105,7 +57179,7 @@
 	    _this3.setState({
 	      inputValue: value
 	    });
-	    if ((0, _moment2["default"])(value, _this3.props.format).isValid()) {
+	    if ((0, _moment2["default"])(value, _this3.props.format).isValid() && _this3.props.validatorFunc(value)) {
 	      _this3.setState({
 	        value: (0, _moment2["default"])(value, _this3.props.format)
 	      });
@@ -57136,7 +57210,7 @@
 	        open: false
 	      });
 	      var value = _this3.state.inputValue;
-	      if ((0, _moment2["default"])(value, _this3.props.format).isValid()) {
+	      if ((0, _moment2["default"])(value, _this3.props.format).isValid() && _this3.props.validatorFunc(value)) {
 	        _this3.setState({
 	          value: (0, _moment2["default"])(value, _this3.props.format)
 	        });
@@ -57233,7 +57307,10 @@
 	  format: "YYYY-MM-DD",
 	  showSecond: true,
 	  showHour: true,
-	  showMinute: true
+	  showMinute: true,
+	  validatorFunc: function validatorFunc() {
+	    return true;
+	  }
 	};
 	
 	exports["default"] = DatePicker;
@@ -57372,11 +57449,15 @@
 	  };
 	
 	  Calendar.prototype.render = function render() {
+	    var _this2 = this;
+	
 	    var props = this.props,
 	        state = this.state;
 	    var locale = props.locale,
 	        prefixCls = props.prefixCls,
 	        disabledDate = props.disabledDate,
+	        validatorFunc = props.validatorFunc,
+	        format = props.format,
 	        dateInputPlaceholder = props.dateInputPlaceholder,
 	        timePicker = props.timePicker,
 	        disabledTime = props.disabledTime,
@@ -57424,10 +57505,15 @@
 	      prefixCls: prefixCls,
 	      selectedValue: selectedValue,
 	      onChange: this.onDateInputChange,
-	      onSelect: this.onDateInputSelect,
+	      onSelect: function onSelect(value) {
+	        if ((0, _moment2["default"])(value, format, true) && validatorFunc(value)) {
+	          _this2.onDateInputSelect(value);
+	        }
+	      },
 	      clearIcon: clearIcon,
 	      renderError: renderError,
-	      onBlur: onInputBlur
+	      onBlur: onInputBlur,
+	      validatorFunc: validatorFunc
 	    }) : null;
 	
 	    var children = [];
@@ -57552,14 +57638,14 @@
 	});
 	
 	var _initialiseProps = function _initialiseProps() {
-	  var _this2 = this;
+	  var _this3 = this;
 	
 	  this.onPanelChange = function (value, mode) {
-	    var props = _this2.props,
-	        state = _this2.state;
+	    var props = _this3.props,
+	        state = _this3.state;
 	
 	    if (!('mode' in props)) {
-	      _this2.setState({ mode: mode });
+	      _this3.setState({ mode: mode });
 	    }
 	    props.onPanelChange(value || state.value, mode);
 	  };
@@ -57568,58 +57654,58 @@
 	    if (event.target.nodeName.toLowerCase() === 'input') {
 	      return undefined;
 	    } else {
-	      _this2.props.onKeyDown && _this2.props.onKeyDown(event);
+	      _this3.props.onKeyDown && _this3.props.onKeyDown(event);
 	    }
 	    var keyCode = event.keyCode;
 	    // mac
 	    var ctrlKey = event.ctrlKey || event.metaKey;
-	    var disabledDate = _this2.props.disabledDate;
-	    var value = _this2.state.value;
+	    var disabledDate = _this3.props.disabledDate;
+	    var value = _this3.state.value;
 	
 	    switch (keyCode) {
 	      case _KeyCode2["default"].DOWN:
-	        _this2.goTime(1, 'weeks');
+	        _this3.goTime(1, 'weeks');
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].UP:
-	        _this2.goTime(-1, 'weeks');
+	        _this3.goTime(-1, 'weeks');
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].LEFT:
 	        if (ctrlKey) {
-	          _this2.goTime(-1, 'years');
+	          _this3.goTime(-1, 'years');
 	        } else {
-	          _this2.goTime(-1, 'days');
+	          _this3.goTime(-1, 'days');
 	        }
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].RIGHT:
 	        if (ctrlKey) {
-	          _this2.goTime(1, 'years');
+	          _this3.goTime(1, 'years');
 	        } else {
-	          _this2.goTime(1, 'days');
+	          _this3.goTime(1, 'days');
 	        }
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].HOME:
-	        _this2.setValue((0, _toTime.goStartMonth)(_this2.state.value));
+	        _this3.setValue((0, _toTime.goStartMonth)(_this3.state.value));
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].END:
-	        _this2.setValue((0, _toTime.goEndMonth)(_this2.state.value));
+	        _this3.setValue((0, _toTime.goEndMonth)(_this3.state.value));
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].PAGE_DOWN:
-	        _this2.goTime(1, 'month');
+	        _this3.goTime(1, 'month');
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].PAGE_UP:
-	        _this2.goTime(-1, 'month');
+	        _this3.goTime(-1, 'month');
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2["default"].ENTER:
 	        if (!disabledDate || !disabledDate(value)) {
-	          _this2.onSelect(value, {
+	          _this3.onSelect(value, {
 	            source: 'keyboard'
 	          });
 	        }
@@ -57629,33 +57715,33 @@
 	  };
 	
 	  this.onClear = function () {
-	    _this2.onSelect(null);
-	    _this2.props.onClear();
+	    _this3.onSelect(null);
+	    _this3.props.onClear();
 	  };
 	
 	  this.onOk = function () {
-	    var selectedValue = _this2.state.selectedValue;
+	    var selectedValue = _this3.state.selectedValue;
 	
-	    if (_this2.isAllowedDate(selectedValue)) {
-	      _this2.props.onOk(selectedValue);
+	    if (_this3.isAllowedDate(selectedValue)) {
+	      _this3.props.onOk(selectedValue);
 	    }
 	  };
 	
 	  this.onDateInputChange = function (value) {
-	    _this2.onSelect(value, {
+	    _this3.onSelect(value, {
 	      source: 'dateInput'
 	    });
 	  };
 	
 	  this.onDateInputSelect = function (value) {
-	    _this2.onSelect(value, {
+	    _this3.onSelect(value, {
 	      source: 'dateInputSelect'
 	    });
 	  };
 	
 	  this.onDateTableSelect = function (value) {
-	    var timePicker = _this2.props.timePicker;
-	    var selectedValue = _this2.state.selectedValue;
+	    var timePicker = _this3.props.timePicker;
+	    var selectedValue = _this3.state.selectedValue;
 	
 	    if (!selectedValue && timePicker) {
 	      var timePickerDefaultValue = timePicker.props.defaultValue;
@@ -57663,32 +57749,32 @@
 	        (0, _util.syncTime)(timePickerDefaultValue, value);
 	      }
 	    }
-	    _this2.onSelect(value);
+	    _this3.onSelect(value);
 	  };
 	
 	  this.onToday = function () {
-	    var value = _this2.state.value;
+	    var value = _this3.state.value;
 	
 	    var now = (0, _util.getTodayTime)(value);
-	    _this2.onSelect(now, {
+	    _this3.onSelect(now, {
 	      source: 'todayButton'
 	    });
 	  };
 	
 	  this.getRootDOMNode = function () {
-	    return _reactDom2["default"].findDOMNode(_this2);
+	    return _reactDom2["default"].findDOMNode(_this3);
 	  };
 	
 	  this.openTimePicker = function () {
-	    _this2.onPanelChange(null, 'time');
+	    _this3.onPanelChange(null, 'time');
 	  };
 	
 	  this.closeTimePicker = function () {
-	    _this2.onPanelChange(null, 'date');
+	    _this3.onPanelChange(null, 'date');
 	  };
 	
 	  this.goTime = function (direction, unit) {
-	    _this2.setValue((0, _toTime.goTime)(_this2.state.value, direction, unit));
+	    _this3.setValue((0, _toTime.goTime)(_this3.state.value, direction, unit));
 	  };
 	
 	  this.onMouseOver = function (e) {
@@ -76903,7 +76989,8 @@
 	        disabledDate = _props.disabledDate,
 	        format = _props.format,
 	        onChange = _props.onChange,
-	        selectedValue = _props.selectedValue;
+	        selectedValue = _props.selectedValue,
+	        validatorFunc = _props.validatorFunc;
 	
 	    // 没有内容，合法并直接退出
 	
@@ -76925,6 +77012,12 @@
 	      });
 	      return;
 	    }
+	    if (!_this2.props.validatorFunc(str)) {
+	      _this2.setState({
+	        str: str
+	      });
+	      return;
+	    };
 	
 	    var value = _this2.props.value.clone();
 	    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
@@ -76975,6 +77068,12 @@
 	      });
 	      return;
 	    }
+	    if (!_this2.props.validatorFunc(str)) {
+	      _this2.setState({
+	        invalid: true
+	      });
+	      return;
+	    };
 	
 	    var value = _this2.props.value.clone();
 	    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
@@ -77007,7 +77106,8 @@
 	        value = _props3.value,
 	        onKeyDown = _props3.onKeyDown,
 	        format = _props3.format,
-	        isRange = _props3.isRange;
+	        isRange = _props3.isRange,
+	        validatorFunc = _props3.validatorFunc;
 	
 	    var str = e.target.value;
 	    var parsed = (0, _moment2["default"])(str, format, true);
@@ -77025,6 +77125,11 @@
 	      }
 	      // 有内容，判断是否合法
 	      if (!parsed.isValid()) {
+	        _this2.setState({
+	          invalid: true
+	        });
+	      }
+	      if (!validatorFunc(str)) {
 	        _this2.setState({
 	          invalid: true
 	        });
@@ -78360,7 +78465,8 @@
 	  placement: _propTypes2["default"].any,
 	  value: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].array]),
 	  defaultValue: _propTypes2["default"].oneOfType([_propTypes2["default"].object, _propTypes2["default"].array]),
-	  align: _propTypes2["default"].object
+	  align: _propTypes2["default"].object,
+	  enterKeyDown: _propTypes2["default"].bool //enter 键是否打开日期面板
 	};
 	Picker.defaultProps = {
 	  prefixCls: 'rc-calendar-picker',
@@ -78369,7 +78475,8 @@
 	  placement: 'bottomLeft',
 	  defaultOpen: false,
 	  onChange: noop,
-	  onOpenChange: noop
+	  onOpenChange: noop,
+	  enterKeyDown: true
 	};
 	
 	var _initialiseProps = function _initialiseProps() {
@@ -78399,8 +78506,10 @@
 	  };
 	
 	  this.onKeyDown = function (event) {
-	    if (!_this2.state.open && (event.keyCode === _KeyCode2["default"].DOWN || event.keyCode === _KeyCode2["default"].ENTER)) {
-	      _this2.open();
+	    var enterKeyDown = _this2.props.enterKeyDown;
+	
+	    if (event.keyCode === _KeyCode2["default"].DOWN || enterKeyDown && event.keyCode === _KeyCode2["default"].ENTER) {
+	      if (!_this2.state.open) _this2.open();
 	      event.preventDefault();
 	    }
 	    _this2.props.onKeyDown && _this2.props.onKeyDown(event);
@@ -88741,6 +88850,16 @@
 	    InputNumber.prototype.ComponentWillUnMount = function ComponentWillUnMount() {
 	        this.clear();
 	    };
+	
+	    /**
+	     *  @memberof InputNumber
+	     * type 是否要四舍五入(此参数无效,超长不让输入)
+	     */
+	
+	    /**
+	     * 恢复科学技术法的问题
+	     */
+	
 	    /**
 	     * 设置增加减少按钮是否可用
 	     */
@@ -88795,6 +88914,7 @@
 	
 	        value = precision != null && !this.focus ? this.getPrecision(value) : value;
 	        value = format && !this.focus ? format(value) : value;
+	        value = String(value).indexOf("e") !== -1 ? this.getFullNum(value) : value;
 	        if (minusRight && String(value).indexOf('-') != -1) {
 	            value = String(value).replace("-", "") + "-";
 	        }
@@ -88809,9 +88929,7 @@
 	                _react2["default"].createElement(
 	                    _beeInputGroup2["default"].Addon,
 	                    {
-	                        onClick: function onClick() {
-	                            minusDisabled ? '' : _this2.handleBtnClick('down');
-	                        },
+	                        // onClick={()=>{minusDisabled?'':this.handleBtnClick('down')}}
 	                        className: (minusDisabled && 'disabled') + disabledCursor,
 	                        onMouseDown: this.handleReduceMouseDown,
 	                        onMouseLeave: this.clear,
@@ -88831,9 +88949,7 @@
 	                _react2["default"].createElement(
 	                    _beeInputGroup2["default"].Addon,
 	                    {
-	                        onClick: function onClick() {
-	                            plusDisabled ? '' : _this2.handleBtnClick('up');
-	                        },
+	                        // onClick={()=>{plusDisabled?'':this.handleBtnClick('up')}}
 	                        className: (plusDisabled && 'disabled') + disabledCursor,
 	                        onMouseDown: this.handlePlusMouseDown,
 	                        onMouseLeave: this.clear,
@@ -88865,9 +88981,7 @@
 	                        _react2["default"].createElement(
 	                            'span',
 	                            {
-	                                onClick: function onClick() {
-	                                    plusDisabled ? '' : _this2.handleBtnClick('up');
-	                                },
+	                                // onClick={()=>{plusDisabled?'':this.handleBtnClick('up')}}
 	                                onMouseDown: this.handlePlusMouseDown,
 	                                onMouseLeave: this.clear,
 	                                onMouseUp: this.clear,
@@ -88877,9 +88991,7 @@
 	                        _react2["default"].createElement(
 	                            'span',
 	                            {
-	                                onClick: function onClick() {
-	                                    minusDisabled ? '' : _this2.handleBtnClick('down');
-	                                },
+	                                // onClick={()=> minusDisabled?'':this.handleBtnClick('down')}
 	                                onMouseDown: this.handleReduceMouseDown,
 	                                onMouseLeave: this.clear,
 	                                onMouseUp: this.clear,
@@ -88918,7 +89030,7 @@
 	            }
 	            value = Number(value);
 	        }
-	        if (value != undefined) {
+	        if (value != undefined && value != null) {
 	            if (value === '') {
 	                currentValue = '';
 	                return {
@@ -88995,6 +89107,21 @@
 	        };
 	    };
 	
+	    this.numToFixed = function (value, fixed, type) {
+	        value = String(value);
+	        if (!value && value !== "0") return value;
+	        if (!fixed && String(fixed) !== "0") return value;
+	        var preIndex = value.indexOf(".");
+	        if (value.indexOf(".") === -1) return value;
+	        preIndex++;
+	        var endIndex = preIndex + fixed;
+	        var precValue = value.substr(preIndex, endIndex) + "0000000000";
+	        if (type) {
+	            return Number(value).toFixed(fixed);
+	        }
+	        return value.split(".")[0] + "." + precValue.substr(0, fixed);
+	    };
+	
 	    this.handleChange = function (value) {
 	        var selectionStart = _this3.input.selectionStart == undefined ? _this3.input.input.selectionStart : _this3.input.selectionStart;
 	        _this3.selectionStart = selectionStart;
@@ -89014,12 +89141,12 @@
 	        // value = this.unThousands(value);
 	        if (minusRight) {
 	            if (value.match(/-/g) && value.match(/-/g).length > 1) return;
-	        } else {
-	            if (isNaN(value) && value !== '.' && value !== '-') return;
 	        }
+	        if (isNaN(value) && value !== '.' && value !== '-') return;
 	        if (value.indexOf(".") !== -1) {
 	            //小数最大值处理
 	            var prec = String(value.split(".")[1]).replace("-", "");
+	            if (_this3.props.precision === 0 && (prec === "" || prec != "")) return;
 	            if (_this3.props.precision && prec.length > _this3.props.precision) return;
 	            if (prec.length > 8) return;
 	        }
@@ -89029,8 +89156,7 @@
 	        });
 	        if (value === '-') {
 	            onChange && onChange(value);
-	        }
-	        if (value == '.' || value.indexOf('.') == value.length - 1) {
+	        } else if (value == '.' || value.indexOf('.') == value.length - 1) {
 	            //当输入小数点的时候
 	            onChange && onChange(value);
 	        } else if (value[value.indexOf('.') + 1] == 0) {
@@ -89068,6 +89194,21 @@
 	        onFocus && onFocus(_this3.getPrecision(_this3.state.value), e);
 	    };
 	
+	    this.getFullNum = function (num) {
+	        //处理非数字
+	        if (isNaN(num)) {
+	            return num;
+	        };
+	
+	        //处理不需要转换的数字
+	        var str = '' + num;
+	        if (!/e/i.test(str)) {
+	            return num;
+	        };
+	        var _precision = _this3.props.precision ? _this3.props.precision : 18;
+	        return Number(num).toFixed(_precision).replace(/\.?0+$/, "");
+	    };
+	
 	    this.handleBlur = function (v, e) {
 	        _this3.focus = false;
 	        var _props4 = _this3.props,
@@ -89078,13 +89219,13 @@
 	            max = _props4.max,
 	            min = _props4.min,
 	            displayCheckPrompt = _props4.displayCheckPrompt,
-	            minusRight = _props4.minusRight;
+	            minusRight = _props4.minusRight,
+	            round = _props4.round;
 	
 	        var local = (0, _tool.getComponentLocale)(_this3.props, _this3.context, 'InputNumber', function () {
 	            return _i18n2["default"];
 	        });
-	        // v = this.state.value;//在onBlur的时候不需要活输入框的只，而是要获取state中的值，因为有format的时候就会有问题。
-	        v = _this3.state.value === "-" ? "" : _this3.state.value;
+	        v = _this3.state.value; //在onBlur的时候不需要活输入框的只，而是要获取state中的值，因为有format的时候就会有问题。
 	        if (v === '' || !v) {
 	            _this3.setState({
 	                value: v
@@ -89093,8 +89234,8 @@
 	            onBlur && onBlur(v, e);
 	            return;
 	        }
-	        // let value = this.unThousands(v);
-	        var value = v;
+	        // let value = this.unThousands(v); 
+	        var value = _this3.numToFixed(v, precision, round);
 	        if (minusRight) {
 	            if (value.indexOf('-') != -1) {
 	                //所有位置的负号转到前边
@@ -89191,8 +89332,11 @@
 	        _this3.setState({
 	            value: value,
 	            showValue: toThousands(value)
+	        }, function () {
+	            _this3.input.input.focus && _this3.input.input.focus();
 	        });
 	        toNumber ? onChange && onChange(Number(value)) : onChange && onChange(value);
+	        _this3.handleBtnClick('down', value);
 	        _this3.detailDisable(value);
 	    };
 	
@@ -89223,8 +89367,11 @@
 	        _this3.setState({
 	            value: value,
 	            showValue: toThousands(value)
+	        }, function () {
+	            _this3.input.input.focus && _this3.input.input.focus();
 	        });
 	        toNumber ? onChange && onChange(Number(value)) : onChange && onChange(value);
+	        _this3.handleBtnClick('up', value);
 	        _this3.detailDisable(value);
 	    };
 	
@@ -89253,11 +89400,15 @@
 	    };
 	
 	    this.separate = function (value) {
-	        value = value !== null && value.toString();
-	        if (value.indexOf('.') > -1) {
-	            return value.split('.')[1];
-	        } else {
+	        if (value == null || value == undefined) {
 	            return "";
+	        } else {
+	            value = value.toString();
+	            if (value.indexOf('.') > -1) {
+	                return value.split('.')[1];
+	            } else {
+	                return "";
+	            }
 	        }
 	    };
 	
@@ -89268,7 +89419,7 @@
 	    };
 	
 	    this.handlePlusMouseDown = function (e) {
-	        e.preventDefault();
+	        e.preventDefault && e.preventDefault();
 	        var _props8 = _this3.props,
 	            delay = _props8.delay,
 	            disabled = _props8.disabled;
@@ -89278,12 +89429,12 @@
 	        _this3.plus(value);
 	        _this3.clear();
 	        _this3.timer = setTimeout(function () {
-	            _this3.handlePlusMouseDown();
+	            _this3.handlePlusMouseDown(e);
 	        }, delay);
 	    };
 	
 	    this.handleReduceMouseDown = function (e) {
-	        e.preventDefault();
+	        e.preventDefault && e.preventDefault();
 	        var _props9 = _this3.props,
 	            delay = _props9.delay,
 	            disabled = _props9.disabled;
@@ -89293,15 +89444,18 @@
 	        _this3.minus(value);
 	        _this3.clear();
 	        _this3.timer = setTimeout(function () {
-	            _this3.handleReduceMouseDown();
+	            _this3.handleReduceMouseDown(e);
 	        }, delay);
 	    };
 	
 	    this.getPrecision = function (value) {
+	        if (value == null || value == undefined) return value;
 	        if (!value && value === "") return value;
 	        value = String(value);
+	        value = value.indexOf("e") !== -1 ? _this3.getFullNum(value) : value;
 	        var precision = _this3.props.precision;
 	
+	        if (precision === 0) return value;
 	        if (precision == undefined || value.indexOf(".") !== -1 && String(value.split(".")[1]).length === precision) {
 	            return value;
 	        }
@@ -89310,12 +89464,25 @@
 	            after = value.substring(len - 1, len);
 	        before = before === "-" ? before : "";
 	        after = after === "-" ? after : "";
-	        value = value.replace("-", '');
+	        //是科学计数法，不replace - 
+	        if (before) value = value.substring(1, len - 1);
+	        if (after) value = value.substring(0, len - 1);
+	        // value = value.replace("-",'');
+	        var precV = "000000000000000000000000000000000000000000000000000000000000000000000000";
+	        if (value.indexOf(".") === -1) {
+	            precV = precV.substr(0, precision);
+	            precV = precV ? "." + precV : precV;
+	            if (!isNaN(value) && (value.indexOf('-') != -1 || value.indexOf('+') != -1) && value.indexOf('e') != -1) {//是科学计数法，不拼接0000000
+	
+	            } else {
+	                value = value + precV;
+	            }
+	        }
 	        return before + Number(value).toFixed(precision) + after;
 	    };
 	
-	    this.handleBtnClick = function (type) {
-	        _this3.props.handleBtnClick(type, _this3.state.value);
+	    this.handleBtnClick = function (type, value) {
+	        _this3.props.handleBtnClick(type, value);
 	    };
 	};
 	
@@ -89340,8 +89507,8 @@
 	    'msgMax': '值不能大于最大值',
 	    'msgMin': '值不能小于最小值',
 	    'en-us': {
-	        'msgMax': 'value cannot be greater than the maximum',
-	        'msgMin': 'value cannot be less than minimum'
+	        'msgMax': 'Cannot be greater than the Max value',
+	        'msgMin': 'Cannot be less than the Min value'
 	    },
 	    'zh-tw': {
 	        'msgMax': '值不能大於最大值',
@@ -89859,6 +90026,9 @@
 	    filterDropdownType: 'string'
 	};
 	
+	FilterDropDown.contextTypes = {
+	    beeLocale: _propTypes2["default"].object
+	};
 	exports["default"] = FilterDropDown;
 	module.exports = exports['default'];
 
@@ -90725,9 +90895,15 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _zh_CN = __webpack_require__(623);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -90742,10 +90918,11 @@
 	    addToBtns: _propTypes2["default"].object, //所有的按钮，支持扩展
 	    powerBtns: _propTypes2["default"].array, // 按钮权限 code数组
 	    btns: _propTypes2["default"].object, // 按钮对象数组
-	    type: _propTypes2["default"].oneOfType(['button', 'line']),
+	    type: _propTypes2["default"].oneOfType(['button', 'line', 'icon']),
 	    maxSize: _propTypes2["default"].number,
 	    forcePowerBtns: _propTypes2["default"].array, //不受权限控制的按钮code数组
-	    localeCookie: _propTypes2["default"].string //当前语种的cookie key值
+	    iconTypes: _propTypes2["default"].object,
+	    locale: _propTypes2["default"].object
 	};
 	var defaultProps = {
 	    addToBtns: {},
@@ -90753,23 +90930,13 @@
 	    type: 'button',
 	    maxSize: 2,
 	    forcePowerBtns: ['cancel', 'search', 'clear', 'empty'], //取消、查询、清空、置空不受权限管理控制
-	    localeCookie: 'locale',
-	    onClick: function onClick() {}
-	};
-	
-	var getCookie = function getCookie(name) {
-	    var cookieValue = null;
-	    if (document.cookie && document.cookie != '') {
-	        var cookies = document.cookie.split(';');
-	        for (var i = 0; i < cookies.length; i++) {
-	            var cookie = cookies[i].trim();
-	            if (cookie.substring(0, name.length + 1) == name + '=') {
-	                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-	                break;
-	            }
-	        }
-	    }
-	    return cookieValue;
+	    onClick: function onClick() {},
+	    iconTypes: { //默认code对应的图标
+	        add: 'uf-add-c-o',
+	        update: 'uf-pencil',
+	        "delete": 'uf-del'
+	    },
+	    locale: _zh_CN2["default"]
 	};
 	
 	var Btns = function (_Component) {
@@ -90794,10 +90961,8 @@
 	                maxSize = _this$props.maxSize,
 	                powerBtns = _this$props.powerBtns,
 	                forcePowerBtns = _this$props.forcePowerBtns,
-	                localeCookie = _this$props.localeCookie;
+	                locale = _this$props.locale;
 	
-	            var more = '更多';
-	            if (getCookie(localeCookie) == 'en_US') more = 'more';
 	            var btnArray = [];
 	            if (powerBtns) {
 	                Object.keys(btns).map(function (item) {
@@ -90813,7 +90978,7 @@
 	                });
 	            }
 	
-	            if (type == 'line') {
+	            if (type == 'line' || type == 'icon') {
 	                if (btnArray.length > maxSize) {
 	                    var menusList = _react2["default"].createElement(
 	                        _beeMenus2["default"],
@@ -90836,7 +91001,7 @@
 	                        _react2["default"].createElement(
 	                            'span',
 	                            { className: 'ac-btns-item ac-btns-more' },
-	                            more
+	                            locale['_more']
 	                        )
 	                    );
 	                    btnArray.splice(maxSize, btnArray.length - maxSize + 1, drop);
@@ -90854,14 +91019,10 @@
 	            var itemProps = _this.props.btns[key];
 	            var _this$state$allBtns$k = _this.state.allBtns[key],
 	                colors = _this$state$allBtns$k.colors,
-	                className = _this$state$allBtns$k.className,
-	                name = _this$state$allBtns$k.name_zh_CN,
-	                name_zh_TW = _this$state$allBtns$k.name_zh_TW,
-	                name_en_US = _this$state$allBtns$k.name_en_US;
+	                className = _this$state$allBtns$k.className;
 	
+	            var name = _this.props.locale[key] || _btnJSON2["default"][key].name;
 	            var clss = 'ac-btns-item ' + className;
-	            if (getCookie(_this.props.localeCookie) == 'zh_TW') name = name_zh_TW;
-	            if (getCookie(_this.props.localeCookie) == 'en_US') name = name_en_US;
 	            if (itemProps) {
 	                if (itemProps.className) clss += ' ' + itemProps.className;
 	                if (itemProps.name) name = itemProps.name;
@@ -90941,7 +91102,7 @@
 	                                    name
 	                                );
 	                        }
-	                    } else {
+	                    } else if (_this.props.type == 'line') {
 	                        switch (key) {
 	                            case 'search':
 	                                return _react2["default"].createElement(
@@ -90974,6 +91135,16 @@
 	                                    name
 	                                );
 	                        }
+	                    } else if (_this.props.type == 'icon') {
+	                        var iconType = itemProps.iconType,
+	                            other = _objectWithoutProperties(itemProps, ['iconType']);
+	
+	                        iconType = iconType ? iconType : _this.props.iconTypes[key];
+	                        return _react2["default"].createElement(
+	                            'span',
+	                            _extends({ key: key }, other, { colors: colors, className: clss + ' icon', title: name }),
+	                            _react2["default"].createElement(_beeIcon2["default"], { type: iconType })
+	                        );
 	                    }
 	                }
 	            } else {
@@ -91019,277 +91190,270 @@
 /* 622 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	exports["default"] = {
-	    'add': { //新增
-	        'colors': 'primary',
-	        'name_zh_CN': '新增',
-	        'name_zh_TW': '新增',
-	        'name_en_US': 'New',
-	        'hotkey': 'alt+n',
-	        'className': 'ac-btns-add'
+	    "add": {
+	        "colors": "primary",
+	        "hotkey": "alt+n",
+	        "className": "ac-btns-add",
+	        "name": "新增"
 	    },
-	    'confirm': { //确认
-	        'colors': 'primary',
-	        'name_zh_CN': '确认',
-	        'name_zh_TW': '確認',
-	        'name_en_US': 'Confirm',
-	        'className': 'ac-btns-confirm'
+	    "confirm": {
+	        "colors": "primary",
+	        "className": "ac-btns-confirm",
+	        "name": "确认"
 	    },
-	    'detail': { //详情
-	        'colors': 'write',
-	        'name_zh_CN': '详情',
-	        'name_zh_TW': '詳情',
-	        'name_en_US': 'Details',
-	        'className': 'ac-btns-detail'
+	    "detail": {
+	        "colors": "write",
+	        "className": "ac-btns-detail",
+	        "name": "详情"
 	    },
-	    'search': { //查询
-	        'colors': 'primary',
-	        'name_zh_CN': '查询',
-	        'name_zh_TW': '查詢',
-	        'name_en_US': 'Search',
-	        'hotkey': 'ctrl+enter',
-	        'className': 'ac-btns-search'
+	    "search": {
+	        "colors": "primary",
+	        "hotkey": "ctrl+enter",
+	        "className": "ac-btns-search",
+	        "name": "查询"
 	    },
-	    'clear': { //清空
-	        'colors': 'write',
-	        'name_zh_CN': '清空',
-	        'name_zh_TW': '清空',
-	        'name_en_US': 'Clear',
-	        'hotkey': 'ctrl+r',
-	        'className': 'ac-btns-clear'
+	    "clear": {
+	        "colors": "write",
+	        "hotkey": "ctrl+r",
+	        "className": "ac-btns-clear",
+	        "name": "清空"
 	    },
-	    'empty': { //置空
-	        'colors': 'write',
-	        'name_zh_CN': '清空',
-	        'name_zh_TW': '清空',
-	        'name_en_US': 'Clear',
-	        'hotkey': 'ctrl+r',
-	        'className': 'ac-btns-empty'
+	    "empty": {
+	        "colors": "write",
+	        "hotkey": "ctrl+r",
+	        "className": "ac-btns-empty",
+	        "name": "清空"
 	    },
-	    'export': { //导出
-	        'colors': 'write',
-	        'name_zh_CN': '导出',
-	        'name_zh_TW': '導出',
-	        'name_en_US': 'Export',
-	        'hotkey': '',
-	        'className': 'ac-btns-export'
+	    "export": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-export",
+	        "name": "导出"
 	    },
-	    'import': { //导入
-	        'colors': 'write',
-	        'name_zh_CN': '导入',
-	        'name_zh_TW': '導入',
-	        'name_en_US': 'Import',
-	        'hotkey': '',
-	        'className': 'ac-btns-import'
+	    "import": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-import",
+	        "name": "导入"
 	    },
-	    'template': { //导入模板下载
-	        'colors': 'write',
-	        'name_zh_CN': '导入模板下载',
-	        'name_zh_TW': '導入模板下載',
-	        'name_en_US': 'Import template download',
-	        'hotkey': '',
-	        'className': 'ac-btns-template'
+	    "template": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-template",
+	        "name": "导入模板下载"
 	    },
-	    'save': { //保存
-	        'colors': 'primary',
-	        'name_zh_CN': '保存',
-	        'name_zh_TW': '保存',
-	        'name_en_US': 'Save',
-	        'hotkey': '',
-	        'className': 'ac-btns-save'
+	    "save": {
+	        "colors": "primary",
+	        "hotkey": "",
+	        "className": "ac-btns-save",
+	        "name": "保存"
 	    },
-	    'cancel': { //取消
-	        'colors': 'write',
-	        'name_zh_CN': '取消',
-	        'name_zh_TW': '取消',
-	        'name_en_US': 'Cancel',
-	        'hotkey': '',
-	        'className': 'ac-btns-cancel'
+	    "cancel": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-cancel",
+	        "name": "取消"
 	    },
-	    'update': { //修改
-	        'colors': 'write',
-	        'name_zh_CN': '修改',
-	        'name_zh_TW': '修改',
-	        'name_en_US': 'Modify',
-	        'hotkey': '',
-	        'className': 'ac-btns-update'
+	    "update": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-update",
+	        "name": "修改"
 	    },
-	    'delete': { //删除
-	        'colors': 'write',
-	        'name_zh_CN': '删除',
-	        'name_zh_TW': '刪除',
-	        'name_en_US': 'Delete',
-	        'hotkey': '',
-	        'className': 'ac-btns-delete'
+	    "delete": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-delete",
+	        "name": "删除"
 	    },
-	    'pbmsubmit': { //提交
-	        'colors': 'write',
-	        'name_zh_CN': '提交',
-	        'name_zh_TW': '提交',
-	        'name_en_US': 'Submit',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmsubmit'
+	    "pbmsubmit": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmsubmit",
+	        "name": "提交"
 	    },
-	    'pbmcancle': { //撤回
-	        'colors': 'write',
-	        'name_zh_CN': '撤回',
-	        'name_zh_TW': '撤回',
-	        'name_en_US': 'Recall',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmcancle'
+	    "pbmcancle": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmcancle",
+	        "name": "撤回"
 	    },
-	    'pbmapprove': { //审批
-	        'colors': 'write',
-	        'name_zh_CN': '审批',
-	        'name_zh_TW': '審批',
-	        'name_en_US': 'Approval',
-	        'hotkey': '',
-	        'className': 'ac-btns-pbmapprove'
+	    "pbmapprove": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-pbmapprove",
+	        "name": "审批"
 	    },
-	    'appoint': { //指派
-	        'colors': 'write',
-	        'name_zh_CN': '指派',
-	        'name_zh_TW': '指派',
-	        'name_en_US': 'Appoint',
-	        'hotkey': '',
-	        'className': 'ac-btns-appoint'
+	    "appoint": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-appoint",
+	        "name": "指派"
 	    },
-	    'printpreview': { //打印预览
-	        'colors': 'write',
-	        'name_zh_CN': '打印预览',
-	        'name_zh_TW': '打印預覽',
-	        'name_en_US': 'Print Preview',
-	        'className': 'ac-btns-printpreview'
+	    "send": {
+	        "colors": "write",
+	        "hotkey": "",
+	        "className": "ac-btns-send",
+	        "name": "发送"
 	    },
-	    'printdesign': { //打印设计
-	        'colors': 'write',
-	        'name_zh_CN': '打印设计',
-	        'name_zh_TW': '打印設計',
-	        'name_en_US': 'Print Design',
-	        'className': 'ac-btns-printdesign'
+	    "printpreview": {
+	        "colors": "write",
+	        "className": "ac-btns-printpreview",
+	        "name": "打印预览"
 	    },
-	    'upload': { //上传
-	        'colors': 'primary',
-	        'name_zh_CN': '上传',
-	        'name_zh_TW': '上傳',
-	        'name_en_US': 'Upload',
-	        'className': 'ac-btns-upload'
+	    "printdesign": {
+	        "colors": "write",
+	        "className": "ac-btns-printdesign",
+	        "name": "打印设计"
 	    },
-	    'reupload': { //重新上传
-	        'colors': 'primary',
-	        'name_zh_CN': '重新上传',
-	        'name_zh_TW': '重新上傳',
-	        'name_en_US': 'Re-upload',
-	        'className': 'ac-btns-reupload'
+	    "upload": {
+	        "colors": "primary",
+	        "className": "ac-btns-upload",
+	        "name": "上传"
 	    },
-	    'download': { //下载
-	        'colors': 'write',
-	        'name_zh_CN': '下载',
-	        'name_zh_TW': '下載',
-	        'name_en_US': 'Download',
-	        'className': 'ac-btns-download'
+	    "reupload": {
+	        "colors": "primary",
+	        "className": "ac-btns-reupload",
+	        "name": "重新上传"
 	    },
-	    'addRow': { //增行
-	        'colors': 'write',
-	        'name_zh_CN': '增行',
-	        'name_zh_TW': '增行',
-	        'name_en_US': 'New',
-	        'className': 'ac-btns-addRow'
+	    "download": {
+	        "colors": "write",
+	        "className": "ac-btns-download",
+	        "name": "下载"
 	    },
-	    'delRow': { //删行
-	        'colors': 'write',
-	        'name_zh_CN': '删行',
-	        'name_zh_TW': '刪行',
-	        'name_en_US': 'Delete',
-	        'className': 'ac-btns-delRow'
+	    "addRow": {
+	        "colors": "write",
+	        "className": "ac-btns-addRow",
+	        "name": "增行"
 	    },
-	    'copyRow': { //复制行
-	        'colors': 'write',
-	        'name_zh_CN': '复制行',
-	        'name_zh_TW': '複製行',
-	        'name_en_US': 'Duplicate rows',
-	        'className': 'ac-btns-copyRow'
+	    "delRow": {
+	        "colors": "write",
+	        "className": "ac-btns-delRow",
+	        "name": "删行"
 	    },
-	    'max': { //最大化
-	        'colors': 'write',
-	        'name_zh_CN': '最大化',
-	        'name_zh_TW': '最大化',
-	        'name_en_US': 'Maximize',
-	        'className': 'ac-btns-max'
+	    "copyRow": {
+	        "colors": "write",
+	        "className": "ac-btns-copyRow",
+	        "name": "复制行"
 	    },
-	    'min': { //最小化
-	        'colors': 'write',
-	        'name_zh_CN': 'min',
-	        'name_zh_TW': '最小化',
-	        'name_en_US': 'Minimize',
-	        'className': 'ac-btns-min'
+	    "max": {
+	        "colors": "write",
+	        "className": "ac-btns-max",
+	        "name": "最大化"
 	    },
-	    'copyToEnd': { //粘贴至末行
-	        'colors': 'write',
-	        'name_zh_CN': '粘贴至末行',
-	        'name_zh_TW': '粘貼至末行',
-	        'name_en_US': 'Paste to end line',
-	        'className': 'ac-btns-copyToEnd'
+	    "min": {
+	        "colors": "write",
+	        "className": "ac-btns-min",
+	        "name": "min"
 	    },
-	    'organizationChat': { //机构图
-	        'colors': 'write',
-	        'name_zh_CN': '机构图',
-	        'name_zh_TW': '機構圖',
-	        'name_en_US': 'Organization Chat',
-	        'className': 'ac-btns-organizationChat'
+	    "copyToEnd": {
+	        "colors": "write",
+	        "className": "ac-btns-copyToEnd",
+	        "name": "粘贴至末行"
 	    },
-	    'enable': { //启用
-	        'colors': 'write',
-	        'name_zh_CN': '启用',
-	        'name_zh_TW': '啟用',
-	        'name_en_US': 'Enable',
-	        'className': 'ac-btns-enable'
+	    "copyToHere": {
+	        "colors": "write",
+	        "className": "ac-btns-copyToHere",
+	        "name": "粘贴至此处"
 	    },
-	    'disabled': { //停用
-	        'colors': 'write',
-	        'name_zh_CN': '停用',
-	        'name_zh_TW': '停用',
-	        'name_en_US': 'Disabled',
-	        'className': 'ac-btns-disabled'
+	    "organizationChat": {
+	        "colors": "write",
+	        "className": "ac-btns-organizationChat",
+	        "name": "机构图"
 	    },
-	    'next': { //下一条
-	        'colors': 'write',
-	        'name_zh_CN': '下一条',
-	        'name_zh_TW': '下一條',
-	        'name_en_US': 'Next',
-	        'className': 'ac-btns-next'
+	    "enable": {
+	        "colors": "write",
+	        "className": "ac-btns-enable",
+	        "name": "启用"
 	    },
-	    'previous': { //上一条
-	        'colors': 'write',
-	        'name_zh_CN': '上一条',
-	        'name_zh_TW': '上一條',
-	        'name_en_US': 'Previous',
-	        'className': 'ac-btns-previous'
+	    "disabled": {
+	        "colors": "write",
+	        "className": "ac-btns-disabled",
+	        "name": "停用"
 	    },
-	    'first': { //第一条
-	        'colors': 'write',
-	        'name_zh_CN': '第一条',
-	        'name_zh_TW': '第一條',
-	        'name_en_US': 'First',
-	        'className': 'ac-btns-first'
+	    "next": {
+	        "colors": "write",
+	        "className": "ac-btns-next",
+	        "name": "下一条"
 	    },
-	    'last': { //最后一条
-	        'colors': 'write',
-	        'name_zh_CN': '最后一条',
-	        'name_zh_TW': '最後一條',
-	        'name_en_US': 'Last',
-	        'className': 'ac-btns-last'
+	    "previous": {
+	        "colors": "write",
+	        "className": "ac-btns-previous",
+	        "name": "上一条"
+	    },
+	    "first": {
+	        "colors": "write",
+	        "className": "ac-btns-first",
+	        "name": "第一条"
+	    },
+	    "last": {
+	        "colors": "write",
+	        "className": "ac-btns-last",
+	        "name": "最后一条"
 	    }
 	};
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ }),
 /* 623 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports["default"] = {
+	    "_more": "更多",
+	
+	    "add": "新增",
+	    "confirm": "确认",
+	    "detail": "详情",
+	    "search": "查询",
+	    "clear": "清空",
+	    "empty": "清空",
+	    "export": "导出",
+	    "import": "导入",
+	    "template": "导入模板下载",
+	    "save": "保存",
+	    "cancel": "取消",
+	    "update": "修改",
+	    "delete": "删除",
+	    "pbmsubmit": "提交",
+	    "pbmcancle": "撤回",
+	    "pbmapprove": "审批",
+	    "appoint": "指派",
+	    "send": "发送",
+	    "printpreview": "打印预览",
+	    "printdesign": "打印设计",
+	    "upload": "上传",
+	    "reupload": "重新上传",
+	    "download": "下载",
+	    "addRow": "增行",
+	    "delRow": "删行",
+	    "copyRow": "复制行",
+	    "max": "最大化",
+	    "min": "min",
+	    "copyToEnd": "粘贴至末行",
+	    "copyToHere": "粘贴至此处",
+	    "organizationChat": "机构图",
+	    "enable": "启用",
+	    "disabled": "停用",
+	    "next": "下一条",
+	    "previous": "上一条",
+	    "first": "第一条",
+	    "last": "最后一条"
+	};
+	module.exports = exports["default"];
+
+/***/ }),
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91298,9 +91462,9 @@
 	 * Module dependenices
 	 */
 	
-	const clone = __webpack_require__(624);
-	const typeOf = __webpack_require__(629);
-	const isPlainObject = __webpack_require__(630);
+	const clone = __webpack_require__(625);
+	const typeOf = __webpack_require__(630);
+	const isPlainObject = __webpack_require__(631);
 	
 	function cloneDeep(val, instanceClone) {
 	  switch (typeOf(val)) {
@@ -91344,7 +91508,7 @@
 
 
 /***/ }),
-/* 624 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
@@ -91357,7 +91521,7 @@
 	'use strict';
 	
 	const valueOf = Symbol.prototype.valueOf;
-	const typeOf = __webpack_require__(629);
+	const typeOf = __webpack_require__(630);
 	
 	function clone(val, deep) {
 	  switch (typeOf(val)) {
@@ -91431,10 +91595,10 @@
 	
 	module.exports = clone;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(625).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(626).Buffer))
 
 /***/ }),
-/* 625 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -91447,9 +91611,9 @@
 	
 	'use strict'
 	
-	var base64 = __webpack_require__(626)
-	var ieee754 = __webpack_require__(627)
-	var isArray = __webpack_require__(628)
+	var base64 = __webpack_require__(627)
+	var ieee754 = __webpack_require__(628)
+	var isArray = __webpack_require__(629)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -93230,7 +93394,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 626 */
+/* 627 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -93388,7 +93552,7 @@
 
 
 /***/ }),
-/* 627 */
+/* 628 */
 /***/ (function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -93478,7 +93642,7 @@
 
 
 /***/ }),
-/* 628 */
+/* 629 */
 /***/ (function(module, exports) {
 
 	var toString = {}.toString;
@@ -93489,7 +93653,7 @@
 
 
 /***/ }),
-/* 629 */
+/* 630 */
 /***/ (function(module, exports) {
 
 	var toString = Object.prototype.toString;
@@ -93624,7 +93788,7 @@
 
 
 /***/ }),
-/* 630 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*!
@@ -93636,7 +93800,7 @@
 	
 	'use strict';
 	
-	var isObject = __webpack_require__(631);
+	var isObject = __webpack_require__(632);
 	
 	function isObjectObject(o) {
 	  return isObject(o) === true
@@ -93667,7 +93831,7 @@
 
 
 /***/ }),
-/* 631 */
+/* 632 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -93685,22 +93849,22 @@
 
 
 /***/ }),
-/* 632 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(633);
+	module.exports = __webpack_require__(634);
 
 /***/ }),
-/* 633 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
-	var bind = __webpack_require__(635);
-	var Axios = __webpack_require__(636);
-	var mergeConfig = __webpack_require__(654);
-	var defaults = __webpack_require__(642);
+	var utils = __webpack_require__(635);
+	var bind = __webpack_require__(636);
+	var Axios = __webpack_require__(637);
+	var mergeConfig = __webpack_require__(655);
+	var defaults = __webpack_require__(643);
 	
 	/**
 	 * Create an instance of Axios
@@ -93733,15 +93897,15 @@
 	};
 	
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(655);
-	axios.CancelToken = __webpack_require__(656);
-	axios.isCancel = __webpack_require__(641);
+	axios.Cancel = __webpack_require__(656);
+	axios.CancelToken = __webpack_require__(657);
+	axios.isCancel = __webpack_require__(642);
 	
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(657);
+	axios.spread = __webpack_require__(658);
 	
 	module.exports = axios;
 	
@@ -93750,12 +93914,12 @@
 
 
 /***/ }),
-/* 634 */
+/* 635 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var bind = __webpack_require__(635);
+	var bind = __webpack_require__(636);
 	
 	/*global toString:true*/
 	
@@ -94100,7 +94264,7 @@
 
 
 /***/ }),
-/* 635 */
+/* 636 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94117,16 +94281,16 @@
 
 
 /***/ }),
-/* 636 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
-	var buildURL = __webpack_require__(637);
-	var InterceptorManager = __webpack_require__(638);
-	var dispatchRequest = __webpack_require__(639);
-	var mergeConfig = __webpack_require__(654);
+	var utils = __webpack_require__(635);
+	var buildURL = __webpack_require__(638);
+	var InterceptorManager = __webpack_require__(639);
+	var dispatchRequest = __webpack_require__(640);
+	var mergeConfig = __webpack_require__(655);
 	
 	/**
 	 * Create a new instance of Axios
@@ -94217,12 +94381,12 @@
 
 
 /***/ }),
-/* 637 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -94294,12 +94458,12 @@
 
 
 /***/ }),
-/* 638 */
+/* 639 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -94352,15 +94516,15 @@
 
 
 /***/ }),
-/* 639 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
-	var transformData = __webpack_require__(640);
-	var isCancel = __webpack_require__(641);
-	var defaults = __webpack_require__(642);
+	var utils = __webpack_require__(635);
+	var transformData = __webpack_require__(641);
+	var isCancel = __webpack_require__(642);
+	var defaults = __webpack_require__(643);
 	
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -94437,12 +94601,12 @@
 
 
 /***/ }),
-/* 640 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -94463,7 +94627,7 @@
 
 
 /***/ }),
-/* 641 */
+/* 642 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94474,13 +94638,13 @@
 
 
 /***/ }),
-/* 642 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(634);
-	var normalizeHeaderName = __webpack_require__(643);
+	var utils = __webpack_require__(635);
+	var normalizeHeaderName = __webpack_require__(644);
 	
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
@@ -94496,10 +94660,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(644);
+	    adapter = __webpack_require__(645);
 	  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(644);
+	    adapter = __webpack_require__(645);
 	  }
 	  return adapter;
 	}
@@ -94578,12 +94742,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 643 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -94596,18 +94760,18 @@
 
 
 /***/ }),
-/* 644 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
-	var settle = __webpack_require__(645);
-	var buildURL = __webpack_require__(637);
-	var buildFullPath = __webpack_require__(648);
-	var parseHeaders = __webpack_require__(651);
-	var isURLSameOrigin = __webpack_require__(652);
-	var createError = __webpack_require__(646);
+	var utils = __webpack_require__(635);
+	var settle = __webpack_require__(646);
+	var buildURL = __webpack_require__(638);
+	var buildFullPath = __webpack_require__(649);
+	var parseHeaders = __webpack_require__(652);
+	var isURLSameOrigin = __webpack_require__(653);
+	var createError = __webpack_require__(647);
 	
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -94704,7 +94868,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(653);
+	      var cookies = __webpack_require__(654);
 	
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
@@ -94782,12 +94946,12 @@
 
 
 /***/ }),
-/* 645 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var createError = __webpack_require__(646);
+	var createError = __webpack_require__(647);
 	
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -94813,12 +94977,12 @@
 
 
 /***/ }),
-/* 646 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var enhanceError = __webpack_require__(647);
+	var enhanceError = __webpack_require__(648);
 	
 	/**
 	 * Create an Error with the specified message, config, error code, request and response.
@@ -94837,7 +95001,7 @@
 
 
 /***/ }),
-/* 647 */
+/* 648 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94885,13 +95049,13 @@
 
 
 /***/ }),
-/* 648 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var isAbsoluteURL = __webpack_require__(649);
-	var combineURLs = __webpack_require__(650);
+	var isAbsoluteURL = __webpack_require__(650);
+	var combineURLs = __webpack_require__(651);
 	
 	/**
 	 * Creates a new URL by combining the baseURL with the requestedURL,
@@ -94911,7 +95075,7 @@
 
 
 /***/ }),
-/* 649 */
+/* 650 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94931,7 +95095,7 @@
 
 
 /***/ }),
-/* 650 */
+/* 651 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94951,12 +95115,12 @@
 
 
 /***/ }),
-/* 651 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	// Headers whose duplicates are ignored by node
 	// c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -95010,12 +95174,12 @@
 
 
 /***/ }),
-/* 652 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -95084,12 +95248,12 @@
 
 
 /***/ }),
-/* 653 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -95143,12 +95307,12 @@
 
 
 /***/ }),
-/* 654 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(634);
+	var utils = __webpack_require__(635);
 	
 	/**
 	 * Config-specific merge-function which creates a new config-object
@@ -95222,7 +95386,7 @@
 
 
 /***/ }),
-/* 655 */
+/* 656 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95247,12 +95411,12 @@
 
 
 /***/ }),
-/* 656 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Cancel = __webpack_require__(655);
+	var Cancel = __webpack_require__(656);
 	
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -95310,7 +95474,7 @@
 
 
 /***/ }),
-/* 657 */
+/* 658 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95343,7 +95507,7 @@
 
 
 /***/ }),
-/* 658 */
+/* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95593,7 +95757,7 @@
 	};
 
 /***/ }),
-/* 659 */
+/* 660 */
 /***/ (function(module, exports) {
 
 	'use strict';
