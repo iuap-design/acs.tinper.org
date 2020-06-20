@@ -375,26 +375,10 @@ var _initialiseProps = function _initialiseProps() {
                         item.render = function (text, record, index) {
                             var displayName = 'name';
                             if (fieldProps && fieldProps.displayName) name = fieldProps.displayName;
-                            var value = null;
-                            if (record._edit) {
-                                if (typeof text == 'string') {
-                                    try {
-                                        value = JSON.parse(text);
-                                    } catch (error) {
-                                        value = text;
-                                    }
-                                } else if (Array.isArray(text)) {
-                                    value = text;
-                                } else if ((typeof text === "undefined" ? "undefined" : _typeof(text)) == 'object') {
-                                    value = text;
-                                }
-                            } else {
-                                text = oldRender && oldRender(text, record, index);
-                                if (text && (typeof text === "undefined" ? "undefined" : _typeof(text)) == 'object' && !record._edit) {
-                                    text = oldRender && oldRender(text[displayName], record, index);
-                                }
+                            var value = oldRender && oldRender(text, record, index);
+                            if (text && (typeof text === "undefined" ? "undefined" : _typeof(text)) == 'object' && !record._edit) {
+                                value = oldRender && oldRender(text[displayName], record, index);
                             }
-
                             return record._edit ? _react2["default"].createElement(
                                 "span",
                                 null,
@@ -404,12 +388,13 @@ var _initialiseProps = function _initialiseProps() {
                                     field: item.dataIndex,
                                     onChange: _this2.onChange,
                                     status: record._status,
-                                    onValidate: _this2.onValidate
+                                    onValidate: _this2.onValidate,
+                                    text: item.listKey ? record[item.listKey] : value
                                 }))
                             ) : _react2["default"].createElement(
                                 "div",
                                 null,
-                                text
+                                item.listKey ? record[item.listKey] : value
                             );
                         };
                         break;
@@ -446,6 +431,9 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onValidate = function (filed, errors, index) {
+        if (filed == '_delete') {
+            delete _this2.errors[index];
+        }
         var current = _this2.errors[index] || {};
         if (errors) {
             current[filed] = errors[filed][0].message;
@@ -580,9 +568,12 @@ var _initialiseProps = function _initialiseProps() {
                     var data = (0, _lodash2["default"])(_this2.state.data);
                     _this2.selectList.forEach(function (item, index) {
                         data.splice(item._index - index, 1);
+                        _this2.onValidate('_delete', '', item._index);
                     });
+
                     data = _this2.resetChecked(data, true);
                     _this2.allData = data;
+                    _this2.props.onChange(data);
                     _this2.setState({
                         data: data
                     }, function () {

@@ -24,7 +24,7 @@ import 'bee-complex-grid/build/Grid.css';
 
 |参数|说明|类型|默认值|
 |:--|:---:|:--:|---:|
-|paginationObj|表格分页，具体参考[分页API](http://bee.tinper.org/bee-pagination#bee-pagination)|Object|{activePage: 1, total: 0,items:1} <br/> `horizontalPosition` : 分页组件的对齐方式。默认值是 `left` ，可以设置为 `center`、`right`。 <br/> `verticalPosition` ：分页组件位于表格上方还是下方。默认值是 `bottom` ，可以设置为 `top`, 当值为 `none` 时不显示分页|
+|paginationObj|表格分页，具体参考[分页API](http://bee.tinper.org/tinper-bee/bee-pagination#API)|Object|{activePage: 1, total: 0,items:1} <br/> `horizontalPosition` : 分页组件的对齐方式。默认值是 `left` ，可以设置为 `center`、`right`。 <br/> `verticalPosition` ：分页组件位于表格上方还是下方。默认值是 `bottom` ，可以设置为 `top`, 当值为 `none` 时不显示分页|
 |multiSelect|是否开启多选功能或单选功能。`multiSelect={{ type:"radio" }}` 时为单选表格，`multiSelect={{ type:"checkbox" }}` 时为多选表格，传其他值时均为普通表格|Object|{ type:"checkbox" }|
 |showHeaderMenu|设置为 `false` 时，会隐藏表头的下拉菜单和右上角的列过滤面板。默认显示。|boolean|true|
 |showFilterMenu|设置为 `true` 时，表头下拉菜单中会显示 “打开/关闭行过滤” 的选项。行过滤：即按条件或值筛选行数据源`data`的功能。（备注：在 showHeaderMenu 值为 true 时有效）|boolean|false|
@@ -36,6 +36,7 @@ import 'bee-complex-grid/build/Grid.css';
 |resetColumns|重置columns|function|this.refs.grid.resetColumns(columns)|
 |exportData|要导出的数据源|array	|-|
 |afterRowFilter|行过滤菜单显示隐藏时的回调函数，第一个参数会返回当前行过滤展开关闭状态|Function	|-|
+|afterRowLock|表头锁定解锁的回调函数。包含三个参数：列的key值，是否锁定，所有column信息|Function	|-|
 |noReplaceColumns|重置column内容|boolean	|false|
 |canSum |是否开启合计功能|boolean	|false|
 

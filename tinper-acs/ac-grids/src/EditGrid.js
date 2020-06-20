@@ -65,6 +65,7 @@ class EditGrid extends Component {
            delete current[filed];
         }
         this.errors[index] = current;
+        this.props.onValidate&&this.props.onValidate(this.errors);
     }
     validate = ()=>{
         if(Object.keys(this.errors).length){
@@ -105,6 +106,7 @@ class EditGrid extends Component {
                                 customizeRender={item.customizeRender}
                                 onValidate={this.onValidate}
                                 filedProps={item.filedProps}
+                                record={record}
                             />
                 }
             }else{
@@ -148,7 +150,11 @@ class EditGrid extends Component {
         this.setState({
             data:data
         })
-        this.props.onChange(data);
+        this.props.onChange(data,{
+            index,
+            key,
+            value
+        });
     }
 
     //选中数据的回调
@@ -156,7 +162,9 @@ class EditGrid extends Component {
         let data = this.resetChecked(this.state.data)
         let selectDataIds = []
         selectData.forEach((item)=>{
-            data[item.index-1]._checked=!data[item.index-1]._checked;
+            if(data[item.index-1]){
+                data[item.index-1]._checked=!data[item.index-1]._checked;
+            }
             let id = 'selectDataId'+this.selectDataId;
             data.selectDataId = id;
             selectDataIds.push(id);
@@ -193,7 +201,7 @@ class EditGrid extends Component {
                 data:nextProps.data
             })
         }
-        if('disabled' in nextProps){
+        if('disabled' in nextProps||(!isequal(nextProps.columns,this.state.columns))){
             this.setDataColumn(nextProps.disabled,nextProps.columns,nextProps.data)
         }
     }

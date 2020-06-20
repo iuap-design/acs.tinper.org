@@ -37320,19 +37320,31 @@
 	
 	var _acBtns2 = _interopRequireDefault(_acBtns);
 	
-	var _cloneDeep = __webpack_require__(624);
+	var _beeCheckbox = __webpack_require__(624);
+	
+	var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
+	
+	var _cloneDeep = __webpack_require__(627);
 	
 	var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
 	
-	var _axios = __webpack_require__(633);
+	var _axios = __webpack_require__(636);
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _utils = __webpack_require__(659);
+	var _utils = __webpack_require__(662);
 	
-	var _i18n = __webpack_require__(660);
+	var _i18n = __webpack_require__(663);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
+	
+	var _newMultiSelect = __webpack_require__(664);
+	
+	var _newMultiSelect2 = _interopRequireDefault(_newMultiSelect);
+	
+	var _sort = __webpack_require__(667);
+	
+	var _sort2 = _interopRequireDefault(_sort);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -37346,6 +37358,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
+	var MultiSelectTable = (0, _newMultiSelect2['default'])(_beeTable2['default'], _beeCheckbox2['default']);
+	var ComplexTable = (0, _sort2['default'])(MultiSelectTable, _beeIcon2['default']);
 	var propTypes = {
 	    canUnfold: _propTypes2['default'].bool, //是否可以展开收起
 	    id: _propTypes2['default'].string.isRequired,
@@ -37355,7 +37369,15 @@
 	    url: _propTypes2['default'].object, //地址
 	    uploadProps: _propTypes2['default'].object, //附件上传参数
 	    powerBtns: _propTypes2['default'].array, //可用按钮集合
-	    callback: _propTypes2['default'].func //回调 第一个参数：成功(success)/失败(error)； 第二个参数：list 获得文件列表；delete 删除； upload 上传。 第三个参数：成功信息/错误信息。 第四个参数：null/error对象
+	    callback: _propTypes2['default'].func, //回调 第一个参数：成功(success)/失败(error)； 第二个参数：list 获得文件列表；delete 删除； upload 上传。 第三个参数：成功信息/错误信息。 第四个参数：null/error对象
+	    uploadBut: _propTypes2['default'].node, //动态肩部按钮
+	    lineToolbar: _propTypes2['default'].node, //动态行按钮
+	    afterGetList: _propTypes2['default'].func, //获取列表后可执行的操作
+	    vitualDelete: _propTypes2['default'].func, //本地执行删除
+	    recordActiveRow: _propTypes2['default'].func, //记录当前活动行
+	    getSelectedDataFunc: _propTypes2['default'].func, //启用多选后
+	    beforeAct: _propTypes2['default'].func, //执行操作前触发的方法；
+	    type: _propTypes2['default'].string //使用者类型，mdf cn
 	};
 	
 	var defaultProps = {
@@ -37373,7 +37395,11 @@
 	    powerBtns: ['upload', 'reupload', 'download', 'delete', 'confirm', 'cancel'],
 	    localeCookie: 'locale',
 	    callback: function callback() {},
-	    canUnfold: true
+	    canUnfold: true,
+	    getSelectedDataFunc: function getSelectedDataFunc() {},
+	    uploadBut: null,
+	    lineToolbar: null,
+	    operationWidth: 200
 	};
 	
 	var FileList = function (_Component) {
@@ -37384,11 +37410,27 @@
 	
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
+	        _this._handelBeforeAct = function (type) {
+	            var data = _this.state.data;
+	            var beforeAct = _this.props.beforeAct;
+	
+	            var flag = true;
+	            if (beforeAct) {
+	                if (!beforeAct(type, data)) {
+	                    flag = false;
+	                }
+	            }
+	            return flag;
+	        };
+	
 	        _this.getList = function () {
 	            var pageObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	            var propsId = arguments[1];
 	
 	            var id = propsId || _this.props.id;
+	            var afterGetList = _this.props.afterGetList;
+	
+	            if (!_this._handelBeforeAct('list')) return;
 	            if (id) {
 	                var url = _this.props.url.list.replace('{id}', id);
 	                var params = _extends({
@@ -37402,11 +37444,13 @@
 	                    withCredentials: true
 	                }).then(function (res) {
 	                    if (res.status == 200) {
-	                        var data = res.data.data;
-	                        if (data) {
-	                            //data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
+	                        if (res.data.data) {
+	                            var list = res.data.data;
+	                            if (afterGetList) {
+	                                list = afterGetList(list);
+	                            }
 	                            _this.setState({
-	                                data: data.reverse(),
+	                                data: list,
 	                                pageSize: params.pageSize,
 	                                pageNo: params.pageNo
 	                            });
@@ -37439,10 +37483,16 @@
 	            _this.setState({
 	                data: data,
 	                selectedList: selectedList
+	            }, function () {
+	                _this.props.getSelectedDataFunc && _this.props.getSelectedDataFunc(selectedList, record, index);
 	            });
 	        };
 	
 	        _this.onRowHover = function (index, record) {
+	            var recordActiveRow = _this.props.recordActiveRow;
+	
+	            if (recordActiveRow) recordActiveRow(record);
+	            _this.hoverData = record;
 	            _this.state.hoverData = record;
 	            _this.setState({
 	                hoverData: record
@@ -37485,6 +37535,10 @@
 	        };
 	
 	        _this['delete'] = function () {
+	            var vitualDelete = _this.props.vitualDelete;
+	
+	            if (!_this._handelBeforeAct('delete')) return;
+	            if (vitualDelete && !vitualDelete(_this.state.hoverData, _this)) return; //本地删除
 	            var url = _this.props.url['delete'].replace('{id}', _this.state.hoverData.id);
 	            (0, _axios2['default'])(url, {
 	                method: "delete",
@@ -37510,6 +37564,7 @@
 	        };
 	
 	        _this.download = function () {
+	            if (!_this._handelBeforeAct('download')) return;
 	            var url = _this.props.url.info.replace('{id}', _this.state.hoverData.id);
 	            (0, _axios2['default'])(url, {
 	                method: "get",
@@ -37532,18 +37587,19 @@
 	            var data = (0, _cloneDeep2['default'])(_this.state.data);
 	            if (info.file.status !== 'uploading') {}
 	            if (info.file.status === 'done') {
-	                var id = info.file.response.data[0].id;
-	                data.forEach(function (item) {
-	                    if (item.uid == info.file.uid) {
-	                        item.uploadStatus = 'done';
-	                        item.id = id;
-	                    }
-	                });
-	                _this.setState({
-	                    data: data
-	                });
+	                // let id = info.file.response.data[0].id;
+	                // data.forEach(item=>{
+	                //     if(item.uid==info.file.uid){
+	                //         item.uploadStatus='done';
+	                //         item.id=id
+	                //     }
+	                // });
+	                // this.setState({
+	                //     data
+	                // })
 	                _this.props.callback('success', 'upload', info.file.response);
 	                console.log(_this.localObj['uploadSuccess']);
+	                _this.getList();
 	            }
 	            if (info.file.status === 'removed') {
 	                var msg = info.file.response.displayMessage[(0, _utils.getCookie)(_this.props.localeCookie)] || info.file.response.displayMessage['zh_CN'];
@@ -37594,8 +37650,10 @@
 	            pageSize: 999999,
 	            hoverData: {},
 	            id: props.id,
-	            open: true
+	            open: true,
+	            reload: Math.random()
 	        };
+	        _this.hoverData = {};
 	        _this.localObj = _i18n2['default'][(0, _utils.getCookie)(props.localeCookie)] || _i18n2['default']['zh_CN'];
 	        _this.columns = [{
 	            title: _this.localObj.fileName,
@@ -37666,7 +37724,7 @@
 	            title: _this.localObj.operation,
 	            dataIndex: "e",
 	            key: "e",
-	            width: 200,
+	            width: props.operationWidth,
 	            render: function render(text, record, index) {
 	                if (!_this.props.disabled) {
 	                    if (record.uploadStatus == 'error') {
@@ -37709,7 +37767,11 @@
 	                        return _react2['default'].createElement(
 	                            'div',
 	                            { className: 'opt-btns' },
-	                            _react2['default'].createElement(_acBtns2['default'], { localeCookie: props.localeCookie,
+	                            _this.props.type == 'mdf' ? _react2['default'].createElement(
+	                                'div',
+	                                { className: 'file-list-linetoolbar-container' },
+	                                _react2['default'].cloneElement(props.lineToolbar, { record: record })
+	                            ) : _react2['default'].createElement(_acBtns2['default'], { localeCookie: props.localeCookie,
 	                                type: 'line',
 	                                btns: {
 	                                    download: {
@@ -37730,7 +37792,12 @@
 	    }
 	
 	    FileList.prototype.componentDidMount = function componentDidMount() {
-	        this.props.getListNow && this.getList();
+	        var _props = this.props,
+	            getChild = _props.getChild,
+	            getListNow = _props.getListNow;
+	
+	        getChild && getChild(this);
+	        getListNow && this.getList();
 	    };
 	
 	    FileList.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -37746,7 +37813,15 @@
 	                id: nextProps.id
 	            });
 	        }
+	        if (nextProps.reload && nextProps.reload !== this.state.reload) {
+	            this.getList({}, nextProps.id);
+	            this.setState({
+	                reload: nextProps.reload
+	            });
+	        }
 	    };
+	
+	    /*操作前处理方法*/
 	
 	    /**获得文件列表 */
 	
@@ -37771,13 +37846,16 @@
 	
 	
 	    FileList.prototype.render = function render() {
-	        var _props = this.props,
-	            clsfix = _props.clsfix,
-	            id = _props.id,
-	            disabled = _props.disabled,
-	            uploadProps = _props.uploadProps,
-	            canUnfold = _props.canUnfold,
-	            title = _props.title;
+	        var _props2 = this.props,
+	            clsfix = _props2.clsfix,
+	            id = _props2.id,
+	            disabled = _props2.disabled,
+	            uploadProps = _props2.uploadProps,
+	            canUnfold = _props2.canUnfold,
+	            uploadBut = _props2.uploadBut,
+	            toolbar = _props2.toolbar,
+	            type = _props2.type,
+	            title = _props2.title;
 	        var _state = this.state,
 	            data = _state.data,
 	            open = _state.open;
@@ -37814,9 +37892,14 @@
 	                        btns: {
 	                            upload: {
 	                                node: _react2['default'].createElement(
-	                                    _beeUpload2['default'],
-	                                    uploadP,
-	                                    _react2['default'].createElement(_acBtns2['default'], { localeCookie: this.props.localeCookie, powerBtns: this.props.powerBtns, btns: { upload: {} } })
+	                                    'div',
+	                                    null,
+	                                    toolbar,
+	                                    _react2['default'].createElement(
+	                                        _beeUpload2['default'],
+	                                        uploadP,
+	                                        type == 'mdf' ? uploadBut : _react2['default'].createElement(_acBtns2['default'], { localeCookie: this.props.localeCookie, powerBtns: this.props.powerBtns, btns: { upload: {} } })
+	                                    )
 	                                )
 	                            }
 	                        }
@@ -37826,7 +37909,7 @@
 	            _react2['default'].createElement(
 	                'div',
 	                { className: open ? clsfix + '-file-area' : clsfix + '-file-area hide' },
-	                _react2['default'].createElement(_beeTable2['default'], {
+	                type == 'mdf' ? _react2['default'].createElement(ComplexTable, {
 	                    columns: this.columns,
 	                    data: data,
 	                    rowKey: function rowKey(record, index) {
@@ -37835,7 +37918,17 @@
 	                    scroll: { y: 400 },
 	                    getSelectedDataFunc: this.getSelectedDataFunc,
 	                    onRowHover: this.onRowHover,
-	                    multiSelect: false
+	                    multiSelect: { type: "checkbox" }
+	
+	                }) : _react2['default'].createElement(_beeTable2['default'], {
+	                    columns: this.columns,
+	                    data: data,
+	                    rowKey: function rowKey(record, index) {
+	                        return index;
+	                    },
+	                    scroll: { y: 400 },
+	                    getSelectedDataFunc: this.getSelectedDataFunc,
+	                    onRowHover: this.onRowHover
 	
 	                }),
 	                _react2['default'].createElement(
@@ -91458,13 +91551,422 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _Checkbox = __webpack_require__(625);
+	
+	var _Checkbox2 = _interopRequireDefault(_Checkbox);
+	
+	var _CheckboxGroup = __webpack_require__(626);
+	
+	var _CheckboxGroup2 = _interopRequireDefault(_CheckboxGroup);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	_Checkbox2["default"].CheckboxGroup = _CheckboxGroup2["default"];
+	exports["default"] = _Checkbox2["default"];
+	module.exports = exports['default'];
+
+/***/ }),
+/* 625 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _classnames = __webpack_require__(5);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(6);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var propTypes = {
+	
+	    colors: _propTypes2["default"].oneOf(['', 'dark', 'success', 'info', 'warning', 'danger', 'primary']),
+	
+	    disabled: _propTypes2["default"].bool,
+	
+	    inverse: _propTypes2["default"].bool
+	
+	};
+	
+	var defaultProps = {
+	    disabled: false,
+	    inverse: false,
+	    colors: 'primary',
+	    clsPrefix: 'u-checkbox',
+	    defaultChecked: false,
+	    onClick: function onClick() {}
+	};
+	var clsPrefix = 'u-checkbox';
+	
+	var Checkbox = function (_React$Component) {
+	    _inherits(Checkbox, _React$Component);
+	
+	    function Checkbox(props) {
+	        _classCallCheck(this, Checkbox);
+	
+	        var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	
+	        _initialiseProps.call(_this);
+	
+	        _this.state = {
+	            checked: 'checked' in props ? props.checked : props.defaultChecked,
+	            focused: false
+	        };
+	        _this.doubleClickFlag = null;
+	        return _this;
+	    }
+	
+	    Checkbox.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        if ('checked' in nextProps) {
+	            this.setState({
+	                checked: nextProps.checked
+	            });
+	        }
+	    };
+	
+	    Checkbox.prototype.render = function render() {
+	        var _classes;
+	
+	        var _props = this.props,
+	            disabled = _props.disabled,
+	            inverse = _props.inverse,
+	            colors = _props.colors,
+	            size = _props.size,
+	            className = _props.className,
+	            indeterminate = _props.indeterminate,
+	            onClick = _props.onClick,
+	            children = _props.children,
+	            checked = _props.checked,
+	            clsPrefix = _props.clsPrefix,
+	            onDoubleClick = _props.onDoubleClick,
+	            onChange = _props.onChange,
+	            others = _objectWithoutProperties(_props, ['disabled', 'inverse', 'colors', 'size', 'className', 'indeterminate', 'onClick', 'children', 'checked', 'clsPrefix', 'onDoubleClick', 'onChange']);
+	
+	        var input = _react2["default"].createElement('input', _extends({}, others, {
+	            type: 'checkbox',
+	            disabled: this.props.disabled,
+	            onFocus: this.handleFocus,
+	            onBlur: this.handleBlur
+	        }));
+	
+	        var classes = (_classes = {}, _defineProperty(_classes, clsPrefix + '-focused', this.state.focused), _defineProperty(_classes, 'is-checked', this.state.checked), _defineProperty(_classes, 'disabled', disabled), _classes);
+	
+	        if (inverse) {
+	            classes[clsPrefix + '-inverse'] = true;
+	        }
+	
+	        if (colors) {
+	            classes[clsPrefix + '-' + colors] = true;
+	        }
+	
+	        if (size) {
+	            classes[clsPrefix + '-' + size] = true;
+	        }
+	
+	        if (!checked && indeterminate) {
+	            classes[clsPrefix + '-indeterminate'] = true;
+	        }
+	
+	        var classNames = (0, _classnames2["default"])(clsPrefix, classes);
+	
+	        return _react2["default"].createElement(
+	            'label',
+	            {
+	                className: (0, _classnames2["default"])(classNames, className),
+	                onDoubleClick: this.handledbClick,
+	                onClick: this.changeState },
+	            input,
+	            _react2["default"].createElement(
+	                'label',
+	                { className: clsPrefix + '-label' },
+	                children
+	            )
+	        );
+	    };
+	
+	    return Checkbox;
+	}(_react2["default"].Component);
+	
+	var _initialiseProps = function _initialiseProps() {
+	    var _this2 = this;
+	
+	    this.changeState = function (e) {
+	        var props = _this2.props;
+	        var checked = _this2.state.checked;
+	
+	        clearTimeout(_this2.doubleClickFlag);
+	        if (props.onClick instanceof Function) {
+	            props.onClick(e);
+	        }
+	        if (props.onDoubleClick instanceof Function) {
+	            _this2.doubleClickFlag = setTimeout(function () {
+	                //do function在此处写单击事件要执行的代码
+	                _this2.change(props, checked);
+	            }, 300);
+	        } else {
+	            _this2.change(props, checked);
+	        }
+	        e.stopPropagation();
+	        e.preventDefault();
+	        //执行延时
+	    };
+	
+	    this.change = function (props, checked) {
+	        if (props.disabled) {
+	            return;
+	        }
+	        if (!('checked' in props)) {
+	            _this2.setState({
+	                checked: !checked
+	            });
+	        }
+	
+	        if (props.onChange instanceof Function) {
+	            props.onChange(!checked);
+	        }
+	    };
+	
+	    this.handledbClick = function (e) {
+	        var onDoubleClick = _this2.props.onDoubleClick;
+	
+	        clearTimeout(_this2.doubleClickFlag);
+	        onDoubleClick && onDoubleClick(_this2.state.checked, e);
+	    };
+	
+	    this.handleFocus = function (e) {
+	        if (e.target && e.target.type == 'checkbox') {
+	            _this2.setState({
+	                focused: true
+	            });
+	        }
+	    };
+	
+	    this.handleBlur = function (e) {
+	        if (e.target && e.target.type == 'checkbox') {
+	            _this2.setState({
+	                focused: false
+	            });
+	        }
+	    };
+	};
+	
+	Checkbox.propTypes = propTypes;
+	Checkbox.defaultProps = defaultProps;
+	
+	exports["default"] = Checkbox;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 626 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(6);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _Checkbox = __webpack_require__(625);
+	
+	var _Checkbox2 = _interopRequireDefault(_Checkbox);
+	
+	var _lodash = __webpack_require__(244);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var propTypes = {
+	    clsPrefix: _propTypes2["default"].string,
+	    value: _propTypes2["default"].array,
+	    onChange: _propTypes2["default"].func,
+	    disabled: _propTypes2["default"].bool,
+	    options: _propTypes2["default"].array,
+	    defaultValue: _propTypes2["default"].array
+	};
+	
+	var defaultProps = {
+	    clsPrefix: 'u-checkbox-group',
+	    onChange: function onChange() {},
+	    disabled: false,
+	    options: []
+	};
+	
+	var CheckboxGroup = function (_React$Component) {
+	    _inherits(CheckboxGroup, _React$Component);
+	
+	    function CheckboxGroup(props) {
+	        _classCallCheck(this, CheckboxGroup);
+	
+	        var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	
+	        _this.changeHandle = function (v) {
+	            var values = _this.state.values;
+	            if (values.indexOf(v) != -1) {
+	                values.splice(values.indexOf(v), 1);
+	            } else {
+	                values.push(v);
+	            }
+	            _this.setState({
+	                values: values
+	            });
+	            var onChange = _this.props.onChange;
+	
+	            if (onChange) {
+	                var options = _this.getOptions();
+	                onChange(values.filter(function (val) {
+	                    return values.indexOf(val) !== -1;
+	                }).sort(function (a, b) {
+	                    var indexA = options.findIndex(function (opt) {
+	                        return opt.value === a;
+	                    });
+	                    var indexB = options.findIndex(function (opt) {
+	                        return opt.value === b;
+	                    });
+	                    return indexA - indexB;
+	                }));
+	            }
+	        };
+	
+	        _this.state = {
+	            values: props.value || props.defaultValue || []
+	        };
+	        return _this;
+	    }
+	
+	    CheckboxGroup.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        if (nextProps.value && !(0, _lodash2["default"])(nextProps.value, this.state.values)) {
+	            this.setState({
+	                values: nextProps.value
+	            });
+	        }
+	    };
+	
+	    CheckboxGroup.prototype.getOptions = function getOptions() {
+	        var options = this.props.options;
+	
+	        return options.map(function (option) {
+	            if (typeof option === 'string') {
+	                return {
+	                    label: option,
+	                    value: option
+	                };
+	            }
+	            return option;
+	        });
+	    };
+	
+	    CheckboxGroup.prototype.render = function render() {
+	        var _this2 = this;
+	
+	        var state = this.state;
+	        var props = this.props;
+	        var clsPrefix = props.clsPrefix,
+	            className = props.className,
+	            disabled = props.disabled,
+	            children = props.children,
+	            options = props.options;
+	
+	        var classes = clsPrefix;
+	        console.log('state.values: ', state.values);
+	        if (className) classes += ' ' + className;
+	        if (options && options.length > 0) {
+	            children = this.getOptions().map(function (option) {
+	                return _react2["default"].createElement(
+	                    _Checkbox2["default"],
+	                    {
+	                        key: option.value.toString(),
+	                        disabled: 'disabled' in option ? option.disabled : props.disabled,
+	                        value: option.value,
+	                        checked: state.values.indexOf(option.value) !== -1,
+	                        onChange: option.onChange
+	                    },
+	                    option.label
+	                );
+	            });
+	        }
+	        return _react2["default"].createElement(
+	            'div',
+	            { className: classes },
+	            _react2["default"].Children.map(children, function (child) {
+	                return _react2["default"].cloneElement(child, {
+	                    onChange: function onChange() {
+	                        _this2.changeHandle(child.props.value);
+	                    },
+	                    checked: state.values.indexOf(child.props.value) != -1,
+	                    disabled: child.props.disabled || disabled
+	                });
+	            })
+	        );
+	    };
+	
+	    return CheckboxGroup;
+	}(_react2["default"].Component);
+	
+	CheckboxGroup.propTypes = propTypes;
+	CheckboxGroup.defaultProps = defaultProps;
+	
+	exports["default"] = CheckboxGroup;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 627 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	/**
 	 * Module dependenices
 	 */
 	
-	const clone = __webpack_require__(625);
-	const typeOf = __webpack_require__(630);
-	const isPlainObject = __webpack_require__(631);
+	const clone = __webpack_require__(628);
+	const typeOf = __webpack_require__(633);
+	const isPlainObject = __webpack_require__(634);
 	
 	function cloneDeep(val, instanceClone) {
 	  switch (typeOf(val)) {
@@ -91508,7 +92010,7 @@
 
 
 /***/ }),
-/* 625 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
@@ -91521,7 +92023,7 @@
 	'use strict';
 	
 	const valueOf = Symbol.prototype.valueOf;
-	const typeOf = __webpack_require__(630);
+	const typeOf = __webpack_require__(633);
 	
 	function clone(val, deep) {
 	  switch (typeOf(val)) {
@@ -91595,10 +92097,10 @@
 	
 	module.exports = clone;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(626).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(629).Buffer))
 
 /***/ }),
-/* 626 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -91611,9 +92113,9 @@
 	
 	'use strict'
 	
-	var base64 = __webpack_require__(627)
-	var ieee754 = __webpack_require__(628)
-	var isArray = __webpack_require__(629)
+	var base64 = __webpack_require__(630)
+	var ieee754 = __webpack_require__(631)
+	var isArray = __webpack_require__(632)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -93394,7 +93896,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 627 */
+/* 630 */
 /***/ (function(module, exports) {
 
 	'use strict'
@@ -93552,7 +94054,7 @@
 
 
 /***/ }),
-/* 628 */
+/* 631 */
 /***/ (function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -93642,7 +94144,7 @@
 
 
 /***/ }),
-/* 629 */
+/* 632 */
 /***/ (function(module, exports) {
 
 	var toString = {}.toString;
@@ -93653,7 +94155,7 @@
 
 
 /***/ }),
-/* 630 */
+/* 633 */
 /***/ (function(module, exports) {
 
 	var toString = Object.prototype.toString;
@@ -93788,7 +94290,7 @@
 
 
 /***/ }),
-/* 631 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*!
@@ -93800,7 +94302,7 @@
 	
 	'use strict';
 	
-	var isObject = __webpack_require__(632);
+	var isObject = __webpack_require__(635);
 	
 	function isObjectObject(o) {
 	  return isObject(o) === true
@@ -93831,7 +94333,7 @@
 
 
 /***/ }),
-/* 632 */
+/* 635 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -93849,22 +94351,22 @@
 
 
 /***/ }),
-/* 633 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(634);
+	module.exports = __webpack_require__(637);
 
 /***/ }),
-/* 634 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
-	var bind = __webpack_require__(636);
-	var Axios = __webpack_require__(637);
-	var mergeConfig = __webpack_require__(655);
-	var defaults = __webpack_require__(643);
+	var utils = __webpack_require__(638);
+	var bind = __webpack_require__(639);
+	var Axios = __webpack_require__(640);
+	var mergeConfig = __webpack_require__(658);
+	var defaults = __webpack_require__(646);
 	
 	/**
 	 * Create an instance of Axios
@@ -93897,15 +94399,15 @@
 	};
 	
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(656);
-	axios.CancelToken = __webpack_require__(657);
-	axios.isCancel = __webpack_require__(642);
+	axios.Cancel = __webpack_require__(659);
+	axios.CancelToken = __webpack_require__(660);
+	axios.isCancel = __webpack_require__(645);
 	
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(658);
+	axios.spread = __webpack_require__(661);
 	
 	module.exports = axios;
 	
@@ -93914,12 +94416,12 @@
 
 
 /***/ }),
-/* 635 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var bind = __webpack_require__(636);
+	var bind = __webpack_require__(639);
 	
 	/*global toString:true*/
 	
@@ -94264,7 +94766,7 @@
 
 
 /***/ }),
-/* 636 */
+/* 639 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94281,16 +94783,16 @@
 
 
 /***/ }),
-/* 637 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
-	var buildURL = __webpack_require__(638);
-	var InterceptorManager = __webpack_require__(639);
-	var dispatchRequest = __webpack_require__(640);
-	var mergeConfig = __webpack_require__(655);
+	var utils = __webpack_require__(638);
+	var buildURL = __webpack_require__(641);
+	var InterceptorManager = __webpack_require__(642);
+	var dispatchRequest = __webpack_require__(643);
+	var mergeConfig = __webpack_require__(658);
 	
 	/**
 	 * Create a new instance of Axios
@@ -94381,12 +94883,12 @@
 
 
 /***/ }),
-/* 638 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -94458,12 +94960,12 @@
 
 
 /***/ }),
-/* 639 */
+/* 642 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -94516,15 +95018,15 @@
 
 
 /***/ }),
-/* 640 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
-	var transformData = __webpack_require__(641);
-	var isCancel = __webpack_require__(642);
-	var defaults = __webpack_require__(643);
+	var utils = __webpack_require__(638);
+	var transformData = __webpack_require__(644);
+	var isCancel = __webpack_require__(645);
+	var defaults = __webpack_require__(646);
 	
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -94601,12 +95103,12 @@
 
 
 /***/ }),
-/* 641 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -94627,7 +95129,7 @@
 
 
 /***/ }),
-/* 642 */
+/* 645 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -94638,13 +95140,13 @@
 
 
 /***/ }),
-/* 643 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(635);
-	var normalizeHeaderName = __webpack_require__(644);
+	var utils = __webpack_require__(638);
+	var normalizeHeaderName = __webpack_require__(647);
 	
 	var DEFAULT_CONTENT_TYPE = {
 	  'Content-Type': 'application/x-www-form-urlencoded'
@@ -94660,10 +95162,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(645);
+	    adapter = __webpack_require__(648);
 	  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(645);
+	    adapter = __webpack_require__(648);
 	  }
 	  return adapter;
 	}
@@ -94742,12 +95244,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 644 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -94760,18 +95262,18 @@
 
 
 /***/ }),
-/* 645 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
-	var settle = __webpack_require__(646);
-	var buildURL = __webpack_require__(638);
-	var buildFullPath = __webpack_require__(649);
-	var parseHeaders = __webpack_require__(652);
-	var isURLSameOrigin = __webpack_require__(653);
-	var createError = __webpack_require__(647);
+	var utils = __webpack_require__(638);
+	var settle = __webpack_require__(649);
+	var buildURL = __webpack_require__(641);
+	var buildFullPath = __webpack_require__(652);
+	var parseHeaders = __webpack_require__(655);
+	var isURLSameOrigin = __webpack_require__(656);
+	var createError = __webpack_require__(650);
 	
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -94868,7 +95370,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(654);
+	      var cookies = __webpack_require__(657);
 	
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
@@ -94946,12 +95448,12 @@
 
 
 /***/ }),
-/* 646 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var createError = __webpack_require__(647);
+	var createError = __webpack_require__(650);
 	
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -94977,12 +95479,12 @@
 
 
 /***/ }),
-/* 647 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var enhanceError = __webpack_require__(648);
+	var enhanceError = __webpack_require__(651);
 	
 	/**
 	 * Create an Error with the specified message, config, error code, request and response.
@@ -95001,7 +95503,7 @@
 
 
 /***/ }),
-/* 648 */
+/* 651 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95049,13 +95551,13 @@
 
 
 /***/ }),
-/* 649 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var isAbsoluteURL = __webpack_require__(650);
-	var combineURLs = __webpack_require__(651);
+	var isAbsoluteURL = __webpack_require__(653);
+	var combineURLs = __webpack_require__(654);
 	
 	/**
 	 * Creates a new URL by combining the baseURL with the requestedURL,
@@ -95075,7 +95577,7 @@
 
 
 /***/ }),
-/* 650 */
+/* 653 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95095,7 +95597,7 @@
 
 
 /***/ }),
-/* 651 */
+/* 654 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95115,12 +95617,12 @@
 
 
 /***/ }),
-/* 652 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	// Headers whose duplicates are ignored by node
 	// c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -95174,12 +95676,12 @@
 
 
 /***/ }),
-/* 653 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -95248,12 +95750,12 @@
 
 
 /***/ }),
-/* 654 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -95307,12 +95809,12 @@
 
 
 /***/ }),
-/* 655 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(635);
+	var utils = __webpack_require__(638);
 	
 	/**
 	 * Config-specific merge-function which creates a new config-object
@@ -95386,7 +95888,7 @@
 
 
 /***/ }),
-/* 656 */
+/* 659 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95411,12 +95913,12 @@
 
 
 /***/ }),
-/* 657 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Cancel = __webpack_require__(656);
+	var Cancel = __webpack_require__(659);
 	
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -95474,7 +95976,7 @@
 
 
 /***/ }),
-/* 658 */
+/* 661 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95507,7 +96009,7 @@
 
 
 /***/ }),
-/* 659 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95757,7 +96259,7 @@
 	};
 
 /***/ }),
-/* 660 */
+/* 663 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -95830,6 +96332,901 @@
 	        interfaceError: 'Interface error'
 	    }
 	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 664 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = newMultiSelect;
+	
+	var _multiSelect = __webpack_require__(665);
+	
+	var _multiSelect2 = _interopRequireDefault(_multiSelect);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function newMultiSelect(Table, Checkbox) {
+	  return (0, _multiSelect2["default"])(Table, Checkbox);
+	}
+	module.exports = exports['default'];
+
+/***/ }),
+/* 665 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports["default"] = multiSelect;
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(6);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _util = __webpack_require__(666);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	/**
+	 * 参数: 过滤表头
+	 * @param {*} Table
+	 * @param {*} Checkbox
+	 * @param {*} Popover
+	 * @param {*} Icon
+	 */
+	
+	function multiSelect(Table, Checkbox) {
+	  var _class, _temp, _initialiseProps;
+	
+	  return _temp = _class = function (_Component) {
+	    _inherits(MultiSelect, _Component);
+	
+	    function MultiSelect(props) {
+	      _classCallCheck(this, MultiSelect);
+	
+	      var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	      _initialiseProps.call(_this);
+	
+	      var obj = _this.getCheckedOrIndeter(props.data);
+	      _this.state = _extends({}, obj, {
+	        data: (0, _util.ObjectAssign)(props.data)
+	      });
+	      return _this;
+	    }
+	
+	    MultiSelect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	      if ('data' in nextProps) {
+	        var obj = this.getCheckedOrIndeter(nextProps.data);
+	        this.setState(_extends({}, obj, {
+	          data: (0, _util.ObjectAssign)(nextProps.data)
+	        }));
+	      }
+	    };
+	
+	    /**
+	     * @param {*} data 
+	     */
+	
+	
+	    MultiSelect.prototype.getCheckedOrIndeter = function getCheckedOrIndeter(data) {
+	      var obj = {};
+	      var checkStatus = this.checkAllSelected(data);
+	      if (!checkStatus) {
+	        obj.checkedAll = false;
+	        obj.indeterminate = false;
+	        return obj;
+	      }
+	      if (checkStatus == 'indeter') {
+	        obj.indeterminate = true;
+	        obj.checkedAll = false;
+	      } else if (checkStatus == 'all') {
+	        obj.checkedAll = true;
+	        obj.indeterminate = false;
+	      }
+	      return obj;
+	    };
+	
+	    /**
+	     * 判断数据是否全部选中
+	     * @param {*} data 
+	     * return  string  all(全选)、indeter(半选)
+	     */
+	
+	
+	    MultiSelect.prototype.setChecked = function setChecked(data) {
+	      if (!this.isArray(data)) return false;
+	      if (data.length == 0) return false;
+	      var count = 0;
+	      var disabledCount = 0;
+	      data.forEach(function (da) {
+	        if (da._checked && !da._disabled) {
+	          count++;
+	        }
+	        if (da._disabled) {
+	          disabledCount++;
+	        }
+	      });
+	
+	      if (data.length == count + disabledCount && count > 0) {
+	        return "all";
+	      }
+	      return count == 0 ? false : "indeter";
+	    };
+	
+	    /**
+	     * 重写：判断数据是否全部选中
+	     */
+	
+	
+	    /**
+	     * 判断是否是数组
+	     * @param {*} o 
+	     */
+	    MultiSelect.prototype.isArray = function isArray(o) {
+	      return Object.prototype.toString.call(o) == '[object Array]';
+	    };
+	
+	    /**
+	     * 遍历树节点和它的子孙节点，设置_checked
+	     */
+	
+	
+	    /**
+	     * 遍历树节点和它的子孙节点，获取对应状态的节点数组
+	     */
+	
+	
+	    // 实现行点击时触发多选框勾选的需求
+	
+	
+	    MultiSelect.prototype.render = function render() {
+	      var _props = this.props,
+	          columns = _props.columns,
+	          expandIconColumnIndex = _props.expandIconColumnIndex;
+	      var data = this.state.data;
+	
+	      return _react2["default"].createElement(Table, _extends({}, this.props, {
+	        columns: this.getDefaultColumns(columns),
+	        data: data,
+	        onRowClick: this.onRowClick,
+	        expandIconColumnIndex: expandIconColumnIndex ? expandIconColumnIndex + 1 : 1
+	      }));
+	    };
+	
+	    return MultiSelect;
+	  }(_react.Component), _class.propTypes = {
+	    autoCheckedByClickRows: _propTypes2["default"].bool //行点击时，是否自动勾选复选框
+	  }, _class.defaultProps = {
+	    prefixCls: "u-table-mult-select",
+	    getSelectedDataFunc: function getSelectedDataFunc() {},
+	    autoSelect: false,
+	    autoCheckedByClickRows: true,
+	    multiSelectConfig: {}
+	  }, _initialiseProps = function _initialiseProps() {
+	    var _this2 = this;
+	
+	    this.checkAllSelected = function (data) {
+	      if (!_this2.isArray(data)) return false;
+	      if (data.length == 0) return false;
+	      var count = 0;
+	      var disabledCount = 0;
+	      var length = 0;
+	      var getTree = function getTree(arr) {
+	        arr.forEach(function (item) {
+	          length++;
+	          if (item._checked && !item._disabled) {
+	            count++;
+	          } else if (item._disabled) {
+	            disabledCount++;
+	          }
+	          if (item.children) {
+	            getTree(item.children);
+	          }
+	        });
+	      };
+	      getTree(data);
+	      if (length == count + disabledCount && count > 0) {
+	        return "all";
+	      }
+	      return count == 0 ? false : "indeter";
+	    };
+	
+	    this.onAllCheckChange = function () {
+	      var _state = _this2.state,
+	          data = _state.data,
+	          checkedAll = _state.checkedAll,
+	          indeterminate = _state.indeterminate;
+	
+	      var check = false;
+	      if (checkedAll) {
+	        check = false;
+	      } else {
+	        check = true;
+	      }
+	      var selectList = [];
+	
+	      data.forEach(function (item) {
+	        if (item.children) {
+	          var res = _this2.setTree(item, check, true);
+	          selectList = selectList.concat(res);
+	        } else {
+	          if (!item._disabled) {
+	            item._checked = check;
+	          }
+	
+	          if (item._checked) {
+	            selectList.push(item);
+	          }
+	        }
+	      });
+	      if (selectList.length > 0) {
+	        indeterminate = true;
+	      } else {
+	        indeterminate = false;
+	      }
+	      _this2.setState({
+	        indeterminate: indeterminate,
+	        checkedAll: check
+	      });
+	      _this2.props.getSelectedDataFunc(selectList, undefined, undefined, data);
+	    };
+	
+	    this.setTree = function (node, flag, autoSelect) {
+	      var res = [];
+	      var setTreeNodeFlag = function setTreeNodeFlag(node, flag) {
+	        if (!node._disabled) {
+	          node._checked = flag;
+	        }
+	        if (flag) {
+	          res.push(node);
+	        }
+	        if (node.children && autoSelect) {
+	          node.children.forEach(function (item) {
+	            setTreeNodeFlag(item, flag);
+	          });
+	        }
+	      };
+	      setTreeNodeFlag(node, flag);
+	      return res;
+	    };
+	
+	    this.getTree = function (node, key, value) {
+	      var res = [];
+	      var getTreeNodeByFlag = function getTreeNodeByFlag(node) {
+	        if (node[key] === value) {
+	          res.push(node);
+	        }
+	        if (node.children) {
+	          node.children.forEach(function (item) {
+	            getTreeNodeByFlag(item);
+	          });
+	        }
+	      };
+	      getTreeNodeByFlag(node);
+	      return res;
+	    };
+	
+	    this.onCheckboxChange = function (text, record, index) {
+	      return function () {
+	        var data = _this2.state.data;
+	
+	        var selectList = [];
+	        // record._checked = record._checked?false:true;
+	        var flag = record._checked ? false : true;
+	        if (record.children) {
+	          _this2.setTree(record, flag, _this2.props.autoSelect);
+	        } else {
+	          record._checked = flag;
+	        }
+	        var obj = _this2.getCheckedOrIndeter(data);
+	        _this2.setState(_extends({
+	          data: data
+	        }, obj));
+	        data.forEach(function (da) {
+	          if (da.children) {
+	            selectList = selectList.concat(_this2.getTree(da, '_checked', true));
+	          } else if (da._checked) {
+	            selectList.push(da);
+	          }
+	        });
+	        _this2.props.getSelectedDataFunc(selectList, record, index, data);
+	      };
+	    };
+	
+	    this.getDefaultColumns = function (columns) {
+	      var multiSelectConfig = _this2.props.multiSelectConfig;
+	      var _state2 = _this2.state,
+	          checkedAll = _state2.checkedAll,
+	          indeterminate = _state2.indeterminate;
+	
+	      var checkAttr = { checked: checkedAll ? true : false };
+	      var data = _this2.props.data;
+	      var dataLength = data.length;
+	      var disabledCount = 0;
+	      indeterminate ? checkAttr.indeterminate = true : "";
+	      //设置表头Checkbox是否可以点击
+	      data.forEach(function (item, index, arr) {
+	        if (item._disabled) {
+	          disabledCount++;
+	        }
+	      });
+	
+	      var _defaultColumns = [{
+	        className: 'u-table-multiSelect-column',
+	        title: _react2["default"].createElement(Checkbox, _extends({
+	          className: 'table-checkbox'
+	        }, checkAttr, multiSelectConfig, {
+	          disabled: disabledCount == dataLength ? true : false,
+	          onChange: _this2.onAllCheckChange
+	        })),
+	        key: "checkbox",
+	        dataIndex: "checkbox",
+	        fixed: "left",
+	        width: 49,
+	        render: function render(text, record, index) {
+	          var attr = {};
+	          record._disabled ? attr.disabled = record._disabled : "";
+	          return _react2["default"].createElement(Checkbox, _extends({
+	            key: index,
+	            className: 'table-checkbox'
+	          }, attr, multiSelectConfig, {
+	            checked: record._checked,
+	            onChange: _this2.onCheckboxChange(text, record, index)
+	          }));
+	        }
+	      }];
+	      return _defaultColumns.concat(columns);
+	    };
+	
+	    this.onRowClick = function (record, index, event) {
+	      if (record._disabled) return;
+	      var _props2 = _this2.props,
+	          autoCheckedByClickRows = _props2.autoCheckedByClickRows,
+	          onRowClick = _props2.onRowClick;
+	
+	      if (autoCheckedByClickRows) {
+	        _this2.onCheckboxChange('', record, index)();
+	      }
+	      onRowClick && onRowClick(record, index, event);
+	    };
+	  }, _temp;
+	}
+	module.exports = exports['default'];
+
+/***/ }),
+/* 666 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.sortBy = sortBy;
+	exports.compare = compare;
+	exports.ObjectAssign = ObjectAssign;
+	/*
+	* 快速排序，按某个属性，或按“获取排序依据的函数”，来排序.
+	* @method soryBy
+	* @static
+	* @param {array} arr 待处理数组
+	* @param {string|function} prop 排序依据属性，获取
+	* @param {boolean} desc 降序
+	* @return {array} 返回排序后的新数组
+	*/
+	
+	function sortBy(arr, prop, desc) {
+	    var props = [],
+	        ret = [],
+	        i = 0,
+	        len = arr.length;
+	    if (typeof prop == 'string') {
+	        for (; i < len; i++) {
+	            var oI = arr[i];
+	            (props[i] = new String(oI && oI[prop] || ''))._obj = oI;
+	        }
+	    } else if (typeof prop == 'function') {
+	        for (; i < len; i++) {
+	            var _oI = arr[i];
+	            (props[i] = new String(_oI && prop(_oI) || ''))._obj = _oI;
+	        }
+	    } else {
+	        throw '参数类型错误';
+	    }
+	    props.sort();
+	    for (i = 0; i < len; i++) {
+	        ret[i] = props[i]._obj;
+	    }
+	    if (desc) ret.reverse();
+	    return ret;
+	};
+	
+	/**
+	 * 数组对象排序
+	 * console.log(arr.sort(compare('age')))
+	 * @param {} property 
+	 */
+	function compare(property) {
+	    return function (a, b) {
+	        var value1 = a[property];
+	        var value2 = b[property];
+	        return value1 - value2;
+	    };
+	}
+	
+	/**
+	 * 简单数组数据对象拷贝
+	 * @param {*} obj 要拷贝的对象 
+	 */
+	function ObjectAssign(obj) {
+	    var b = obj instanceof Array;
+	    var tagObj = b ? [] : {};
+	    if (b) {
+	        //数组
+	        obj.forEach(function (da) {
+	            var _da = {};
+	            _extends(_da, da);
+	            tagObj.push(_da);
+	        });
+	    } else {
+	        _extends(tagObj, obj);
+	    }
+	    return tagObj;
+	}
+
+/***/ }),
+/* 667 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports["default"] = sort;
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	/**
+	 * 参数：prefixCls，默认bee-table,用于设置图标的样式
+	 * @param {*} Table
+	 * @param {*} Icon
+	 */
+	function sort(Table, Icon) {
+	  var _class, _temp, _initialiseProps;
+	
+	  var IconType = [{
+	    'type': 'flat',
+	    'icon': 'uf-symlist',
+	    'order': 'flatscend'
+	  }, {
+	    'type': 'up',
+	    'icon': 'uf-sortup',
+	    'order': 'ascend'
+	  }, {
+	    'type': 'down',
+	    'icon': 'uf-sortdown',
+	    'order': 'descend'
+	  }];
+	
+	  return _temp = _class = function (_Component) {
+	    _inherits(SortTable, _Component);
+	
+	    function SortTable(props) {
+	      _classCallCheck(this, SortTable);
+	
+	      var _this2 = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	      _initialiseProps.call(_this2);
+	
+	      var flatColumns = [];
+	      _this2._toFlatColumn(props.columns, -1, flatColumns);
+	      _this2.state = { data: _this2.props.data, columns: props.columns, flatColumns: flatColumns };
+	
+	      return _this2;
+	    }
+	
+	    //默认是前端排序，值为true为后端排序
+	    SortTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	
+	      if (nextProps.data !== this.props.data) {
+	        this.setState({
+	          data: nextProps.data,
+	          oldData: nextProps.data.concat()
+	        });
+	      }
+	      if (nextProps.columns !== this.props.columns) {
+	        var flatColumns = [];
+	        this._toFlatColumn(nextProps.columns, -1, flatColumns);
+	        this.setState({ columns: nextProps.columns, flatColumns: flatColumns });
+	      }
+	    };
+	    /**
+	     *column扁平化处理，适应多表头避免递归操作
+	     *
+	     */
+	
+	
+	    SortTable.prototype._toFlatColumn = function _toFlatColumn(columns) {
+	      var parentIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+	      var flatColumns = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+	
+	      var _this = this;
+	      var children = [];
+	      // const flatColumns = _this.state;
+	      columns.forEach(function (item, index) {
+	        item.parentIndex = parentIndex;
+	        children = item.children;
+	        flatColumns.push(item);
+	        if (children) {
+	          // item.children = [];
+	          _this._toFlatColumn(children, flatColumns.length - 1, flatColumns);
+	        }
+	      });
+	    };
+	
+	    /**
+	     * column 当前的排序的列
+	     * 当有的列不排序时，将该列的orderNum置为‘’，并动态的修改其他列的orderNum。
+	     */
+	
+	    /**
+	     * 获取排序字段
+	     */
+	
+	
+	    /**
+	     * pre：前一条数据
+	     * after:后一条数据
+	     * orderType:升序、降序
+	     */
+	
+	    /**
+	     * 多列排序 先排order为1的，其他的基于已排序的数据排
+	     */
+	
+	    //每个column上添加orderNum属性，不排序时为“”。
+	    //点击时orderNum有值则不重新赋值，如果没有值，则取当前column下的有oderNum的length值。并排序
+	    //点击置为“”时，动态的设置相关column的orderNum值。并排序
+	
+	
+	    // 默认的比较函数,即字符串比较函数
+	
+	    // 数值比较函数
+	
+	
+	    // 中文比较函数，按拼音排序
+	
+	
+	    SortTable.prototype._flatToColumn = function _flatToColumn(flatColumns) {
+	      var colLen = flatColumns.length;
+	      var parentIndex = void 0,
+	          rsColumns = [];
+	      //每次渲染需要将父类的children置空，避免重复
+	      flatColumns.forEach(function (item) {
+	        if (item.children) {
+	          item.children = [];
+	        }
+	      });
+	      for (var i = colLen - 1; i >= 0; i--) {
+	        parentIndex = flatColumns[i].parentIndex;
+	        if (parentIndex >= 0) {
+	          flatColumns[parentIndex].children.unshift(flatColumns[i]);
+	        }
+	      }
+	      rsColumns = flatColumns.filter(function (item) {
+	        return item.parentIndex == -1;
+	      });
+	      return rsColumns;
+	    };
+	
+	    SortTable.prototype.render = function render() {
+	      var columns = this.renderColumnsDropdown(this.state.flatColumns.concat());
+	      return _react2["default"].createElement(Table, _extends({}, this.props, { columns: columns, data: this.state.data }));
+	    };
+	
+	    return SortTable;
+	  }(_react.Component), _class.defaultProps = { sort: { mode: "single", backSource: false } }, _initialiseProps = function _initialiseProps() {
+	    var _this3 = this;
+	
+	    this.getOrderNum = function () {
+	      var orderNum = 0;
+	      //todo 1
+	      _this3.state.flatColumns.forEach(function (item, index) {
+	        if (item.order == "ascend" || item.order == "descend") {
+	          orderNum++;
+	        }
+	      });
+	      return orderNum ? orderNum : 1;
+	    };
+	
+	    this.changeOrderNum = function (column) {
+	      var flatColumns = _this3.state.flatColumns;
+	      //todo 2
+	
+	      flatColumns.forEach(function (col) {
+	        if (col.orderNum > column.orderNum) {
+	          col.orderNum--;
+	        }
+	        if (column.key == col.key) {
+	          col.orderNum = "";
+	        }
+	      });
+	      _this3.setState({ flatColumns: flatColumns });
+	    };
+	
+	    this.getOrderCols = function (columns) {
+	      var orderCols = [];
+	      //todo 3
+	      columns.forEach(function (item) {
+	        if (item.order == "ascend" || item.order == "descend") {
+	          orderCols.push({
+	            order: item.order,
+	            field: item.dataIndex,
+	            orderNum: item.orderNum
+	          });
+	        }
+	      });
+	      return orderCols;
+	    };
+	
+	    this._sortBy = function (pre, after, orderCols, orderColslen, currentIndex) {
+	      var currentCol = orderCols[currentIndex];
+	      var preKey = pre[currentCol.key];
+	      var afterKey = after[currentCol.key];
+	      var colSortFun = currentCol.sorter;
+	      if (typeof colSortFun !== 'function') {
+	        colSortFun = function colSortFun() {
+	          return preKey - afterKey;
+	        };
+	      }
+	      if (preKey == afterKey && currentIndex + 1 <= orderColslen) {
+	        return _this3._sortBy(pre, after, orderCols, orderColslen, currentIndex + 1);
+	      }
+	      if (currentCol.order == "ascend") {
+	        return colSortFun(pre, after);
+	      } else {
+	        return -colSortFun(pre, after);
+	      }
+	    };
+	
+	    this.multiSort = function (columns) {
+	      var _state = _this3.state,
+	          data = _state.data,
+	          oldData = _state.oldData;
+	
+	      var self = _this3;
+	      var orderCols = {},
+	          orderColslen = 0;
+	      //todo 4
+	      columns.forEach(function (item) {
+	        if (item.orderNum) {
+	          orderColslen++;
+	          orderCols[item.orderNum] = item;
+	        }
+	      });
+	      if (orderColslen > 0) {
+	        data = data.sort(function (a, b) {
+	          return self._sortBy(a, b, orderCols, orderColslen, 1);
+	        });
+	      } else {
+	        data = oldData.concat();
+	      }
+	      return data;
+	    };
+	
+	    this.toggleSortOrder = function (order, column) {
+	      var _state2 = _this3.state,
+	          data = _state2.data,
+	          oldData = _state2.oldData,
+	          flatColumns = _state2.flatColumns;
+	      var sort = _this3.props.sort;
+	
+	      var seleObj = void 0;
+	      if (!oldData) {
+	        oldData = data.concat();
+	      }
+	      var sortCol = void 0;
+	      //单列排序，清空其他列的排序
+	      if (sort.mode == "single") {
+	        //todo 5
+	        flatColumns.forEach(function (da) {
+	          if (da.key == column.key) {
+	            seleObj = da;
+	          } else {
+	            if (da.order) {
+	              da.order = "flatscend";
+	            }
+	          }
+	        });
+	        seleObj.order = order;
+	        sortCol = [{ order: order, field: seleObj.dataIndex }];
+	        //通过后端请求
+	        if (sort.backSource && typeof sort.sortFun === "function") {
+	          //获取排序的字段和方式
+	          sort.sortFun(sortCol);
+	        } else {
+	          if (order === "ascend") {
+	            data = data.sort(function (a, b) {
+	              return column.sorter(a, b);
+	            });
+	          } else if (order === "descend") {
+	            data = data.sort(function (a, b) {
+	              return column.sorter(b, a);
+	            });
+	          } else {
+	            data = oldData.concat();
+	          }
+	          typeof sort.sortFun === "function" && sort.sortFun(sortCol, data);
+	        }
+	      } else {
+	        seleObj = flatColumns.find(function (da) {
+	          return da.key == column.key;
+	        });
+	        seleObj.order = order;
+	        if (order === "flatscend") {
+	          _this3.changeOrderNum(column);
+	        }
+	        if (!seleObj.orderNum && (order == "ascend" || order == "descend")) {
+	          seleObj.orderNum = _this3.getOrderNum();
+	        }
+	        sortCol = _this3.getOrderCols(flatColumns);
+	        if (sort.backSource && typeof sort.sortFun === "function") {
+	          sort.sortFun(sortCol);
+	        } else {
+	          data = _this3.multiSort(flatColumns);
+	          typeof sort.sortFun === "function" && sort.sortFun(sortCol, data);
+	        }
+	      }
+	      _this3.setState({ data: data, oldData: oldData, flatColumns: flatColumns });
+	    };
+	
+	    this.renderColumnsDropdown = function (columns) {
+	      var tempColumns = [],
+	          rsColumns = [];
+	      tempColumns = columns.map(function (originColumn) {
+	        var column = _extends({}, originColumn);
+	        return _this3.sortColumn(column);
+	      });
+	      rsColumns = _this3._flatToColumn(tempColumns);
+	      return rsColumns;
+	    };
+	
+	    this.sortColumn = function (column) {
+	      var mode = _this3.props.sort.mode;
+	
+	      var prefixCls = "bee-table";
+	      var iconTypeIndex = 0;
+	      var sorterClass = "flat";
+	
+	      if (column.order === "ascend") {
+	        iconTypeIndex = 1;
+	        sorterClass = "up";
+	      } else if (column.order === "descend") {
+	        iconTypeIndex = 2;
+	        sorterClass = "down";
+	      }
+	
+	      var sortButton = void 0;
+	
+	      // sorter和sortEnable均可触发排序,且sorter优先级更高
+	      if (column.sorter || column.sortEnable) {
+	        //大于0说明不是升序就是降序，判断orderNum有没有值，没有值赋值
+	        if (column.sortEnable && !column.sorter) {
+	          switch (column.fieldType) {
+	            case 'number':
+	              {
+	                column.sorter = _this3.numberSortFn(column.dataIndex);
+	                break;
+	              }
+	            case 'stringChinese':
+	              {
+	                column.sorter = _this3.chineseSortFn(column.dataIndex);
+	                break;
+	              }
+	            default:
+	              {
+	                column.sorter = _this3.defaultSortFn(column.dataIndex);
+	                break;
+	              }
+	          }
+	        }
+	        if (iconTypeIndex > 0 && !column.orderNum && mode == "multiple") {
+	          column.orderNum = _this3.getOrderNum();
+	        }
+	        sortButton = _react2["default"].createElement(
+	          'div',
+	          { className: prefixCls + '-column-sorter' },
+	          _react2["default"].createElement(
+	            'span',
+	            { className: prefixCls + '-column-sorter-' + sorterClass, onClick: function onClick() {
+	                _this3.toggleSortOrder(IconType[iconTypeIndex == 2 ? 0 : iconTypeIndex + 1].order, column);
+	
+	                if (column.sorterClick) {
+	                  column.sorterClick(column, IconType[iconTypeIndex].type);
+	                }
+	              } },
+	            _react2["default"].createElement('i', { className: 'uf ' + IconType[iconTypeIndex].icon }),
+	            _react2["default"].createElement(
+	              'span',
+	              null,
+	              column.orderNum
+	            )
+	          )
+	        );
+	      }
+	      column.title = _react2["default"].createElement(
+	        'span',
+	        null,
+	        column.title,
+	        sortButton
+	      );
+	      return column;
+	    };
+	
+	    this.defaultSortFn = function (key) {
+	      return function (a, b) {
+	        return a[key] >= b[key] ? 1 : -1;
+	      };
+	    };
+	
+	    this.numberSortFn = function (key) {
+	      return function (a, b) {
+	        var numberA = parseFloat(a[key]);
+	        var numberB = parseFloat(b[key]);
+	        return numberA >= numberB ? 1 : -1;
+	      };
+	    };
+	
+	    this.chineseSortFn = function (key) {
+	      return function (a, b) {
+	        return a[key].localeCompare(b[key], 'zh-Hans-CN', { sensitivity: 'accent' });
+	      };
+	    };
+	  }, _temp;
+	}
 	module.exports = exports['default'];
 
 /***/ })

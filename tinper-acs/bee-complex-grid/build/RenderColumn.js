@@ -55,6 +55,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var propTypes = {
     onChange: _propTypes2["default"].func,
     filedProps: _propTypes2["default"].object //filed属性
+
 };
 
 var defaultProps = {
@@ -96,6 +97,10 @@ var RenderColumn = function (_Component) {
             _this.props.onChange(index, dataIndex, value);
         };
 
+        _this.onRef = function (ref) {
+            _this.customizeRender = ref;
+        };
+
         _this.renderComp = function () {
             var _this$props2 = _this.props,
                 type = _this$props2.type,
@@ -112,25 +117,37 @@ var RenderColumn = function (_Component) {
                 valueField = _this$props2.valueField,
                 filedProps = _this$props2.filedProps,
                 onValidate = _this$props2.onValidate,
-                defaultValue = _this$props2.defaultValue;
+                defaultValue = _this$props2.defaultValue,
+                record = _this$props2.record,
+                forceRenderColumn = _this$props2.forceRenderColumn;
 
             var placement = 'left';
             if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
             if (customizeRender) {
+                var customizeRenderText = _this.customizeRender && _this.customizeRender.customizeRenderText;
+                var customText = customizeRenderText && customizeRenderText(_extends({}, filedProps, {
+                    value: value,
+                    field: dataIndex,
+                    record: record,
+                    index: index
+                }));
+                var text = value,
+                    overlay = value;
+                if (customText) {
+                    if (Object.prototype.toString.call(customText) == '[object Object]') {
+                        overlay = customText.overlay;
+                        text = customText.text;
+                    } else if (Object.prototype.toString.call(customText) == '[object String]') {
+                        text = customText;
+                        overlay = customText;
+                    }
+                }
                 return _react2["default"].createElement(
                     'div',
                     null,
-                    disabled ? _react2["default"].createElement(
-                        _beeTooltip2["default"],
-                        { overlay: value, inverse: true, placement: placement },
-                        _react2["default"].createElement(
-                            'span',
-                            { className: 'u-edit-grid-cell' },
-                            value
-                        )
-                    ) : _react2["default"].createElement(
-                        _RenderCell2["default"],
-                        { type: 'refer', text: value, textAlign: textAlign },
+                    forceRenderColumn ? _react2["default"].createElement(
+                        'span',
+                        { style: { 'display': 'none' } },
                         _react2["default"].cloneElement(customizeRender, _extends({
                             valueField: valueField,
                             textAlign: textAlign,
@@ -139,10 +156,39 @@ var RenderColumn = function (_Component) {
                             required: required,
                             value: value,
                             index: index,
+                            record: record,
                             onChange: function onChange(field, v) {
                                 _this.props.onChange(index, dataIndex, v);
                             },
-                            onValidate: onValidate
+                            onValidate: onValidate,
+                            onRef: _this.onRef
+                        }, filedProps))
+                    ) : '',
+                    disabled ? _react2["default"].createElement(
+                        _beeTooltip2["default"],
+                        { overlay: overlay, inverse: true, placement: placement },
+                        _react2["default"].createElement(
+                            'span',
+                            { className: 'u-edit-grid-cell' },
+                            text
+                        )
+                    ) : _react2["default"].createElement(
+                        _RenderCell2["default"],
+                        { type: 'refer', overlay: overlay, text: text, textAlign: textAlign },
+                        _react2["default"].cloneElement(customizeRender, _extends({
+                            valueField: valueField,
+                            textAlign: textAlign,
+                            field: dataIndex,
+                            validate: validate,
+                            required: required,
+                            value: value,
+                            index: index,
+                            record: record,
+                            onChange: function onChange(field, v) {
+                                _this.props.onChange(index, dataIndex, v);
+                            },
+                            onValidate: onValidate,
+                            onRef: _this.onRef
                         }, filedProps))
                     )
                 );
@@ -317,7 +363,6 @@ var RenderColumn = function (_Component) {
         };
         return _this;
     }
-
     /**
      * 渲染组件函数
      * @returns JSX

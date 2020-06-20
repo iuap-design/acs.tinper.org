@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from 'bee-icon'
 import Dropdown from 'bee-dropdown';
 import Menu from 'bee-menus';
-import Tooltip from 'bee-tooltip'
+import Tooltip from 'bee-tooltip';
 import { Provider, create } from 'mini-store';
 import Btns from 'ac-btns';
 import i18n from './i18n'
@@ -136,7 +136,11 @@ class AcSearchPanel extends Component {
         );
         return(
             <Provider store={this.store}>
-            <div className={clsfix}>
+            <div className={clsfix} onKeyDown={(e)=>{
+                if(e.keyCode==13){
+                    search(e)
+                }
+            }}>
                 <div className={`${clsfix}-header`} >
                 
                 {

@@ -203,7 +203,9 @@ var EditGrid = function (_Component) {
             var data = _this.resetChecked(_this.state.data);
             var selectDataIds = [];
             selectData.forEach(function (item) {
-                data[item.index - 1]._checked = !data[item.index - 1]._checked;
+                if (data[item.index - 1]) {
+                    data[item.index - 1]._checked = !data[item.index - 1]._checked;
+                }
                 var id = 'selectDataId' + _this.selectDataId;
                 data.selectDataId = id;
                 selectDataIds.push(id);
@@ -506,7 +508,7 @@ var EditGrid = function (_Component) {
                 data: nextProps.data
             });
         }
-        if ('disabled' in nextProps) {
+        if ('disabled' in nextProps || !(0, _lodash2["default"])(nextProps.columns, this.state.columns)) {
             this.setDataColumn(nextProps.disabled, nextProps.columns, nextProps.data);
         }
     };

@@ -44,6 +44,7 @@ const EditGrid = AcGrids.EditGrid;
 |defaultOpen|默认是否打开|bool|-|
 |showIndex|是否显示序号列|bool|true|
 |excludeKeys|粘贴时不需要粘贴的key值合集|array|[]|
+|onValidate|校验表格数据,有错误的时候返回错误信息，没有错误的时候返回值为null|func|-|
 
 
 ### columns

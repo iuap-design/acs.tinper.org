@@ -266,17 +266,21 @@
       display: inline-block; }
   .ac-upload-list-file-area .u-table .u-table-tbody tr td .upload-status.error {
     color: #e14c46; }
-  .ac-upload-list-file-area .u-table .u-table-tbody .opt-btns .ac-btns button.ac-btns-item.u-button.ac-btns-write,
-  .ac-upload-list-file-area .u-table .u-table-tbody .opt-btns .ac-btns button.ac-btns-item.u-button.ac-btns-write:hover {
-    color: #fff !important;
-    background: #505F79 !important;
-    border-color: #505F79 !important;
-    height: 26px;
-    font-size: 14px;
-    line-height: 26px;
-    padding: 0;
-    margin-right: 8px;
-    margin-bottom: 2px; }
+  .ac-upload-list-file-area .u-table .u-table-tbody .opt-btns {
+    min-height: 20px; }
+    .ac-upload-list-file-area .u-table .u-table-tbody .opt-btns .ac-btns button.ac-btns-item.u-button.ac-btns-write,
+    .ac-upload-list-file-area .u-table .u-table-tbody .opt-btns .ac-btns button.ac-btns-item.u-button.ac-btns-write:hover {
+      color: #fff !important;
+      background: #505F79 !important;
+      border-color: #505F79 !important;
+      height: 26px;
+      font-size: 14px;
+      line-height: 26px;
+      padding: 0;
+      margin-right: 8px;
+      margin-bottom: 2px; }
+    .ac-upload-list-file-area .u-table .u-table-tbody .opt-btns .file-list-linetoolbar-container {
+      display: block; }
 
 .ac-upload-list .u-upload-list {
   display: none; }

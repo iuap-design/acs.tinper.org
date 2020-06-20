@@ -1,51 +1,55 @@
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import ToolTip from 'bee-tooltip'
 
 class RenderCell extends Component {
-    constructor(props) {
+    constructor(props){
         super(props)
-        this.state = {
-            visible: true,
-            enter: false,
+        this.state={
+            visible:true,
+            enter:false,
             hasError:false
         }
     }
 
-    click = () => {
-        if (this.state.visible) {
+    click=()=>{
+        if(this.state.visible){
             setTimeout(() => {
                 let input = document.querySelector('.triangle-flag .u-form-control');
-                if (input) input.focus()
+                if(input)input.focus()
+                let field = ReactDOM.findDOMNode(this.field);
+                let fieldInput = field.querySelector('.u-form-control')
+                if(fieldInput)fieldInput.focus&&fieldInput.focus()
             }, 0);
         }
         this.setState({
-            visible: !this.state.visible
+            visible:!this.state.visible
         })
     }
 
-    onMouseEnter = () => {
+    onMouseEnter=()=>{
         this.setState({
-            enter: true
+            enter:true
         })
     }
 
-    onMouseLeave = () => {
+    onMouseLeave=()=>{
         this.setState({
-            visible: true,
-            enter: false
+            visible:true,
+            enter:false
         })
     }
     renderSpan=()=>{
         if(this.state.visible&&(!this.state.hasError)){
-            let textAlign = this.props.textAlign;
+            let { textAlign,overlay,text } = this.props;
             let placement = 'left';
             if(textAlign)placement=textAlign=='center'?'bottom':textAlign;
             return (
-                <ToolTip inverse overlay={this.props.text} placement={placement}>
+                <ToolTip inverse overlay={overlay} placement={placement}>
                     <span className={`u-edit-grid-cell ${this.state.enter?'enter':''}`} 
                     onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} 
-                    onClick={this.click}>{this.props.text}</span>
+                    onClick={this.click}>{text}</span>
                 </ToolTip> 
             )
         }else{
@@ -62,7 +66,7 @@ class RenderCell extends Component {
         }
     }
 
-    render () {
+    render() {
         return this.renderSpan();
     }
 }

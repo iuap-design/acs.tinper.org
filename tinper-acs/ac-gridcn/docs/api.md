@@ -1,4 +1,4 @@
-# 复杂表格全编辑 AcGrids
+# 复杂表格全编辑 AcGridcn
 
 简单表格、编辑表格，项目中需要引入`tinper-bee`的样式文件
 
@@ -52,6 +52,7 @@ import 'ac-gridcn/build/Gridcn.css';
 |pattern|校验正则|RegExp|-|
 |patternMessage|正则校验错误信息|string|-|
 |filedProps|传给`field`的属性|string|-|
+|listKey|编辑表格中，用于浏览态显示的key值|string|-|
 
 
 #### filedProps

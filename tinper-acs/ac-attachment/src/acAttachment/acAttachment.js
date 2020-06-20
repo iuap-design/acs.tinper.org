@@ -105,6 +105,9 @@ class AcAttachment extends Component{
         //单据Id变化刷新文件列表
         if(nextProps.recordId && nextProps.recordId != this.props.recordId){
             this.fLoadFileList(nextProps);
+            this.setState({
+                selectedFiles: []
+            })
         }
         //disabled变化更新按钮
         if(nextProps.disabled != this.props.disabled){
@@ -121,9 +124,14 @@ class AcAttachment extends Component{
                 });
             });
         }
+        if(nextProps.children != this.props.children){
+            setTimeout(() => {
+                this.fSetSelectedFiles(this.state.selectedFiles);
+            },0);
+        }
     }
 	componentDidMount(){
-		this.fLoadFileList();
+        this.fLoadFileList();
     }
 	fLoadFileList(nextProps){
         const self = this;
@@ -153,8 +161,8 @@ class AcAttachment extends Component{
             });
         }
     }
-    fGetTableList(fileList){
-        let {selectedFiles} = this.state;
+    fGetTableList(fileList,selectedFiles){
+        selectedFiles = selectedFiles || this.state.selectedFiles;
         let tableList = fileList.map(function(item){
             const regExt = /\.(\w+)$/;
             let filetypeMatch = item.filename.match(regExt);
@@ -259,9 +267,6 @@ class AcAttachment extends Component{
         this.fSetSelectedFiles(data);
     }
     fSetSelectedFiles(selectedFiles){
-        this.setState({
-            selectedFiles: selectedFiles || []
-        });
         //按钮禁用
         let battchEnable = selectedFiles && selectedFiles.length > 0;
         let btnDisabled = !battchEnable;
@@ -270,10 +275,14 @@ class AcAttachment extends Component{
         let btnUpload = this.fGetBtnByType('upload',btnDisabled,outDisabled);
         let btnDownload = this.fGetBtnByType('download',btnDisabled,outDisabled);
         let btnDelete = this.fGetBtnByType('delete',btnDisabled,outDisabled);
+        
+        let {fileList} = this.state;
         this.setState({
             btnUpload: btnUpload,
             btnDownload: btnDownload,
-            btnDelete: btnDelete
+            btnDelete: btnDelete,
+            selectedFiles: selectedFiles || [],
+            tableList: this.fGetTableList(fileList,selectedFiles)
         });
     }
 	fGetTableColumns(){
@@ -402,11 +411,16 @@ class AcAttachment extends Component{
             };
             btn = map[type];
         }
-        //外部禁用，则全部按钮禁用 
-        if(outDisabled){
+
+        //自身的禁用优先
+        if(typeof btn.props.disabled !== 'undefined'){
+            btn = React.cloneElement(btn,{disabled: btn.props.disabled});
+        }
+        //外部禁用，则全部按钮禁用，若按钮本身禁用，则依然是禁用
+        else if(outDisabled){
             btn = React.cloneElement(btn,{disabled:true});
         }
-        //外部不禁用，则有选择记录时候控制删除和下载按钮的disabled
+        //外部和自身都不禁用，则有选择记录时候控制删除和下载按钮的disabled
         else{
             if(type != 'upload'){
                 btn = React.cloneElement(btn,{disabled:disabled});
@@ -418,6 +432,13 @@ class AcAttachment extends Component{
         }
 
         return btn;
+    }
+    renderDel(btn){
+        let {onDelete} = this.props;
+        btn = onDelete ? React.cloneElement(btn,{onClick:(ev) => {onDelete(this)}}) : btn;
+        return (
+            btn
+        )
     }
     fConClick(ev){
         let btnType = ev.target.getAttribute('data-btn');
@@ -437,13 +458,6 @@ class AcAttachment extends Component{
             default:
                 break;
         }
-    }
-    renderDel(btn){
-        let {onDelete} = this.props;
-        btn = onDelete ? React.cloneElement(btn,{onClick:(ev) => {onDelete(this)}}) : btn;
-        return (
-            btn
-        )
     }
     fValidateFileType(fileType){
         const accept = this.props.fileType;
@@ -545,7 +559,7 @@ class AcAttachment extends Component{
         let uploadUrl = this.uploadUrl;
         let uploadData = this.fGetUploadData();
         let conClass = classNames('ac-attachmentc',className);
-        
+
 		return (
                 <div className={conClass} onClick={this.fConClick}>
                     <AcUpload
@@ -591,4 +605,3 @@ AcAttachment.propTypes = propTypes;
 AcAttachment.defaultProps = defaultProps;
 
 export default injectIntl(AcAttachment,{withRef:true});
- 

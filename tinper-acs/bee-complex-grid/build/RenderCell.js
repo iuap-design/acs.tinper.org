@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _beeTooltip = require('bee-tooltip');
 
 var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
@@ -35,6 +39,9 @@ var RenderCell = function (_Component) {
                 setTimeout(function () {
                     var input = document.querySelector('.triangle-flag .u-form-control');
                     if (input) input.focus();
+                    var field = _reactDom2["default"].findDOMNode(_this.field);
+                    var fieldInput = field.querySelector('.u-form-control');
+                    if (fieldInput) fieldInput.focus && fieldInput.focus();
                 }, 0);
             }
             _this.setState({
@@ -57,18 +64,22 @@ var RenderCell = function (_Component) {
 
         _this.renderSpan = function () {
             if (_this.state.visible && !_this.state.hasError) {
-                var textAlign = _this.props.textAlign;
+                var _this$props = _this.props,
+                    textAlign = _this$props.textAlign,
+                    overlay = _this$props.overlay,
+                    text = _this$props.text;
+
                 var placement = 'left';
                 if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
                 return _react2["default"].createElement(
                     _beeTooltip2["default"],
-                    { inverse: true, overlay: _this.props.text, placement: placement },
+                    { inverse: true, overlay: overlay, placement: placement },
                     _react2["default"].createElement(
                         'span',
                         { className: 'u-edit-grid-cell ' + (_this.state.enter ? 'enter' : ''),
                             onMouseLeave: _this.onMouseLeave, onMouseEnter: _this.onMouseEnter,
                             onClick: _this.click },
-                        _this.props.text
+                        text
                     )
                 );
             } else {

@@ -11,6 +11,7 @@ const propTypes = {
     onChange: PropTypes.func,//数据改变回调
     clsfix: PropTypes.string,
     disabled: PropTypes.bool,//是否可编辑
+    forceRenderColumn:PropTypes.bool,//强制renderColumn
 }
 
 const defaultProps = {
@@ -18,6 +19,7 @@ const defaultProps = {
     data: [],
     columns: [],
     onChange: () => { },
+    forceRenderColumn:false
 };
 
 class EditGrid extends Component {
@@ -62,7 +64,7 @@ class EditGrid extends Component {
            delete current[filed];
         }
         this.errors[index] = current;
-        console.log(this.errors)
+        this.props.onValidate&&this.props.onValidate(this.errors);
     }
     validate = ()=>{
         if(Object.keys(this.errors).length){
@@ -102,6 +104,8 @@ class EditGrid extends Component {
                         customizeRender={item.customizeRender}
                         onValidate={this.onValidate}
                         filedProps={item.filedProps}
+                        record={record}
+                        forceRenderColumn={this.props.forceRenderColumn}
                     />
                 }
             } else {
@@ -144,11 +148,15 @@ class EditGrid extends Component {
         this.setState({
             data: data
         })
-        this.props.onChange(data);
+        this.props.onChange(data,{
+            index,
+            key,
+            value
+        });
     }
 
     //选中数据的回调
-    getSelectedDataFunc = (selectData) => {
+    getSelectedDataFunc = (selectData,a,b,c,d) => {
         let data = this.resetChecked(this.state.data)
         let selectDataIds = []
         selectData.forEach((item) => {
@@ -164,6 +172,7 @@ class EditGrid extends Component {
             data
         })
         this.props.onChange(data);
+        this.props.getSelectedDataFunc&&this.props.getSelectedDataFunc(selectData,a,b,c,d)
     }
 
     resetChecked = (dataValue) => {

@@ -6,11 +6,16 @@ import Icon from 'bee-icon';
 import Modal from 'bee-modal';
 import Table from 'bee-table'
 import Btns from 'ac-btns';
+import Checkbox from 'bee-checkbox';
 import cloneDeep from 'clone-deep';
 import request from 'axios';
 import { getSize, getFileNames,dateFormate,getCookie } from './utils.js';
 import i18n from './i18n.js';
+import multiSelect from "bee-table/build/lib/newMultiSelect";
+import sort from "bee-table/build/lib/sort";
 
+const MultiSelectTable = multiSelect(Table, Checkbox);
+const ComplexTable = sort(MultiSelectTable, Icon);
 const propTypes = {
     canUnfold:PropTypes.bool,//是否可以展开收起
     id:PropTypes.string.isRequired,
@@ -21,6 +26,14 @@ const propTypes = {
     uploadProps:PropTypes.object,//附件上传参数
     powerBtns:PropTypes.array,//可用按钮集合
     callback:PropTypes.func,//回调 第一个参数：成功(success)/失败(error)； 第二个参数：list 获得文件列表；delete 删除； upload 上传。 第三个参数：成功信息/错误信息。 第四个参数：null/error对象
+    uploadBut:PropTypes.node, //动态肩部按钮
+    lineToolbar:PropTypes.node, //动态行按钮
+    afterGetList:PropTypes.func,//获取列表后可执行的操作
+    vitualDelete:PropTypes.func,//本地执行删除
+    recordActiveRow:PropTypes.func,//记录当前活动行
+    getSelectedDataFunc:PropTypes.func,//启用多选后
+    beforeAct:PropTypes.func,//执行操作前触发的方法；
+    type:PropTypes.string,//使用者类型，mdf cn
 };
 
 const defaultProps = {
@@ -38,7 +51,11 @@ const defaultProps = {
     powerBtns:['upload','reupload','download','delete','confirm','cancel'],
     localeCookie:'locale',
     callback:()=>{},
-    canUnfold:true
+    canUnfold:true,
+    getSelectedDataFunc:()=>{},
+    uploadBut:null,
+    lineToolbar:null,
+    operationWidth: 200
 };
 
 class FileList extends Component {
@@ -52,8 +69,10 @@ class FileList extends Component {
             pageSize:999999,
             hoverData:{},
             id:props.id,
-            open:true
+            open:true,
+            reload: Math.random()
         }
+        this.hoverData={};
         this.localObj = i18n[getCookie(props.localeCookie)]||i18n['zh_CN'];
         this.columns = [{
             title: this.localObj.fileName,
@@ -115,7 +134,7 @@ class FileList extends Component {
             title: this.localObj.operation,
             dataIndex: "e",
             key: "e",
-            width: 200,
+            width: props.operationWidth,
             render:(text,record,index)=>{
                 if(!this.props.disabled){
                     if(record.uploadStatus=='error'){
@@ -129,49 +148,55 @@ class FileList extends Component {
                         },this.props.uploadProps);
                         return <div className="opt-btns">
                             <Btns localeCookie={this.props.localeCookie}
-                                powerBtns={this.props.powerBtns}
-                                type='line'
-                                btns={{
-                                    reupload: {
-                                        node:<Upload {...uploadP}>
+                                    powerBtns={this.props.powerBtns}
+                                    type='line'
+                                    btns={{
+                                        reupload: {
+                                            node:<Upload {...uploadP}>
                                                 <Btns localeCookie={this.props.localeCookie}
                                                     powerBtns={this.props.powerBtns}
                                                     type='line'
                                                     btns={{ reupload:{} }}/>
                                             </Upload>
-                                    },
-                                    delete: {
-                                        onClick: ()=>{this.deleteError(record.uid)}
-                                    },
-                                }}
-                                powerBtns={props.powerBtns}
+                                        },
+                                        delete: {
+                                            onClick: ()=>{this.deleteError(record.uid)}
+                                        },
+                                    }}
+                                    powerBtns={props.powerBtns}
                             />
                         </div>
                     }else if(record.uploadStatus=='uploading'){
                         return <div className="opt-btns"></div>
                     }else{
                         return <div className="opt-btns">
-                            <Btns localeCookie={props.localeCookie}
-                                type='line'
-                                btns={{
-                                    download: {
-                                        onClick: this.download
-                                    },
-                                    delete: {
-                                        onClick: this.deleteConfirm
-                                    },
-                                }}
-                                powerBtns={props.powerBtns}
-                            />
+                            {this.props.type =='mdf' ?
+                                <div className="file-list-linetoolbar-container">{React.cloneElement(props.lineToolbar, { record })}</div>
+                                : <Btns localeCookie={props.localeCookie}
+                                        type='line'
+                                        btns={{
+                                            download: {
+                                                onClick: this.download
+                                            },
+                                            delete: {
+                                                onClick: this.deleteConfirm
+                                            },
+                                        }}
+                                        powerBtns={props.powerBtns}
+                            />}
+
+
                         </div>
                     }
                 }
 
             }
-        }];
+            }];
     }
     componentDidMount(){
-        this.props.getListNow&&this.getList()
+        const {getChild,getListNow}=this.props;
+        getChild && getChild(this);
+        getListNow && this.getList();
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.id!=this.state.id){
@@ -186,11 +211,31 @@ class FileList extends Component {
                 id:nextProps.id
             })
         }
+        if(nextProps.reload && (nextProps.reload !== this.state.reload)){
+            this.getList({},nextProps.id);
+            this.setState({
+                reload: nextProps.reload
+            })
+        }
     }
 
+    /*操作前处理方法*/
+    _handelBeforeAct=(type)=>{
+        const {data}=this.state;
+        const {beforeAct}=this.props;
+        let flag=true;
+        if(beforeAct){
+            if(!beforeAct(type,data)){
+                flag=false;
+            }
+        }
+        return flag
+    }
     /**获得文件列表 */
     getList=(pageObj={},propsId)=>{
         let id = propsId||this.props.id;
+        let {afterGetList} =this.props;
+        if(!this._handelBeforeAct('list')) return;
         if(id){
             let url = this.props.url.list.replace('{id}',id)
             let params=Object.assign({
@@ -204,11 +249,13 @@ class FileList extends Component {
                 withCredentials:true
             }).then((res)=>{
                 if(res.status==200){
-                    const data=res.data.data;
-                    if(data){
-                        //data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
+                    if(res.data.data){
+                        let list = res.data.data;
+                        if(afterGetList){
+                            list=afterGetList(list)
+                        }
                         this.setState({
-                            data:data.reverse(),
+                            data:list,
                             pageSize:params.pageSize,
                             pageNo:params.pageNo
                         })
@@ -242,10 +289,15 @@ class FileList extends Component {
         this.setState({
             data,
             selectedList
-        })
+        }, () => {
+            this.props.getSelectedDataFunc && this.props.getSelectedDataFunc(selectedList,record,index);
+        });
     };
     /**划过 */
     onRowHover = (index,record) => {
+        const {recordActiveRow} =this.props;
+        if(recordActiveRow) recordActiveRow(record);
+        this.hoverData=record;
         this.state.hoverData = record;
         this.setState({
             hoverData:record
@@ -288,6 +340,9 @@ class FileList extends Component {
 
     /**删除 */
     delete=()=>{
+        const {vitualDelete}=this.props;
+        if(!this._handelBeforeAct('delete')) return;
+        if(vitualDelete && !vitualDelete(this.state.hoverData,this)) return; //本地删除
         let url = this.props.url.delete.replace('{id}',this.state.hoverData.id);
         request(url, {
             method: "delete",
@@ -312,6 +367,7 @@ class FileList extends Component {
         })
     }
     download=()=>{
+        if(!this._handelBeforeAct('download')) return;
         let url = this.props.url.info.replace('{id}',this.state.hoverData.id)
         request(url, {
             method: "get",
@@ -348,18 +404,19 @@ class FileList extends Component {
 
         }
         if (info.file.status === 'done') {
-            let id = info.file.response.data[0].id;
-            data.forEach(item=>{
-                if(item.uid==info.file.uid){
-                    item.uploadStatus='done';
-                    item.id=id
-                }
-            });
-            this.setState({
-                data
-            })
+            // let id = info.file.response.data[0].id;
+            // data.forEach(item=>{
+            //     if(item.uid==info.file.uid){
+            //         item.uploadStatus='done';
+            //         item.id=id
+            //     }
+            // });
+            // this.setState({
+            //     data
+            // })
             this.props.callback('success','upload',info.file.response);
             console.log(this.localObj['uploadSuccess'])
+            this.getList()
         }
         if (info.file.status === 'removed') {
             let msg = info.file.response.displayMessage[getCookie(this.props.localeCookie)]||info.file.response.displayMessage['zh_CN']
@@ -401,7 +458,7 @@ class FileList extends Component {
     }
 
     render(){
-        let { clsfix,id,disabled,uploadProps,canUnfold,title } = this.props;
+        let { clsfix,id,disabled,uploadProps,canUnfold,uploadBut,toolbar,type, title } = this.props;
         let { data,open } = this.state;
         const uploadP =Object.assign({
             withCredentials:true,
@@ -409,7 +466,7 @@ class FileList extends Component {
             action: this.props.url.upload.replace('{id}',this.props.id),
             onChange:this.fileChange,
             multiple:true,
-            beforeUpload:this.beforeUpload
+            beforeUpload:this.beforeUpload,
         },uploadProps)
         return(
             <div className={clsfix}>
@@ -417,36 +474,49 @@ class FileList extends Component {
                     {
                         canUnfold?<div className={`${clsfix}-text`} onClick={this.changeOpenStatus}>
                             <Icon type={open?'uf-triangle-down':'uf-triangle-right'}></Icon>
-                            <span>{title?title:this.localObj.file}</span>
+                            <span>{title ? title : this.localObj.file}</span>
                         </div>:''
                     }
                     <div className={`${clsfix}-btns`}>
                         {
                             disabled?'':<Btns localeCookie={this.props.localeCookie}
-                            powerBtns={this.props.powerBtns}
-                            btns={{
-                                upload:{
-                                    node:<Upload {...uploadP}>
-                                            <Btns localeCookie={this.props.localeCookie} powerBtns={this.props.powerBtns} btns={{ upload:{} }}/>
-                                        </Upload>
-                                },
-                            }}
-                        />
+                                              powerBtns={this.props.powerBtns}
+                                              btns={{
+                                                upload:{
+                                                    node:<div>
+                                                        {toolbar}
+                                                        <Upload {...uploadP}>
+                                                            {type == 'mdf' ? uploadBut : <Btns localeCookie={this.props.localeCookie} powerBtns={this.props.powerBtns} btns={{ upload:{} }}/>}
+                                                        </Upload>
+                                                    </div>
+                                                },
+                                              }}
+                            />
                         }
 
                     </div>
                 </div>
                 <div className={open?`${clsfix}-file-area`:`${clsfix}-file-area hide`}>
-                    <Table
-                        columns={this.columns}
-                        data={data}
-                        rowKey={(record,index)=>index}
-                        scroll = {{y:400}}
-                        getSelectedDataFunc={this.getSelectedDataFunc}
-                        onRowHover={this.onRowHover}
-                        multiSelect={false}
+                    {
+                        type == 'mdf' ? <ComplexTable
+                            columns={this.columns}
+                            data={data}
+                            rowKey={(record,index)=>index}
+                            scroll = {{y:400}}
+                            getSelectedDataFunc={this.getSelectedDataFunc}
+                            onRowHover={this.onRowHover}
+                            multiSelect={{type: "checkbox" }}
 
-                    />
+                        /> : <Table
+                            columns={this.columns}
+                            data={data}
+                            rowKey={(record,index)=>index}
+                            scroll = {{y:400}}
+                            getSelectedDataFunc={this.getSelectedDataFunc}
+                            onRowHover={this.onRowHover}
+
+                        />
+                    }
                     <Modal
                         size='sm'
                         className='pop_dialog'
