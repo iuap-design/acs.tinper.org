@@ -179,7 +179,7 @@ module.exports = {
       isStander: isStander,
       isGhpages: isGhpages,
       rightMenus: rightMenus,
-      changeLog: changeLog,
+      changeLog: changeLog||[],
       latestVersion:sidebar['概述']['version'].replace('v','')
     });
   }
