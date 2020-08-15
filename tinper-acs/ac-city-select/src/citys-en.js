@@ -7,7 +7,7 @@ const provinceData = [
     {
         "name": "Hebei", "city": [
 
-            { "name": "Shijiazhuang", "area": ["Chang'an District", "Qiaodong District", "Qiaoxi District", "Xinhua District", "Suburb", "Jingxing Mining Area", "Jingxing County", "Zhengding County", "Luancheng County", "Xingtang County", "Lingshou County", "Gaoyi County", "Shenze County", "Zanhuang County", "Wuji County", "Pingshan County", "Yuanshi County", "Zhao County", "Xinji City", "Gao", "Jinzhou City", "Xinle City", "Luquan City"] },
+            { "name": "Shijiazhuang", "area": ["Chang'an District", "Qiaodong District", "Qiaoxi District", "Xinhua District", "Suburb", "Jingxing Mining Area", "Jingxing County", "Zhengding County", "Luancheng County", "Xingtang County", "Lingshou County", "Gaoyi County", "Shenze County", "Zanhuang County", "Wuji County", "Pingshan County", "Yuanshi County", "Zhao County", "Xinji City", "Gaocheng District", "Jinzhou City", "Xinle City", "Luquan City"] },
 
             { "name": "Tangshan", "area": ["Lunan District", "Lubei District", "Guye District", "Kaiping District", "New District", "Fengrun County", "Luan County", "Luannan County", "Laoting County", "Qianxi County", "Yutian County", "Tanghai County", "Zunhua City", "Fengnan City", "Qian'an City"] },
 

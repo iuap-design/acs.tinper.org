@@ -515,7 +515,7 @@ var _initialiseProps = function _initialiseProps() {
 
     this.cancelAdd = function () {
         _beeModal2["default"].confirm({
-            title: '温馨提示',
+            // title:'温馨提示',
             keyword: '警告',
             content: "数据未保存，确定离开 ?",
             onOk: function onOk() {
@@ -561,7 +561,7 @@ var _initialiseProps = function _initialiseProps() {
             });
         } else {
             _beeModal2["default"].confirm({
-                title: '温馨提示',
+                // title:'温馨提示',
                 keyword: '删除',
                 content: "单据删除后将不能恢复。",
                 onOk: function onOk() {
@@ -722,7 +722,7 @@ var _initialiseProps = function _initialiseProps() {
 
     this.cancelEdit = function () {
         _beeModal2["default"].confirm({
-            title: '温馨提示',
+            // title:'温馨提示',
             keyword: '警告',
             content: "数据未保存，确定离开？",
             onOk: function onOk() {

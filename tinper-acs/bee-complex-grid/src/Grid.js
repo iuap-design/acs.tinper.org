@@ -48,7 +48,7 @@ const defaultProps = {
     afterRowLock:()=>{},//表头锁定解锁的回调函数
 };
 
-const defualtPaginationParam = { horizontalPosition: "left", verticalPosition: 'bottom', showJump: true, first: true, prev: true, last: true, next: true, maxButtons: 5 };
+const defualtPaginationParam = { horizontalPosition: "center", verticalPosition: 'bottom', showJump: true, first: true, prev: true, last: true, next: true, maxButtons: 5 };
 
 class Grid extends Component {
     constructor(props) {
@@ -120,12 +120,13 @@ class Grid extends Component {
         const { renderFlag, selectedRowIndex } = this.state;
         //分页
         if (nextProps.paginationObj && nextProps.paginationObj !== 'none') {
-            this.setState({
-                activePage: nextProps.paginationObj.activePage,
-                total: nextProps.paginationObj.total,
-                pageItems: nextProps.paginationObj.items,
-                dataNum: nextProps.paginationObj.dataNum
-            });
+            let { activePage,total,items,dataNum } = nextProps.paginationObj;
+            let obj = {}
+            if(activePage!=this.state.activePage)obj.activePage=activePage;
+            if(total!=this.state.total)obj.total=total;
+            if(items!=this.state.pageItems)obj.pageItems=items;
+            if(dataNum!=this.state.dataNum)obj.activePage=dataNum;
+            this.setState(obj);
         }
         if (nextProps.columns && nextProps.columns !== this.columns) {
             let newColumns = [],
@@ -343,7 +344,7 @@ class Grid extends Component {
     /**
      * 后端获取数据
      */
-    sortFun = sortParam => {
+    sortFun = (sortParam,newData,oldData) => {
         let sortObj = {};
         sortParam.forEach(item => {
             sortObj[item.field] = item;
@@ -357,10 +358,9 @@ class Grid extends Component {
                 da.orderNum = "";
             }
         });
-
         //将参数传递给后端排序
         if (typeof this.sort.originSortFun == "function") {
-            this.sort.originSortFun(sortParam, this.columns);
+            this.sort.originSortFun(sortParam, this.columns,newData,oldData);
         }
     };
     /**

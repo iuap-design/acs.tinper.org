@@ -105,6 +105,7 @@ var EditGrid = function (_Component) {
                 delete current[filed];
             }
             _this.errors[index] = current;
+            _this.props.onValidate && _this.props.onValidate(_this.errors);
         };
 
         _this.validate = function () {
@@ -149,7 +150,8 @@ var EditGrid = function (_Component) {
                             disabled: disabled ? true : item.disabled,
                             customizeRender: item.customizeRender,
                             onValidate: _this.onValidate,
-                            filedProps: item.filedProps
+                            filedProps: item.filedProps,
+                            record: record
                         });
                     };
                 } else {
@@ -196,7 +198,11 @@ var EditGrid = function (_Component) {
             _this.setState({
                 data: data
             });
-            _this.props.onChange(data);
+            _this.props.onChange(data, {
+                index: index,
+                key: key,
+                value: value
+            });
         };
 
         _this.getSelectedDataFunc = function (selectData, record, index, newData) {

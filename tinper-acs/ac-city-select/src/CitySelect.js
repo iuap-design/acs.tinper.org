@@ -91,32 +91,44 @@ class CitySelect extends Component {
         if (!nextProps.value) return;
         const { province:oldProvince, city:oldCity, area:oldArea } = this.props.value;
         const { province, city, area } = nextProps.value;
-        // if(province !== oldProvince || city !== oldCity || area !== oldArea) {
-        //     this.setState({
-        //         province,
-        //         secondCity: city,
-        //         secondArea: area
-        //     });
-        //     this.handleProvinceChange(province, city, area);
-        // }
+        const { preLang, lang } = nextProps;
         if(province !== oldProvince) {
+            const { newProvince, newCity, newArea } = this.getCurrentValue(province, city, area, preLang, lang);
             this.setState({
-                province,
+                province:newProvince,
             });
-            return this.handleProvinceChange(province, city, area);
+            return this.handleProvinceChange(newProvince, newCity, newArea);
         }
         if(city !== oldCity) {
+            const { newCity, newArea } = this.getCurrentValue(province, city, area, preLang, lang);
             this.setState({
-                secondCity: city,
+                secondCity: newCity,
             });
-            return this.handleCityChange(city);
+            return this.handleCityChange(newCity, newArea);
         }
         if(area !== oldArea) {
+            const { newArea } = this.getCurrentValue(province, city, area, preLang, lang);
             this.setState({
-                secondArea: area
+                secondArea: newArea
             });
-            this.onSecondAreaChange(area);
+            this.onSecondAreaChange(newArea);
         }
+    }
+    // 切换语种后，要自动翻译value
+    getCurrentValue (province, city, area, preLang, lang) {
+        const result = {
+            newProvince:province, 
+            newCity:city,
+            newArea:area
+        }
+        if (!preLang || preLang === lang) return result;
+        let newValue = this.translateValue(province, city, area, preLang);
+        if (newValue) {
+            result.newProvince = newValue.province;
+            result.newCity = newValue.city;
+            result.newArea = newValue.area
+        }
+        return result
     }
 
     /**
@@ -180,8 +192,8 @@ class CitySelect extends Component {
         return newArr;
     };
 
-    getIndex = (type, name, provinceIndex) => {
-        let provinceData = this.state.provinceData;
+    getIndex = (type, name, provinceIndex, targetData) => {
+        let provinceData = targetData || this.state.provinceData;
         let provinceI = provinceIndex || this.state.provinceIndex;
         provinceI = provinceI < 0 ? 0 : provinceI;
         switch (type) {
@@ -203,7 +215,7 @@ class CitySelect extends Component {
             citesInitArr = [],
             areasInitData = [];
         if(value !== ''){
-            let { provinceData } = this.state;
+            let { provinceData,provinceIndex } = this.state;
             let { disabledCityArr, disabledAreaObj, lang } = this.props;
             index = this.getIndex('province', value);
             if(index > -1){
@@ -223,18 +235,18 @@ class CitySelect extends Component {
         });
         this.onChange(value, city, area);
     };
-    handleCityChange = (value) => {
+    handleCityChange = (value, areaValue) => {
         value = (value) ? value : '';
         let index = '',
             area = '',
             areasInitData = [];
-        let { province,cities } = this.state;
+        let { province,cities,cityIndex } = this.state;
         let { disabledAreaObj, lang } = this.props;
         if(value !== ''){
             index = this.getIndex('city', value);
             if(index > -1){
                 areasInitData = this.buildAreaInitData(cities[index].area, cities[index].name, disabledAreaObj, lang);
-                area = areasInitData[0].name;
+                area = areaValue ? areaValue : areasInitData[0].name;
             }
         }
         this.setState({
@@ -260,8 +272,35 @@ class CitySelect extends Component {
             area: area
         })
     };
+    translateValue = (province, secondCity, secondArea, preLang) => {
+        let { provinceData } = this.state;
+        let lastData;
+        if (preLang === 'zh_TW') {
+            lastData = tw.provinceData;
+        } else if (preLang === 'en_US') {
+            lastData = en.provinceData;
+        } else if (preLang === 'zh_CN') {
+            lastData = zh.provinceData;
+        }
+        let provinceIndex = this.getIndex('province', province, undefined, lastData);
+        let cityIndex = this.getIndex('city', secondCity, provinceIndex, lastData);
+        if (provinceIndex > -1 && cityIndex > -1) {
+            let areaIndex = findIndex(lastData[provinceIndex].city[cityIndex].area, function (item) {
+                return item === secondArea;
+            });
+            if (areaIndex < 0) return
+            const newProvince = provinceData[provinceIndex];
+            const newCity = newProvince.city[cityIndex];
+            return {
+                province: newProvince.name,
+                city: newCity.name,
+                area: newCity.area[areaIndex]
+            }
+        }
+    }
     render() {
         let { provinceData, cities, areas } = this.state;
+        const { notFoundContent } = this.props;
 
         const provinceOptions = provinceData.map((province, index) => {
             if (province.disabled) {
@@ -291,6 +330,7 @@ class CitySelect extends Component {
                     value={this.state.province}
                     className="province"
                     disabled={this.props.disabled}
+                    notFoundContent={notFoundContent}
                     allowClear = {this.state.province && this.props.allowClear}
                     onChange={(value) => this.handleProvinceChange(value)}>
                     {provinceOptions}
@@ -298,6 +338,7 @@ class CitySelect extends Component {
                 <Select
                     value={this.state.secondCity}
                     disabled={this.props.disabled}
+                    notFoundContent={notFoundContent}
                     allowClear = {this.state.secondCity && this.props.allowClear}
                     className="city"
                     onChange={(value) => this.handleCityChange(value)}>
@@ -308,6 +349,7 @@ class CitySelect extends Component {
                     className="area"
                     allowClear = {this.state.secondArea && this.props.allowClear}
                     disabled={this.props.disabled}
+                    notFoundContent={notFoundContent}
                     onChange={(value) => this.onSecondAreaChange(value)}>
                     {areaOptions}
                 </Select>

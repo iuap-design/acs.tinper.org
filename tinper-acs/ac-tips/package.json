@@ -1,6 +1,6 @@
 {
  "name": "ac-tips",
- "version": "0.0.10",
+ "version": "1.0.1",
  "description": "AcTips ui component for react",
  "keywords": [
   "react",
@@ -34,13 +34,16 @@
   "coveralls": "bee-tools-test run coverage",
   "browsers": "bee-tools-test run browsers",
   "pub": "bee-tools run pub",
-  "changelog": "bee-tools run changelog"
+  "changelog": "bee-tools run changelog",
+  "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+  "postversion": "git push --follow-tags",
+  "prepublishOnly": "npm run build"
  },
  "dependencies": {
   "babel-runtime": "^6.23.0",
   "bee-icon": "^1.0.11",
   "classnames": "^2.2.5",
-  "uuid": "^3.3.2"
+  "rc-notification": "^4.4.0"
  },
  "devDependencies": {
   "chai": "^3.5.0",

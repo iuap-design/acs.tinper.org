@@ -1,6 +1,6 @@
 {
  "name": "ac-form-layout",
- "version": "0.1.12",
+ "version": "1.0.4",
  "description": "FormLayout ui component for react",
  "keywords": [
   "react",
@@ -34,7 +34,10 @@
   "coveralls": "bee-tools-test run coverage",
   "browsers": "bee-tools-test run browsers",
   "pub": "bee-tools run pub",
-  "changelog": "bee-tools run changelog"
+  "changelog": "bee-tools run changelog",
+  "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+  "postversion": "git push --follow-tags",
+  "prepublishOnly": "npm run build"
  },
  "dependencies": {
   "babel-runtime": "^6.23.0",

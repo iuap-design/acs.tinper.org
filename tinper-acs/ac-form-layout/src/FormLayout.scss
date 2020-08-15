@@ -1,3 +1,4 @@
+$font-size: 12px;
 .ac-form-layout {
     &-row {
         margin: 0
@@ -5,7 +6,7 @@
 
     &-item {
         padding: 0;
-        margin-bottom: 8px;
+        margin-bottom: 14px;
         .u-form-control{
             padding: 0 8px;
         }
@@ -19,11 +20,14 @@
             border-color: #d5d6d9;
         }
         .u-form-control:hover,.u-select-enabled .u-select-selection:hover,.u-input-number:hover{
-            border-color: #8cc6ff;
+            border-color: #505766;
         }
         .u-form-control:active,.u-select .u-select-selection:active,.u-input-number:active,
         .u-form-control:focus,.u-select .u-select-selection:focus,.u-input-number:focus{
-            border-color: #007ace;
+            border-color: #505766;
+        }
+        .datepicker-input-group.u-input-group:hover > input {
+            border-color: #505766;
         }
         .u-select .u-select-arrow,.datepicker-container .u-input-group-btn,.datepicker-input-group .u-input-group-btn,
         .u-input-number.u-input-group > span:first-child,.u-input-number.u-input-group > span:last-child,
@@ -44,15 +48,15 @@
             display: inline-block;
             width: 140px;
             text-align: right;
-            font-size: 13px;
+            font-size: $font-size;;
             color: #111111;
         }
 
         .u-label+* {
-            width: calc(100% - 140px);
+            width: calc(100% - 215px);
             display: inline-block;
             height: 32px;
-            font-size: 13px;
+            font-size: $font-size;;
         }
         .ac-form-layout-span{
             line-height: 32px;
@@ -62,6 +66,8 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             pointer-events: painted;
+            border: 1px solid #eee;
+            border-radius: 3px;
         }
         .ncc-refer-container .refer-wrapper .refer-wrapper-content{
             height: 32px;
@@ -130,40 +136,10 @@
 
         &-error-msg {
             color: #f53c32;
-            position: absolute;
-            z-index: 2;
-            top: -30px;
-            width: 100%;
-            text-align: center;
-            overflow: hidden;
-            display: block;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            height: 30px;
-            pointer-events: none;
-
             &-text {
-                padding: 3px 10px;
-                border-radius: 4px;
-                background: #fff;
-                box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-                top: 6px;
+                top: -2px;
                 position: relative;
             }
-        }
-
-        &-error-msg::after {
-            position: absolute;
-            display: block;
-            width: 6px;
-            height: 6px;
-            background: #fff;
-            content: " ";
-            left: calc(50% - 5px);
-            transform: rotate(45deg);
-            border-right: 1px solid #d5d6d9;
-            border-bottom: 1px solid #d5d6d9;
-            bottom: -1px;
         }
 
 
@@ -185,13 +161,13 @@
 
         input::-webkit-input-placeholder {
             color: #cccccc !important;
-            font-size: 13px;
+            font-size: $font-size;;
         }
 
         .u-select-selection-placeholder,
         .u-select-search-field-placeholder {
             color: #cccccc;
-            font-size: 13px;
+            font-size: $font-size;;
         }
     }
 
@@ -218,14 +194,14 @@
         .rc-tree-select-selection:hover,
         .u-form-control {
             background: none;
-            border: none;
+            border-color: #eee;
             color: #111111;
             box-shadow: none;
         }
 
         .u-select .u-select-selection {
             background: none;
-            border: none;
+            border-color: #eee;
             &.u-select-selection--multiple{
                 .u-select-selection-choice{
                     background: none;
@@ -257,7 +233,7 @@
             .refer-wrapper{
                 pointer-events: none;
                 .refer-wrapper-content{
-                    border: none;
+                    border-color: #eee;
                     background: none;
                     >ul{
                         background: none;
@@ -276,7 +252,7 @@
 
         }
         .u-input-number{
-            border: none;
+            border-color: #eee;
             .u-input-group-addon{
                 display: none;
             }

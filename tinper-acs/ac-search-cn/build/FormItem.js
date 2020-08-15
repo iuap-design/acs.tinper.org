@@ -14,6 +14,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _miniStore = require('mini-store');
 
+var _beeIcon = require('bee-icon');
+
+var _beeIcon2 = _interopRequireDefault(_beeIcon);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -48,13 +52,13 @@ var FormItem = function (_Component) {
                 var ary = [];
                 _react2["default"].Children.map(children, function (child) {
                     ary.push(_react2["default"].cloneElement(child, {
-                        placeholder: label
+                        // placeholder:label,
                     }));
                 });
                 return ary;
             } else {
                 return _react2["default"].cloneElement(children, {
-                    placeholder: label
+                    // placeholder:label,
                 });
             }
         };
@@ -169,7 +173,9 @@ var FormItem = function (_Component) {
     FormItem.prototype.render = function render() {
         var _this2 = this;
 
-        var required = this.props.required;
+        var _props = this.props,
+            required = _props.required,
+            label = _props.label;
 
         var classes = 'ac-search-cn-formitem';
         if (required) classes += ' require';
@@ -181,26 +187,21 @@ var FormItem = function (_Component) {
                     _this2.onMouseEnter(str);
                 },
                 onMouseLeave: this.mouseLeave },
-            this.state.show && str ? _react2["default"].createElement(
-                'span',
-                { className: 'ac-search-cn-formitem-value',
-                    onMouseEnter: this.innerMouseEnter,
-                    onMouseLeave: this.inneronMouseLeave,
-                    style: { 'top': this.state.strTop } },
+            _react2["default"].createElement(
+                'div',
+                { className: 'u-row' },
                 _react2["default"].createElement(
-                    'span',
-                    { className: 'ac-search-cn-formitem-value-text ' + (this.state.strTop == '-28px' ? '' : 'top'), ref: function ref(_ref) {
-                            return _this2.str = _ref;
-                        } },
-                    str
+                    'label',
+                    { className: 'u-label' },
+                    required ? _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-mi', className: 'mast' }) : '',
+                    label
+                ),
+                _react2["default"].createElement(
+                    'div',
+                    { className: 'input-control' },
+                    this.getChild()
                 )
-            ) : '',
-            required ? _react2["default"].createElement(
-                'span',
-                { className: 'ac-search-cn-formitem-mast' },
-                '*'
-            ) : '',
-            this.getChild()
+            )
         );
     };
 

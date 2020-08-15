@@ -28,6 +28,14 @@ var _create = require('babel-runtime/core-js/object/create');
 
 var _create2 = _interopRequireDefault(_create);
 
+var _set = require('babel-runtime/core-js/set');
+
+var _set2 = _interopRequireDefault(_set);
+
+var _map = require('babel-runtime/core-js/map');
+
+var _map2 = _interopRequireDefault(_map);
+
 var _extends = _assign2["default"] || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
@@ -37,8 +45,6 @@ var _react2 = _interopRequireDefault(_react);
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _utils = require('./utils');
 
 var _RefCoreError = require('ref-core/lib/refs/RefCoreError');
 
@@ -70,6 +76,8 @@ var _shallowequal2 = _interopRequireDefault(_shallowequal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 function _defaults(obj, defaults) { var keys = (0, _getOwnPropertyNames2["default"])(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = (0, _getOwnPropertyDescriptor2["default"])(defaults, key); if (value && value.configurable && obj[key] === undefined) { (0, _defineProperty2["default"])(obj, key, value); } } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -77,6 +85,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = (0, _create2["default"])(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) _setPrototypeOf2["default"] ? (0, _setPrototypeOf2["default"])(subClass, superClass) : _defaults(subClass, superClass); }
+// import { refValParse,deepTraversal } from './utils';
+
 
 var noop = function noop() {};
 var propTypes = {
@@ -147,11 +157,19 @@ var RefTreeBaseUI = function (_Component) {
       showLoading: showLoading,
       searchValue: '' //20190527新增搜索
     };
+    _this.flatTreeData = new _map2["default"]();
+    _this.currentParentChildrenArr = new _set2["default"]();
     return _this;
   }
 
   RefTreeBaseUI.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     //重新渲染数据获取selectedArray,因为取消操作重置了selectedArray，需要初始化
+    if (!(0, _shallowequal2["default"])(nextProps.treeData, this.props.treeData) && !nextProps.checkStrictly) {
+      //非严格模式需要平铺数据
+      this.flatTreeData = new _map2["default"]();
+      this.deepTraversal(nextProps.treeData, null, nextProps.valueField);
+    }
+
     if (nextProps.showModal) this.initComponent(nextProps);
   };
 
@@ -173,7 +191,6 @@ var RefTreeBaseUI = function (_Component) {
       });
     } else {
       //多选
-      //多选
       var _props = this.props,
           valueField = _props.valueField,
           checkStrictly = _props.checkStrictly;
@@ -182,10 +199,11 @@ var RefTreeBaseUI = function (_Component) {
       var newCheckedKeys = this.state.checkedKeys;
       var key = event.node.props.attr[valueField];
       var currentNode = event.node.props.attr;
+
       if (!checkStrictly) {
         //下面涉及到checkStricly=false/true，涉及删除会多个删除，新增会新增多个
         if (event.checked) {
-          //新增操作
+          //新增操作，checkNodes会平铺所有的，没问题
           event.checkedNodes.forEach(function (item) {
             var curKey = item.props.attr[valueField];
             if (newCheckedKeys.indexOf(curKey) < 0) {
@@ -194,25 +212,33 @@ var RefTreeBaseUI = function (_Component) {
             }
           });
         } else {
-          if (!event.node.props.attr.children || event.node.props.attr.children.length === 0) {
-            //删除子节点操作，涉及删除会多个删除
+          //删除操作，父节点，删除当前，并且删除children；叶子节点，只删除当前就好
+          //往上找父节点删除
+          this.currentParentChildrenArr = new _set2["default"]();
+          this.currentParentChildrenArr.add(key); //节点本身
+          this.getParentKeys(key);
+          //往下找子节点删除
+          if (event.node.props.attr.children && event.node.props.attr.children.length) {
+            var _loop = function _loop(data, arr) {
+              data.forEach(function (item) {
+                arr.add(item[valueField]);
+                if (item.children && item.children.length) {
+                  _loop(item.children, arr);
+                }
+              });
+            };
+
+            _loop(event.node.props.attr.children, this.currentParentChildrenArr);
+          }
+          this.currentParentChildrenArr.forEach(function (key) {
             allProcessCheckedArray = allProcessCheckedArray.filter(function (item) {
               return item[valueField] !== key;
             });
             if (newCheckedKeys.indexOf(key) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(key), 1);
-            //下面是多个时候
-            event.halfCheckedKeys.forEach(function (parentKeys) {
-              allProcessCheckedArray = allProcessCheckedArray.filter(function (item) {
-                return item[valueField] !== parentKeys;
-              });
-              if (newCheckedKeys.indexOf(parentKeys) > -1) newCheckedKeys.splice(newCheckedKeys.indexOf(parentKeys), 1);
-            });
-          } else {
-            //删除父节点，涉及遍历children节点，这里暂时不添加
-            return false;
-          }
+          });
         }
       } else {
+        //这里是checkStrictly为true的时候，增删都是一个
         if (event.checked) {
           //新增操作
           allProcessCheckedArray.push(currentNode);
@@ -347,7 +373,8 @@ var RefTreeBaseUI = function (_Component) {
         _props3$treeProps = _props3.treeProps,
         treeProps = _props3$treeProps === undefined ? {} : _props3$treeProps,
         _props3$footerBtnDom = _props3.footerBtnDom,
-        footerBtnDom = _props3$footerBtnDom === undefined ? '' : _props3$footerBtnDom;
+        footerBtnDom = _props3$footerBtnDom === undefined ? '' : _props3$footerBtnDom,
+        searchPlaceholder = _props3.searchPlaceholder;
     var _state = this.state,
         checkedKeys = _state.checkedKeys,
         searchValue = _state.searchValue;
@@ -386,7 +413,8 @@ var RefTreeBaseUI = function (_Component) {
           show: searchable,
           onSearch: this.onSearch,
           onChange: this.onSearch,
-          language: lang
+          language: lang,
+          placeholder: searchPlaceholder
         }),
         treeData.length ? _react2["default"].createElement(_RefCoreTree2["default"], _extends({}, treeProps, {
           show: Boolean(treeData.length),
@@ -425,11 +453,53 @@ var RefTreeBaseUI = function (_Component) {
 var _initialiseProps = function _initialiseProps() {
   var _this6 = this;
 
+  this.deepTraversal = function (treeData) {
+    var parentKey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var valueField = arguments[2];
+
+    var dataCopy = [].concat(treeData);
+    if (Array.isArray(dataCopy)) {
+      for (var i = 0, l = dataCopy.length; i < l; i++) {
+        var _dataCopy$i = dataCopy[i],
+            refname = _dataCopy$i.refname,
+            children = _dataCopy$i.children,
+            props = _objectWithoutProperties(_dataCopy$i, ['refname', 'children']);
+
+        var key = dataCopy[i][valueField];
+        var dataCopyI = new Object(),
+            isLeaf = children ? false : true;
+        dataCopyI = _extends(dataCopyI, {
+          key: key,
+          refname: refname,
+          parentKey: parentKey || null,
+          isLeaf: isLeaf
+        }, props);
+        _this6.flatTreeData.set(key, dataCopyI); // 取每项数据放入一个新数组
+        if (Array.isArray(children) && children.length > 0) {
+          // 若存在children则递归调用，把数据拼接到新数组中，并且删除该children
+          _this6.deepTraversal(children, key, valueField);
+        }
+      }
+    }
+  };
+
+  this.getParentKeys = function (key) {
+    var data = _this6.flatTreeData.get(key);
+    if (data.parentKey) {
+      _this6.currentParentChildrenArr.add(data.parentKey); //加入当前节点的父节点
+      var parentData = _this6.flatTreeData.get(data.parentKey);
+      if (parentData) {
+        _this6.getParentKeys(data.parentKey); //去找父节点的父级
+      }
+    }
+  };
+
   this.initComponent = function (props) {
     var _props$matchData2 = props.matchData,
         matchData = _props$matchData2 === undefined ? [] : _props$matchData2,
         value = props.value,
-        valueField = props.valueField;
+        valueField = props.valueField,
+        checkStrictly = props.checkStrictly;
 
     _this6.setState({
       searchValue: '', //清空搜索

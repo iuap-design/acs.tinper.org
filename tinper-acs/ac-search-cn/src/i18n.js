@@ -5,6 +5,7 @@ export default {
     'query':'查询条件',
     'open':'展开',
     'close':'收起',
+    'search':'搜索',
     'en_US':{
         'title':'Search Panel',
         'sample':'Sample',
@@ -12,6 +13,7 @@ export default {
         'query':'Query Criteria',
         'open':'Open',
         'close':'Close',
+        'search':'Search'
     },
     'zh_TW':{
         'title':'條件篩選',
@@ -20,5 +22,6 @@ export default {
         'query':'查詢條件',
         'open':'展開',
         'close':'收起',
+        'search':'搜索',
     }
 }

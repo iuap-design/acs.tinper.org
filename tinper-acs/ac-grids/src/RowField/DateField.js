@@ -4,6 +4,7 @@
 
 //React导入
 import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 //类型校验
 import PropTypes from 'prop-types';
 //日期处理
@@ -17,6 +18,7 @@ import DatePicker from "bee-datepicker";
 import zhCN from 'bee-datepicker/build/locale/zh_CN'
 
 import FieldWrap from './FieldWrap'
+import cb from '../utils';
 
 
 //类型校验
@@ -59,6 +61,7 @@ class DateField extends Component {
             error: false//校验是否有错误
 
         }
+        this.handleBodyClick = this.handleBodyClick.bind(this);
     }
     /**
      *  参数发生变化回调
@@ -72,6 +75,28 @@ class DateField extends Component {
         if (nextProps.validate == true) {
             this.validate();
         }
+    }
+
+    handleBodyClick (e) {
+        document.body.removeEventListener('click', this.handleBodyClick);
+        const { onBlur } = this.props;
+        const refs = this.refs.div;
+        if (this.contains(refs, e.target)) return;
+        const targetClass = 'div.rc-calendar';
+        if (e.target && cb.dom(findDOMNode(e.target)).parents(targetClass).length) return;
+        onBlur && onBlur();
+    }
+
+    contains=(elem, target) => {
+        if (elem === target)
+          return true;
+        if (!elem || !elem.children || !elem.children.length)
+          return false;
+        for (let i = 0, len = elem.children.length; i < len; i++) {
+          if (this.contains(elem.children[i], target))
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -114,6 +139,7 @@ class DateField extends Component {
         });
     }
     render() {
+        document.body.addEventListener('click', this.handleBodyClick);
         let { value, error, flag } = this.state;
 
         let { className, message, required,disabledDate,disabled } = this.props;
@@ -125,16 +151,18 @@ class DateField extends Component {
                 message={message}
                 flag={flag}
             >
-                <DatePicker
-                    className={className}
-                    value={value}
-                    onChange={this.handlerChange}
-                    format={'YYYY-MM-DD'}
-                    locale={zhCN}
-                    placeholder={"选择年"}
-                    disabledDate={disabledDate}
-                    disabled={disabled}
-                />
+                <div ref='div'>
+                    <DatePicker
+                        className={className}
+                        value={value}
+                        onChange={this.handlerChange}
+                        format={'YYYY-MM-DD'}
+                        locale={zhCN}
+                        placeholder={"选择年"}
+                        disabledDate={disabledDate}
+                        disabled={disabled}
+                    />
+                </div>
             </FieldWrap>
         );
     }

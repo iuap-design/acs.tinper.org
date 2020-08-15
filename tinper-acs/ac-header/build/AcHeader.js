@@ -16,6 +16,10 @@ var _beeIcon = require('bee-icon');
 
 var _beeIcon2 = _interopRequireDefault(_beeIcon);
 
+var _beeButton = require('bee-button');
+
+var _beeButton2 = _interopRequireDefault(_beeButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -79,7 +83,12 @@ var AcHeader = function (_Component) {
                 showBack ? _react2["default"].createElement(
                     'span',
                     { className: clsfix + '-back', onClick: this.backClick },
-                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-arrow-left' })
+                    _react2["default"].createElement(
+                        _beeButton2["default"],
+                        { bordered: true },
+                        _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-back' }),
+                        '\u8FD4\u56DE'
+                    )
                 ) : '',
                 _react2["default"].createElement(
                     'span',

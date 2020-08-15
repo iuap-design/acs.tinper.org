@@ -1,5 +1,9 @@
-$primaryColor : #e14c46;
+$primaryColor : linear-gradient(90deg, #fa482e, #f32f27);
 $secondary : #eceff1;
+$grey: #505766;
+//hover
+$primary-button-bg-color-hover: linear-gradient(90deg, #f32f27, #fa482e);
+$font-size: 12px;
 
 .ac-btns{
     .ac-btns-item{
@@ -8,40 +12,50 @@ $secondary : #eceff1;
     }
     span.ac-btns-item{
         color: #0073e1;
-        font-size: 13px;
+        font-size: $font-size;
         &[disabled]{
             color: #dfe1e6;
         }
     }
     button.ac-btns-item.u-button{
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
-        font-size: 13px;
+        font-size: $font-size;
         min-width: 60px;
         min-height: 30px;
         padding: 0 10px;
         min-height: 28px;
         line-height: 28px;
+        transition: all .3s cubic-bezier(.645,.045,.355,1);
+        &.u-button-sm{
+            min-width: 44px;
+            min-height: 22px;
+            line-height: 22px;
+        }
         &:last-child{
             margin-right: 0;
         }
         &.ac-btns-write{
-            box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
-            border-color: #d0d0d0;
-            color: #111;
+            box-shadow: none;
+            border-color: #d9d9d9;
+            color: #535a69;
             background-color: #fff;
+            font-weight: 500;
             &:hover{
-                color: #e14c46;
-                border-color: #e14c46;
-                background-color: #fff;
+                color: #505766;
+                border-color: #505766;
+                background-color: unset;
+                z-index: 2;
             }
         }
         &.u-button-primary{
-            background-color: $primaryColor;
+            background: $primaryColor;
             color: #fff;
-            border: 1px solid $primaryColor;
-            box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+            border: none;
+            box-shadow: none;
+            height: 30px;
+            line-height: 30px;
             &:hover{
-                background-color: #d7332c;
+                background: $primary-button-bg-color-hover;
                 color: #fff;
             }
         }
@@ -56,6 +70,17 @@ $secondary : #eceff1;
                 color: #212121;
             }
         }
+        &.ac-btns-write.u-button-dark{
+            background-color: $grey;
+            color: #fff;
+            border: 1px solid $grey;
+            box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+            &:hover{
+                border: 1px solid #616875;
+                background-color: #616875;
+                color: #fff;
+            }
+        }
         &.ac-btns-search,&.ac-btns-clear, &.ac-btns-empty,
         &.ac-btns-first,&.ac-btns-previous,&.ac-btns-next,&.ac-btns-last,
         &.ac-btns-max,&.ac-btns-min{
@@ -66,8 +91,15 @@ $secondary : #eceff1;
             background-color: #fff;
             height: 30px;
         }
+        &.ac-btns-add{
+            .uf{
+                font-size: $font-size;
+                padding: 0;
+                margin-right: 3px;
+            }
+        }
         &.ac-btns-search{
-            background-color: $primaryColor;
+            background: $primaryColor;
             color:#fff;
             min-width: 52px;
             position: relative;
@@ -97,10 +129,10 @@ $secondary : #eceff1;
             }
         }
         &.u-button[disabled],&.u-button[disabled]:hover{
-            background: #fff;
-            color: #dfe1e6;
-            border-color: #d0d0d0;
-            box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+            border: 1px solid #d9d9d9;
+            color: rgba(0,0,0,.25);
+            background: #f7f7f7;
+            box-shadow: none;
         }
         
     }

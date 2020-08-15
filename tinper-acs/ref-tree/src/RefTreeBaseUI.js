@@ -347,6 +347,7 @@ class RefTreeBaseUI extends Component {
       treeNodeDisabledKey,
       treeProps={},
       footerBtnDom='',
+      searchPlaceholder
     } = this.props;
     const { checkedKeys,searchValue } = this.state;
     if(checkedKeys.length === 0) emptyBut = false; //20190226没有选中数据清空按钮不展示
@@ -371,6 +372,7 @@ class RefTreeBaseUI extends Component {
               onSearch={this.onSearch}
               onChange={this.onSearch}
               language={lang}
+              placeholder={searchPlaceholder}
             />
             {
               treeData.length ?

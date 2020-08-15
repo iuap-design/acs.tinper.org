@@ -7545,6 +7545,9 @@ input.u-button[type="submit"] {
 .uf-qingkong:before {
   content: "\e666"; }
 
+.uf-location:before {
+  content: "\e78b"; }
+
 .u-form-control {
   position: relative;
   display: inline-block;
@@ -7619,6 +7622,10 @@ input.u-button[type="submit"] {
     line-height: 0;
     right: 7px;
     color: rgba(0, 0, 0, 0.65); }
+  .u-form-control-affix-wrapper .u-form-control-suffix.has-close {
+    cursor: pointer;
+    right: 0;
+    padding-right: 7px; }
   .u-form-control-affix-wrapper .u-form-control-simple-prefix, .u-form-control-affix-wrapper .u-form-control-simple-suffix {
     position: absolute;
     top: 60%;
@@ -7640,6 +7647,10 @@ input.u-button[type="submit"] {
 
 .u-form-control-close:hover .uf-close-c {
   opacity: 1; }
+
+.u-form-control.rc-textarea {
+  min-height: 32px;
+  transition: all .3s,height 0s; }
 
 /* FormGroup */
 /*  Navlayout  */
@@ -8649,6 +8660,9 @@ input.u-button[type="submit"] {
 .uf-qingkong:before {
   content: "\e666"; }
 
+.uf-location:before {
+  content: "\e78b"; }
+
 /* FormGroup */
 /*  Navlayout  */
 /* keyframes 定义 */
@@ -9557,6 +9571,17 @@ ul {
     bottom: 0;
     right: 0;
     background: transparent; }
+
+.u-select-nowarp {
+  overflow: hidden; }
+  .u-select-nowarp .u-select-selection-rendered {
+    display: -ms-flexbox;
+    display: flex;
+    white-space: nowrap; }
+    .u-select-nowarp .u-select-selection-rendered ul {
+      display: -ms-flexbox;
+      display: flex;
+      white-space: nowrap; }
 
 .u-pagination {
   font-size: 14px;
@@ -10936,6 +10961,17 @@ ul {
     right: 0;
     background: transparent; }
 
+.u-select-nowarp {
+  overflow: hidden; }
+  .u-select-nowarp .u-select-selection-rendered {
+    display: -ms-flexbox;
+    display: flex;
+    white-space: nowrap; }
+    .u-select-nowarp .u-select-selection-rendered ul {
+      display: -ms-flexbox;
+      display: flex;
+      white-space: nowrap; }
+
 /* FormGroup */
 /*  Navlayout  */
 .u-popover {
@@ -12263,6 +12299,9 @@ ul {
 .uf-qingkong:before {
   content: "\e666"; }
 
+.uf-location:before {
+  content: "\e78b"; }
+
 .u-form-control {
   position: relative;
   display: inline-block;
@@ -12337,6 +12376,10 @@ ul {
     line-height: 0;
     right: 7px;
     color: rgba(0, 0, 0, 0.65); }
+  .u-form-control-affix-wrapper .u-form-control-suffix.has-close {
+    cursor: pointer;
+    right: 0;
+    padding-right: 7px; }
   .u-form-control-affix-wrapper .u-form-control-simple-prefix, .u-form-control-affix-wrapper .u-form-control-simple-suffix {
     position: absolute;
     top: 60%;
@@ -12358,6 +12401,10 @@ ul {
 
 .u-form-control-close:hover .uf-close-c {
   opacity: 1; }
+
+.u-form-control.rc-textarea {
+  min-height: 32px;
+  transition: all .3s,height 0s; }
 
 /* FormGroup */
 /*  Navlayout  */
@@ -13422,6 +13469,17 @@ ul {
     bottom: 0;
     right: 0;
     background: transparent; }
+
+.u-select-nowarp {
+  overflow: hidden; }
+  .u-select-nowarp .u-select-selection-rendered {
+    display: -ms-flexbox;
+    display: flex;
+    white-space: nowrap; }
+    .u-select-nowarp .u-select-selection-rendered ul {
+      display: -ms-flexbox;
+      display: flex;
+      white-space: nowrap; }
 
 /* FormGroup */
 /*  Navlayout  */
@@ -14550,6 +14608,9 @@ ul {
 .uf-qingkong:before {
   content: "\e666"; }
 
+.uf-location:before {
+  content: "\e78b"; }
+
 /* FormGroup */
 /*  Navlayout  */
 /* keyframes 定义 */
@@ -15458,6 +15519,17 @@ ul {
     bottom: 0;
     right: 0;
     background: transparent; }
+
+.u-select-nowarp {
+  overflow: hidden; }
+  .u-select-nowarp .u-select-selection-rendered {
+    display: -ms-flexbox;
+    display: flex;
+    white-space: nowrap; }
+    .u-select-nowarp .u-select-selection-rendered ul {
+      display: -ms-flexbox;
+      display: flex;
+      white-space: nowrap; }
 
 .u-pagination {
   font-size: 14px;
@@ -17778,7 +17850,7 @@ ul {
     display: none; }
   .u-table ::-webkit-scrollbar-track-piece {
     display: none; }
-  .u-table .row-dragg-able {
+  .u-table .drag-handle-column, .u-table .row-dragg-able {
     cursor: move; }
   .u-table .u-table-drag-hidden-cont {
     width: 100px;

@@ -113,21 +113,29 @@ var RenderColumn = function (_Component) {
                 valueField = _this$props2.valueField,
                 defaultValue = _this$props2.defaultValue,
                 filedProps = _this$props2.filedProps,
-                onValidate = _this$props2.onValidate;
+                onValidate = _this$props2.onValidate,
+                record = _this$props2.record;
 
             var placement = 'left';
             if (textAlign) placement = textAlign == 'center' ? 'bottom' : textAlign;
             if (customizeRender) {
+                var customizeRenderText = customizeRender.type && customizeRender.type.customizeRenderText;
+                var text = customizeRenderText ? customizeRenderText(_extends({}, filedProps, {
+                    value: value,
+                    field: dataIndex,
+                    record: record,
+                    index: index
+                })) : value;
                 return _react2["default"].createElement(
                     'div',
                     null,
                     disabled ? _react2["default"].createElement(
                         _beeTooltip2["default"],
-                        { overlay: value, inverse: true, placement: placement },
+                        { overlay: text, inverse: true, placement: placement },
                         _react2["default"].createElement(
                             'span',
                             { className: 'ac-grid-cell' },
-                            value
+                            text
                         )
                     ) : _react2["default"].createElement(
                         _RenderCell2["default"],
@@ -141,6 +149,7 @@ var RenderColumn = function (_Component) {
                             value: value,
                             onValidate: onValidate,
                             index: index,
+                            record: record,
                             onChange: function onChange(field, v) {
                                 _this.props.onChange(index, dataIndex, v);
                             }
@@ -246,6 +255,7 @@ var RenderColumn = function (_Component) {
                         );
                         break;
                     case 'datepicker':
+                        value = value._isAMomentObject ? value.format('YYYY-MM-DD') : value;
                         return _react2["default"].createElement(
                             'div',
                             null,

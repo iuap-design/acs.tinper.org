@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'bee-icon';
+import Button from 'bee-button';
 
 const propTypes = {
     clsfix:PropTypes.string,
@@ -34,7 +35,8 @@ class AcHeader extends Component {
                     {
                         showBack?
                         <span className={`${clsfix}-back`} onClick={this.backClick}>
-                            <Icon type='uf-arrow-left'/>
+                            {/* <Icon type='uf-arrow-left'/> */}
+                            <Button bordered><Icon type="uf-back" />返回</Button>
                         </span>:''
                     }
                     <span className={`${clsfix}-icon`}>

@@ -8,6 +8,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -31,6 +33,10 @@ var _zh_CN2 = _interopRequireDefault(_zh_CN);
 var _FieldWrap = require('./FieldWrap');
 
 var _FieldWrap2 = _interopRequireDefault(_FieldWrap);
+
+var _utils = require('../utils');
+
+var _utils2 = _interopRequireDefault(_utils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -99,6 +105,15 @@ var DateField = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this.contains = function (elem, target) {
+            if (elem === target) return true;
+            if (!elem || !elem.children || !elem.children.length) return false;
+            for (var i = 0, len = elem.children.length; i < len; i++) {
+                if (_this.contains(elem.children[i], target)) return true;
+            }
+            return false;
+        };
+
         _this.handlerChange = function (value) {
             var _this$props = _this.props,
                 onChange = _this$props.onChange,
@@ -145,6 +160,7 @@ var DateField = function (_Component) {
             error: false //校验是否有错误
 
         };
+        _this.handleBodyClick = _this.handleBodyClick.bind(_this);
         return _this;
     }
     /**
@@ -163,6 +179,17 @@ var DateField = function (_Component) {
         }
     };
 
+    DateField.prototype.handleBodyClick = function handleBodyClick(e) {
+        document.body.removeEventListener('click', this.handleBodyClick);
+        var onBlur = this.props.onBlur;
+
+        var refs = this.refs.div;
+        if (this.contains(refs, e.target)) return;
+        var targetClass = 'div.rc-calendar';
+        if (e.target && _utils2["default"].dom((0, _reactDom.findDOMNode)(e.target)).parents(targetClass).length) return;
+        onBlur && onBlur();
+    };
+
     /**
      * 有输入值改变的回调
      *
@@ -176,6 +203,7 @@ var DateField = function (_Component) {
 
 
     DateField.prototype.render = function render() {
+        document.body.addEventListener('click', this.handleBodyClick);
         var _state = this.state,
             value = _state.value,
             error = _state.error,
@@ -196,16 +224,20 @@ var DateField = function (_Component) {
                 message: message,
                 flag: flag
             },
-            _react2["default"].createElement(_beeDatepicker2["default"], {
-                className: className,
-                value: value,
-                onChange: this.handlerChange,
-                format: 'YYYY-MM-DD',
-                locale: _zh_CN2["default"],
-                placeholder: "选择年",
-                disabledDate: disabledDate,
-                disabled: disabled
-            })
+            _react2["default"].createElement(
+                'div',
+                { ref: 'div' },
+                _react2["default"].createElement(_beeDatepicker2["default"], {
+                    className: className,
+                    value: value,
+                    onChange: this.handlerChange,
+                    format: 'YYYY-MM-DD',
+                    locale: _zh_CN2["default"],
+                    placeholder: "选择年",
+                    disabledDate: disabledDate,
+                    disabled: disabled
+                })
+            )
         );
     };
 

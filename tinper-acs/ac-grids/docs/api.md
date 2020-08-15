@@ -72,6 +72,7 @@ const EditGrid = AcGrids.EditGrid;
 |maxLength|最大长度，type=`input`时生效|string|-|
 |placeholder|输入框的提示信息，type=`input`时生效|string|-|
 |options|type=`select` 时的下拉内容|bool|-|
+|showSearch|是否可以输入搜索，type=`select`生效|bool|false|
 |precision|小数点后保留几位小数，type=`inputNumber`生效|number|-|
 |max|最大值，type=`inputNumber`生效|number|-|
 |min|最小值，type=`inputNumber`生效|number|-|

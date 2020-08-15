@@ -49,7 +49,7 @@ class AcSearchPanel extends Component {
     constructor(props){
         super(props);
         this.state={
-            open:true,
+            open:false,
             type:'1',
             show:false,
         }
@@ -170,17 +170,6 @@ class AcSearchPanel extends Component {
                             </Tooltip>
                         </span>:''
                     }
-                    <span className={`${clsfix}-open`} onClick={this.open}>
-                        {
-                            this.state.open?
-                            <span>
-                            {locale.close}<Icon type='uf-arrow-up'/>
-                            </span>
-                            :<span>
-                            {locale.open}<Icon type='uf-arrow-down'/>
-                            </span>
-                        }
-                    </span>
                 </div>
                 <div className={`${clsfix}-ctns-out`}>
                     <div className={ctns}>
@@ -190,22 +179,47 @@ class AcSearchPanel extends Component {
                             }
                         </div>
                         <div className={`${clsfix}-btns`}>
-                            <Btns localeCookie={localeCookie}
+                            <Btns type='line' localeCookie={localeCookie}
                                 btns={{
-                                    search:{
-                                        onClick:search,
-                                    },
-                                    empty:{
+                                    'empty_ys':{
                                         onClick:reset,
                                     },
                                 }}
+                                addToBtns={{
+                                    'empty_ys':{ 
+                                        name:'重置',
+                                        className:`${clsfix}-btns-reset-ys`
+                                    }
+                                }} 
                             />
-                            {/* <Button colors='primary' className={`${clsfix}-btns-search`} onClick={search}>
-                                <Icon type='uf-search-light-2'/>
-                            </Button>
-                            <Button colors='primary' bordered className={`${clsfix}-btns-reset`} onClick={reset}>
-                                <Icon type='uf-clean'/>
-                            </Button> */}
+                            <Btns localeCookie={localeCookie}
+                                btns={{
+                                    'search_ys':{
+                                        onClick:search,
+                                    },
+                                }}
+                                addToBtns={{
+                                    'search_ys':{ 
+                                        colors:'dark',
+                                        name:'搜索'
+                                    }
+                                }}
+                            />
+                            {
+                                children.length > 3 ? 
+                                <span className={`${clsfix}-open`} onClick={this.open}>
+                                    {
+                                        this.state.open?
+                                        <span>
+                                            <Icon type="uf-2arrow-up" />
+                                        </span>
+                                        :<span>
+                                            <Icon type="uf-2arrow-down" />
+                                        </span>
+                                    }
+                                </span>
+                                : null
+                            }
                         </div>
                     </div>
                 </div>

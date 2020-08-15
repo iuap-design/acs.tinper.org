@@ -1,4 +1,5 @@
 @import '../node_modules/ac-btns/src/Btns.scss';
+$font-size: 12px;
 @keyframes beLong {
     from {
         width: 20%;
@@ -49,7 +50,7 @@
         cursor: pointer;
         span {
             font-weight: bold;
-            font-size: 13px;
+            font-size: $font-size;
         }
     }
 
@@ -106,7 +107,7 @@
                         padding: 0;
                         height: 35px;
                         padding-left: 12px;
-                        font-size: 13px;
+                        font-size: $font-size;
 
                         .u-table-thead-th-drag-gap .online {
                             height: 12px;
@@ -156,7 +157,7 @@
                         padding: 0;
                         padding-left: 12px;
                         height: 30px;
-                        font-size: 13px;
+                        font-size: $font-size;
                         border-color: #d0d0d0;
 
                         .ac-grid-cell {
@@ -329,7 +330,7 @@
         }
 
         .pop_dialog-ctn {
-            font-size: 13px;
+            font-size: $font-size;
             display: block;
             color: rgb(85, 85, 85);
             padding: 5px 55px;

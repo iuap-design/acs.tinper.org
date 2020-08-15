@@ -5,6 +5,7 @@
  */
 import React, { Component } from "react";
 import AcGrids from '../../src';
+import moment from 'moment';
 
 const EditGrid = AcGrids.EditGrid;
 
@@ -45,6 +46,7 @@ const column = [
     required:true,
     validate:true,
     filedProps:{
+      showSearch:true,
       defaultValue:'1',
       options:[
         {
@@ -104,7 +106,7 @@ const dataList = [
     type_name: "1",
     purchasing: "内行",
     purchasingGroup: "采购组",
-    voucherDate: "kkkk",
+    voucherDate: moment().format('YYYY-MM-DD'),
     approvalState_name: "vvvv",
     confirmState_name: "aaaa",
     closeState_name: "vnnnnn",
@@ -118,7 +120,7 @@ const dataList = [
     type_name: "2",
     purchasing: "内行2",
     purchasingGroup: "3223",
-    voucherDate: "222kk",
+    voucherDate: moment().format('YYYY-MM-DD'),
     approvalState_name: "22vvvv",
     confirmState_name: "2aaaa",
     closeState_name: "2vnnnnn",
@@ -132,7 +134,7 @@ const dataList = [
     type_name: "3",
     purchasing: "内行2",
     purchasingGroup: "3223",
-    voucherDate: "222kk",
+    voucherDate: moment().format('YYYY-MM-DD'),
     approvalState_name: "22vvvv",
     confirmState_name: "2aaaa",
     closeState_name: "2vnnnnn",
@@ -146,7 +148,7 @@ const dataList = [
     type_name: "3",
     purchasing: "内行2",
     purchasingGroup: "3223",
-    voucherDate: "222kk",
+    voucherDate: moment().format('YYYY-MM-DD'),
     approvalState_name: "22vvvv",
     confirmState_name: "2aaaa",
     closeState_name: "2vnnnnn",

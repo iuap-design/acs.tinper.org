@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var paginationDefaultProps = exports.paginationDefaultProps = {
     dataNumSelect: ["5", "10", "15", "20", "25", "50"],
-    horizontalPosition: 'center',
+    horizontalPosition: 'right',
     verticalPosition: "bottom",
     dataNum: 1,
     btnType: {

@@ -165,7 +165,7 @@ var AcSearchPanel = function (_Component) {
         };
 
         _this.state = {
-            open: true,
+            open: false,
             type: '1',
             show: false
         };
@@ -215,7 +215,11 @@ var AcSearchPanel = function (_Component) {
             { store: this.store },
             _react2["default"].createElement(
                 'div',
-                { className: clsfix },
+                { className: clsfix, onKeyDown: function onKeyDown(e) {
+                        if (e.keyCode == 13) {
+                            search(e);
+                        }
+                    } },
                 _react2["default"].createElement(
                     'div',
                     { className: clsfix + '-header' },
@@ -254,22 +258,7 @@ var AcSearchPanel = function (_Component) {
                                 this.formatSearchDate(toolTips, locale)
                             )
                         )
-                    ) : '',
-                    _react2["default"].createElement(
-                        'span',
-                        { className: clsfix + '-open', onClick: this.open },
-                        this.state.open ? _react2["default"].createElement(
-                            'span',
-                            null,
-                            locale.close,
-                            _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-arrow-up' })
-                        ) : _react2["default"].createElement(
-                            'span',
-                            null,
-                            locale.open,
-                            _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-arrow-down' })
-                        )
-                    )
+                    ) : ''
                 ),
                 _react2["default"].createElement(
                     'div',
@@ -285,16 +274,45 @@ var AcSearchPanel = function (_Component) {
                         _react2["default"].createElement(
                             'div',
                             { className: clsfix + '-btns' },
-                            _react2["default"].createElement(_acBtns2["default"], { localeCookie: localeCookie,
+                            _react2["default"].createElement(_acBtns2["default"], { type: 'line', localeCookie: localeCookie,
                                 btns: {
-                                    search: {
-                                        onClick: search
-                                    },
-                                    empty: {
+                                    'empty_ys': {
                                         onClick: reset
                                     }
+                                },
+                                addToBtns: {
+                                    'empty_ys': {
+                                        name: '重置',
+                                        className: clsfix + '-btns-reset-ys'
+                                    }
                                 }
-                            })
+                            }),
+                            _react2["default"].createElement(_acBtns2["default"], { localeCookie: localeCookie,
+                                btns: {
+                                    'search_ys': {
+                                        onClick: search
+                                    }
+                                },
+                                addToBtns: {
+                                    'search_ys': {
+                                        colors: 'dark',
+                                        name: '搜索'
+                                    }
+                                }
+                            }),
+                            children.length > 3 ? _react2["default"].createElement(
+                                'span',
+                                { className: clsfix + '-open', onClick: this.open },
+                                this.state.open ? _react2["default"].createElement(
+                                    'span',
+                                    null,
+                                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-2arrow-up' })
+                                ) : _react2["default"].createElement(
+                                    'span',
+                                    null,
+                                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-2arrow-down' })
+                                )
+                            ) : null
                         )
                     )
                 )

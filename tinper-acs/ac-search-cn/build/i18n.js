@@ -10,13 +10,15 @@ exports["default"] = {
     'query': '查询条件',
     'open': '展开',
     'close': '收起',
+    'search': '搜索',
     'en_US': {
         'title': 'Search Panel',
         'sample': 'Sample',
         'complex': 'Complex',
         'query': 'Query Criteria',
         'open': 'Open',
-        'close': 'Close'
+        'close': 'Close',
+        'search': 'Search'
     },
     'zh_TW': {
         'title': '條件篩選',
@@ -24,7 +26,8 @@ exports["default"] = {
         'complex': '複雜查詢',
         'query': '查詢條件',
         'open': '展開',
-        'close': '收起'
+        'close': '收起',
+        'search': '搜索'
     }
 };
 module.exports = exports['default'];

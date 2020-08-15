@@ -1,18 +1,24 @@
 @import '../node_modules/ac-btns/src/Btns.scss';
-
+$border-color: #d9d9d9;
+$border-hover-color: #505766;
+$font-size: 12px;
 .ac-search-cn {
-    border-bottom: 1px solid #D0D0D0;
+    // border-bottom: 1px solid #D0D0D0;
     &-ctns-out {
         padding-left: 16px;
         padding-right: 16px;
-        background-color: #f3f3f3;
+        background-color: #fff;
     }
 
     &-ctns {
         display: flex;
         justify-content: space-between;
         &.close {
-            display: none;
+            .ac-search-cn-ctn {
+                :not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)) {
+                    display: none;
+                } 
+            }
         }
     }
 
@@ -22,12 +28,20 @@
     }
 
     &-formitem {
-        width: calc(100% / 5);
+        width: calc(100% / 3);
         padding-right: 8px;
         display: inline-block;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         position: relative;
         vertical-align: bottom;
+        .u-row{
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+        .input-control{
+            width: calc(100% - 100px);
+        }
         .u-form-control{
             padding: 0 8px;
         }
@@ -38,15 +52,16 @@
         input,
         .u-select .u-select-selection,
         .u-input-number,.u-input-number.u-input-group>span:first-child,.u-input-number.u-input-group>span:last-child {
-            border-color: #d5d6d9;
+            border-color: $border-color;
         }
-        
+        .datepicker-input-group.u-input-group:hover > input,
+        .calendar-picker.u-input-group:hover>input,
         .u-form-control:hover,.u-select-enabled .u-select-selection:hover,.u-input-number:hover{
-            border-color: #8cc6ff;
+            border-color: $border-hover-color;
         }
         .u-form-control:active,.u-select .u-select-selection:active,.u-input-number:active,
         .u-form-control:focus,.u-select .u-select-selection:focus,.u-input-number:focus{
-            border-color: #007ace;
+            border-color: $border-hover-color;
         }
         .u-select .u-select-arrow,.datepicker-container .u-input-group-btn,.datepicker-input-group .u-input-group-btn,
         .u-input-number.u-input-group > span:first-child,.u-input-number.u-input-group > span:last-child,
@@ -66,9 +81,15 @@
         .u-label {
             display: inline-block;
             width: 140px;
+            padding-left: 15px;
+            padding-right: 10px;
             text-align: right;
-            font-size: 13px;
+            font-size: $font-size;
             color: #111111;
+            .uf-mi.mast {
+                padding: 0;
+                color: #ff0000;
+            }
         }
 
         &-mast {
@@ -148,7 +169,7 @@
                 background: #fff;
                 box-shadow: 1px 1px 10px px rgba(0, 0, 0, 0.3);
                 pointer-events: all;
-                font-size: 13px;
+                font-size: $font-size;
                 word-break: break-all;
 
                 &.top {
@@ -195,28 +216,31 @@
 
         input::-webkit-input-placeholder {
             color: #cccccc !important;
-            font-size: 13px;
+            font-size: $font-size;
         }
 
         .u-select-selection-placeholder,
         .u-select-search-field-placeholder {
             color: #cccccc;
-            font-size: 13px;
+            font-size: $font-size;
         }
     }
 
     &-btns {
-        width: 90px;
+        width: 130px;
         display: inline-block;
         height: 32px;
         display: flex;
-        justify-content: flex-start;
+        justify-content: flex-end;
         align-self: flex-end;
         margin-bottom: 8px;
         margin-right: 0;
         .u-button {
             padding: 0;
             min-width: auto;
+        }
+        & &-reset-ys {
+            line-height: 32px;
         }
     }
 
@@ -226,21 +250,13 @@
         color: #9FABBF;
         user-select: none;
         font-size: 12px;
+        line-height: 32px;
 
         .uf {
-            background: #9FABBF;
-            color: #fff;
+            color: #505766;
             padding: 0 2px;
             margin-left: 5px;
             font-size: 14px;
-        }
-
-        &:hover {
-            color: #0073e1;
-
-            .uf {
-                background: #0073e1;
-            }
         }
     }
 
@@ -249,7 +265,7 @@
         padding-bottom: 8px;
         padding-left: 16px;
         padding-right: 16px;
-        background-color: #f3f3f3;
+        background-color: #fff;
         min-height: 40px;
     }
 
@@ -282,14 +298,14 @@
     }
 
     &-selected-sample {
-        font-size: 13px;
+        font-size: $font-size;
         cursor: pointer;
     }
 
     &-selected-complex {
         &-item {
             line-height: 15px;
-            font-size: 13px;
+            font-size: $font-size;
 
             &-title {
                 margin-left: 8px;

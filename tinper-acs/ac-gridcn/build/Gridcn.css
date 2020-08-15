@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* FormGroup */
 /*  Navlayout  */
+@import url(../node_modules/rc-notification/assets/index.css);
 @font-face {
   font-family: "uf";
   src: url("//design.yonyoucloud.com/static/iconfont/iconfont.eot");
@@ -2123,6 +2124,10 @@
 .u-form-control-close:hover .uf-close-c {
   opacity: 1; }
 
+.u-form-control.rc-textarea {
+  min-height: 32px;
+  transition: all .3s,height 0s; }
+
 /* FormGroup */
 /*  Navlayout  */
 /* FormGroup */
@@ -3239,6 +3244,10 @@
 
 .u-form-control-close:hover .uf-close-c {
   opacity: 1; }
+
+.u-form-control.rc-textarea {
+  min-height: 32px;
+  transition: all .3s,height 0s; }
 
 /* FormGroup */
 /*  Navlayout  */
@@ -10053,7 +10062,7 @@ ul {
     display: none; }
   .u-table ::-webkit-scrollbar-track-piece {
     display: none; }
-  .u-table .row-dragg-able {
+  .u-table .drag-handle-column, .u-table .row-dragg-able {
     cursor: move; }
   .u-table .u-table-drag-hidden-cont {
     width: 100px;
@@ -11865,6 +11874,10 @@ ul {
 .u-form-control-close:hover .uf-close-c {
   opacity: 1; }
 
+.u-form-control.rc-textarea {
+  min-height: 32px;
+  transition: all .3s,height 0s; }
+
 /* FormGroup */
 /*  Navlayout  */
 /* FormGroup */
@@ -13389,36 +13402,45 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 
 .ac-btns span.ac-btns-item {
   color: #0073e1;
-  font-size: 13px; }
+  font-size: 12px; }
   .ac-btns span.ac-btns-item[disabled] {
     color: #dfe1e6; }
 
 .ac-btns button.ac-btns-item.u-button {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-  font-size: 13px;
+  font-size: 12px;
   min-width: 60px;
   min-height: 30px;
   padding: 0 10px;
   min-height: 28px;
-  line-height: 28px; }
+  line-height: 28px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }
+  .ac-btns button.ac-btns-item.u-button.u-button-sm {
+    min-width: 44px;
+    min-height: 22px;
+    line-height: 22px; }
   .ac-btns button.ac-btns-item.u-button:last-child {
     margin-right: 0; }
   .ac-btns button.ac-btns-item.u-button.ac-btns-write {
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-    border-color: #d0d0d0;
-    color: #111;
-    background-color: #fff; }
+    box-shadow: none;
+    border-color: #d9d9d9;
+    color: #535a69;
+    background-color: #fff;
+    font-weight: 500; }
     .ac-btns button.ac-btns-item.u-button.ac-btns-write:hover {
-      color: #e14c46;
-      border-color: #e14c46;
-      background-color: #fff; }
+      color: #505766;
+      border-color: #505766;
+      background-color: unset;
+      z-index: 2; }
   .ac-btns button.ac-btns-item.u-button.u-button-primary {
-    background-color: #e14c46;
+    background: linear-gradient(90deg, #fa482e, #f32f27);
     color: #fff;
-    border: 1px solid #e14c46;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+    border: none;
+    box-shadow: none;
+    height: 30px;
+    line-height: 30px; }
     .ac-btns button.ac-btns-item.u-button.u-button-primary:hover {
-      background-color: #d7332c;
+      background: linear-gradient(90deg, #f32f27, #fa482e);
       color: #fff; }
   .ac-btns button.ac-btns-item.u-button.u-button-secondary {
     background-color: #eceff1;
@@ -13429,6 +13451,15 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       border: 1px solid #dfe1e6;
       background-color: #dfe1e6;
       color: #212121; }
+  .ac-btns button.ac-btns-item.u-button.ac-btns-write.u-button-dark {
+    background-color: #505766;
+    color: #fff;
+    border: 1px solid #505766;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+    .ac-btns button.ac-btns-item.u-button.ac-btns-write.u-button-dark:hover {
+      border: 1px solid #616875;
+      background-color: #616875;
+      color: #fff; }
   .ac-btns button.ac-btns-item.u-button.ac-btns-search, .ac-btns button.ac-btns-item.u-button.ac-btns-clear, .ac-btns button.ac-btns-item.u-button.ac-btns-empty, .ac-btns button.ac-btns-item.u-button.ac-btns-first, .ac-btns button.ac-btns-item.u-button.ac-btns-previous, .ac-btns button.ac-btns-item.u-button.ac-btns-next, .ac-btns button.ac-btns-item.u-button.ac-btns-last, .ac-btns button.ac-btns-item.u-button.ac-btns-max, .ac-btns button.ac-btns-item.u-button.ac-btns-min {
     min-width: 30px;
     padding: 0;
@@ -13436,8 +13467,12 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     color: #111;
     background-color: #fff;
     height: 30px; }
+  .ac-btns button.ac-btns-item.u-button.ac-btns-add .uf {
+    font-size: 12px;
+    padding: 0;
+    margin-right: 3px; }
   .ac-btns button.ac-btns-item.u-button.ac-btns-search {
-    background-color: #e14c46;
+    background: linear-gradient(90deg, #fa482e, #f32f27);
     color: #fff;
     min-width: 52px;
     position: relative;
@@ -13459,13 +13494,13 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       position: relative;
       bottom: 2px; }
   .ac-btns button.ac-btns-item.u-button.u-button[disabled], .ac-btns button.ac-btns-item.u-button.u-button[disabled]:hover {
-    background: #fff;
-    color: #dfe1e6;
-    border-color: #d0d0d0;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+    border: 1px solid #d9d9d9;
+    color: rgba(0, 0, 0, 0.25);
+    background: #f7f7f7;
+    box-shadow: none; }
 
 .ac-btns .icon.ac-btns-add, .ac-btns .icon.ac-btns-update, .ac-btns .icon.ac-btns-delete {
-  color: #e14c46; }
+  color: linear-gradient(90deg, #fa482e, #f32f27); }
   .ac-btns .icon.ac-btns-add .uf, .ac-btns .icon.ac-btns-update .uf, .ac-btns .icon.ac-btns-delete .uf {
     padding: 0; }
 
@@ -13508,56 +13543,78 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   background-color: #ebecf0; }
 
 .ac-btns-dropdown .icon.ac-btns-add, .ac-btns-dropdown .icon.ac-btns-update, .ac-btns-dropdown .icon.ac-btns-delete {
-  color: #e14c46; }
+  color: linear-gradient(90deg, #fa482e, #f32f27); }
 
-.ac-tips-out {
-  box-shadow: 0px 3px 12px 0px #4a515d40;
+.uretail-message {
   position: fixed;
-  min-width: 36px;
-  background: #fff;
-  min-height: 36px;
-  line-height: 36px;
-  padding: 0 15px;
-  right: -100%;
-  transition: all .3s;
-  z-index: 9; }
-  .ac-tips-out .ac-tips {
-    display: flex; }
-    .ac-tips-out .ac-tips-inner {
-      min-width: 112px;
-      display: inline-block;
-      text-align: left;
-      padding-right: 10px;
-      font-size: 13px;
-      max-width: 480px;
-      white-space: normal;
-      word-break: break-all;
-      max-height: 270px;
-      overflow-y: auto;
-      line-height: unset; }
-    .ac-tips-out .ac-tips-close {
-      cursor: pointer;
-      color: #0073e1;
-      font-size: 13px; }
-      .ac-tips-out .ac-tips-close:hover {
-        color: #f44336; }
-  .ac-tips-out.in {
-    right: 0; }
-  .ac-tips-out.success {
-    color: #4caf50;
-    border: 1px solid #4caf50; }
-    .ac-tips-out.success .ac-tips-close:hover {
-      color: #4caf50; }
-  .ac-tips-out.error {
-    color: #f44336;
-    border: 1px solid #f44336; }
-    .ac-tips-out.error .ac-tips-close:hover {
-      color: #f44336; }
-  .ac-tips-out.warning {
-    color: #ff9800;
-    border: 1px solid #ff9800; }
-    .ac-tips-out.warning .ac-tips-close:hover {
-      color: #ff9800; }
+  z-index: 1000; }
+  .uretail-message .anticon {
+    position: absolute;
+    left: 6px; }
+  .uretail-message .anticon-circle {
+    font-size: 12px;
+    color: #666;
+    white-space: pre-wrap;
+    margin-left: 4px; }
+  .uretail-message-notice {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin: 10px 0; }
+  .uretail-message-notice-content {
+    max-width: 400px;
+    word-break: break-all; }
+  .uretail-message-custom-content {
+    position: relative;
+    padding-left: 32px !important; }
+  .uretail-message .uf {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 2px;
+    padding: 0; }
+  .uretail-message-success {
+    background: #EBF8F2;
+    border: #A7E1C4 solid 1px;
+    border-radius: 4px;
+    width: auto;
+    line-height: 20px;
+    color: #666;
+    padding: 8px 12px; }
+    .uretail-message-success .uf {
+      color: #18B681; }
+  .uretail-message-info {
+    background: #E6F0F7;
+    border: #ADD8F7 solid 1px;
+    border-radius: 4px;
+    width: auto;
+    line-height: 20px;
+    color: #666;
+    font-size: 12px;
+    padding: 8px 12px; }
+    .uretail-message-info .uf {
+      color: #588CE9; }
+  .uretail-message-error {
+    background: #FEF3EB;
+    border: #FCCCA7 solid 1px;
+    border-radius: 4px;
+    width: auto;
+    line-height: 20px;
+    color: #666;
+    font-size: 12px;
+    padding: 8px 12px; }
+    .uretail-message-error .uf {
+      color: #FF5735; }
+  .uretail-message-warning {
+    background: #FFFAEB;
+    border: #FFE9A7 solid 1px;
+    border-radius: 4px;
+    width: auto;
+    line-height: 20px;
+    color: #666;
+    font-size: 12px;
+    padding: 8px 12px; }
+    .uretail-message-warning .uf {
+      color: #FFA600;
+      font-size: 22px; }
 
 /* FormGroup */
 /*  Navlayout  */
@@ -14734,39 +14791,32 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   .u-modal-container .u-modal, .u-modal-container .u-modal-backdrop {
     position: absolute; }
 
-.react-draggable-transparent-selection * {
-  pointer-events: none !important; }
-
 .ac-confirm .u-modal-dialog {
   width: 410px;
   height: 201px; }
   .ac-confirm .u-modal-dialog .ac-confirm-footer {
     height: 48px;
     padding: 8px 16px;
-    border-top: #d0d0d0 solid 1px; }
+    border-top: none; }
     .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button {
       min-width: 60px;
       min-height: 28px;
       line-height: 28px;
       padding: 0 10px; }
+    .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button.u-button-secondary {
+      background: #dbe0e5;
+      border: none; }
+      .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button.u-button-secondary:hover {
+        background: #e5e9ec; }
     .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button.u-button-primary {
       margin-right: 8px;
-      background-color: #e14c46;
+      background: linear-gradient(-45deg, #fc4c2f, #ee2223);
       color: #fff;
-      border: 1px solid #f53c32;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2); }
+      border: none;
+      box-shadow: none; }
     .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button.u-button-primary:hover {
-      background-color: #d7332c;
+      background: linear-gradient(-225deg, #fc4c2f, #ee2223);
       color: #fff; }
-    .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button-border {
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-      border-color: #d0d0d0;
-      color: #111;
-      background-color: #fff; }
-    .ac-confirm .u-modal-dialog .ac-confirm-footer .u-button-border:hover {
-      color: #e14c46;
-      border-color: #e14c46;
-      background: #fff; }
 
 .ac-confirm .u-modal-content .ac-confirm-header.u-modal-header {
   background-color: #f3f3f3;
@@ -14781,13 +14831,15 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 
 .ac-confirm .ac-confirm-body.u-modal-body {
   padding: 16px 33px;
-  min-height: 124px; }
+  min-height: 0; }
   .ac-confirm .ac-confirm-body.u-modal-body .ac-confirm-body-title {
     display: block; }
     .ac-confirm .ac-confirm-body.u-modal-body .ac-confirm-body-title .ac-confirm-body-title-icon {
       color: #ffbf00;
       font-size: 25px;
-      vertical-align: sub; }
+      vertical-align: sub;
+      display: inline-block;
+      transform: scale(1.5); }
     .ac-confirm .ac-confirm-body.u-modal-body .ac-confirm-body-title .ac-confirm-body-title-keyword {
       font-size: 18px;
       color: #111111;
@@ -14803,6 +14855,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   position: unset; }
 
 .ac-gridcn .u-grid {
+  border-top: 1px solid #505766;
   background: #fff;
   overflow: hidden; }
   .ac-gridcn .u-grid table {
@@ -14811,16 +14864,23 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     height: 16px;
     line-height: 1; }
   .ac-gridcn .u-grid .u-table-thead th {
-    background: #ECEFF5; }
+    background: #f7f9fd;
+    font-weight: 500; }
   .ac-gridcn .u-grid .u-table-filter-column-filter-icon {
     height: 33px;
     line-height: 33px;
-    background: #ECEFF5; }
+    background: #f7f9fd; }
   .ac-gridcn .u-grid .u-table-placeholder .table-nodata {
     position: inherit; }
 
 .ac-gridcn .u-input-group {
   border-spacing: 0; }
+
+.ac-gridcn .u-table .u-table-thead-th-drag-gap:hover .online {
+  background-color: #505766; }
+
+.ac-gridcn .u-table thead tr:last-child {
+  border-color: #dbe0e5; }
 
 .ac-gridcn .u-table tr {
   transition: none; }
@@ -14829,20 +14889,20 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   .ac-gridcn .u-table tr:nth-child(2n + 1) {
     background: #ffffff; }
   .ac-gridcn .u-table tr:hover, .ac-gridcn .u-table tr.u-table-row-hover {
-    background: #F3F3F3; }
+    background: #edf1f7; }
   .ac-gridcn .u-table tr.u-table-row.selected, .ac-gridcn .u-table tr.u-table-row.ref-multiple-table-row-selected {
-    background: #E3E3E3; }
+    background: #edf1f7; }
   .ac-gridcn .u-table tr .u-table-thead .th-drag:hover {
     background: #DCE1EB; }
 
 .ac-gridcn .u-table th {
   padding: 8px 8px;
-  height: 35px; }
+  height: 30px; }
 
 .ac-gridcn .u-table td {
   padding: 0 8px;
-  height: 30px;
-  border-color: #E9E9E9; }
+  height: 35px;
+  border-color: #dbe0e5; }
 
 .ac-gridcn .u-table th {
   overflow: visible;
@@ -14875,7 +14935,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     color: #adb4bc; }
   .ac-gridcn .u-table tr.filterable th .datepicker-input-group .u-form-control {
     height: 26px;
-    font-size: 13px;
+    font-size: 12px;
     padding-left: 8px;
     padding-right: 8px; }
   .ac-gridcn .u-table tr.filterable th .u-select {
@@ -14883,7 +14943,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     .ac-gridcn .u-table tr.filterable th .u-select .u-select-selection-rendered {
       line-height: 26px; }
       .ac-gridcn .u-table tr.filterable th .u-select .u-select-selection-rendered .u-select-selection-selected-value {
-        font-size: 13px; }
+        font-size: 12px; }
     .ac-gridcn .u-table tr.filterable th .u-select .u-select-selection {
       height: 26px; }
     .ac-gridcn .u-table tr.filterable th .u-select .u-select-arrow {
@@ -15066,7 +15126,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     width: calc(100% - 30px);
     height: 26px;
     text-align: left;
-    font-size: 13px;
+    font-size: 12px;
     padding: 0 8px; }
   .ac-gridcn .u-table tr td .triangle-flag input,
   .ac-gridcn .u-table tr td .triangle-flag .u-select .u-select-selection,
@@ -15089,7 +15149,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     color: #adb4bc; }
   .ac-gridcn .u-table tr td .triangle-flag .datepicker-input-group .u-form-control {
     height: 26px;
-    font-size: 13px;
+    font-size: 12px;
     padding-left: 8px;
     padding-right: 8px; }
   .ac-gridcn .u-table tr td .triangle-flag .u-select {
@@ -15099,7 +15159,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
       margin-left: 0;
       margin-right: 0; }
       .ac-gridcn .u-table tr td .triangle-flag .u-select .u-select-selection-rendered .u-select-selection-selected-value {
-        font-size: 13px;
+        font-size: 12px;
         padding-left: 8px;
         padding-right: 8px; }
     .ac-gridcn .u-table tr td .triangle-flag .u-select .u-select-selection {
@@ -15147,8 +15207,10 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   justify-content: space-between;
   padding-top: 9px;
   padding-left: 12px;
-  background: #f6f6f6;
+  background: #fff;
   margin-bottom: 0px; }
+  .ac-gridcn .u-pagination .u-pagination-total {
+    order: -1; }
   .ac-gridcn .u-pagination .u-pagination-gap > li > a {
     margin: 0 4px; }
   .ac-gridcn .u-pagination .u-pagination-sm > li > a {
@@ -15165,9 +15227,9 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   .ac-gridcn .u-pagination .u-pagination-list > .active > span,
   .ac-gridcn .u-pagination .u-pagination-list > .active > span:focus,
   .ac-gridcn .u-pagination .u-pagination-list > .active > span:hover {
-    color: #E14C46;
-    background: #fff;
-    border-color: #E14C46; }
+    color: #fff;
+    background: #adb4bc;
+    border-color: #adb4bc; }
   .ac-gridcn .u-pagination .u-pagination-list > .disabled > a,
   .ac-gridcn .u-pagination .u-pagination-list > .disabled > a:focus,
   .ac-gridcn .u-pagination .u-pagination-list > .disabled > a:hover,
@@ -15179,6 +15241,8 @@ li.rc-time-picker-panel-select-option-disabled:hover {
     background: #fff;
     border-color: #d0d0d0;
     line-height: 16px; }
+  .ac-gridcn .u-pagination .u-pagination-list > li > a:hover {
+    border-color: #505766; }
   .ac-gridcn .u-pagination .u-pagination-list a,
   .ac-gridcn .u-pagination .u-pagination-list li {
     height: 16px;

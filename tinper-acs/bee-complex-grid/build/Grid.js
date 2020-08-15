@@ -120,7 +120,7 @@ var defaultProps = {
     afterRowLock: function afterRowLock() {} //表头锁定解锁的回调函数
 };
 
-var defualtPaginationParam = { horizontalPosition: "left", verticalPosition: 'bottom', showJump: true, first: true, prev: true, last: true, next: true, maxButtons: 5 };
+var defualtPaginationParam = { horizontalPosition: "center", verticalPosition: 'bottom', showJump: true, first: true, prev: true, last: true, next: true, maxButtons: 5 };
 
 var Grid = function (_Component) {
     _inherits(Grid, _Component);
@@ -162,12 +162,18 @@ var Grid = function (_Component) {
         //分页
 
         if (nextProps.paginationObj && nextProps.paginationObj !== 'none') {
-            this.setState({
-                activePage: nextProps.paginationObj.activePage,
-                total: nextProps.paginationObj.total,
-                pageItems: nextProps.paginationObj.items,
-                dataNum: nextProps.paginationObj.dataNum
-            });
+            var _nextProps$pagination = nextProps.paginationObj,
+                activePage = _nextProps$pagination.activePage,
+                total = _nextProps$pagination.total,
+                items = _nextProps$pagination.items,
+                dataNum = _nextProps$pagination.dataNum;
+
+            var obj = {};
+            if (activePage != this.state.activePage) obj.activePage = activePage;
+            if (total != this.state.total) obj.total = total;
+            if (items != this.state.pageItems) obj.pageItems = items;
+            if (dataNum != this.state.dataNum) obj.activePage = dataNum;
+            this.setState(obj);
         }
         if (nextProps.columns && nextProps.columns !== this.columns) {
             var newColumns = [],
@@ -558,7 +564,7 @@ var _initialiseProps = function _initialiseProps() {
         }
     };
 
-    this.sortFun = function (sortParam) {
+    this.sortFun = function (sortParam, newData, oldData) {
         var sortObj = {};
         sortParam.forEach(function (item) {
             sortObj[item.field] = item;
@@ -572,10 +578,9 @@ var _initialiseProps = function _initialiseProps() {
                 da.orderNum = "";
             }
         });
-
         //将参数传递给后端排序
         if (typeof _this4.sort.originSortFun == "function") {
-            _this4.sort.originSortFun(sortParam, _this4.columns);
+            _this4.sort.originSortFun(sortParam, _this4.columns, newData, oldData);
         }
     };
 

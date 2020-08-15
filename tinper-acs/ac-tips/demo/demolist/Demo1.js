@@ -25,6 +25,12 @@ class Demo1 extends Component {
         })
         count++;
     }
+    info=()=>{
+        AcTips.create({
+            type:'info',
+            content:"info"
+        })
+    }
     warning=()=>{
         AcTips.create({
             type:'warning',
@@ -47,6 +53,11 @@ class Demo1 extends Component {
                     colors="danger"
                     onClick={this.error}>
                     error
+                </Button>
+                <Button
+                    colors="info"
+                    onClick={this.info}>
+                    info
                 </Button>
                 <Button
                     colors="warning"

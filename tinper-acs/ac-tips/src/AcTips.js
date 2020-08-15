@@ -1,3 +1,7 @@
+/**
+ * NCC 风格 tips
+ * Abandoned on July 31, 2020
+ */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import uuid from 'uuid';

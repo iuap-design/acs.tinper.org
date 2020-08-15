@@ -10,6 +10,7 @@ $primaryColor : #e14c46;
 $secondary : #eceff1;
 $borderColor:#d5d6d9;
 $borderColor2:#d0d0d0;
+$font-size:12px;
 
 .ac-gridcn {
     .u-table .u-checkbox .u-checkbox-label {
@@ -19,6 +20,7 @@ $borderColor2:#d0d0d0;
     
 
     .u-grid {
+        border-top: 1px solid #505766;
         background: #fff;
         overflow: hidden;
 
@@ -40,13 +42,14 @@ $borderColor2:#d0d0d0;
         }
 
         .u-table-thead th {
-            background: #ECEFF5;
+            background: #f7f9fd;
+            font-weight: 500;
         }
 
         .u-table-filter-column-filter-icon {
             height: 33px;
             line-height: 33px;
-            background: #ECEFF5;
+            background: #f7f9fd;
         }
 
         .u-table-placeholder .table-nodata {
@@ -59,7 +62,12 @@ $borderColor2:#d0d0d0;
     }
 
     .u-table {
-
+        .u-table-thead-th-drag-gap:hover .online {
+            background-color: #505766;
+        }
+        thead tr:last-child {
+            border-color: #dbe0e5;
+        }
         tr {
             transition: none;
 
@@ -73,7 +81,7 @@ $borderColor2:#d0d0d0;
 
             &:hover,
             &.u-table-row-hover {
-                background: #F3F3F3;
+                background: #edf1f7;
 
             }
 
@@ -81,7 +89,7 @@ $borderColor2:#d0d0d0;
 
                 &.selected,
                 &.ref-multiple-table-row-selected {
-                    background: #E3E3E3;
+                    background: #edf1f7;
                 }
             }
 
@@ -93,13 +101,13 @@ $borderColor2:#d0d0d0;
 
         th {
             padding: 8px 8px;
-            height: 35px;
+            height: 30px;
         }
 
         td {
             padding: 0 8px;
-            height: 30px;
-            border-color: #E9E9E9;
+            height: 35px;
+            border-color: #dbe0e5;
 
         }
 
@@ -145,7 +153,7 @@ $borderColor2:#d0d0d0;
 
                 .datepicker-input-group .u-form-control {
                     height: 26px;
-                    font-size: 13px;
+                    font-size: $font-size;
                     padding-left: 8px;
                     padding-right: 8px;
                 }
@@ -157,7 +165,7 @@ $borderColor2:#d0d0d0;
                         line-height: 26px;
 
                         .u-select-selection-selected-value {
-                            font-size: 13px;
+                            font-size: $font-size;
                         }
                     }
 
@@ -425,7 +433,7 @@ $borderColor2:#d0d0d0;
                 width: calc(100% - 30px);
                 height: 26px;
                 text-align: left;
-                font-size: 13px;
+                font-size: $font-size;
                 padding: 0 8px;
             }
 
@@ -458,7 +466,7 @@ $borderColor2:#d0d0d0;
 
             .datepicker-input-group .u-form-control {
                 height: 26px;
-                font-size: 13px;
+                font-size: $font-size;
                 padding-left: 8px;
                 padding-right: 8px;
             }
@@ -472,7 +480,7 @@ $borderColor2:#d0d0d0;
                     margin-right: 0;
 
                     .u-select-selection-selected-value {
-                        font-size: 13px;
+                        font-size: $font-size;
                         padding-left: 8px;
                         padding-right: 8px;
                     }
@@ -545,8 +553,11 @@ $borderColor2:#d0d0d0;
         justify-content: space-between;
         padding-top: 9px;
         padding-left: 12px;
-        background: #f6f6f6;
+        background: #fff;
         margin-bottom: 0px;
+        .u-pagination-total {
+            order: -1;
+        }
         .u-pagination-gap>li>a{
             margin: 0 4px;
         }
@@ -568,9 +579,9 @@ $borderColor2:#d0d0d0;
         .u-pagination-list>.active>span,
         .u-pagination-list>.active>span:focus,
         .u-pagination-list>.active>span:hover {
-            color: #E14C46;
-            background: #fff;
-            border-color: #E14C46;
+            color: #fff;
+            background: #adb4bc;
+            border-color: #adb4bc;
         }
 
         .u-pagination-list>.disabled>a,
@@ -584,6 +595,9 @@ $borderColor2:#d0d0d0;
             background: #fff;
             border-color: $borderColor2;
             line-height: 16px;
+        }
+        .u-pagination-list>li>a:hover {
+            border-color: #505766;
         }
 
         .u-pagination-list a,

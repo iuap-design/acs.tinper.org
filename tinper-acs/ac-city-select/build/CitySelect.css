@@ -1302,6 +1302,15 @@ ul {
     -webkit-transform: scaleY(1);
     transform: scaleY(1); } }
 
+.u-select-nowarp {
+  overflow: hidden; }
+  .u-select-nowarp .u-select-selection-rendered {
+    display: flex;
+    white-space: nowrap; }
+    .u-select-nowarp .u-select-selection-rendered ul {
+      display: flex;
+      white-space: nowrap; }
+
 .province, .city {
   margin-right: 10px;
   width: 120px; }

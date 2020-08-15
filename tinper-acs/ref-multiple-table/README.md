@@ -109,42 +109,56 @@ canInputGoOn|`function()`| ()=>{return true}|当点击文本框触发快捷录�
 menuIcon| `dom` | <span><i className="uf uf-navmenu"></i></span> | input框参照打开按钮，默认汉堡按钮 | 否
 footerBtnDom | `dom` | <span></span> | 自定义footer的按钮dom | 否
 
+## API 解读
+
+### 一、input框的展示值
+
+1. input框的初始值，只从value的refname中获取
+1. 参照进行保存操作之后（点击参照确认按钮），input框展示由inputDisplay来决定
+
+### 二、value、inputDisplay、 displayField
+
+1. value和inputDisplay是针对input框来说。
+
+2. value格式可以是`'{"refname":"初级-T1","refpk":"level1"}'`或者数组[object1,object2...]。refname字段不可变，refpk是该数据键，要求具有唯一性；object中应包含数据项具体信息。
+
+3. inputDisplay确定input中显示内容的格式，displayField过滤列表显示内容的格式。inputDisplay和displayField中使用到的字段必须是filterData,matchData和treeData数据项中都含有的字段。
+
+[inputDisplay 和 displayField 具体使用参考Demo3](http://bee.tinper.org/tinper-acs/ref-multiple-table#%E5%9F%BA%E7%A1%80%E7%A4%BA%E4%BE%8B3)
+
+> 注意：value格式是`'{"refname":"初级-T1","refpk":"level1"}'`，inputDisplay只包含refname或者refpk
+
+### 三、value、valueFiled
+  
+1. value初始化input框值，是input需要使用的数据，要求如上。
+2. valueFiled指定数据源的键，要求具有唯一性。
+因此value中refpk指定值应与valueFiled取值一致。
+
+[value 和 valueFiled 具体使用参考demo3](http://bee.tinper.org/tinper-acs/ref-multiple-table#%E5%9F%BA%E7%A1%80%E7%A4%BA%E4%BE%8B3)
+
+> 注意，在多选情况下，value是字符串`'{"refname":"初级-T1","refpk":"level1"}'`格式，那么valueFiled只能指定是`refpk`；value是数组，valueField可以是其他字段
+
+### 四、value、matchData
+
+value初始化input框值，matchData是指定参照中选中的节点。value与matchData并不完全相同。
+
+1. 如果value有值matchData为空，那么input有值但是参照无选中数据；
+2. 反之value空值matchData有值，那么input为空但是参照有选中数据；
+3. 如果value与matchData都有值，但是不匹配，树中选中数据按照matchData。
+
+[value 和 matchData 具体使用参考demo3](http://bee.tinper.org/tinper-acs/ref-multiple-table#%E5%9F%BA%E7%A1%80%E7%A4%BA%E4%BE%8B3)
+
+### 五、filterUrl、filterUrlFunc、filterData
+
+实现参照输入框的快捷录入功能。
+
+1. filterUrl 实现快捷搜索：
+input 中输入的内容，会作为过滤参数请求 filterUrl 接口，取回数据自动更新下拉面板的过滤结果
+
+2. filterUrlFunc+filterData 实现快捷搜索：
+在没有 filterUrl 的情况下，input 中输入的过程中，会调用 filterUrlFunc 回调，参数是 input 中输入的内容。用户可以在 filterUrlFunc 方法中自定义请求，并将处理后的过滤结果（filterData）存储起来。然后更新传给参照的 filterData 属性，这样同样会更新下拉过滤面板内容
+
 ## 注意事项
-
-#### 参数解析
-
-- 1.input框的展示值
-
-    - 1.1 input框的初始值，只从value的refname中获取
-    - 1.2 参照进行保存操作之后（点击参照确认按钮），input框展示由inputDisplay来决定
-
-- 2.value、inputDisplay、 displayField
-  
-    2.1 value和inputDisplay是针对input框来说。
-
-    2.2 value格式可以是`'{"refname":"初级-T1","refpk":"level1"}'`或者数组[object1,object2...]。refname字段不可变，refpk是该数据键，要求具有唯一性；object中应包含数据项具体信息。
-   
-    2.3 inputDisplay确定input中显示内容的格式，displayField过滤列表显示内容的格式。inputDisplay和displayField中使用到的字段必须是filterData,matchData和treeData数据项中都含有的字段。
-    
-    **inputDisplay和displayField具体使用参考demo3**
-   
-    > 注意：value格式是`'{"refname":"初级-T1","refpk":"level1"}'`，inputDisplay只包含refname或者refpk
-
-- 3.value、valueFiled
-  
-    value初始化input框值，是input需要使用的数据，要求如上。
-    valueFiled指定数据源的键，要求具有唯一性。
-    因此value中refpk指定值应与valueFiled取值一致。
-   
-    > 注意，在多选情况下，value是字符串`'{"refname":"初级-T1","refpk":"level1"}'`格式，那么valueFiled只能指定是`refpk`；value是数组，valueField可以是其他字段 **具体使用参考demo3**
-
-- 4.value、matchData
-  
-    value初始化input框值，matchData是指定参照中选中的节点。**具体参照demo3，value与matchData并不完全相同**
-
-    - 4.1 如果value有值matchData为空，那么input有值但是参照无选中数据；
-    - 4.2 反之value空值matchData有值，那么input为空但是参照有选中数据；
-    - 4.3 如果value与matchData都有值，但是不匹配，树中选中数据按照matchData。
 
 ## 更新日志
     

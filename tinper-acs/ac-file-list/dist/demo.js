@@ -91188,10 +91188,17 @@
 	                                    _extends({ key: key }, itemProps, { colors: colors, className: 'ac-btns-write ' + clss, title: name }),
 	                                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-2arrow-right' })
 	                                );
-	                            default:
+	                            case 'add':
 	                                return _react2["default"].createElement(
 	                                    _beeButton2["default"],
 	                                    _extends({ key: key }, itemProps, { colors: colors, className: 'ac-btns-write ' + clss }),
+	                                    _react2["default"].createElement(_beeIcon2["default"], { type: 'uf-plus' }),
+	                                    name
+	                                );
+	                            default:
+	                                return _react2["default"].createElement(
+	                                    _beeButton2["default"],
+	                                    _extends({ key: key, colors: colors, className: 'ac-btns-write ' + clss }, itemProps),
 	                                    name
 	                                );
 	                        }

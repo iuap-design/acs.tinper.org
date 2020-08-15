@@ -1,6 +1,6 @@
 {
  "name": "ac-search-cn",
- "version": "0.1.13",
+ "version": "1.0.3",
  "description": "AcSearch ui component for react",
  "keywords": [
   "react",
@@ -34,7 +34,10 @@
   "coveralls": "bee-tools-test run coverage",
   "browsers": "bee-tools-test run browsers",
   "pub": "bee-tools run pub",
-  "changelog": "bee-tools run changelog"
+  "changelog": "bee-tools run changelog",
+  "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+  "postversion": "git push --follow-tags",
+  "prepublishOnly": "npm run build"
  },
  "dependencies": {
   "ac-btns": "latest",

@@ -74,6 +74,7 @@ var FormItem = function (_Component) {
                     errorMsg ? ary.push(_react2["default"].createElement(
                         'div',
                         { className: clsfix + '-item-out', title: errorMsg },
+                        child,
                         _react2["default"].createElement(
                             'span',
                             { className: clsfix + '-item-error-msg' },
@@ -82,14 +83,14 @@ var FormItem = function (_Component) {
                                 { className: clsfix + '-item-error-msg-text' },
                                 errorMsg
                             )
-                        ),
-                        child
+                        )
                     )) : ary.push(child);
                 });
             } else {
                 errorMsg ? ary.push(_react2["default"].createElement(
                     'div',
                     { className: clsfix + '-item-out', title: errorMsg },
+                    children,
                     _react2["default"].createElement(
                         'span',
                         { className: clsfix + '-item-error-msg' },
@@ -98,8 +99,7 @@ var FormItem = function (_Component) {
                             { className: clsfix + '-item-error-msg-text' },
                             errorMsg
                         )
-                    ),
-                    children
+                    )
                 )) : ary.push(children);
             }
             return ary;

@@ -1,14 +1,19 @@
+$font-size: 12px;
 .ac-split-button{
     display: inline-block;
     .icon-out{
         display: inline-block;
+        width: 20px;
         border: 1px solid #d0d0d0;
         position: relative;
         border-left: none;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
         cursor: pointer;
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+        &:hover {
+            background: #f3f5f9 !important;
+        }
     }
     .uf-anglearrowdown {
         transform: rotateX(0deg);
@@ -16,6 +21,17 @@
         padding: 0;
         position: relative;
         top: 3px;
+        padding: 0 2px;
+        font-size: 15px;
+        &::after {
+            content: "";
+            width: 1px;
+            height: 22px;
+            background: linear-gradient(180deg,#fff,#a5a5a5 50%,#fff);
+            opacity: .5;
+            position: absolute;
+            left: 0;
+        }
     }
     .uf-anglearrowdown.show {
         transform: rotateX(180deg);
@@ -26,8 +42,9 @@
         border-bottom-right-radius: 0;
         color: #212121;
         border: 1px solid #d0d0d0;
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-        font-size: 13px;
+        border-right: none;
+        box-shadow: none;
+        font-size: $font-size;
         // &:hover{
         //     background-color: #fff;
         // }
@@ -43,46 +60,46 @@
     }
 
 
-    &.primary {
-        .split-btn.u-button:hover,.icon-out:hover{
+    &.primary:hover {
+        .split-btn.u-button,.icon-out{
             background-color: #fff;
             border-color: #f53c32;
             color: #f53c32;
         }
     }
-    &.success {
-        .split-btn.u-button:hover,.icon-out:hover{
+    &.success:hover {
+        .split-btn.u-button,.icon-out{
             background-color: #fff;
             border-color: #4caf50;
             color: #4caf50;
         }
     }
-    &.info {
-        .split-btn.u-button:hover,.icon-out:hover{
+    &.info:hover {
+        .split-btn.u-button,.icon-out{
             background-color: #fff;
             border-color: #00bcd4;
             color: #00bcd4;
         }
     }
-    &.warning {
-        .split-btn.u-button:hover,.icon-out:hover{
+    &.warning:hover {
+        .split-btn.u-button,.icon-out{
             background-color: #fff;
             border-color: #ff9800;
             color: #ff9800;
         }
     }
-    &.danger {
-        .split-btn.u-button:hover,.icon-out:hover{
+    &.danger:hover{
+        .split-btn.u-button,.icon-out{
             background-color: #fff;
             border-color: #f44336;
             color: #f44336;
         }
     }
-    &.dark {
-        .split-btn.u-button:hover,.icon-out:hover{
+    &.dark:hover{
+        .split-btn.u-button,.icon-out{
             background-color: #fff;
-            border-color: #616161;
-            color: #616161;
+            border-color: #505766;
+            color: #505766;
         }
     }
     &.sm .icon-out{

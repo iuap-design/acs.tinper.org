@@ -38,6 +38,10 @@ var _acBtns = require('ac-btns');
 
 var _acBtns2 = _interopRequireDefault(_acBtns);
 
+var _beeCheckbox = require('bee-checkbox');
+
+var _beeCheckbox2 = _interopRequireDefault(_beeCheckbox);
+
 var _cloneDeep = require('clone-deep');
 
 var _cloneDeep2 = _interopRequireDefault(_cloneDeep);
@@ -52,6 +56,14 @@ var _i18n = require('./i18n.js');
 
 var _i18n2 = _interopRequireDefault(_i18n);
 
+var _newMultiSelect = require('bee-table/build/lib/newMultiSelect');
+
+var _newMultiSelect2 = _interopRequireDefault(_newMultiSelect);
+
+var _sort = require('bee-table/build/lib/sort');
+
+var _sort2 = _interopRequireDefault(_sort);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -64,6 +76,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 
+var MultiSelectTable = (0, _newMultiSelect2["default"])(_beeTable2["default"], _beeCheckbox2["default"]);
+var ComplexTable = (0, _sort2["default"])(MultiSelectTable, _beeIcon2["default"]);
 var propTypes = {
     canUnfold: _propTypes2["default"].bool, //是否可以展开收起
     id: _propTypes2["default"].string.isRequired,
@@ -73,7 +87,15 @@ var propTypes = {
     url: _propTypes2["default"].object, //地址
     uploadProps: _propTypes2["default"].object, //附件上传参数
     powerBtns: _propTypes2["default"].array, //可用按钮集合
-    callback: _propTypes2["default"].func //回调 第一个参数：成功(success)/失败(error)； 第二个参数：list 获得文件列表；delete 删除； upload 上传。 第三个参数：成功信息/错误信息。 第四个参数：null/error对象
+    callback: _propTypes2["default"].func, //回调 第一个参数：成功(success)/失败(error)； 第二个参数：list 获得文件列表；delete 删除； upload 上传。 第三个参数：成功信息/错误信息。 第四个参数：null/error对象
+    uploadBut: _propTypes2["default"].node, //动态肩部按钮
+    lineToolbar: _propTypes2["default"].node, //动态行按钮
+    afterGetList: _propTypes2["default"].func, //获取列表后可执行的操作
+    vitualDelete: _propTypes2["default"].func, //本地执行删除
+    recordActiveRow: _propTypes2["default"].func, //记录当前活动行
+    getSelectedDataFunc: _propTypes2["default"].func, //启用多选后
+    beforeAct: _propTypes2["default"].func, //执行操作前触发的方法；
+    type: _propTypes2["default"].string //使用者类型，mdf cn
 };
 
 var defaultProps = {
@@ -91,7 +113,11 @@ var defaultProps = {
     powerBtns: ['upload', 'reupload', 'download', 'delete', 'confirm', 'cancel'],
     localeCookie: 'locale',
     callback: function callback() {},
-    canUnfold: true
+    canUnfold: true,
+    getSelectedDataFunc: function getSelectedDataFunc() {},
+    uploadBut: null,
+    lineToolbar: null,
+    operationWidth: 200
 };
 
 var FileList = function (_Component) {
@@ -102,11 +128,27 @@ var FileList = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 
+        _this._handelBeforeAct = function (type) {
+            var data = _this.state.data;
+            var beforeAct = _this.props.beforeAct;
+
+            var flag = true;
+            if (beforeAct) {
+                if (!beforeAct(type, data)) {
+                    flag = false;
+                }
+            }
+            return flag;
+        };
+
         _this.getList = function () {
             var pageObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
             var propsId = arguments[1];
 
             var id = propsId || _this.props.id;
+            var afterGetList = _this.props.afterGetList;
+
+            if (!_this._handelBeforeAct('list')) return;
             if (id) {
                 var url = _this.props.url.list.replace('{id}', id);
                 var params = _extends({
@@ -120,11 +162,13 @@ var FileList = function (_Component) {
                     withCredentials: true
                 }).then(function (res) {
                     if (res.status == 200) {
-                        var data = res.data.data;
-                        if (data) {
-                            //data.forEach(item=>item.userName=decodeURIComponent(getCookie('yonyou_uname')));
+                        if (res.data.data) {
+                            var list = res.data.data;
+                            if (afterGetList) {
+                                list = afterGetList(list);
+                            }
                             _this.setState({
-                                data: data.reverse(),
+                                data: list,
                                 pageSize: params.pageSize,
                                 pageNo: params.pageNo
                             });
@@ -157,10 +201,16 @@ var FileList = function (_Component) {
             _this.setState({
                 data: data,
                 selectedList: selectedList
+            }, function () {
+                _this.props.getSelectedDataFunc && _this.props.getSelectedDataFunc(selectedList, record, index);
             });
         };
 
         _this.onRowHover = function (index, record) {
+            var recordActiveRow = _this.props.recordActiveRow;
+
+            if (recordActiveRow) recordActiveRow(record);
+            _this.hoverData = record;
             _this.state.hoverData = record;
             _this.setState({
                 hoverData: record
@@ -203,6 +253,10 @@ var FileList = function (_Component) {
         };
 
         _this["delete"] = function () {
+            var vitualDelete = _this.props.vitualDelete;
+
+            if (!_this._handelBeforeAct('delete')) return;
+            if (vitualDelete && !vitualDelete(_this.state.hoverData, _this)) return; //本地删除
             var url = _this.props.url["delete"].replace('{id}', _this.state.hoverData.id);
             (0, _axios2["default"])(url, {
                 method: "delete",
@@ -228,6 +282,7 @@ var FileList = function (_Component) {
         };
 
         _this.download = function () {
+            if (!_this._handelBeforeAct('download')) return;
             var url = _this.props.url.info.replace('{id}', _this.state.hoverData.id);
             (0, _axios2["default"])(url, {
                 method: "get",
@@ -250,18 +305,19 @@ var FileList = function (_Component) {
             var data = (0, _cloneDeep2["default"])(_this.state.data);
             if (info.file.status !== 'uploading') {}
             if (info.file.status === 'done') {
-                var id = info.file.response.data[0].id;
-                data.forEach(function (item) {
-                    if (item.uid == info.file.uid) {
-                        item.uploadStatus = 'done';
-                        item.id = id;
-                    }
-                });
-                _this.setState({
-                    data: data
-                });
+                // let id = info.file.response.data[0].id;
+                // data.forEach(item=>{
+                //     if(item.uid==info.file.uid){
+                //         item.uploadStatus='done';
+                //         item.id=id
+                //     }
+                // });
+                // this.setState({
+                //     data
+                // })
                 _this.props.callback('success', 'upload', info.file.response);
                 console.log(_this.localObj['uploadSuccess']);
+                _this.getList();
             }
             if (info.file.status === 'removed') {
                 var msg = info.file.response.displayMessage[(0, _utils.getCookie)(_this.props.localeCookie)] || info.file.response.displayMessage['zh_CN'];
@@ -312,8 +368,10 @@ var FileList = function (_Component) {
             pageSize: 999999,
             hoverData: {},
             id: props.id,
-            open: true
+            open: true,
+            reload: Math.random()
         };
+        _this.hoverData = {};
         _this.localObj = _i18n2["default"][(0, _utils.getCookie)(props.localeCookie)] || _i18n2["default"]['zh_CN'];
         _this.columns = [{
             title: _this.localObj.fileName,
@@ -384,7 +442,7 @@ var FileList = function (_Component) {
             title: _this.localObj.operation,
             dataIndex: "e",
             key: "e",
-            width: 200,
+            width: props.operationWidth,
             render: function render(text, record, index) {
                 if (!_this.props.disabled) {
                     if (record.uploadStatus == 'error') {
@@ -427,7 +485,11 @@ var FileList = function (_Component) {
                         return _react2["default"].createElement(
                             'div',
                             { className: 'opt-btns' },
-                            _react2["default"].createElement(_acBtns2["default"], { localeCookie: props.localeCookie,
+                            _this.props.type == 'mdf' ? _react2["default"].createElement(
+                                'div',
+                                { className: 'file-list-linetoolbar-container' },
+                                _react2["default"].cloneElement(props.lineToolbar, { record: record })
+                            ) : _react2["default"].createElement(_acBtns2["default"], { localeCookie: props.localeCookie,
                                 type: 'line',
                                 btns: {
                                     download: {
@@ -448,7 +510,12 @@ var FileList = function (_Component) {
     }
 
     FileList.prototype.componentDidMount = function componentDidMount() {
-        this.props.getListNow && this.getList();
+        var _props = this.props,
+            getChild = _props.getChild,
+            getListNow = _props.getListNow;
+
+        getChild && getChild(this);
+        getListNow && this.getList();
     };
 
     FileList.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
@@ -464,7 +531,15 @@ var FileList = function (_Component) {
                 id: nextProps.id
             });
         }
+        if (nextProps.reload && nextProps.reload !== this.state.reload) {
+            this.getList({}, nextProps.id);
+            this.setState({
+                reload: nextProps.reload
+            });
+        }
     };
+
+    /*操作前处理方法*/
 
     /**获得文件列表 */
 
@@ -489,13 +564,16 @@ var FileList = function (_Component) {
 
 
     FileList.prototype.render = function render() {
-        var _props = this.props,
-            clsfix = _props.clsfix,
-            id = _props.id,
-            disabled = _props.disabled,
-            uploadProps = _props.uploadProps,
-            canUnfold = _props.canUnfold,
-            title = _props.title;
+        var _props2 = this.props,
+            clsfix = _props2.clsfix,
+            id = _props2.id,
+            disabled = _props2.disabled,
+            uploadProps = _props2.uploadProps,
+            canUnfold = _props2.canUnfold,
+            uploadBut = _props2.uploadBut,
+            toolbar = _props2.toolbar,
+            type = _props2.type,
+            title = _props2.title;
         var _state = this.state,
             data = _state.data,
             open = _state.open;
@@ -532,9 +610,14 @@ var FileList = function (_Component) {
                         btns: {
                             upload: {
                                 node: _react2["default"].createElement(
-                                    _beeUpload2["default"],
-                                    uploadP,
-                                    _react2["default"].createElement(_acBtns2["default"], { localeCookie: this.props.localeCookie, powerBtns: this.props.powerBtns, btns: { upload: {} } })
+                                    'div',
+                                    null,
+                                    toolbar,
+                                    _react2["default"].createElement(
+                                        _beeUpload2["default"],
+                                        uploadP,
+                                        type == 'mdf' ? uploadBut : _react2["default"].createElement(_acBtns2["default"], { localeCookie: this.props.localeCookie, powerBtns: this.props.powerBtns, btns: { upload: {} } })
+                                    )
                                 )
                             }
                         }
@@ -544,7 +627,7 @@ var FileList = function (_Component) {
             _react2["default"].createElement(
                 'div',
                 { className: open ? clsfix + '-file-area' : clsfix + '-file-area hide' },
-                _react2["default"].createElement(_beeTable2["default"], {
+                type == 'mdf' ? _react2["default"].createElement(ComplexTable, {
                     columns: this.columns,
                     data: data,
                     rowKey: function rowKey(record, index) {
@@ -553,7 +636,17 @@ var FileList = function (_Component) {
                     scroll: { y: 400 },
                     getSelectedDataFunc: this.getSelectedDataFunc,
                     onRowHover: this.onRowHover,
-                    multiSelect: false
+                    multiSelect: { type: "checkbox" }
+
+                }) : _react2["default"].createElement(_beeTable2["default"], {
+                    columns: this.columns,
+                    data: data,
+                    rowKey: function rowKey(record, index) {
+                        return index;
+                    },
+                    scroll: { y: 400 },
+                    getSelectedDataFunc: this.getSelectedDataFunc,
+                    onRowHover: this.onRowHover
 
                 }),
                 _react2["default"].createElement(

@@ -167,8 +167,12 @@ class Btns extends Component {
                             return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`} title={name}>
                                         <Icon type='uf-2arrow-right'/>
                                     </Button>
+                        case 'add':
+                            return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>
+                                        <Icon type="uf-plus" />{name}
+                                    </Button>
                         default:
-                            return <Button key={key} {...itemProps} colors={colors} className={`ac-btns-write ${clss}`}>{name}</Button>
+                            return <Button key={key} colors={colors} className={`ac-btns-write ${clss}`} {...itemProps}>{name}</Button>
                     }
                 }else if(this.props.type=='line'){
                     switch(key){
