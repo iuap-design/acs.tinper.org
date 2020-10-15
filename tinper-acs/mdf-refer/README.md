@@ -8,7 +8,7 @@
 ## 如何使用
 安装
 ```shell
-ynpm install @yonyou/smdf-refer --save
+ynpm install @yonyou/mdf-refer --save
 ```
 引入antd的样式
 
